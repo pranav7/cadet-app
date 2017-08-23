@@ -10,6 +10,12 @@
  * files in this directory. Styles in this file should be added after the last require_* statement.
  * It is generally better to create a new file per style scope.
  *
- *= require_tree .
- *= require_self
+ * require_tree .
+ * require_self
+ 
+ Read the below post on why it is benefitial to use SASS import directive rather
+ than Sprockets require directives
+ https://content.pivotal.io/blog/structure-your-sass-files-with-import
  */
+
+@import "bourbon";

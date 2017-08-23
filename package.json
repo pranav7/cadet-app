@@ -1,5 +1,7 @@
 {
   "name": "cadet-app",
   "private": true,
-  "dependencies": {}
+  "dependencies": {
+    "normalize.css": "^7.0.0"
+  }
 }

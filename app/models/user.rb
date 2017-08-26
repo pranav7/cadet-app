@@ -1,5 +1,6 @@
 class User < ApplicationRecord
   has_many :posts
+  has_many :comments
   belongs_to :company
 
   # Include default devise modules. Others available are:

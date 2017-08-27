@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/doabit/semantic-ui-sass.git
+  revision: ddb56eebc86ec4c2d9d634b6b6b16d561cacdc84
+  specs:
+    semantic-ui-sass (2.2.11.0)
+      sass (>= 3.2)
+
+GIT
   remote: https://github.com/thoughtbot/shoulda-matchers.git
   revision: edaf9cb926ee9c59c59729e7a4f8c206b44da8a1
   branch: rails-5
@@ -266,6 +273,7 @@ DEPENDENCIES
   rspec-rails (~> 3.6)
   sass-rails (~> 5.0)
   selenium-webdriver
+  semantic-ui-sass!
   shoulda-matchers!
   simple_form
   slim-rails

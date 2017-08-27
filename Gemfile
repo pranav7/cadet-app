@@ -37,6 +37,7 @@ gem 'bourbon'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'devise'
+gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

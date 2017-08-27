@@ -1,3 +1,3 @@
 class Content < ApplicationRecord
-  belongs_to :post
+  belongs_to :parent, polymorphic: true
 end

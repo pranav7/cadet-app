@@ -52,6 +52,7 @@ group :development, :test do
   gem 'rspec'
   gem 'rspec-rails', '~> 3.6'
   gem 'rspec-mocks'
+  gem 'rspec_junit_formatter'
   gem 'factory_girl_rails'
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 end

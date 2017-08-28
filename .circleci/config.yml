@@ -22,7 +22,7 @@ jobs:
           POSTGRES_DB: cadet_test
           POSTGRES_PASSWORD: ""
 
-    working_directory: ~/cadet
+    working_directory: ~/cadet-app
 
     steps:
       - checkout

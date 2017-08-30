@@ -11,6 +11,11 @@ RSpec.describe PostsController, type: :controller do
       get :new
       expect(response).to have_http_status(200)
     end
+
+    it "assings @post with a new object" do
+      get :new
+      expect(assigns(:post)).to be_a_new(Post)
+    end
   end
 
   describe "#create" do
@@ -28,6 +33,12 @@ RSpec.describe PostsController, type: :controller do
     it "responds successfully" do
       get :index
       expect(response).to be_success
+    end
+
+    it "populates @posts with all posts" do
+      posts = create_list :post, 3
+      get :index
+      expect(assigns(:posts)).to eq(posts)
     end
   end
 end

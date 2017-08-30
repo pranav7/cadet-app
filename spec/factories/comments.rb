@@ -1,6 +1,7 @@
 FactoryGirl.define do
   factory :comment do
-    post nil
-    user nil
+    after :create do |comment|
+      comment.content = create(:content, parent: comment)
+    end
   end
 end

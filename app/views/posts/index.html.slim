@@ -1,0 +1,15 @@
+.ui.container
+  h1 Create Post
+  = simple_form_for @post do |f|
+    = f.input :title
+    = f.simple_fields_for :content do |cf|
+      = cf.input :body
+    
+    = f.submit
+
+  .ui.divider
+  h1 Posts
+  = @posts.each do |post|
+    h3 = post.title
+    p= post.content.body
+    hr.ui.divider

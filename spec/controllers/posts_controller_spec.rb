@@ -46,4 +46,18 @@ RSpec.describe PostsController, type: :controller do
       expect(assigns(:post)).to be_a_new(Post)
     end
   end
+
+  describe "#show" do
+    let(:post) { create :post }
+
+    it "responds successfully" do
+      get :show, params: { id: post.id }
+      expect(response).to be_success
+    end
+
+    it "assigns @post with the post object" do
+      get :show, params: { id: post.id }
+      expect(assigns(:post)).to eq(post)
+    end
+  end
 end

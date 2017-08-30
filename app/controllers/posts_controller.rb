@@ -1,4 +1,8 @@
 class PostsController < ApplicationController
+  def show
+    @post = Post.find(params[:id])
+  end
+
   def index
     @posts = Post.order(created_at: :desc)
     @post = Post.new

@@ -38,7 +38,7 @@ RSpec.describe PostsController, type: :controller do
     it "assigns @posts with all posts" do
       posts = create_list :post, 3
       get :index
-      expect(assigns(:posts)).to eq(posts)
+      expect(assigns(:posts)).to eq(posts.reverse)
     end
 
     it "assings @post with a new object" do

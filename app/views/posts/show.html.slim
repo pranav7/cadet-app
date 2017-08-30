@@ -12,5 +12,10 @@
       = cf.input :body
     = f.submit
   - @post.comments.each do |comment|
+    - next if comment.new_record?
     .ui.divider
     p=comment.content.body
+    - if comment.created_at > 2.weeks.ago
+      p #{time_ago_in_words(comment.created_at)} ago
+    - else
+      p= comment.created_at.strftime("%d %B, %Y")

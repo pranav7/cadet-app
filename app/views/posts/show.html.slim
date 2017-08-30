@@ -1,21 +1,26 @@
 .ui.container
-  a href=posts_path
-    | &larr; Posts
+  .ui.grid
+    .ten.wide.column
+      a href=posts_path
+        | &larr; Posts
 
-  h1 = @post.title
-  p = @post.content.body
+      h1 = @post.title
+      p = @post.content.body
 
-  .ui.divider
-  h4 Comments
-  = simple_form_for @comment do |f|
-    = f.simple_fields_for :content do |cf|
-      = cf.input :body
-    = f.submit
-  - @post.comments.each do |comment|
-    - next if comment.new_record?
-    .ui.divider
-    p=comment.content.body
-    - if comment.created_at > 2.weeks.ago
-      p #{time_ago_in_words(comment.created_at)} ago
-    - else
-      p= comment.created_at.strftime("%d %B, %Y")
+      .ui.dividing.header Activity
+      = simple_form_for @comment do |f|
+        = f.simple_fields_for :content do |cf|
+          = cf.input :body,
+            placeholder: "Leave a comment",
+            label: false,
+            input_html: { rows: 3 }
+        = f.submit "Comment"
+
+      - @post.comments.each do |comment|
+        - next if comment.new_record?
+        .ui.divider
+        p=comment.content.body
+        - if comment.created_at > 2.weeks.ago
+          p #{time_ago_in_words(comment.created_at)} ago
+        - else
+          p= comment.created_at.strftime("%d %B, %Y")

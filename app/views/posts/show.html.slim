@@ -1,6 +1,16 @@
 .ui.container
+  a href=posts_path
+    | &larr; Posts
+
   h1 = @post.title
   p = @post.content.body
 
   .ui.divider
   h4 Comments
+  = simple_form_for @comment do |f|
+    = f.simple_fields_for :content do |cf|
+      = cf.input :body
+    = f.submit
+  - @post.comments.each do |comment|
+    .ui.divider
+    p=comment.content.body

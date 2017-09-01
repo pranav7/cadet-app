@@ -15,4 +15,8 @@ class User < ApplicationRecord
     uniqueness: { scope: :company_id },
     presence: true,
     format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+
+  def name
+    [first_name, last_name].join(" ")
+  end
 end

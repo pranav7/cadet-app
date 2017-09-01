@@ -8,6 +8,10 @@ RSpec.describe User, type: :model do
   end
 
   describe User, "Validations" do
+    it "has a valid factory" do
+      expect(build(:user)).to be_valid
+    end
+
     it { should validate_presence_of(:first_name) }
 
     context "password validation" do

@@ -5,5 +5,14 @@ html
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application'
   body
-    = yield
+    .ui.container
+      .ui.grid
+        .right.aligned.column
+          - if user_signed_in?
+            span Hello, #{current_user.first_name}.
+            span= link_to "Logout", destroy_user_session_path, method: :delete
+          - else
+            = link_to "Login", new_user_session_path
+      = yield

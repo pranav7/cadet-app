@@ -1,0 +1,19 @@
+.ui.grid
+  .six.wide.centered.column
+    .ui.segment
+      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
+        = f.simple_fields_for :company do |company|
+          = company.input :name, placeholder: "Company Name", label: false, autofocus: true
+          = company.input :subdomain, label: false, wrapper: :ui_right_labled_input do
+            = company.input_field :subdomain, placeholder: "Subdomain"
+            .ui.basic.label .getcadet.com
+        .two.fields
+          = f.input :first_name, label: false, placeholder: "First Name"
+          = f.input :last_name, label: false, placeholder: "Last Name"
+        = f.input :email, label: false, placeholder: "Work Email"
+        .two.fields
+          = f.input :password, label: false, placeholder: "Password"
+          = f.input :password_confirmation, label: false, placeholder: "Confirm Password", autocomplete: "off"
+
+        = f.button :submit, "Sign up", class: "ui fluid button"
+    = render "devise/shared/links"

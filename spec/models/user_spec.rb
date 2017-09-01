@@ -1,9 +1,71 @@
 require 'rails_helper'
 
 RSpec.describe User, type: :model do
-  describe "Associations" do
+  describe User, "Associations" do
     it { should belong_to(:company) }
     it { should have_many(:posts) }
     it { should have_many(:comments) }
+  end
+
+  describe User, "Validations" do
+    it { should validate_presence_of(:first_name) }
+
+    context "password validation" do
+      it { should validate_presence_of(:password) }
+      it { should validate_confirmation_of(:password) }
+      it { should validate_length_of(:password).is_at_least(6) }
+      it { should validate_length_of(:password).is_at_most(25) }
+    end
+
+    context "email validation" do
+      it { should validate_presence_of(:email) }
+
+      context "uniqueness" do
+        before :each do
+          @company = create :company
+          @user = create :user, company_id: @company.id
+        end
+
+        it "validates uniqueness of :email, scoped to :company_id" do
+          userA = build :user, email: @user.email, company_id: @company.id
+
+          expect(userA.save).to be(false)
+          expect(userA.errors.full_messages).to include("Email has already been taken")
+        end
+
+        it "allows same email if company is different" do
+          userA = build :user, email: @user.email
+          
+          expect(userA.save).to be(true)
+          expect(userA.errors.full_messages).not_to include("Email has already been taken")
+        end
+      end
+
+      context "format" do
+        it "should not allow 'john' to be saved" do
+          user = build :user, email: "john"
+          expect(user.save).to be(false)
+          expect(user.errors.full_messages).to include("Email is invalid")
+        end
+
+        it "should not allow 'john@' to be saved" do
+          user = build :user, email: "john@"
+          expect(user.save).to be(false)
+          expect(user.errors.full_messages).to include("Email is invalid")
+        end
+
+        it "should not allow 'john@example. to be saved'" do
+          user = build :user, email: "john@example"
+          expect(user.save).to be(false)
+          expect(user.errors.full_messages).to include("Email is invalid")
+        end
+
+        it "allows 'john@example.com to be saved'" do
+          user = build :user, email: "john@example.com"
+          expect(user.save).to be(true)
+          expect(user.errors.full_messages).not_to include("Email is invalid")
+        end
+      end
+    end
   end
 end

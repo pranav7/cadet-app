@@ -27,3 +27,6 @@
 .ruby-version
 
 .rspec
+/public/packs
+/public/packs-test
+/node_modules

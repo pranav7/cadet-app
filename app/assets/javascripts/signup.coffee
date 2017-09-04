@@ -12,3 +12,7 @@ $(document).ready ->
       email: ['empty', 'email']
       subdomain: ['empty']
   })
+
+  $('.message .close').on('click', ->
+    $(this).parent().hide()
+  )

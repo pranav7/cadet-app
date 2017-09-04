@@ -1,6 +1,9 @@
 .ui.grid
   .six.wide.centered.column
     .ui.segment
+      h2
+        | Start your free Cadet trial
+      p.soft Cadet makes it simple to collect & organize customer feedback and learn what your customers really want.
       = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f|
         = f.simple_fields_for :company do |company|
           = company.input :name, placeholder: "Company Name", label: false, autofocus: true

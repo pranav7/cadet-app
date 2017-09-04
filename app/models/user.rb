@@ -12,7 +12,7 @@ class User < ApplicationRecord
 
   validates :first_name, presence: true
   validates :email,
-    uniqueness: { scope: :company_id },
+    uniqueness: true,
     presence: true,
     format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
 

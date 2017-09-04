@@ -18,32 +18,12 @@ RSpec.describe User, type: :model do
       it { should validate_presence_of(:password) }
       it { should validate_confirmation_of(:password) }
       it { should validate_length_of(:password).is_at_least(6) }
-      it { should validate_length_of(:password).is_at_most(25) }
     end
 
     context "email validation" do
+      subject { create :user }
       it { should validate_presence_of(:email) }
-
-      context "uniqueness" do
-        before :each do
-          @company = create :company
-          @user = create :user, company_id: @company.id
-        end
-
-        it "validates uniqueness of :email, scoped to :company_id" do
-          userA = build :user, email: @user.email, company_id: @company.id
-
-          expect(userA.save).to be(false)
-          expect(userA.errors.full_messages).to include("Email has already been taken")
-        end
-
-        it "allows same email if company is different" do
-          userA = build :user, email: @user.email
-          
-          expect(userA.save).to be(true)
-          expect(userA.errors.full_messages).not_to include("Email has already been taken")
-        end
-      end
+      it { should validate_uniqueness_of(:email).case_insensitive }
 
       context "format" do
         it "should not allow 'john' to be saved" do

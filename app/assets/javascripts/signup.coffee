@@ -1,11 +1,12 @@
 $(document).ready ->
-  $("#user_company_attributes_name").blur ->
-    return unless $("#user_company_attributes_subdomain").val() == ""
-    company_name = $("#user_company_attributes_name").val()
+  company_el = $("#user_memberships_attributes_0_company_attributes_name")
+  subdomain_el = $("#user_memberships_attributes_0_company_attributes_subdomain")
+  company_el.blur ->
+    return unless subdomain_el.val() == ""
 
-    if company_name?
-      parameterized_name = company_name.toLowerCase().replace(/\s/g, "")
-      $("#user_company_attributes_subdomain").val(parameterized_name)
+    if company_el.val()?
+      parameterized_name = company_el.val().toLowerCase().replace(/\s/g, "-")
+      subdomain_el.val(parameterized_name)
 
   $("new_user").form({
     fields:

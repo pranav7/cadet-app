@@ -4,6 +4,7 @@ RSpec.describe Company, type: :model do
   describe "Associations" do
     it { should have_many(:memberships) }
     it { should have_many(:users).through(:memberships) }
+    it { should have_many(:posts) }
   end
 
   describe "Validations" do

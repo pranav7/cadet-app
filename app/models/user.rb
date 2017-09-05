@@ -1,9 +1,10 @@
 class User < ApplicationRecord
   has_many :posts
   has_many :comments
-  belongs_to :company
+  has_many :memberships
+  has_many :companies, through: :memberships
 
-  accepts_nested_attributes_for :company
+  accepts_nested_attributes_for :memberships
 
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable and :omniauthable

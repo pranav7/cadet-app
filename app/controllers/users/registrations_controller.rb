@@ -7,14 +7,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # GET /resource/sign_up
   def new
     build_resource({})
-    self.resource.company = Company.new
+    self.resource.memberships.build.build_company
     respond_with self.resource
   end
 
   # POST /resource
-  # def create
-  #   super
-  # end
+  def create
+    binding.pry
+    super
+  end
 
   # GET /resource/edit
   # def edit
@@ -44,7 +45,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # If you have extra params to permit, append them to the sanitizer.
   def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up, keys: [:first_name, :last_name, company_attributes: [:name, :subdomain]])
+    devise_parameter_sanitizer.permit(:sign_up,
+                                      keys: [:first_name,
+                                             :last_name,
+                                             memberships_attributes: [ company_attributes: [:name, :subdomain]]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

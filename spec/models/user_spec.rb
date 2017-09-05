@@ -2,9 +2,10 @@ require 'rails_helper'
 
 RSpec.describe User, type: :model do
   describe User, "Associations" do
-    it { should belong_to(:company) }
     it { should have_many(:posts) }
     it { should have_many(:comments) }
+    it { should have_many(:companies).through(:memberships) }
+    it { should have_many(:memberships) }
   end
 
   describe User, "Validations" do

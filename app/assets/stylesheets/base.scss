@@ -3,8 +3,17 @@ body {
   @include font-smoothing(on);
 
   padding-top: $base-size;
+
 }
 
+/* Utility Classes */
 .soft {
   color: $darker;
+}
+
+.custom.error.message {
+  display: inline-block !important;
+  color: $good-red;
+  font-size: 12px;
+  font-weight: 500;
 }

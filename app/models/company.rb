@@ -5,7 +5,7 @@ class Company < ApplicationRecord
   validates :subdomain,
     uniqueness: true,
     presence: true,
-    exclusion: { in: %w(app), message: "not available" }
+    exclusion: { in: %w(app), message: "This subdomain is not available" }
 
   validates :name, presence: true
 end

@@ -88,21 +88,21 @@ SimpleForm.setup do |config|
   config.wrappers :ui_left_labled_input, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
-
     b.wrapper tag: 'div', class: 'ui left labeled input' do |input|
       input.use :input
       input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   config.wrappers :ui_right_labled_input, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
-
     b.wrapper tag: 'div', class: 'ui right labeled input' do |input|
       input.use :input
       input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
   end
 
   # The default wrapper to be used by the FormBuilder.

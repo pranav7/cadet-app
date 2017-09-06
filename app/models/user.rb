@@ -1,4 +1,6 @@
 class User < ApplicationRecord
+  enum role: [:admin, :customer]
+
   has_many :posts
   has_many :comments
   has_many :memberships

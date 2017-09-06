@@ -8,7 +8,7 @@ $(document).ready ->
       parameterized_name = company_el.val().toLowerCase().replace(/\s/g, "-")
       subdomain_el.val(parameterized_name)
 
-  $("new_user").form({
+  $("#new_user").form({
     fields:
       email: ['empty', 'email']
       subdomain: ['empty']

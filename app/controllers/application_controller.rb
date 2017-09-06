@@ -6,14 +6,24 @@ class ApplicationController < ActionController::Base
   helper_method :current_company
 
   def current_company
-    @current_company = Company.find_by_subdomain(request.subdomains.first)
+    @current_company ||= Company.find_by_subdomain(request.subdomains.first)
+  end
+
+  protected
+
+  def not_found
+    raise ActionController::RoutingError.new('Not Found')
   end
 
   private
 
   def ensure_valid_subdomain!
+    return if request.subdomains.first == "app"
+    if current_company.nil?
+      not_found
+      return
+    end
     return unless user_signed_in?
-    return if current_company
     return if current_user.companies.map(&:subdomain).include?(request.subdomains.first)
 
     redirect_to root_url(host: "#{current_user.companies.first.subdomain}.lvh.me:3000")

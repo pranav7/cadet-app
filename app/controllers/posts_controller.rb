@@ -1,5 +1,5 @@
 class PostsController < ApplicationController
-  before_action :authenticate_user!
+  before_action :authenticate_user!, only: [:create]
 
   def show
     @post = current_company.posts.find(params[:id])

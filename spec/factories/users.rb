@@ -6,11 +6,15 @@ FactoryGirl.define do
     password { Faker::Internet.password }
 
     transient do
-      company create(:company)
+      company nil
     end
 
     after :create do |user, evaluator|
-      user.companies << evaluator.company
+      if evaluator.company
+        user.companies << evaluator.company
+      else
+        user.companies << create(:company)
+      end
     end
   end
 

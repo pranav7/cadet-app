@@ -14,7 +14,7 @@ html
       .ui.grid
         .right.aligned.column
           - if user_signed_in?
-            span Hello, #{current_user.first_name}.
+            span Hello, #{current_user.first_name}.  
             span= link_to "Logout", logout_path, method: :delete
           - else
             = link_to "Login", new_user_session_path

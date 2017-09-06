@@ -1,6 +1,14 @@
 require 'rails_helper'
 
 RSpec.describe PostsController, type: :controller do
+  let(:company) { create :company }
+  let(:user) { create :user, company: company }
+
+  before :each do
+    request.host = "#{user.companies.first.subdomain}.example.com"
+    sign_in user
+  end
+
   describe "#new" do
     it "responds successfully" do
       get :new
@@ -36,9 +44,15 @@ RSpec.describe PostsController, type: :controller do
     end
 
     it "assigns @posts with all posts" do
-      posts = create_list :post, 3
+      posts = create_list :post, 3, company: company
       get :index
       expect(assigns(:posts)).to eq(posts.reverse)
+    end
+
+    it "does not assign @posts with other company's posts" do
+      posts = create_list :post, 3
+      get :index
+      expect(assigns(:posts)).to eq([])
     end
 
     it "assings @post with a new object" do
@@ -48,7 +62,7 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "#show" do
-    let(:post) { create :post }
+    let(:post) { create :post, company: company }
 
     it "responds successfully" do
       get :show, params: { id: post.id }

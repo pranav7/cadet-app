@@ -1,6 +1,9 @@
 FactoryGirl.define do
   factory :company do
-    name "MyString"
-    subdomain "MyString"
+    name { Faker::Company.name }
+
+    sequence :subdomain do |n|
+      "#{name.parameterize}-#{n}"
+    end
   end
 end

@@ -1,17 +1,20 @@
-.ui.container
-  .ui.grid
-    .ten.wide.column
-      h1 Posts
+.ui.grid
+  .nine.wide.column
+    h1 Posts
+    - if @posts.empty?
+      p There are no posts yet.
+    - else
       - @posts.each do |post|
         = link_to post_path(post) do
           h3= post.title
         p= post.content.body
         .ui.divider
-    .six.wide.column
-      h1 Create Post
-      = simple_form_for @post do |f|
-        = f.input :title
-        = f.simple_fields_for :content do |cf|
-          = cf.input :body
-        
-        = f.submit
+  .one.wide.column
+  .six.wide.column
+    h1 Create Post
+    = simple_form_for @post do |f|
+      = f.input :title, placeholder: "Ttile", label: false
+      = f.simple_fields_for :content do |cf|
+        = cf.input :body, placeholder: "Description", label: false
+      
+      = f.submit

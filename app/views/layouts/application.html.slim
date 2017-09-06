@@ -3,7 +3,19 @@ html
   head
     title Cadet
     = csrf_meta_tags
-    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    = favicon_link_tag 'favicon.png'
   body
-    = yield
+    .ui.grid
+      .four.wide.centered.column
+        = semantic_flash
+    .ui.container
+      .ui.grid
+        .right.aligned.column
+          - if user_signed_in?
+            span Hello, #{current_user.first_name}.  
+            span= link_to "Logout", logout_path, method: :delete
+          - else
+            = link_to "Login", new_user_session_path
+      = yield

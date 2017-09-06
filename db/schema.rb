@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170828183603) do
+ActiveRecord::Schema.define(version: 20170906071904) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -33,6 +33,15 @@ ActiveRecord::Schema.define(version: 20170828183603) do
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
   end
 
+  create_table "company_users", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_users_on_company_id"
+    t.index ["user_id"], name: "index_company_users_on_user_id"
+  end
+
   create_table "contents", force: :cascade do |t|
     t.text "body"
     t.bigint "post_id"
@@ -44,12 +53,23 @@ ActiveRecord::Schema.define(version: 20170828183603) do
     t.index ["post_id"], name: "index_contents_on_post_id"
   end
 
+  create_table "memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_memberships_on_company_id"
+    t.index ["user_id"], name: "index_memberships_on_user_id"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
+    t.bigint "company_id"
+    t.index ["company_id"], name: "index_posts_on_company_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -69,6 +89,7 @@ ActiveRecord::Schema.define(version: 20170828183603) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "company_id"
+    t.integer "role"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
@@ -76,7 +97,12 @@ ActiveRecord::Schema.define(version: 20170828183603) do
 
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "company_users", "companies"
+  add_foreign_key "company_users", "users"
   add_foreign_key "contents", "posts"
+  add_foreign_key "memberships", "companies"
+  add_foreign_key "memberships", "users"
+  add_foreign_key "posts", "companies"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "companies"
 end

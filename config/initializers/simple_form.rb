@@ -58,7 +58,7 @@ SimpleForm.setup do |config|
     b.optional :min_max
     b.use :label_input
     b.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
-    b.use :error, wrap_with: { tag: 'div', class: 'ui red pointing above label error' }
+    b.use :error, wrap_with: { tag: 'div', class: 'custom error message' }
   end
 
   config.wrappers :ui_checkbox, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
@@ -88,21 +88,21 @@ SimpleForm.setup do |config|
   config.wrappers :ui_left_labled_input, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
-
     b.wrapper tag: 'div', class: 'ui left labeled input' do |input|
       input.use :input
       input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'custom error message' }
   end
 
   config.wrappers :ui_right_labled_input, tag: 'div', class: "field", error_class: 'error', hint_class: 'with_hint' do |b|
     b.use :html5
     b.use :label
-
     b.wrapper tag: 'div', class: 'ui right labeled input' do |input|
       input.use :input
       input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
     end
+    b.use :error, wrap_with: { tag: 'div', class: 'custom error message' }
   end
 
   # The default wrapper to be used by the FormBuilder.
@@ -174,7 +174,7 @@ SimpleForm.setup do |config|
   # in this configuration, which is recommended due to some quirks from different browsers.
   # To stop SimpleForm from generating the novalidate option, enabling the HTML5 validations,
   # change this configuration to true.
-  config.browser_validations = false
+  config.browser_validations = true
 
   # Collection of methods to detect if a file type was given.
   # config.file_methods = [ :mounted_as, :file?, :public_filename ]

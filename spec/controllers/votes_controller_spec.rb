@@ -20,7 +20,7 @@ RSpec.describe VotesController, type: :controller do
 
   describe "#destroy" do
     let(:_post) { create :post, company: user.companies.first }
-    let(:vote) { create :vote, post: _post, user: user }
+    let!(:vote) { create :vote, post: _post, user: user }
 
     it "deletes vote" do
       delete :destroy, params: { post_id: _post.id }

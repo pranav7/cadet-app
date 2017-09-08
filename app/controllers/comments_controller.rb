@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    post = Post.find(params[:id])
+    post = current_company.posts.find(params[:post_id])
     comment = post.comments.new(comment_params)
     comment.user = current_user
     comment.save

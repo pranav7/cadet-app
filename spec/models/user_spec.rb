@@ -4,6 +4,7 @@ RSpec.describe User, type: :model do
   describe User, "Associations" do
     it { should have_many(:posts) }
     it { should have_many(:comments) }
+    it { should have_many(:votes) }
     it { should have_many(:companies).through(:memberships) }
     it { should have_many(:memberships) }
   end
@@ -59,6 +60,19 @@ RSpec.describe User, type: :model do
       user = build(:user, first_name: "John", last_name: "Doe")
 
       expect(user.name).to eq "John Doe"
+    end
+  end
+
+  describe User, "#voted?" do
+    let(:vote) { create :vote }
+
+    it "returns true if a user has voted the given post " do
+      expect(vote.user.voted?(vote.post)).to eq(true)
+    end
+
+    it "returns false if a user has not voted the given post" do
+      user = create :user
+      expect(user.voted?(vote.post)).to eq(false)
     end
   end
 end

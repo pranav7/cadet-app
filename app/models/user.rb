@@ -3,6 +3,7 @@ class User < ApplicationRecord
 
   has_many :posts
   has_many :comments
+  has_many :votes
   has_many :memberships
   has_many :companies, through: :memberships
 
@@ -21,5 +22,10 @@ class User < ApplicationRecord
 
   def name
     [first_name, last_name].join(" ")
+  end
+
+  def voted?(post)
+    return false if votes.where(post: post).empty?
+    return true
   end
 end

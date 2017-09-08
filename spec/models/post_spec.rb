@@ -4,6 +4,7 @@ RSpec.describe Post, type: :model do
   describe "Associations" do
     it { should have_one(:content) }
     it { should have_many(:comments) }
+    it { should have_many(:votes) }
     it { should belong_to(:user) }
     it { should belong_to(:company) }
   end

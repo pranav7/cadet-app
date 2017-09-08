@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
 
-  before_action :ensure_valid_subdomain!
+  # before_action :ensure_valid_subdomain!
 
   helper_method :current_company
 

@@ -14,13 +14,13 @@ RSpec.describe CommentsController, type: :controller do
     let(:comment_params) { attributes_for(:comment, content_attributes: content_params) }
 
     it "redirects to post show page" do
-      post :create, params: { id: _post.id, comment: comment_params }
+      post :create, params: { post_id: _post.id, comment: comment_params }
       expect(response).to redirect_to(post_path(_post))
     end
 
     it "creates a comment" do
       expect {
-        post :create, params: { id: _post.id, comment: comment_params }
+        post :create, params: { post_id: _post.id, comment: comment_params }
       }.to change(Comment, :count).by(1)
     end
   end

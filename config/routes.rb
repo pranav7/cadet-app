@@ -17,9 +17,8 @@ Rails.application.routes.draw do
   end
 
   resources :posts, only: [:new, :create, :index, :show] do
-    member do
-      resources :comments, only: [:create]
-    end
+    resources :comments, only: [:create]
+    resource :votes, only: [:create, :destroy]
   end
 
   root "posts#index"

@@ -1,30 +1,43 @@
 .ui.container
+  .top-links-container.vertical.padded
+    a href=posts_path
+      | &larr; Posts
   .ui.grid
     .ten.wide.column
-      a href=posts_path
-        | &larr; Posts
+      .ui.segment
+        .row
+          .ui.grid
+            .left.aligned.twelve.wide.column
+              h1= @post.title
+            .right.aligned.four.wide.column
+              = render partial: "posts/vote", locals: { post: @post }
+        .row
+          p
+            strong= @post.user.name if @post.user
+          p= @post.content.body
 
-      h1= @post.title
-      p
-        strong= @post.user.name if @post.user
-      p= @post.content.body
+          .ui.dividing.header Activity
+          = simple_form_for @comment, url: post_comments_path(@post) do |f|
+            = f.simple_fields_for :content do |cf|
+              = cf.input :body,
+                placeholder: "Leave a comment",
+                label: false,
+                input_html: { rows: 3 }
+            = f.submit "Comment"
 
-      .ui.dividing.header Activity
-      = simple_form_for @comment do |f|
-        = f.simple_fields_for :content do |cf|
-          = cf.input :body,
-            placeholder: "Leave a comment",
-            label: false,
-            input_html: { rows: 3 }
-        = f.submit "Comment"
-
-      - @post.comments.each do |comment|
-        - next if comment.new_record?
-        .ui.divider
-        p
-          strong= comment.user.name if comment.user
-        = simple_format comment.content.body
-        - if comment.created_at > 2.weeks.ago
-          p.soft #{time_ago_in_words(comment.created_at)} ago
-        - else
-          p.soft= comment.created_at.strftime("%d %B, %Y")
+          - @post.comments.each do |comment|
+            - next if comment.new_record?
+            .ui.divider
+            p
+              strong= comment.user.name if comment.user
+            = simple_format comment.content.body
+            - if comment.created_at > 2.weeks.ago
+              p.soft #{time_ago_in_words(comment.created_at)} ago
+            - else
+                p.soft= comment.created_at.strftime("%d %B, %Y")
+    .six.wide.column
+      .ui.segment
+        ul
+          - @post.voters.each do |voter|
+            li= voter.name
+          

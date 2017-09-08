@@ -5,6 +5,7 @@
       p There are no posts yet.
     - else
       - @posts.each do |post|
+        = render partial: "posts/vote", locals: { post: post }
         = link_to post_path(post) do
           h3= post.title
         p= post.content.body

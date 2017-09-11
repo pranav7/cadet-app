@@ -39,7 +39,7 @@
             p.soft= render_time(comment.created_at)
     .six.wide.column
       .ui.segment
-        ul
-          - @post.voters.each do |voter|
-            li= voter.name
+        strong Voters
+        - @post.voters.each do |voter|
+          div= voter.name
           

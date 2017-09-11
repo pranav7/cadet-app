@@ -24,7 +24,10 @@
       .row
         .four.wide.column
           = simple_form_for @post do |form|
-            = form.input :status, collection: Post.statuses.keys, placeholder: "Status", input_html: { onchange: "this.form.submit()" }
+            = form.input :status,
+              collection: Post.statuses.keys,
+              placeholder: "Status",
+              input_html: { onchange: "this.form.submit()" }
         br
       .row
         .ui.grid
@@ -60,6 +63,6 @@
           p.soft= render_time(comment.created_at)
   .four.wide.column
     .ui.segment
-      ul
-        - @post.voters.each do |voter|
-          li= voter.name
+      strong Voters
+      - @post.voters.each do |voter|
+        div= voter.name

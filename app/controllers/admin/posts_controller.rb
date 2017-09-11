@@ -10,10 +10,4 @@ class Admin::PostsController < Admin::AdminController
     @posts = current_company.posts.order(created_at: :desc).includes(:comments)
     redirect_to admin_post_path(@posts.first)
   end
-
-  private
-
-  def post_params
-    params.require(:post).permit(:title, content_attributes: [:body])
-  end
 end

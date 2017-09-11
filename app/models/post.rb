@@ -11,4 +11,6 @@ class Post < ApplicationRecord
   validates :title, presence: true
 
   accepts_nested_attributes_for :content
+
+  enum status: %w(open closed planned completed working)
 end

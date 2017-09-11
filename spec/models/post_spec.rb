@@ -16,4 +16,11 @@ RSpec.describe Post, type: :model do
       expect(build(:post)).to be_valid
     end
   end
+
+  describe "#status" do
+    it "should default to open" do
+      post = create :post
+      expect(post.open?).to eq(true)
+    end
+  end
 end

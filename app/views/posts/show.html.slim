@@ -11,6 +11,10 @@
               h1= @post.title
             .right.aligned.four.wide.column
               = render partial: "posts/vote", locals: { post: @post }
+              p
+                strong.soft Status
+                br
+                | ##{@post.status}
         .row
           p
             strong= @post.user.name if @post.user

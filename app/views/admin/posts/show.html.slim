@@ -15,15 +15,27 @@
           span
             i.comments.icon
             = post.comments.count
+          span &nbsp;
+          span
+            | ##{post.status}
         .ui.divider
   .eight.wide.column
     .ui.segment
+      .row
+        .four.wide.column
+          = simple_form_for @post do |form|
+            = form.input :status, collection: Post.statuses.keys, placeholder: "Status", input_html: { onchange: "this.form.submit()" }
+        br
       .row
         .ui.grid
           .left.aligned.twelve.wide.column
             h1= @post.title
           .right.aligned.four.wide.column
             = render partial: "posts/vote", locals: { post: @post }
+            p
+              strong.soft Status
+              br
+              | ##{@post.status}
       .row
         p
           strong= @post.user.name if @post.user

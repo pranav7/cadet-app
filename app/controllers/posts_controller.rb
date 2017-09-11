@@ -22,9 +22,16 @@ class PostsController < ApplicationController
     redirect_to posts_path
   end
 
+  def update
+    post = current_company.posts.find(params[:id])
+    post.update_attributes(post_params)
+
+    redirect_back fallback_location: post_path(post)
+  end
+
   private
 
   def post_params
-    params.require(:post).permit(:title, content_attributes: [:body])
+    params.require(:post).permit(:title, :status, content_attributes: [:body])
   end
 end

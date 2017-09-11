@@ -74,4 +74,17 @@ RSpec.describe PostsController, type: :controller do
       expect(assigns(:post)).to eq(post)
     end
   end
+
+  describe "#update" do
+    let(:post) { create :post, company: company }
+
+    it "updates the post" do
+      expect(post.closed?).to eq(false)
+
+      put :update, params: { id: post.id, post: { status: "closed" } }
+      
+      post.reload
+      expect(post.closed?).to eq(true)
+    end
+  end
 end

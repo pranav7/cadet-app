@@ -12,5 +12,5 @@ class Post < ApplicationRecord
 
   accepts_nested_attributes_for :content
 
-  enum status: %w(open closed planned completed working)
+  enum status: %w(open planned working completed closed)
 end

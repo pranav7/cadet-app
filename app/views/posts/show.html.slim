@@ -19,6 +19,7 @@
           p
             strong= @post.user.name if @post.user
           p= @post.content.body
+          p.soft= render_time(@post.created_at)
 
           .ui.dividing.header Activity
           = simple_form_for @comment, url: post_comments_path(@post) do |f|
@@ -35,10 +36,7 @@
             p
               strong= comment.user.name if comment.user
             = simple_format comment.content.body
-            - if comment.created_at > 2.weeks.ago
-              p.soft #{time_ago_in_words(comment.created_at)} ago
-            - else
-                p.soft= comment.created_at.strftime("%d %B, %Y")
+            p.soft= render_time(comment.created_at)
     .six.wide.column
       .ui.segment
         ul

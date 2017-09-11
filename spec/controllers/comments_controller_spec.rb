@@ -13,9 +13,13 @@ RSpec.describe CommentsController, type: :controller do
     let(:content_params) { attributes_for(:content) }
     let(:comment_params) { attributes_for(:comment, content_attributes: content_params) }
 
-    it "redirects to post show page" do
+    let(:back) { "#{request.host}/posts/#{_post.id}" }
+    before { request.env['HTTP_REFERER'] = back }
+
+    it "redirects to back to where it came from" do
       post :create, params: { post_id: _post.id, comment: comment_params }
-      expect(response).to redirect_to(post_path(_post))
+      binding.pry
+      expect(response).to redirect_to(back)
     end
 
     it "creates a comment" do

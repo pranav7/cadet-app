@@ -7,7 +7,7 @@ class CommentsController < ApplicationController
     comment.user = current_user
     comment.save
 
-    redirect_to post_path(comment.post)
+    redirect_back fallback_location: post_path(post)
   end
 
   private

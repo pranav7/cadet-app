@@ -10,7 +10,9 @@ html
     .ui.grid
       .four.wide.centered.column
         = semantic_flash
-    .ui.grid
+    .ui.two.column.grid
+      .left.aligned.column
+        strong= current_company.name
       .right.aligned.column
         span Hello, #{current_user.first_name}.  
         span= link_to "Logout", logout_path, method: :delete

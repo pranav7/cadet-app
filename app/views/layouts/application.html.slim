@@ -11,14 +11,14 @@ html
       .four.wide.centered.column
         = semantic_flash
     .ui.container
-      .ui.grid
+      .ui.two.column.grid
+        .left.aligned.column
+          strong= current_company.name
         .right.aligned.column
           - if user_signed_in?
-            span Hello, #{current_user.first_name}.  
-            | - 
             - if (current_user.admin? && current_user.companies.include?(current_company))            
               span= link_to "Admin Dashboard", admin_posts_path
-              | - 
+              |  - 
 
             span= link_to "Logout", logout_path, method: :delete
           - else

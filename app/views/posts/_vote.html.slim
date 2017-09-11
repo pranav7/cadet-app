@@ -1,10 +1,10 @@
 - if user_signed_in? && current_user.voted?(post)
   a.ui.labeled.button href=post_votes_path(post) data-method="delete"
-    .ui.primary.button
-      i.thumbs.up.large.icon
+    .ui.primary.small.button
+      i.thumbs.up.icon
     .ui.basic.left.pointing.label= post.votes.count
 - else
   a.ui.labeled.button href=post_votes_path(post) data-method="post"
-    .ui.basic.button
-      i.thumbs.up.large.icon
+    .ui.basic.small.button
+      i.thumbs.up.icon
     .ui.basic.left.pointing.label= post.votes.count

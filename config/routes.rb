@@ -21,5 +21,9 @@ Rails.application.routes.draw do
     resource :votes, only: [:create, :destroy]
   end
 
+  namespace :admin do
+    resources :posts, only: [:index, :show]
+  end
+
   root "posts#index"
 end

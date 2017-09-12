@@ -1,0 +1,20 @@
+.ui.grid
+  .four.wide.column
+    - if @posts.empty?
+      p There are no posts yet.
+    - else
+      - @posts.each do |post|
+        = link_to admin_post_path(post) do
+          h3= post.title
+        p= post.content.body.truncate(140)
+        p.soft
+          span
+            | ##{post.status}
+          span &nbsp;
+          span
+            i.thumbs.up.icon
+            = post.votes.count
+          span &nbsp;
+          span
+            i.comments.icon
+            = post.comments.count

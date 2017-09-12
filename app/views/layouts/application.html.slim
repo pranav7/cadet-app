@@ -16,6 +16,11 @@ html
           strong= current_company.name
         .right.aligned.column
           - if user_signed_in?
+            span
+              strong= current_user.name
+              span.soft
+                |  (#{current_user.email})
+            |  - 
             - if current_user.admin_of?(current_company)
               span= link_to "Admin Dashboard", admin_posts_path
               |  - 

@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912104459) do
+ActiveRecord::Schema.define(version: 20170912195943) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boards", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_boards_on_company_id"
+  end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "post_id"
@@ -70,6 +79,8 @@ ActiveRecord::Schema.define(version: 20170912104459) do
     t.datetime "updated_at", null: false
     t.bigint "user_id"
     t.bigint "company_id"
+    t.bigint "board_id"
+    t.index ["board_id"], name: "index_posts_on_board_id"
     t.index ["company_id"], name: "index_posts_on_company_id"
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
@@ -107,6 +118,7 @@ ActiveRecord::Schema.define(version: 20170912104459) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "boards", "companies"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "company_users", "companies"
@@ -114,6 +126,7 @@ ActiveRecord::Schema.define(version: 20170912104459) do
   add_foreign_key "contents", "posts"
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"
+  add_foreign_key "posts", "boards"
   add_foreign_key "posts", "companies"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "companies"

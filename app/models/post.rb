@@ -7,6 +7,7 @@ class Post < ApplicationRecord
 
   belongs_to :user, optional: true # @todo Remove optional later
   belongs_to :company
+  belongs_to :board
 
   validates :title, presence: true
 

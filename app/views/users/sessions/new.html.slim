@@ -4,13 +4,24 @@
       h2
         | Log in
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
-        = f.input :email, required: false, autofocus: true, label: false, placeholder: "Email"
-        = f.input :password, required: false, label: false, placeholder: "Password"
-        = f.input :remember_me, wrapper: :ui_checkbox, as: :boolean if devise_mapping.rememberable?
+        = f.input :email,
+          required: false,
+          autofocus: true,
+          label: false,
+          placeholder: "Email"
+        = f.input :password,
+          required: false,
+          label: false,
+          placeholder: "Password"
+        = f.input :remember_me,
+          wrapper: :ui_checkbox,
+          as: :boolean if devise_mapping.rememberable?
         = f.button :submit, "Log in", class: "ui fluid button"
 
         .ui.horizontal.divider or
-        = link_to user_google_oauth2_omniauth_authorize_path, class: "ui red fluid button" do
+
+        = link_to user_google_oauth2_omniauth_authorize_path,
+          class: "ui red fluid button" do
           i.google.icon
           | Log in with Google
-    = render "devise/shared/links"
+    = render "users/shared/links"

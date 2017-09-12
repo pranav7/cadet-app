@@ -4,11 +4,20 @@
       h2
         | Start your free Cadet trial
       p.soft. Cadet makes it simple to collect & organize customer feedback and learn what your customers really want.
-      = simple_form_for(resource, as: resource_name, url: registration_path(resource_name)) do |form|
+
+      = simple_form_for resource,
+        as: resource_name,
+        url: registration_path(resource_name) do |form|
+
         = form.simple_fields_for :memberships do |memberships_form|
           = memberships_form.simple_fields_for :company do |company_form|
-            = company_form.input :name, placeholder: "Company Name", label: false, autofocus: true
-            = company_form.input :subdomain, label: false, wrapper: :ui_right_labled_input do
+            = company_form.input :name,
+              placeholder: "Company Name",
+              label: false,
+              autofocus: true
+            = company_form.input :subdomain,
+              label: false,
+              wrapper: :ui_right_labled_input do
               = company_form.input_field :subdomain, placeholder: "Subdomain"
               .ui.custom.basic.label .getcadet.com
 
@@ -18,11 +27,16 @@
         = form.input :email, label: false, placeholder: "Work Email"
         .two.fields
           = form.input :password, label: false, placeholder: "Password"
-          = form.input :password_confirmation, label: false, placeholder: "Confirm Password", autocomplete: "off"
+          = form.input :password_confirmation,
+            label: false,
+            placeholder: "Confirm Password",
+            autocomplete: "off"
 
         = form.button :submit, "Sign up", class: "ui fluid button"
         .ui.horizontal.divider or
-        = link_to user_google_oauth2_omniauth_authorize_path, class: "ui red fluid button" do
+
+        = link_to user_google_oauth2_omniauth_authorize_path,
+          class: "ui red fluid button" do
           i.google.icon
           | Sign up with Google
-    = render "devise/shared/links"
+    = render "users/shared/links"

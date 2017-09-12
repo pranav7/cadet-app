@@ -21,4 +21,8 @@
           = form.input :password_confirmation, label: false, placeholder: "Confirm Password", autocomplete: "off"
 
         = form.button :submit, "Sign up", class: "ui fluid button"
+        .ui.horizontal.divider or
+        = link_to user_google_oauth2_omniauth_authorize_path, class: "ui red fluid button" do
+          i.google.icon
+          | Sign up with Google
     = render "devise/shared/links"

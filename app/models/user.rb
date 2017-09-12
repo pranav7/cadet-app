@@ -1,5 +1,5 @@
 class User < ApplicationRecord
-  enum role: [:admin, :customer]
+  enum role: { customer: 0, admin: 20 }
 
   has_many :posts
   has_many :comments

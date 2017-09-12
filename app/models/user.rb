@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  enum role: { customer: 0, admin: 20 }
-
   has_many :posts
   has_many :comments
   has_many :votes
@@ -55,7 +53,7 @@ class User < ApplicationRecord
   end
 
   def admin_of?(company)
-    return true if companies.include?(company)
-    return false
+    return false if memberships.where(company: company, role: :admin).empty?
+    return true
   end
 end

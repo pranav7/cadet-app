@@ -103,4 +103,19 @@ RSpec.describe User, type: :model do
       expect(user.admin_of?(another_company)).to eq(false)
     end
   end
+
+  describe User, "#part_of" do
+    let(:company) { create :company }
+    let(:user) { create :user, company: company }
+
+    it "returns true if user is part of given company" do
+      expect(user.part_of?(company)).to eq(true)
+    end
+
+    it "returns false if user is not part of given company" do
+      other_company = create :company
+
+      expect(user.part_of?(other_company)).to eq(false)
+    end
+  end
 end

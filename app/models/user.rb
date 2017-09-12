@@ -10,9 +10,10 @@ class User < ApplicationRecord
   accepts_nested_attributes_for :memberships
 
   # Include default devise modules. Others available are:
-  # :confirmable, :lockable, :timeoutable and :omniauthable
+  # :confirmable, :lockable, :timeoutable
   devise :database_authenticatable, :registerable,
-         :recoverable, :rememberable, :trackable, :validatable
+         :recoverable, :rememberable, :trackable, :validatable,
+         :omniauthable
 
   validates :first_name, presence: true
   validates :email,

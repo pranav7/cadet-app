@@ -57,9 +57,18 @@ RSpec.describe User, type: :model do
 
   describe User, "#name" do
     it "returns a user's full name as a string" do
-      user = build(:user, first_name: "John", last_name: "Doe")
+      user = build(:user, first_name: "Jon", last_name: "Snow")
 
-      expect(user.name).to eq "John Doe"
+      expect(user.name).to eq "Jon Snow"
+    end
+  end
+
+  describe User, "#name=" do
+    it "sets the user's first_name and last_name" do
+      user = build(:user, name: "Jamie Lannister")
+
+      expect(user.first_name).to eq("Jamie")
+      expect(user.last_name).to eq("Lannister")
     end
   end
 
@@ -73,6 +82,20 @@ RSpec.describe User, type: :model do
     it "returns false if a user has not voted the given post" do
       user = create :user
       expect(user.voted?(vote.post)).to eq(false)
+    end
+  end
+
+  describe User, "#admin_of?" do
+    let(:company) { create :company }
+    let(:user) { create :admin, company: company }
+    let(:another_company) { create :company }
+
+    it "returns true if user is admin of given company" do
+      expect(user.admin_of?(company)).to eq(true)
+    end
+
+    it "returns false if user is not admin of given comapny" do
+      expect(user.admin_of?(another_company)).to eq(false)
     end
   end
 end

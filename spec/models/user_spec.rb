@@ -90,6 +90,11 @@ RSpec.describe User, type: :model do
     let(:user) { create :admin, company: company }
     let(:another_company) { create :company }
 
+    it "returns false if user is not admin" do
+      customer = create :user, company: company
+      expect(customer.admin_of?(company)).to eq(false)
+    end
+
     it "returns true if user is admin of given company" do
       expect(user.admin_of?(company)).to eq(true)
     end

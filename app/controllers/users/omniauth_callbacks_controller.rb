@@ -8,6 +8,18 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   # More info at:
   # https://github.com/plataformatec/devise#omniauth
+  def google_oauth2
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+
+    if @user.persisted?
+      binding.pry
+      sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
+      set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
+    else
+      session["devise.google_oauth2_data"] = request.env["omniauth.auth"]
+      redirect_to new_user_registration_url
+    end
+  end
 
   # GET|POST /resource/auth/twitter
   # def passthru
@@ -15,9 +27,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   # end
 
   # GET|POST /users/auth/twitter/callback
-  # def failure
-  #   super
-  # end
+  def failure
+    super
+  end
 
   # protected
 

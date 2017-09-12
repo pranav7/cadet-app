@@ -19,10 +19,12 @@ FactoryGirl.define do
   end
 
   factory :admin, parent: :user do
-    role "admin"
-  end
-
-  factory :customer, parent: :user do
-    role "customer"
+    after :create do |user, evaluator|
+      if evaluator.company
+        create :admin_membership, company: evaluator.company, user: user
+      else
+        create :admin_membership, company: create(:company), user: user
+      end
+    end
   end
 end

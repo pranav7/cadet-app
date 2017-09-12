@@ -4,6 +4,10 @@ class VotesController < ApplicationController
   def create
     post = current_company.posts.find(params[:post_id])
     post.votes.create(user: current_user)
+    
+    unless current_user.part_of?(current_company)
+      current_user.companies << current_company
+    end
 
     respond_to do |format|
       format.html do

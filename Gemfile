@@ -20,6 +20,7 @@ gem 'bourbon'
 gem 'simple_form'
 gem 'slim-rails'
 gem 'devise'
+gem 'omniauth-google-oauth2'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes

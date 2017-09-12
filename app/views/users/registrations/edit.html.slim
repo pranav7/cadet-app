@@ -1,22 +1,34 @@
-h2
-  | Edit 
-  = resource_name.to_s.humanize
-= simple_form_for(resource, as: resource_name, url: registration_path(resource_name), html: { method: :put }) do |f|
-  = f.error_notification
-  .form-inputs
-    = f.input :email, required: true, autofocus: true
-    - if devise_mapping.confirmable? && resource.pending_reconfirmation?
-      p
-        | Currently waiting confirmation for: 
-        = resource.unconfirmed_email
-    = f.input :password, autocomplete: "off", hint: "leave it blank if you don't want to change it", required: false
-    = f.input :password_confirmation, required: false
-    = f.input :current_password, hint: "we need your current password to confirm your changes", required: true
-  .form-actions
-    = f.button :submit, "Update"
-h3
-  | Cancel my account
-p
-  | Unhappy? 
-  = link_to "Cancel my account", registration_path(resource_name), data: { confirm: "Are you sure?" }, method: :delete
-= link_to "Back", :back
+.ui.grid
+  .six.wide.centered.column
+    .ui.segment
+      h2
+        | Hey, #{resource.first_name}.
+      strong Welcome to Cadet!
+      p.soft. Cadet makes it simple to collect & organize customer feedback and learn what your customers really want.
+
+      = simple_form_for resource,
+        as: resource_name,
+        url: registration_path(resource_name),
+        html: { method: :put } do |form|
+
+        = form.simple_fields_for :memberships do |memberships_form|
+          = memberships_form.input :role,
+            as: :hidden,
+            input_html: { value: "admin" }
+          = memberships_form.simple_fields_for :company do |company_form|
+            = company_form.input :name,
+              placeholder: "Company Name",
+              label: false,
+              autofocus: true
+            = company_form.input :subdomain,
+              label: false,
+              wrapper: :ui_right_labled_input do
+              = company_form.input_field :subdomain, placeholder: "Subdomain"
+              .ui.custom.basic.label .getcadet.com
+
+        .two.fields
+          = form.input :first_name, label: false, placeholder: "First Name"
+          = form.input :last_name, label: false, placeholder: "Last Name"
+        = form.input :email, label: false, placeholder: "Work Email"
+
+        = form.button :submit, "Complete Signup", class: "ui fluid button"

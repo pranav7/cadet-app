@@ -2,7 +2,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   layout "public"
 
   before_action :configure_sign_up_params, only: [:create]
-  # before_action :configure_account_update_params, only: [:update]
+  before_action :configure_account_update_params, only: [:update]
 
   # GET /resource/sign_up
   def new
@@ -17,14 +17,21 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   # GET /resource/edit
-  # def edit
-  #   super
-  # end
+  def edit
+    self.resource.memberships.build.build_company
+    super
+  end
 
   # PUT /resource
-  # def update
-  #   super
-  # end
+  def update
+    if current_user.update_attributes(account_update_params)
+      flash[:success] = "Welcome to Cadet!"
+      sign_in_and_redirect current_user
+    else
+      flash[:error] = "Something went wrong!"
+      render action: :edit
+    end
+  end
 
   # DELETE /resource
   # def destroy
@@ -51,9 +58,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   end
 
   # If you have extra params to permit, append them to the sanitizer.
-  # def configure_account_update_params
-  #   devise_parameter_sanitizer.permit(:account_update, keys: [:attribute])
-  # end
+  def configure_account_update_params
+    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, memberships_attributes: [:role, company_attributes: [:name, :subdomain]]])
+  end
 
   # The path used after sign up.
   # def after_sign_up_path_for(resource)

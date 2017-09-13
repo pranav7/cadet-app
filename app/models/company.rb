@@ -2,6 +2,7 @@ class Company < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
   has_many :posts
+  has_many :boards
 
   validates :subdomain,
     uniqueness: true,

@@ -1,4 +1,6 @@
 class Post < ApplicationRecord
+  include Sluggable
+
   has_one :content, as: :parent
   has_many :comments
 
@@ -14,8 +16,4 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :content
 
   enum status: %w(open planned developing released closed)
-
-  def to_param
-    "#{id}-#{title.parameterize}"
-  end
 end

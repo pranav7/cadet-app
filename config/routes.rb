@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   end
 
   resources :boards do
-    resources :posts, only: [:new, :create, :index, :show, :update] do
+    resources :posts, only: [:new, :create, :index, :show] do
       resources :comments, only: [:create]
       resource :votes, only: [:create, :destroy]
     end
@@ -26,9 +26,9 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :boards do
-      resources :posts, only: [:index, :show]
+      resources :posts, only: [:index, :show, :update]
     end
   end
 
-  root "posts#index"
+  root "boards#index"
 end

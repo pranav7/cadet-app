@@ -7,11 +7,6 @@ class Admin::PostsController < Admin::AdminController
     @comment.build_content
   end
 
-  def index
-    @posts = current_company.posts.order(created_at: :desc).includes(:comments)
-    redirect_to admin_post_path(@posts.first) unless @posts.empty?
-  end
-
   def update
     board = current_company.boards.find(params[:board_id])
     post = board.posts.find(params[:id])

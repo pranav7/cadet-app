@@ -3,22 +3,11 @@ require 'rails_helper'
 RSpec.describe PostsController, type: :controller do
   let(:company) { create :company }
   let(:user) { create :user, company: company }
+  let(:board) { create :board, company: company }
 
   before :each do
     request.host = "#{user.companies.first.subdomain}.example.com"
     sign_in user
-  end
-
-  describe "#new" do
-    it "responds successfully" do
-      get :new
-      expect(response).to be_success
-    end
-
-    it "returns a 200 response" do
-      get :new
-      expect(response).to have_http_status(200)
-    end
   end
 
   describe "#create" do
@@ -27,13 +16,13 @@ RSpec.describe PostsController, type: :controller do
 
     it "creates a post" do
       expect {
-        post :create, params: { post: post_params }
+        post :create, params: { board_id: board.id, post: post_params }
       }.to change(Post, :count).by(1)
     end
 
     it "redirects to all posts" do
-      post :create, params: { post: post_params }
-      expect(response).to redirect_to(posts_path)
+      post :create, params: { board_id: board.id, post: post_params }
+      expect(response).to redirect_to(board_posts_path(board))
     end
   end
 
@@ -72,19 +61,6 @@ RSpec.describe PostsController, type: :controller do
     it "assigns @post with the post object" do
       get :show, params: { id: post.id }
       expect(assigns(:post)).to eq(post)
-    end
-  end
-
-  describe "#update" do
-    let(:post) { create :post, company: company }
-
-    it "updates the post" do
-      expect(post.closed?).to eq(false)
-
-      put :update, params: { id: post.id, post: { status: "closed" } }
-      
-      post.reload
-      expect(post.closed?).to eq(true)
     end
   end
 end

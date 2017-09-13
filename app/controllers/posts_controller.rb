@@ -9,10 +9,12 @@ class PostsController < ApplicationController
   end
 
   def create
-    post = current_company.posts.new(post_params)
+    board = current_company.boards.find(params[:board_id])
+    post = board.posts.new(post_params)
     post.user = current_user
     post.save
-    redirect_to posts_path
+
+    redirect_to board_posts_path(board)
   end
 
   private

@@ -6,7 +6,6 @@ RSpec.describe Post, type: :model do
     it { should have_many(:comments) }
     it { should have_many(:votes) }
     it { should belong_to(:user) }
-    it { should belong_to(:company) }
     it { should belong_to(:board) }
   end
 

@@ -8,7 +8,6 @@ class Post < ApplicationRecord
   has_many :voters, through: :votes, source: :user
 
   belongs_to :user, optional: true # @todo Remove optional later
-  belongs_to :company
   belongs_to :board
 
   validates :title, presence: true

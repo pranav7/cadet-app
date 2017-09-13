@@ -17,13 +17,17 @@ Rails.application.routes.draw do
     delete "/logout", to: "users/sessions#destroy"
   end
 
-  resources :posts, only: [:new, :create, :index, :show, :update] do
-    resources :comments, only: [:create]
-    resource :votes, only: [:create, :destroy]
+  resources :boards do
+    resources :posts, only: [:new, :create, :index, :show, :update] do
+      resources :comments, only: [:create]
+      resource :votes, only: [:create, :destroy]
+    end
   end
 
   namespace :admin do
-    resources :posts, only: [:index, :show]
+    resources :boards do
+      resources :posts, only: [:index, :show]
+    end
   end
 
   root "posts#index"

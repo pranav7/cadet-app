@@ -2,12 +2,13 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    post = current_company.posts.find(params[:post_id])
+    board = current_company.boards.find(params[:board_id])
+    post = board.posts.find(params[:post_id])
     comment = post.comments.new(comment_params)
     comment.user = current_user
     comment.save
 
-    redirect_back fallback_location: post_path(post)
+    redirect_back fallback_location: board_post_path(board, post)
   end
 
   private

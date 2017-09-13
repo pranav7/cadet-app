@@ -1,19 +1,19 @@
 .ui.grid
   .nine.wide.column
-    h1 Posts
+    h1= @board.name
     - if @posts.empty?
       p There are no posts yet.
     - else
       - @posts.each do |post|
         = render partial: "posts/vote", locals: { post: post }
-        = link_to post_path(post) do
+        = link_to board_post_path(@board, post) do
           h3= post.title
         p= post.content.body
         .ui.divider
   .one.wide.column
   .six.wide.column
     h1 Create Post
-    = simple_form_for @post do |f|
+    = simple_form_for @post, url: board_post_path(@board) do |f|
       = f.input :title, placeholder: "Ttile", label: false
       = f.simple_fields_for :content do |cf|
         = cf.input :body, placeholder: "Description", label: false

@@ -1,7 +1,7 @@
 .ui.container
   .top-links-container.vertical.padded
-    a href=posts_path
-      | &larr; Posts
+    a href=board_path(@board)
+      | &larr; #{@board.name}
   .ui.grid
     .ten.wide.column
       .ui.segment
@@ -22,7 +22,7 @@
           p.soft= render_time(@post.created_at)
 
           .ui.dividing.header Activity
-          = simple_form_for @comment, url: post_comments_path(@post) do |f|
+          = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
             = f.simple_fields_for :content do |cf|
               = cf.input :body,
                 placeholder: "Leave a comment",

@@ -4,7 +4,7 @@
       p There are no posts yet.
     - else
       - @posts.each do |post|
-        = link_to admin_post_path(post) do
+        = link_to admin_board_post_path(@board, post) do
           h3= post.title
         p= post.content.body.truncate(140)
         p.soft
@@ -23,7 +23,7 @@
     .ui.segment
       .row
         .four.wide.column
-          = simple_form_for @post do |form|
+          = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
             = form.input :status,
               collection: Post.statuses.keys,
               placeholder: "Status",
@@ -46,7 +46,7 @@
         p.soft= render_time(@post.created_at)
 
         .ui.dividing.header Activity
-        = simple_form_for @comment, url: post_comments_path(@post) do |f|
+        = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
           = f.simple_fields_for :content do |cf|
             = cf.input :body,
               placeholder: "Leave a comment",

@@ -4,7 +4,7 @@
       p There are no posts yet.
     - else
       - @posts.each do |post|
-        = link_to admin_post_path(post) do
+        = link_to admin_board_post_path(@board, post) do
           h3= post.title
         p= post.content.body.truncate(140)
         p.soft

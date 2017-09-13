@@ -22,7 +22,7 @@ html
                 |  (#{current_user.email})
             |  - 
             - if current_user.admin_of?(current_company)
-              span= link_to "Admin Dashboard", admin_posts_path
+              span= link_to "Admin Dashboard", admin_boards_path
               |  - 
 
             span= link_to "Logout", logout_path, method: :delete

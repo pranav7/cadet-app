@@ -6,7 +6,7 @@ RSpec.describe PostsController, type: :controller do
   let(:board) { create :board, company: company }
 
   before :each do
-    request.host = "#{user.companies.first.subdomain}.example.com"
+    request.host = "#{company.subdomain}.example.com"
     sign_in user
   end
 
@@ -20,22 +20,22 @@ RSpec.describe PostsController, type: :controller do
       }.to change(Post, :count).by(1)
     end
 
-    it "redirects to all posts" do
+    it "redirects to all posts that is boards#show" do
       post :create, params: { board_id: board.id, post: post_params }
-      expect(response).to redirect_to(board_posts_path(board))
+      expect(response).to redirect_to(board_path(board))
     end
   end
 
   describe "#show" do
-    let(:post) { create :post, company: company }
+    let(:post) { create :post, board: board }
 
     it "responds successfully" do
-      get :show, params: { id: post.id }
+      get :show, params: { board_id: board.id, id: post.id }
       expect(response).to be_success
     end
 
     it "assigns @post with the post object" do
-      get :show, params: { id: post.id }
+      get :show, params: { board_id: board.id, id: post.id }
       expect(assigns(:post)).to eq(post)
     end
   end

@@ -6,7 +6,8 @@
 //= require jquery
 //= require jquery_ujs
 //= require semantic-ui
-//= require linkifyjs
+//= require linkifyjs/dist/linkify
+//= require linkifyjs/dist/linkify-jquery
 //= require init
 //= require cadet/posts
 //= require cadet/signup

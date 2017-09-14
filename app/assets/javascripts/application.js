@@ -1,3 +1,6 @@
+// Auto Require has been removed, make sure to manually require
+// a JS file if you a add a new one
+
 //= require rails-ujs
 //= require turbolinks
 //= require jquery

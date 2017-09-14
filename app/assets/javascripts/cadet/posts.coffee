@@ -3,11 +3,15 @@ class Cadet.Posts
     # initialize some stuff here
 
   init: ->
-    @linkifyComments()
+    @linkifyText()
 
-  linkifyComments: ->
-    $(".comment").linkify ->
-      target: "_blank"
+  linkifyText: ->
+    $(".comment").linkify({
+      className: (href, type) ->
+        "link--#{type}"
+      tagName:
+        mention: "span"
+    })
 
 $(document).on "turbolinks:load", ->
   posts = new Cadet.Posts

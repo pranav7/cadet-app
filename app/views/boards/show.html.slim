@@ -13,7 +13,7 @@
   .one.wide.column
   .six.wide.column
     h1 Create Post
-    = simple_form_for @post, url: board_post_path(@board) do |f|
+    = simple_form_for @post, url: board_posts_path(@board) do |f|
       = f.input :title, placeholder: "Ttile", label: false
       = f.simple_fields_for :content do |cf|
         = cf.input :body, placeholder: "Description", label: false

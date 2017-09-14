@@ -14,7 +14,7 @@ class PostsController < ApplicationController
     post.user = current_user
     post.save
 
-    redirect_to board_posts_path(board)
+    redirect_to board_path(board)
   end
 
   private

@@ -1,5 +1,6 @@
 class Post < ApplicationRecord
-  include Sluggable
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
 
   has_one :content, as: :parent
   has_many :comments

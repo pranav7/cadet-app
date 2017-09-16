@@ -1,5 +1,6 @@
 class Board < ApplicationRecord
-  include Sluggable
+  extend FriendlyId
+  friendly_id :title, use: [:slugged, :history]
 
   belongs_to :company
   has_many :posts

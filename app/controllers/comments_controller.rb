@@ -2,7 +2,7 @@ class CommentsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def create
-    board = current_company.boards.find(params[:board_id])
+    board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.find(params[:post_id])
     comment = post.comments.new(comment_params)
     comment.user = current_user

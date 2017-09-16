@@ -1,6 +1,6 @@
 class Admin::PostsController < Admin::AdminController
   def show
-    @board = current_company.boards.find(params[:board_id])
+    @board = current_company.boards.friendly.find(params[:board_id])
     @posts = @board.posts.order(created_at: :desc).includes(:comments)
     @post = Post.find(params[:id]) || @posts.first || nil
     @comment = @post.comments.new
@@ -8,7 +8,7 @@ class Admin::PostsController < Admin::AdminController
   end
 
   def update
-    board = current_company.boards.find(params[:board_id])
+    board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.find(params[:id])
     post.update_attributes(post_params)
 

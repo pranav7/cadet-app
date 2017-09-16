@@ -2,14 +2,14 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
 
   def show
-    @board = current_company.boards.find(params[:board_id])
-    @post = @board.posts.find(params[:id])
+    @board = current_company.boards.friendly.find(params[:board_id])
+    @post = @board.posts.friendly.find(params[:id])
     @comment = @post.comments.new
     @comment.build_content
   end
 
   def create
-    board = current_company.boards.find(params[:board_id])
+    board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
     post.user = current_user
     post.save

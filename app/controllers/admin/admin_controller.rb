@@ -4,6 +4,6 @@ class Admin::AdminController < ApplicationController
   layout 'admin'
 
   def authorize!
-    return redirect_to(posts_path) unless current_user.admin_of?(current_company)
+    return redirect_to(boards_path) unless current_user.admin_of?(current_company)
   end
 end

@@ -6,7 +6,7 @@ html
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.png'
-  body.admin
+  body.admin class="#{controller_name} #{action_name}"
     .ui.grid
       .four.wide.centered.column
         = semantic_flash
@@ -14,7 +14,7 @@ html
       .left.aligned.column
         strong= current_company.name
       .right.aligned.column
-        span Hello, #{current_user.first_name}.  
+        span Hello, #{current_user.first_name}.
         span= link_to "Logout", logout_path, method: :delete
 
     = yield

@@ -1,0 +1,20 @@
+.ui.grid
+  .six.wide.column
+    h1 Boards
+    - if @boards
+      - @boards.each do |board|
+        - next if board.new_record?
+        = link_to admin_board_path(board) do
+          h3= board.name
+        p= board.description
+        p.soft
+          strong #{board.posts.count} Posts
+        .ui.divider
+    - else
+      | No Boards
+  .four.wide.column
+    h1 Create Board
+    = simple_form_for @board, url: admin_boards_path do |form|
+      = form.input :name
+      = form.input :description
+      = form.submit

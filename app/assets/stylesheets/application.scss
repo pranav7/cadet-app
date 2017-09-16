@@ -13,6 +13,8 @@
  * require_tree .
  * require_self
  
+ Whatever is writen above in invalid. Mannually import all SCSS files once you add a new one.
+
  Read the below post on why it is benefitial to use SASS import directive rather
  than Sprockets require directives
  https://content.pivotal.io/blog/structure-your-sass-files-with-import
@@ -29,5 +31,6 @@ $font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-San
 
 @import 'base';
 @import 'public';
+@import 'posts';
 
 @import 'admin/base'

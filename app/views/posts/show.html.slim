@@ -1,7 +1,7 @@
 .ui.container
   .top-links-container.vertical.padded
-    a href=posts_path
-      | &larr; Posts
+    a href=board_path(@board)
+      | &larr; #{@board.name}
   .ui.grid
     .ten.wide.column
       .ui.segment
@@ -18,11 +18,12 @@
         .row
           p
             strong= @post.user.name if @post.user
-          p= @post.content.body
+          .content
+            = simple_format @post.content.body
           p.soft= render_time(@post.created_at)
 
           .ui.dividing.header Activity
-          = simple_form_for @comment, url: post_comments_path(@post) do |f|
+          = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
             = f.simple_fields_for :content do |cf|
               = cf.input :body,
                 placeholder: "Leave a comment",
@@ -35,11 +36,11 @@
             .ui.divider
             p
               strong= comment.user.name if comment.user
-            = simple_format comment.content.body
+            .content
+              = simple_format comment.content.body
             p.soft= render_time(comment.created_at)
     .six.wide.column
       .ui.segment
         strong Voters
         - @post.voters.each do |voter|
           div= voter.name
-          

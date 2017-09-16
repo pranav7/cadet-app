@@ -10,10 +10,21 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912104459) do
+ActiveRecord::Schema.define(version: 20170916065946) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "boards", force: :cascade do |t|
+    t.bigint "company_id"
+    t.string "name"
+    t.string "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "slug"
+    t.index ["company_id"], name: "index_boards_on_company_id"
+    t.index ["slug"], name: "index_boards_on_slug", unique: true
+  end
 
   create_table "comments", force: :cascade do |t|
     t.bigint "post_id"
@@ -53,6 +64,18 @@ ActiveRecord::Schema.define(version: 20170912104459) do
     t.index ["post_id"], name: "index_contents_on_post_id"
   end
 
+  create_table "friendly_id_slugs", force: :cascade do |t|
+    t.string "slug", null: false
+    t.integer "sluggable_id", null: false
+    t.string "sluggable_type", limit: 50
+    t.string "scope"
+    t.datetime "created_at"
+    t.index ["slug", "sluggable_type", "scope"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type_and_scope", unique: true
+    t.index ["slug", "sluggable_type"], name: "index_friendly_id_slugs_on_slug_and_sluggable_type"
+    t.index ["sluggable_id"], name: "index_friendly_id_slugs_on_sluggable_id"
+    t.index ["sluggable_type"], name: "index_friendly_id_slugs_on_sluggable_type"
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_id"
@@ -69,8 +92,10 @@ ActiveRecord::Schema.define(version: 20170912104459) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "company_id"
-    t.index ["company_id"], name: "index_posts_on_company_id"
+    t.bigint "board_id"
+    t.string "slug"
+    t.index ["board_id"], name: "index_posts_on_board_id"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -107,6 +132,7 @@ ActiveRecord::Schema.define(version: 20170912104459) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "boards", "companies"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "company_users", "companies"
@@ -114,7 +140,7 @@ ActiveRecord::Schema.define(version: 20170912104459) do
   add_foreign_key "contents", "posts"
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"
-  add_foreign_key "posts", "companies"
+  add_foreign_key "posts", "boards"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "companies"
   add_foreign_key "votes", "posts"

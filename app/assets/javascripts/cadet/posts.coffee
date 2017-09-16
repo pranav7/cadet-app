@@ -6,7 +6,7 @@ class Cadet.Posts
     @linkifyText()
 
   linkifyText: ->
-    $(".comment").linkify({
+    $(".content").linkify({
       className: (href, type) ->
         "link--#{type}"
       tagName:

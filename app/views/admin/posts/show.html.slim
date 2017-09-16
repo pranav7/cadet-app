@@ -42,7 +42,7 @@
       .row
         p
           strong= @post.user.name if @post.user
-        .comment
+        .content
           = simple_format @post.content.body
         p.soft= render_time(@post.created_at)
 
@@ -60,7 +60,7 @@
           .ui.divider
           p
             strong= comment.user.name if comment.user
-          .comment
+          .content
             = simple_format comment.content.body
           p.soft= render_time(comment.created_at)
   .four.wide.column

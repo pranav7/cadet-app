@@ -2,7 +2,7 @@ class Admin::PostsController < Admin::AdminController
   def show
     @board = current_company.boards.friendly.find(params[:board_id])
     @posts = @board.posts.order(created_at: :desc).includes(:comments)
-    @post = Post.find(params[:id]) || @posts.first || nil
+    @post = Post.friendly.find(params[:id]) || @posts.first || nil
     @comment = @post.comments.new
     @comment.build_content
   end

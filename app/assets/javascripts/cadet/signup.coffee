@@ -6,12 +6,15 @@ class Cadet.Signup
     @setupFormValidations()
 
   setupSubdomainAutoFill: ->
-    @company_el.blur =>
-      return unless @subdomain_el.val() == ""
+    @company_el.keyup (e) =>
+      charCode = e.which
+      return unless (charCode >= 65 && charCode <= 90) || (charCode >= 97 && charCode <= 122) || (charCode == 32)
 
-      if @company_el.val()?
-        parameterized_name = @company_el.val().toLowerCase().replace(/\s/g, "-")
-        @subdomain_el.val(parameterized_name)
+      key = e.key
+      key = "-" if charCode == 32
+
+      @subdomain_el.val(@subdomain_el.val() + key.toLowerCase())
+      return
 
   setupFormValidations: ->
     $("#new_user").form({

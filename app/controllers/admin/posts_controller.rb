@@ -9,7 +9,7 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     board = current_company.boards.friendly.find(params[:board_id])
-    post = board.posts.find(params[:id])
+    post = board.posts.friendly.find(params[:id])
     post.update_attributes(post_params)
 
     redirect_back fallback_location: admin_board_post_path(post)

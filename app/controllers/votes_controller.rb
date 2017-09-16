@@ -26,6 +26,6 @@ class VotesController < ApplicationController
 
   def load_post
     @board = current_company.boards.friendly.find(params[:board_id])
-    @post = @board.posts.find(params[:post_id])
+    @post = @board.posts.friendly.find(params[:post_id])
   end
 end

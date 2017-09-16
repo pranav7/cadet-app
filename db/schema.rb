@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170912195943) do
+ActiveRecord::Schema.define(version: 20170916065010) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -78,10 +78,10 @@ ActiveRecord::Schema.define(version: 20170912195943) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.bigint "user_id"
-    t.bigint "company_id"
     t.bigint "board_id"
+    t.string "slug"
     t.index ["board_id"], name: "index_posts_on_board_id"
-    t.index ["company_id"], name: "index_posts_on_company_id"
+    t.index ["slug"], name: "index_posts_on_slug", unique: true
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
@@ -127,7 +127,6 @@ ActiveRecord::Schema.define(version: 20170912195943) do
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"
   add_foreign_key "posts", "boards"
-  add_foreign_key "posts", "companies"
   add_foreign_key "posts", "users"
   add_foreign_key "users", "companies"
   add_foreign_key "votes", "posts"

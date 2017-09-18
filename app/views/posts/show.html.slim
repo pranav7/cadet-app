@@ -33,12 +33,8 @@
 
           - @post.comments.each do |comment|
             - next if comment.new_record?
+            = render partial: "posts/comment", locals: { comment: comment }
             .ui.divider
-            p
-              strong= comment.user.name if comment.user
-            .content
-              = simple_format comment.content.body
-            p.soft= render_time(comment.created_at)
     .six.wide.column
       .ui.segment
         strong Voters

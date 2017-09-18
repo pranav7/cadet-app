@@ -1,0 +1,7 @@
+.user
+  span#avatar
+  span#name
+    strong= comment.user.name
+.content
+  = simple_format comment.content.body
+p.soft= render_time(comment.created_at)

@@ -16,3 +16,23 @@
 @mixin bottom-padding($value) {
   padding-bottom: $value * $base-size;
 }
+
+@mixin avatar($size) {
+  width: $size;
+  height: $size;
+  background-color: $yellow-light;
+  text-align: center;
+  border-radius: 50%;
+  display: inline-block;
+  vertical-align: middle;
+
+  .initials {
+    position: relative;
+    top: $size * 0.25;
+    font-size: $size * 0.5;
+    line-height: $size * 0.5;
+    color: #fff;
+    font-weight: bold;
+    display: inline-block;
+  }
+}

@@ -16,4 +16,8 @@ class Post < ApplicationRecord
   accepts_nested_attributes_for :content
 
   enum status: %w(open planned developing released closed)
+
+  def created_by
+    user
+  end
 end

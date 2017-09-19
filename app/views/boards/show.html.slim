@@ -8,7 +8,11 @@
         = render partial: "posts/vote", locals: { post: post }
         = link_to board_post_path(@board, post) do
           h3= post.title
-        p= post.content.body
+          .meta-info.soft
+            strong ##{post.status}
+            span &nbsp;
+            span
+              | #{render_time(post.created_at)} by #{post.created_by.name}
         .ui.divider
   .one.wide.column
   .six.wide.column

@@ -47,6 +47,10 @@ class User < ApplicationRecord
     self.first_name, self.last_name = name.split(" ")
   end
 
+  def initials
+    "#{first_name.slice(0, 1)}#{last_name.slice(0, 1)}".upcase
+  end
+
   def voted?(post)
     return false if votes.where(post: post).empty?
     return true

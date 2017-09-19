@@ -1,0 +1,7 @@
+.user
+  .avatar.circle class=(size rescue nil)
+    .initials= user.initials
+  .details
+    span.name= user.name
+    br
+    span.meta.soft= user.job_title if user.job_title

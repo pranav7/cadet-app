@@ -24,6 +24,9 @@ gem 'omniauth-google-oauth2'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'friendly_id', '~> 5.1.0'
 
+# Until we update to rails 5.2
+gem 'activestorage'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use Redis adapter to run Action Cable in production

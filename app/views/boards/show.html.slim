@@ -1,25 +1,30 @@
 .ui.grid
-  .nine.wide.column
-    h1= @board.name
-    - if @posts.empty?
-      p There are no posts yet.
-    - else
-      - @posts.each do |post|
-        = render partial: "posts/vote", locals: { post: post }
-        = link_to board_post_path(@board, post) do
-          h3= post.title
-          .meta-info.soft
-            strong ##{post.status}
-            span &nbsp;
-            span
-              | #{render_time(post.created_at)} by #{post.created_by.name}
-        .ui.divider
-  .one.wide.column
-  .six.wide.column
-    h1 Create Post
-    = simple_form_for @post, url: board_posts_path(@board) do |f|
-      = f.input :title, placeholder: "Ttile", label: false
-      = f.simple_fields_for :content do |cf|
-        = cf.input :body, placeholder: "Description", label: false
-      
-      = f.submit
+  .row
+    .four.wide.column
+      .board-name
+        span.soft Boards / 
+        strong= @board.name
+  .row
+    .nine.wide.column
+      - if @posts.empty?
+        p There are no posts yet.
+      - else
+        - @posts.each do |post|
+          = render partial: "posts/vote", locals: { post: post }
+          = link_to board_post_path(@board, post) do
+            h3= post.title
+            .meta-info.soft
+              strong ##{post.status}
+              span &nbsp;
+              span
+                | #{render_time(post.created_at)} by #{post.created_by.name}
+          .ui.divider
+    .one.wide.column
+    .six.wide.column
+      h1 Create Post
+      = simple_form_for @post, url: board_posts_path(@board) do |f|
+        = f.input :title, placeholder: "Ttile", label: false
+        = f.simple_fields_for :content do |cf|
+          = cf.input :body, placeholder: "Description", label: false
+        
+        = f.submit

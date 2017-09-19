@@ -5,3 +5,6 @@
     span.name= user.name
     br
     span.meta.soft= user.job_title if user.job_title
+  // Staff Label
+  - if user.admin_of?(current_company)
+    .ui.small.label.float.right staff

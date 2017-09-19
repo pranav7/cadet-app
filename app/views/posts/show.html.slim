@@ -16,8 +16,8 @@
                 br
                 | ##{@post.status}
         .row
-          p
-            strong= @post.user.name if @post.user
+          = render partial: "partials/user",
+            locals: { user: @post.user }
           .content
             = simple_format @post.content.body
           p.soft= render_time(@post.created_at)
@@ -33,10 +33,11 @@
 
           - @post.comments.each do |comment|
             - next if comment.new_record?
-            = render partial: "posts/comment", locals: { comment: comment }
+            = render partial: "partials/comment", locals: { comment: comment }
             .ui.divider
     .six.wide.column
       .ui.segment
         strong Voters
         - @post.voters.each do |voter|
-          div= voter.name
+          = render partial: "partials/user",
+            locals: { user: voter }

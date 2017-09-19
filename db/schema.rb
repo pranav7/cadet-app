@@ -10,10 +10,32 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170916065946) do
+ActiveRecord::Schema.define(version: 20170919082416) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "active_storage_attachments", force: :cascade do |t|
+    t.string "name"
+    t.string "record_gid"
+    t.integer "blob_id"
+    t.time "created_at"
+    t.index ["blob_id"], name: "index_active_storage_attachments_on_blob_id"
+    t.index ["record_gid", "blob_id"], name: "index_active_storage_attachments_on_record_gid_and_blob_id", unique: true
+    t.index ["record_gid", "name"], name: "index_active_storage_attachments_on_record_gid_and_name"
+    t.index ["record_gid"], name: "index_active_storage_attachments_on_record_gid"
+  end
+
+  create_table "active_storage_blobs", force: :cascade do |t|
+    t.string "key"
+    t.string "filename"
+    t.string "content_type"
+    t.text "metadata"
+    t.integer "byte_size"
+    t.string "checksum"
+    t.time "created_at"
+    t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
 
   create_table "boards", force: :cascade do |t|
     t.bigint "company_id"
@@ -118,6 +140,7 @@ ActiveRecord::Schema.define(version: 20170916065946) do
     t.integer "role", default: 0
     t.string "provider"
     t.string "uid"
+    t.string "job_title"
     t.index ["company_id"], name: "index_users_on_company_id"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true

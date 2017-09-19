@@ -1,0 +1,6 @@
+.comment
+  = render partial: "partials/user",
+    locals: { user: comment.user }
+  .content
+    = simple_format comment.content.body
+  p.soft= render_time(comment.created_at)

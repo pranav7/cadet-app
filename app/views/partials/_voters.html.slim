@@ -1,0 +1,5 @@
+.ui.segment
+  strong Voters
+  - voters.each do |voter|
+    = render partial: "partials/user",
+      locals: { user: voter }

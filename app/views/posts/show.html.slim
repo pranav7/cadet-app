@@ -4,40 +4,30 @@
       | &larr; #{@board.name}
   .ui.grid
     .ten.wide.column
-      .ui.segment
-        .row
-          .ui.grid
-            .left.aligned.twelve.wide.column
-              h1= @post.title
-            .right.aligned.four.wide.column
-              = render partial: "posts/vote", locals: { post: @post }
-              p
-                strong.soft Status
-                br
-                | ##{@post.status}
-        .row
-          = render partial: "partials/user",
-            locals: { user: @post.user }
-          .content
-            = simple_format @post.content.body
-          p.soft= render_time(@post.created_at)
+      .row
+        .ui.grid
+          .left.aligned.twelve.wide.column
+            h1= @post.title
+          .right.aligned.four.wide.column
+            = render partial: "posts/vote", locals: { post: @post }
+            p
+              strong.soft Status
+              br
+              | ##{@post.status}
+      .row
+        = render partial: "partials/comment", locals: { resource: @post }
 
-          .ui.dividing.header Activity
-          = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
-            = f.simple_fields_for :content do |cf|
-              = cf.input :body,
-                placeholder: "Leave a comment",
-                label: false,
-                input_html: { rows: 3 }
-            = f.submit "Comment"
+        .ui.dividing.header Activity
+        = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
+          = f.simple_fields_for :content do |cf|
+            = cf.input :body,
+              placeholder: "Leave a comment",
+              label: false,
+              input_html: { rows: 3 }
+          = f.submit "Comment"
 
-          - @post.comments.each do |comment|
-            - next if comment.new_record?
-            = render partial: "partials/comment", locals: { comment: comment }
-            .ui.divider
+        - @post.comments.each do |comment|
+          - next if comment.new_record?
+          = render partial: "partials/comment", locals: { resource: comment }
     .six.wide.column
-      .ui.segment
-        strong Voters
-        - @post.voters.each do |voter|
-          = render partial: "partials/user",
-            locals: { user: voter }
+      = render partial: "partials/voters", locals: { voters: @post.voters }

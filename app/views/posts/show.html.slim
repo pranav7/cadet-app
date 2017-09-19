@@ -6,10 +6,10 @@
     .ten.wide.column
       .row
         .ui.grid
-          .left.aligned.twelve.wide.column
-            h1= @post.title
-          .right.aligned.four.wide.column
+          .left.aligned.thirteen.wide.column
             = render partial: "posts/vote", locals: { post: @post }
+            h1.post-title= @post.title
+          .right.aligned.three.wide.column
             p
               strong.soft Status
               br

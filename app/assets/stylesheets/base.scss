@@ -12,6 +12,14 @@ body {
   color: $darker;
 }
 
+.box {
+  @extend .ui.segment;
+
+  background-color: $white;
+  border: 1px solid $lighter;
+  box-shadow: none;
+}
+
 .custom.error.message {
   display: inline-block !important;
   color: $good-red;
@@ -57,3 +65,10 @@ body {
 .avatar.circle         { @include avatar(40px); }
 .avatar.circle.large   { @include avatar(64px); }
 .avatar.circle.huge    { @include avatar(128px); }
+
+.ui.basic.label {
+  background-color: $lightest;
+  border-color: $lighter;
+  color: $darkest;
+  font-weight: 600;
+}

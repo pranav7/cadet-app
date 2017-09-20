@@ -2,32 +2,31 @@
   .top-links-container.vertical.padded
     a href=board_path(@board)
       | &larr; #{@board.name}
+
   .ui.grid
+    // Middle Section
     .ten.wide.column
-      .row
-        .ui.grid
-          .left.aligned.thirteen.wide.column
-            = render partial: "posts/vote", locals: { post: @post }
-            h1.post-title= @post.title
-          .right.aligned.three.wide.column
-            p
-              strong.soft Status
-              br
-              | ##{@post.status}
-      .row
-        = render partial: "partials/comment", locals: { resource: @post }
+      // Post Header
+      .post-header.vertical-padded
+        .post-header-title
+          = render partial: "posts/vote", locals: { post: @post }
+          h1.post-title= @post.title
+        .post-header-info
+          .ui.basic.label ##{@post.status}
+      // Post Body
+      = render partial: "partials/comment", locals: { resource: @post }
 
-        .ui.dividing.header Activity
-        = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
-          = f.simple_fields_for :content do |cf|
-            = cf.input :body,
-              placeholder: "Leave a comment",
-              label: false,
-              input_html: { rows: 3 }
-          = f.submit "Comment"
+      // Create Comment
+      = render partial: "comments/new",
+        locals: { board: @board, post: @post, comment: @comment }
 
-        - @post.comments.each do |comment|
-          - next if comment.new_record?
-          = render partial: "partials/comment", locals: { resource: comment }
+      // Post Activity
+      .ui.dividing.header Activity
+      - @post.comments.each do |comment|
+        - next if comment.new_record?
+        = render partial: "partials/comment", locals: { resource: comment }
+
+    // Middle Section
     .six.wide.column
+      // Voters
       = render partial: "partials/voters", locals: { voters: @post.voters }

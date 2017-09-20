@@ -32,29 +32,21 @@
             placeholder: "Status",
             input_html: { onchange: "this.form.submit()" }
     .row
-      .ui.grid
-        .left.aligned.twelve.wide.column
-          h1= @post.title
-        .right.aligned.four.wide.column
+      // Post Header
+      .post-header.vertical-padded
+        .post-header-title
           = render partial: "posts/vote", locals: { post: @post }
-          .post-status
-            strong.soft Status
-            br
-            | ##{@post.status}
+          h1.post-title= @post.title
+        .post-header-info
+          .ui.basic.label ##{@post.status}
     .row
+      // Post Content
       = render partial: "partials/comment", locals: { resource: @post }
+      // Create Comment
+      = render partial: "comments/new",
+        locals: { board: @board, post: @post, comment: @comment }
 
-      .ui.dividing.header Activity
-      // Create Comment Form
-      = simple_form_for @comment, url: board_post_comments_path(@board, @post) do |f|
-        = f.simple_fields_for :content do |cf|
-          = cf.input :body,
-            placeholder: "Leave a comment",
-            label: false,
-            input_html: { rows: 3 }
-        = f.submit "Comment"
-      
-      .ui.divider
+      .ui.dividing.header Activity 
       - @post.comments.each do |comment|
         - next if comment.new_record?
         = render partial: "partials/comment", locals: { resource: comment }

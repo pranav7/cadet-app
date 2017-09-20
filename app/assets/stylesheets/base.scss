@@ -60,7 +60,7 @@ body {
 }
 
 .avatar.circle.mini    { @include avatar(16px); }
-.avatar.circle.small   { @include avatar(24px); }
+.avatar.circle.small   { @include avatar(32px); }
 .avatar.circle         { @include avatar(40px); }
 .avatar.circle.large   { @include avatar(64px); }
 .avatar.circle.huge    { @include avatar(128px); }
@@ -70,4 +70,24 @@ body {
   border-color: $lighter;
   color: $darkest;
   font-weight: 600;
+}
+
+a.vote-button {
+  display: table-cell;
+  margin-right: $base-size;
+  color: $black;
+
+  &.upvoted {
+    color: $secondary-blue;
+  }
+
+  span.vote-count {
+    display: block;
+    text-align: center;
+    font-weight: 600;
+    font-size: 24px;
+    position: relative;
+    top: 4px;
+    right: 4px;
+  }
 }

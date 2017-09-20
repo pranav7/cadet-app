@@ -1,8 +1,8 @@
 - if user_signed_in? && current_user.voted?(post)
   a.vote-button.upvoted href=board_post_votes_path(@board, post) data-method="delete"
-    i.big.thumbs.up.icon
+    i.big.caret.up.icon
     span.vote-count= post.votes.count
 - else
   a.vote-button href=board_post_votes_path(@board, post) data-method="post"
-    i.big.thumbs.up.icon
+    i.big.caret.up.icon
     span.vote-count= post.votes.count

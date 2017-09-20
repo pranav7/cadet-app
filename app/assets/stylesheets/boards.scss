@@ -1,3 +1,21 @@
-// Place all the styles related to the boards controller here.
-// They will automatically be included in application.css.
-// You can use Sass (SCSS) here: http://sass-lang.com/
+body.boards {
+  .post {
+    padding: 2 * $base-size 0;
+
+    a.post-title {
+      color: $darkest;
+
+      &:hover { color: $black; }
+
+      h3 {
+        font-size: 1.5 * $base-size;
+        font-weight: 500;
+        margin: 0;
+      }
+
+      .post-summary {
+        padding-bottom: $base-size;
+      }
+    }
+  }
+}

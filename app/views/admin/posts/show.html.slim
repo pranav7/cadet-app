@@ -12,14 +12,13 @@
           span
             = render_time(post.created_at, format: :short)
           span &nbsp;
-          span
+          span.ui.basic.label
             | ##{post.status}
           span &nbsp;
-          span
-            i.thumbs.up.icon
-            = post.votes.count
+          span.ui.basic.label
+            | #{post.votes.count} votes
           span &nbsp;
-          span
+          span.ui.basic.label
             i.comments.icon
             = post.comments.count
         .ui.divider
@@ -36,10 +35,9 @@
             input_html: { onchange: "this.form.submit()" }
     .row
       // Post Header
-      .post-header.vertical-padded
-        .post-header-title
-          = render partial: "posts/vote", locals: { post: @post }
-          h1.post-title= @post.title
+      .post-header.vertical-padded.table--object
+        = render partial: "posts/vote", locals: { post: @post }
+        h1.post-title= @post.title
         .post-header-info
           .ui.basic.label ##{@post.status}
     .row

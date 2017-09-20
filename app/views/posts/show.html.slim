@@ -7,10 +7,9 @@
     // Middle Section
     .ten.wide.column
       // Post Header
-      .post-header.vertical-padded
-        .post-header-title
-          = render partial: "posts/vote", locals: { post: @post }
-          h1.post-title= @post.title
+      .post-header.vertical-padded.table--object
+        = render partial: "posts/vote", locals: { post: @post }
+        h1.post-title= @post.title
         .post-header-info
           .ui.basic.label ##{@post.status}
       // Post Body

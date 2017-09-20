@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :votes
   has_many :memberships
   has_many :companies, through: :memberships
-  has_one_attached :image
+  # has_one_attached :image
 
   accepts_nested_attributes_for :memberships
 

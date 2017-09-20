@@ -3,9 +3,26 @@ body.posts {
     font-weight: bold;
   }
 
-  h1.post-title {
-    color: $black;
-    font-weight: 700;
-    font-size: 2 * $base-size;
+  .post-header {
+    padding: $base-size 0;
+    display: table-cell;
+
+    .post-header-info {
+      display: table-cell;
+    }
+
+    .post-header-title {
+      padding: $base-size 0;
+    }
+
+    h1.post-title {
+      color: $black;
+      font-weight: 700;
+      font-size: 2 * $base-size;
+      display: table-cell;
+      padding: 0;
+      margin: 0;
+      vertical-align: top;
+    }
   }
 }

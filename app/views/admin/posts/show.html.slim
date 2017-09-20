@@ -10,6 +10,9 @@
         p= post.content.body.truncate(140)
         p.soft
           span
+            = render_time(post.created_at, format: :short)
+          span &nbsp;
+          span
             | ##{post.status}
           span &nbsp;
           span

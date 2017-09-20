@@ -4,7 +4,7 @@ class User < ApplicationRecord
   has_many :votes
   has_many :memberships
   has_many :companies, through: :memberships
-  has_one_attached :avatar
+  has_one_attached :image
 
   accepts_nested_attributes_for :memberships
 
@@ -46,6 +46,10 @@ class User < ApplicationRecord
 
   def name=(name)
     self.first_name, self.last_name = name.split(" ")
+  end
+
+  def initials
+    "#{first_name.slice(0, 1)}#{last_name.slice(0, 1)}".upcase
   end
 
   def voted?(post)

@@ -1,0 +1,6 @@
+.comment.box
+  = render partial: "partials/user",
+    locals: { user: resource.user }
+  .content
+    = simple_format resource.content.body
+  p.soft= render_time(resource.created_at)

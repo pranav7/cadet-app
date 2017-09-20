@@ -3,11 +3,21 @@ body {
   @include font-smoothing(on);
 
   padding-top: $base-size;
+  font-size: 14px;
+  background-color: $lightest;
 }
 
 /* Utility Classes */
 .soft {
   color: $darker;
+}
+
+.box {
+  @extend .ui.segment;
+
+  background-color: $white;
+  border: 1px solid $lighter;
+  box-shadow: none;
 }
 
 .custom.error.message {
@@ -23,4 +33,41 @@ body {
 
 .vertical.padded {
   padding: $base-size 0;
+}
+
+.user {
+  padding: $half-base-size 0;
+
+  .details {
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: $base-size;
+
+    .name {
+      font-weight: 800;
+    }
+  }
+}
+
+.content {
+  line-height: 1.5;
+  padding: $half-base-size 0;
+}
+
+.float {
+  &.left { float: left; }
+  &.right { float: right; }
+}
+
+.avatar.circle.mini    { @include avatar(16px); }
+.avatar.circle.small   { @include avatar(24px); }
+.avatar.circle         { @include avatar(40px); }
+.avatar.circle.large   { @include avatar(64px); }
+.avatar.circle.huge    { @include avatar(128px); }
+
+.ui.basic.label {
+  background-color: $lightest;
+  border-color: $lighter;
+  color: $darkest;
+  font-weight: 600;
 }

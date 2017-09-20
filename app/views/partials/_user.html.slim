@@ -1,0 +1,10 @@
+.user
+  .avatar.circle class=(size rescue nil)
+    .initials= user.initials
+  .details
+    span.name= user.name
+    br
+    span.meta.soft= user.job_title if user.job_title
+  // Staff Label
+  - if user.admin_of?(current_company)
+    .ui.small.basic.label.float.right Owner

@@ -8,9 +8,11 @@ body {
 }
 
 /* Utility Classes */
+.c-table--object,
 .table--object {
   display: table;
 
+  .c-table--item,
   .table--item {
     display: table-cell;
   }
@@ -20,6 +22,7 @@ body {
   color: $darker;
 }
 
+.c-box,
 .box {
   @extend .ui.segment;
 

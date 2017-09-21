@@ -10,10 +10,22 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170919082416) do
+ActiveRecord::Schema.define(version: 20170921082340) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "accounts", force: :cascade do |t|
+    t.string "name"
+    t.string "domain"
+    t.bigint "company_id"
+    t.boolean "paying", default: false
+    t.boolean "churned", default: false
+    t.string "mrr"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_accounts_on_company_id"
+  end
 
   create_table "active_storage_attachments", force: :cascade do |t|
     t.string "name"
@@ -155,6 +167,7 @@ ActiveRecord::Schema.define(version: 20170919082416) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "accounts", "companies"
   add_foreign_key "boards", "companies"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"

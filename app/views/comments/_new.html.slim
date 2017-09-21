@@ -1,7 +1,7 @@
 = simple_form_for comment, url: board_post_comments_path(board, post) do |form|
   = form.simple_fields_for :content do |cf|
     = cf.input :body,
-      placeholder: "Type a reply ...",
+      placeholder: "Type a comment ...",
       label: false,
       input_html: { rows: 3 }
-  = form.submit "Reply", class: "ui button"
+  = form.submit "Comment", class: "ui button"

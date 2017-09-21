@@ -12,7 +12,17 @@ class PostsController < ApplicationController
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
     post.user = current_user
-    post.save
+    
+    if post.save
+      # @todo Move this to VotesService
+      post.votes.create(user: current_user)
+
+      unless current_user.part_of?(current_company)
+        current_user.companies << current_company
+      end
+    else
+      # Hanlde Post Error
+    end
 
     redirect_to board_path(board)
   end

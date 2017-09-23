@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20170921082340) do
+ActiveRecord::Schema.define(version: 20170923015343) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "account_memberships", force: :cascade do |t|
+    t.bigint "user_id"
+    t.bigint "account_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["account_id"], name: "index_account_memberships_on_account_id"
+    t.index ["user_id"], name: "index_account_memberships_on_user_id"
+  end
 
   create_table "accounts", force: :cascade do |t|
     t.string "name"
@@ -167,6 +176,8 @@ ActiveRecord::Schema.define(version: 20170921082340) do
     t.index ["user_id"], name: "index_votes_on_user_id"
   end
 
+  add_foreign_key "account_memberships", "accounts"
+  add_foreign_key "account_memberships", "users"
   add_foreign_key "accounts", "companies"
   add_foreign_key "boards", "companies"
   add_foreign_key "comments", "posts"

@@ -21,6 +21,10 @@ Rails.application.routes.draw do
     resources :boards do
       resources :posts, only: [:index, :show, :update]
     end
+
+    resources :accounts, only: [:index, :show, :create] do
+      resource :account_memberships, only: [:create]
+    end
   end
 
   resources :boards, path: "" do

@@ -103,3 +103,37 @@ a.vote-button {
     right: 3px;
   }
 }
+
+.post-list-item {
+  padding: 2 * $base-size 0;
+  width: 100%;
+
+  a.post-link {
+    color: $darkest;
+
+    &:hover { color: $black; }
+
+    .post-summary {
+      padding-bottom: $base-size;
+    }
+  }
+
+  .post-title {
+    display: flex;
+    flex: 1;
+
+    .comment-count {
+      min-width: 30px;
+    }
+
+    .title-text {
+      flex: auto;
+
+      h3 {
+        font-size: 1.5 * $base-size;
+        font-weight: 500;
+        margin: 0;
+      }
+    }
+  }
+}

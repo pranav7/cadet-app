@@ -117,7 +117,7 @@ RSpec.describe User, type: :model do
     let(:company) { create :company }
 
     it "returns true if user is a customer of the given company" do
-      customer = create :user, company: company
+      customer = create :customer, company: company
       expect(customer.customer_of?(company)).to eq(true)
     end
 

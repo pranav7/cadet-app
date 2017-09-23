@@ -10,6 +10,14 @@ FactoryGirl.define do
     end
   end
 
+  factory :customer, parent: :user do
+    after :create do |user, evaluator|
+      if evaluator.company
+        create :membership, company: evaluator.company, user: user
+      end
+    end
+  end
+
   factory :admin, parent: :user do
     after :create do |user, evaluator|
       if evaluator.company

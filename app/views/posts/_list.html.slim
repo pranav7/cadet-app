@@ -1,6 +1,6 @@
-.post.table--object
+.post-list-item.table--object
   = render partial: "posts/vote", locals: { post: post }
-  = link_to board_post_path(@board, post), class: "post-link" do
+  = link_to board_post_path(post.board, post), class: "post-link" do
     .post-title
       span.title-text.float.left
         h3= post.title

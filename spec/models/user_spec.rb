@@ -113,6 +113,25 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe User, "#customer_of?" do
+    let(:company) { create :company }
+
+    it "returns true if user is a customer of the given company" do
+      customer = create :user, company: company
+      expect(customer.customer_of?(company)).to eq(true)
+    end
+
+    it "returns false if user not a customer of the given company" do
+      customer = create :user
+      expect(customer.customer_of?(company)).to eq(false)
+    end
+
+    it "returns false if user is an admin of the given company" do
+      admin = create :admin, company: company
+      expect(admin.customer_of?(company)).to eq(false)
+    end
+  end
+
   describe User, "#part_of" do
     let(:company) { create :company }
     let(:user) { create :user, company: company }

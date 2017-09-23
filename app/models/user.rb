@@ -64,6 +64,11 @@ class User < ApplicationRecord
     return true
   end
 
+  def customer_of?(company)
+    return false if memberships.where(company: company, role: :customer).empty?
+    return true
+  end
+
   def part_of?(company)
     return false if memberships.where(company: company).empty?
     return true

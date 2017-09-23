@@ -4,7 +4,12 @@
   .details
     span.name= user.name
     br
-    span.meta.soft= user.job_title if user.job_title
+    - if user.job_title
+      span.meta.soft= user.job_title
+      span.meta.soft,
+    span.meta.soft
+      |  #{user.account_for(current_company).name if user.account_for(current_company)}
+
   // Staff Label
   - if user.admin_of?(current_company)
     .ui.small.basic.label.float.right Team

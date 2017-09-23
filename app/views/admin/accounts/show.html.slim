@@ -1,16 +1,23 @@
 h1= @account.name
 h4.soft= @account.domain
+p.soft
+  | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not everyone.
 
 .ui.grid
-  .eight.wide.column
-    .ui.dividing.header Users
+  .eight.wide.column.box
+    - @posts.each do |post|
+      = render partial: "posts/list",
+        locals: { post: post }
+  .four.wide.column.box
+    strong Users
+    .ui.divider
     - @account.users.each do |user|
       = render partial: "partials/user", locals: { user: user }
       span
         = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
           span.soft Remove
       .ui.divider
-  .four.wide.column
+  .four.wide.column.box
     = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
       = form.input :user_ids,
         as: :fake_select,

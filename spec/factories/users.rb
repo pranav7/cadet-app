@@ -8,14 +8,6 @@ FactoryGirl.define do
     transient do
       company nil
     end
-
-    after :create do |user, evaluator|
-      if evaluator.company
-        user.companies << evaluator.company
-      else
-        user.companies << create(:company)
-      end
-    end
   end
 
   factory :admin, parent: :user do

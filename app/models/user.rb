@@ -73,4 +73,8 @@ class User < ApplicationRecord
     return false if memberships.where(company: company).empty?
     return true
   end
+
+  def account_for(company)
+    accounts.where(company: company).first
+  end
 end

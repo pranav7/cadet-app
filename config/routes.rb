@@ -23,7 +23,7 @@ Rails.application.routes.draw do
     end
 
     resources :accounts, only: [:index, :show, :create] do
-      resource :account_memberships, only: [:create]
+      resource :account_memberships, only: [:create, :destroy]
     end
   end
 

@@ -5,10 +5,11 @@ h4.soft= @account.domain
   .eight.wide.column
     .ui.dividing.header Users
     - @account.users.each do |user|
-      p
-        | #{user.name} 
-        span.soft
-          | (#{user.email})
+      = render partial: "partials/user", locals: { user: user }
+      span
+        = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
+          span.soft Remove
+      .ui.divider
   .four.wide.column
     = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
       = form.input :user_ids,

@@ -9,4 +9,11 @@ class Admin::AccountMembershipsController < Admin::AdminController
 
     redirect_to admin_account_path(account)
   end
+
+  def destroy
+    account_membership = AccountMembership.where(user_id: params[:user_id], account_id: params[:account_id]).first
+    account_membership.destroy!
+    flash[:success] = "User removed"
+    redirect_to admin_account_path(params[:account_id])
+  end
 end

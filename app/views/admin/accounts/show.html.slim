@@ -1,0 +1,25 @@
+h1= @account.name
+h4.soft= @account.domain
+
+.ui.grid
+  .eight.wide.column
+    .ui.dividing.header Users
+    - @account.users.each do |user|
+      p
+        | #{user.name} 
+        span.soft
+          | (#{user.email})
+  .four.wide.column
+    = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
+      = form.input :user_ids,
+        as: :fake_select,
+        collection: @customers,
+        multiple: true,
+        input_html: { class: "ui search dropdown" }
+      = form.submit "Add"
+
+coffee:
+  $('.ui.dropdown').dropdown({
+    allowMultiple: true
+  })
+

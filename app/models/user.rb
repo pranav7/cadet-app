@@ -2,6 +2,7 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :votes
+  has_many :voted_posts, through: :votes, source: :post
   has_many :memberships
   has_many :companies, through: :memberships
   has_many :account_memberships

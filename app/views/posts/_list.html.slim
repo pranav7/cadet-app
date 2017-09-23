@@ -1,0 +1,14 @@
+.post.table--object
+  = render partial: "posts/vote", locals: { post: post }
+  = link_to board_post_path(@board, post), class: "post-link" do
+    .post-title
+      span.title-text.float.left
+        h3= post.title
+      span.comment-count.soft.float.right
+        i.comment.outline.icon
+        = post.comments.count
+
+    .post-summary.soft= post.content.body.truncate(140)
+  .post-info.soft
+    strong ##{post.status}
+    span.float.right #{render_time(post.created_at, format: :short)} by #{post.created_by.name}

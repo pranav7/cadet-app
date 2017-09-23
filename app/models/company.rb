@@ -11,4 +11,8 @@ class Company < ApplicationRecord
     exclusion: { in: %w(app), message: "This subdomain is not available" }
 
   validates :name, presence: true
+
+  def customers
+    memberships.where(role: :customer).map(&:user)
+  end
 end

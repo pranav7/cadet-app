@@ -18,4 +18,18 @@ RSpec.describe Company, type: :model do
       expect(build(:company)).to be_valid
     end
   end
+
+  describe "#customers" do
+    let(:company) { create :company }
+
+    it "returns customers of the company" do
+      customers = create_list :customer, 3, company: company
+      expect(company.customers).to eq(customers)
+    end
+
+    it "should not return admins" do
+      create_list :admin, 3, company: company
+      expect(company.customers).to eq([])
+    end
+  end
 end

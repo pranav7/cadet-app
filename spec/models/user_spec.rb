@@ -7,6 +7,8 @@ RSpec.describe User, type: :model do
     it { should have_many(:votes) }
     it { should have_many(:companies).through(:memberships) }
     it { should have_many(:memberships) }
+    it { should have_many(:account_memberships) }
+    it { should have_many(:accounts).through(:account_memberships) }
   end
 
   describe User, "Validations" do

@@ -4,7 +4,11 @@ class Membership < ApplicationRecord
   belongs_to :user
   belongs_to :company
 
-  validates :user, presence: true
+  validates :user,
+    presence: true,
+    uniqueness: { scope: :company_id },
+    case_sensetive: false
+
   validates :company, presence: true
 
   accepts_nested_attributes_for :company

@@ -134,7 +134,7 @@ RSpec.describe User, type: :model do
 
   describe User, "#part_of" do
     let(:company) { create :company }
-    let(:user) { create :user, company: company }
+    let(:user) { create :admin, company: company }
 
     it "returns true if user is part of given company" do
       expect(user.part_of?(company)).to eq(true)

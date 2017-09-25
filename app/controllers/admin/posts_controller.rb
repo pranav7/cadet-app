@@ -5,6 +5,7 @@ class Admin::PostsController < Admin::AdminController
     @post = Post.friendly.find(params[:id]) || @posts.first || nil
     @comment = @post.comments.new
     @comment.build_content
+    @accounts = @post.accounts
   end
 
   def update

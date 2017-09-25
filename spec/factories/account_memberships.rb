@@ -1,6 +1,6 @@
 FactoryGirl.define do
   factory :account_membership do
-    user nil
-    account nil
+    user
+    account
   end
 end

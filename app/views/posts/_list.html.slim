@@ -1,5 +1,5 @@
 .post-list-item.table--object
-  = render partial: "posts/vote", locals: { post: post }
+  = render partial: "posts/vote", locals: { post: post, account: (account rescue nil) }
   = link_to build_post_link(post, link_to: link_to), class: "post-link" do
     .post-title
       span.title-text.float.left

@@ -8,7 +8,7 @@ class Admin::AccountsController < Admin::AdminController
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
     @customers = current_company.customers
-    @posts = @account.users.collect { |user| user.voted_posts }.flatten
+    @posts = @account.users.collect { |user| user.voted_posts }.flatten.uniq
   end
 
   def create

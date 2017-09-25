@@ -7,7 +7,7 @@
     - if user.job_title
       span.meta.soft= user.job_title
     - if user.job_title && user.account_for(current_company)
-      span.meta.soft,
+      span.meta.soft, 
     - if user.account_for(current_company)
       span.meta.soft= user.account_for(current_company).name
 

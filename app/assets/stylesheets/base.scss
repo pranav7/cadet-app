@@ -1,3 +1,6 @@
+// @todo Rename to globals.css
+// This file contains all the globals styles
+
 body {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   @include font-smoothing(on);
@@ -7,7 +10,8 @@ body {
   background-color: $lightest;
 }
 
-/* Utility Classes */
+// Start
+// Utility Classes
 .c-table--object,
 .table--object {
   display: table;
@@ -18,6 +22,7 @@ body {
   }
 }
 
+.c-soft,
 .soft {
   color: $darker;
 }
@@ -38,14 +43,34 @@ body {
   font-weight: 500;
 }
 
-.ui.custom.basic.label {
-  color: $dark;
-}
-
 .vertical.padded {
   padding: $base-size 0;
 }
 
+.float {
+  &.left { float: left; }
+  &.right { float: right; }
+}
+// End
+// Utility Classes
+
+// Start
+// Semantic UI Overrides
+.ui.basic.label {
+  background-color: $lightest;
+  border-color: $lighter;
+  color: $darkest;
+  font-weight: 600;
+}
+
+.ui.custom.basic.label {
+  color: $dark;
+}
+// End
+// Semantic UI Overrides
+
+// Start
+// User Styling
 .user {
   padding: $half-base-size 0;
 
@@ -59,30 +84,30 @@ body {
     }
   }
 }
+// End
+// User Styling
 
+// Start
+// Styling for Post and Comment Content
 .content {
   line-height: 1.5;
   padding: $half-base-size 0;
 }
+// End
+// Styling for Post and Comment Content
 
-.float {
-  &.left { float: left; }
-  &.right { float: right; }
-}
-
+// Start
+// Placeholder Avatar Styling
 .avatar.circle.mini    { @include avatar(16px); }
 .avatar.circle.small   { @include avatar(32px); }
 .avatar.circle         { @include avatar(40px); }
 .avatar.circle.large   { @include avatar(64px); }
 .avatar.circle.huge    { @include avatar(128px); }
+// End
+// Placeholder Avatar Styling
 
-.ui.basic.label {
-  background-color: $lightest;
-  border-color: $lighter;
-  color: $darkest;
-  font-weight: 600;
-}
-
+// Start
+// Styling for Vote Button
 a.vote-button {
   display: table-cell;
   margin-right: $base-size;
@@ -103,7 +128,11 @@ a.vote-button {
     right: 3px;
   }
 }
+// End
+// Styling for Vote Button
 
+// Start
+// Styling for Post Item in Post List
 .post-list-item {
   padding: 2 * $base-size 0;
   width: 100%;
@@ -137,3 +166,5 @@ a.vote-button {
     }
   }
 }
+// End
+// Styling for Post Item in Post List

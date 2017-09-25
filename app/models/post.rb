@@ -20,4 +20,9 @@ class Post < ApplicationRecord
   def created_by
     user
   end
+
+  # Get all the accounts whose users have upvoted this post
+  def accounts
+    voters.map { |voter| voter.account_for(board.company) }.uniq.compact
+  end
 end

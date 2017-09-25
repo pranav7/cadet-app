@@ -4,27 +4,29 @@ p.soft
   | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not everyone.
 
 .ui.grid
-  .eight.wide.column.box
-    - @posts.each do |post|
-      = render partial: "posts/list",
-        locals: { post: post }
-  .four.wide.column.box
-    strong Users
-    .ui.divider
-    - @account.users.each do |user|
-      = render partial: "partials/user", locals: { user: user }
-      span
-        = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
-          span.soft Remove
+  .nine.wide.column
+    .box
+      - @posts.each do |post|
+        = render partial: "posts/list",
+          locals: { post: post, link_to: :admin }
+  .five.wide.column
+    .box
+      strong Users
+      = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
+        = form.input :user_ids,
+          as: :fake_select,
+          label: false,
+          collection: @customers,
+          multiple: true,
+          input_html: { class: "ui search dropdown" }
+        = form.submit "Add"
       .ui.divider
-  .four.wide.column.box
-    = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
-      = form.input :user_ids,
-        as: :fake_select,
-        collection: @customers,
-        multiple: true,
-        input_html: { class: "ui search dropdown" }
-      = form.submit "Add"
+      - @account.users.each do |user|
+        = render partial: "partials/user", locals: { user: user }
+        span
+          = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
+            span.soft Remove
+        .ui.divider
 
 coffee:
   $('.ui.dropdown').dropdown({

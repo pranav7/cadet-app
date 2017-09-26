@@ -2,6 +2,7 @@ class Company < ApplicationRecord
   has_many :memberships
   has_many :users, through: :memberships
   has_many :boards
+  has_many :accounts
 
   validates :subdomain,
     uniqueness: true,
@@ -10,4 +11,8 @@ class Company < ApplicationRecord
     exclusion: { in: %w(app), message: "This subdomain is not available" }
 
   validates :name, presence: true
+
+  def customers
+    memberships.where(role: :customer).map(&:user)
+  end
 end

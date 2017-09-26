@@ -16,10 +16,11 @@
             | ##{post.status}
           span &nbsp;
           span.ui.basic.label
-            | #{post.votes.count} votes
+            i.caret.up.icon
+            | #{post.votes.count}
           span &nbsp;
           span.ui.basic.label
-            i.comments.icon
+            i.comment.icon
             = post.comments.count
         .ui.divider
 
@@ -54,4 +55,16 @@
 
   // Right Info View
   .four.wide.column
+    // Voters
     = render partial: "partials/voters", locals: { voters: @post.voters }
+    // Companies
+    - if @accounts
+      .box
+        - @accounts.each do |account|
+          p
+            strong= account.name
+            span.ui.basic.label
+              i.caret.up.icon
+              = account.votes_for(@post).count
+            span.ui.basic.label
+              | $#{account.mrr}

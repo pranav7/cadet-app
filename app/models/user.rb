@@ -2,8 +2,11 @@ class User < ApplicationRecord
   has_many :posts
   has_many :comments
   has_many :votes
+  has_many :voted_posts, through: :votes, source: :post
   has_many :memberships
   has_many :companies, through: :memberships
+  has_many :account_memberships
+  has_many :accounts, through: :account_memberships
   # has_one_attached :image
 
   accepts_nested_attributes_for :memberships
@@ -62,8 +65,17 @@ class User < ApplicationRecord
     return true
   end
 
+  def customer_of?(company)
+    return false if memberships.where(company: company, role: :customer).empty?
+    return true
+  end
+
   def part_of?(company)
     return false if memberships.where(company: company).empty?
     return true
+  end
+
+  def account_for(company)
+    accounts.where(company: company).first
   end
 end

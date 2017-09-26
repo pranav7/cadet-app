@@ -7,7 +7,10 @@ RSpec.describe Membership, type: :model do
   end
 
   describe Membership, "Validations" do
-    it { should validate_presence_of :company }
-    it { should validate_presence_of :user }
+    subject { create(:membership) }
+
+    it { should validate_presence_of(:company) }
+    it { should validate_presence_of(:user) }
+    it { should validate_uniqueness_of(:user).case_insensitive.scoped_to(:company_id) }
   end
 end

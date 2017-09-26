@@ -14,7 +14,11 @@ html
       .left.aligned.column
         strong= current_company.name
       .right.aligned.column
+        span
+          = link_to "Accounts", admin_accounts_path
+        span - 
         span Hello, #{current_user.first_name}.
+        span 
         span= link_to "Logout", logout_path, method: :delete
 
     = yield

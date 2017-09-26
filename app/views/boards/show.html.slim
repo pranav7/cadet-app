@@ -11,15 +11,7 @@
           p There are no posts yet.
         - else
           - @posts.each do |post|
-            .post
-              .table--object
-                = render partial: "posts/vote", locals: { post: post }
-                = link_to board_post_path(@board, post), class: "post-title" do
-                  h3= post.title
-                  .post-summary.soft= post.content.body.truncate(140)
-                .post-info.soft
-                  strong ##{post.status} 
-                  span #{render_time(post.created_at, format: :short)} by #{post.created_by.name}
+            = render partial: "posts/list", locals: { board: @board, post: post }
 
     .six.wide.column
       .box

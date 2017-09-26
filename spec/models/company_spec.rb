@@ -5,6 +5,7 @@ RSpec.describe Company, type: :model do
     it { should have_many(:memberships) }
     it { should have_many(:users).through(:memberships) }
     it { should have_many(:boards) }
+    it { should have_many(:accounts) }
   end
 
   describe "Validations" do
@@ -15,6 +16,20 @@ RSpec.describe Company, type: :model do
 
     it "has a valid factory" do
       expect(build(:company)).to be_valid
+    end
+  end
+
+  describe "#customers" do
+    let(:company) { create :company }
+
+    it "returns customers of the company" do
+      customers = create_list :customer, 3, company: company
+      expect(company.customers).to eq(customers)
+    end
+
+    it "should not return admins" do
+      create_list :admin, 3, company: company
+      expect(company.customers).to eq([])
     end
   end
 end

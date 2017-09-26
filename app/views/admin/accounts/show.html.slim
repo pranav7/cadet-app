@@ -11,11 +11,10 @@ p.soft
           locals: { post: post, link_to: :admin, account: @account }
   .five.wide.column
     .box
-      strong Users
       = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
         = form.input :user_ids,
           as: :fake_select,
-          label: false,
+          label: "Select Users",
           collection: @customers,
           multiple: true,
           input_html: { class: "ui search dropdown" }

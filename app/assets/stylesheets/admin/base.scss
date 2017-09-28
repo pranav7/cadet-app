@@ -12,6 +12,11 @@ body.admin {
     width: 100%;
   }
 
+  .c-full-pane {
+    grid-column: list / end;
+    padding: $base-size;
+  }
+
   .c-left-pane {
     background: $white;
     grid-column: list / main;
@@ -52,10 +57,14 @@ body.admin {
     padding: $base-size $half-base-size;
   }
 
-  .post-list-item {
+  .admin-post-list-item {
     padding: ($base-size * 1.5);
     border-bottom: 1px solid $lighter;
     display: block;
+
+    &:hover {
+      background: $lightest;
+    }
 
     &.selected {
       background: $lightest; 
@@ -68,7 +77,7 @@ body.admin {
       color: $black;
     }
 
-    .post-content {
+    .post-summary {
       margin-top: $half-base-size;
     }
 

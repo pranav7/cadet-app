@@ -13,3 +13,4 @@
 //= require init
 //= require cadet/posts
 //= require cadet/signup
+//= require cadet/admin/dashboard

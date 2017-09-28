@@ -2,15 +2,20 @@
   grid-column: nav / main;
   background-color: $darkest;
   width: 100%;
+  height: 100vh;
+  min-height: 100vh;
 
   nav ul.nav-list {
     list-style: none;
     padding: 0;
 
     li.list-item {
+      text-align: center;
+      color: $darker;
+      font-weight: 500;
+
       a.item-link {
         color: $darker;
-        text-align: center;
         display: block;
         transition: 0.5s ease;
         padding: $base-size 0;
@@ -23,6 +28,10 @@
       .item-text {
         margin-top: $base-size; 
       }
+    }
+
+    li.list-item.current-user {
+      padding-bottom: $double-base-size;
     }
   }
 }

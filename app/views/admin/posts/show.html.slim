@@ -3,9 +3,9 @@
     p There are no posts yet.
   - else
     - @posts.each do |post|
-      a.post-list-item href="#{admin_board_post_path(@board, post)}##{post.id}" id=post.id class=("selected" if post.id == @post.id) 
+      a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
         .post-title= post.title
-        .post-content.c-soft= post.content.body.truncate(140)
+        .post-summary.c-soft= post.content.body.truncate(140)
         .post-meta.c-soft
           span
             = render_time(post.created_at, format: :short)
@@ -48,6 +48,8 @@
   = render partial: "partials/voters", locals: { voters: @post.voters }
   // Companies
   - unless @accounts.blank?
+    p
+      strong Companies
     .box
       - @accounts.each do |account|
         p

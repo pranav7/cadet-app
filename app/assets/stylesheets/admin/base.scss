@@ -8,7 +8,7 @@ body.admin {
   .c-content-container {
     display: inline-grid;
     grid-column: main / end;
-    grid-template-columns: [list] 375px [main] auto [right] 300px [end];
+    grid-template-columns: [list] 350px [main] auto [right] 300px [end];
     width: 100%;
   }
 

@@ -1,2 +1,27 @@
 body.boards {
+  .boards {
+    display: flex;
+
+    a.board {
+      width: 32%;
+      background: $white;
+      padding: $double-base-size ($base-size * 1.5);
+      border-radius: 4px;
+      border: 1px solid $lighter;
+      margin: 0 2% 2% 0;
+      color: $black;
+      transition: 0.5s ease;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      &:hover {
+        box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.1);
+      }
+
+      .meta {
+        margin-top: $double-base-size;
+      }
+    }
+  }
 }

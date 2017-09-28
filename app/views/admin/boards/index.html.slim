@@ -1,20 +1,23 @@
 .ui.grid.c-full-pane
-  .six.wide.column
-    h1 Boards
-    - if @boards
-      - @boards.each do |board|
-        - next if board.new_record?
-        = link_to admin_board_path(board) do
-          h3= board.name
-        p= board.description
-        p.soft
-          strong #{board.posts.count} Posts
-        .ui.divider
-    - else
-      | No Boards
+  .twelve.wide.column
+    h1.heading Boards
+    .boards
+      - if @boards
+        - @boards.each do |board|
+          - next if board.new_record?
+          = link_to admin_board_path(board), class: "board" do
+            .main
+              h3= board.name
+              p= board.description
+            .meta
+              p.soft= pluralize(board.posts.count, "Post")
+      - else
+        | No Boards
   .four.wide.column
-    h1 Create Board
-    = simple_form_for @board, url: admin_boards_path do |form|
-      = form.input :name
-      = form.input :description
-      = form.submit
+    .box
+      strong Create Board
+      .ui.divider
+      = simple_form_for @board, url: admin_boards_path do |form|
+        = form.input :name, label: false, placeholder: "Board Title"
+        = form.input :description, label: false, placeholder: "Board Description"
+        = form.submit "Add Board", class: "ui button"

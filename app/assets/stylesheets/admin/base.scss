@@ -1,4 +1,10 @@
 body.admin {
+  h1.heading {
+    font-weight: 500;
+    color: $darkest;
+    border-bottom: 1px solid $lighter;
+  }
+
   main.c-container {
     display: grid;
     grid-template-columns: [nav] 85px [main] auto [end];

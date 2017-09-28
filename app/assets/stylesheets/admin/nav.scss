@@ -9,7 +9,7 @@ body.admin {
     nav .cadet-logo {
       position: absolute;
       bottom: $base-size;
-      left: $base-size;
+      left: $base-size * 1.5;
       opacity: 0.75;
     }
 
@@ -27,7 +27,7 @@ body.admin {
           color: $darker;
           display: block;
           transition: 0.5s ease;
-          padding: $base-size 0;
+          padding: $half-base-size 0;
 
           &:hover {
             background: darken($darkest, 5);
@@ -36,9 +36,6 @@ body.admin {
           i.icon {
             vertical-align: super;
           }
-        }
-
-        .item-text {
         }
       }
 

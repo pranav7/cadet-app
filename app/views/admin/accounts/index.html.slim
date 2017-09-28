@@ -1,26 +1,23 @@
-.ui.grid
-  .row
-    .six.wide.column
-      h2 Accounts
-  .row
-    .ten.wide.column
-      table.ui.table
+.ui.grid.c-full-pane
+  .ten.wide.column
+    h2 Accounts
+    table.ui.table
+      tr
+        th Name
+        th Domain
+        th Paying
+        th Churned
+        th MRR
+      - @accounts.each do |account|
+        - next if account.new_record?
         tr
-          th Name
-          th Domain
-          th Paying
-          th Churned
-          th MRR
-        - @accounts.each do |account|
-          - next if account.new_record?
-          tr
-            td
-              a href=admin_account_path(account)
-                strong= account.name
-            td= account.domain
-            td= account.paying
-            td= account.churned
-            td $#{account.mrr}
-    .five.wide.column
-      .box
-        = render partial: "form"
+          td
+            a href=admin_account_path(account)
+              strong= account.name
+          td= account.domain
+          td= account.paying
+          td= account.churned
+          td $#{account.mrr}
+  .five.wide.column
+    .box
+      = render partial: "form"

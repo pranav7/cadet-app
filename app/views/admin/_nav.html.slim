@@ -1,5 +1,10 @@
 nav
   ul.nav-list
+    li.list-item.current-user
+      .avatar.circle
+        .initials= current_user.initials
+      .user-name= current_user.name
+      
     li.list-item
       = link_to admin_boards_path, class: "item-link" do
         i.square.outline.big.icon

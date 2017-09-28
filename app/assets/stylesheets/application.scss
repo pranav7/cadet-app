@@ -12,7 +12,7 @@
  *
  * require_tree .
  * require_self
- 
+
  Whatever is writen above in invalid. Mannually import all SCSS files once you add a new one.
 
  Read the below post on why it is benefitial to use SASS import directive rather
@@ -35,4 +35,5 @@ $font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-San
 @import 'posts';
 @import 'comments';
 
-@import 'admin/base'
+@import 'admin/base';
+@import 'admin/nav';

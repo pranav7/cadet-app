@@ -48,14 +48,17 @@
   = render partial: "partials/voters", locals: { voters: @post.voters }
   // Companies
   - unless @accounts.blank?
-    p
-      strong Companies
     .box
+      .box-header
+        .header-text
+          i.user.circle.icon
+          | Customers
       - @accounts.each do |account|
         p
-          strong= account.name
-          span.ui.basic.label
+          strong
+            | #{account.name}  
+          span.ui.small.basic.label
             i.caret.up.icon
             = account.votes_for(@post).count
-          span.ui.basic.label
-            | $#{account.mrr}
+          span.ui.small.basic.label
+            | $#{account.mrr}/mo

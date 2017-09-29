@@ -10,7 +10,7 @@ body.admin {
     padding-bottom: $base-size;
 
     .header-text {
-      padding: $half-base-size 0;
+      padding-bottom: $half-base-size;
       border-bottom: 1px solid $lighter;
     }
   }

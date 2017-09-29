@@ -1,28 +1,36 @@
-.ui.grid.c-full-pane
-  .ten.wide.column
-    h1.heading Accounts
-    table.ui.sortable.table
-      thead
-        tr
-          th Name
-          th Domain
-          th Paying
-          th Churned
-          th MRR
-      - @accounts.each do |account|
-        - next if account.new_record?
-        tr
-          td
-            h4
-              a href=admin_account_path(account)
-                = account.name
-          td= account.domain
-          td= account.paying
-          td= account.churned
-          td $#{account.mrr}
-  .five.wide.column
-    .box
-      = render partial: "form"
+.c-full-pane
+  .ui.grid
+    .row
+      .sixteen.wide.column
+        h1.heading Customers
+    .row
+      .eight.wide.column
+        table.ui.sortable.table
+          thead
+            tr
+              th Name
+              th Domain
+              th Paying
+              th Churned
+              th MRR
+          - @accounts.each do |account|
+            - next if account.new_record?
+            tr
+              td
+                h4
+                  a href=admin_account_path(account)
+                    = account.name
+              td= account.domain
+              td= account.paying
+              td= account.churned
+              td $#{account.mrr}
+      .four.wide.column
+        .box
+          .box-header
+            .header-text
+              i.user.circle.icon
+              | Add Customer
+          = render partial: "form"
 
 coffee:
   $(document).on "turbolinks:load", ->

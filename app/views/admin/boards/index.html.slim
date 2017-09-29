@@ -15,8 +15,10 @@
         | No Boards
   .four.wide.column
     .box
-      strong Create Board
-      .ui.divider
+      .box-header
+        .header-text
+          i.square.outline.icon
+          | Add Board
       = simple_form_for @board, url: admin_boards_path do |form|
         = form.input :name, label: false, placeholder: "Board Title"
         = form.input :description, label: false, placeholder: "Board Description"

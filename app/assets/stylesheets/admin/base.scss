@@ -5,6 +5,16 @@ body.admin {
     border-bottom: 1px solid $lighter;
   }
 
+  .box-header { 
+    @extend .c-soft;
+    padding-bottom: $base-size;
+
+    .header-text {
+      padding: $half-base-size 0;
+      border-bottom: 1px solid $lighter;
+    }
+  }
+
   main.c-container {
     display: grid;
     grid-template-columns: [nav] 85px [main] auto [end];

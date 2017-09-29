@@ -47,13 +47,20 @@
               i.user.circle.icon
               | Users
           = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
-            = form.input :user_ids,
-              as: :fake_select,
-              label: "Select Users",
-              collection: @customers,
-              multiple: true,
-              input_html: { class: "ui search dropdown" }
-            = form.submit "Add User", class: "ui small button"
+            .field
+              .ui.fluid.multiple.search.selection.dropdown
+                input type="hidden" name="user_ids"
+                i.dropdown.icon
+                .default.text Select Users
+                .menu
+                  - @customers.each do |customer|
+                    - next if @account.users.include?(customer)
+                    .item data-value=customer.id
+                      strong= customer.name
+                      span.c-soft
+                        |  (#{customer.email})
+
+            = form.submit "+ Add", class: "ui small button"
           .vertical.padded
           - @account.users.each do |user|
             = render partial: "partials/user", locals: { user: user }

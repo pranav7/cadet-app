@@ -15,11 +15,13 @@
 
     .six.wide.column
       .box
-        .vertical.padded
-          strong Create Post
+        .box-header
+          strong Create a Post
         = simple_form_for @post, url: board_posts_path(@board) do |f|
           = f.input :title, placeholder: "Ttile", label: false
           = f.simple_fields_for :content do |cf|
             = cf.input :body, placeholder: "Description", label: false
           
           = f.submit "Create Post", class: "ui button"
+
+      = render partial: "partials/cadet_power"      

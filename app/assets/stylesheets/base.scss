@@ -26,15 +26,6 @@ body {
   color: $darker;
 }
 
-.c-box,
-.box {
-  @extend .ui.segment;
-
-  background-color: $white;
-  border: 1px solid $lighter;
-  box-shadow: none;
-}
-
 .custom.error.message {
   display: inline-block !important;
   color: $good-red;
@@ -52,6 +43,29 @@ body {
 }
 // End
 // Utility Classes
+
+// Start
+// Box Styling
+.c-box,
+.box {
+  @extend .ui.segment;
+
+  background-color: $white;
+  border: 1px solid $lighter;
+  box-shadow: none;
+
+  .box-header { 
+    @extend .c-soft;
+    padding-bottom: $base-size;
+
+    .header-text {
+      padding-bottom: $half-base-size;
+      border-bottom: 1px solid $lighter;
+    }
+  }
+}
+// End
+// Box Styling
 
 // Start
 // Semantic UI Overrides

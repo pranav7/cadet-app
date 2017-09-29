@@ -23,11 +23,16 @@
 
 .c-main-pane
   .top-action-bar
-    = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
-      = form.input :status,
-        collection: Post.statuses.keys,
-        placeholder: "Status",
-        input_html: { onchange: "this.form.submit()" }
+    .ui.grid
+      .three.wide.column
+        // Change Status
+        = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
+          select.ui.c.dropdown name="post[status]" onchange="this.form.submit()"
+            option value="" Status
+            - Post.statuses.keys.each do |key|
+              option value=key
+                | ##{key}
+
   .post-header.table--object
     = render partial: "posts/vote", locals: { post: @post }
     h1.post-title= @post.title
@@ -39,7 +44,10 @@
     = render partial: "comments/new",
       locals: { board: @board, post: @post, comment: @comment }
   .post-activity.vertical.padded
-    .ui.dividing.header Activity
+    .activity-header
+      .text
+        i.comments.outline.icon
+        | Conversation
     - @post.comments.each do |comment|
       - next if comment.new_record?
       = render partial: "partials/comment", locals: { resource: comment }
@@ -62,3 +70,6 @@
             = account.votes_for(@post).count
           span.ui.small.basic.label
             | $#{account.mrr}/mo
+
+coffee:
+  $('.ui.dropdown').dropdown()

@@ -1,19 +1,21 @@
 .ui.grid.c-full-pane
   .ten.wide.column
     h1.heading Accounts
-    table.ui.table
-      tr
-        th Name
-        th Domain
-        th Paying
-        th Churned
-        th MRR
+    table.ui.sortable.table
+      thead
+        tr
+          th Name
+          th Domain
+          th Paying
+          th Churned
+          th MRR
       - @accounts.each do |account|
         - next if account.new_record?
         tr
           td
-            a href=admin_account_path(account)
-              strong= account.name
+            h4
+              a href=admin_account_path(account)
+                = account.name
           td= account.domain
           td= account.paying
           td= account.churned
@@ -21,3 +23,7 @@
   .five.wide.column
     .box
       = render partial: "form"
+
+coffee:
+  $(document).on "turbolinks:load", ->
+    $('table').tablesort()

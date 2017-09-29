@@ -1,9 +1,10 @@
 body.boards {
   .boards {
     display: flex;
+    flex-wrap: wrap;
 
     a.board {
-      width: 32%;
+      width: 30%;
       background: $white;
       padding: $double-base-size ($base-size * 1.5);
       border-radius: 4px;
@@ -17,6 +18,11 @@ body.boards {
 
       &:hover {
         box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.1);
+      }
+
+      .main h3 {
+        font-weight: 600;
+        font-size: $base-size * 1.5;
       }
 
       .meta {

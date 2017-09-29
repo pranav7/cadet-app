@@ -1,32 +1,61 @@
 .c-full-pane
-  h1.heading= @account.name
-  h4.soft= @account.domain
-  p.soft
-    | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not everyone.
+  .ui.stackable.grid
+    .row
+      .sixteen.wide.column
+        h1.heading= @account.name
+    .row
+      .eight.wide.column
+        p.soft
+          | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
+    
+    .row
+      .eight.wide.column
+        .box
+          - @posts.each do |post|
+            = render partial: "posts/list",
+              locals: { post: post, link_to: :admin, account: @account }
+      .four.wide.column
+        .box
+          .account-info
+            .info-heading.soft
+              i.address.card.icon
+              | About #{@account.name}
+          .account-info
+            .info-label.c-soft Domain
+            .info-value= @account.domain
+          .account-info
+            .info-label.c-soft MRR
+            .info-value $#{@account.mrr}
+          .account-info
+            .info-label.c-soft Paying
+            .info-value= @account.paying
+          .account-info
+            .info-label.c-soft Churned
+            .info-value= @account.churned
+          .account-info
+            .info-label.c-soft Since
+            .info-value= render_time(@account.created_at)
 
-  .ui.grid
-    .nine.wide.column
-      .box
-        - @posts.each do |post|
-          = render partial: "posts/list",
-            locals: { post: post, link_to: :admin, account: @account }
-    .five.wide.column
-      .box
-        = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
-          = form.input :user_ids,
-            as: :fake_select,
-            label: "Select Users",
-            collection: @customers,
-            multiple: true,
-            input_html: { class: "ui search dropdown" }
-          = form.submit "Add"
-        .ui.divider
-        - @account.users.each do |user|
-          = render partial: "partials/user", locals: { user: user }
-          span
-            = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
-              span.soft Remove
-          .ui.divider
+        .box
+          .account-info
+            .info-heading.soft
+              i.user.circle.icon
+              | Users
+          = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
+            = form.input :user_ids,
+              as: :fake_select,
+              label: "Select Users",
+              collection: @customers,
+              multiple: true,
+              input_html: { class: "ui search dropdown" }
+            = form.submit "Add User", class: "ui small button"
+          .vertical.padded
+          - @account.users.each do |user|
+            = render partial: "partials/user", locals: { user: user }
+            span
+              = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
+                span.soft Remove
+            .ui.divider
 
 coffee:
   $('.ui.dropdown').dropdown({

@@ -21,6 +21,9 @@ body.admin {
   .c-full-pane {
     grid-column: list / end;
     padding: $base-size;
+    max-height: 100vh;
+    height: 100vh;
+    overflow: auto;
   }
 
   .c-left-pane {

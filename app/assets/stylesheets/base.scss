@@ -7,6 +7,7 @@ body {
 
   font-size: 14px;
   background-color: $lightest;
+  color: $black;
 }
 
 // Start
@@ -186,7 +187,7 @@ a.vote-button {
 // Start
 // Styling for Cadet Power
 .cadet-power {
-  font-size: 13px;
+  font-size: 12px;
   text-align: center;
 
   span.text {
@@ -195,3 +196,16 @@ a.vote-button {
 }
 // End
 // Styling for Cadet Power
+
+.public-header {
+  background: $white;
+  border-bottom: 2px solid $lighter;
+  min-height: 60px;
+  margin-bottom: $base-size;
+  padding: $double-base-size 0;
+
+  .company-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+}

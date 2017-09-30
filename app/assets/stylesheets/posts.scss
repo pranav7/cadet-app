@@ -15,4 +15,14 @@ body.posts {
       vertical-align: top;
     }
   }
+
+  .activity-header {
+    @extend .c-soft;
+    padding-top: $double-base-size;
+
+    .text {
+      border-bottom: 1px solid $lighter;
+      padding-bottom: $half-base-size;
+    }
+  }
 }

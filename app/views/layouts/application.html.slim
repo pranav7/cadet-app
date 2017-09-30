@@ -10,22 +10,24 @@ html
     .ui.grid
       .four.wide.centered.column
         = semantic_flash
-    .ui.container
-      .ui.two.column.grid
-        .left.aligned.column
-          strong= current_company.name
-        .right.aligned.column
-          - if user_signed_in?
-            span
-              strong= current_user.name
-              span.soft
-                |  (#{current_user.email})
-            |  - 
-            - if current_user.admin_of?(current_company)
-              span= link_to "Admin Dashboard", admin_boards_path
+    .public-header
+      .ui.container
+        .ui.two.column.grid
+          .left.aligned.column
+            .company-name= current_company.name
+          .right.aligned.column
+            - if user_signed_in?
+              span
+                strong= current_user.name
+                span.soft
+                  |  (#{current_user.email})
               |  - 
+              - if current_user.admin_of?(current_company)
+                span= link_to "Admin Dashboard", admin_boards_path
+                |  - 
 
-            span= link_to "Logout", logout_path, method: :delete
-          - else
-            = link_to "Login", new_user_session_url(subdomain: "app")
+              span= link_to "Logout", logout_path, method: :delete
+            - else
+              = link_to "Login", new_user_session_url(subdomain: "app")
+    .ui.container
       = yield

@@ -1,7 +1,7 @@
 .ui.container
   .top-links-container.vertical.padded
-    a href=board_path(@board)
-      | &larr; #{@board.name}
+    span.soft Boards / 
+    strong= @board.name
 
   .ui.grid
     // Middle Section
@@ -20,7 +20,10 @@
         locals: { board: @board, post: @post, comment: @comment }
 
       // Post Activity
-      .ui.dividing.header Activity
+      .activity-header
+        .text
+          i.comments.outline.icon
+          | Conversation
       - @post.comments.each do |comment|
         - next if comment.new_record?
         = render partial: "partials/comment", locals: { resource: comment }

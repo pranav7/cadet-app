@@ -18,6 +18,7 @@
               .header
                 .main-text= current_user.name
                 .sub-text= current_user.email
+              .divider
               - if current_user.admin_of?(current_company)
                 = link_to admin_boards_path, class: "item" do
                   i.soft.columns.icon

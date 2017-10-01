@@ -94,4 +94,28 @@ body.admin {
       margin-top: $base-size;
     }
   }
+
+  .c-profile-menu {
+    & > .menu {
+      padding-bottom: $base-size;
+      min-width: 200px;
+      margin-top: 4px !important;
+      font-weight: 500;
+
+      .header {
+        text-transform: none !important;
+
+        .main-text {
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .sub-text {
+          @extend .c-soft;
+          font-weight: normal;
+          font-size: 13px;
+        }
+      }
+    }
+  }
 }

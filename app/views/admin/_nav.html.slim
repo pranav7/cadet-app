@@ -4,11 +4,11 @@ nav
       .c-profile-menu.ui.left.top.pointing.dropdown
         .avatar.circle
           .initials= current_user.initials
-        i.dropdown.icon
         .menu
           .header
             .main-text= current_user.name
             .sub-text= current_user.email
+          .divider
           - if current_user.admin_of?(current_company)
             = link_to boards_path, class: "item" do
               i.soft.external.icon

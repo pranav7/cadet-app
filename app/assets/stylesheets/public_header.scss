@@ -1,0 +1,35 @@
+.public-header {
+  background: $white;
+  border-bottom: 2px solid $lighter;
+  min-height: 60px;
+  margin-bottom: $double-base-size;
+  padding: $base-size 0;
+
+  .company-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  .c-profile-menu {
+    & > .menu {
+      padding: $base-size 0;
+      min-width: 200px;
+      margin-top: 0 !important;
+      font-weight: 500;
+    }
+  }
+
+  span.company-name a {
+    color: $black;
+  }
+
+  span.board-name {
+    border-left: 1px solid $dark;
+    margin: 8px;
+    padding: 0 8px;
+
+    a {
+      color: $dark;
+    }
+  }
+}

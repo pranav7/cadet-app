@@ -1,18 +1,7 @@
 .ui.grid.c-full-pane
   .twelve.wide.column
     h1.heading Boards
-    .boards
-      - if @boards
-        - @boards.each do |board|
-          - next if board.new_record?
-          = link_to admin_board_path(board), class: "board" do
-            .main
-              h3= board.name
-              p= board.description
-            .meta
-              p.soft= pluralize(board.posts.count, "Post")
-      - else
-        | No Boards
+    = render partial: "boards/boards", locals: { boards: @boards, to_admin: true }
   .four.wide.column
     .box
       .box-header

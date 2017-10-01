@@ -1,27 +1,21 @@
 .ui.grid
-  .row
-    .four.wide.column
-      .board-name
-        span.soft Boards / 
-        strong= @board.name
-  .row
-    .ten.wide.column
-      .posts-list.box
-        - if @posts.empty?
-          p There are no posts yet.
-        - else
-          - @posts.each do |post|
-            = render partial: "posts/list", locals: { board: @board, post: post }
+  .ten.wide.column
+    .posts-list.box
+      - if @posts.empty?
+        p There are no posts yet.
+      - else
+        - @posts.each do |post|
+          = render partial: "posts/list", locals: { board: @board, post: post }
 
-    .six.wide.column
-      .box
-        .box-header
-          strong Create a Post
-        = simple_form_for @post, url: board_posts_path(@board) do |f|
-          = f.input :title, placeholder: "Ttile", label: false
-          = f.simple_fields_for :content do |cf|
-            = cf.input :body, placeholder: "Description", label: false
-          
-          = f.submit "Create Post", class: "ui button"
+  .six.wide.column
+    .box
+      .box-header
+        strong Create a Post
+      = simple_form_for @post, url: board_posts_path(@board) do |f|
+        = f.input :title, placeholder: "Ttile", label: false
+        = f.simple_fields_for :content do |cf|
+          = cf.input :body, placeholder: "Description", label: false
+        
+        = f.submit "Create Post", class: "ui button"
 
-      = render partial: "partials/cadet_power"      
+    = render partial: "partials/cadet_power"      

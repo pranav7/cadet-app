@@ -8,14 +8,16 @@
           span.board-name= link_to @board.name, board_path(@board)
       .right.aligned.column
         - if user_signed_in?
-          .c-profile-menu.ui.pointing.simple.dropdown
+          .c-profile-menu.ui.left.top.pointing.dropdown
             .text.user
               .avatar.circle.small
                 .initials= current_user.initials
-              .details
-                span.name= current_user.name
+
             i.dropdown.icon
             .menu
+              .header
+                .main-text= current_user.name
+                .sub-text= current_user.email
               - if current_user.admin_of?(current_company)
                 = link_to admin_boards_path, class: "item" do
                   i.soft.columns.icon
@@ -30,5 +32,5 @@
 coffee:
   $(".ui.dropdown").dropdown({
     action: "select"
-    on: "hover"
+    on: "click"
   })

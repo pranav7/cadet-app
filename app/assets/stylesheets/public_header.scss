@@ -12,10 +12,25 @@
 
   .c-profile-menu {
     & > .menu {
-      padding: $base-size 0;
+      padding-bottom: $base-size;
       min-width: 200px;
       margin-top: 0 !important;
       font-weight: 500;
+
+      .header {
+        text-transform: none;
+
+        .main-text {
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .sub-text {
+          @extend .c-soft;
+          font-weight: normal;
+          font-size: 13px;
+        }
+      }
     }
   }
 

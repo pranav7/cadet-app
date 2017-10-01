@@ -1,9 +1,21 @@
 nav
   ul.nav-list
     li.list-item.current-user
-      .avatar.circle
-        .initials= current_user.initials
-      .user-name= current_user.name
+      .c-profile-menu.ui.left.top.pointing.dropdown
+        .avatar.circle
+          .initials= current_user.initials
+        i.dropdown.icon
+        .menu
+          .header
+            .main-text= current_user.name
+            .sub-text= current_user.email
+          - if current_user.admin_of?(current_company)
+            = link_to boards_path, class: "item" do
+              i.soft.external.icon
+              | Public View
+          = link_to logout_path, class: "item", method: :delete do
+            i.soft.sign.out.icon
+            | Logout
       
     li.list-item
       = link_to admin_boards_path, class: "item-link" do
@@ -16,3 +28,9 @@ nav
 
   .cadet-logo
     = image_tag "cadet-logo-grey.png", width: 50
+
+coffee:
+  $(".ui.dropdown").dropdown({
+    action: "select"
+    on: "hover"
+  })

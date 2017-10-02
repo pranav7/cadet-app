@@ -1,0 +1,27 @@
+body.admin.posts {
+  .top-action-bar {
+    .ui.c.dropdown {
+      background: none;
+      border: none;
+      min-width: 8em;
+      box-shadow: none;
+
+      .menu {
+        border-top-width: 1px !important;
+        border-color: $lighter;
+      }
+
+      & > .default.text {
+        color: $dark; 
+        font-weight: bold;
+      }
+
+      & > .dropdown.icon {
+        color: $dark;
+        right: 2em;
+        font-size: 16px;
+        top: 6px;
+      }
+    }
+  }
+}

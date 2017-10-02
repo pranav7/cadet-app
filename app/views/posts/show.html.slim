@@ -1,31 +1,40 @@
 .ui.container
-  .top-links-container.vertical.padded
-    a href=board_path(@board)
-      | &larr; #{@board.name}
-
   .ui.grid
-    // Middle Section
-    .ten.wide.column
-      // Post Header
-      .post-header.vertical-padded.table--object
-        = render partial: "posts/vote", locals: { post: @post }
-        h1.post-title= @post.title
-        .post-header-info
-          .ui.basic.label ##{@post.status}
-      // Post Body
-      = render partial: "partials/comment", locals: { resource: @post }
+    .row
+      .sixteen.wide.column
+        .c-breadcrumb
+          .section= link_to "Boards", boards_path
+          .divider
+              | /
+          .section.active= link_to @board.name, board_path(@board)
 
-      // Create Comment
-      = render partial: "comments/new",
-        locals: { board: @board, post: @post, comment: @comment }
+    .row
+      // Middle Section
+      .ten.wide.column
+        // Post Header
+        .post-header.vertical-padded.table--object
+          = render partial: "posts/vote", locals: { post: @post }
+          h1.post-title= @post.title
+          .post-header-info
+            .ui.basic.label ##{@post.status}
+        // Post Body
+        = render partial: "partials/comment", locals: { resource: @post }
 
-      // Post Activity
-      .ui.dividing.header Activity
-      - @post.comments.each do |comment|
-        - next if comment.new_record?
-        = render partial: "partials/comment", locals: { resource: comment }
+        // Create Comment
+        = render partial: "comments/new",
+          locals: { board: @board, post: @post, comment: @comment }
 
-    // Middle Section
-    .six.wide.column
-      // Voters
-      = render partial: "partials/voters", locals: { voters: @post.voters }
+        // Post Activity
+        .activity-header
+          .text
+            i.comments.outline.icon
+            | Conversation
+        - @post.comments.each do |comment|
+          - next if comment.new_record?
+          = render partial: "partials/comment", locals: { resource: comment }
+
+      // Middle Section
+      .six.wide.column
+        // Voters
+        = render partial: "partials/voters", locals: { voters: @post.voters }
+        = render partial: "partials/cadet_power"

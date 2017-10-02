@@ -9,8 +9,8 @@ class Cadet.Posts
     $(".content").linkify({
       className: (href, type) ->
         "link--#{type}"
-      tagName:
-        mention: "span"
+      # tagName:
+      #  mention: "span"
     })
 
 $(document).on "turbolinks:load", ->

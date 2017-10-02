@@ -1,5 +1,8 @@
-strong Voters
-.voters.box
+.box
+  .box-header
+    .header-text
+      i.user.outline.icon
+      | Voters
   - voters.each do |voter|
     = render partial: "partials/user",
       locals: { user: voter, size: "small" }

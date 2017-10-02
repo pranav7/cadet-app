@@ -1,0 +1,37 @@
+.public-header
+  .ui.container
+    .ui.two.column.middle.aligned.grid
+      .left.aligned.column
+        span.company-name
+          = link_to current_company.name, boards_path
+        - if @board
+          span.board-name= link_to @board.name, board_path(@board)
+      .right.aligned.column
+        - if user_signed_in?
+          .c-profile-menu.ui.left.top.pointing.dropdown
+            .text.user
+              .avatar.circle.small
+                .initials= current_user.initials
+
+            i.dropdown.icon
+            .menu
+              .header
+                .main-text= current_user.name
+                .sub-text= current_user.email
+              .divider
+              - if current_user.admin_of?(current_company)
+                = link_to admin_boards_path, class: "item" do
+                  i.soft.columns.icon
+                  | Admin
+              = link_to logout_path, class: "item", method: :delete do
+                i.soft.sign.out.icon
+                | Logout
+
+        - else
+          = link_to "Login", new_user_session_url(subdomain: "app")
+
+coffee:
+  $(".ui.dropdown").dropdown({
+    action: "select"
+    on: "hover"
+  })

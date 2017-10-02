@@ -1,0 +1,52 @@
+.public-header {
+  background: $white;
+  border-bottom: 2px solid $lighter;
+  min-height: 60px;
+  margin-bottom: $double-base-size;
+  padding: $base-size 0;
+  display: flex;
+  align-items: center;
+
+  .company-name {
+    font-weight: 700;
+    font-size: 16px;
+  }
+
+  span.company-name a {
+    color: $black;
+  }
+
+  span.board-name {
+    border-left: 1px solid $dark;
+    margin: 8px;
+    padding: 0 8px;
+
+    a {
+      color: $dark;
+    }
+  }
+
+  .c-profile-menu {
+    & > .menu {
+      padding-bottom: $base-size;
+      min-width: 200px;
+      margin-top: 4px !important;
+      font-weight: 500;
+
+      .header {
+        text-transform: none !important;
+
+        .main-text {
+          font-size: 14px;
+          font-weight: 600;
+        }
+
+        .sub-text {
+          @extend .c-soft;
+          font-weight: normal;
+          font-size: 13px;
+        }
+      }
+    }
+  }
+}

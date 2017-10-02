@@ -1,0 +1,13 @@
+- to_admin = to_admin || false
+.boards
+  - if boards
+    - boards.each do |board|
+      - next if board.new_record?
+      = link_to board_link(board, to_admin: to_admin), class: "board" do
+        .main
+          h3= board.name
+          p= board.description
+        .meta
+          p.soft= pluralize(board.posts.count, "Post")
+  - else
+    | No Boards

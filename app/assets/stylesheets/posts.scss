@@ -4,8 +4,6 @@ body.posts {
   }
 
   .post-header {
-    padding: $base-size 0;
-
     h1.post-title {
       color: $darkest;
       font-weight: 600;
@@ -13,6 +11,16 @@ body.posts {
       padding: 0;
       margin: 0;
       vertical-align: top;
+    }
+  }
+
+  .activity-header {
+    @extend .c-soft;
+    padding-top: $double-base-size;
+
+    .text {
+      border-bottom: 1px solid $lighter;
+      padding-bottom: $half-base-size;
     }
   }
 }

@@ -1,12 +1,3 @@
 .ui.grid
-  .six.wide.column
-    h1 Boards
-    - if @boards
-      - @boards.each do |board|
-        = link_to board_path(board) do
-          h2= board.name
-        p= board.description
-        p.soft
-          strong #{board.posts.count} Posts
-    - else
-      No Boards
+  .sixteen.wide.column
+    = render partial: "boards/boards", locals: { boards: @boards }

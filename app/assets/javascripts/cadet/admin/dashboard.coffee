@@ -22,7 +22,7 @@ class Cadet.Admin.Dashboard
       Cookies.remove("scrollPos")
 
 $(document).on "turbolinks:load", ->
-  # Ties this JS to only Signup Page
+  # Ties this JS to Posts show page
   return unless $(".admin.posts.show").length > 0
 
   dashboard = new Cadet.Admin.Dashboard($(".c-left-pane"), $(".admin-post-list-item"))

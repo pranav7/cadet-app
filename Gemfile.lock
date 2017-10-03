@@ -5,14 +5,6 @@ GIT
     semantic-ui-sass (2.2.11.0)
       sass (>= 3.2)
 
-GIT
-  remote: https://github.com/thoughtbot/shoulda-matchers.git
-  revision: edaf9cb926ee9c59c59729e7a4f8c206b44da8a1
-  branch: rails-5
-  specs:
-    shoulda-matchers (3.1.2)
-      activesupport (>= 4.2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -243,6 +235,8 @@ GEM
     selenium-webdriver (3.5.1)
       childprocess (~> 0.5)
       rubyzip (~> 1.0)
+    shoulda-matchers (3.1.2)
+      activesupport (>= 4.0.0)
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
@@ -320,7 +314,7 @@ DEPENDENCIES
   sass-rails (~> 5.0)
   selenium-webdriver
   semantic-ui-sass!
-  shoulda-matchers!
+  shoulda-matchers
   simple_form
   slim-rails
   spring

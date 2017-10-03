@@ -50,6 +50,28 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
+desc "Check that we can access everything"
+task :check_write_permissions do
+  on roles(:all) do |host|
+    if test("[ -w #{fetch(:deploy_to)} ]")
+      info "#{fetch(:deploy_to)} is writable on #{host}"
+    else
+      error "#{fetch(:deploy_to)} is not writable on #{host}"
+    end
+  end
+end
+
+desc "Check if agent forwarding is working"
+task :forwarding do
+  on roles(:all) do |h|
+    if test("env | grep SSH_AUTH_SOCK")
+      info "Agent forwarding is up to #{h}"
+    else
+      error "Agent forwarding is NOT up to #{h}"
+    end
+  end
+end
+
 namespace :puma do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
@@ -63,6 +85,17 @@ namespace :puma do
 end
 
 namespace :deploy do
+  desc "Create production database"
+  task :db_create do
+    on roles(:all) do
+      within release_path do
+        with rails_env: fetch(:stage) do
+          execute :rake, 'db:create'
+        end
+      end
+    end
+  end
+
   desc "Make sure local git is in sync with remote."
   task :check_revision do
     on roles(:app) do
@@ -77,8 +110,10 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
+      before 'puma:make_dirs'
       before 'deploy:restart', 'puma:start'
       invoke 'deploy'
+      after  'deploy:db_create'
     end
   end
 
@@ -89,7 +124,7 @@ namespace :deploy do
     end
   end
 
- #  before :starting,     :check_revision
+  # before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

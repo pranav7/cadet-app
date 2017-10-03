@@ -3,6 +3,7 @@ lock "3.9.1"
 
 set :application, "cadet_app"
 set :repo_url, "ssh://git@bitbucket.org/pranav7/cadet-app.git"
+set :user, 'rails'
 
 # Default value for :format is :airbrussh.
 # Airbrussh pretties up your SSHKit and Capistrano output
@@ -17,25 +18,12 @@ current_branch = `git symbolic-ref --short HEAD`.chomp
 set :branch, ENV['branch'] || current_branch || "master"
 # You can use the 'branch' parameter on deployment to specify the branch you wish to deploy
 
-set :rvm_ruby_version, '2.4.1'
-
-# Don't change these unless you know what you're doing
-set :pty,             true
-set :user,            "rails"
-set :use_sudo,        false
-set :deploy_via,      :remote_cache
-set :deploy_to,       "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
-set :puma_bind,       "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
-set :puma_state,      "#{shared_path}/tmp/pids/puma.state"
-set :puma_pid,        "#{shared_path}/tmp/pids/puma.pid"
-set :puma_access_log, "#{release_path}/log/puma.error.log"
-set :puma_error_log,  "#{release_path}/log/puma.access.log"
-set :puma_preload_app, true
-set :puma_worker_timeout, nil
-set :puma_init_active_record, true  # Change to false when not using ActiveRecord
-
-# set :ssh_options,     { forward_agent: true, user: fetch(:user), keys: %w(~/.ssh/id_rsa.pub) }
-set :ssh_options, { forward_agent: true }
+set :rvm_ruby_version, 'ruby-2.4.1'
+set :pty, true
+set :use_sudo, false
+set :deploy_via, :remote_cache
+set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :puma_bind, "unix://#{shared_path}/tmp/sockets/#{fetch(:application)}-puma.sock"
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml"
@@ -52,34 +40,23 @@ append :linked_dirs, "log", "tmp/pids", "tmp/cache", "tmp/sockets", "public/syst
 # Default value for keep_releases is 5
 # set :keep_releases, 5
 
-desc "Check that we can access everything"
-task :check_write_permissions do
-  on roles(:all) do |host|
-    if test("[ -w #{fetch(:deploy_to)} ]")
-      info "#{fetch(:deploy_to)} is writable on #{host}"
-    else
-      error "#{fetch(:deploy_to)} is not writable on #{host}"
-    end
-  end
-end
-
-desc "Check if agent forwarding is working"
-task :forwarding do
-  on roles(:all) do |h|
-    if test("env | grep SSH_AUTH_SOCK")
-      info "Agent forwarding is up to #{h}"
-    else
-      error "Agent forwarding is NOT up to #{h}"
-    end
-  end
-end
-
-namespace :puma do
+namespace :server do
   desc 'Create Directories for Puma Pids and Socket'
   task :make_dirs do
     on roles(:app) do
       execute "mkdir #{shared_path}/tmp/sockets -p"
       execute "mkdir #{shared_path}/tmp/pids -p"
+    end
+  end
+
+  desc 'Start Puma Servers'
+  task :start do
+    on roles(:app) do
+      within release_path do
+        with rails_env: fetch(:stage) do
+          execute "bundle exec puma --preload -b #{fetch(:puma_bind)}"
+        end
+      end
     end
   end
 
@@ -109,18 +86,10 @@ namespace :deploy do
     end
   end
 
-  desc 'Initial Deploy'
-  task :initial do
-    on roles(:app) do
-      before 'deploy:restart', 'puma:start'
-      invoke 'deploy'
-    end
-  end
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      invoke 'puma:restart'
+      # invoke 'puma:restart'
     end
   end
 

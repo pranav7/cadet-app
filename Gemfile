@@ -53,6 +53,9 @@ group :development, :test do
   gem 'shoulda-matchers', git: 'https://github.com/thoughtbot/shoulda-matchers.git', branch: 'rails-5'
 
   gem 'capistrano-rails'
+  gem 'capistrano-rvm'
+  gem 'capistrano-npm'
+  gem 'capistrano3-puma'
 end
 
 group :development do

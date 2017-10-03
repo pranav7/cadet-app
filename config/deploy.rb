@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock "3.9.1"
 
-set :application, "cadet"
+set :application, "cadet_app"
 set :repo_url, "ssh://git@bitbucket.org/pranav7/cadet-app.git"
 
 # Default value for :format is :airbrussh.
@@ -120,7 +120,7 @@ namespace :deploy do
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
-      # invoke 'puma:restart'
+      invoke 'puma:restart'
     end
   end
 

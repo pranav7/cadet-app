@@ -17,6 +17,8 @@ current_branch = `git symbolic-ref --short HEAD`.chomp
 set :branch, ENV['branch'] || current_branch || "master"
 # You can use the 'branch' parameter on deployment to specify the branch you wish to deploy
 
+set :rvm_ruby_version, '2.4.1'
+
 # Don't change these unless you know what you're doing
 set :pty,             true
 set :user,            "rails"
@@ -110,10 +112,8 @@ namespace :deploy do
   desc 'Initial Deploy'
   task :initial do
     on roles(:app) do
-      before 'puma:make_dirs'
       before 'deploy:restart', 'puma:start'
       invoke 'deploy'
-      after  'deploy:db_create'
     end
   end
 

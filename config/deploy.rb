@@ -1,7 +1,7 @@
 # config valid only for current version of Capistrano
 lock "3.9.1"
 
-set :application, "cadet_app"
+set :application, "cadet-app"
 set :repo_url, "ssh://git@bitbucket.org/pranav7/cadet-app.git"
 set :user, 'rails'
 
@@ -54,7 +54,7 @@ namespace :server do
     on roles(:app) do
       within release_path do
         with rails_env: fetch(:stage) do
-          execute "bundle exec puma --preload -b #{fetch(:puma_bind)}"
+          execute "bundle exec puma --preload -b #{fetch(:puma_bind)} -d"
         end
       end
     end
@@ -64,28 +64,6 @@ namespace :server do
 end
 
 namespace :deploy do
-  desc "Create production database"
-  task :db_create do
-    on roles(:all) do
-      within release_path do
-        with rails_env: fetch(:stage) do
-          execute :rake, 'db:create'
-        end
-      end
-    end
-  end
-
-  desc "Make sure local git is in sync with remote."
-  task :check_revision do
-    on roles(:app) do
-      unless `git rev-parse HEAD` == `git rev-parse origin/master`
-        puts "WARNING: HEAD is not the same as origin/master"
-        puts "Run `git push` to sync changes."
-        exit
-      end
-    end
-  end
-
   desc 'Restart application'
   task :restart do
     on roles(:app), in: :sequence, wait: 5 do
@@ -93,7 +71,6 @@ namespace :deploy do
     end
   end
 
-  # before :starting,     :check_revision
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

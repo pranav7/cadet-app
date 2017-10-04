@@ -66,7 +66,7 @@ group :development do
   gem 'capistrano-bundler', '~> 1.2'
   gem 'capistrano-rvm'
   gem 'capistrano-npm'
-  # gem 'capistrano3-puma'
+  gem 'capistrano3-puma'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

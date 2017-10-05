@@ -1,3 +1,8 @@
-.ui.grid
-  .sixteen.wide.column
-    = render partial: "boards/boards", locals: { boards: @boards }
+- if @boards.empty?
+  .ui.centered.grid
+    .six.wide.center.aligned.column
+      h3.soft No Boards Added
+- else
+  .ui.grid
+    .sixteen.wide.column
+      = render partial: "boards/boards", locals: { boards: @boards }

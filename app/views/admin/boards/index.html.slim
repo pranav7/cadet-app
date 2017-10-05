@@ -1,7 +1,10 @@
 .ui.grid.c-full-pane
   .twelve.wide.column
     h1.heading Boards
-    = render partial: "boards/boards", locals: { boards: @boards, to_admin: true }
+    - if @boards.reject { |board| board.id.nil? }.blank?
+      .soft No Boards added yet.
+    - else
+      = render partial: "boards/boards", locals: { boards: @boards, to_admin: true }
   .four.wide.column
     .box
       .box-header

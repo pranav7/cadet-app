@@ -30,6 +30,6 @@ class ApplicationController < ActionController::Base
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || root_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
+    request.env['omniauth.origin'] || stored_location_for(resource) || boards_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
   end
 end

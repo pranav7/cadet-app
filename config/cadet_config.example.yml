@@ -1,0 +1,8 @@
+development:
+  base_domain: lvh.me:3000
+
+test:
+  base_domain: lvh.me:3000
+
+production:
+  base_domain: getcadet.com

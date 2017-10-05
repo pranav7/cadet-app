@@ -30,3 +30,5 @@
 /public/packs
 /public/packs-test
 /node_modules
+
+config/cadet_config.yml

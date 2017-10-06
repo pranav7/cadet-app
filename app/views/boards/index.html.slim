@@ -2,6 +2,9 @@
   .ui.centered.grid
     .six.wide.center.aligned.column
       h3.soft No Boards Added
+      - if user_signed_in? && current_user.admin_of?(current_company)
+        a.ui.primary.button href=admin_boards_path
+          | + Add Board
 - else
   .ui.grid
     .sixteen.wide.column

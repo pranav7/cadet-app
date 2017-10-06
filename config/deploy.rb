@@ -47,29 +47,9 @@ namespace :server do
       execute "mkdir #{shared_path}/tmp/pids -p"
     end
   end
-
-  desc 'Start Puma Servers'
-  task :start do
-    on roles(:app) do
-      within release_path do
-        with rails_env: fetch(:stage) do
-          execute "bundle exec puma --preload -b #{fetch(:puma_bind)} -d"
-        end
-      end
-    end
-  end
-
-  before :start, :make_dirs
 end
 
 namespace :deploy do
-  desc 'Restart application'
-  task :restart do
-    on roles(:app), in: :sequence, wait: 5 do
-      # invoke 'puma:restart'
-    end
-  end
-
   after  :finishing,    :compile_assets
   after  :finishing,    :cleanup
   after  :finishing,    :restart

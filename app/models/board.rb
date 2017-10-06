@@ -1,9 +1,11 @@
 class Board < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history, :scoped], scope: :company
+  friendly_id :name, use: [:scoped, :slugged, :history], scope: :company
 
   belongs_to :company
   has_many :posts
+
+  validates :slug, presence: true, uniqueness: { scope: :company }
 
   alias_attribute :title, :name
 end

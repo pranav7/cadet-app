@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history, :scoped], scope: [:board]
+  friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
   has_one :content, as: :parent
   has_many :comments
@@ -12,6 +12,7 @@ class Post < ApplicationRecord
   belongs_to :board
 
   validates :title, presence: true
+  validates :slug, presence: true, uniqueness: { scope: :board }
 
   accepts_nested_attributes_for :content
 

@@ -1,6 +1,6 @@
 class Post < ApplicationRecord
   extend FriendlyId
-  friendly_id :title, use: [:slugged, :history]
+  friendly_id :title, use: [:slugged, :history, :scoped], scope: [:board]
 
   has_one :content, as: :parent
   has_many :comments

@@ -6,6 +6,8 @@ class PostsController < ApplicationController
     @post = @board.posts.friendly.find(params[:id])
     @comment = @post.comments.new
     @comment.build_content
+
+    @page_title = @post.title
   end
 
   def create

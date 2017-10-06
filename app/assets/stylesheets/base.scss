@@ -94,6 +94,34 @@ body {
 .ui.custom.basic.label {
   color: $dark;
 }
+
+.ui.message {
+  position: absolute;
+  width: 100%;
+  text-align: center;
+  margin-top: 4px !important;
+  font-weight: 500;
+  border-radius: 5px;
+  z-index: 1000;
+
+  &.success,
+  &.info, 
+  &.warning {
+    background-color: $black;
+    color: $white;
+    border: 1px solid $black;
+    opacity: 0.75;
+    box-shadow: none;
+  }
+
+  &.alert {
+    background-color: $good-red;
+    opacity: 0.75;
+    color: $white;
+    border: 1px solid darken($good-red, 1);
+    box-shadow: none;
+  }
+}
 // End
 // Semantic UI Overrides
 

@@ -60,6 +60,11 @@ class User < ApplicationRecord
     return true
   end
 
+  # @todo Add Test
+  def make_admin!(company)
+    memberships.where(company: company).first.admin!
+  end
+
   def admin_of?(company)
     return false if memberships.where(company: company, role: :admin).empty?
     return true

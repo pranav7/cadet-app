@@ -31,5 +31,4 @@
 /public/packs-test
 /node_modules
 
-# Ignore encrypted secrets key file.
-config/secrets.yml.key
+config/cadet_config.yml

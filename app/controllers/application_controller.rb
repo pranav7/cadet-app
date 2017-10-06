@@ -26,10 +26,10 @@ class ApplicationController < ActionController::Base
     return unless user_signed_in?
     return if current_user.companies.map(&:subdomain).include?(request.subdomains.first)
 
-    redirect_to root_url(host: "#{current_user.companies.first.subdomain}.lvh.me:3000")
+    redirect_to root_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
   end
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || root_url(host: "#{current_user.companies.first.subdomain}.lvh.me:3000")
+    request.env['omniauth.origin'] || stored_location_for(resource) || boards_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
   end
 end

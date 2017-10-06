@@ -11,6 +11,8 @@ Rails.application.routes.draw do
         invitations: 'users/invitations',
         omniauth_callbacks: "users/omniauth_callbacks"
     }
+
+    root to: redirect('signup')
   end
 
   devise_scope :user do
@@ -33,6 +35,4 @@ Rails.application.routes.draw do
       resource :votes, only: [:create, :destroy]
     end
   end
-
-  root "boards#index"
 end

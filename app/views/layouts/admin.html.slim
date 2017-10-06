@@ -7,23 +7,10 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.png'
   body.admin class="#{controller_name} #{action_name}"
-    .flash-messages
-      .ui.grid
-        .four.wide.centered.column
-          = semantic_flash
+    = render partial: "partials/flash_messages"
+
     main.c-container
       .c-admin-nav
         = render partial: "admin/nav"
       .c-content-container
         = yield
-
-    / .ui.two.column.grid
-      / .left.aligned.column
-        / strong= current_company.name
-      / .right.aligned.column
-        / span
-          / = link_to "Accounts", admin_accounts_path
-        / span -
-        / span Hello, #{current_user.first_name}.
-        / span
-        / span= link_to "Logout", logout_path, method: :delete

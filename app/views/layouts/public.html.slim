@@ -7,8 +7,6 @@ html
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.png'
   body.public class="#{controller_name} #{action_name}"
-    .ui.grid
-      .four.wide.centered.column
-        = semantic_flash
+    = render partial: "partials/flash_messages"
     .ui.container
       = yield

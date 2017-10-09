@@ -5,6 +5,14 @@ body.admin {
     border-bottom: 1px solid $lighter;
   }
 
+  .invite-link {
+    font-size: 12px;
+    background: $lightest;
+    border: 1px solid $lighter;
+    padding: 4px;
+    border-radius: 4px;
+  }
+
   main.c-container {
     display: grid;
     grid-template-columns: [nav] 85px [main] auto [end];

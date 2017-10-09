@@ -31,6 +31,13 @@
               i.user.circle.icon
               | Add Customer
           = render partial: "form"
+        .box
+          .box-header
+            .header-text
+              i.plus.icon
+              | Invite Users
+          p.soft Share your board to get users posting and voting on posts. User this link to invite users:
+          .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/invite"
 
 coffee:
   $(document).on "turbolinks:load", ->

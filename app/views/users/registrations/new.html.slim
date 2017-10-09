@@ -25,12 +25,8 @@
           = form.input :first_name, label: false, placeholder: "First Name"
           = form.input :last_name, label: false, placeholder: "Last Name"
         = form.input :email, label: false, placeholder: "Work Email"
-        .two.fields
-          = form.input :password, label: false, placeholder: "Password"
-          = form.input :password_confirmation,
-            label: false,
-            placeholder: "Confirm Password",
-            autocomplete: "off"
+        = form.input :password, label: false, placeholder: "Password"
+        = form.input :job_title, label: false, placeholder: "Job Title (optional)"
 
         = form.button :submit, "Sign up", class: "ui fluid button"
         .ui.horizontal.divider or

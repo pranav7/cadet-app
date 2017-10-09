@@ -1,0 +1,14 @@
+.ui.grid
+  .six.wide.centered.column
+    .box
+      h4 Signup for Cadet
+
+      = simple_form_for @user do |form|
+        .two.fields
+          = form.input :first_name, label: false, placeholder: "First Name"
+          = form.input :last_name, label: false, placeholder: "Last Name"
+        = form.input :email, label: false, placeholder: "Work Email"
+        = form.input :password, label: false, placeholder: "Password"
+        = form.input :job_title, label: false, placeholder: "Job Title (optional)"
+
+        = form.button :submit, "Sign up", class: "ui fluid button"

@@ -29,6 +29,9 @@ Rails.application.routes.draw do
     end
   end
 
+  get :invite, to: "users#new"
+  resource :users, only: [:create]
+
   resources :boards, path: "" do
     resources :posts, only: [:create, :show] do
       resources :comments, only: [:create]

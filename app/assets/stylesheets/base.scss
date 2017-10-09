@@ -223,11 +223,10 @@ a.vote-button {
       min-width: 30px;
     }
 
-    .post-title {
-      .title-text h3 {
-        font-size: 1.5 * $base-size;
-        margin: 0;
-      }
+    .title-text h3 {
+      font-size: 1.5 * $base-size;
+      font-weight: 500;
+      margin: 0;
     }
   }
 }

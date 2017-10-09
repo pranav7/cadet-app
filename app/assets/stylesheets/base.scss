@@ -22,6 +22,10 @@ body {
   }
 }
 
+.c-flex--object {
+  display: flex;
+}
+
 .c-soft,
 .soft {
   color: $darker;
@@ -170,6 +174,7 @@ a.vote-button {
   margin-right: $base-size;
   color: $darkest;
   vertical-align: top;
+  text-align: center;
 
   &.upvoted {
     color: $secondary-blue;
@@ -193,31 +198,34 @@ a.vote-button {
 .post-list-item {
   padding: 2 * $base-size 0;
   width: 100%;
+  display: flex;
 
   a.post-link {
     color: $darkest;
+    display: flex;
+    justify-content: space-between;
+    flex: 1;
+  }
+
+  .post-body {
+    display: flex;
+    flex-direction: column;
+    box-flex: 1;
+    flex: 1;
 
     &:hover { color: $black; }
 
     .post-summary {
       padding-bottom: $base-size;
     }
-  }
-
-  .post-title {
-    display: flex;
-    flex: 1;
 
     .comment-count {
       min-width: 30px;
     }
 
-    .title-text {
-      flex: auto;
-
-      h3 {
+    .post-title {
+      .title-text h3 {
         font-size: 1.5 * $base-size;
-        font-weight: 500;
         margin: 0;
       }
     }

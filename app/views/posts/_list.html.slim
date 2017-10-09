@@ -1,14 +1,13 @@
-.post-list-item.table--object
+.post-list-item
   = render partial: "posts/vote", locals: { post: post, account: (account rescue nil) }
   = link_to build_post_link(post, link_to: link_to), class: "post-link" do
-    .post-title
+    .post-body
       span.title-text.float.left
         h3= post.title
-      span.comment-count.soft.float.right
-        i.comment.outline.icon
-        = post.comments.count
-
-    .post-summary.soft= post.content.body.truncate(140)
-  .post-info.soft
-    strong ##{post.status}
-    span.float.right #{render_time(post.created_at, format: :short)} by #{post.created_by.name}
+      .post-summary.soft= post.content.body.truncate(140)
+      .post-info.soft
+        strong ##{post.status}
+        span  #{render_time(post.created_at, format: :short)} by #{post.created_by.name}
+    .comment-count.soft.float.right
+      i.comment.outline.icon
+      = post.comments.count

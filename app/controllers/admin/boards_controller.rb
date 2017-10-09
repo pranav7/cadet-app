@@ -17,8 +17,12 @@ class Admin::BoardsController < Admin::AdminController
 
   def show
     @board = current_company.boards.friendly.find(params[:id])
-    @posts = @board.posts.order(created_at: :desc).includes(:comments)
-    redirect_to admin_board_post_path(@board, @posts.first) unless @posts.empty?
+    if @board.posts.blank?
+      @post = @board.posts.new
+      @post.build_content
+    else
+      redirect_to admin_board_post_path(@board, @board.posts.first)
+    end
   end
 
   def index

@@ -1,2 +1,10 @@
-h1= @board.name
-.ui.message No Posts
+.c-full-pane
+  .ui.grid
+    .row
+      .seven.wide.column
+        h4 There are no posts yet.
+        p.soft We recommend creating at least 5 posts to help your users get started.
+    .row
+      .five.wide.column
+        = render partial: "posts/form",
+          locals: { board: @board, post: @post, after_create_path: :admin }

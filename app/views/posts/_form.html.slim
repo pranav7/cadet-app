@@ -1,0 +1,10 @@
+- after_create_path = after_create_path || :public
+.box
+  .box-header
+    strong Create a Post
+  = simple_form_for post, url: board_posts_path(board, after_create_path: after_create_path) do |f|
+    = f.input :title, placeholder: "Title", label: false
+    = f.simple_fields_for :content do |cf|
+      = cf.input :body, placeholder: "Description", label: false
+    
+    = f.submit "Create Post", class: "ui button"

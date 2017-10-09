@@ -26,7 +26,11 @@ class PostsController < ApplicationController
       # Hanlde Post Error
     end
 
-    redirect_to board_path(board)
+    if params[:after_create_path] == "admin"
+      redirect_to admin_board_path(board)
+    else
+      redirect_to board_path(board)
+    end
   end
 
   private

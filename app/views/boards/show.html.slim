@@ -10,14 +10,5 @@
           = render partial: "posts/list", locals: { board: @board, post: post }
 
   .six.wide.column
-    .box
-      .box-header
-        strong Create a Post
-      = simple_form_for @post, url: board_posts_path(@board) do |f|
-        = f.input :title, placeholder: "Ttile", label: false
-        = f.simple_fields_for :content do |cf|
-          = cf.input :body, placeholder: "Description", label: false
-        
-        = f.submit "Create Post", class: "ui button"
-
-    = render partial: "partials/cadet_power"      
+    = render partial: "posts/form", locals: { board: @board, post: @post }
+    = render partial: "partials/cadet_power"

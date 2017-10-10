@@ -134,6 +134,10 @@ setimmediate@^1.0.5:
   version "1.0.5"
   resolved "https://registry.yarnpkg.com/setimmediate/-/setimmediate-1.0.5.tgz#290cbb232e306942d7d7ea9b83732ab7856f8285"
 
+tablesort@^5.0.1:
+  version "5.0.1"
+  resolved "https://registry.yarnpkg.com/tablesort/-/tablesort-5.0.1.tgz#598cedb3623c82599574b67c42f915a35c336c69"
+
 ua-parser-js@^0.7.9:
   version "0.7.14"
   resolved "https://registry.yarnpkg.com/ua-parser-js/-/ua-parser-js-0.7.14.tgz#110d53fa4c3f326c121292bbeac904d2e03387ca"

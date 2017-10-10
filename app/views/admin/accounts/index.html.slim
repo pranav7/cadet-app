@@ -5,7 +5,7 @@
         h1.heading Customers
     .row
       .ten.wide.column
-        table.ui.sortable.table
+        table.ui.table#accounts-table
           thead
             tr
               th Name
@@ -23,7 +23,7 @@
               td= account.domain
               td= account.paying
               td= account.churned
-              td $#{account.mrr}
+              td data-sort=account.mrr $#{account.mrr}
       .five.wide.column
         .box
           .box-header
@@ -41,4 +41,4 @@
 
 coffee:
   $(document).on "turbolinks:load", ->
-    $('table').tablesort()
+    new Tablesort(document.getElementById('accounts-table'))

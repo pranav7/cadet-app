@@ -10,7 +10,8 @@
 //= require linkifyjs/dist/linkify-jquery
 // require linkifyjs/dist/linkify-plugin-mention
 //= require js-cookie/src/js.cookie
-//= require tablesort
+//= require tablesort/dist/tablesort.min.js
+//= require tablesort/dist/sorts/tablesort.number.min.js
 //= require init
 //= require cadet/posts
 //= require cadet/signup

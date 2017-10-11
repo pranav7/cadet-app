@@ -4,6 +4,10 @@ class Account < ApplicationRecord
   has_many :account_memberships
   has_many :users, through: :account_memberships
 
+  validates :name, presence: true
+  validates :domain, presence: true
+  validates :mrr, presence: true
+
   # Get all the votes that an account's users have voted for a given post
   def votes_for(post)
     users.map { |user| user.votes.where(post: post) }.flatten.uniq

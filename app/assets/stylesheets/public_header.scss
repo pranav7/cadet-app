@@ -26,6 +26,16 @@
     }
   }
 
+  a.link-item {
+    color: $darker;
+    font-weight: 500;
+    transition: 0.15s ease;
+
+    &:hover {
+      color: $black;
+    }
+  }
+
   .c-profile-menu {
     & > .menu {
       padding-bottom: $base-size;

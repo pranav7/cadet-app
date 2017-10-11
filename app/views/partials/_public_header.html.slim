@@ -28,7 +28,7 @@
                 | Logout
 
         - else
-          = link_to "Login", new_user_session_url(subdomain: "app")
+          = link_to "Login/Signup", new_user_session_url(subdomain: "app"), class: "link-item"
 
 coffee:
   $(".ui.dropdown").dropdown({

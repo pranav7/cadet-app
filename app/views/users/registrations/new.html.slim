@@ -28,11 +28,11 @@
         = form.input :password, label: false, placeholder: "Password"
         = form.input :job_title, label: false, placeholder: "Job Title (optional)"
 
-        = form.button :submit, "Sign up", class: "ui fluid button"
+        = form.button :submit, "Sign up", class: "ui basic fluid button"
         .ui.horizontal.divider or
 
         = link_to user_google_oauth2_omniauth_authorize_path,
-          class: "ui red fluid button" do
+          class: "ui google fluid button" do
           i.google.icon
           | Sign up with Google
     = render "users/shared/links"

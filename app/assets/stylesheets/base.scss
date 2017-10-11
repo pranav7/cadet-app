@@ -126,6 +126,15 @@ body {
     box-shadow: none;
   }
 }
+
+.ui.google.button {
+  background-color: $google;
+  color: $white;
+
+  &:hover {
+    background-color: darken($google, 3)
+  }
+}
 // End
 // Semantic UI Overrides
 

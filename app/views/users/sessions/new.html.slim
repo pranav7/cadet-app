@@ -16,12 +16,12 @@
         = f.input :remember_me,
           wrapper: :ui_checkbox,
           as: :boolean if devise_mapping.rememberable?
-        = f.button :submit, "Log in", class: "ui fluid button"
+        = f.button :submit, "Log in", class: "ui basic fluid button"
 
         .ui.horizontal.divider or
 
         = link_to user_google_oauth2_omniauth_authorize_path,
-          class: "ui red fluid button" do
+          class: "ui google fluid button" do
           i.google.icon
           | Log in with Google
     = render "users/shared/links"

@@ -38,6 +38,13 @@ class Admin::AccountsController < Admin::AdminController
     end
   end
 
+  def destroy
+    @account = current_company.accounts.find(params[:id])
+    @account.destroy!
+    flash[:success] = "Account deleted!"
+    redirect_to admin_accounts_path
+  end
+
   private
 
   def account_params

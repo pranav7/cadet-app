@@ -55,7 +55,9 @@
           .account-info
             a.c.underlined.link href=edit_admin_account_path(@account, request.query_parameters)
               | Edit
-
+            | &nbsp;
+            | &nbsp;
+            = link_to "Delete", admin_account_path(@account), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
         .box
           .box-header.c-soft
             .header-text

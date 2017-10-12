@@ -3,9 +3,9 @@ class Post < ApplicationRecord
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
   has_one :content, as: :parent
-  has_many :comments
+  has_many :comments, dependent: :destroy
 
-  has_many :votes
+  has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
   belongs_to :user, optional: true # @todo Remove optional later

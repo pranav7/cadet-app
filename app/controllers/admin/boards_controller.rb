@@ -15,8 +15,24 @@ class Admin::BoardsController < Admin::AdminController
     end
   end
 
+  def edit
+    @board = current_company.boards.friendly.find(params[:id])
+  end
+
+  def update
+    @board = current_company.boards.friendly.find(params[:id])
+
+    if @board.update_attributes(board_params)
+      flash[:success] = "Settings saved"
+      redirect_to edit_admin_board_path(@board)
+    else
+      render action: :edit
+    end
+  end
+
   def show
     @board = current_company.boards.friendly.find(params[:id])
+
     if @board.posts.blank?
       @post = @board.posts.new
       @post.build_content
@@ -28,6 +44,14 @@ class Admin::BoardsController < Admin::AdminController
   def index
     @boards = current_company.boards
     @board = current_company.boards.new
+  end
+
+  def destroy
+    @board = current_company.boards.friendly.find(params[:id])
+    @board.destroy!
+
+    flash[:success] = "Board and all it's posts were deleted"
+    redirect_to admin_boards_path
   end
 
   private

@@ -3,7 +3,7 @@ class Board < ApplicationRecord
   friendly_id :name, use: [:scoped, :slugged, :history], scope: :company
 
   belongs_to :company
-  has_many :posts
+  has_many :posts, dependent: :destroy
 
   validates :slug, presence: true, uniqueness: { scope: :company }
   validates :name, uniqueness: { case_sensitive: false, scope: :company }

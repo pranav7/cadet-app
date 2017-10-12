@@ -1,0 +1,18 @@
+.c-full-pane
+  .ui.grid
+    .row
+      .twelve.wide.column
+        h1.heading
+          | Board Settings
+    .row
+      .five.wide.column
+        .box
+          = simple_form_for @board, url: admin_board_path(@board) do |form|
+            = form.input :name, label: false, placeholder: "Board Title"
+            = form.input :description, label: false, placeholder: "Board Description"
+            .ui.middle.aligned.two.column.grid
+              .left.aligned.column
+                = form.submit "Save", class: "ui button"
+              .right.aligned.column
+                = link_to "Delete", admin_board_path(@board), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
+

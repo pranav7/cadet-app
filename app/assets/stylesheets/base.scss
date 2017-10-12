@@ -66,12 +66,16 @@ a.c.link {
   font-weight: 500;
   transition: 0.15s ease;
 
-  &:hover {
-    color: $darkest;
-  }
-
   &.underlined {
     text-decoration: underline;
+  }
+
+  &.light {
+    color: $light;
+  }
+
+  &:hover {
+    color: $darkest;
   }
 }
 // End

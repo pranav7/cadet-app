@@ -10,8 +10,8 @@ class Admin::BoardsController < Admin::AdminController
       flash[:success] = "Board created!"
       redirect_to admin_boards_path
     else
-      flash[:error] = "There was an error while creating your board"
-      render action: :new
+      @boards = current_company.boards
+      render action: :index
     end
   end
 

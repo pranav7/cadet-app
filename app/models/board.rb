@@ -6,6 +6,7 @@ class Board < ApplicationRecord
   has_many :posts
 
   validates :slug, presence: true, uniqueness: { scope: :company }
+  validates :name, uniqueness: { case_sensitive: false, scope: :company }
 
   alias_attribute :title, :name
 end

@@ -1,2 +1,10 @@
 body.public {
+  .public-logo-container {
+    padding: 5rem 0 2rem 0;
+  }
+
+  h2 {
+    font-weight: 600;
+    color: $darkest;
+  }
 }

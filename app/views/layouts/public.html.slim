@@ -9,6 +9,9 @@ html
   body.public class="#{controller_name} #{action_name}"
     = render partial: "partials/flash_messages"
     .ui.container
+      .ui.centered.grid
+        .public-logo-container
+          = image_tag "cadet-logo.png", height: 25
       = yield
 
   = render partial: "partials/external_js"

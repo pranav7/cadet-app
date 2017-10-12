@@ -9,7 +9,7 @@
     .box
       .box-header
         .header-text
-          i.square.outline.icon
+          i.clone.icon
           | Add Board
       = simple_form_for @board, url: admin_boards_path do |form|
         = form.input :name, label: false, placeholder: "Board Title"

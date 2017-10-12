@@ -37,9 +37,9 @@ jobs:
             - vendor/bundle
 
       - run:
-        name: Copy Config Files
-        command: |
-          config/cadet_config.example.yml config/cadet_config.yml
+          name: Copy Config Files
+          command: |
+            config/cadet_config.example.yml config/cadet_config.yml
 
       - run:
           name: install dependencies

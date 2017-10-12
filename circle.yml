@@ -1,0 +1,3 @@
+checkout:
+  post:
+    - cp config/cadet_config.example.yml config/cadet_config.yml

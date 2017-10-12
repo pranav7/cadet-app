@@ -1,8 +1,9 @@
 body.admin {
   h1.heading {
-    font-weight: 500;
+    font-weight: 600;
     color: $darkest;
     border-bottom: 1px solid $lighter;
+    font-size: 24px;
   }
 
   .invite-link {

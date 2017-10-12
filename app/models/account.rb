@@ -13,8 +13,12 @@ class Account < ApplicationRecord
     users.map { |user| user.votes.where(post: post) }.flatten.uniq
   end
 
-  # Get all the posts that an account's users have voted on
-  def posts
-    users.collect { |user| user.voted_posts }.flatten.uniq
+  # Get all the posts that an account's users have upvoted
+  def posts(board = nil)
+    return [] unless board
+
+    users.collect do |user|
+      user.voted_posts.where(board: board)
+    end.flatten.uniq
   end
 end

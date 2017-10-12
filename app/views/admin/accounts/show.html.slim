@@ -11,13 +11,25 @@
     .row
       .ten.wide.column
         .box
-          - if @posts.blank?
-            h4.soft
-              | The users of #{@account.name} have not yet participated in any posts.
+          = form_tag admin_account_path(@account), method: :get
+            select.ui.dropdown name="board" onchange="this.form.submit()"
+              option value="" Select Board
+              - current_company.boards.each do |board|
+                option value=board.slug selected=(true if board == @board)
+                 = board.name
+
+          - if @board
+            - if @posts.blank?
+              h4.soft
+                | The users of #{@account.name} have not yet participated in any posts.
+            - else
+              - @posts.each do |post|
+                = render partial: "posts/list",
+                  locals: { post: post, link_to: :admin, account: @account }
           - else
-            - @posts.each do |post|
-              = render partial: "posts/list",
-                locals: { post: post, link_to: :admin, account: @account }
+            h4.soft
+              | Please select a board
+
 
       .five.wide.column
         .box

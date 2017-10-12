@@ -8,7 +8,8 @@ class Admin::AccountsController < Admin::AdminController
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
     @customers = current_company.customers
-    @posts = @account.posts
+    @board = current_company.boards.friendly.find(params[:board]) if params[:board]
+    @posts = @account.posts(@board)
   end
 
   def create

@@ -36,25 +36,9 @@
           .box-header.c-soft
             .header-text
               i.address.card.icon
-              | About #{@account.name}
-          .account-info
-            .info-label.c-soft Domain
-            .info-value= @account.domain
-          .account-info
-            .info-label.c-soft MRR
-            .info-value $#{@account.mrr}
-          .account-info
-            .info-label.c-soft Paying
-            .info-value= @account.paying
-          .account-info
-            .info-label.c-soft Churned
-            .info-value= @account.churned
-          .account-info
-            .info-label.c-soft Since
-            .info-value= render_time(@account.created_at)
-          .account-info
-            a.c.underlined.link href=edit_admin_account_path(@account, request.query_parameters)
-              | Edit
+              | Edit #{@account.name}
+          .vertical.padded
+            = render partial: "form"
 
         .box
           .box-header.c-soft
@@ -88,4 +72,3 @@ coffee:
   $('.ui.dropdown').dropdown({
     allowMultiple: true
   })
-

@@ -24,7 +24,7 @@ Rails.application.routes.draw do
       resources :posts, only: [:index, :show, :update]
     end
 
-    resources :accounts, only: [:index, :show, :create] do
+    resources :accounts do
       resource :account_memberships, only: [:create, :destroy]
     end
   end

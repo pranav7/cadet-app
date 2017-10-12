@@ -1,4 +1,6 @@
-= simple_form_for @account, url: admin_accounts_path do |form|
+- url = @account.new_record? ? admin_accounts_path : admin_account_path(@account, request.query_parameters)
+
+= simple_form_for @account, url: url do |form|
   = form.input :name, label: false, placeholder: "Company Name. Ex: Acme Corp"
   = form.input :domain, label: false, placeholder: "Domain. Ex: acmecorp.com"
   = form.input :paying, wrapper: :ui_checkbox

@@ -19,6 +19,25 @@ class Admin::AccountsController < Admin::AdminController
     redirect_to admin_accounts_path
   end
 
+  def edit
+    @account = current_company.accounts.find(params[:id])
+    @account_membership = @account.account_memberships.new
+    @customers = current_company.customers
+    @board = current_company.boards.friendly.find(params[:board]) if params[:board]
+    @posts = @account.posts(@board)
+  end
+
+  def update
+    @account = current_company.accounts.find(params[:id])
+
+    if @account.update_attributes(account_params)
+      flash[:success] = "Account updated!"
+      redirect_to admin_account_path(@account, request.query_parameters)
+    else
+      render :edit
+    end
+  end
+
   private
 
   def account_params

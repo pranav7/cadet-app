@@ -60,6 +60,20 @@ body {
     color: $darker;
   }
 }
+
+a.c.link {
+  color: $darker;
+  font-weight: 500;
+  transition: 0.15s ease;
+
+  &:hover {
+    color: $darkest;
+  }
+
+  &.underlined {
+    text-decoration: underline;
+  }
+}
 // End
 // Utility Classes
 

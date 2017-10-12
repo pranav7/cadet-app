@@ -5,7 +5,7 @@
         h1.heading Customers
     .row
       .ten.wide.column
-        table.ui.table#accounts-table
+        table.ui.selectable.table#accounts-table
           thead
             tr
               th Name
@@ -15,11 +15,9 @@
               th MRR
           - @accounts.each do |account|
             - next if account.new_record?
-            tr
+            tr.selectable-row data-href=admin_account_path(account)
               td
-                h4
-                  a href=admin_account_path(account)
-                    = account.name
+                h4= account.name
               td= account.domain
               td= account.paying
               td= account.churned
@@ -43,3 +41,6 @@
 coffee:
   $(document).on "turbolinks:load", ->
     new Tablesort(document.getElementById('accounts-table'))
+    
+    $(".selectable-row").click (e) ->
+      window.location = $(@).data("href")

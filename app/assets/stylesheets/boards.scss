@@ -14,7 +14,6 @@ body.boards {
       transition: 0.5s ease;
       display: flex;
       flex-direction: column;
-      justify-content: space-between;
 
       &:hover {
         box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.1);
@@ -27,6 +26,40 @@ body.boards {
 
       .meta {
         margin-top: $double-base-size;
+      }
+    }
+  }
+}
+
+body.admin.boards {
+  .boards-list {
+    display: flex;
+    flex-wrap: wrap;
+
+    .board {
+      width: 235px;
+      min-height: 295px;
+      margin: 0 20px 20px 0;
+      padding: 24px;
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+
+      border-top: 4px solid $lighter;
+
+      a.board-name {
+        color: $darkest;
+        font-weight: 600;
+        font-size: 18px;
+
+        &:hover {
+          text-decoration: underline;
+        }
+      }
+
+      .board-description {
+        margin-top: 8px;
       }
     }
   }

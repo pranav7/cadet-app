@@ -73,6 +73,10 @@ a.c.link {
   &.underlined {
     text-decoration: underline;
   }
+
+  &.light {
+    color: $dark;
+  }
 }
 // End
 // Utility Classes

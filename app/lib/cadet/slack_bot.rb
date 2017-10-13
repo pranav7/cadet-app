@@ -26,15 +26,15 @@ module Cadet
         when /^bot how many companies/i then
           client.message channel: data.channel, text: "The current number of companies are #{Company.count}"
         when /^bot how many boards/i then
-          client.message channel: data.channel, text: "The current number of companies are #{Board.count}"
+          client.message channel: data.channel, text: "#{Board.count} boards"
         when /^bot how many posts/i then
-          client.message channel: data.channel, text: "The current number of companies are #{Post.count}"
+          client.message channel: data.channel, text: "#{Post.count} posts"
         when /^bot how many votes/i then
-          client.message channel: data.channel, text: "The current number of companies are #{Vote.count}"
+          client.message channel: data.channel, text: "#{Vote.count} votes"
         when /^bot how many comments/i then
-          client.message channel: data.channel, text: "The current number of companies are #{Comment.count}"
+          client.message channel: data.channel, text: "#{Comment.count} comments"
         when /^bot how many users/ then
-          client.message channel: data.channel, text: "The current number of companies are #{User.count}"
+          client.message channel: data.channel, text: "#{Users.count} users"
         when /^bot print daily report/i then
           client.message channel: data.channel, text: daily_stats_report
         when /^bot/ then

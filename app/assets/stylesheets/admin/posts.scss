@@ -1,4 +1,15 @@
 body.admin.posts {
+  .top-list-bar {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 1rem;
+
+    #create-post-btn {
+      cursor: pointer;
+    }
+  }
+
   .top-action-bar {
     .ui.c.dropdown {
       background: none;

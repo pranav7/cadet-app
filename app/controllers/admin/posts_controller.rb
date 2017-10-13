@@ -3,8 +3,13 @@ class Admin::PostsController < Admin::AdminController
     @board = current_company.boards.friendly.find(params[:board_id])
     @posts = @board.posts.order(created_at: :desc).includes(:comments)
     @post = Post.friendly.find(params[:id]) || @posts.first || nil
+
+    @new_post = @board.posts.new
+    @new_post.build_content
+
     @comment = @post.comments.new
     @comment.build_content
+
     @accounts = @post.accounts
   end
 

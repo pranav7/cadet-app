@@ -153,6 +153,15 @@ a.c.link {
     background-color: darken($google, 3)
   }
 }
+
+.primary.icon.button {
+  color: $secondary-blue;
+  transition: 0.2s ease;
+
+  &:hover {
+    color: darken($secondary-blue, 7) !important;
+  }
+}
 // End
 // Semantic UI Overrides
 

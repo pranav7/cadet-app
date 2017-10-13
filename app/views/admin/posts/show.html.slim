@@ -1,4 +1,13 @@
 .c-left-pane
+  .top-list-bar
+    .c-breadcrumb
+      .section= link_to "Boards", boards_path
+      .divider
+          | /
+      .section.active= link_to @board.name, board_path(@board)
+    #create-post-btn
+      i.add.square.primary.big.icon.button
+  .post-list-container
   - @posts.each do |post|
     a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
       .post-title= post.title
@@ -67,7 +76,16 @@
           span.ui.small.basic.label
             | $#{account.mrr}/mo
 
+.ui.basic.tiny.modal#create-post-modal
+  i.close.icon
+  .content
+    = render partial: "posts/form",
+      locals: { board: @board, post: @new_post, after_create_path: :admin }
+
 coffee:
   $('.ui.dropdown').dropdown({
     action: "select"
   })
+
+  $("#create-post-btn").click ->
+    $("#create-post-modal").modal('show')

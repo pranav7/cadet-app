@@ -78,13 +78,11 @@
             | $#{account.mrr}/mo
 
 .ui.basic.tiny.modal#create-post-modal
-  i.close.icon
   .content
     = render partial: "posts/form",
       locals: { board: @board, post: @new_post, after_create_path: :admin }
 
 .ui.basic.tiny.modal#edit-post-modal
-  i.close.icon
   .content
     = render partial: "posts/form",
       locals: { board: @board, post: @post, after_create_path: :admin }

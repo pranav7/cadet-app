@@ -1,4 +1,18 @@
 body.admin.posts {
+  .post-list-container {
+    max-height: 94vh;
+    height: 94vh;
+    overflow: hidden;
+
+    &:hover {
+      overflow: auto;
+    }
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
   .admin-post-list-item {
     padding: ($base-size * 1.5);
     border-bottom: 1px solid $lighter;

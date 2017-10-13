@@ -1,34 +1,44 @@
 .c-left-pane
-  - @posts.each do |post|
-    a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
-      .post-title= post.title
-      .post-summary.c-soft= post.content.body.truncate(140)
-      .post-meta.c-soft
-        span
-          = render_time(post.created_at, format: :short)
-        span &nbsp;
-        span.ui.basic.label
-          | ##{post.status}
-        span &nbsp;
-        span.ui.basic.label
-          i.caret.up.icon
-          | #{post.votes.count}
-        span &nbsp;
-        span.ui.basic.label
-          i.comment.outline.icon
-          = post.comments.count
+  .top-list-bar
+    .c-breadcrumb
+      .section= link_to "Boards", admin_boards_path
+      .divider
+          | /
+      .section.active= link_to @board.name, admin_board_path(@board)
+    #create-post-btn
+      i.add.square.primary.big.icon.button
+  .post-list-container
+    - @posts.each do |post|
+      a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
+        .post-title= post.title
+        .post-summary.c-soft= post.content.body.truncate(140)
+        .post-meta.c-soft
+          span
+            = render_time(post.created_at, format: :short)
+          span &nbsp;
+          span.ui.basic.label
+            | ##{post.status}
+          span &nbsp;
+          span.ui.basic.label
+            i.caret.up.icon
+            | #{post.votes.count}
+          span &nbsp;
+          span.ui.basic.label
+            i.comment.outline.icon
+            = post.comments.count
 
 .c-main-pane
   .top-action-bar
-    .ui.grid
-      .three.wide.column
-        // Change Status
-        = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
-          select.ui.c.dropdown name="post[status]" onchange="this.form.submit()"
-            option value="" Status
-            - Post.statuses.keys.each do |key|
-              option value=key
-                | ##{key}
+    .item
+      // Change Status
+      = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
+        select.ui.c.dropdown name="post[status]" onchange="this.form.submit()"
+          option value="" Status
+          - Post.statuses.keys.each do |key|
+            option value=key
+              | ##{key}
+    .item
+      a#edit-post-btn Edit
 
   .post-header.table--object
     = render partial: "posts/vote", locals: { post: @post }
@@ -67,7 +77,25 @@
           span.ui.small.basic.label
             | $#{account.mrr}/mo
 
+.ui.basic.tiny.modal#create-post-modal
+  i.close.icon
+  .content
+    = render partial: "posts/form",
+      locals: { board: @board, post: @new_post, after_create_path: :admin }
+
+.ui.basic.tiny.modal#edit-post-modal
+  i.close.icon
+  .content
+    = render partial: "posts/form",
+      locals: { board: @board, post: @post, after_create_path: :admin }
+
 coffee:
   $('.ui.dropdown').dropdown({
     action: "select"
   })
+
+  $("#create-post-btn").click ->
+    $("#create-post-modal").modal('show')
+
+  $("#edit-post-btn").click ->
+    $("#edit-post-modal").modal('show')

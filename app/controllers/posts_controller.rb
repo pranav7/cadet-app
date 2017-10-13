@@ -27,7 +27,7 @@ class PostsController < ApplicationController
     end
 
     if params[:after_create_path] == "admin"
-      redirect_to admin_board_path(board)
+      redirect_to admin_board_post_path(board, post)
     else
       redirect_to board_path(board)
     end

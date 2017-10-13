@@ -2,6 +2,8 @@ class Post < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
+  default_scope { order(created_at: :desc) }
+
   has_one :content, as: :parent
   has_many :comments, dependent: :destroy
 

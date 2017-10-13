@@ -74,7 +74,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def notify_slack  
     message = "*#{@user.name} (#{@user.email}) signed up!*"
     message << "\n"
-    message << "*Company*: #{@user.companies.first.name} - http://#{@user.companies.first.subdomain}.getcadet.com/"
+    message << "_#{@user.job_title}_"
+    message << "\n"
+    message << "#{@user.companies.first.name} - http://#{@user.companies.first.subdomain}.getcadet.com/"
 
     client = Slack::Web::Client.new
     client.chat_postMessage(channel: '#main', text: message, as_user: true)

@@ -11,15 +11,22 @@ body.admin.posts {
   }
 
   .top-action-bar {
+    display: flex;
+    border-bottom: 1px solid $lighter;
+    margin-bottom: $base-size;
+
     .ui.c.dropdown {
       background: none;
       border: none;
-      min-width: 8em;
+      min-width: 6 * $base-size;
+      min-height: 2 * $base-size;
       box-shadow: none;
+      padding: 0;
 
       .menu {
         border-top-width: 1px !important;
         border-color: $lighter;
+        min-width: 8rem;
       }
 
       & > .default.text {
@@ -29,10 +36,16 @@ body.admin.posts {
 
       & > .dropdown.icon {
         color: $dark;
-        right: 2em;
+        left: 48px;
         font-size: 16px;
-        top: 6px;
+        top: -4px;
       }
+    }
+
+    .item a {
+      color: $dark; 
+      font-weight: bold;
+      cursor: pointer;
     }
   }
 }

@@ -8,8 +8,8 @@ Thread.new do
   begin
     Cadet::SlackBot.new.execute
   rescue Exception => e
-    STDERR.puts "ERROR: #{e}"
-    STDERR.puts e.backtrace
+    Rails.logger.warning "ERROR: #{e}"
+    Rails.logger.warning e.backtrace
     raise e
   end
 end

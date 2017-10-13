@@ -78,10 +78,10 @@ module Cadet
         message << "*#{company.name} (http://#{company.subdomain}.getcadet.com/)*"
         message << "\n*Boards*: #{company.boards.count}"
         posts = company.boards.collect(&:posts).flatten
-        messages << "\n*Posts*: #{posts.count}"
-        messages << "\n*Votes*: #{posts.collect(&:votes).flatten.count}"
-        messages << "\n*Comments*: #{posts.collect(&:comments).flatten.count}"
-        messages << "\n------\n"
+        message << "\n*Posts*: #{posts.count}"
+        message << "\n*Votes*: #{posts.collect(&:votes).flatten.count}"
+        message << "\n*Comments*: #{posts.collect(&:comments).flatten.count}"
+        message << "\n------\n"
       end
 
       message

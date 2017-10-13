@@ -19,24 +19,25 @@ module Cadet
       client.on :message do |data|
         client.typing channel: data.channel
 
-        case data.text
+        message = Slack::Messages::Formatting.unescape(data.text)
+        case message
         when 'bot hi' then
           client.message channel: data.channel, text: "Hi <@#{data.user}>!"
-        when /^bot how many companies/ then
+        when /^@cadetbot how many companies/i then
           client.message channel: data.channel, text: "The current number of companies are #{Company.count}"
-        when /^bot how many boards/ then
+        when /^@cadetbot how many boards/i then
           client.message channel: data.channel, text: "The current number of companies are #{Board.count}"
-        when /^bot how many posts/ then
+        when /^@cadetbot how many posts/i then
           client.message channel: data.channel, text: "The current number of companies are #{Post.count}"
-        when /^bot how many votes/ then
+        when /^@cadetbot how many votes/i then
           client.message channel: data.channel, text: "The current number of companies are #{Vote.count}"
-        when /^bot how many comments/ then
+        when /^@cadetbot how many comments/i then
           client.message channel: data.channel, text: "The current number of companies are #{Comment.count}"
-        when /^bot how many users/ then
+        when /^@cadetbot how many users/ then
           client.message channel: data.channel, text: "The current number of companies are #{User.count}"
-        when /^bot print daily report/ then
+        when /^@cadetbot print daily report/i then
           client.message channel: data.channel, text: daily_stats_report
-        when /^bot/ then
+        when /^@bot/ then
           client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
         end
       end

@@ -73,8 +73,10 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   def notify_slack  
     message = "*#{@user.name} (#{@user.email}) signed up!*"
-    message << "\n"
-    message << "_#{@user.job_title}_"
+    if @user.job_title
+      message << "\n"
+      message << "_#{@user.job_title}_"
+    end
     message << "\n"
     message << "#{@user.companies.first.name} - http://#{@user.companies.first.subdomain}.getcadet.com/"
 

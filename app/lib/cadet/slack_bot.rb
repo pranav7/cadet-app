@@ -77,11 +77,11 @@ module Cadet
       Company.all.each do |company|
         message << "*#{company.name} (http://#{company.subdomain}.getcadet.com/)*"
         message << "\n```\n"
-        message << "*Boards*: #{company.boards.count}"
+        message << "Boards: #{company.boards.count}"
         posts = company.boards.collect(&:posts).flatten
-        message << ", *Posts*: #{posts.count}"
-        message << ", *Votes*: #{posts.collect(&:votes).flatten.count}"
-        message << ", *Comments*: #{posts.collect(&:comments).flatten.count}"
+        message << ", Posts: #{posts.count}"
+        message << ", Votes: #{posts.collect(&:votes).flatten.count}"
+        message << ", Comments: #{posts.collect(&:comments).flatten.count}"
         message << "\n```\n"
       end
 

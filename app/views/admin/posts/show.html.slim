@@ -1,10 +1,10 @@
 .c-left-pane
   .top-list-bar
     .c-breadcrumb
-      .section= link_to "Boards", boards_path
+      .section= link_to "Boards", admin_boards_path
       .divider
           | /
-      .section.active= link_to @board.name, board_path(@board)
+      .section.active= link_to @board.name, admin_board_path(@board)
     #create-post-btn
       i.add.square.primary.big.icon.button
   .post-list-container

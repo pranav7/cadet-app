@@ -24,6 +24,7 @@ gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'friendly_id', '~> 5.1.0'
 gem 'slack-ruby-client'
 gem 'eventmachine'
+gem 'faye-websocket'
 
 # Until we update to rails 5.2
 gem 'activestorage'

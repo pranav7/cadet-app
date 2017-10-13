@@ -34,6 +34,8 @@ module Cadet
           client.message channel: data.channel, text: "The current number of companies are #{Comment.count}"
         when /^bot how many users/ then
           client.message channel: data.channel, text: "The current number of companies are #{User.count}"
+        when /^bot print daily report/ then
+          client.message channel: data.channel, text: daily_stats_report
         when /^bot/ then
           client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
         end
@@ -60,6 +62,29 @@ module Cadet
 
     def start!
       client.start!
+    end
+
+    private
+
+    def daily_stats_report
+      message = "*Companies*: #{Company.count}"
+      message << "\n*Boards*: #{Board.count}"
+      message << "\n*Posts*: #{Post.count}"
+      message << "\n*Votes*: #{Vote.count}"
+      message << "\n*Comments*: #{Comment.count}"
+
+      message << "\n"
+      Company.all.each do |company|
+        message << "*#{company.name} (http://#{company.subdomain}.getcadet.com/)*"
+        message << "\n*Boards*: #{company.boards.count}"
+        posts = company.boards.collect(&:posts).flatten
+        messages << "\n*Posts*: #{posts.count}"
+        messages << "\n*Votes*: #{posts.collect(&:votes).flatten.count}"
+        messages << "\n*Comments*: #{posts.collect(&:comments).flatten.count}"
+        messages << "\n------\n"
+      end
+
+      message
     end
   end
 end

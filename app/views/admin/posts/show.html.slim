@@ -8,24 +8,24 @@
     #create-post-btn
       i.add.square.primary.big.icon.button
   .post-list-container
-  - @posts.each do |post|
-    a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
-      .post-title= post.title
-      .post-summary.c-soft= post.content.body.truncate(140)
-      .post-meta.c-soft
-        span
-          = render_time(post.created_at, format: :short)
-        span &nbsp;
-        span.ui.basic.label
-          | ##{post.status}
-        span &nbsp;
-        span.ui.basic.label
-          i.caret.up.icon
-          | #{post.votes.count}
-        span &nbsp;
-        span.ui.basic.label
-          i.comment.outline.icon
-          = post.comments.count
+    - @posts.each do |post|
+      a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
+        .post-title= post.title
+        .post-summary.c-soft= post.content.body.truncate(140)
+        .post-meta.c-soft
+          span
+            = render_time(post.created_at, format: :short)
+          span &nbsp;
+          span.ui.basic.label
+            | ##{post.status}
+          span &nbsp;
+          span.ui.basic.label
+            i.caret.up.icon
+            | #{post.votes.count}
+          span &nbsp;
+          span.ui.basic.label
+            i.comment.outline.icon
+            = post.comments.count
 
 .c-main-pane
   .top-action-bar

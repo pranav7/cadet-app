@@ -75,35 +75,6 @@ body.admin {
     padding: $base-size $half-base-size;
   }
 
-  .admin-post-list-item {
-    padding: ($base-size * 1.5);
-    border-bottom: 1px solid $lighter;
-    display: block;
-
-    &:hover {
-      background: $lightest;
-    }
-
-    &.selected {
-      background: $lightest; 
-    }
-
-    .post-title {
-      font-size: 18px;
-      line-height: 1.3;
-      font-weight: 500;
-      color: $black;
-    }
-
-    .post-summary {
-      margin-top: $half-base-size;
-    }
-
-    .post-meta {
-      margin-top: $base-size;
-    }
-  }
-
   .c-profile-menu {
     & > .menu {
       padding-bottom: $base-size;

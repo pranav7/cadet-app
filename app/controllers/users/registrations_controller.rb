@@ -4,6 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
   after_action :assign_admin_role, only: [:create]
+  after_action :notify_slack, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -67,6 +68,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # If you have extra params to permit, append them to the sanitizer.
   def configure_account_update_params
     devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, memberships_attributes: [:role, company_attributes: [:name, :subdomain]]])
+  end
+
+  def notify_slack  
+    message = "*#{@user.name} (#{@user.email}) signed up!*"
+    message << "\n"
+    message << "*Company*: #{@user.companies.first.name} - http://#{@user.companies.first.subdomain}.getcadet.com/"
+
+    client = Slack::Web::Client.new
+    client.chat_postMessage(channel: '#main', text: message, as_user: true)
   end
 
   # The path used after sign up.

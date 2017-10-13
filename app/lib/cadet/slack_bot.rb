@@ -23,21 +23,21 @@ module Cadet
         case message
         when 'bot hi' then
           client.message channel: data.channel, text: "Hi <@#{data.user}>!"
-        when /^@cadetbot how many companies/i then
+        when /^bot how many companies/i then
           client.message channel: data.channel, text: "The current number of companies are #{Company.count}"
-        when /^@cadetbot how many boards/i then
+        when /^bot how many boards/i then
           client.message channel: data.channel, text: "The current number of companies are #{Board.count}"
-        when /^@cadetbot how many posts/i then
+        when /^bot how many posts/i then
           client.message channel: data.channel, text: "The current number of companies are #{Post.count}"
-        when /^@cadetbot how many votes/i then
+        when /^bot how many votes/i then
           client.message channel: data.channel, text: "The current number of companies are #{Vote.count}"
-        when /^@cadetbot how many comments/i then
+        when /^bot how many comments/i then
           client.message channel: data.channel, text: "The current number of companies are #{Comment.count}"
-        when /^@cadetbot how many users/ then
+        when /^bot how many users/ then
           client.message channel: data.channel, text: "The current number of companies are #{User.count}"
-        when /^@cadetbot print daily report/i then
+        when /^bot print daily report/i then
           client.message channel: data.channel, text: daily_stats_report
-        when /^@bot/ then
+        when /^bot/ then
           client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
         end
       end

@@ -61,7 +61,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def configure_sign_up_params
     devise_parameter_sanitizer.permit(:sign_up,
                                       keys: [:first_name,
-                                             :last_name
+                                             :last_name,
                                              :job_title,
                                              memberships_attributes: [ company_attributes: [:name, :subdomain]]])
   end

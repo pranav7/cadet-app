@@ -72,6 +72,7 @@
                 .menu
                   - @customers.each do |customer|
                     - next if @account.users.include?(customer)
+                    - next unless customer
                     .item data-value=customer.id
                       strong= customer.name
                       span.c-soft

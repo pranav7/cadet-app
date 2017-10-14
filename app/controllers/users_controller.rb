@@ -6,8 +6,12 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
 
-    if @user.save
+    @user.transaction do
+      @user.save
       Membership.create(user: @user, company: current_company)
+    end
+
+    if @user.errors.empty?
       sign_in_and_redirect @user
     else
       render action: :new

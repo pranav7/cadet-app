@@ -5,7 +5,7 @@
   = form.input :domain, label: false, placeholder: "Domain. Ex: acmecorp.com"
   = form.input :paying, wrapper: :ui_checkbox
   = form.input :churned, wrapper: :ui_checkbox
-  = form.input :mrr, label: false, wrapper: :ui_right_labled_input do
+  = form.input :mrr, label: false, wrapper: :ui_left_labled_input do
     .ui.custom.basic.label $
     = form.input_field :mrr, placeholder: "Monthly Recurring Revenue"
   = form.submit "Save", class: "ui small button"

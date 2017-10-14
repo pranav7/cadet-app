@@ -304,24 +304,36 @@ a.vote-button {
 // Start
 // Status Colors
 .status {
+  margin-right: 10px;
+  position: relative;
+  color: #fff;
+  border-radius: 50px;
+  padding: 2px 8px;
+  font-size: 12px;
+  font-weight: 500;
+  height: 20px;
+  line-height: 19px;
+
   &.released {
-    color: $green-light;
+    background: $green-light;
   }
 
   &.developing {
-    color: $secondary-blue;
+    background: $secondary-blue;
   }
 
   &.planned {
-    color: $darkest;
+    background: $purple;
   }
 
   &.closed {
-    color: $good-red;
+    background: $good-red;
   }
 
   &.open {
-    color: $dark;
+    color: $darker;
+    border: 1px solid $light;
+    background: $white;
   }
 }
 // End

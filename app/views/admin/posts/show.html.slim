@@ -16,7 +16,7 @@
           span
             = render_time(post.created_at, format: :short)
           span &nbsp;
-          span.ui.basic.label
+          span.status class=post.status
             | ##{post.status}
           span &nbsp;
           span.ui.basic.label
@@ -44,7 +44,7 @@
     = render partial: "posts/vote", locals: { post: @post }
     h1.post-title= @post.title
     .post-header-info
-      .ui.basic.label ##{@post.status}
+      span.status class=@post.status ##{@post.status}
   .post-content.vertical.padded
     = render partial: "partials/comment", locals: { resource: @post }
   .create-comment

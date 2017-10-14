@@ -17,3 +17,10 @@ html
 
   = render partial: "partials/external_js"
   = render partial: "partials/live_chat"
+
+  javascript:
+    var HW_config = {
+      selector: "#changelog", // CSS selector where to inject the badge
+      account:  "7NgqBJ"
+    }
+  script async=true src="//cdn.headwayapp.co/widget.js"

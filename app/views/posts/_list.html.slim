@@ -6,7 +6,7 @@
         h3= post.title
       .post-summary.soft= post.content.body.truncate(140)
       .post-info.soft
-        strong ##{post.status}
+        strong.status class=post.status ##{post.status}
         span  #{render_time(post.created_at, format: :short)} by #{post.created_by.name}
     .comment-count.soft.float.right
       i.comment.outline.icon

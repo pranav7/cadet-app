@@ -16,7 +16,7 @@
           = render partial: "posts/vote", locals: { post: @post }
           h1.post-title= @post.title
           .post-header-info
-            .ui.basic.label ##{@post.status}
+            strong.status class=@post.status ##{@post.status}
         // Post Body
         = render partial: "partials/comment", locals: { resource: @post }
 

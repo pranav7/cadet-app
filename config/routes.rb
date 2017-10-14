@@ -27,7 +27,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get :invite, to: "users#new"
+  get :join, to: "users#new"
   resource :users, only: [:create]
 
   resources :boards, path: "" do

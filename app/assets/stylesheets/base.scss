@@ -47,6 +47,16 @@ body {
   &.right { float: right; }
 }
 
+.margined {
+  & > .left {
+    margin-left: 8px;
+
+    & > .small {
+      margin-left: 4px;
+    }
+  }
+}
+
 .c-breadcrumb {
   @extend .ui.breadcrumb;
 
@@ -72,6 +82,10 @@ a.c.link {
 
   &.light {
     color: $light;
+  }
+
+  &.thin {
+    font-weight: normal;
   }
 
   &:hover {
@@ -281,4 +295,3 @@ a.vote-button {
 }
 // End
 // Styling for Cadet Power
-

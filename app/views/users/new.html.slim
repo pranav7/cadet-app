@@ -1,15 +1,19 @@
-.ui.grid
-  .six.wide.centered.column
-    .box
-      h4 Signup for Cadet
-      p.soft We use Cadet to gather feature requests and feedback from customers. Signup to contribute.
+.new-user-signup-container
+  .ui.grid
+    .six.wide.centered.column
+      .box
+        h3.heading Signup for Cadet
+        p.soft We use Cadet to gather feature requests and feedback from customers. Signup to contribute.
 
-      = simple_form_for @user do |form|
-        .two.fields
-          = form.input :first_name, label: false, placeholder: "First Name"
-          = form.input :last_name, label: false, placeholder: "Last Name"
-        = form.input :email, label: false, placeholder: "Work Email"
-        = form.input :password, label: false, placeholder: "Password"
-        = form.input :job_title, label: false, placeholder: "Job Title (optional)"
+        = simple_form_for @user do |form|
+          .two.fields
+            = form.input :first_name, label: false, placeholder: "First Name"
+            = form.input :last_name, label: false, placeholder: "Last Name"
+          = form.input :email, label: false, placeholder: "Work Email"
+          = form.input :password, label: false, placeholder: "Password"
+          = form.input :job_title, label: false, placeholder: "Job Title (optional)"
 
-        = form.button :submit, "Sign up", class: "ui fluid button"
+          = form.button :submit, "Sign up", class: "ui fluid primary button"
+      .soft
+        | Already have an account? 
+        a.c.underlined.link href=new_session_url(User, subdomain: "app") Login

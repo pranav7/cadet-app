@@ -82,14 +82,16 @@ RSpec.describe User, type: :model do
   end
   
   describe User, "#voted?" do
-    let(:vote) { create :vote }
+    let(:company) { create :company }
+    let(:user) { create :admin, company: company }
+    let(:vote) { create :vote, user: user }
 
     it "returns true if a user has voted the given post " do
-      expect(vote.user.voted?(vote.post)).to eq(true)
+      expect(user.voted?(vote.post)).to eq(true)
     end
 
     it "returns false if a user has not voted the given post" do
-      user = create :user
+      user = create :admin
       expect(user.voted?(vote.post)).to eq(false)
     end
   end

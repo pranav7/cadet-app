@@ -11,7 +11,7 @@ FactoryGirl.define do
   end
 
   factory :customer, parent: :user do
-    after :create do |user, evaluator|
+    before :create do |user, evaluator|
       if evaluator.company
         create :membership, company: evaluator.company, user: user
       end
@@ -19,9 +19,11 @@ FactoryGirl.define do
   end
 
   factory :admin, parent: :user do
-    after :create do |user, evaluator|
+    before :create do |user, evaluator|
       if evaluator.company
         create :admin_membership, company: evaluator.company, user: user
+      else
+        create :admin_membership, company: (create :company), user: user
       end
     end
   end

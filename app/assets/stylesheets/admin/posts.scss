@@ -39,6 +39,8 @@ body.admin.posts {
 
     .post-meta {
       margin-top: $base-size;
+      display: flex;
+      align-items: center;
     }
   }
 

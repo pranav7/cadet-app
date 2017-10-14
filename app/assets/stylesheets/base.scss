@@ -181,6 +181,10 @@ a.c.link {
     color: darken($secondary-blue, 7) !important;
   }
 }
+
+.ui.label {
+  border-radius: 50px;
+}
 // End
 // Semantic UI Overrides
 
@@ -304,15 +308,14 @@ a.vote-button {
 // Start
 // Status Colors
 .status {
-  margin-right: 10px;
   position: relative;
   color: #fff;
   border-radius: 50px;
   padding: 2px 8px;
   font-size: 12px;
   font-weight: 500;
-  height: 20px;
   line-height: 19px;
+  display: inline-block;
 
   &.released {
     background: $green-light;
@@ -333,7 +336,6 @@ a.vote-button {
   &.open {
     color: $darker;
     border: 1px solid $light;
-    background: $white;
   }
 }
 // End

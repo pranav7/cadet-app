@@ -159,6 +159,11 @@ a.c.link {
   }
 }
 
+.ui.basic.button {
+  font-weight: 600;
+  color: $dark;
+}
+
 .ui.google.button {
   background-color: $google;
   color: $white;

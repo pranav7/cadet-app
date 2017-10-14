@@ -28,10 +28,10 @@
                 | Logout
 
         - else
-          = link_to "Login", new_user_session_url(subdomain: "app"), class: "c thin link"
+          = link_to "Login", new_user_session_url(subdomain: "app"), class: "c link"
           | &nbsp;
           | &nbsp;
-          = link_to "Signup", join_path, class: "ui basic button"
+          = link_to "Sign up", join_path, class: "ui basic button"
 
 coffee:
   $(".ui.dropdown").dropdown({

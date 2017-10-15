@@ -20,6 +20,8 @@ class Post < ApplicationRecord
 
   enum status: %w(open planned developing released closed)
 
+  before_validation :set_last_activity_at, on: :create
+
   def created_by
     user
   end
@@ -27,5 +29,11 @@ class Post < ApplicationRecord
   # Get all the accounts whose users have upvoted this post
   def accounts
     voters.map { |voter| voter.account_for(board.company) }.uniq.compact
+  end
+
+  private
+
+  def set_last_activity_at
+    self.last_activity_at = Time.zone.now
   end
 end

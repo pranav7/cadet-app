@@ -23,4 +23,11 @@ RSpec.describe Post, type: :model do
       expect(post.open?).to eq(true)
     end
   end
+
+  describe "Before Validation" do
+    it "sets last_activity_at" do
+      post = create :post
+      expect(post.last_activity_at).to_not be_nil
+    end
+  end
 end

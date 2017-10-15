@@ -54,6 +54,7 @@ group :development, :test do
   gem 'factory_girl_rails'
   gem 'faker', '~> 1.7.3'
   gem 'shoulda-matchers'
+  gem 'timecop'
 end
 
 group :development do

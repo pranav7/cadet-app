@@ -25,5 +25,5 @@ $(document).on "turbolinks:load", ->
   # Ties this JS to Posts show page
   return unless $(".admin.posts.show").length > 0
 
-  dashboard = new Cadet.Admin.Dashboard($(".c-left-pane"), $(".admin-post-list-item"))
+  dashboard = new Cadet.Admin.Dashboard($(".post-list-container"), $(".admin-post-list-item"))
   dashboard.init()

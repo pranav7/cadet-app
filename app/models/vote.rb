@@ -4,4 +4,12 @@ class Vote < ApplicationRecord
 
   validates_presence_of :user
   validates_presence_of :post
+
+  after_create :touch_post_last_activity
+
+  private
+
+  def touch_post_last_activity
+    post.touch(:last_activity_at)
+  end
 end

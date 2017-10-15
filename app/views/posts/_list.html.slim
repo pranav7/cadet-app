@@ -4,7 +4,7 @@
     .post-body
       span.title-text.float.left
         h3= post.title
-      .post-summary.soft= post.content.body.truncate(140)
+      .post-summary.soft= post.content.body.truncate(200)
       .post-info.soft
         strong.status class=post.status ##{post.status}
         span  #{render_time(post.created_at, format: :short)} by #{post.created_by.name}

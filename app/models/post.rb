@@ -2,7 +2,10 @@ class Post < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
-  default_scope { order(created_at: :desc) }
+  scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
+  scope :sort_by_new, -> { order(created_at: :desc) }
+  scope :sort_by_top, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC') }
+  scope :show_all, -> { order(last_activity_at: :desc) }
 
   has_one :content, as: :parent
   has_many :comments, dependent: :destroy

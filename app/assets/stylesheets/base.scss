@@ -92,6 +92,15 @@ a.c.link {
     font-weight: normal;
   }
 
+  &.hoverunderline {
+  transition: 0s ease;
+
+    &:hover {
+      color: $light !important;
+      text-decoration: underline;
+    }
+  }
+
   &:hover {
     color: $darkest;
   }

@@ -1,6 +1,7 @@
-.comment.box
+.comment.box id="comment-#{resource.id}"
   = render partial: "partials/user",
     locals: { user: resource.user }
   .content
     = simple_format resource.content.body
-  p.soft= render_time(resource.created_at)
+  a.c.thin.hoverunderline.link href="#{request.path}#comment-#{resource.id}"
+    p.soft= render_time(resource.created_at)

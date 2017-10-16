@@ -63,7 +63,6 @@ body {
 
 .c-breadcrumb {
   @extend .ui.breadcrumb;
-
   font-size: 12px;
 
   .section a {
@@ -96,7 +95,6 @@ a.c.link {
   transition: 0s ease;
 
     &:hover {
-      color: $light !important;
       text-decoration: underline;
     }
   }
@@ -117,6 +115,7 @@ a.c.link {
   background-color: $white;
   border: 1px solid $lighter;
   box-shadow: none;
+  font-size: 100%;
 
   .box-header { 
     @extend .c-soft;
@@ -204,8 +203,7 @@ a.c.link {
     display: block;
     color: $dark;
     font-weight: 700;
-    font-size: 11px;
-    text-transform: uppercase;
+    font-size: 12px;
     margin-bottom: -4px;
   }
 
@@ -258,7 +256,6 @@ a.c.link {
     margin-left: $base-size;
 
     .name {
-      font-size: 15px;
       font-weight: 600;
     }
   }
@@ -269,8 +266,11 @@ a.c.link {
 // Start
 // Styling for Post and Comment Content
 .content {
-  line-height: 1.5;
   padding: $half-base-size 0;
+
+  p {
+    line-height: 1.5;
+  }
 }
 // End
 // Styling for Post and Comment Content

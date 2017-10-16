@@ -88,10 +88,10 @@
       - @accounts.each do |account|
         p
           | #{account.name}  
-          span.ui.small.basic.label
+          span.ui.tiny.rounded.label
             i.caret.up.icon
             = account.votes_for(@post).count
-          span.ui.small.basic.label
+          span.ui.tiny.rounded.label
             | $#{account.mrr}/mo
 
 .ui.basic.tiny.modal#create-post-modal

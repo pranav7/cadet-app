@@ -38,6 +38,10 @@ body {
   font-weight: 500;
 }
 
+.padded {
+  padding: $base-size;
+}
+
 .vertical.padded {
   padding: $base-size 0;
 }

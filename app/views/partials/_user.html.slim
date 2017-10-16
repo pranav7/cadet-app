@@ -1,15 +1,20 @@
+- show_email = show_email || false
+
 .user
   .avatar.circle class=(size rescue nil)
     .initials= user.initials
   .details
     span.name= user.name
     br
-    - if user.job_title
-      span.meta.soft= user.job_title
-    - if user.job_title && user.account_for(current_company)
-      span.meta.soft, 
-    - if user.account_for(current_company)
-      span.meta.soft= user.account_for(current_company).name
+    - if show_email && show_email == true
+      span.meta.soft= user.email
+    - else
+      - if user.job_title
+        span.meta.soft= user.job_title
+      - if user.job_title && user.account_for(current_company)
+        span.meta.soft, 
+      - if user.account_for(current_company)
+        span.meta.soft= user.account_for(current_company).name
 
   // Staff Label
   - if user.admin_of?(current_company)

@@ -185,6 +185,52 @@ a.c.link {
 .ui.rounded.label {
   border-radius: 50px;
 }
+
+.c.labeled.field {
+  label {
+    display: block;
+    color: $dark;
+    font-weight: 700;
+    font-size: 11px;
+    text-transform: uppercase;
+  }
+
+  .ui.open.dropdown {
+    background: none;
+    border: none;
+    min-width: auto;
+    min-height: 2 * $base-size;
+    box-shadow: none;
+    padding: 0;
+    display: inline-flex;
+    flex-direction: row-reverse;
+    align-items: center;
+
+    .menu {
+      border-top-width: 1px !important;
+      border-color: $lighter;
+      min-width: 11rem;
+      border-radius: 5px;
+    }
+
+    & > .default.text {
+      color: $dark; 
+      font-weight: bold;
+    }
+
+    & > .text,
+    & > .text:not(.default) {
+      font-weight: bold;
+      font-size: 15px;
+    }
+
+    & > .dropdown.icon {
+      color: $dark;
+      font-size: 16px;
+      position: unset;
+    }
+  }
+}
 // End
 // Semantic UI Overrides
 

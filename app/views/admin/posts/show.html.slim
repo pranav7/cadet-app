@@ -1,15 +1,28 @@
 .c-left-pane
-  .top-list-bar
-    .c-breadcrumb
-      .section= link_to "Boards", admin_boards_path
-      .divider
-          | /
-      .section.active= link_to @board.name, admin_board_path(@board)
-    #create-post-btn
-      i.add.square.primary.big.icon.button
+  .list-action-bar
+    .container-one
+      .c-breadcrumb
+        .section= link_to "Boards", admin_boards_path
+        .divider
+            | /
+        .section.active= link_to @board.name, admin_board_path(@board)
+      #create-post-btn
+        i.add.square.primary.big.icon.button
+    .container-two
+      = form_tag admin_board_post_path(@board, @post), method: :get
+        .c.labeled.field
+          label Sort By
+          select.ui.open.dropdown name="sort_by" onchange="this.form.submit()"
+            option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
+            option value="sort_by_top" selected=(true if params[:sort_by] == "sort_by_top") Top
+            option value="sort_by_new" selected=(true if params[:sort_by] == "sort_by_new") New
+            - Post.statuses.keys.each do |key|
+              option value=key selected=(true if key == params[:sort_by])
+                | ##{key}
+
   .post-list-container
     - @posts.each do |post|
-      a.admin-post-list-item href=admin_board_post_path(@board, post) id=post.id class=("selected" if post.id == @post.id)
+      a.admin-post-list-item href=admin_board_post_path(@board, post, request.query_parameters) id=post.id class=("selected" if post.id == @post.id)
         .post-title= post.title
         .post-summary.c-soft= post.content.body.truncate(140)
         .post-meta.c-soft
@@ -88,9 +101,11 @@
       locals: { board: @board, post: @post, after_create_path: :admin }
 
 coffee:
-  $('.ui.dropdown').dropdown({
+  $('.ui.top.bar.dropdown').dropdown({
     action: "select"
   })
+
+  $('.ui.open.dropdown').dropdown()
 
   $("#create-post-btn").click ->
     $("#create-post-modal").modal('show')

@@ -193,13 +193,14 @@ a.c.link {
     font-weight: 700;
     font-size: 11px;
     text-transform: uppercase;
+    margin-bottom: -4px;
   }
 
   .ui.open.dropdown {
     background: none;
     border: none;
     min-width: auto;
-    min-height: 2 * $base-size;
+    min-height: $base-size;
     box-shadow: none;
     padding: 0;
     display: inline-flex;

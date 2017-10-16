@@ -44,15 +44,22 @@ body.admin.posts {
     }
   }
 
-  .top-list-bar {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+  .list-action-bar {
     padding: 1rem;
     border-bottom: 1px solid $lighter;
 
-    #create-post-btn {
-      cursor: pointer;
+    .container-one {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+
+      #create-post-btn {
+        cursor: pointer;
+      }
+    }
+
+    .container-two {
+      padding: $base-size 0;
     }
   }
 

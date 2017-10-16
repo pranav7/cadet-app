@@ -7,7 +7,7 @@ class Admin::AccountsController < Admin::AdminController
   def show
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
-    @customers = current_company.customers
+    @users = current_company.users
     @board = current_company.boards.friendly.find(params[:board]) if params[:board]
     @posts = @account.posts(@board)
   end
@@ -22,7 +22,7 @@ class Admin::AccountsController < Admin::AdminController
   def edit
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
-    @customers = current_company.customers
+    @users = current_company.users
     @board = current_company.boards.friendly.find(params[:board]) if params[:board]
     @posts = @account.posts(@board)
   end

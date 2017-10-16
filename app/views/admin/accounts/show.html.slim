@@ -70,13 +70,11 @@
                 i.dropdown.icon
                 .default.text Select Users
                 .menu
-                  - @customers.each do |customer|
-                    - next if @account.users.include?(customer)
-                    - next unless customer
-                    .item data-value=customer.id
-                      strong= customer.name
-                      span.c-soft
-                        |  (#{customer.email})
+                  - @users.each do |user|
+                    - next unless user
+                    - next if @account.users.include?(user)
+                    .item data-value=user.id
+                      = render partial: "partials/user", locals: { user: user, size: :small, show_email: true }
 
             = form.submit "+ Add", class: "ui small button"
           .vertical.padded

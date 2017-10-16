@@ -1,8 +1,10 @@
-- show_email = show_email || false
+- show_email = (show_email || false)
+- hide_avatar = (hide_avatar || false)
 
 .user
-  .avatar.circle class=(size rescue nil)
-    .initials= user.initials
+  - unless hide_avatar
+    .avatar.circle class=(size rescue nil)
+      .initials= user.initials
   .details
     span.name= user.name
     br

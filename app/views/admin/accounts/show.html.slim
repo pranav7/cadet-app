@@ -74,7 +74,7 @@
                     - next unless user
                     - next if @account.users.include?(user)
                     .item data-value=user.id
-                      = render partial: "partials/user", locals: { user: user, size: :small, show_email: true }
+                      = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
 
             = form.submit "+ Add", class: "ui small button"
           .vertical.padded

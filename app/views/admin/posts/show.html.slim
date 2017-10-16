@@ -32,7 +32,7 @@
     .item
       // Change Status
       = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
-        select.ui.c.dropdown name="post[status]" onchange="this.form.submit()"
+        select.ui.top.bar.dropdown name="post[status]" onchange="this.form.submit()"
           option value="" Status
           - Post.statuses.keys.each do |key|
             option value=key

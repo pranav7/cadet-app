@@ -19,6 +19,8 @@ class Company < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*A Company was added*"
     message << "\n#{self.name} - http://#{self.subdomain}.getcadet.com/"
 

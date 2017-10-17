@@ -88,6 +88,8 @@ class User < ApplicationRecord
 
   # @todo Write spec for this
   def notify_slack
+    return if Rails.env.test?
+
     message = "*#{self.name} (#{self.email}) signed up!*"
     if self.job_title
       message << "\n_#{self.job_title}_"

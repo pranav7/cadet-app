@@ -88,14 +88,12 @@ class User < ApplicationRecord
 
   # @todo Write spec for this
   def notify_slack
-    return
-
     message = "*#{self.name} (#{self.email}) signed up!*"
     if self.job_title
       message << "\n_#{self.job_title}_"
     end
-    message << "\n#{self.companies.first.name} - http://#{self.companies.first.subdomain}.getcadet.com/"
-    message << "\n`#{self.memberships.first.role}`"
+    # message << "\n#{self.companies.first.name} - http://#{self.companies.first.subdomain}.getcadet.com/"
+    # message << "\n`#{self.memberships.first.role}`"
 
     client = Slack::Web::Client.new
     client.chat_postMessage(channel: '#main', text: message, as_user: true)

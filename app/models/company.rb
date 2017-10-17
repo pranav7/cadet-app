@@ -12,7 +12,17 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
+  after_commit :notify_slack, on: :create
+
   def customers
     memberships.where(role: :customer).map(&:user)
+  end
+
+  def notify_slack
+    message = "*A Company was added*"
+    message << "\n#{self.name} - http://#{self.subdomain}.getcadet.com/"
+
+    client = Slack::Web::Client.new
+    client.chat_postMessage(channel: '#main', text: message, as_user: true)
   end
 end

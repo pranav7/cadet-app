@@ -25,6 +25,11 @@ class Post < ApplicationRecord
 
   before_validation :set_last_activity_at, on: :create
 
+  def self.sorted(options = {})
+    sort_method = options.delete(:sort_method) || :latest_activity
+    self.public_send(sort_method)
+  end
+
   def created_by
     user
   end

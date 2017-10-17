@@ -3,8 +3,9 @@
 
 .user
   - unless hide_avatar
-    .avatar.circle class=(size rescue nil)
-      .initials= user.initials
+    .avatar-container
+      .avatar.circle class=(size rescue nil)
+        .initials= user.initials
   .details
     span.name= user.name
     br
@@ -20,4 +21,5 @@
 
   // Staff Label
   - if user.admin_of?(current_company)
-    .ui.small.rounded.label.float.right Staff
+    .staff-label
+      .ui.small.rounded.label.float.right Staff

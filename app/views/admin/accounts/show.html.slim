@@ -23,7 +23,7 @@
                        = board.name
 
               .four.wide.column
-                = render partial: "partials/post_sort_field"
+                = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
           .ui.divider
           
           - if @board

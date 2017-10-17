@@ -1,7 +1,7 @@
 class Admin::PostsController < Admin::AdminController
   def show
     @board = current_company.boards.friendly.find(params[:board_id])
-    get_posts_and_apply_filter
+    @posts = @board.posts.sorted(sort_method: params[:sort_by])
     @post = Post.friendly.find(params[:id]) || @posts.first || nil
 
     @new_post = @board.posts.new
@@ -25,13 +25,5 @@ class Admin::PostsController < Admin::AdminController
 
   def post_params
     params.require(:post).permit(:title, :status, content_attributes: [:body])
-  end
-
-  def get_posts_and_apply_filter
-    if params[:sort_by] && params[:sort_by] != ""
-      @posts = @board.posts.public_send(params[:sort_by]).includes(:comments)
-    else
-      @posts = @board.posts.latest_activity.includes(:comments)
-    end
   end
 end

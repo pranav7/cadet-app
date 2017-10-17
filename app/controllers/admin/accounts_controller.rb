@@ -9,7 +9,7 @@ class Admin::AccountsController < Admin::AdminController
     @account_membership = @account.account_memberships.new
     @users = current_company.users
     @board = current_company.boards.friendly.find(params[:board]) if params[:board]
-    @posts = @account.posts(@board)
+    @posts = @account.posts(@board).sorted(sort_method: params[:sort_by])
   end
 
   def create

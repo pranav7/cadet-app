@@ -15,10 +15,6 @@ class Account < ApplicationRecord
 
   # Get all the posts that an account's users have upvoted
   def posts(board = nil)
-    return [] unless board
-
-    users.collect do |user|
-      user.voted_posts.where(board: board)
-    end.flatten.uniq
+    Post.joins(:votes).where(votes: { user: users }).distinct
   end
 end

@@ -88,7 +88,7 @@ class User < ApplicationRecord
 
   # @todo Write spec for this
   def notify_slack
-    return unless Rails.env.production?
+    return
 
     message = "*#{self.name} (#{self.email}) signed up!*"
     if self.job_title

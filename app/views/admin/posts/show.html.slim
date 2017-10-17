@@ -14,7 +14,7 @@
           label Sort By
           select.ui.open.dropdown name="sort_by" onchange="this.form.submit()"
             option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
-            option value="sort_by_top" selected=(true if params[:sort_by] == "sort_by_top") Top
+            option value="most_voted" selected=(true if params[:sort_by] == "most_voted") Most Voted
             option value="sort_by_new" selected=(true if params[:sort_by] == "sort_by_new") New
             - Post.statuses.keys.each do |key|
               option value=key selected=(true if key == params[:sort_by])

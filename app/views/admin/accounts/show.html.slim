@@ -12,20 +12,28 @@
       .ten.wide.column
         .box
           = form_tag admin_account_path(@account), method: :get
-            select.ui.dropdown name="board" onchange="this.form.submit()"
-              option value="" Select Board
-              - current_company.boards.each do |board|
-                option value=board.slug selected=(true if board == @board)
-                 = board.name
+            .ui.grid
+              .four.wide.column
+                .c.labeled.field
+                  label Board
+                  select.ui.open.dropdown name="board" onchange="this.form.submit()"
+                    option value="" Select Board
+                    - current_company.boards.each do |board|
+                      option value=board.slug selected=(true if board == @board)
+                       = board.name
 
+              .four.wide.column
+                = render partial: "partials/post_sort_field"
+          .ui.divider
+          
           - if @board
             - if @posts.blank?
               h4.soft
                 | The users of #{@account.name} have not yet participated in any posts.
             - else
               - @posts.each do |post|
-                = render partial: "posts/list",
-                  locals: { post: post, link_to: :admin, account: @account }
+                = render partial: "posts/admin_list",
+                  locals: { post: post, board: @board, account: @account }
           - else
             h4.soft
               | Please select a board

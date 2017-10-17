@@ -10,15 +10,7 @@
         i.add.square.primary.big.icon.button
     .container-two
       = form_tag admin_board_post_path(@board, @post), method: :get
-        .c.labeled.field
-          label Sort By
-          select.ui.open.dropdown name="sort_by" onchange="this.form.submit()"
-            option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
-            option value="most_voted" selected=(true if params[:sort_by] == "most_voted") Most Voted
-            option value="sort_by_new" selected=(true if params[:sort_by] == "sort_by_new") New
-            - Post.statuses.keys.each do |key|
-              option value=key selected=(true if key == params[:sort_by])
-                | ##{key}
+        = render partial: "partials/post_sort_field"
 
   .post-list-container
     - if @posts.empty?
@@ -26,23 +18,8 @@
         | No Posts
     - else
       - @posts.each do |post|
-        a.admin-post-list-item href=admin_board_post_path(@board, post, request.query_parameters) id=post.id class=("selected" if post.id == @post.id)
-          .post-title= post.title
-          .post-summary.c-soft= post.content.body.truncate(140)
-          .post-meta.c-soft
-            span
-              = render_time(post.created_at, format: :short)
-            span &nbsp;
-            span.status class=post.status
-              | ##{post.status}
-            span &nbsp;
-            span.ui.rounded.small.label.soft
-              i.caret.up.icon
-              | #{post.votes.count}
-            span &nbsp;
-            span.ui.rounded.small.label.soft
-              i.comment.outline.icon
-              = post.comments.count
+        = render partial: "posts/admin_list",
+          locals: { post: post, board: @board, selected_post: @post }
 
 .c-main-pane
   .top-action-bar

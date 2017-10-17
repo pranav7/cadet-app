@@ -1,0 +1,22 @@
+- account = account || nil
+
+a.admin-post-list-item href=admin_board_post_path(board, post, request.query_parameters) id=post.id class=("selected" if post.id == (selected_post.id rescue -1))
+  .post-title= post.title
+  .post-summary.c-soft= post.content.body.truncate(100)
+  .post-meta.c-soft
+    span
+      = render_time(post.created_at, format: :short)
+    span &nbsp;
+    span.status class=post.status
+      | ##{post.status}
+    span &nbsp;
+    span.ui.rounded.small.label.soft
+      i.caret.up.icon
+      - if account
+        = account.votes_for(post).count
+      - else
+        = post.votes.count
+    span &nbsp;
+    span.ui.rounded.small.label.soft
+      i.comment.outline.icon
+      = post.comments.count

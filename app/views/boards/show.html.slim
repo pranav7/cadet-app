@@ -2,15 +2,8 @@
   .ten.wide.column
     .posts-list.box
       = form_tag board_path(@board), method: :get
-        .c.labeled.field
-          label Sort By
-          select.ui.open.dropdown name="sort_by" onchange="this.form.submit()"
-            option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
-            option value="most_voted" selected=(true if params[:sort_by] == "most_voted") Most Voted
-            option value="sort_by_new" selected=(true if params[:sort_by] == "sort_by_new") New
-            - Post.statuses.keys.each do |key|
-              option value=key selected=(true if key == params[:sort_by])
-                | ##{key}
+        = render partial: "partials/post_sort_field"
+
       - if @posts.empty?
         h4 No Posts
         - if user_signed_in? && current_user.admin_of?(current_company) && !params[:sort_by]

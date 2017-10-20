@@ -25,6 +25,7 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'slack-ruby-client'
 gem 'eventmachine'
 gem 'faye-websocket'
+gem "sentry-raven"
 
 # Until we update to rails 5.2
 gem 'activestorage'

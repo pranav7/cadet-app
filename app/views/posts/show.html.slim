@@ -10,7 +10,7 @@
 
     .row
       // Middle Section
-      .ten.wide.column
+      .sixteen.wide.mobile.column.ten.wide.computer.column
         // Post Header
         .post-header.vertical-padded
           .header
@@ -37,7 +37,7 @@
           = render partial: "partials/comment", locals: { resource: comment }
 
       // Middle Section
-      .six.wide.column
+      .sixteen.wide.mobile.six.wide.computer.column
         // Voters
         = render partial: "partials/voters", locals: { voters: @post.voters }
         = render partial: "partials/cadet_power"

@@ -40,7 +40,7 @@
       .post-header-info
         strong.status class=@post.status ##{@post.status}
     .votes
-      = render partial: "posts/vote", locals: { type: :large, post: @post }
+      = render partial: "posts/vote", locals: { post: @post }
 
   .post-content.vertical.padded
     = render partial: "partials/comment", locals: { resource: @post }

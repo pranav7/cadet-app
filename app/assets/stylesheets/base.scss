@@ -300,36 +300,63 @@ a.c.link {
 .vote-button {
   display: inline-flex;
   justify-content: center;
-  padding: 7px 5px;
-  border: 1px solid $light;
-  color: $dark;
-  background-color: $lightest;
-  min-width: 56px;
+  align-items: center;
+  user-select: none;
+  box-sizing: border-box;
+  transition: opacity ease-in-out 100ms,color ease-in-out 100ms,background-color ease-in-out 100ms,border-color ease-in-out 100ms;
+  border-radius: 3px;
+  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+  font-weight: 500;
+  outline: 0;
+  padding: 3px 7px 4px 7px;
   text-align: center;
-  border-radius: 4px;
-  transition: 0.2s ease;
+  text-decoration: none;
+  cursor: pointer;
+  background: #f1f8fb;
+  color: $quora-blue;
+  border: 1px solid #bbcadc;
 
-  &:hover,
+  &:hover {
+    border-color: $quora-blue;
+  }
+
   &.upvoted {
-    border: 1px solid #80deea;
-    color: #00bcd4;
-    background-color: #e0f7fa;
+    background: #f6f6f6;
+    color: #999;
+    border: 1px solid #ddd;
+
+    span.vote-count {
+      border-color: rgba(153, 153, 153, 0.3);
+    }
+
+    &:hover {
+      border-color: $dark;
+    }
   }
 
   span.vote-count {
     font-weight: 600;
+    padding-left: 6px;
+    margin-left: 6px;
+    border-left: 1px solid rgba(43, 109, 173, 0.3);
+  }
+
+  span.text {
+    font-weight: 700;
+    font-size: 13px;
   }
 
   &.large {
+    padding: 6px 14px 8px 14px;
+
     span.vote-count {
       font-size: 18px;
       margin-left: 8px;
     }
 
-    .text {
-      font-size: 11px;
+    span.text {
+      font-size: 14px;
       font-weight: 700;
-      text-transform: uppercase;
     }
   }
 }

@@ -3,18 +3,14 @@
 
 - if user_signed_in? && current_user.voted?(post)
   a.vote-button.upvoted href=board_post_votes_path(post.board, post) data-method="delete" class=(type rescue nil)
-    i.caret.up.icon
-    - if type == :large
-      span.text upvoted
+    span.text Upvoted
     - if account
       span.vote-count= account.votes_for(post).count
     - else
       span.vote-count= post.votes.count
 - else
   a.vote-button href=board_post_votes_path(post.board, post) data-method="post" class=(type rescue nil)
-    i.caret.up.icon
-    - if type == :large
-      span.text upvote
+    span.text Upvote
     - if account
       span.vote-count= account.votes_for(post).count
     - else

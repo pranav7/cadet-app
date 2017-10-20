@@ -11,11 +11,11 @@ a.admin-post-list-item href=admin_board_post_path(board, post, request.query_par
       | ##{post.status}
     span &nbsp;
     span.ui.rounded.small.label.soft
-      i.caret.up.icon
       - if account
         = account.votes_for(post).count
       - else
         = post.votes.count
+      | &nbsp; Upvotes
     span &nbsp;
     span.ui.rounded.small.label.soft
       i.comment.outline.icon

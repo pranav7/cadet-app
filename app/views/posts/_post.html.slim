@@ -12,4 +12,4 @@
     = render partial: "posts/vote",
       locals: { post: post, account: (account rescue nil) }
     strong.margined.left.status class=post.status ##{post.status}
-    span  #{render_time(post.created_at, format: :short)} by #{post.created_by.name}
+    span.margined.left #{render_time(post.created_at, format: :short)} by #{post.created_by.name}

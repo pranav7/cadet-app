@@ -399,6 +399,12 @@ a.c.link {
       margin: 0;
     }
   }
+
+  .post-info {
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+  }
 }
 // End
 // Styling for Post Item in Post List

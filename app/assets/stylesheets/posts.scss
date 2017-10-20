@@ -4,6 +4,13 @@ body.posts {
   }
 
   .post-header {
+    display: flex;
+    align-items: center;
+
+    .header {
+      flex: 1;
+    }
+
     h1.post-title {
       color: $darkest;
       font-weight: 600;

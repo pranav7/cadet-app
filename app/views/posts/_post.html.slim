@@ -1,0 +1,17 @@
+.post-list-item
+  .post-body
+    a.post-link href=build_post_link(post, link_to: link_to)
+      span.title-text.float.left
+        h3= post.title
+      .post-summary.soft= post.content.body.truncate(200)
+    .comment-count.soft.float.right
+      i.comment.outline.icon
+      = post.comments.count
+
+  .post-info.soft
+    .float.left
+      = render partial: "posts/vote",
+        locals: { post: post, account: (account rescue nil) }
+    .float.right
+      strong.status class=post.status ##{post.status}
+      span  #{render_time(post.created_at, format: :short)} by #{post.created_by.name}

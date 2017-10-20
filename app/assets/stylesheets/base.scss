@@ -52,10 +52,10 @@ body {
 }
 
 .margined {
-  & > .left {
+  &.left {
     margin-left: 8px;
 
-    & > .small {
+    &.small {
       margin-left: 4px;
     }
   }
@@ -297,25 +297,40 @@ a.c.link {
 
 // Start
 // Styling for Vote Button
-a.vote-button {
-  display: table-cell;
-  margin-right: $base-size;
-  color: $darkest;
-  vertical-align: top;
+.vote-button {
+  display: inline-flex;
+  justify-content: center;
+  padding: 7px 5px;
+  border: 1px solid $light;
+  color: $dark;
+  background-color: $lightest;
+  min-width: 56px;
   text-align: center;
+  border-radius: 4px;
+  transition: 0.2s ease;
 
+  &:hover,
   &.upvoted {
-    color: $secondary-blue;
+    border: 1px solid #80deea;
+    color: #00bcd4;
+    background-color: #e0f7fa;
   }
 
   span.vote-count {
-    display: block;
-    text-align: center;
     font-weight: 600;
-    font-size: 24px;
-    position: relative;
-    top: 4px;
-    right: 3px;
+  }
+
+  &.large {
+    span.vote-count {
+      font-size: 18px;
+      margin-left: 8px;
+    }
+
+    .text {
+      font-size: 11px;
+      font-weight: 700;
+      text-transform: uppercase;
+    }
   }
 }
 // End
@@ -327,19 +342,18 @@ a.vote-button {
   padding: 2 * $base-size 0;
   width: 100%;
   display: flex;
+  flex-direction: column;
 
   a.post-link {
     color: $darkest;
     display: flex;
+    flex-direction: column;
     justify-content: space-between;
     flex: 1;
   }
 
   .post-body {
     display: flex;
-    flex-direction: column;
-    box-flex: 1;
-    flex: 1;
 
     &:hover { color: $black; }
 

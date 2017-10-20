@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
+  before_action :set_raven_context
 
   # before_action :ensure_valid_subdomain!
 
@@ -31,5 +32,17 @@ class ApplicationController < ActionController::Base
 
   def after_sign_in_path_for(resource)
     request.env['omniauth.origin'] || stored_location_for(resource) || admin_boards_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
+  end
+
+  def set_raven_context
+    if user_signed_in?
+      Raven.user_context({
+        id: current_user.id,
+        email: current_user.email,
+        company: current_company.subdomain
+      })
+    end
+
+    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
   end
 end

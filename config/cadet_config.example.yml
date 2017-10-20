@@ -6,9 +6,11 @@ development:
   mixpanel_token: ""
   slack: &slack
     bot-api-token: ""
+  sentry: "https://620638c031fb45fa98198c57f7bd89e2:a621c30ebcd74c6b9779e953176a9011@sentry.io/233277"
 
 test:
   base_domain: lvh.me:3000
   google_oauth2: *google_oauth2
   mixpanel_token: ""
   slack: *slack
+  sentry: ""

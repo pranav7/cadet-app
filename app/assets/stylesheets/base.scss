@@ -435,7 +435,7 @@ a.c.link {
   display: inline-block;
 
   &.released {
-    background: $green-light;
+    background: $released-color;
   }
 
   &.developing {
@@ -443,7 +443,7 @@ a.c.link {
   }
 
   &.planned {
-    background: $purple;
+    background: $planned-color;
   }
 
   &.closed {

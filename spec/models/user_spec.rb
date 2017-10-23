@@ -77,7 +77,7 @@ RSpec.describe User, type: :model do
   describe "#initials" do
     it "returns the initials of the user's name" do
       user = build(:user, name: "Jamie Lannister")
-      expect(user.initials).to eq("JL")
+      expect(user.initials).to eq("J")
     end
   end
   

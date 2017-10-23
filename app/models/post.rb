@@ -27,6 +27,7 @@ class Post < ApplicationRecord
 
   def self.sorted(options = {})
     sort_method = options.delete(:sort_method) || :latest_activity
+
     self.public_send(sort_method)
   end
 

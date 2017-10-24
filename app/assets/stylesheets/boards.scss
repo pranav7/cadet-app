@@ -1,37 +1,4 @@
 body.boards {
-  .boards {
-    display: flex;
-    flex-wrap: wrap;
-
-    a.board {
-      width: 30%;
-      background: $white;
-      padding: $double-base-size ($base-size * 1.5);
-      border-radius: 4px;
-      border: 1px solid $lighter;
-      margin: 0 2% 2% 0;
-      color: $black;
-      transition: 0.5s ease;
-      display: flex;
-      flex-direction: column;
-
-      &:hover {
-        box-shadow: 0 15px 25px -10px rgba(0, 0, 0, 0.1);
-      }
-
-      .main h3 {
-        font-weight: 600;
-        font-size: $base-size * 1.5;
-      }
-
-      .meta {
-        margin-top: $double-base-size;
-      }
-    }
-  }
-}
-
-body.admin.boards {
   .boards-list {
     display: flex;
     flex-wrap: wrap;
@@ -63,4 +30,7 @@ body.admin.boards {
       }
     }
   }
+}
+
+body.admin.boards {
 }

@@ -1,14 +1,19 @@
-p.page-heading.soft
-  i.clone.icon
-  | Boards
-- if @boards.empty?
-  .ui.centered.grid
-    .six.wide.center.aligned.column
-      h3.soft No Boards Added
-      - if user_signed_in? && current_user.admin_of?(current_company)
-        a.ui.primary.button href=admin_boards_path
-          | + Add Board
-- else
-  .ui.grid
-    .sixteen.wide.column
-      = render partial: "boards/boards", locals: { boards: @boards }
+.ui.grid
+  .sixteen.wide.column
+    p.page-heading.soft
+      i.clone.icon
+      | Boards
+      - if @boards.empty?
+        p This company has no boards.
+        - if user_signed_in? && current_user.admin_of?(current_company)
+          a.ui.primary.button href=admin_boards_path
+            | + Add Board
+      - else
+        .boards-list
+          - @boards.each do |board|
+            .board.box
+              .top
+                = link_to board.name, board_path(board), class: "board-name"
+                .board-description.soft= board.description
+              .bottom
+                span.soft.foat.left= pluralize(board.posts.count, "Post")

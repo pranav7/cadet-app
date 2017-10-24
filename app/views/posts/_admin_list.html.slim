@@ -14,8 +14,7 @@ a.admin-post-list-item href=admin_board_post_path(board, post, request.query_par
       - if account
         = account.votes_for(post).count
       - else
-        = post.votes.count
-      | &nbsp; Upvotes
+        = pluralize(post.votes.count, "Upvote")
     span &nbsp;
     span.ui.rounded.small.label.soft
       i.comment.outline.icon

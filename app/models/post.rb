@@ -24,6 +24,7 @@ class Post < ApplicationRecord
   enum status: %w(open planned developing released closed)
 
   before_validation :set_last_activity_at, on: :create
+  after_update :update_last_activity_at
 
   def self.sorted(options = {})
     sort_method = options.delete(:sort_method) || :latest_activity
@@ -38,6 +39,12 @@ class Post < ApplicationRecord
   # Get all the accounts whose users have upvoted this post
   def accounts
     voters.map { |voter| voter.account_for(board.company) }.uniq.compact
+  end
+
+  def update_last_activity_at
+    if saved_change_to_status?
+      self.touch :last_activity_at
+    end
   end
 
   private

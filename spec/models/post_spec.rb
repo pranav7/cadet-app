@@ -30,4 +30,29 @@ RSpec.describe Post, type: :model do
       expect(post.last_activity_at).to_not be_nil
     end
   end
+
+  describe "After Update" do
+    context "status changed" do
+      let(:post) { build :post }
+
+      before do
+        @post_created_at = 1.day.ago
+        Timecop.freeze(@post_created_at) do
+          post.save
+        end
+
+        Timecop.return
+      end
+
+      it "updates last_activity_at" do
+        status_changed_at = Time.zone.now
+        Timecop.freeze(status_changed_at) do
+          post.developing!
+        end
+        Timecop.return
+
+        expect(post.last_activity_at.utc.strftime("%a, %b %e, %Y at%l:%M %p")).to eq(status_changed_at.utc.strftime("%a, %b %e, %Y at%l:%M %p"))
+      end
+    end
+  end
 end

@@ -18,6 +18,10 @@ class Company < ApplicationRecord
     memberships.where(role: :customer).map(&:user)
   end
 
+  def admins
+    memberships.where(role: :admin).map(&:user)
+  end
+
   def notify_slack
     return if Rails.env.test?
 

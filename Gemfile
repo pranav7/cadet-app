@@ -27,6 +27,7 @@ gem 'eventmachine'
 gem 'faye-websocket'
 gem "sentry-raven"
 gem 'postmark-rails'
+gem 'sidekiq'
 
 # Until we update to rails 5.2
 gem 'activestorage'

@@ -27,9 +27,6 @@ Rails.application.configure do
   end
 
   # Don't care if the mailer can't send.
-  config.action_mailer.delivery_method = :postmark
-  config.action_mailer.postmark_settings = { api_token: "8d24e2be-d868-4f64-a395-e59d2f1baa57" }
-
   config.action_mailer.raise_delivery_errors = false
 
   config.action_mailer.perform_caching = false

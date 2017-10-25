@@ -26,6 +26,7 @@ gem 'slack-ruby-client'
 gem 'eventmachine'
 gem 'faye-websocket'
 gem "sentry-raven"
+gem 'postmark-rails'
 
 # Until we update to rails 5.2
 gem 'activestorage'

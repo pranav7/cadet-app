@@ -21,12 +21,12 @@ class Comment < ApplicationRecord
     post.company.admins.each do |admin|
       next if admin == commenter
 
-      CommentNotificationMailer.new_comment(admin, self).deliver_later
+      CommentNotificationMailer.new_comment(self, admin).deliver_later
     end
   end
 
   def notify_requester
-    CommentNotificationMailer.new_comment(post.created_by, self).deliver_later
+    CommentNotificationMailer.new_comment(self, post.created_by).deliver_later
   end
 
   private

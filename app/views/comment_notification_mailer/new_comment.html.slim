@@ -6,10 +6,10 @@ p
     = " (Staff) "
   - else
     = " (#{@commenter.email}) "
-  a href='#{board_post_url(@post.board, @post, host: "#{@post.company.subdomain}.#{APP_CONFIG['base_domain']}")}#comment-#{@comment.id}' commented
+  a href=@comment_url commented
   |  on the post 
   strong
-    a href=board_post_url(@post.board, @post, host: "#{@post.company.subdomain}.#{APP_CONFIG['base_domain']}")
+    a href=@board_url
       = @post.title
 
 blockquote style="color: #888888;margin: 0;padding: 4px 24px;border-left: 2px solid #e4e4e4;"

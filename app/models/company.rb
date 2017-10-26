@@ -31,4 +31,8 @@ class Company < ApplicationRecord
     client = Slack::Web::Client.new
     client.chat_postMessage(channel: '#main', text: message, as_user: true)
   end
+
+  def host
+    "#{subdomain}.#{APP_CONFIG['base_domain']}"
+  end
 end

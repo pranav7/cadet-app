@@ -27,5 +27,16 @@ RSpec.describe Comment, type: :model do
 
       expect(@post.last_activity_at.utc.strftime("%a, %b %e, %Y at%l:%M %p")).to eq(comment_created_at.utc.strftime("%a, %b %e, %Y at%l:%M %p"))
     end
+
+    context "Email Notification" do
+      let(:post) { create :post }
+      let(:user) { create :customer }
+      let!(:admin) { create :admin, company: post.company }
+
+      it "notifies all admins of the company" do
+        expect { create :comment, post: post, user: user }
+          .to change(ActionMailer::Base.deliveries, :count).by(1)
+      end
+    end
   end
 end

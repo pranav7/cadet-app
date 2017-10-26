@@ -282,6 +282,15 @@ a.c.link {
     line-height: 1.5;
   }
 }
+
+.comment {
+  transition: 0.2s ease;
+
+  &.selected {
+    background-color: $blue-lightest;
+    border-left: 3px solid $secondary-blue;
+  }
+}
 // End
 // Styling for Post and Comment Content
 

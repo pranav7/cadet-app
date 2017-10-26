@@ -4,6 +4,7 @@ class Cadet.Posts
 
   init: ->
     @linkifyText()
+    @highlightSelectedComment()
 
   linkifyText: ->
     $(".content").linkify({
@@ -12,6 +13,10 @@ class Cadet.Posts
       # tagName:
       #  mention: "span"
     })
+
+  highlightSelectedComment: ->
+    selected_el = $("##{location.hash.slice(1)}")
+    selected_el.addClass("selected")
 
 $(document).on "turbolinks:load", ->
   posts = new Cadet.Posts

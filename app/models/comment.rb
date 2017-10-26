@@ -10,11 +10,23 @@ class Comment < ApplicationRecord
 
   def send_notifications
     notify_admins
-    notify_requester
+    notify_requester if staff_commented?
   end
 
-  def created_by
+  def commenter
     user
+  end
+
+  def notify_admins
+    post.company.admins.each do |admin|
+      next if admin == commenter
+
+      CommentNotificationMailer.new_comment(admin, self).deliver_later
+    end
+  end
+
+  def notify_requester
+    CommentNotificationMailer.new_comment(post.created_by, self).deliver_later
   end
 
   private
@@ -23,14 +35,7 @@ class Comment < ApplicationRecord
     post.touch(:last_activity_at)
   end
 
-  def notify_admins
-    post.company.admins.each do |admin|
-      next if admin == created_by
-
-      CommentNotificationMailer.new_comment(admin, self).deliver_now
-    end
-  end
-
-  def notify_requester
+  def staff_commented?
+    commenter.admin_of?(post.company)
   end
 end

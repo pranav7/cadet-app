@@ -30,12 +30,22 @@ RSpec.describe Comment, type: :model do
 
     context "Email Notification" do
       let(:post) { create :post }
-      let(:user) { create :customer }
       let!(:admin) { create :admin, company: post.company }
 
-      it "notifies all admins of the company" do
-        expect { create :comment, post: post, user: user }
-          .to change(ActionMailer::Base.deliveries, :count).by(1)
+      context "customer comments" do
+        let(:customer) { create :customer }
+
+        it "notifies all admins of the company" do
+          expect { create :comment, post: post, user: customer }
+            .to have_enqueued_job.on_queue('mailers').exactly(:twice)
+        end
+      end
+
+      context "staff comments" do
+        it "notifies post requester and other staff members" do
+          expect { create :comment, post: post, user: admin }
+            .to have_enqueued_job.on_queue('mailers').exactly(:twice)
+        end
       end
     end
   end

@@ -2,7 +2,7 @@ class CommentNotificationMailer < ApplicationMailer
   def new_comment(user, comment)
     @user = user
     @comment = comment
-    @commenter = comment.created_by
+    @commenter = comment.commenter
     @post = comment.post
     @company = @post.company
 

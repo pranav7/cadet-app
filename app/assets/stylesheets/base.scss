@@ -126,6 +126,11 @@ a.c.link {
       border-bottom: 1px solid $lighter;
     }
   }
+
+  &.transparent {
+    background-color: transparent;
+    border-color: transparent;
+  }
 }
 // End
 // Box Styling
@@ -288,6 +293,7 @@ a.c.link {
 
   &.selected {
     background-color: $blue-lightest;
+    border-color: rgba(74, 144, 226, 0.24);
     border-left: 3px solid $secondary-blue;
   }
 }

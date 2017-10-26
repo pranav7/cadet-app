@@ -32,3 +32,5 @@
 /node_modules
 
 config/cadet_config.yml
+
+config/secrets.yml

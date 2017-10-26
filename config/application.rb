@@ -15,10 +15,6 @@ module CadetApp
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { api_token: Rails.application.secrets.postmark_api_token }
 
-    Raven.configure do |config|
-      config.dsn = 'https://13928da26c524ca28e360bb8b389df2f:2d53846d5dff4e519464a84205933aa4@sentry.io/233281'
-    end    
-
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
     # -- all .rb files in that directory are automatically loaded.

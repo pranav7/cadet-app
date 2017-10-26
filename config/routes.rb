@@ -1,4 +1,9 @@
 Rails.application.routes.draw do
+  authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" } do
+    require 'sidekiq/web'
+    mount Sidekiq::Web => '/sidekiq'
+  end
+
   constraints subdomain: 'app' do
     devise_for :users, path: '',
       path_names: { sign_in: 'login', sign_up: 'signup' },

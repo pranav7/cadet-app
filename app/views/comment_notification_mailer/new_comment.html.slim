@@ -1,0 +1,21 @@
+p Hi #{@user.first_name},
+
+p
+  | #{@commenter.name}
+  - if @commenter.admin_of?(@post.company)
+    = " (Staff) "
+  - else
+    = " (#{@commenter.email}) "
+  a href='#{board_post_url(@post.board, @post, host: "#{@post.company.subdomain}.#{APP_CONFIG['base_domain']}")}#comment-#{@comment.id}' commented
+  |  on the post 
+  strong
+    a href=board_post_url(@post.board, @post, host: "#{@post.company.subdomain}.#{APP_CONFIG['base_domain']}")
+      = @post.title
+
+blockquote style="color: #888888;margin: 0;padding: 4px 24px;border-left: 2px solid #e4e4e4;"
+  = simple_format @comment.content.body
+
+p
+  | Cheers,
+  br
+  | Team Cadet

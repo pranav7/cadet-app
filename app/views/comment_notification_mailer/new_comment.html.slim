@@ -1,7 +1,7 @@
 p Hi #{@user.first_name},
 
 p
-  | #{@commenter.name}
+  strong #{@commenter.name}
   - if @commenter.admin_of?(@post.company)
     = " (Staff) "
   - else

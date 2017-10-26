@@ -15,8 +15,8 @@ class Cadet.Posts
     })
 
   highlightSelectedComment: ->
-    selected_el = $("##{location.hash.slice(1)}")
-    selected_el.addClass("selected")
+    commentId = location.hash.slice(1)
+    $("##{commentId}").addClass("selected")
 
 $(document).on "turbolinks:load", ->
   posts = new Cadet.Posts

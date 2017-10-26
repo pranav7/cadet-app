@@ -31,6 +31,7 @@ RSpec.describe Comment, type: :model do
     context "Email Notification" do
       let(:post) { create :post }
       let!(:admin) { create :admin, company: post.company }
+      let!(:admin2) { create :admin, company: post.company }
 
       context "customer comments" do
         let(:customer) { create :customer }

@@ -36,6 +36,10 @@ class Post < ApplicationRecord
     user
   end
 
+  def company
+    board.company
+  end
+
   # Get all the accounts whose users have upvoted this post
   def accounts
     voters.map { |voter| voter.account_for(board.company) }.uniq.compact

@@ -1,0 +1,12 @@
+p Hi #{@user.first_name},
+
+p
+  strong #{@requester.name}
+  - if @requester.admin_of?(@post.company)
+    = " (Staff) "
+  - else
+    = " (#{@requester.email}) "
+  | created a new post: 
+  a href=@post_url
+    strong= @post.title
+  |  in #{@post.board.name}

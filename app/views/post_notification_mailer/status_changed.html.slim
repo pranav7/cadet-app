@@ -1,11 +1,11 @@
 p Hi #{@user.first_name},
 
 p
-  | The post 
+  | Status of the post 
   a href=@post_url
     strong= @post.title
   |  in #{@post.board.name}
-  |  was marked as 
+  |  has changed to  
   span.status class=@post.status
     = "##{@post.status}"
 

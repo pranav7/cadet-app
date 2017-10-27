@@ -24,7 +24,8 @@ class Post < ApplicationRecord
   enum status: %w(open planned developing released closed)
 
   before_validation :set_last_activity_at, on: :create
-  after_update :update_last_activity_at
+  after_create :perform_after_create_tasks
+  after_update :perform_after_update_tasks
 
   def self.sorted(options = {})
     sort_method = options.delete(:sort_method) || :latest_activity
@@ -32,12 +33,21 @@ class Post < ApplicationRecord
     self.public_send(sort_method)
   end
 
+  def commenters
+    comments.map(&:user)
+  end
+
   def created_by
     user
   end
+  alias_method :requester, :created_by
 
   def company
     board.company
+  end
+
+  def participants
+    (voters + commenters).flatten.uniq
   end
 
   # Get all the accounts whose users have upvoted this post
@@ -45,9 +55,27 @@ class Post < ApplicationRecord
     voters.map { |voter| voter.account_for(board.company) }.uniq.compact
   end
 
-  def update_last_activity_at
+  def perform_after_update_tasks
     if saved_change_to_status?
-      self.touch :last_activity_at
+      update_last_activity_at
+      notify_status_changed_to_all_participants
+    end
+  end
+
+  def perform_after_create_tasks
+    notify_post_created_to_all_admins
+  end
+
+  def notify_post_created_to_all_admins
+    company.admins.each do |admin|
+      next if admin == requester
+      PostNotificationMailer.new_post(self, admin).deliver_later
+    end
+  end
+
+  def notify_status_changed_to_all_participants
+    participants.each do |participant|
+      PostNotificationMailer.status_changed(self, participant).deliver_later
     end
   end
 
@@ -55,5 +83,9 @@ class Post < ApplicationRecord
 
   def set_last_activity_at
     self.last_activity_at = Time.zone.now
+  end
+
+  def update_last_activity_at
+    self.touch :last_activity_at
   end
 end

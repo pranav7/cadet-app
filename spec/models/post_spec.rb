@@ -24,6 +24,18 @@ RSpec.describe Post, type: :model do
     end
   end
 
+  describe "#participants" do
+    let(:post) { create :post }
+
+    it "returns a list of all commenters and voters" do
+      vote = create :vote, post: post
+      comment = create :comment, post: post
+
+      expect(post.participants.include?(vote.user)).to eq(true)
+      expect(post.participants.include?(comment.user)).to eq(true)
+    end
+  end
+
   describe "Before Validation" do
     it "sets last_activity_at" do
       post = create :post
@@ -52,6 +64,30 @@ RSpec.describe Post, type: :model do
         Timecop.return
 
         expect(post.last_activity_at.utc.strftime("%a, %b %e, %Y at%l:%M %p")).to eq(status_changed_at.utc.strftime("%a, %b %e, %Y at%l:%M %p"))
+      end
+    end
+  end
+
+  describe "After Create" do
+    let!(:company) { create :company }
+    let!(:admin) { create :admin, company: company }
+    let(:board) { create :board, company: company }
+
+    describe "new post created" do
+      it "sends email notification to all admins" do
+        expect { create :post, board: board }
+          .to have_enqueued_job.on_queue('mailers').exactly(:once)
+      end
+    end
+
+    describe "status changed" do
+      it "sends email notification to all participants" do
+        post = create :post
+        create :vote, post: post
+        create :comment, post: post
+
+        expect { post.update_attributes(status: "developing") }
+          .to have_enqueued_job.on_queue('mailers').exactly(:twice)
       end
     end
   end

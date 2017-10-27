@@ -1,10 +1,10 @@
 class CommentNotificationMailer < ApplicationMailer
   def new_comment(comment, user)
     @user = user
-    @post = comment.post
-    @company = @post.company
     @comment = comment
-    @commenter = comment.commenter
+    @commenter = @comment.commenter
+    @post = @comment.post
+    @company = @post.company
     @host = @company.host
 
     build_comment_and_board_urls

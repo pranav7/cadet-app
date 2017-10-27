@@ -3,7 +3,7 @@ html
   head
     meta[http-equiv="Content-Type" content="text/html; charset=utf-8"]
     style
-      | body { max-width:550px; margin:10; padding: 0; font-family: sans-serif; font-size:15px; font-style: normal; line-height: 1.5; }
+      | body { max-width:600px; margin:10; padding: 0; font-family: sans-serif; font-size:15px; font-style: normal; line-height: 1.5; }
 
       | blockquote {
           color: #888888;
@@ -11,10 +11,38 @@ html
           padding: 4px 24px;
           border-left: 2px solid #e4e4e4;
         }
+
+      | .status {
+          position: relative;
+          color: #fff;
+          border-radius: 50px;
+          padding: 2px 8px;
+          font-size: 14px;
+          font-weight: 500;
+          line-height: 19px;
+          display: inline-block;
+        }
+
+      | .status.released {
+          background: #5fba7d;
+        }
+
+      | .status.developing {
+          background: #4a90e2;
+        }
+
+      | .status.planned {
+          background: #7963BF;
+        }
+
+      | .status.closed {
+          background: #c33c54;
+        }
+
+      | .status.open {
+          color:  #7f7f7f;
+          border: 1px solid #d6d6d6;
+        }
   body
     = yield
-
-    p
-      | Cheers,
-      br
-      | Team Cadet
+    p= @signature

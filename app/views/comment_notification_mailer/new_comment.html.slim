@@ -7,7 +7,9 @@ p
   - else
     = " (#{@commenter.email}) "
   a href=@comment_url commented
-  |  on the post 
+  |  on 
+  = @user == @post.requester ? "your" : "the" 
+  |  post 
   strong
     a href=@board_url
       = @post.title

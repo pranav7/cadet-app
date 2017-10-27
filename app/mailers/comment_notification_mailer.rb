@@ -7,6 +7,18 @@ class CommentNotificationMailer < ApplicationMailer
     @commenter = comment.commenter
     @host = @company.host
 
+    build_comment_and_board_urls
+
+    mail(
+      subject: "New Comment on #{@post.title}",
+      to: "#{@user.name} <#{@user.email}>",
+      form: from_address
+    )
+  end
+
+  private
+
+  def build_comment_and_board_urls
     if @user.admin_of?(@company)
       @board_url = admin_board_post_url(@post.board, @post, host: @host)
       @comment_url =
@@ -18,11 +30,5 @@ class CommentNotificationMailer < ApplicationMailer
         board_post_url(@post.board, @post, host: @host) +
         "#comment-#{@comment.id}"
     end
-
-    mail(
-      subject: "New Comment on #{@post.title}",
-      to: "#{@user.name} <#{@user.email}>",
-      form: from_address
-    )
   end
 end

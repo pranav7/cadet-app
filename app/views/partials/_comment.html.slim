@@ -3,4 +3,9 @@
     locals: { user: resource.user }
   .content
     = simple_format resource.content.body
-  a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
+  
+  - if resource.class == Comment
+    a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
+  - else
+    p.soft= render_time(resource.created_at)
+

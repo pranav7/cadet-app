@@ -10,7 +10,10 @@ class Comment < ApplicationRecord
 
   def send_notifications
     notify_admins
-    notify_requester if staff_commented?
+
+    if staff_commented? && requester_not_admin?
+      notify_requester
+    end
   end
 
   def commenter
@@ -37,5 +40,9 @@ class Comment < ApplicationRecord
 
   def staff_commented?
     commenter.admin_of?(post.company)
+  end
+
+  def requester_not_admin?
+    !post.requester.admin_of?(post.company)
   end
 end

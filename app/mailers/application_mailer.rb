@@ -5,7 +5,7 @@ class ApplicationMailer < ActionMailer::Base
 
   def from_address
     address = Mail::Address.new "notifications@getcadet.com"
-    address.display_name = signature.dup
+    address.display_name = signature
     address.format
   end
 

@@ -11,7 +11,7 @@ class PostNotificationMailer < ApplicationMailer
     mail(
       subject: "New Post #{@post.title} in #{@post.board.name}",
       to: @user.formatted_address,
-      form: from_address
+      from: from_address
     )
   end
 
@@ -27,7 +27,7 @@ class PostNotificationMailer < ApplicationMailer
     mail({
       subject: "#{@upvoter.name} upvoted #{@post.title}",
       to: @user.formatted_address,
-      form: from_address
+      from: from_address
     })
   end
 
@@ -42,7 +42,7 @@ class PostNotificationMailer < ApplicationMailer
     mail({
       subject: "#{@post.title} was marked as ##{@post.status}",
       to: @user.formatted_address,
-      form: from_address
+      from: from_address
     })
   end
 

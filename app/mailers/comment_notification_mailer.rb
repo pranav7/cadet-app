@@ -11,7 +11,7 @@ class CommentNotificationMailer < ApplicationMailer
 
     mail(
       subject: "New Comment on #{@post.title}",
-      to: "#{@user.name} <#{@user.email}>",
+      to: @user.formatted_address,
       form: from_address
     )
   end

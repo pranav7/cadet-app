@@ -23,6 +23,7 @@ set :pty, false
 set :use_sudo, false
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"
+set :sidekiq_config, "#{current_path}/config/sidekiq.yml"
 
 # Default value for :linked_files is []
 append :linked_files, "config/database.yml", "config/secrets.yml", "config/cadet_config.yml"

@@ -45,6 +45,14 @@ class User < ApplicationRecord
     end
   end
 
+  def formatted_address
+    require 'mail'
+
+    address = Mail::Address.new email
+    address.display_name = name.dup
+    address.format
+  end
+
   def name
     [first_name, last_name].join(" ")
   end

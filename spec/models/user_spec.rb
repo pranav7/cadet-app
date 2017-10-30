@@ -57,6 +57,13 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe User, '#formatted_address' do
+    it "returns proper formatted address with name and email" do
+      user = build :user, first_name: "Jon", last_name: "Snow", email: "jon@winterfell.com"
+      expect(user.formatted_address).to eq("Jon Snow <jon@winterfell.com>")
+    end
+  end
+
   describe User, "#name" do
     it "returns a user's full name as a string" do
       user = build(:user, first_name: "Jon", last_name: "Snow")

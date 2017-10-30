@@ -31,8 +31,9 @@ class PostNotificationMailer < ApplicationMailer
     })
   end
 
-  def status_changed(post, user)
+  def status_changed(post, status, user)
     @post = post
+    @status = status
     @company = @post.company
     @user = user
     @host = @company.host
@@ -40,7 +41,7 @@ class PostNotificationMailer < ApplicationMailer
     build_post_url
 
     mail({
-      subject: "#{@post.title} was marked as ##{@post.status}",
+      subject: "#{@post.title} was marked as ##{@status}",
       to: @user.formatted_address,
       from: from_address
     })

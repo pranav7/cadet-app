@@ -9,6 +9,6 @@ class PostNotificationMailerPreview < ActionMailer::Preview
   end
 
   def status_changed
-    PostNotificationMailer.status_changed(Post.first, User.last)
+    PostNotificationMailer.status_changed(Post.first, "closed", User.last)
   end
 end

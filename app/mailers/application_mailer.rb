@@ -1,9 +1,12 @@
 class ApplicationMailer < ActionMailer::Base
-  default from: 'notifications@getcadet.com'
+  require 'mail'
+  # default from: 'notifications@getcadet.com'
   layout 'mailer'
 
   def from_address
-    "#{signature} <notifications@getcadet.com>"
+    address = Mail::Address.new "notifications@getcadet.com"
+    address.display_name = signature.dup
+    address.format
   end
 
   def signature

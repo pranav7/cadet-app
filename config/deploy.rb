@@ -19,7 +19,7 @@ set :branch, ENV['branch'] || current_branch || "master"
 # You can use the 'branch' parameter on deployment to specify the branch you wish to deploy
 
 set :rvm_ruby_version, 'ruby-2.4.1'
-set :pty, true
+set :pty, false
 set :use_sudo, false
 set :deploy_via, :remote_cache
 set :deploy_to, "/home/#{fetch(:user)}/apps/#{fetch(:application)}"

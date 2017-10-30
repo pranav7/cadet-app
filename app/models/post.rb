@@ -25,7 +25,7 @@ class Post < ApplicationRecord
 
   before_validation :set_last_activity_at, on: :create
   after_create :perform_after_create_tasks
-  after_update :perform_after_update_tasks
+  after_save :perform_after_update_tasks, on: :update
 
   def self.sorted(options = {})
     sort_method = options.delete(:sort_method) || :latest_activity
@@ -58,7 +58,7 @@ class Post < ApplicationRecord
   def perform_after_update_tasks
     if saved_change_to_status?
       update_last_activity_at
-      notify_status_changed_to_all_participants
+      notify_status_changed_to_all_participants(saved_change_to_status.last)
     end
   end
 
@@ -73,9 +73,9 @@ class Post < ApplicationRecord
     end
   end
 
-  def notify_status_changed_to_all_participants
+  def notify_status_changed_to_all_participants(status)
     participants.each do |participant|
-      PostNotificationMailer.status_changed(self, participant).deliver_later
+      PostNotificationMailer.status_changed(self, status, participant).deliver_later
     end
   end
 

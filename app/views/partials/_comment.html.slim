@@ -1,14 +1,15 @@
-.comment.box id="#{resource.class.to_s.downcase}-#{resource.id}" class=("note" if resource.try(:note?))
-  - if resource.try(:note?)
-    = render partial: "partials/user",
-      locals: { user: resource.user, hide_label: true }
-  - else
-    = render partial: "partials/user",
-      locals: { user: resource.user }
-  .content
-    = simple_format resource.content.body
-  
-  - if resource.class == Comment
-    a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
-  - else
-    p.soft= render_time(resource.created_at)
+.comment-container
+  .comment.box id="#{resource.class.to_s.downcase}-#{resource.id}" class=("note" if resource.try(:note?))
+    - if resource.try(:note?)
+      = render partial: "partials/user",
+        locals: { user: resource.user, hide_label: true }
+    - else
+      = render partial: "partials/user",
+        locals: { user: resource.user }
+    .content
+      = simple_format resource.content.body
+    
+    - if resource.class == Comment
+      a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
+    - else
+      p.soft= render_time(resource.created_at)

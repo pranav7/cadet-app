@@ -5,6 +5,21 @@ RSpec.describe Comment, type: :model do
   it { should have_one(:content) }
   it { should belong_to(:user) }
 
+  describe "#note?" do
+    it "returns true for private " do
+      comment = build :comment
+      comment.private = true
+      comment.save
+
+      expect(comment.note?).to eq(true)
+    end
+
+    it "reutrns false for public comments" do
+      comment = create :comment
+      expect(comment.note?).to eq(false)
+    end
+  end
+
   describe "After Create" do
     before :each do
       Timecop.freeze(1.day.ago) do

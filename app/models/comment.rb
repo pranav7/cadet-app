@@ -8,6 +8,12 @@ class Comment < ApplicationRecord
   after_create :touch_post_last_activity
   after_create :send_notifications
 
+  scope :without_notes, -> { where.not(private: true) }
+
+  def note?
+    !!self.private
+  end
+
   def send_notifications
     notify_admins
 

@@ -16,10 +16,7 @@ class Comment < ApplicationRecord
 
   def send_notifications
     notify_admins
-
-    if staff_commented? && requester_not_admin?
-      notify_requester
-    end
+    notify_requester if should_notify_requester?
   end
 
   def commenter
@@ -42,6 +39,10 @@ class Comment < ApplicationRecord
 
   def touch_post_last_activity
     post.touch(:last_activity_at)
+  end
+
+  def should_notify_requester?
+    not(note?) && staff_commented? && requester_not_admin?
   end
 
   def staff_commented?

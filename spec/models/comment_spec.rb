@@ -58,10 +58,22 @@ RSpec.describe Comment, type: :model do
         end
       end
 
+      context "staff adds note" do
+        it "notifies all admins of the company" do
+          expect { create :comment, post: post, user: admin, private: true }
+            .to have_enqueued_job.on_queue('mailers').exactly(:once)
+        end
+      end
+
       context "staff comments" do
         it "notifies post requester and other staff members" do
           expect { create :comment, post: post, user: admin }
             .to have_enqueued_job.on_queue('mailers').exactly(:twice)
+        end
+
+        it "does not notify if staff adds a note" do
+          expect { create :comment, post: post, user: admin, private: true }
+            .to have_enqueued_job.on_queue('mailers').exactly(:once)
         end
       end
     end

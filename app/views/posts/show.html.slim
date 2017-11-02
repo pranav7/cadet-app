@@ -25,14 +25,14 @@
 
         // Create Comment
         = render partial: "comments/new",
-          locals: { board: @board, post: @post, comment: @comment }
+          locals: { board: @board, post: @post, comment: @comment, note: false }
 
         // Post Activity
         .activity-header
           .text
             i.comments.outline.icon
             | Conversation
-        - @post.comments.each do |comment|
+        - @post.comments.without_notes.each do |comment|
           - next if comment.new_record?
           = render partial: "partials/comment", locals: { resource: comment }
 

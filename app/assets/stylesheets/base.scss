@@ -296,6 +296,14 @@ a.c.link {
     border-color: rgba(74, 144, 226, 0.24);
     border-left: 3px solid $secondary-blue;
   }
+
+  &.note {
+    background-color: $note-back;
+    border-color: $note-border;
+    display: inline-block;
+    border-radius: 25px;
+    padding: 1em 1.5em;
+  }
 }
 // End
 // Styling for Post and Comment Content

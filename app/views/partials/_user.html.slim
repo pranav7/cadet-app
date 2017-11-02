@@ -1,5 +1,6 @@
 - show_email = (show_email || false)
 - hide_avatar = (hide_avatar || false)
+- hide_label = (hide_label || false)
 
 .user
   - unless hide_avatar
@@ -20,6 +21,6 @@
         span.meta.soft= user.account_for(current_company).name
 
   // Staff Label
-  - if user.admin_of?(current_company)
+  - if !hide_label && user.admin_of?(current_company)
     .staff-label
       .ui.small.rounded.label.float.right Staff

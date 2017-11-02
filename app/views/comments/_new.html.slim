@@ -1,7 +1,13 @@
+- placeholder = note ? "This is an internal note, will only be visible to other admins ... " : "Type your reply ..."
 = simple_form_for comment, url: board_post_comments_path(board, post) do |form|
+  - if note
+    = form.input :private, as: :hidden, input_html: { value: true }
   = form.simple_fields_for :content do |cf|
     = cf.input :body,
-      placeholder: "Type a comment ...",
+      placeholder: placeholder,
       label: false,
-      input_html: { rows: 3 }
-  = form.submit "Comment", class: "ui button"
+      input_html: { rows: 4, class: "transparent" }
+  - if note
+    = form.submit "Add Note", class: "ui small button"
+  - else
+    = form.submit "Reply", class: "ui small button"

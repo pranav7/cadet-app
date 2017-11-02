@@ -70,4 +70,19 @@ body.admin.posts {
       cursor: pointer;
     }
   }
+
+  .create-comment {
+    #note-container,
+    .item.note.active {
+      background: $note-back;
+      border-color: $note-border;
+    }
+
+    textarea.transparent {
+      background: transparent;
+      border: none;
+      padding: 0;
+    }
+  }
 }
+

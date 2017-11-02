@@ -6,7 +6,7 @@
       .post-summary.soft= post.content.body.truncate(200)
     .comment-count.soft.float.right
       i.comment.outline.icon
-      = post.comments.count
+      = post.comments.without_notes.count
 
   .post-info.soft
     = render partial: "posts/vote",

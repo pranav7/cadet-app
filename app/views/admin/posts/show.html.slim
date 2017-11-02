@@ -46,8 +46,16 @@
     = render partial: "partials/comment", locals: { resource: @post }
 
   .create-comment
-    = render partial: "comments/new",
-      locals: { board: @board, post: @post, comment: @comment }
+    .ui.top.attached.tabular.menu
+      a.item.active data-tab="comment" Reply
+      a.item.note data-tab="note" Note
+
+    .ui.bottom.attached.tab.segment.active data-tab='comment'
+      = render partial: "comments/new",
+        locals: { board: @board, post: @post, comment: @comment, note: false }
+    .ui.bottom.attached.tab.segment#note-container data-tab='note'
+      = render partial: "comments/new",
+        locals: { board: @board, post: @post, comment: @comment, note: true }
 
   .post-activity.vertical.padded
     .activity-header
@@ -98,3 +106,5 @@ coffee:
 
   $("#edit-post-btn").click ->
     $("#edit-post-modal").modal('show')
+
+  $('.menu .item').tab()

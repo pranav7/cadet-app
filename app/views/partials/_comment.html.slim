@@ -1,6 +1,10 @@
-.comment.box id="#{resource.class.to_s.downcase}-#{resource.id}"
-  = render partial: "partials/user",
-    locals: { user: resource.user }
+.comment.box id="#{resource.class.to_s.downcase}-#{resource.id}" class=("note" if resource.try(:note?))
+  - if resource.try(:note?)
+    = render partial: "partials/user",
+      locals: { user: resource.user, hide_label: true }
+  - else
+    = render partial: "partials/user",
+      locals: { user: resource.user }
   .content
     = simple_format resource.content.body
   

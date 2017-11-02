@@ -6,8 +6,13 @@ p
     = " (Staff) "
   - else
     = " (#{@commenter.email}) "
-  a href=@comment_url commented
-  |  on 
+
+  - if @comment.note?
+    a href=@comment_url added a note
+    |  in 
+  - else
+    a href=@comment_url replied
+    |  to 
   = @user == @post.requester ? "your" : "the" 
   |  post 
   strong
@@ -15,5 +20,9 @@ p
       = @post.title
   |  in #{@post.board.name}
 
-blockquote 
-  = simple_format @comment.content.body
+- if @comment.note?
+  .note
+    = simple_format @comment.content.body
+- else
+  .comment
+    = simple_format @comment.content.body

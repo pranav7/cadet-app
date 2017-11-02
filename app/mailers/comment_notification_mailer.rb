@@ -9,8 +9,14 @@ class CommentNotificationMailer < ApplicationMailer
 
     build_comment_and_board_urls
 
+    if @comment.note?
+      @subject = "New Note: #{@post.title}"
+    else
+      @subject = "New Reply: #{@post.title}"
+    end
+
     mail(
-      subject: "New Comment on #{@post.title}",
+      subject: @subject,
       to: @user.formatted_address,
       from: from_address
     )

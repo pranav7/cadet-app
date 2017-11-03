@@ -12,7 +12,7 @@ a.admin-post-list-item href=admin_board_post_path(board, post, request.query_par
     span &nbsp;
     span.ui.rounded.small.label.soft
       - if account
-        = account.votes_for(post).count
+        = pluralize(account.votes_for(post).count, "Upvote")
       - else
         = pluralize(post.votes.count, "Upvote")
     span &nbsp;

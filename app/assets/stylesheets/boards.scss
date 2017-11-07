@@ -3,6 +3,18 @@ body.boards {
     display: flex;
     flex-wrap: wrap;
 
+    a.board-link {
+      .board-name {
+        color: $darkest;
+        font-weight: 600;
+        font-size: 18px;
+      }
+
+      .board:hover {
+        border-top-color: $secondary-blue;
+      }
+    }
+
     .board {
       width: 235px;
       min-height: 295px;
@@ -14,6 +26,7 @@ body.boards {
       justify-content: space-between;
 
       border-top: 4px solid $lighter;
+      transition: 0.25s ease;
 
       a.board-name {
         color: $darkest;

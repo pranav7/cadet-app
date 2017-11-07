@@ -11,9 +11,10 @@
       - else
         .boards-list
           - @boards.each do |board|
-            .board.box
-              .top
-                = link_to board.name, board_path(board), class: "board-name"
-                .board-description.soft= board.description
-              .bottom
-                span.soft.foat.left= pluralize(board.posts.count, "Post")
+            a.board-link href=board_path(board)
+              .board.box
+                .top
+                  .board-name= board.name
+                  .board-description.soft= board.description
+                .bottom
+                  span.soft.foat.left= pluralize(board.posts.count, "Post")

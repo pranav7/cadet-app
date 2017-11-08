@@ -21,6 +21,8 @@ class Admin::BoardsController < Admin::AdminController
 
   def update
     @board = current_company.boards.friendly.find(params[:id])
+    # slug needs to be set to nil to regenerate slug
+    @board.slug = nil
 
     if @board.update_attributes(board_params)
       flash[:success] = "Settings saved"

@@ -16,7 +16,14 @@ class Admin::PostsController < Admin::AdminController
   def update
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.friendly.find(params[:id])
-    post.update_attributes(post_params)
+    # slug needs to be set to nil to regenerate slug
+    post.slug = nil
+
+    if post.update_attributes(post_params)
+      flash[:success] = "Changes to post saved"
+    else
+      flash[:error] = "Something went wrong"
+    end
 
     redirect_back fallback_location: admin_board_post_path(post)
   end

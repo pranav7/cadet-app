@@ -1,6 +1,11 @@
 class BoardsController < ApplicationController
   def index
     @boards = current_company.boards
+
+    if @boards.count == 1
+      return redirect_to(board_path(@boards.first))
+    end
+
     @page_title = "Boards - #{current_company.name}"
   end
 

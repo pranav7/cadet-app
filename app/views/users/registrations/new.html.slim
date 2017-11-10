@@ -14,17 +14,18 @@
             = company_form.input :name,
               placeholder: "Company Name",
               label: false,
-              autofocus: true
+              autofocus: true,
+              input_html: { value: @company }
             = company_form.input :subdomain,
               label: false,
               wrapper: :ui_right_labled_input do
-              = company_form.input_field :subdomain, placeholder: "Cadet URL"
+              = company_form.input_field :subdomain, placeholder: "Cadet URL", value: @subdomain_value
               .ui.custom.basic.label .getcadet.com
 
         .two.fields
-          = form.input :first_name, label: false, placeholder: "First Name"
-          = form.input :last_name, label: false, placeholder: "Last Name"
-        = form.input :email, label: false, placeholder: "Work Email"
+          = form.input :first_name, label: false, placeholder: "First Name", input_html: { value: @first_name }
+          = form.input :last_name, label: false, placeholder: "Last Name", input_html: { value: @last_name }
+        = form.input :email, label: false, placeholder: "Work Email", input_html: { value: @email }
         = form.input :password, label: false, placeholder: "Password"
         = form.input :job_title, label: false, placeholder: "Job Title (optional)"
 

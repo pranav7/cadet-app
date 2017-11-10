@@ -9,6 +9,14 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     build_resource({})
     self.resource.memberships.build.build_company
+
+    # Prepopulating values for user's convenience
+    @first_name = params[:first_name] || nil
+    @last_name = params[:last_name] || nil
+    @email = params[:email] || nil
+    @company = params[:company] || nil
+    @subdomain_value = params[:sd] || nil
+
     respond_with self.resource
   end
 

@@ -4,9 +4,7 @@
 
 .user
   - unless hide_avatar
-    .avatar-container
-      .avatar.circle class=(size rescue nil)
-        .initials= user.initials
+    = render partial: "users/avatar", locals: { user: user, size: (size rescue nil) }
   .details
     span.name= user.name
     br

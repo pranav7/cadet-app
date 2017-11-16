@@ -3,6 +3,7 @@ class Admin::AccountsController < Admin::AdminController
     @accounts = current_company.accounts
     @account = current_company.accounts.new
     @main_selected = :customers
+    @sub_nav_selected = :accounts
   end
 
   def show
@@ -10,6 +11,7 @@ class Admin::AccountsController < Admin::AdminController
     @account_membership = @account.account_memberships.new
     @users = current_company.users
     @main_selected = :customers
+    @sub_nav_selected = :accounts
 
     if params[:board]
       @board = current_company.boards.friendly.find(params[:board])

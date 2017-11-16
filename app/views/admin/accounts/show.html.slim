@@ -1,97 +1,99 @@
-.c-full-pane
-  .ui.stackable.grid
-    .row
-      .sixteen.wide.column
-        h1.heading= @account.name
-    .row
-      .eight.wide.column
-        p.soft
-          | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
-    
-    .row
-      .ten.wide.column
-        .box
-          = form_tag admin_account_path(@account), method: :get
-            .ui.grid
-              .four.wide.column
-                .c.labeled.field
-                  label Board
-                  select.ui.open.dropdown name="board" onchange="this.form.submit()"
-                    option value="" Select Board
-                    - current_company.boards.each do |board|
-                      option value=board.slug selected=(true if board == @board)
-                       = board.name
+.c-settings-grid
+  .c-left-pane.dark
+    = render partial: "admin/customers_sub_nav"
+  .c-main-pane
+    .ui.stackable.grid
+      .row
+        .sixteen.wide.column
+          h1.heading= @account.name
+      .row
+        .eight.wide.column
+          p.soft
+            | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
+      
+      .row
+        .sixteen.wide.column
+          .box
+            = form_tag admin_account_path(@account), method: :get
+              .ui.grid
+                .four.wide.column
+                  .c.labeled.field
+                    label Board
+                    select.ui.open.dropdown name="board" onchange="this.form.submit()"
+                      option value="" Select Board
+                      - current_company.boards.each do |board|
+                        option value=board.slug selected=(true if board == @board)
+                         = board.name
 
-              .four.wide.column
-                = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
-          .ui.divider
-          
-          - if @board
-            - if @posts.blank?
-              h4.soft
-                | The users of #{@account.name} have not yet participated in any posts.
-            - else
-              - @posts.each do |post|
-                = render partial: "posts/admin_list",
-                  locals: { post: post, board: @board, account: @account }
-          - else
-            h4.soft
-              | Please select a board
-
-
-      .five.wide.column
-        .box
-          .box-header.c-soft
-            .header-text
-              i.address.card.icon
-              | About #{@account.name}
-          .account-info
-            .info-label.c-soft Domain
-            .info-value= @account.domain
-          .account-info
-            .info-label.c-soft MRR
-            .info-value $#{@account.mrr}
-          .account-info
-            .info-label.c-soft Paying
-            .info-value= @account.paying
-          .account-info
-            .info-label.c-soft Churned
-            .info-value= @account.churned
-          .account-info
-            .info-label.c-soft Since
-            .info-value= render_time(@account.created_at)
-          .account-info
-            a.c.underlined.link href=edit_admin_account_path(@account, request.query_parameters)
-              | Edit
-            | &nbsp;
-            | &nbsp;
-            = link_to "Delete", admin_account_path(@account), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
-        .box
-          .box-header.c-soft
-            .header-text
-              i.user.circle.icon
-              | Users
-          = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
-            .field
-              .ui.fluid.multiple.search.selection.dropdown
-                input type="hidden" name="user_ids"
-                i.dropdown.icon
-                .default.text Select Users
-                .menu
-                  - @users.each do |user|
-                    - next unless user
-                    - next if @account.users.include?(user)
-                    .item data-value=user.id
-                      = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
-
-            = form.submit "+ Add", class: "ui small button"
-          .vertical.padded
-          - @account.users.each do |user|
-            = render partial: "partials/user", locals: { user: user }
-            span
-              = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
-                span.soft Remove
+                .four.wide.column
+                  = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
             .ui.divider
+            
+            - if @board
+              - if @posts.blank?
+                h4.soft
+                  | The users of #{@account.name} have not yet participated in any posts.
+              - else
+                - @posts.each do |post|
+                  = render partial: "posts/admin_list",
+                    locals: { post: post, board: @board, account: @account }
+            - else
+              h4.soft
+                | Please select a board
+
+  .c-right-pane
+    .box
+      .box-header.c-soft
+        .header-text
+          i.address.card.icon
+          | About #{@account.name}
+      .account-info
+        .info-label.c-soft Domain
+        .info-value= @account.domain
+      .account-info
+        .info-label.c-soft MRR
+        .info-value $#{@account.mrr}
+      .account-info
+        .info-label.c-soft Paying
+        .info-value= @account.paying
+      .account-info
+        .info-label.c-soft Churned
+        .info-value= @account.churned
+      .account-info
+        .info-label.c-soft Since
+        .info-value= render_time(@account.created_at)
+      .account-info
+        a.c.underlined.link href=edit_admin_account_path(@account, request.query_parameters)
+          | Edit
+        | &nbsp;
+        | &nbsp;
+        = link_to "Delete", admin_account_path(@account), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
+    .box
+      .box-header.c-soft
+        .header-text
+          i.user.circle.icon
+          | Users
+      = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
+        .field
+          .ui.fluid.multiple.search.selection.dropdown
+            input type="hidden" name="user_ids"
+            i.dropdown.icon
+            .default.text Select Users
+            .menu
+              - @users.each do |user|
+                - next unless user
+                - next if @account.users.include?(user)
+                .item data-value=user.id
+                  = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
+
+        = form.submit "+ Add", class: "ui small button"
+      .vertical.padded
+      - @account.users.each do |user|
+        = render partial: "partials/user", locals: { user: user }
+        span
+          = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
+            span.soft Remove
+        .ui.divider
 
 coffee:
   $('.ui.dropdown').dropdown({

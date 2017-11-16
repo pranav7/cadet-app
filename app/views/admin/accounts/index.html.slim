@@ -1,42 +1,45 @@
-.c-full-pane
-  .ui.grid
-    .row
-      .sixteen.wide.column
-        h1.heading Customers
-    .row
-      .ten.wide.column
-        table.ui.selectable.table#accounts-table
-          thead
-            tr
-              th Name
-              th Domain
-              th Paying
-              th Churned
-              th MRR
-          - @accounts.each do |account|
-            - next if account.new_record?
-            tr.selectable-row data-href=admin_account_path(account)
-              td
-                h4= account.name
-              td= account.domain
-              td= account.paying
-              td= account.churned
-              td data-sort=account.mrr $#{account.mrr}
-      .five.wide.column
-        .box
-          .box-header
-            .header-text
-              i.user.circle.icon
-              | Add Customer
-          .vertical.padded
-            = render partial: "form"
-        .box
-          .box-header
-            .header-text
-              i.plus.icon
-              | Invite Users
-          p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
-          .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
+.c-settings-grid
+  .c-left-pane.dark
+    = render partial: "admin/customers_sub_nav"
+  .c-main-pane
+    .ui.grid
+      .row
+        .sixteen.wide.column
+          h1.heading Accounts
+      .row
+        .sixteen.wide.column
+          table.ui.selectable.table#accounts-table
+            thead
+              tr
+                th Name
+                th Domain
+                th Paying
+                th Churned
+                th MRR
+            - @accounts.each do |account|
+              - next if account.new_record?
+              tr.selectable-row data-href=admin_account_path(account)
+                td
+                  h4= account.name
+                td= account.domain
+                td= account.paying
+                td= account.churned
+                td data-sort=account.mrr $#{account.mrr}
+  .c-right-pane
+    .box
+      .box-header
+        .header-text
+          i.suitcase.icon
+          | Add Account
+      .vertical.padded
+        = render partial: "form"
+    .box
+      .box-header
+        .header-text
+          i.plus.icon
+          | Invite Users
+      p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
+      .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).on "turbolinks:load", ->

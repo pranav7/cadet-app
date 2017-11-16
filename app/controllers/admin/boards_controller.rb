@@ -46,6 +46,7 @@ class Admin::BoardsController < Admin::AdminController
   def index
     @boards = current_company.boards
     @board = current_company.boards.new
+    @main_selected = :boards
   end
 
   def destroy

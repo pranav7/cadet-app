@@ -11,6 +11,7 @@ class Admin::PostsController < Admin::AdminController
     @comment.build_content
 
     @accounts = @post.accounts
+    @main_selected = :boards
   end
 
   def update

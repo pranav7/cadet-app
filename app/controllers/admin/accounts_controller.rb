@@ -2,12 +2,14 @@ class Admin::AccountsController < Admin::AdminController
   def index
     @accounts = current_company.accounts
     @account = current_company.accounts.new
+    @main_selected = :customers
   end
 
   def show
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
     @users = current_company.users
+    @main_selected = :customers
 
     if params[:board]
       @board = current_company.boards.friendly.find(params[:board])

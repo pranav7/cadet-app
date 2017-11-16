@@ -4,4 +4,10 @@ class Admin::UsersController < Admin::AdminController
     @main_selected = :customers
     @sub_nav_selected = :users
   end
+
+  def show
+    @user = current_company.users.find(params[:id])
+    @main_selected = :customers
+    @sub_nav_selected = :users
+  end
 end

@@ -12,6 +12,8 @@ Cadet.init = ->
 
 Cadet.Admin.init = ->
   # initialize common jQuery plugins and other Javascript libraries here
+  $(".selectable-row").click (e) ->
+    window.location = $(@).data("href")
 
 $(document).on "turbolinks:load", ->
   Cadet.init()

@@ -43,7 +43,4 @@
 
 coffee:
   $(document).on "turbolinks:load", ->
-    new Tablesort(document.getElementById('accounts-table'))
-    
-    $(".selectable-row").click (e) ->
-      window.location = $(@).data("href")
+    new Tablesort(document.getElementById('accounts-table')) 

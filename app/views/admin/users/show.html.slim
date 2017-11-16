@@ -2,4 +2,53 @@
   .c-left-pane.dark
     = render partial: "admin/customers_sub_nav"
   .c-main-pane
-    h1.heading= @user.name
+    .box
+      = form_tag admin_user_path(@user), method: :get
+        .ui.grid
+          .four.wide.column
+            .c.labeled.field
+              label Board
+              select.ui.open.dropdown name="board" onchange="this.form.submit()"
+                option value="" Select Board
+                - current_company.boards.each do |board|
+                  option value=board.slug selected=(true if board == @board)
+                   = board.name
+
+          .four.wide.column
+            = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
+      .ui.divider
+      
+      - if @board
+        - if @posts.blank?
+          h4.soft
+            | #{@user.name} has not yet participated in any posts.
+        - else
+          - @posts.each do |post|
+            = render partial: "posts/admin_list",
+              locals: { post: post, board: @board, account: @account }
+      - else
+        h4.soft
+          | Please select a board
+  .c-right-pane
+    .box
+      = render partial: "users/avatar", locals: { user: @user, size: "large" }
+      h2= @user.name
+      .account-info
+        .info-label.c-soft Email
+        .info-value= @user.email
+      .account-info
+        .info-label.c-soft Job Title
+        - if @user.job_title
+          .info-value= @user.job_title
+        - else
+          .info-value -
+      .account-info
+        .info-label.c-soft Account
+        .info-value
+          - account = @user.account_for(current_company)
+          a href=admin_account_path(account)
+            | #{account.name} 
+            i.external.link.icon
+
+coffee:
+  $('.ui.dropdown').dropdown()

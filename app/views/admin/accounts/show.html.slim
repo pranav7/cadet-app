@@ -4,9 +4,6 @@
   .c-main-pane
     .ui.stackable.grid
       .row
-        .sixteen.wide.column
-          h1.heading= @account.name
-      .row
         .eight.wide.column
           p.soft
             | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
@@ -47,6 +44,10 @@
         .header-text
           i.address.card.icon
           | About #{@account.name}
+      .account-info
+        .info-label.c-soft Name
+        .info-value
+          h2= @account.name
       .account-info
         .info-label.c-soft Domain
         .info-value= @account.domain

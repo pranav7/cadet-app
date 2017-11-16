@@ -16,6 +16,19 @@ body.admin {
     border-radius: 4px;
   }
 
+  .account-info {
+    padding: $half-base-size 0;
+
+    .info-value {
+      font-weight: 500;
+      font-size: 15px;
+
+      h2 {
+        margin-top: 0;
+      }
+    }
+  }
+
   table.ui.selectable.table {
     tr.selectable-row {
       cursor: pointer;

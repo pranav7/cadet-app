@@ -1,0 +1,30 @@
+.c-settings-grid
+  .c-left-pane.dark
+    = render partial: "admin/customers_sub_nav"
+  .c-main-pane
+    .ui.grid
+      .row
+        .sixteen.wide.column
+          h1.heading Users
+      .row
+        .sixteen.wide.column
+          table.ui.selectable.table#users-table
+            thead
+              tr
+                th Name
+                th Email
+                th Account
+                th Posts
+            - @users.each do |user|
+              tr.selectable-row
+                td
+                  h4= user.name
+                td= user.email
+                - if user.account_for(current_company)
+                  td= user.account_for(current_company).name
+                - else
+                  td -
+                - if user.posts.empty?
+                  td -
+                - else
+                  td= pluralize(user.posts.count, "Post")

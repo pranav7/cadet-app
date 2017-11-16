@@ -31,7 +31,7 @@ Rails.application.routes.draw do
       resource :account_memberships, only: [:create, :destroy]
     end
 
-    resources :users, only: [:index]
+    resources :users, only: [:index, :show]
   end
 
   get :join, to: "users#new"

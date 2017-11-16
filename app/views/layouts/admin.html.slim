@@ -12,8 +12,7 @@ html
     main.c-container
       .c-admin-nav
         = render partial: "admin/nav"
-      .c-content-container
-        = yield
+      = yield
 
   = render partial: "partials/external_js"
   = render partial: "partials/live_chat"

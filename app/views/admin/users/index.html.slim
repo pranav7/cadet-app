@@ -11,12 +11,16 @@
           table.ui.selectable.table#users-table
             thead
               tr
+                th
                 th Name
                 th Email
                 th Account
                 th Posts
             - @users.each do |user|
-              tr.selectable-row
+              tr.selectable-row data-href=admin_user_path(user)
+                td
+                  = render partial: "users/avatar",
+                    locals: { user: user, size: "small" }
                 td
                   h4= user.name
                 td= user.email
@@ -28,3 +32,7 @@
                   td -
                 - else
                   td= pluralize(user.posts.count, "Post")
+
+coffee:
+  $(document).on "turbolinks:load", ->
+    new Tablesort(document.getElementById('users-table')) 

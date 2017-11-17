@@ -15,23 +15,18 @@
                 th Name
                 th Email
                 th Account
-                th Posts
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
                 td
                   = render partial: "users/avatar",
                     locals: { user: user, size: "small" }
                 td
-                  h4= user.name
+                  strong= user.name
                 td= user.email
                 - if user.account_for(current_company)
                   td= user.account_for(current_company).name
                 - else
                   td -
-                - if user.posts.empty?
-                  td -
-                - else
-                  td= pluralize(user.posts.count, "Post")
 
 coffee:
   $(document).on "turbolinks:load", ->

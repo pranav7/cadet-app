@@ -30,9 +30,9 @@
         h4.soft
           | Please select a board
   .c-right-pane
-    .box
+    .box.user-show-box
       = render partial: "users/avatar", locals: { user: @user, size: "large" }
-      h2= @user.name
+      h2.user-name= @user.name
       .account-info
         .info-label.c-soft Email
         .info-value= @user.email
@@ -46,9 +46,12 @@
         .info-label.c-soft Account
         .info-value
           - account = @user.account_for(current_company)
-          a href=admin_account_path(account)
-            | #{account.name} 
-            i.external.link.icon
+          - if account
+            a href=admin_account_path(account)
+              | #{account.name} 
+              i.external.link.icon
+          - else
+            | -
 
 coffee:
   $('.ui.dropdown').dropdown()

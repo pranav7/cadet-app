@@ -27,6 +27,14 @@
                   td= user.account_for(current_company).name
                 - else
                   td -
+  .c-right-pane
+    .box
+      .box-header
+        .header-text
+          i.plus.icon
+          | Invite Users
+      p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
+      .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).on "turbolinks:load", ->

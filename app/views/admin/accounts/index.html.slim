@@ -33,13 +33,6 @@
           | Add Account
       .vertical.padded
         = render partial: "form"
-    .box
-      .box-header
-        .header-text
-          i.plus.icon
-          | Invite Users
-      p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
-      .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).on "turbolinks:load", ->

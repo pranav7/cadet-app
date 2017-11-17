@@ -12,7 +12,7 @@ class Admin::UsersController < Admin::AdminController
 
     if params[:board]
       @board = current_company.boards.friendly.find(params[:board])
-      @posts = @user.posts.sorted(sort_method: params[:sort_by])
+      @posts = @user.voted_posts.sorted(sort_method: params[:sort_by])
     end
   end
 end

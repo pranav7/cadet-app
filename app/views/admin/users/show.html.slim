@@ -2,6 +2,16 @@
   .c-left-pane.dark
     = render partial: "admin/customers_sub_nav"
   .c-main-pane
+    - if @board
+      p.soft
+        | These are the posts that 
+        strong #{@user.name}
+        |  has upvoted in 
+        strong #{@board.name}
+    - else
+      p.soft
+        | Please select a board to see the posts upvoted by 
+        strong #{@user.name}
     .box
       = form_tag admin_user_path(@user), method: :get
         .ui.grid
@@ -52,6 +62,9 @@
               i.external.link.icon
           - else
             | -
+      .account-info
+        .info-label.c-soft Posts created across boards
+        .info-value= @user.posts.count
 
 coffee:
   $('.ui.dropdown').dropdown()

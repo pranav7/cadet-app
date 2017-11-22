@@ -68,32 +68,7 @@
         | &nbsp;
         | &nbsp;
         = link_to "Delete", admin_account_path(@account), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
-    .box
-      .box-header.c-soft
-        .header-text
-          i.user.circle.icon
-          | Users
-      = simple_form_for @account_membership, url: admin_account_account_memberships_path(@account) do |form|
-        .field
-          .ui.fluid.multiple.search.selection.dropdown
-            input type="hidden" name="user_ids"
-            i.dropdown.icon
-            .default.text Select Users
-            .menu
-              - @users.each do |user|
-                - next unless user
-                - next if @account.users.include?(user)
-                .item data-value=user.id
-                  = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
-
-        = form.submit "+ Add", class: "ui small button"
-      .vertical.padded
-      - @account.users.each do |user|
-        = render partial: "partials/user", locals: { user: user }
-        span
-          = link_to admin_account_account_memberships_path(@account, user_id: user.id), method: :delete do
-            span.soft Remove
-        .ui.divider
+    = render partial: "add_and_list_users"
 
 coffee:
   $('.ui.dropdown').dropdown({

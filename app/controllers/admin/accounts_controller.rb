@@ -30,8 +30,11 @@ class Admin::AccountsController < Admin::AdminController
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
     @users = current_company.users
-    @board = current_company.boards.friendly.find(params[:board]) if params[:board]
-    @posts = @account.posts(@board)
+
+    if params[:board]
+      @board = current_company.boards.friendly.find(params[:board])
+      @posts = @account.posts(@board)
+    end
   end
 
   def update

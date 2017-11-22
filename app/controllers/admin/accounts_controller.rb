@@ -29,12 +29,6 @@ class Admin::AccountsController < Admin::AdminController
   def edit
     @account = current_company.accounts.find(params[:id])
     @account_membership = @account.account_memberships.new
-    @users = current_company.users
-
-    if params[:board]
-      @board = current_company.boards.friendly.find(params[:board])
-      @posts = @account.posts(@board)
-    end
   end
 
   def update

@@ -2,53 +2,12 @@
   .c-left-pane.dark
     = render partial: "admin/customers_sub_nav"
   .c-main-pane
-    .ui.stackable.grid
-      .row
-        .sixteen.wide.column
-          p.soft These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
-      
-      .row
-        .sixteen.wide.column
-          .box
-            = form_tag admin_account_path(@account), method: :get
-              .ui.grid
-                .four.wide.column
-                  .c.labeled.field
-                    label Board
-                    select.ui.open.dropdown name="board" onchange="this.form.submit()"
-                      option value="" Select Board
-                      - current_company.boards.each do |board|
-                        option value=board.slug selected=(true if board == @board)
-                         = board.name
-
-                .four.wide.column
-                  = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
-            .ui.divider
-            
-            - if @board
-              - if @posts.blank?
-                h4.soft
-                  | The users of #{@account.name} have not yet participated in any posts.
-              - else
-                - @posts.each do |post|
-                  = render partial: "posts/admin_list",
-                    locals: { post: post, board: @board, account: @account }
-            - else
-              h4.soft
-                | Please select a board
-
-  .c-right-pane
-    .box
-      .box-header.c-soft
-        .header-text
-          i.address.card.icon
-          | Edit #{@account.name}
-      .vertical.padded
-        = render partial: "form"
-
-    = render partial: "add_and_list_users"
-
-coffee:
-  $('.ui.dropdown').dropdown({
-    allowMultiple: true
-  })
+  .ui.grid
+    .five.wide.column
+      .box
+        .box-header.c-soft
+          .header-text
+            i.address.card.icon
+            | Edit #{@account.name}
+        .vertical.padded
+          = render partial: "form"

@@ -1,7 +1,16 @@
 body.admin.users {
   .user-show-box {
-    h2.user-name {
-      margin-top: 4px;
+    .user-name-container {
+      margin-bottom: 1rem;
+
+      span.admin-label {
+        margin-left: 0;
+      }
+
+      h2.user-name {
+        margin-top: 4px;
+        margin-bottom: 0;
+      }
     }
   }
 }

@@ -42,7 +42,11 @@
   .c-right-pane
     .box.user-show-box
       = render partial: "users/avatar", locals: { user: @user, size: "large" }
-      h2.user-name= @user.name
+      .user-name-container
+        h2.user-name
+          = @user.name
+        - if @user.admin_of?(current_company)
+          span.admin-label.ui.small.rounded.label Admin
       .account-info
         .info-label.c-soft Email
         .info-value= @user.email

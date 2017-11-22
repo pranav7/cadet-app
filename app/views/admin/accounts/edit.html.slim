@@ -2,12 +2,12 @@
   .c-left-pane.dark
     = render partial: "admin/customers_sub_nav"
   .c-main-pane
-  .ui.grid
-    .five.wide.column
-      .box
-        .box-header.c-soft
-          .header-text
-            i.address.card.icon
-            | Edit #{@account.name}
-        .vertical.padded
-          = render partial: "form"
+    .ui.grid
+      .ten.wide.column
+        .box
+          .box-header.c-soft
+            .header-text
+              i.address.card.icon
+              | Edit #{@account.name}
+          .vertical.padded
+            = render partial: "form"

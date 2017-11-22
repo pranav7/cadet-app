@@ -36,3 +36,17 @@
     display: inline-block;
   }
 }
+
+@mixin restrict-height-to-window {
+  max-height: 100vh;
+  height: 100vh;
+  overflow: hidden;
+
+  &:hover {
+    overflow: auto;
+  }
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+} 

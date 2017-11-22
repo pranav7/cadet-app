@@ -68,17 +68,8 @@ body.admin {
     background: $white;
     grid-column: left / main;
     border-right: 1px solid $lighter;
-    max-height: 100vh;
-    height: 100vh;
-    overflow: hidden;
 
-    &:hover {
-      overflow: auto;
-    }
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @include restrict-height-to-window;
 
     &.dark {
       background: $darkest;
@@ -88,24 +79,15 @@ body.admin {
   .c-main-pane {
     grid-column: main / right;
     padding: $base-size;
-    overflow: auto;
-    max-height: 100vh;
-    height: 100vh;
 
-    overflow: hidden;
-
-    &:hover {
-      overflow: auto;
-    }
-
-    &::-webkit-scrollbar {
-      display: none;
-    }
+    @include restrict-height-to-window;
   }
 
   .c-right-pane {
     grid-column: right / end;
     padding: $base-size $half-base-size;
+
+    @include restrict-height-to-window;
   }
 
   .c-profile-menu {

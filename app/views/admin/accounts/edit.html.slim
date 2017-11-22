@@ -1,48 +1,10 @@
 .c-full-pane
-  .ui.stackable.grid
-    .row
-      .sixteen.wide.column
-        h1.heading= @account.name
-    .row
-      .eight.wide.column
-        p.soft
-          | These are the posts that the users of #{@account.name} have upvoted. The upvotes you see below are only from the users of #{@account.name} and not all the upvotes for that post.
-    
-    .row
-      .ten.wide.column
-        .box
-          = form_tag admin_account_path(@account), method: :get
-            select.ui.dropdown name="board" onchange="this.form.submit()"
-              option value="" Select Board
-              - current_company.boards.each do |board|
-                option value=board.slug selected=(true if board == @board)
-                 = board.name
-
-          - if @board
-            - if @posts.blank?
-              h4.soft
-                | The users of #{@account.name} have not yet participated in any posts.
-            - else
-              - @posts.each do |post|
-                = render partial: "posts/list",
-                  locals: { post: post, link_to: :admin, account: @account }
-          - else
-            h4.soft
-              | Please select a board
-
-
-      .five.wide.column
-        .box
-          .box-header.c-soft
-            .header-text
-              i.address.card.icon
-              | Edit #{@account.name}
-          .vertical.padded
-            = render partial: "form"
-
-        = render partial: "add_and_list_users"
-
-coffee:
-  $('.ui.dropdown').dropdown({
-    allowMultiple: true
-  })
+  .ui.grid
+    .five.wide.column
+      .box
+        .box-header.c-soft
+          .header-text
+            i.address.card.icon
+            | Edit #{@account.name}
+        .vertical.padded
+          = render partial: "form"

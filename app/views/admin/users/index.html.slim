@@ -44,5 +44,5 @@
       .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
-  $(document).on "turbolinks:load", ->
+  $(document).ready ->
     new Tablesort(document.getElementById('users-table')) 

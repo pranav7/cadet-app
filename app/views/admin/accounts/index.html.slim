@@ -35,5 +35,5 @@
         = render partial: "form"
 
 coffee:
-  $(document).on "turbolinks:load", ->
+  $(document).ready ->
     new Tablesort(document.getElementById('accounts-table')) 

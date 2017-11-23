@@ -37,7 +37,7 @@ body.admin {
 
   main.c-container {
     display: grid;
-    grid-template-columns: [nav] 85px [main] auto [end];
+    grid-template-columns: [nav] 75px [main] auto [end];
     justify-items: start;
 
     .c-full-pane {
@@ -60,7 +60,7 @@ body.admin {
   .c-settings-grid {
     display: inline-grid;
     grid-column: main / end;
-    grid-template-columns: [left] 200px [main] auto [right] 350px [end];
+    grid-template-columns: [left] 175px [main] auto [right] 350px [end];
     width: 100%;
   }
 
@@ -148,7 +148,7 @@ body.admin {
   }
 
   .ui.settings.menu {
-    padding: 24px 16px;
+    padding: 24px 0;
 
     .item {
       font-weight: 500;

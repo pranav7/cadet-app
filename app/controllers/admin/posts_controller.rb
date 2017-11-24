@@ -29,6 +29,21 @@ class Admin::PostsController < Admin::AdminController
     redirect_back fallback_location: admin_board_post_path(post)
   end
 
+  def destroy
+    board = current_company.boards.friendly.find(params[:board_id])
+    post = board.posts.friendly.find(params[:id])
+    
+    begin
+      post.destroy!
+
+      flash[:success] = "Post was deleted!"
+      redirect_to admin_boards_path(board)
+    rescue
+      flash[:error] = "Something went wrong while deleting the post"
+      redirect_to board_post_path(board, post)
+    end
+  end
+
   private
 
   def post_params

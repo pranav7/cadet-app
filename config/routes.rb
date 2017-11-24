@@ -19,12 +19,13 @@ Rails.application.routes.draw do
   end
 
   devise_scope :user do
+    post "/invitation", to: "users/invitations#create", as: :invite_user
     delete "/logout", to: "users/sessions#destroy"
   end
 
   namespace :admin do
     resources :boards do
-      resources :posts, only: [:index, :show, :update]
+      resources :posts, only: [:index, :show, :update, :destroy]
     end
 
     resources :accounts do

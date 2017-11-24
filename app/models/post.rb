@@ -7,7 +7,7 @@ class Post < ApplicationRecord
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC') }
   scope :show_all, -> { order(last_activity_at: :desc) }
 
-  has_one :content, as: :parent
+  has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy
 
   has_many :votes, dependent: :destroy

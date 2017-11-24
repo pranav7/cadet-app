@@ -38,6 +38,20 @@
     .box
       .box-header
         .header-text
+          i.user.circle.icon
+          | Invite User
+      = simple_form_for @user, url: invite_user_path, method: :post do |form|
+        .two.fields
+          = form.input :first_name, label: false, placeholder: "First Name"
+          = form.input :last_name, label: false, placeholder: "Last Name"
+        = form.input :email, label: false, placeholder: "Email"
+        .field
+          = select_tag "role", options_for_select(Membership.roles.keys.map(&:titleize)), class: "ui dropdown"
+        = form.submit "Save", class: "ui small button"
+
+    .box
+      .box-header
+        .header-text
           i.plus.icon
           | Invite Users
       p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
@@ -46,3 +60,5 @@
 coffee:
   $(document).ready ->
     new Tablesort(document.getElementById('users-table')) 
+
+    $(".ui.dropdown").dropdown()

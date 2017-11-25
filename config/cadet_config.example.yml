@@ -5,6 +5,7 @@ development:
     client_secret: "w-CSRjdjZ5Jh73_QKhnxXtCl"
   mixpanel_token: ""
   slack: &slack
+    channel: '#test'
     bot-api-token: ""
   sentry: "https://620638c031fb45fa98198c57f7bd89e2:a621c30ebcd74c6b9779e953176a9011@sentry.io/233277"
 

@@ -31,6 +31,12 @@ body {
   color: $darker;
 }
 
+.text {
+  &.small {
+    font-size: 13px;
+  }
+}
+
 .custom.error.message {
   display: inline-block !important;
   color: $good-red;

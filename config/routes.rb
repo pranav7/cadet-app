@@ -20,6 +20,7 @@ Rails.application.routes.draw do
 
   devise_scope :user do
     post "/invitation", to: "users/invitations#create", as: :invite_user
+    get "/invitation/accept", to: "users/invitations#edit", as: :accept_user_invite
     delete "/logout", to: "users/sessions#destroy"
   end
 

@@ -47,8 +47,13 @@
         = form.input :email, label: false, placeholder: "Email"
         .field
           = select_tag "role", options_for_select(Membership.roles.keys.map(&:titleize)), class: "ui dropdown"
-        = form.submit "Send Invite", class: "ui small button"
-        p.soft.text.small When you click on 'Send Invite', we will send an email invitation to them. They can then accept the invite to start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
+        .field
+          .ui.checkbox
+            = check_box_tag :send_invitation, true, true
+            = label_tag "Send email invitation"
+        = form.submit "Add User", class: "ui small button"
+
+        p.soft.text.small If you have the option checked, we will send an email invitation to them. Once they accept, they can start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
       .ui.divider
       p.soft.text.small You can also share this link with you customers to let them signup themselves.
       .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"

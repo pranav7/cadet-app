@@ -28,6 +28,7 @@ class Users::InvitationsController < Devise::InvitationsController
     super do |user|
       validate_role
       user.memberships.build(company: current_company, role: params[:role].downcase)
+      user.skip_invitation = true if params[:send_invitation] != "true"
     end
   end
 

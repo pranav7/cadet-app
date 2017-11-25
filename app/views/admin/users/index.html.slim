@@ -47,14 +47,10 @@
         = form.input :email, label: false, placeholder: "Email"
         .field
           = select_tag "role", options_for_select(Membership.roles.keys.map(&:titleize)), class: "ui dropdown"
-        = form.submit "Save", class: "ui small button"
-
-    .box
-      .box-header
-        .header-text
-          i.plus.icon
-          | Invite Users
-      p.soft Share your boards to get users to post and vote on feedback. Use this link to invite users:
+        = form.submit "Send Invite", class: "ui small button"
+        p.soft.text.small When you click on 'Send Invite', we will send an email invitation to them. They can then accept the invite to start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
+      .ui.divider
+      p.soft.text.small You can also share this link with you customers to let them signup themselves.
       .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:

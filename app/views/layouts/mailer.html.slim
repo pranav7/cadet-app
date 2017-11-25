@@ -26,6 +26,10 @@ html
           border-radius: 5px;
         }
 
+      | .soft {
+          color: #888888;
+        }
+
       | .status {
           position: relative;
           color: #fff;
@@ -57,6 +61,32 @@ html
           color:  #7f7f7f;
           border: 1px solid #d6d6d6;
         }
+        
+      | a.button {
+          color: #fff;
+          background-color: #5fba7d;
+          padding: 8px 16px;
+          font-weight: 600;
+          font-size: 16px;
+          border-radius: 5px;
+          text-decoration: none;
+        }
+
+      | ul.simple-list {
+          list-style: none;
+          padding: 0;
+        }
+
+      | ul.simple-list li {
+          padding: 8px 0;
+        }
+
+      | a.link {
+          color: #000;
+          text-decoration: underline;
+        }
   body
     = yield
-    p= @signature
+
+    - unless @no_signatures
+      p= @signature

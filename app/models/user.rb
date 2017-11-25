@@ -92,4 +92,8 @@ class User < ApplicationRecord
   def account_for(company)
     accounts.where(company: company).first
   end
+
+  def membership_for(company)
+    memberships.where(company: company).first
+  end
 end

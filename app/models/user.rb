@@ -107,6 +107,6 @@ class User < ApplicationRecord
     # message << "\n`#{self.memberships.first.role}`"
 
     client = Slack::Web::Client.new
-    client.chat_postMessage(channel: '#main', text: message, as_user: true)
+    client.chat_postMessage(channel: APP_CONFIG['slack']['channel'], text: message, as_user: true)
   end
 end

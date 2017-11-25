@@ -3,9 +3,9 @@ class User < ApplicationRecord
   has_many :comments
   has_many :votes
   has_many :voted_posts, through: :votes, source: :post
-  has_many :memberships
+  has_many :memberships, dependent: :destroy
   has_many :companies, through: :memberships
-  has_many :account_memberships
+  has_many :account_memberships, dependent: :destroy
   has_many :accounts, through: :account_memberships
   # has_one_attached :image
 
@@ -22,8 +22,6 @@ class User < ApplicationRecord
     uniqueness: true,
     presence: true,
     format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
-
-  after_commit :notify_slack, on: :create
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -93,20 +91,5 @@ class User < ApplicationRecord
 
   def account_for(company)
     accounts.where(company: company).first
-  end
-
-  # @todo Write spec for this
-  def notify_slack
-    return if Rails.env.test?
-
-    message = "*#{self.name} (#{self.email}) signed up!*"
-    if self.job_title
-      message << "\n_#{self.job_title}_"
-    end
-    # message << "\n#{self.companies.first.name} - http://#{self.companies.first.subdomain}.getcadet.com/"
-    # message << "\n`#{self.memberships.first.role}`"
-
-    client = Slack::Web::Client.new
-    client.chat_postMessage(channel: APP_CONFIG['slack']['channel'], text: message, as_user: true)
   end
 end

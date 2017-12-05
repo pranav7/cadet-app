@@ -15,7 +15,7 @@
                 th Name
                 th Email
                 th Account
-                th
+                th Role
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
                 td
@@ -30,9 +30,9 @@
                   td -
                 - if user.admin_of?(current_company)
                   td
-                    .ui.small.rounded.label.float.right Admin
+                    .ui.small.rounded.label Admin
                 - else
-                  td -
+                  td
 
   .c-right-pane
     .box

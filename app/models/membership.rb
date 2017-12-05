@@ -6,7 +6,7 @@ class Membership < ApplicationRecord
 
   validates :user,
     presence: true,
-    uniqueness: { scope: :company_id },
+    uniqueness: { scope: :company_id, message: "A user with this email already exists" },
     case_sensetive: false
 
   validates :company, presence: true

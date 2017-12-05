@@ -1,6 +1,6 @@
 class Admin::UsersController < Admin::AdminController
   def index
-    @users = current_company.users.compact
+    @users = current_company.users.order(created_at: :desc).compact
     @user = User.new
     @main_selected = :customers
     @sub_nav_selected = :users

@@ -4,6 +4,9 @@ class Company < ApplicationRecord
   has_many :boards
   has_many :accounts
 
+  before_save :downcase_subdomain, on: :create
+  before_save :downcase_subdomain, on: :update
+
   validates :subdomain,
     uniqueness: true,
     presence: true,
@@ -22,5 +25,11 @@ class Company < ApplicationRecord
 
   def host
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
+  end
+
+  private
+
+  def downcase_subdomain
+    self.subdomain = subdomain.downcase
   end
 end

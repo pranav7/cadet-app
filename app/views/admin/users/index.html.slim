@@ -16,6 +16,7 @@
                 th Email
                 th Account
                 th Role
+                th Invitation Status
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
                 td
@@ -33,6 +34,11 @@
                     .ui.small.rounded.label Admin
                 - else
                   td
+                - if user.invited_to_sign_up? && not(user.invitation_accepted?)
+                  td
+                    .ui.small.yellow.rounded.label Pending
+                - else
+                  td -
 
   .c-right-pane
     .box

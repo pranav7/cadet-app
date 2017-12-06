@@ -50,6 +50,17 @@
       .account-info
         .info-label.c-soft Email
         .info-value= @user.email
+      - if @user.invited_to_sign_up? && not(@user.invitation_accepted?)
+        .account-info
+          .info-label.c-soft Invitation Status
+          .info-value
+            span.ui.small.yellow.rounded.label Pending
+        .account-info
+          .info-value
+            a#copy-invite-link data-clipboard-text=accept_user_invite_url(@user, invitation_token: @user.invitation_token, host: current_company.host) href="javascript:void(0);"
+              i.copy.icon
+              | Copy invite link
+
       .account-info
         .info-label.c-soft Job Title
         - if @user.job_title
@@ -72,3 +83,19 @@
 
 coffee:
   $('.ui.dropdown').dropdown()
+  clipboard = new Clipboard('#copy-invite-link')
+  $("a#copy-invite-link").popup({
+    content: "Copied!",
+    variation: "tiny inverted",
+    on: "manual",
+    position: "right center",
+    duration: 100,
+    closable: true,
+    hoverable: true
+  })
+
+  clipboard.on "success", (e) ->
+    $("a#copy-invite-link").popup("show")
+    setTimeout (->
+      $("a#copy-invite-link").popup("hide")
+    ), 2000

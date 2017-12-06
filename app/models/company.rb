@@ -5,7 +5,6 @@ class Company < ApplicationRecord
   has_many :accounts
 
   before_save :downcase_subdomain, on: :create
-  before_save :downcase_subdomain, on: :update
 
   validates :subdomain,
     uniqueness: true,

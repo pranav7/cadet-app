@@ -33,7 +33,13 @@
               option value=key
                 | ##{key}
       .item
-        a#edit-post-btn Edit
+        a#edit-post-btn
+          i.edit.large.icon
+      .item
+        = link_to admin_board_post_path(@board, @post),
+          method: :delete,
+          data: { confirm: "Are you sure?" } do
+          i.trash.outline.large.icon#delete-icon
 
     .post-header
       .header
@@ -74,8 +80,8 @@
       .box
         .box-header
           .header-text
-            i.user.circle.icon
-            | Customers
+            i.suitcase.icon
+            | Accounts
         - @accounts.each do |account|
           p
             | #{account.name}  

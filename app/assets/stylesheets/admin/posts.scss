@@ -37,6 +37,19 @@ body.admin.posts {
     border-bottom: 1px solid $lighter;
     margin-bottom: $base-size;
 
+    .item {
+      padding-right: $base-size;
+
+      i {
+        color: $dark;
+        position: relative;
+      }
+    }
+
+    #delete-icon{
+      bottom: 2px;
+    }
+
     .ui.top.bar.dropdown {
       background: none;
       border: none;

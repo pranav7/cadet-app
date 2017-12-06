@@ -11,6 +11,11 @@ RSpec.describe Membership, type: :model do
 
     it { should validate_presence_of(:company) }
     it { should validate_presence_of(:user) }
-    it { should validate_uniqueness_of(:user).case_insensitive.scoped_to(:company_id) }
+    it {
+      should validate_uniqueness_of(:user)
+        .case_insensitive
+        .scoped_to(:company_id)
+        .with_message("A user with this email already exists")
+    }
   end
 end

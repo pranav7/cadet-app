@@ -12,6 +12,7 @@
 //= require js-cookie/src/js.cookie
 //= require tablesort/dist/tablesort.min.js
 //= require tablesort/dist/sorts/tablesort.number.min.js
+//= require clipboard/dist/clipboard
 //= require init
 //= require cadet/posts
 //= require cadet/signup

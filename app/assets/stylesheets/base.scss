@@ -143,6 +143,12 @@ a.c.link {
 
 // Start
 // Semantic UI Overrides
+.ui.popup {
+  .content {
+    padding: 0;
+  }
+}
+
 .ui.basic.label {
   background-color: $lightest;
   border-color: $lighter;
@@ -156,7 +162,7 @@ a.c.link {
 
 .ui.message {
   position: absolute;
-  width: 100%;
+  min-width: 100%;
   text-align: center;
   margin-top: 4px !important;
   font-weight: 500;

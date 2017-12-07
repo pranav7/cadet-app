@@ -1,6 +1,7 @@
 class Users::RegistrationsController < Devise::RegistrationsController
   layout "public"
 
+  before_action :ensure_app_subdomain, only: [:new]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
   after_action :assign_admin_role, only: [:create]
@@ -80,4 +81,12 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # def after_inactive_sign_up_path_for(resource)
   #   super(resource)
   # end
+
+  private
+
+  def ensure_app_subdomain
+    unless request.subdomains.first == "app"
+      redirect_to new_user_registration_url(subdomain: "app")
+    end
+  end
 end

@@ -4,24 +4,21 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  devise_for :users, path: '',
+    path_names: { sign_in: 'login', sign_up: 'signup' },
+    controllers: {
+      sessions: 'users/sessions',
+      registrations: 'users/registrations',
+      passwords: 'users/passwords',
+      invitations: 'users/invitations',
+      omniauth_callbacks: "users/omniauth_callbacks"
+  }
+
   constraints subdomain: 'app' do
-    devise_for :users, path: '',
-      path_names: { sign_in: 'login', sign_up: 'signup' },
-      controllers: {
-        sessions: 'users/sessions',
-        registrations: 'users/registrations',
-        passwords: 'users/passwords',
-        invitations: 'users/invitations',
-        omniauth_callbacks: "users/omniauth_callbacks"
-    }
+    get '/login', to: 'users/sessions#new'
+    get '/signup', to: 'users/registrations#new'
 
     root to: redirect('signup')
-  end
-
-  devise_scope :user do
-    post "/invitation", to: "users/invitations#create", as: :invite_user
-    get "/invitation/accept", to: "users/invitations#edit", as: :accept_user_invite
-    delete "/logout", to: "users/sessions#destroy"
   end
 
   namespace :admin do

@@ -11,7 +11,6 @@
           table.ui.selectable.table#users-table
             thead
               tr
-                th
                 th Name
                 th Email
                 th Account
@@ -19,9 +18,6 @@
                 th Invitation Status
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
-                td
-                  = render partial: "users/avatar",
-                    locals: { user: user, size: "small" }
                 td
                   strong= user.name
                 td= user.email

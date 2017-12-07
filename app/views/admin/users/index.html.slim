@@ -46,7 +46,7 @@
         .header-text
           i.user.circle.icon
           | Invite User
-      = simple_form_for @user, url: invite_user_path, method: :post do |form|
+      = simple_form_for @user, url: user_invitation_path, method: :post do |form|
         .two.fields
           = form.input :first_name, label: false, placeholder: "First Name"
           = form.input :last_name, label: false, placeholder: "Last Name"

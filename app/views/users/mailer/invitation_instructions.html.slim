@@ -3,7 +3,7 @@ p Hello #{@resource.first_name},
 p We would like to invite you to Cadet - a tool we use to gather product feedback and feature requests. At #{@company.name}, we'd like to be transparent with our customers and this is a step in that direction.
 
 p
-  a.button href=accept_user_invite_url(@resource, invitation_token: @token, host: @host) Accept Invite
+  a.button href=accept_user_invitation_url(@resource, invitation_token: @token, host: @host) Accept Invite
 
 p Here are our boards on Cadet -
 

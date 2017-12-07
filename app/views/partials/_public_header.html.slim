@@ -23,7 +23,7 @@
                 = link_to admin_boards_path, class: "item" do
                   i.soft.columns.icon
                   | Admin
-              = link_to logout_path, class: "item", method: :delete do
+              = link_to destroy_user_session_path, class: "item", method: :delete do
                 i.soft.sign.out.icon
                 | Logout
 

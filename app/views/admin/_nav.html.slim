@@ -13,7 +13,7 @@ nav
             = link_to boards_path, class: "item" do
               i.soft.external.icon
               | Public View
-          = link_to logout_path, class: "item", method: :delete do
+          = link_to destroy_user_session_path, class: "item", method: :delete do
             i.soft.sign.out.icon
             | Logout
       

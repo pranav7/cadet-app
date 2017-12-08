@@ -1,8 +1,14 @@
-.box
+- admin = admin || false
+.voters.box
   .box-header
     .header-text
       i.user.outline.icon
       | Users who upvoted
   - voters.each do |voter|
-    = render partial: "partials/user",
-      locals: { user: voter, size: "small" }
+    .voter
+      = render partial: "partials/user",
+        locals: { user: voter, size: "small" }
+      - if admin && not(voter.votes.where(post: post).first.manual?)
+        a.remove-btn href=board_post_votes_path(post.board, post, user_id: voter.id) data-method="delete"
+          i.remove.icon.softer
+

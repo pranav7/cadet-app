@@ -1,5 +1,5 @@
 .ui.tiny.modal#vote-on-behalf-modal
-  .header Add Vote
+  .header Add Voter
   .content
     = simple_form_for @post.votes.build, url: board_post_votes_path(@board, @post) do |form|
       .field

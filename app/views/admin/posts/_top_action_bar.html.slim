@@ -19,8 +19,8 @@
     .ui.left.top.pointing.dropdown.top-bar-more-options
       i.ellipsis.horizontal.large.icon
       .menu
-        .item
-          span#add-vote-btn href="javascript:void(0)" Add Vote
+        .item#add-vote-btn
+          | Add Voter
         .item
           span#copy-public-link data-clipboard-text=board_post_url(@board, @post, host: @board.company.host)
             | Copy Public Link
@@ -29,13 +29,3 @@ coffee:
   $(".top-bar-more-options").dropdown({
     action: "nothing"
   })
-
-  clipboard = new Clipboard("#copy-public-link")
-  clipboard.on 'success', (e) ->
-    copy_btn = $("#copy-public-link")
-    copy_btn.html("Copied!")
-
-    setTimeout (->
-      copy_btn.html("Copy Public Link")
-    ), 3000
-

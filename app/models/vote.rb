@@ -8,6 +8,8 @@ class Vote < ApplicationRecord
 
   after_create :touch_post_last_activity
 
+  scope :manual, -> { where(added_by: nil) }
+
   private
 
   def touch_post_last_activity

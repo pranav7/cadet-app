@@ -16,7 +16,7 @@ class VotesController < ApplicationController
 
     respond_to do |format|
       format.html do
-        flash[:success] = "Vote Added!" if params[:user_id]
+        flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
         redirect_back fallback_location: board_post_path(@board, @post)
       end
     end

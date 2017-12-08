@@ -1,0 +1,19 @@
+.top-action-bar
+  .item
+    // Change Status
+    = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
+      select.ui.top.bar.dropdown name="post[status]" onchange="this.form.submit()"
+        option value="" Status
+        - Post.statuses.keys.each do |key|
+          option value=key
+            | ##{key}
+  .item
+    a#edit-post-btn
+      i.edit.large.icon
+  .item
+    = link_to admin_board_post_path(@board, @post),
+      method: :delete,
+      data: { confirm: "Are you sure you want to delete this post? Please note that this step is irreversible." } do
+      i.trash.outline.large.icon#delete-icon
+  .item
+    a#add-vote-btn href="javascript:void(0)" Add Vote

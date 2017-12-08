@@ -46,8 +46,12 @@ class Post < ApplicationRecord
     board.company
   end
 
-  def participants
+  def all_participants
     (voters + commenters).flatten.uniq
+  end
+
+  def participants
+    (manual_voters + commenters).flatten.uniq
   end
 
   # Get all the accounts whose users have upvoted this post
@@ -77,6 +81,10 @@ class Post < ApplicationRecord
     participants.each do |participant|
       PostNotificationMailer.status_changed(self, status, participant).deliver_later
     end
+  end
+
+  def manual_voters
+    votes.manual.map(&:user)
   end
 
   private

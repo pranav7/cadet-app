@@ -97,5 +97,12 @@ body.admin.posts {
       padding: 0;
     }
   }
-}
 
+  #vote-on-behalf-modal {
+    & > .actions {
+      text-align: left;
+      line-height: 1.4;
+      font-size: small;
+    }
+  }
+}

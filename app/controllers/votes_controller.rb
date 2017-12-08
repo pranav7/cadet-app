@@ -5,10 +5,11 @@ class VotesController < ApplicationController
   def create
     if params[:user_id]
       user = User.find params[:user_id]
+      @post.votes.create(user: user, added_by: current_user)
     else
       user = current_user
+      @post.votes.create(user: user)
     end
-    @post.votes.create(user: user)
     
     unless user.part_of?(current_company)
       user.companies << current_company

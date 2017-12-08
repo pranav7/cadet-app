@@ -1,7 +1,7 @@
 class Vote < ApplicationRecord
   belongs_to :user
   belongs_to :post
-  belongs_to :added_by, class_name: "User"
+  belongs_to :added_by, class_name: "User", optional: true
 
   validates_presence_of :user
   validates_presence_of :post

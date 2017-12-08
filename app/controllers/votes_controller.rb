@@ -24,7 +24,13 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    vote = Vote.where(post: @post, user: current_user).first
+    if params[:user_id]
+      user = User.find params[:user_id]
+    else
+      user = current_user
+    end
+
+    vote = Vote.where(post: @post, user: user).first
     vote.destroy!
     redirect_back fallback_location: board_post_path(@board, @post)
   end

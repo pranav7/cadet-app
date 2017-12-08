@@ -23,24 +23,7 @@
             locals: { post: post, board: @board, selected_post: @post }
 
   .c-main-pane
-    .top-action-bar
-      .item
-        // Change Status
-        = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
-          select.ui.top.bar.dropdown name="post[status]" onchange="this.form.submit()"
-            option value="" Status
-            - Post.statuses.keys.each do |key|
-              option value=key
-                | ##{key}
-      .item
-        a#edit-post-btn
-          i.edit.large.icon
-      .item
-        = link_to admin_board_post_path(@board, @post),
-          method: :delete,
-          data: { confirm: "Are you sure you want to delete this post? Please note that this step is irreversible." } do
-          i.trash.outline.large.icon#delete-icon
-
+    = render partial: "top_action_bar"
     .post-header
       .header
         h1.post-title= @post.title
@@ -101,17 +84,17 @@
       = render partial: "posts/form",
         locals: { board: @board, post: @post, after_create_path: :admin }
 
-  coffee:
-    $('.ui.top.bar.dropdown').dropdown({
-      action: "select"
-    })
+= render partial: "add_vote_modal"
 
-    $('.ui.open.dropdown').dropdown()
+coffee:
+  $('.status-dropdown').dropdown({
+    action: "select"
+  })
 
-    $("#create-post-btn").click ->
-      $("#create-post-modal").modal('show')
+  $("#create-post-btn").click ->
+    $("#create-post-modal").modal('show')
 
-    $("#edit-post-btn").click ->
-      $("#edit-post-modal").modal('show')
+  $("#edit-post-btn").click ->
+    $("#edit-post-modal").modal('show')
 
-    $('.menu .item').tab()
+  $('.menu .item').tab()

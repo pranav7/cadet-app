@@ -2,7 +2,7 @@
 
 .c.labeled.field
   label Sort By
-  select.ui.open.dropdown name="sort_by" onchange="this.form.submit()"
+  select.ui.open.dropdown.sort-post-dropdown name="sort_by" onchange="this.form.submit()"
     option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
     - unless hide_most_voted
       option value="most_voted" selected=(true if params[:sort_by] == "most_voted") Most Voted
@@ -11,3 +11,5 @@
       option value=key selected=(true if key == params[:sort_by])
         | ##{key}
 
+coffee:
+  $(".sort-post-dropdown").dropdown()

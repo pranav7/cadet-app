@@ -87,11 +87,9 @@
 = render partial: "add_vote_modal"
 
 coffee:
-  $('.ui.top.bar.dropdown').dropdown({
+  $('.status-dropdown').dropdown({
     action: "select"
   })
-
-  $('.ui.dropdown').dropdown()
 
   $("#create-post-btn").click ->
     $("#create-post-modal").modal('show')

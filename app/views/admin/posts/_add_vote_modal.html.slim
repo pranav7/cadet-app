@@ -3,7 +3,7 @@
   .content
     = simple_form_for @post.votes.build, url: board_post_votes_path(@board, @post) do |form|
       .field
-        .ui.fluid.search.selection.dropdown
+        .ui.fluid.search.selection.dropdown.user-list-dropdown
           input type="hidden" name="user_id"
           i.dropdown.icon
           .default.text Select Users
@@ -17,5 +17,7 @@
       = form.submit "Add Vote", class: "ui small button"
 
 coffee:
+  $(".user-list-dropdown").dropdown()
+
   $("#add-vote-btn").click ->
     $("#vote-on-behalf-modal").modal('show')

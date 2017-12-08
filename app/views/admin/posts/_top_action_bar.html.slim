@@ -21,9 +21,8 @@
       .menu
         .item#add-vote-btn
           | Add Voter
-        .item
-          span#copy-public-link data-clipboard-text=board_post_url(@board, @post, host: @board.company.host)
-            | Copy Public Link
+        .item#copy-public-link data-clipboard-text=board_post_url(@board, @post, host: @board.company.host)
+          | Copy Public Link
 
 coffee:
   $(".top-bar-more-options").dropdown({

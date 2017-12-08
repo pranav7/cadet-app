@@ -7,7 +7,7 @@ class Cadet.Posts
     @highlightSelectedComment()
 
   linkifyText: ->
-    $(".content").linkify({
+    $(".comment .content").linkify({
       className: (href, type) ->
         "link--#{type}"
       # tagName:

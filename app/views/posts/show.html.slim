@@ -39,5 +39,5 @@
       // Middle Section
       .sixteen.wide.mobile.six.wide.computer.column
         // Voters
-        = render partial: "partials/voters", locals: { voters: @post.voters }
+        = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }
         = render partial: "partials/cadet_power"

@@ -10,6 +10,10 @@ class Vote < ApplicationRecord
 
   scope :manual, -> { where(added_by: nil) }
 
+  def manual?
+    !!!added_by
+  end
+
   private
 
   def touch_post_last_activity

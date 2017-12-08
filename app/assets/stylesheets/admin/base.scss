@@ -164,6 +164,12 @@ body.admin {
       }
     }
   }
+
+  .voters .voter {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
 }
 
 // Start Table Sort CSS

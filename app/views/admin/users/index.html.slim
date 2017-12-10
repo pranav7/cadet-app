@@ -58,7 +58,7 @@
         p.soft.text.small If you have the option checked, we will send an email invitation to them. Once they accept, they can start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
       .ui.divider
       p.soft.text.small You can also share this link with you customers to let them signup themselves.
-      .invite-link= "http://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
+      .invite-link= "https://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).ready ->

@@ -13,13 +13,19 @@ class PostsController < ApplicationController
   def create
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
-    post.user = current_user
     
+    if post_params[:user_id] && not(post_params[:user_id] == "")
+      user = User.find post_params[:user_id]
+    else
+      user = current_user
+    end
+    
+    post.user = user
     if post.save
       # @todo Move this to VotesService
-      post.votes.create(user: current_user)
+      post.votes.create(user: user)
 
-      unless current_user.part_of?(current_company)
+      unless user.part_of?(current_company)
         current_user.companies << current_company
       end
     else
@@ -36,6 +42,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :status, content_attributes: [:body])
+    params.require(:post).permit(:title, :status, :user_id, content_attributes: [:body])
   end
 end

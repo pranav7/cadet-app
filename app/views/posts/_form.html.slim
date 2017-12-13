@@ -1,3 +1,5 @@
+- admin = admin || false
+
 .box
   .box-header
     - if post.new_record?
@@ -9,5 +11,22 @@
     = f.input :title, placeholder: "Title", label: false
     = f.simple_fields_for :content do |cf|
       = cf.input :body, placeholder: "Description", label: false
+    - if admin
+      .ui.divider
+      .field
+        label Requested by (optional)
+        .ui.fluid.search.selection.dropdown.select-requester-dropdown
+          input type="hidden" name="post[user_id]" value=(post.user.id unless post.new_record?)
+          i.dropdown.icon
+          .default.text Select Customer 
+          .menu
+            - current_company.customers.each do |user|
+              - next unless user
+              .item data-value=user.id
+                = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
+        .hint The requester would receive email notifications for this post, only use this option if you have their consent.
     
     = f.submit post_button(post), class: "ui button"
+
+coffee:
+  $(".select-requester-dropdown").dropdown()

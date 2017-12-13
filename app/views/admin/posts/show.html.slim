@@ -77,12 +77,12 @@
   .ui.basic.tiny.modal#create-post-modal
     .content
       = render partial: "posts/form",
-        locals: { board: @board, post: @new_post, after_create_path: :admin }
+        locals: { board: @board, post: @new_post, after_create_path: :admin, admin: true }
 
   .ui.basic.tiny.modal#edit-post-modal
     .content
       = render partial: "posts/form",
-        locals: { board: @board, post: @post, after_create_path: :admin }
+        locals: { board: @board, post: @post, after_create_path: :admin, admin: true }
 
 = render partial: "add_vote_modal"
 

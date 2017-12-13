@@ -10,3 +10,6 @@ p
   a href=@post_url
     strong= @post.title
   |  in #{@post.board.name}
+
+p.comment
+  = simple_format @post.content.body

@@ -4,7 +4,7 @@ RSpec.describe PostNotificationMailer, type: :mailer do
   describe "#new_post" do
     let(:user) { create :user }
     let(:requester) { create :customer }
-    let(:post) { create :post, user: requester }
+    let(:post) { create :post, requester: requester }
     let(:mail) { PostNotificationMailer.new_post(post, user) }
 
     it "renders the headers" do

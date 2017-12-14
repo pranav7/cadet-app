@@ -3,7 +3,7 @@ class PostNotificationMailer < ApplicationMailer
     @post = post
     @company = @post.company
     @user = user
-    @requester = post.created_by
+    @requester = post.requester
     @host = @company.host
 
     build_post_url

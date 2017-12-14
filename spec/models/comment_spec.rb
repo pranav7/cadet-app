@@ -45,7 +45,7 @@ RSpec.describe Comment, type: :model do
 
     context "Email Notification" do
       let(:requester) { create :customer }
-      let(:post) { create :post, user: requester }
+      let(:post) { create :post, requester: requester }
       let!(:admin) { create :admin, company: post.company }
       let!(:admin2) { create :admin, company: post.company }
 

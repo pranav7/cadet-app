@@ -15,18 +15,18 @@ class PostsController < ApplicationController
     post = board.posts.new(post_params)
     
     if post_params[:user_id] && not(post_params[:user_id] == "")
-      user = User.find post_params[:user_id]
+      requester = User.find post_params[:user_id]
     else
-      user = current_user
+      requester = current_user
     end
     
-    post.user = user
+    post.requester = requester
     if post.save
       # @todo Move this to VotesService
-      post.votes.create(user: user)
+      post.votes.create(user: requester)
 
-      unless user.part_of?(current_company)
-        current_user.companies << current_company
+      unless requester.part_of?(current_company)
+        requester.companies << current_company
       end
     else
       # Hanlde Post Error

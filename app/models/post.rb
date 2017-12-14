@@ -13,7 +13,10 @@ class Post < ApplicationRecord
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
-  belongs_to :user, optional: true # @todo Remove optional later
+  belongs_to :requester,
+    class_name: "User",
+    optional: true,
+    foreign_key: "user_id"
   belongs_to :board
 
   validates :title, presence: true
@@ -37,10 +40,13 @@ class Post < ApplicationRecord
     comments.map(&:user)
   end
 
-  def created_by
-    user
+  def user
+    requester
   end
-  alias_method :requester, :created_by
+
+  def user=(x)
+    requester = x
+  end
 
   def company
     board.company

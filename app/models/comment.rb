@@ -32,7 +32,7 @@ class Comment < ApplicationRecord
   end
 
   def notify_requester
-    CommentNotificationMailer.new_comment(self, post.created_by).deliver_later
+    CommentNotificationMailer.new_comment(self, post.requester).deliver_later
   end
 
   private

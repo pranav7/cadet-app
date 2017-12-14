@@ -7,6 +7,7 @@ RSpec.describe Post, type: :model do
     it { should have_many(:votes) }
     it { should belong_to(:requester) }
     it { should belong_to(:board) }
+    it { should belong_to(:added_by) }
   end
 
   describe "Validations" do

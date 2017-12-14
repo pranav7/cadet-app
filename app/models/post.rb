@@ -18,6 +18,7 @@ class Post < ApplicationRecord
     optional: true,
     foreign_key: "user_id"
   belongs_to :board
+  belongs_to :added_by, class_name: "User", optional: true
 
   validates :title, presence: true
   validates :slug, presence: true, uniqueness: { scope: :board }

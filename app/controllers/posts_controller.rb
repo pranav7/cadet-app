@@ -16,6 +16,7 @@ class PostsController < ApplicationController
     
     if post_params[:user_id] && not(post_params[:user_id] == "")
       requester = User.find post_params[:user_id]
+      post.added_by = current_user
     else
       requester = current_user
     end

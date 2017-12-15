@@ -17,15 +17,14 @@ class PostsController < ApplicationController
     if post_params[:user_id] && not(post_params[:user_id] == "")
       requester = User.find post_params[:user_id]
       post.added_by = current_user
+      post.votes.build(user: requester, added_by: current_user)
     else
       requester = current_user
+      post.votes.build(user: requester)
     end
     
     post.requester = requester
     if post.save
-      # @todo Move this to VotesService
-      post.votes.create(user: requester)
-
       unless requester.part_of?(current_company)
         requester.companies << current_company
       end

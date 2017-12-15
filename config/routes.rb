@@ -23,7 +23,7 @@ Rails.application.routes.draw do
 
   namespace :admin do
     resources :boards do
-      resources :posts, only: [:index, :show, :update, :destroy]
+      resources :posts, except: [:new, :edit]
     end
 
     resources :accounts do

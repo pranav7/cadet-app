@@ -12,21 +12,13 @@ class PostsController < ApplicationController
 
   def create
     board = current_company.boards.friendly.find(params[:board_id])
-    post = board.posts.new(post_params)
-    
-    if post_params[:user_id] && not(post_params[:user_id] == "")
-      requester = User.find post_params[:user_id]
-      post.added_by = current_user
-      post.votes.build(user: requester, added_by: current_user)
-    else
-      requester = current_user
-      post.votes.build(user: requester)
-    end
-    
-    post.requester = requester
+    post = board.posts.new(post_params) 
+    post.requester = current_user
+    post.votes.build(user: current_user)
+
     if post.save
-      unless requester.part_of?(current_company)
-        requester.companies << current_company
+      unless current_user.part_of?(current_company)
+        current_user.companies << current_company
       end
     else
       # Hanlde Post Error
@@ -42,6 +34,6 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit(:title, :status, :user_id, content_attributes: [:body])
+    params.require(:post).permit(:title, :status, content_attributes: [:body])
   end
 end

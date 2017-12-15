@@ -7,7 +7,7 @@
       p.soft= post.board.description
     - else
       strong Edit Post
-  = simple_form_for post, url: post_endpoint(board, post, after_create_path: (after_create_path rescue nil)) do |f|
+  = simple_form_for post, url: post_endpoint(board, post, after_create_path: (after_create_path rescue nil), admin: admin) do |f|
     = f.input :title, placeholder: "Title", label: false
     = f.simple_fields_for :content do |cf|
       = cf.input :body, placeholder: "Description", label: false

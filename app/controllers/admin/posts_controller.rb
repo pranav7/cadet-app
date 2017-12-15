@@ -19,7 +19,6 @@ class Admin::PostsController < Admin::AdminController
     @post = board.posts.friendly.find(params[:id])
     # slug needs to be set to nil to regenerate slug
     @post.assign_attributes(post_params)
-    binding.pry
     @post.slug = nil if @post.title_changed?
     add_voter if @post.user_id_changed?
 

@@ -8,6 +8,8 @@ class User < ApplicationRecord
   has_many :account_memberships, dependent: :destroy
   has_many :accounts, through: :account_memberships
   # has_one_attached :image
+  
+  after_commit :notify_slack, on: :create
 
   accepts_nested_attributes_for :memberships
 
@@ -95,5 +97,10 @@ class User < ApplicationRecord
 
   def membership_for(company)
     memberships.where(company: company).first
+  end
+
+  def notify_slack
+    message = "*#{formatted_address} is now on Cadet*"
+    NotifySlackJob.perform_later(message)
   end
 end

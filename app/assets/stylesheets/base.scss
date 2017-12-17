@@ -49,6 +49,15 @@ body {
   font-weight: 500;
 }
 
+.c.message {
+  background: $other-blue;
+  display: inline-block;
+  padding: 1rem 2rem;
+  color: white;
+  border: 1px solid darken($other-blue, 10);
+  border-radius: 4px;
+}
+
 .padded {
   padding: $base-size;
 }

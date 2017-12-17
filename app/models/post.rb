@@ -75,6 +75,7 @@ class Post < ApplicationRecord
 
   def perform_after_create_tasks
     notify_post_created_to_all_admins
+    notify_slack
   end
 
   def notify_post_created_to_all_admins
@@ -102,5 +103,12 @@ class Post < ApplicationRecord
 
   def update_last_activity_at
     self.touch :last_activity_at
+  end
+
+  def notify_slack
+    message = "*New Post - ##{board.company.subdomain}*"
+    message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
+
+    NotifySlackJob.perform_later(message)
   end
 end

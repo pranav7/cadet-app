@@ -6,7 +6,7 @@ class Comment < ApplicationRecord
   accepts_nested_attributes_for :content
 
   after_create :touch_post_last_activity
-  after_create :send_notifications
+  after_commit :send_notifications, on: :create
 
   scope :without_notes, -> { where.not(private: true) }
 
@@ -17,6 +17,7 @@ class Comment < ApplicationRecord
   def send_notifications
     notify_admins
     notify_requester if should_notify_requester?
+    notify_slack
   end
 
   def commenter
@@ -51,5 +52,14 @@ class Comment < ApplicationRecord
 
   def requester_not_admin?
     !post.requester.admin_of?(post.company)
+  end
+
+  def notify_slack
+    return if Rails.env.test?
+
+    message = "*New Comment - ##{post.company.subdomain}*"
+    message << "\n#{commenter.formatted_address} commented on _#{post.title}_ in #{post.board.name}"
+
+    NotifySlackJob.perform_later(message)
   end
 end

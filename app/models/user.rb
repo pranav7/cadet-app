@@ -9,13 +9,17 @@ class User < ApplicationRecord
   has_many :accounts, through: :account_memberships
   # has_one_attached :image
 
-  accepts_nested_attributes_for :memberships
-
   # Include default devise modules. Others available are:
   # :confirmable, :lockable, :timeoutable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
+  
+  after_commit :notify_slack, on: :create
+  after_invitation_accepted :notify_slack_invite_accepted
+  after_invitation_created :notify_slack_invite_created
+
+  accepts_nested_attributes_for :memberships
 
   validates :first_name, presence: true
   validates :email,
@@ -95,5 +99,27 @@ class User < ApplicationRecord
 
   def membership_for(company)
     memberships.where(company: company).first
+  end
+
+  def notify_slack
+    return if Rails.env.test?
+    return if invited_to_sign_up?
+
+    message = "*#{formatted_address}* is now on Cadet*"
+    NotifySlackJob.perform_later(message)
+  end
+
+  def notify_slack_invite_accepted
+    return if Rails.env.test?
+
+    message = "*#{formatted_address}* accepted the invite for *#{memberships.first.company.subdomain}*"
+    NotifySlackJob.perform_later(message)
+  end
+
+  def notify_slack_invite_created
+    return if Rails.env.test?
+
+    message = "*#{formatted_address}* was invited to *#{memberships.first.company.subdomain}* as _#{memberships.first.role.titleize}_ by *#{invited_by.formatted_address}*"
+    NotifySlackJob.perform_later(message)
   end
 end

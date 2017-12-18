@@ -29,7 +29,6 @@ class Cadet.Posts
         copy_btn.html("Copy Public Link")
       ), 3000
 
-
 $(document).on "turbolinks:load", ->
   posts = new Cadet.Posts
   posts.init()

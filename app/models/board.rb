@@ -21,7 +21,7 @@ class Board < ApplicationRecord
   def notify_slack
     return if Rails.env.test?
 
-    message = "*New Board added in ##{company.subdomain}"
+    message = "*New Board - ##{company.subdomain}*"
     message << "\n_Name:_ #{title}"
 
     NotifySlackJob.perform_later(message)

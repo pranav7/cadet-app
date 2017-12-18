@@ -30,6 +30,8 @@ class Vote < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*New Upvote - ##{post.company.subdomain}*"
     message << "\n*#{voter.formatted_address}* upvoted *#{post.title}* in #{post.board.name}"
 

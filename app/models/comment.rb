@@ -55,6 +55,8 @@ class Comment < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*New Comment - ##{post.company.subdomain}*"
     message << "\n#{commenter.formatted_address} commented on _#{post.title}_ in #{post.board.name}"
 

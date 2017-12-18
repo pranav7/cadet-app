@@ -106,6 +106,8 @@ class Post < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*New Post - ##{board.company.subdomain}*"
     message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
 

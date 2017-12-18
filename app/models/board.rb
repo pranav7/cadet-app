@@ -19,6 +19,8 @@ class Board < ApplicationRecord
   private
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*New Board added in ##{company.subdomain}"
     message << "\n_Name:_ #{title}"
 

@@ -34,6 +34,8 @@ class Company < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
+
     message = "*##{subdomain} is now on Cadet*"
     message << "\n_Name:_ #{name}"
     message << "\n_Admin:_ #{memberships.first.user.formatted_address}"

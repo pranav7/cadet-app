@@ -102,6 +102,7 @@ class User < ApplicationRecord
   end
 
   def notify_slack
+    return if Rails.env.test?
     return if invited_to_sign_up?
 
     message = "*#{formatted_address}* is now on Cadet*"
@@ -109,11 +110,15 @@ class User < ApplicationRecord
   end
 
   def notify_slack_invite_accepted
+    return if Rails.env.test?
+
     message = "*#{formatted_address}* accepted the invite for *#{memberships.first.company.subdomain}*"
     NotifySlackJob.perform_later(message)
   end
 
   def notify_slack_invite_created
+    return if Rails.env.test?
+
     message = "*#{formatted_address}* was invited to *#{memberships.first.company.subdomain}* as _#{memberships.first.role.titleize}_ by *#{invited_by.formatted_address}*"
     NotifySlackJob.perform_later(message)
   end

@@ -97,13 +97,13 @@ RSpec.describe Post, type: :model do
     describe ".most_voted" do
       before :each do
         @post1 = create :post
-        create_list :vote, 3, post: @post1
+        create_list :vote, 4, post: @post1
 
         @post2 = create :post
-        create_list :vote, 2, post: @post2
+        create_list :vote, 3, post: @post2
 
         @post3 = create :post
-        create :vote, post: @post3
+        create_list :vote, 2, post: @post3
 
         @post4 = create :post
         create :vote, post: @post4

@@ -1,12 +1,13 @@
 - admin = admin || false
 
-.box
-  .box-header
+.create-post-form.box
+  .padded.vertical
     - if post.new_record?
-      strong Create Post
-      p.soft= post.board.description
+      .form-header Create Post
+      .form-summary.soft= post.board.description
     - else
-      strong Edit Post
+      .form-header Edit Post
+
   = simple_form_for post, url: post_endpoint(board, post, after_create_path: (after_create_path rescue nil), admin: admin) do |f|
     = f.input :title, placeholder: "Title", label: false
     = f.simple_fields_for :content do |cf|

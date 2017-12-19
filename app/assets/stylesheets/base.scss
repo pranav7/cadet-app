@@ -532,6 +532,18 @@ a.c.link {
 // End
 // Status Colors
 
+.create-post-form {
+  .form-header {
+    color: $black;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .form-summary {
+    margin-top: 4px;
+  }
+}
+
 // Start
 // Changelog Styling
 #HW_badge_cont {

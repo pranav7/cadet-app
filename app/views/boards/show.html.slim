@@ -2,7 +2,8 @@
   .sixteen.wide.mobile.ten.wide.computer.column
     .posts-list.box
       = form_tag board_path(@board), method: :get
-        = render partial: "partials/post_sort_field"
+        .padded.bottom
+          = render partial: "partials/post_sort_field"
 
       - if @posts.empty?
         h4 No Posts

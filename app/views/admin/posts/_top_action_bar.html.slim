@@ -2,19 +2,28 @@
   .item
     // Change Status
     = simple_form_for @post, url: admin_board_post_path(@board, @post) do |form|
-      select.ui.top.bar.dropdown.status-dropdown name="post[status]" onchange="this.form.submit()"
-        option value="" Status
-        - Post.statuses.keys.each do |key|
-          option value=key
-            | ##{key}
+      .ui.top.bar.dropdown.status-dropdown
+        input type="hidden" name="post[status]"
+        .default.text Status
+        i.dropdown.icon
+        .menu
+          - Post.statuses.keys.each do |key|
+            .item data-value=key
+              span.text-status class=key ##{key}
+
+  // Edit Post
   .item
     a#edit-post-btn
       i.edit.large.icon
+
+  // Delete Post
   .item
     = link_to admin_board_post_path(@board, @post),
       method: :delete,
       data: { confirm: "Are you sure you want to delete this post? Please note that this step is irreversible." } do
       i.trash.outline.large.icon#delete-icon
+
+  // More Options
   .item
     .ui.left.top.pointing.dropdown.top-bar-more-options
       i.ellipsis.horizontal.large.icon
@@ -27,4 +36,10 @@
 coffee:
   $(".top-bar-more-options").dropdown({
     action: "nothing"
+  })
+
+  $('.status-dropdown').dropdown({
+    action: "select"
+    onChange: (value, text, $selectedItem) ->
+      @parentElement.submit()
   })

@@ -533,6 +533,31 @@ a.c.link {
     border: 1px solid $light;
   }
 }
+
+.text-status {
+  font-weight: 600;
+  padding: 8px;
+
+  &.released {
+    color: $released-color;
+  }
+
+  &.developing {
+    color: $secondary-blue;
+  }
+
+  &.planned {
+    color: $planned-color;
+  }
+
+  &.closed {
+    color: $good-red;
+  }
+
+  &.open {
+    color: $darker;
+  }
+}
 // End
 // Status Colors
 

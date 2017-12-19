@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
   scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
   scope :sort_by_new, -> { order(created_at: :desc) }
-  scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC') }
+  scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
 
   has_one :content, as: :parent, dependent: :destroy

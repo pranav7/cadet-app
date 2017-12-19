@@ -92,4 +92,33 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe "Scopes" do
+    describe ".most_voted" do
+      before :each do
+        @post1 = create :post
+        create_list :vote, 3, post: @post1
+
+        @post2 = create :post
+        create_list :vote, 2, post: @post2
+
+        @post3 = create :post
+        create :vote, post: @post3
+
+        @post4 = create :post
+        create :vote, post: @post4
+      end
+
+      it "returns the posts with most votes first" do
+        expect(Post.most_voted).to eq([@post1, @post2, @post3, @post4])
+      end
+
+      it "should not return released or closed posts" do
+        @post3.released!
+        @post4.closed!
+
+        expect(Post.most_voted).to eq([@post1, @post2])
+      end
+    end
+  end
 end

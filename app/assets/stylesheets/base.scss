@@ -161,6 +161,10 @@ a.c.link {
     background-color: transparent;
     border-color: transparent;
   }
+
+  &.with.border {
+    border: 1px solid $lighter;
+  }
 }
 // End
 // Box Styling

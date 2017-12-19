@@ -12,7 +12,7 @@
       - else
         = render partial: "posts/post", collection: @posts, locals: { board: @board }
 
-  .six.wide.column
+  .five.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }
     = render partial: "partials/cadet_power"
 

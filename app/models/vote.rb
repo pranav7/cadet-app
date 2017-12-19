@@ -33,7 +33,7 @@ class Vote < ApplicationRecord
     return if Rails.env.test?
 
     message = "*New Upvote - ##{post.company.subdomain}*"
-    message << "\n*#{voter.formatted_address}* upvoted *#{post.title}* in #{post.board.name}"
+    message << "\n#{voter.formatted_address} upvoted _#{post.title}_ in #{post.board.name}"
 
     NotifySlackJob.perform_later(message)
   end

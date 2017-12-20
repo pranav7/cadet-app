@@ -28,10 +28,6 @@ body.boards {
       border-top: 4px solid $lighter;
       transition: 0.25s ease;
 
-      @media (max-device-width: 480px) {
-        width: 100%;
-      }
-
       a.board-name {
         color: $darkest;
         font-weight: 600;

@@ -29,6 +29,8 @@ gem 'faye-websocket'
 gem "sentry-raven"
 gem 'postmark-rails'
 gem 'sidekiq'
+gem 'exception_notification'
+gem 'slack-notifier' # Need for exception_notification gem
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

@@ -122,6 +122,9 @@ GEM
     diff-lcs (1.3)
     erubi (1.7.0)
     eventmachine (1.2.5)
+    exception_notification (4.2.2)
+      actionmailer (>= 4.0, < 6)
+      activesupport (>= 4.0, < 6)
     execjs (2.7.0)
     factory_girl (4.8.0)
       activesupport (>= 3.0.0)
@@ -300,6 +303,7 @@ GEM
     simple_form (3.5.0)
       actionpack (> 4, < 5.2)
       activemodel (> 4, < 5.2)
+    slack-notifier (2.3.1)
     slack-ruby-client (0.10.0)
       activesupport
       faraday (>= 0.9)
@@ -375,6 +379,7 @@ DEPENDENCIES
   devise
   devise_invitable (~> 1.7.0)
   eventmachine
+  exception_notification
   factory_girl_rails
   faker (~> 1.7.3)
   faye-websocket
@@ -400,6 +405,7 @@ DEPENDENCIES
   shoulda-matchers
   sidekiq
   simple_form
+  slack-notifier
   slack-ruby-client
   slim-rails
   spring

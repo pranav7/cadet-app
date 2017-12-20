@@ -10,7 +10,6 @@ class BoardsController < ApplicationController
   end
 
   def show
-    raise "Important Error"
     @board = current_company.boards.friendly.find(params[:id])
     @posts = @board.posts.sorted(sort_method: params[:sort_by])
     @post = @board.posts.new

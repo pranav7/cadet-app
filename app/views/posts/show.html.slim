@@ -9,7 +9,6 @@
           .section.active= link_to @board.name, board_path(@board)
 
     .row
-      // Middle Section
       .sixteen.wide.mobile.column.ten.wide.computer.column
         // Post Header
         .post-header.vertical-padded
@@ -37,8 +36,7 @@
           - next if comment.new_record?
           = render partial: "partials/comment", locals: { resource: comment }
 
-      // Middle Section
-      .sixteen.wide.mobile.six.wide.computer.column
-        // Voters
+      .sixteen.wide.mobile.five.wide.computer.column
         = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }
         = render partial: "partials/cadet_power"
+

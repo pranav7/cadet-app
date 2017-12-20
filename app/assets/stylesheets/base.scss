@@ -59,11 +59,21 @@ body {
 }
 
 .padded {
-  padding: $base-size;
-}
+  &.full {
+    padding: $base-size;
+  }
 
-.vertical.padded {
-  padding: $base-size 0;
+  &.bottom {
+    padding-bottom: $base-size;
+  }
+
+  &.top {
+    padding-top: $base-size;
+  }
+
+  &.vertical {
+    padding: $base-size 0;
+  }
 }
 
 .float {
@@ -150,6 +160,10 @@ a.c.link {
   &.transparent {
     background-color: transparent;
     border-color: transparent;
+  }
+
+  &.with.border {
+    border: 1px solid $lighter;
   }
 }
 // End
@@ -425,44 +439,49 @@ a.c.link {
 
 // Start
 // Styling for Post Item in Post List
-.post-list-item {
-  padding: 1.75 * $base-size 0;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+.posts-list {
+  padding: $base-size $double-base-size;
 
-  a.post-link {
-    color: $darkest;
+  .post-list-item {
+    border-top: 1px solid $lightest;
+    padding: 2.25 * $base-size 0;
+    width: 100%;
     display: flex;
     flex-direction: column;
-    justify-content: space-between;
-    flex: 1;
-  }
 
-  .post-body {
-    display: flex;
-
-    &:hover { color: $black; }
-
-    .post-summary {
-      padding-bottom: $base-size;
+    a.post-link {
+      color: $darkest;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
     }
 
-    .comment-count {
-      min-width: 30px;
+    .post-body {
+      display: flex;
+
+      &:hover { color: $black; }
+
+      .post-summary {
+        padding-bottom: $base-size;
+      }
+
+      .comment-count {
+        min-width: 30px;
+      }
+
+      .title-text h3 {
+        font-size: 17px;
+        font-weight: 600;
+        margin: 0 0 4px 0;
+      }
     }
 
-    .title-text h3 {
-      font-size: 17px;
-      font-weight: 600;
-      margin: 0 0 4px 0;
+    .post-info {
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
     }
-  }
-
-  .post-info {
-    display: flex;
-    align-items: center;
-    flex-wrap: wrap;
   }
 }
 // End
@@ -514,8 +533,45 @@ a.c.link {
     border: 1px solid $light;
   }
 }
+
+.text-status {
+  font-weight: 600;
+  padding: 8px;
+
+  &.released {
+    color: $released-color;
+  }
+
+  &.developing {
+    color: $secondary-blue;
+  }
+
+  &.planned {
+    color: $planned-color;
+  }
+
+  &.closed {
+    color: $good-red;
+  }
+
+  &.open {
+    color: $darker;
+  }
+}
 // End
 // Status Colors
+
+.create-post-form {
+  .form-header {
+    color: $black;
+    font-size: 16px;
+    font-weight: 500;
+  }
+
+  .form-summary {
+    margin-top: 4px;
+  }
+}
 
 // Start
 // Changelog Styling

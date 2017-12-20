@@ -53,10 +53,11 @@ class ApplicationController < ActionController::Base
   end
 
   def prepare_exception_notifier
-    return unless user_signed_in?
-
-    request.env["exception_notifier.exception_data"] = {
-      current_user: current_user.serializable_hash
+    exception_data = {
+      url: request.url
     }
+    exception_data[:current_user] = current_user.serializable_hash if user_signed_in?
+
+    request.env["exception_notifier.exception_data"] = exception_data
   end
 end

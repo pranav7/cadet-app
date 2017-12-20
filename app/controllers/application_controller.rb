@@ -56,7 +56,7 @@ class ApplicationController < ActionController::Base
     return unless user_signed_in?
 
     request.env["exception_notifier.exception_data"] = {
-      current_user: current_user
+      current_user: current_user.serializable_hash
     }
   end
 end

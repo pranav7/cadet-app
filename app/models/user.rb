@@ -105,7 +105,7 @@ class User < ApplicationRecord
     return if Rails.env.test?
     return if invited_to_sign_up?
 
-    message = "*#{formatted_address}* is now on Cadet*"
+    message = "*#{formatted_address}* is now on Cadet"
     NotifySlackJob.perform_later(message)
   end
 

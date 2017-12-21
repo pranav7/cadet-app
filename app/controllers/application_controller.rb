@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
   before_action :set_raven_context
+  before_action :prepare_exception_notifier
 
   # before_action :ensure_valid_subdomain!
 
@@ -49,5 +50,14 @@ class ApplicationController < ActionController::Base
     end
 
     Raven.extra_context(params: params.to_unsafe_h, url: request.url)
+  end
+
+  def prepare_exception_notifier
+    exception_data = {
+      url: request.url
+    }
+    exception_data[:current_user] = current_user.serializable_hash if user_signed_in?
+
+    request.env["exception_notifier.exception_data"] = exception_data
   end
 end

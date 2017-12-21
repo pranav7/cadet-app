@@ -442,6 +442,10 @@ a.c.link {
 .posts-list {
   padding: $base-size $double-base-size;
 
+  @media (max-device-width: 480px) {
+    padding: $base-size;
+  }
+
   .post-list-item {
     border-top: 1px solid $lightest;
     padding: 2.25 * $base-size 0;

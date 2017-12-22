@@ -1,7 +1,8 @@
 - account = account || nil
 - type = type || nil
+- upvoted = user_signed_in? ? current_user.voted?(post) : false
 
-- if user_signed_in? && current_user.voted?(post)
+- if upvoted
   a.vote-button.upvoted href=board_post_votes_path(post.board, post) data-method="delete" class=(type rescue nil)
     span.text Upvoted
     - if account
@@ -15,3 +16,5 @@
       span.vote-count= account.votes_for(post).count
     - else
       span.vote-count= post.votes.count
+
+= react_component "UpvoteButton", { voteCount: post.votes.count, upvoted: upvoted }, { prerender: true }

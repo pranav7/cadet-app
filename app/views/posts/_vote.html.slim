@@ -17,4 +17,6 @@
     - else
       span.vote-count= post.votes.count
 
-= react_component "UpvoteButton", { voteCount: post.votes.count, upvoted: upvoted }, { prerender: true }
+= react_component "UpvoteButton",
+  { voteCount: post.votes.count, upvoted: upvoted },
+  { prerender: true }

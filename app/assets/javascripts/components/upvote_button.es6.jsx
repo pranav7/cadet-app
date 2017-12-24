@@ -8,9 +8,14 @@ class UpvoteButton extends React.Component {
     };
 
     this.clickListener = this.clickListener.bind(this);
- }
+    this.toggleButtonState = this.toggleButtonState.bind(this);
+  }
 
   clickListener() {
+    this.toggleButtonState()
+  }
+
+  toggleButtonState() {
     if (this.state.upvoted) {
       this.setState({
         voteCount: this.state.voteCount - 1,

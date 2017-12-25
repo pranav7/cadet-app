@@ -46,8 +46,8 @@ class ApplicationController < ActionController::Base
   end
 
   def drop_naked_ip_requests
-    Rails.logger.debug "Request IP: #{request.ip}"
-    Rails.logger.debug "Request URL: #{request.method} #{request.url}"
+    Rails.logger.info "Request IP: #{request.ip}"
+    Rails.logger.info "Request URL: #{request.method} #{request.url}"
 
     if request.url == "https://18.221.127.87/"
       head :not_found

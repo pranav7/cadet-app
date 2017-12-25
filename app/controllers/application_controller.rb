@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery with: :exception
-  before_action :set_raven_context
   before_action :prepare_exception_notifier
   before_action :drop_naked_ip_requests
 
@@ -36,23 +35,6 @@ class ApplicationController < ActionController::Base
     request.env['omniauth.origin'] || stored_location_for(resource) || admin_boards_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
   end
 
-  def set_raven_context
-    if user_signed_in?
-      context = {
-        id: current_user.id,
-        email: current_user.email,
-      }
-
-      if current_company
-        context[:company] = current_company.subdomain
-      end
-
-      Raven.user_context(context)
-    end
-
-    Raven.extra_context(params: params.to_unsafe_h, url: request.url)
-  end
-
   def prepare_exception_notifier
     exception_data = {
       url: request.url,
@@ -64,6 +46,9 @@ class ApplicationController < ActionController::Base
   end
 
   def drop_naked_ip_requests
+    Rails.logger.debug "Request IP: #{request.ip}"
+    Rails.logger.debug "Request URL: #{request.method} #{request.url}"
+
     if request.url == "https://18.221.127.87/"
       head :not_found
     end

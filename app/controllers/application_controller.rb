@@ -55,7 +55,8 @@ class ApplicationController < ActionController::Base
 
   def prepare_exception_notifier
     exception_data = {
-      url: request.url
+      url: request.url,
+      ip: request.ip
     }
     exception_data[:current_user] = current_user.serializable_hash if user_signed_in?
 

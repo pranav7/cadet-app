@@ -31,6 +31,7 @@ gem 'postmark-rails'
 gem 'sidekiq'
 gem 'exception_notification'
 gem 'slack-notifier' # Need for exception_notification gem
+gem 'health_check'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

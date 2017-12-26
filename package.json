@@ -2,6 +2,7 @@
   "name": "cadet-app",
   "private": true,
   "dependencies": {
+    "axios": "^0.17.1",
     "clipboard": "^1.7.1",
     "jquery-ujs": "^1.2.2",
     "js-cookie": "^2.1.4",

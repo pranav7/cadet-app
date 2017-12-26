@@ -5,6 +5,7 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require axios/dist/axios
 //= require semantic-ui
 //= require linkifyjs/dist/linkify
 //= require linkifyjs/dist/linkify-jquery

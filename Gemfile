@@ -27,11 +27,11 @@ gem 'friendly_id', '~> 5.1.0'
 gem 'slack-ruby-client'
 gem 'eventmachine'
 gem 'faye-websocket'
-gem "sentry-raven"
 gem 'postmark-rails'
 gem 'sidekiq'
 gem 'exception_notification'
 gem 'slack-notifier' # Need for exception_notification gem
+gem 'health_check'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

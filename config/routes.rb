@@ -36,6 +36,8 @@ Rails.application.routes.draw do
   get :join, to: "users#new"
   resource :users, only: [:create]
 
+  health_check_routes
+
   resources :boards, path: "" do
     resources :posts, only: [:create, :show] do
       resources :comments, only: [:create]

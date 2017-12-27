@@ -25,7 +25,7 @@ class UpvoteButton extends React.Component {
   }
 
   upvote() {
-    that = this;
+    let that = this;
     axios({
       method: "POST",
       url: `/${this.state.boardId}/posts/${this.state.postId}/votes`,
@@ -41,7 +41,7 @@ class UpvoteButton extends React.Component {
   }
 
   downvote() {
-    that = this;
+    let that = this;
     axios({
       method: "DELETE",
       url: `/${this.state.boardId}/posts/${this.state.postId}/votes`,

@@ -95,6 +95,10 @@ class Post < ApplicationRecord
     votes.manual.map(&:user)
   end
 
+  def summary
+    content.body.truncate(200)
+  end
+
   private
 
   def set_last_activity_at

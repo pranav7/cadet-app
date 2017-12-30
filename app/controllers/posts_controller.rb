@@ -10,6 +10,11 @@ class PostsController < ApplicationController
     @page_title = @post.title
   end
 
+  def index
+    @board = current_company.boards.friendly.find(params[:board_id])
+    @posts = @board.posts
+  end
+
   def create
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params) 

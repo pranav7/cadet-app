@@ -10,7 +10,8 @@
         - if user_signed_in? && current_user.admin_of?(current_company) && !params[:sort_by]
           p.soft We recommend creating at least 5 posts to help your users get started.
       - else
-        = render partial: "posts/post", collection: @posts, locals: { board: @board }
+        //= render partial: "posts/post", collection: @posts, locals: { board: @board }
+        = react_component "PostList", { boardId: @board.id }, { prerender: false }
 
   .five.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }

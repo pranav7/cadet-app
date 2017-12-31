@@ -12,7 +12,7 @@ class PostsController < ApplicationController
 
   def index
     @board = current_company.boards.friendly.find(params[:board_id])
-    @posts = @board.posts
+    @posts = @board.posts.sorted(sort_method: params[:sort_by])
   end
 
   def create

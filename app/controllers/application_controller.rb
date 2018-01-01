@@ -1,7 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :drop_naked_ip_requests
+  protect_from_forgery preprend: true, with: :exception
   before_action :prepare_exception_notifier
-  protect_from_forgery with: :exception
 
   # before_action :ensure_valid_subdomain!
 

@@ -15,11 +15,20 @@ class PostList extends React.Component {
     this.getPosts();
   }
 
-  getPosts() {
+  getPosts(options = {}) {
     let that = this;
+    let searchTerm = options["searchTerm"];
+    let url = null;
+      
+    if (searchTerm) {
+      url = `/${this.state.boardId}/posts?search=${searchTerm}`
+    } else {
+      url = `/${this.state.boardId}/posts`
+    }
+      
     axios({
       method: "GET",
-      url: `/${this.state.boardId}/posts`,
+      url: url,
       headers: {
         'Content-Type': "application/json",
         'Accept': "application/json",
@@ -38,28 +47,16 @@ class PostList extends React.Component {
   }
 
   search() {
-    axios({
-      method: "GET",
-      url: `/${this.state.boardId}/posts?search=${this.state.searchTerm}`,
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then(response => {
-      this.setState({
-        posts: response.data.posts
-      });
-    });
+    this.getPosts({searchTerm: this.state.searchTerm});
   }
 
   render() {
     return(
       <div>
-        <div className="ui input field">
+        <div className="ui icon input field">
+          <i className="search icon" />
           <input  type="text"
-                  placeholder="Search ..."
+                  placeholder="Search..."
                   value={this.state.searchTerm}
                   onChange={this.handleChange} />
         </div>

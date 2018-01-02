@@ -11,6 +11,7 @@ class PostList extends React.Component {
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.postList = this.postList.bind(this);
 
     this.getPosts();
   }
@@ -50,6 +51,22 @@ class PostList extends React.Component {
     this.getPosts({searchTerm: this.state.searchTerm});
   }
 
+  postList() {
+    if (this.state.posts.length > 0) {
+      return (
+        <div>
+          {this.state.posts.map((post) =>
+            <div key={post.id}>
+              <PostListItem boardId={this.state.boardId} post={post} />
+            </div>
+          )}
+        </div>
+      );
+    } else {
+      return(<div className="post-list-item">Your search did not match any post</div>);
+    }
+  }
+
   render() {
     return(
       <div>
@@ -60,11 +77,7 @@ class PostList extends React.Component {
                   value={this.state.searchTerm}
                   onChange={this.handleChange} />
         </div>
-        {this.state.posts.map((post) =>
-          <div key={post.id}>
-            <PostListItem boardId={this.state.boardId} post={post} />
-          </div>
-        )}
+        {this.postList()}
       </div>
     );
   }

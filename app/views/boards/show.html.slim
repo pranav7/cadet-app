@@ -1,16 +1,11 @@
 .ui.mobile.reversed.stackable.grid
   .sixteen.wide.mobile.ten.wide.computer.column
     .posts-list.box
-      = form_tag board_path(@board), method: :get
-        .padded.bottom
-          = render partial: "partials/post_sort_field"
-
       - if @posts.empty?
         h4 No Posts
         - if user_signed_in? && current_user.admin_of?(current_company) && !params[:sort_by]
           p.soft We recommend creating at least 5 posts to help your users get started.
       - else
-        //= render partial: "posts/post", collection: @posts, locals: { board: @board }
         = react_component "PostList", { boardId: @board.id }, { prerender: false }
 
   .five.wide.column

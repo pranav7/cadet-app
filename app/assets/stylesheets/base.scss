@@ -293,6 +293,17 @@ a.c.link {
   color: $dark;
   margin-top: 8px;
 }
+
+.ui.grid {
+  &.no.margin {
+    margin: 0 !important;
+  }
+
+  > .row > .no.padding.column {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 // End
 // Semantic UI Overrides
 

@@ -11,7 +11,8 @@ class PostList extends React.Component {
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
-    this.postList = this.postList.bind(this);
+    this.handleSortSelectChange = this.handleSortSelectChange.bind(this);
+    this.renderPostList = this.renderPostList.bind(this);
 
     this.getPosts();
   }
@@ -19,10 +20,13 @@ class PostList extends React.Component {
   getPosts(options = {}) {
     let that = this;
     let searchTerm = options["searchTerm"];
+    let sortBy = options["sortBy"];
     let url = null;
       
     if (searchTerm) {
       url = `/${this.state.boardId}/posts?search=${searchTerm}`
+    } else if (sortBy) {
+      url = `/${this.state.boardId}/posts?sort_by=${sortBy}`
     } else {
       url = `/${this.state.boardId}/posts`
     }
@@ -47,11 +51,15 @@ class PostList extends React.Component {
     this.setState({ searchTerm: event.target.value }, this.search);
   }
 
+  handleSortSelectChange(value) {
+    this.getPosts({sortBy: value});
+  }
+
   search() {
     this.getPosts({searchTerm: this.state.searchTerm});
   }
 
-  postList() {
+  renderPostList() {
     if (this.state.posts.length > 0) {
       return (
         <div>
@@ -67,17 +75,46 @@ class PostList extends React.Component {
     }
   }
 
+  componentDidMount() {
+    $(".sort-post-dropdown").dropdown({
+      onChange: this.handleSortSelectChange
+    });
+  }
+
   render() {
     return(
-      <div>
-        <div className="ui icon input field">
-          <i className="search icon" />
-          <input  type="text"
-                  placeholder="Search..."
-                  value={this.state.searchTerm}
-                  onChange={this.handleChange} />
+      <div className="ui no margin grid">
+        <div className="two column row">
+          <div className="no padding column">
+            <div className="c labeled field">
+              <label>Sort By</label>
+              <select name="sort_by" className="ui open dropdown sort-post-dropdown selection">
+                <option default value="latest_activity">Latest Activity</option>
+                <option value="most_voted">Most Voted</option>
+                <option value="sort_by_new">New</option>
+                <option value="open">#open</option>
+                <option value="planned">#planned</option>
+                <option value="developing">#developing</option>
+                <option value="released">#released</option>
+                <option value="closed">#closed</option>
+              </select>
+            </div>
+          </div>
+
+          <div className="right aligned no padding column">
+            <div className="ui icon input field">
+              <i className="search icon" />
+              <input  type="text"
+                      placeholder="Search"
+                      value={this.state.searchTerm}
+                      onChange={this.handleChange} />
+            </div>
+          </div>
         </div>
-        {this.postList()}
+
+        <div className="row">
+          {this.renderPostList()}
+        </div>
       </div>
     );
   }

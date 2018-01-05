@@ -5,14 +5,18 @@ class PostList extends React.Component {
     this.state = {
       boardId: this.props.boardId,
       searchTerm: '',
-      posts: []
+      posts: [],
+      suggesting: false
     };
 
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
     this.handleChange = this.handleChange.bind(this);
     this.handleSortSelectChange = this.handleSortSelectChange.bind(this);
+    this.suggestPosts = this.suggestPosts.bind(this);
     this.renderPostList = this.renderPostList.bind(this);
+    this.renderHeader = this.renderHeader.bind(this);
+    this.renderSortDropdown = this.renderSortDropdown.bind(this);
 
     this.getPosts();
   }
@@ -56,13 +60,13 @@ class PostList extends React.Component {
   }
 
   search() {
-    this.getPosts({searchTerm: this.state.searchTerm});
+    this.getPosts({ searchTerm: this.state.searchTerm });
   }
 
   renderPostList() {
     if (this.state.posts.length > 0) {
       return (
-        <div>
+        <div className="post-list-item-container">
           {this.state.posts.map((post) =>
             <div key={post.id}>
               <PostListItem boardId={this.state.boardId} post={post} />
@@ -70,20 +74,24 @@ class PostList extends React.Component {
           )}
         </div>
       );
+    } else if (this.state.searchTerm == "" && this.state.suggesting == false) {
+      return(<div className="ui active centered inline loader"></div>);
     } else {
-      return(<div className="post-list-item">Your search did not match any post</div>);
+      return(<div className="post-list-item">There are no matching posts</div>);
     }
   }
 
-  componentDidMount() {
-    $(".sort-post-dropdown").dropdown({
-      onChange: this.handleSortSelectChange
-    });
-  }
-
-  render() {
-    return(
-      <div className="ui no margin grid">
+  renderHeader() {
+    if (this.state.suggesting == true) {
+      return (
+        <div className="one column row">
+          <div className="no padding column">
+            <strong>Suggesting posts</strong>
+          </div>
+        </div>
+      )
+    } else { 
+      return (
         <div className="two column row">
           <div className="no padding column">
             <div className="c labeled field">
@@ -100,7 +108,6 @@ class PostList extends React.Component {
               </select>
             </div>
           </div>
-
           <div className="right aligned no padding column">
             <div className="ui icon input field">
               <i className="search icon" />
@@ -111,11 +118,41 @@ class PostList extends React.Component {
             </div>
           </div>
         </div>
+      );
+    }
+  }
+
+  renderSortDropdown() {
+    $(".sort-post-dropdown").dropdown({
+      onChange: this.handleSortSelectChange
+    });
+  }
+
+  suggestPosts(event) {
+    if (event.target.value == "") {
+      this.setState({ suggesting: false });
+      this.renderSortDropdown();
+    } else {
+      this.setState({ suggesting: true });
+    }
+
+    this.getPosts({ searchTerm: event.target.value });
+  }
+
+  render() {
+    return(
+      <div className="ui no margin grid">
+        {this.renderHeader()}
 
         <div className="row">
           {this.renderPostList()}
         </div>
       </div>
     );
+  }
+
+  componentDidMount() {
+    this.renderSortDropdown();
+    $('#post_title').on("input", this.suggestPosts);
   }
 }

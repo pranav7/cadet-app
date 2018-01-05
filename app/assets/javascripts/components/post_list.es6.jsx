@@ -88,7 +88,7 @@ class PostList extends React.Component {
       )
     } else { 
       return (
-        <div className="two column row">
+        <div className="two column stackable row">
           <div className="no padding column">
             <div className="c labeled field">
               <label>Sort By</label>

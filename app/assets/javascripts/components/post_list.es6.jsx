@@ -21,20 +21,16 @@ class PostList extends React.Component {
     this.getPosts();
   }
 
-  getPosts(options = {}) {
+  getPosts(params = {}) {
     let that = this;
-    let searchTerm = options["searchTerm"];
-    let sortBy = options["sortBy"];
     let url = null;
-      
-    if (searchTerm) {
-      url = `/${this.state.boardId}/posts?search=${searchTerm}`
-    } else if (sortBy) {
-      url = `/${this.state.boardId}/posts?sort_by=${sortBy}`
-    } else {
+
+    if ($.isEmptyObject(params)) {
       url = `/${this.state.boardId}/posts`
+    } else {
+      url = `/${this.state.boardId}/posts?${$.param(params)}`
     }
-      
+
     axios({
       method: "GET",
       url: url,
@@ -56,11 +52,11 @@ class PostList extends React.Component {
   }
 
   handleSortSelectChange(value) {
-    this.getPosts({sortBy: value});
+    this.getPosts({sort_by: value});
   }
 
   search() {
-    this.getPosts({ searchTerm: this.state.searchTerm });
+    this.getPosts({ search: this.state.searchTerm });
   }
 
   renderPostList() {
@@ -136,7 +132,7 @@ class PostList extends React.Component {
       this.setState({ suggesting: true });
     }
 
-    this.getPosts({ searchTerm: event.target.value });
+    this.getPosts({ search: event.target.value });
   }
 
   render() {

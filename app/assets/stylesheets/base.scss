@@ -293,6 +293,17 @@ a.c.link {
   color: $dark;
   margin-top: 8px;
 }
+
+.ui.grid {
+  &.no.margin {
+    margin: 0 !important;
+  }
+
+  > .row > .no.padding.column {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
 // End
 // Semantic UI Overrides
 
@@ -444,6 +455,10 @@ a.c.link {
 
   @media (max-device-width: 480px) {
     padding: $base-size;
+  }
+
+  .post-list-item-container {
+    width: 100%;
   }
 
   .post-list-item {

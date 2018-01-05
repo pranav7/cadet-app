@@ -37,6 +37,11 @@ class UpvoteButton extends React.Component {
     })
     .then(response => {
       that.toggleUp();
+    })
+    .catch(error => {
+      if (error.response.status == 401) {
+        window.location = "/login";
+      }
     });
   }
 

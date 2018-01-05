@@ -10,6 +10,16 @@ class PostsController < ApplicationController
     @page_title = @post.title
   end
 
+  def index
+    @board = current_company.boards.friendly.find(params[:board_id])
+    if params[:search] && params[:search] != ""
+      posts = Post.arel_table
+      @posts = @board.posts.where(posts[:title].matches("%#{params[:search]}%"))
+    else
+      @posts = @board.posts.sorted(sort_method: params[:sort_by])
+    end
+  end
+
   def create
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params) 

@@ -11,7 +11,7 @@ class PostList extends React.Component {
 
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
-    this.handleChange = this.handleChange.bind(this);
+    this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleSortSelectChange = this.handleSortSelectChange.bind(this);
     this.suggestPosts = this.suggestPosts.bind(this);
     this.renderPostList = this.renderPostList.bind(this);
@@ -51,7 +51,7 @@ class PostList extends React.Component {
     });
   }
 
-  handleChange(event) {
+  handleSearchInput(event) {
     this.setState({ searchTerm: event.target.value }, this.search);
   }
 
@@ -114,7 +114,7 @@ class PostList extends React.Component {
               <input  type="text"
                       placeholder="Search"
                       value={this.state.searchTerm}
-                      onChange={this.handleChange} />
+                      onChange={this.handleSearchInput} />
             </div>
           </div>
         </div>

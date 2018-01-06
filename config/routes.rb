@@ -4,6 +4,10 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
+  %w(404 422 500 503).each do |code|
+    get code, to: "errors#show", code: code
+  end
+
   devise_for :users, path: '',
     path_names: { sign_in: 'login', sign_up: 'signup' },
     controllers: {

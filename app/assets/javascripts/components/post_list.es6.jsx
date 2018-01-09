@@ -6,7 +6,9 @@ class PostList extends React.Component {
       boardId: this.props.boardId,
       searchTerm: '',
       posts: [],
-      suggesting: false
+      suggesting: false,
+      searching: false,
+      noPosts: false
     };
 
     this.getPosts = this.getPosts.bind(this);
@@ -44,11 +46,19 @@ class PostList extends React.Component {
       this.setState({
         posts: response.data.posts
       });
+
+      if (response.data.posts.length == 0) {
+        this.setState({ noPosts: true })
+      }
     });
   }
 
   handleSearchInput(event) {
-    this.setState({ searchTerm: event.target.value }, this.search);
+    if (event.target.value == "") {
+      this.setState({ searchTerm: event.target.value, searching: false }, this.search);
+    } else {
+      this.setState({ searchTerm: event.target.value, searching: true }, this.search);
+    }
   }
 
   handleSortSelectChange(value) {
@@ -70,7 +80,7 @@ class PostList extends React.Component {
           )}
         </div>
       );
-    } else if (this.state.searchTerm == "" && this.state.suggesting == false) {
+    } else if (this.state.noPosts == false && this.state.searching == false && this.state.suggesting == false) {
       return(<div className="ui active centered inline loader"></div>);
     } else {
       return(<div className="post-list-item">There are no matching posts</div>);

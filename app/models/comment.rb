@@ -57,7 +57,8 @@ class Comment < ApplicationRecord
   def notify_slack
     return if Rails.env.test?
 
-    message = "*New Comment - ##{post.company.subdomain}*"
+    comment_type = note? ? "Note" : "Comment"
+    message = "*New #{comment_type} - ##{post.company.subdomain}*"
     message << "\n#{commenter.formatted_address} commented on _#{post.title}_ in #{post.board.name}"
 
     NotifySlackJob.perform_later(message)

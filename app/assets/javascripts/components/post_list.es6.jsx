@@ -101,7 +101,7 @@ class PostList extends React.Component {
         <div className="two column stackable row">
           <div className="no padding column">
             <div className="c labeled field">
-              <label>Sort By</label>
+              <label>Show</label>
               <select name="sort_by" className="ui open dropdown sort-post-dropdown selection">
                 <option default value="latest_activity">Latest Activity</option>
                 <option value="most_voted">Most Voted</option>

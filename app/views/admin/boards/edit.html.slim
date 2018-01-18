@@ -7,12 +7,13 @@
     .row
       .five.wide.column
         .box
-          = simple_form_for @board, url: admin_board_path(@board) do |form|
-            = form.input :name, placeholder: "Board Title"
-            = form.input :description, placeholder: "Board Description"
-            .ui.middle.aligned.two.column.grid
-              .left.aligned.column
-                = form.submit "Save", class: "ui button"
-              .right.aligned.column
-                = link_to "Delete", admin_board_path(@board), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
+          = render partial: 'form'
+
+          .ui.dividing.header Delete Board
+          p.soft This step is irreversible, please be careful.
+          = link_to "Delete Board",
+            admin_board_path(@board),
+            method: :delete,
+            class: "ui mini red button",
+            data: { confirm: "Are you sure?" }
 

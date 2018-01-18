@@ -6,6 +6,8 @@
           = link_to current_company.name, boards_path
         - if @board
           span.board-name= link_to @board.name, board_path(@board)
+          - if @board.private?
+            i.small.lock.icon.soft
       .right.aligned.column
         - if user_signed_in?
           .c-profile-menu.ui.left.top.pointing.dropdown

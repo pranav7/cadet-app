@@ -14,7 +14,9 @@
             a.board-link href=board_path(board)
               .board.box
                 .top
-                  .board-name= board.name
+                  - if board.private?
+                    i.lock.icon.soft
+                  span.board-name= board.name
                   .board-description.soft= board.description
                 .bottom
                   span.soft.foat.left= pluralize(board.posts.count, "Post")

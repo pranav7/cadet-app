@@ -19,6 +19,11 @@ class ApplicationController < ActionController::Base
     raise ActionController::RoutingError.new('Not Found')
   end
 
+  def authorize_admin_access!
+    authenticate_user!
+    not_found unless current_user.admin_of?(current_company)
+  end
+
   private
 
   def after_sign_in_path_for(resource)

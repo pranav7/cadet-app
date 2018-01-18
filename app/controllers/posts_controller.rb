@@ -3,6 +3,8 @@ class PostsController < ApplicationController
 
   def show
     @board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if @board.private?
+
     @post = @board.posts.friendly.find(params[:id])
     @comment = @post.comments.new
     @comment.build_content
@@ -12,6 +14,8 @@ class PostsController < ApplicationController
 
   def index
     @board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if @board.private?
+
     if params[:search] && params[:search] != ""
       posts = Post.arel_table
       @posts = @board.posts.where(posts[:title].matches("%#{params[:search]}%"))
@@ -22,6 +26,8 @@ class PostsController < ApplicationController
 
   def create
     board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if board.private?
+
     post = board.posts.new(post_params) 
     post.requester = current_user
     post.votes.build(user: current_user)

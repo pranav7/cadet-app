@@ -27,16 +27,38 @@ RSpec.describe PostsController, type: :controller do
   end
 
   describe "#show" do
-    let(:post) { create :post, board: board }
+    context "public board" do
+      let(:post) { create :post, board: board }
 
-    it "responds successfully" do
-      get :show, params: { board_id: board.id, id: post.id }
-      expect(response).to be_success
+      it "responds successfully" do
+        get :show, params: { board_id: board.id, id: post.id }
+        expect(response).to be_success
+      end
+
+      it "assigns @post with the post object" do
+        get :show, params: { board_id: board.id, id: post.id }
+        expect(assigns(:post)).to eq(post)
+      end
     end
 
-    it "assigns @post with the post object" do
-      get :show, params: { board_id: board.id, id: post.id }
-      expect(assigns(:post)).to eq(post)
+    context "private board" do
+      let(:private_board) { create :board, company: company, private: true }
+      let(:post) { create :post, board: private_board }
+
+      it "responds with 404 if board is private and current_user is not admin" do
+        expect {
+          get :show, params: { board_id: private_board.id, id: post.id }
+        }.to raise_error(ActionController::RoutingError)
+      end
+
+      it "responds with success if board is private but current_user is admin" do
+        admin = create :admin, company: company
+        sign_in admin
+
+        get :show, params: { board_id: private_board.id, id: post.id }
+
+        expect(response).to be_success
+      end
     end
   end
 end

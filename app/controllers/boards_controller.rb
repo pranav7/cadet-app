@@ -11,7 +11,7 @@ class BoardsController < ApplicationController
 
   def show
     @board = current_company.boards.friendly.find(params[:id])
-    authorize_board_access! if @board.private?
+    authorize_admin_access! if @board.private?
 
     @posts = @board.posts.sorted(sort_method: params[:sort_by])
     @post = @board.posts.new

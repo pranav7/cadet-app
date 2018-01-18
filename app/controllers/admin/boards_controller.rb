@@ -25,7 +25,7 @@ class Admin::BoardsController < Admin::AdminController
     @board.slug = nil
 
     if @board.update_attributes(board_params)
-      flash[:success] = "Settings saved"
+      flash[:success] = "Changes saved"
       redirect_to edit_admin_board_path(@board)
     else
       render action: :edit
@@ -60,6 +60,6 @@ class Admin::BoardsController < Admin::AdminController
   private
 
   def board_params
-    params.require(:board).permit(:name, :description)
+    params.require(:board).permit(:name, :description, :private)
   end
 end

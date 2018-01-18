@@ -177,6 +177,10 @@ a.c.link {
   }
 }
 
+.ui.label {
+  margin: 0;
+}
+
 .ui.basic.label {
   background-color: $lightest;
   border-color: $lighter;

@@ -1,6 +1,10 @@
 class BoardsController < ApplicationController
   def index
-    @boards = current_company.boards
+    if user_signed_in? && current_user.admin_of?(current_company)
+      @boards = current_company.boards
+    else
+      @boards = current_company.boards.non_private
+    end
 
     if @boards.count == 1
       return redirect_to(board_path(@boards.first))

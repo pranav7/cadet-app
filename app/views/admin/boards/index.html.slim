@@ -11,6 +11,10 @@
           - next if board.new_record?
           .board.box
             .top
+              - if board.private?
+                i.lock.icon.soft
+              - else
+                i.unlock.alternate.icon.soft
               = link_to board.name, admin_board_path(board), class: "board-name"
               .board-description.soft= board.description
             .bottom
@@ -26,7 +30,5 @@
         .header-text
           i.clone.icon
           | Add Board
-      = simple_form_for @board, url: admin_boards_path do |form|
-        = form.input :name, label: false, placeholder: "Board Title"
-        = form.input :description, label: false, placeholder: "Board Description"
-        = form.submit "Add Board", class: "ui button"
+
+      = render partial: "form"

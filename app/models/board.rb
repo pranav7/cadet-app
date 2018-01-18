@@ -12,6 +12,9 @@ class Board < ApplicationRecord
 
   alias_attribute :title, :name
 
+  scope :non_public, -> { where(private: true) }
+  scope :non_private, -> { where(private: false) }
+
   def after_create_tasks
     notify_slack
   end

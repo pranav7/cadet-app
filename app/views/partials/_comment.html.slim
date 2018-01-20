@@ -7,8 +7,9 @@
       = render partial: "partials/user",
         locals: { user: resource.user }
     .content
-      = simple_format resource.content.body
-    
+      //= simple_format resource.content.body
+      = simple_format Kramdown::Document.new(resource.content.body, input: 'GFM').to_html
+
     - if resource.class == Comment
       a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
     - else

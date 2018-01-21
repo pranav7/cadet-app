@@ -3,7 +3,7 @@ class Cadet.Posts
     # initialize some stuff here
 
   init: ->
-    @linkifyText()
+    # @linkifyText()
     @highlightSelectedComment()
     @initializeCopyPostButton()
 

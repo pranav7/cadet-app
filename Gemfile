@@ -34,6 +34,15 @@ gem 'slack-notifier' # Need for exception_notification gem
 gem 'health_check'
 gem 'kramdown'
 
+gem 'commonmarker'
+gem 'github-markup'
+gem 'html-pipeline'
+gem 'html-pipeline-rouge_filter'
+gem 'github-linguist'
+gem 'gemoji'
+gem 'rinku'
+gem 'sanitize'
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use Redis adapter to run Action Cable in production

@@ -2,7 +2,7 @@
 
 a.admin-post-list-item href=admin_board_post_path(board, post, request.query_parameters) id=post.id class=("selected" if post.id == (selected_post.id rescue -1))
   .post-title= post.title
-  .post-summary.c-soft= post.content.body.truncate(100)
+  .post-summary.c-soft= post.content.summary
   .post-meta.c-soft
     span
       = render_time(post.created_at, format: :short)

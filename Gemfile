@@ -6,7 +6,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'rails', '~> 5.2.0.beta2'
-gem 'pg'
+gem "pg", "< 1.0"
 gem 'puma', '~> 3.7'
 gem 'sass-rails', '~> 5.0'
 gem 'uglifier', '>= 1.3.0'
@@ -32,6 +32,14 @@ gem 'sidekiq'
 gem 'exception_notification'
 gem 'slack-notifier' # Need for exception_notification gem
 gem 'health_check'
+
+gem 'html-pipeline'
+gem 'html-pipeline-rouge_filter'
+gem 'commonmarker'
+gem 'gemoji'
+gem 'rinku'
+gem 'sanitize'
+gem 'octicons_helper'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

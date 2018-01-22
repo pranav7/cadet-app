@@ -1,9 +1,9 @@
 json.posts do
-  json.array! @posts do |post| 
+  json.array! @posts do |post|
     json.id post.id
     json.slug post.slug
     json.title post.title
-    json.summary post.summary
+    json.summary post.content.summary
     json.url board_post_url(@board, post)
     json.comments_count post.comments.without_notes.count
     json.votes_count post.votes.count

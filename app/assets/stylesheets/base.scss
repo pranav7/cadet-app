@@ -147,7 +147,7 @@ a.c.link {
   box-shadow: none;
   font-size: 100%;
 
-  .box-header { 
+  .box-header {
     @extend .c-soft;
     padding-bottom: $base-size;
 
@@ -202,7 +202,7 @@ a.c.link {
   z-index: 1000;
 
   &.success,
-  &.info, 
+  &.info,
   &.warning {
     background-color: $black;
     color: $white;
@@ -275,7 +275,7 @@ a.c.link {
     }
 
     & > .default.text {
-      color: $dark; 
+      color: $dark;
       font-weight: bold;
     }
 
@@ -345,9 +345,14 @@ a.c.link {
 // Styling for Post and Comment Content
 .content {
   padding: $half-base-size 0;
+  word-wrap: break-word;
 
   p {
-    line-height: 1.5;
+    margin: 0;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 
@@ -596,6 +601,31 @@ a.c.link {
     margin-top: 4px;
   }
 }
+
+// Start
+// Styling with markdown
+a.styling-with-markdown {
+  @extend .soft;
+
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+
+  svg {
+    fill: currentColor;
+  }
+
+  span.markdown-icon {
+    position: relative;
+    top: 4px;
+  }
+
+  span.label {
+    margin-left: 5px;
+  }
+}
+// End
+// Styling with markdown
 
 // Start
 // Changelog Styling

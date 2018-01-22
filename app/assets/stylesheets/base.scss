@@ -348,8 +348,11 @@ a.c.link {
   word-wrap: break-word;
 
   p {
-    //line-height: 1.5;
     margin: 0;
+  }
+
+  img {
+    max-width: 100%;
   }
 }
 
@@ -598,6 +601,31 @@ a.c.link {
     margin-top: 4px;
   }
 }
+
+// Start
+// Styling with markdown
+a.styling-with-markdown {
+  @extend .soft;
+
+  display: inline-block;
+  margin-left: 10px;
+  font-size: 12px;
+
+  svg {
+    fill: currentColor;
+  }
+
+  span.markdown-icon {
+    position: relative;
+    top: 4px;
+  }
+
+  span.label {
+    margin-left: 5px;
+  }
+}
+// End
+// Styling with markdown
 
 // Start
 // Changelog Styling

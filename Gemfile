@@ -32,14 +32,15 @@ gem 'sidekiq'
 gem 'exception_notification'
 gem 'slack-notifier' # Need for exception_notification gem
 gem 'health_check'
+gem 'octicons_helper'
 
+# All HTML Pipeline for Content Formatting Gems
 gem 'html-pipeline'
 gem 'html-pipeline-rouge_filter'
 gem 'commonmarker'
 gem 'gemoji'
 gem 'rinku'
 gem 'sanitize'
-gem 'octicons_helper'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

@@ -1,5 +1,5 @@
 # config valid only for current version of Capistrano
-lock "3.9.1"
+lock "3.10.1"
 
 set :application, "cadet-app"
 set :repo_url, "ssh://git@bitbucket.org/pranav7/cadet-app.git"

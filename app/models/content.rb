@@ -1,24 +1,32 @@
-require 'github/markup'
-
 class Content < ApplicationRecord
   belongs_to :parent, polymorphic: true, optional: true
 
   validates :body, presence: true
 
-  def parsed_markdown
+  def parsed
     context = {
       asset_root: "/images/",
-      gfm: true
+      gfm: true,
+      replace_br: false
     }
 
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::SanitizationFilter,
-      HTML::Pipeline::RougeFilter,
       HTML::Pipeline::EmojiFilter,
       HTML::Pipeline::AutolinkFilter,
+      HTML::Pipeline::RougeFilter
     ], context
 
     pipeline.call(body)[:output].to_s
+  end
+
+  def summary
+    pipeline = HTML::Pipeline.new [
+      HTML::Pipeline::MarkdownFilter
+    ]
+
+    parsed = pipeline.call(body)[:output].to_s
+    ActionView::Base.full_sanitizer.sanitize(parsed).truncate(120)
   end
 end

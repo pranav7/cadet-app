@@ -39,6 +39,7 @@ gem 'commonmarker'
 gem 'gemoji'
 gem 'rinku'
 gem 'sanitize'
+gem 'octicons_helper'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

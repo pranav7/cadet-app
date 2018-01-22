@@ -45,6 +45,7 @@ pre {
   border-radius: 4px;
   padding: 16px 16px 0 16px;
   margin: 0;
+  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 
   code {
     display: inline;
@@ -57,6 +58,11 @@ pre {
     background-color: transparent;
     border: 0;
   }
+}
+
+pre p,
+code p {
+  line-height: inherit;
 }
 
 .highlight p {

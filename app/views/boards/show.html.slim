@@ -8,7 +8,7 @@
       - else
         = react_component "PostList", { boardId: @board.id }, { prerender: false }
 
-  .five.wide.column
+  .six.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }
     = render partial: "partials/cadet_power"
 

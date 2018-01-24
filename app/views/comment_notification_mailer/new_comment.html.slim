@@ -22,7 +22,7 @@ p
 
 - if @comment.note?
   .note
-    = simple_format @comment.content.body
+    = simple_format @comment.content.parsed
 - else
   .comment
-    = simple_format @comment.content.body
+    = simple_format @comment.content.parsed

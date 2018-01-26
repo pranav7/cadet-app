@@ -27,7 +27,7 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || admin_boards_url(host: "#{current_user.companies.first.subdomain}.#{APP_CONFIG['base_domain']}")
+    request.env['omniauth.origin'] || stored_location_for(resource) || admin_boards_url(host: "#{current_user.companies.first.host}")
   end
 
   def prepare_exception_notifier
@@ -44,7 +44,7 @@ class ApplicationController < ActionController::Base
     Rails.logger.info "Request IP: #{request.ip}"
     Rails.logger.info "Request URL: #{request.method} #{request.url}"
 
-    if request.url == "https://18.221.127.87/"
+    if request.url == "https://18.216.9.195/"
       head :not_found
     end
   end

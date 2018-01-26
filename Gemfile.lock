@@ -74,7 +74,7 @@ GEM
       thor (~> 0.19)
     builder (3.2.3)
     byebug (9.1.0)
-    capistrano (3.10.1)
+    capistrano (3.9.1)
       airbrussh (>= 1.0.0)
       i18n
       rake (>= 10.0.0)
@@ -163,7 +163,7 @@ GEM
       activesupport
       html-pipeline (>= 1.11)
       rouge (>= 2.0.0, < 3)
-    i18n (0.9.1)
+    i18n (0.9.3)
       concurrent-ruby (~> 1.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -399,7 +399,7 @@ DEPENDENCIES
   autoprefixer-rails
   bourbon
   byebug
-  capistrano (~> 3.6)
+  capistrano (< 3.10.0)
   capistrano-bundler (~> 1.2)
   capistrano-npm
   capistrano-rails (~> 1.3)

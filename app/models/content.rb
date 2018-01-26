@@ -7,13 +7,13 @@ class Content < ApplicationRecord
     context = {
       asset_root: "/images/",
       gfm: true,
-      replace_br: false
+      replace_br: true
     }
 
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::SanitizationFilter,
-      HTML::Pipeline::EmojiFilter,
+      # HTML::Pipeline::EmojiFilter,
       HTML::Pipeline::AutolinkFilter,
       HTML::Pipeline::RougeFilter
     ], context

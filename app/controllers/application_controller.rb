@@ -27,7 +27,13 @@ class ApplicationController < ActionController::Base
   private
 
   def after_sign_in_path_for(resource)
-    request.env['omniauth.origin'] || stored_location_for(resource) || admin_boards_url(host: "#{current_user.companies.first.host}")
+    return request.env['omniauth.origin'] if request.env['omniauth.origin']
+
+    if stored_location = stored_location_for(resource)
+      return "#{current_user.companies.first.host}#{stored_location}"
+    end
+
+    admin_boards_url(host: "#{current_user.companies.first.host}")
   end
 
   def prepare_exception_notifier

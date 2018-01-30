@@ -27,8 +27,14 @@ class PostListItem extends React.Component {
         </div>
         <div className="post-info soft">
           <UpvoteButton voteCount={this.state.post.votes_count} upvoted={this.state.post.upvoted} boardId={this.state.boardId} postId={this.state.post.id} />
-          <strong className={`margined left status + ${this.state.post.status}`}>#{this.state.post.status}</strong>
-          <span className="margined left">{this.state.post.created_at} by {this.state.post.created_by}</span>
+          <div className="meta">
+            <strong className={`status ${this.state.post.status}`}>
+              #{this.state.post.status}
+            </strong>
+            <span className="dates">
+              {this.state.post.created_at} by {this.state.post.created_by}
+            </span>
+          </div>
         </div>
       </div>
     );

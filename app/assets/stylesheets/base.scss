@@ -172,7 +172,9 @@ a.c.link {
 // Start
 // Semantic UI Overrides
 .ui.full.width.container {
-  width: 100% !important;
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 100% !important;
+  }
 }
 
 .ui.popup {
@@ -514,6 +516,36 @@ a.c.link {
       display: flex;
       align-items: center;
       flex-wrap: wrap;
+
+      @media (min-width: 320px) and (max-width: 480px) {
+        justify-content: space-between;
+      }
+
+      .meta {
+        margin-left: 4px;
+
+        @media (min-width: 320px) and (max-width: 480px) {
+          margin: 0;
+          text-align: right;
+        }
+      }
+
+      .meta .status {
+        margin-left: 4px;
+
+        @media (min-width: 320px) and (max-width: 480px) {
+          margin: 0;
+        }
+      }
+
+      .meta .dates {
+        margin-left: 4px;
+
+        @media (min-width: 320px) and (max-width: 480px) {
+          display: block;
+          margin-top: 4px;
+        }
+      }
     }
   }
 }
@@ -614,6 +646,12 @@ a.styling-with-markdown {
   display: inline-block;
   margin-left: 10px;
   font-size: 12px;
+
+  // In Mobile
+  @media (min-width: 320px) and (max-width: 480px) {
+    margin-left: 0;
+    margin-top: 4px;
+  }
 
   svg {
     fill: currentColor;

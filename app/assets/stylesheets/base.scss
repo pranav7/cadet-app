@@ -171,6 +171,10 @@ a.c.link {
 
 // Start
 // Semantic UI Overrides
+.ui.full.width.container {
+  width: 100% !important;
+}
+
 .ui.popup {
   .content {
     padding: 0;

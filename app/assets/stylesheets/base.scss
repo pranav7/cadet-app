@@ -177,6 +177,12 @@ a.c.link {
   }
 }
 
+.ui.input {
+  @media (min-width: 320px) and (max-width: 480px) {
+    width: 100%;
+  }
+}
+
 .ui.popup {
   .content {
     padding: 0;

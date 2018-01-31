@@ -4,9 +4,11 @@
 html {
   font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
   @include font-smoothing(on);
+}
 
-  font-size: 14px;
+body {
   background-color: $lightest;
+  font-size: 14px;
   color: $black;
 }
 

@@ -7,12 +7,22 @@ body.posts {
     display: flex;
     align-items: center;
 
+    @media (min-width: 320px) and (max-width: 480px) {
+      flex-direction: column-reverse;
+      align-items: left;
+    }
+
     .header {
       flex: 1;
     }
 
     .votes {
       margin-left: 4px;
+
+      @media (min-width: 320px) and (max-width: 480px) {
+        margin-left: 0;
+        margin-bottom: 8px;
+      }
     }
 
     h1.post-title {

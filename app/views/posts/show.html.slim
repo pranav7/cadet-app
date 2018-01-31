@@ -1,41 +1,44 @@
-.ui.container
-  .ui.grid
-    .row
-      .sixteen.wide.column
-        .c-breadcrumb
-          .section= link_to "Boards", boards_path
-          .divider
-              | /
-          .section.active= link_to @board.name, board_path(@board)
+.ui.grid
+  .row
+    .sixteen.wide.column
+      .c-breadcrumb
+        .section= link_to "Boards", boards_path
+        .divider
+            | /
+        .section.active= link_to @board.name, board_path(@board)
 
-    .row
-      .sixteen.wide.mobile.column.ten.wide.computer.column
-        // Post Header
-        .post-header.vertical-padded
-          .header
-            h1.post-title= @post.title
-            .post-header-info
-              strong.status class=@post.status ##{@post.status}
-          .votes
-            = render partial: "posts/vote", locals: { type: :large, post: @post }
+  .row
+    .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column
+      // Post Header
+      .post-header.vertical-padded
+        .header
+          h1.post-title= @post.title
+          .post-header-info
+            strong.status class=@post.status ##{@post.status}
+        .votes
+          = render partial: "posts/vote", locals: { type: :large, post: @post }
 
-        // Post Body
-        = render partial: "partials/comment", locals: { resource: @post }
+      // Post Body
+      = render partial: "partials/comment", locals: { resource: @post }
 
-        // Create Comment
-        = render partial: "comments/new",
-          locals: { board: @board, post: @post, comment: @comment, note: false }
+      // Create Comment
+      = render partial: "comments/new",
+        locals: { board: @board, post: @post, comment: @comment, note: false }
 
-        // Post Activity
-        .activity-header
-          .text
-            i.comments.outline.icon
-            | Conversation
+      // Post Activity
+      .activity-header
+        .text
+          i.comments.outline.icon
+          | Conversation
+      - if @post.comments.without_notes.empty?
+        .padded.vertical.soft
+          | There are no comments on this post
+      - else
         - @post.comments.without_notes.each do |comment|
           - next if comment.new_record?
           = render partial: "partials/comment", locals: { resource: comment }
 
-      .sixteen.wide.mobile.five.wide.computer.column
-        = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }
-        = render partial: "partials/cadet_power"
+    .tablet.computer.only.six.wide.tablet.five.wide.computer.column
+      = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }
+      = render partial: "partials/cadet_power"
 

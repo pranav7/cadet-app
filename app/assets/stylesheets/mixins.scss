@@ -1,5 +1,6 @@
 @mixin font-smoothing($value: on) {
   @if $value == on {
+    font-smoothing: antialiased;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }

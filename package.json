@@ -2,6 +2,7 @@
   "name": "cadet-app",
   "private": true,
   "dependencies": {
+    "@rails/webpacker": "^3.2.1",
     "axios": "^0.17.1",
     "clipboard": "^1.7.1",
     "jquery-ujs": "^1.2.2",
@@ -10,5 +11,7 @@
     "normalize.css": "^7.0.0",
     "tablesort": "^5.0.1"
   },
-  "devDependencies": {}
+  "devDependencies": {
+    "webpack-dev-server": "^2.11.1"
+  }
 }

@@ -30,7 +30,7 @@ class ApplicationController < ActionController::Base
     return request.env['omniauth.origin'] if request.env['omniauth.origin']
 
     if stored_location = stored_location_for(resource)
-      return "#{current_user.companies.first.host}#{stored_location}"
+      return "http://#{current_user.companies.first.host}#{stored_location}"
     end
 
     admin_boards_url(host: "#{current_user.companies.first.host}")

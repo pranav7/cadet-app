@@ -8,16 +8,7 @@ export default class extends Controller {
   }
 
   companyNameChangeListener(event) {
-    if(this._shouldUpdate(event.which)) {
-      this.subdomainTarget.value = this.companyNameTarget.value.replace(/\s+/g, '-').toLowerCase()
-    }
-  }
-
-  _shouldUpdate(charCode) {
-    return (charCode >= 65 && charCode <= 90) ||
-      (charCode >= 97 && charCode <= 122) ||
-      (charCode == 32) ||
-      (charCode == 8)
+    this.subdomainTarget.value = this.companyNameTarget.value.replace(/\s+/g, '-').replace(/[^a-zA-Z0-9-]+/g, '').toLowerCase()
   }
 
   setupFormValidations() {

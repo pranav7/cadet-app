@@ -4,9 +4,11 @@ html
     title=  @page_title || "Cadet"
     = csrf_meta_tags
     = stylesheet_link_tag 'application', media: 'all', 'data-turbolinks-track': 'reload'
+    = javascript_pack_tag 'application'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
     = favicon_link_tag 'favicon.png'
     meta name="viewport" content="width=device-width, initial-scale=1.0"
+
   body.public class="#{controller_name} #{action_name}"
     = render partial: "partials/flash_messages"
     .ui.container
@@ -15,4 +17,4 @@ html
           = image_tag "cadet-logo.png", height: 25
       = yield
 
-  = render partial: "partials/external_js"
+    = render partial: "partials/external_js"

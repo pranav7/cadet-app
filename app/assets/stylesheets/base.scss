@@ -326,6 +326,13 @@ a.c.link {
 .ui.dimmer {
   background-color: rgba(0, 0, 0, 0.5);
 }
+
+.ui.modal .content {
+  h3.heading {
+    font-weight: 600;
+    margin-bottom: 4px;
+  }
+}
 // End
 // Semantic UI Overrides
 

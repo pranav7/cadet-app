@@ -1,71 +1,73 @@
-.content {
-  h1, h2, h3, h4, h5 {
-    margin-top: 8px;
-    margin-bottom: 0;
-    font-weight: 600;
-    line-height: 1.25;
+.comment {
+  .content {
+    h1, h2, h3, h4, h5 {
+      margin-top: 8px;
+      margin-bottom: 0;
+      font-weight: 600;
+      line-height: 1.25;
+    }
+
+    h1 {
+      border-bottom: 1px solid #00000017;
+      padding-bottom: 4px;
+    }
+
+    ul {
+      padding: 0 16px;
+      margin: 0;
+      margin-top: -16px;
+      line-height: 1.25;
+    }
+
+    ul li {
+      margin-top: -8px;
+    }
+
+    blockquote {
+      padding: 0 1em;
+      margin: 0;
+      color: #6a737d;
+      border-left: 0.25em solid #dfe2e5;
+    }
   }
-
-  h1 {
-    border-bottom: 1px solid #00000017;
-    padding-bottom: 4px;
-  }
-
-  ul {
-    padding: 0 16px;
-    margin: 0;
-    margin-top: -16px;
-    line-height: 1.25;
-  }
-
-  ul li {
-    margin-top: -8px;
-  }
-
-  blockquote {
-    padding: 0 1em;
-    margin: 0;
-    color: #6a737d;
-    border-left: 0.25em solid #dfe2e5;
-  }
-}
-
-code {
-  padding: 0.2em 0.4em;
-  margin: 0;
-  background-color: $lightest;
-  border-radius: 4px;
-  white-space: pre-wrap;
-}
-
-pre {
-  background: $lightest;
-  line-height: 0.8;
-  border-radius: 4px;
-  padding: 16px 16px 0 16px;
-  margin: 0;
-  font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 
   code {
-    display: inline;
-    max-width: auto;
-    padding: 0;
+    padding: 0.2em 0.4em;
     margin: 0;
-    overflow: visible;
-    line-height: inherit;
-    word-wrap: normal;
-    background-color: transparent;
-    border: 0;
+    background-color: $lightest;
+    border-radius: 4px;
+    white-space: pre-wrap;
   }
-}
 
-pre p,
-code p {
-  line-height: inherit;
-}
+  pre {
+    background: $lightest;
+    line-height: 0.8;
+    border-radius: 4px;
+    padding: 16px 16px 0 16px;
+    margin: 0;
+    font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
 
-.highlight p {
-  line-height: 0.8;
+    code {
+      display: inline;
+      max-width: auto;
+      padding: 0;
+      margin: 0;
+      overflow: visible;
+      line-height: inherit;
+      word-wrap: normal;
+      background-color: transparent;
+      border: 0;
+    }
+  }
+
+  pre p,
+  code p {
+    line-height: inherit;
+  }
+
+  .highlight p {
+    line-height: 0.8;
+  }
 }
 
 .highlight .hll { background-color: #ffffcc }

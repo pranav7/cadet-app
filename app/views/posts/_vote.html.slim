@@ -12,6 +12,7 @@
       span.text Upvoted
       span.vote-count= post.votes.count
   - else
-    a.vote-button href=board_post_votes_path(post.board, post) data-method="post" class=(type rescue nil)
-      span.text Upvote
-      span.vote-count= post.votes.count
+    div data-controller="onboarding"
+      a.vote-button data-action="onboarding#openSignupModal"
+        span.text Upvote
+        span.vote-count= post.votes.count

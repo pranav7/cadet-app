@@ -40,7 +40,7 @@ class UpvoteButton extends React.Component {
     })
     .catch(error => {
       if (error.response.status == 401) {
-        window.location = "/login";
+        $("#signup-modal").modal("show");
       }
     });
   }

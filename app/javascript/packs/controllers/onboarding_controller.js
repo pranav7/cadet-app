@@ -5,7 +5,13 @@ export default class extends Controller {
     console.log("Onboarding Connected", this.element)
   }
 
-  handleClick() {
+  openSignupModal() {
+    $("#signup-modal").modal("show", {
+      dimmerSettings: { useCss: true }
+    });
+  }
+
+  openLoginModal() {
     $("#login-modal").modal("show", {
       dimmerSettings: { useCss: true }
     });

@@ -1,0 +1,26 @@
+.ui.mini.modal#login-modal data-controller="onboarding"
+  .center.aligned.content
+    .padded.bottom
+      h3.heading Login to Cadet
+    = simple_form_for(User.new, as: "user", url: session_path("user")) do |f|
+      = f.input :email,
+        required: false,
+        autofocus: true,
+        label: false,
+        placeholder: "Email"
+      = f.input :password,
+        required: false,
+        label: false,
+        placeholder: "Password"
+      = f.button :submit, "Log in", class: "ui basic fluid button"
+
+      .ui.horizontal.divider or
+
+      = link_to user_google_oauth2_omniauth_authorize_path,
+        class: "ui google fluid button" do
+        i.google.icon
+        | Log in with Google
+  .actions
+    | Don't have an account? 
+    a.c.underlined.link data-action="onboarding#openSignupModal" href="javascript:void(0);"
+      | Sign up

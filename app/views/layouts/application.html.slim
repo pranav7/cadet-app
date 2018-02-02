@@ -14,5 +14,6 @@ html
     = render partial: "partials/public_header"
     .ui.container
       = yield
-
-  = render partial: "partials/external_js"
+    = render partial: "partials/external_js"
+    = render partial: "partials/login_modal"
+    = render partial: "partials/signup_modal"

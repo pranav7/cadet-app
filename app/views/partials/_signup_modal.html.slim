@@ -1,0 +1,18 @@
+.ui.mini.modal#signup-modal data-controller="onboarding"
+  .content
+    .padded.bottom
+      h3.heading Sign up for Cadet
+      p.soft We use Cadet to gather feature requests and feedback from customers. Join now to contribute.
+
+    = simple_form_for User.new do |form|
+      .two.fields
+        = form.input :first_name, label: false, placeholder: "First Name"
+        = form.input :last_name, label: false, placeholder: "Last Name"
+      = form.input :email, label: false, placeholder: "Email"
+      = form.input :password, label: false, placeholder: "Password"
+
+      = form.button :submit, "Sign up", class: "ui fluid primary button"
+  .actions
+    | Already have an account? 
+    a.c.underlined.link data-action="onboarding#openLoginModal" href="javascript:void(0)"
+      |  Login

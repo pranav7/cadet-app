@@ -327,10 +327,18 @@ a.c.link {
   background-color: rgba(0, 0, 0, 0.5);
 }
 
-.ui.modal .content {
-  h3.heading {
-    font-weight: 600;
-    margin-bottom: 4px;
+.ui.modal {
+  .content {
+    h3.heading {
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+  }
+
+  @media only screen and (max-width: 767px) {
+    & > .actions {
+      padding: 1rem 1rem !important;
+    }
   }
 }
 // End

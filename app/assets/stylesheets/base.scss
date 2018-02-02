@@ -523,7 +523,6 @@ a.c.link {
     .post-info {
       display: flex;
       align-items: center;
-      flex-wrap: wrap;
 
       @media (min-width: 320px) and (max-width: 480px) {
         justify-content: space-between;

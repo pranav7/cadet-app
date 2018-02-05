@@ -1,19 +1,15 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
-  connect() {
-    console.log("Onboarding Connected", this.element)
-  }
-
   openSignupModal() {
-    $("#signup-modal").modal("show", {
-      dimmerSettings: { useCss: true }
-    });
+    $("#signup-modal")
+      .modal({ duration: 250 })
+      .modal("show")
   }
 
   openLoginModal() {
-    $("#login-modal").modal("show", {
-      dimmerSettings: { useCss: true }
-    });
+    $("#login-modal")
+      .modal({ duration: 250 })
+      .modal("show")
   }
 }

@@ -40,7 +40,9 @@ class UpvoteButton extends React.Component {
     })
     .catch(error => {
       if (error.response.status == 401) {
-        $("#signup-modal").modal("show");
+        $("#signup-modal")
+          .modal({ duration: 250 })
+          .modal("show")
       }
     });
   }

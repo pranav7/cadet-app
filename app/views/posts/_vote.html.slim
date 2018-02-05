@@ -2,17 +2,21 @@
 - upvoted = user_signed_in? ? current_user.voted?(post) : false
 - react = react || false
 
-- if react && user_signed_in?
+- if react
   = react_component "UpvoteButton",
     { voteCount: post.votes.count, upvoted: upvoted, boardId: post.board.id, postId: post.id },
     { prerender: true }
-- else
+- elsif user_signed_in?
   - if upvoted
     a.vote-button.upvoted href=board_post_votes_path(post.board, post) data-method="delete" class=(type rescue nil)
       span.text Upvoted
       span.vote-count= post.votes.count
   - else
-    div data-controller="onboarding"
-      a.vote-button data-action="onboarding#openSignupModal"
-        span.text Upvote
-        span.vote-count= post.votes.count
+    a.vote-button href=board_post_votes_path(post.board, post) data-method="post" class=(type rescue nil)
+      span.text Upvoted
+      span.vote-count= post.votes.count
+- else
+  div data-controller="onboarding"
+    a.vote-button data-action="onboarding#openSignupModal"
+      span.text Upvote
+      span.vote-count= post.votes.count

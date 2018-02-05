@@ -12,7 +12,8 @@ class UsersController < ApplicationController
     end
 
     if @user.errors.empty?
-      sign_in_and_redirect @user
+      sign_in @user
+      redirect_back fallback_location: root_path
     else
       render action: :new
     end

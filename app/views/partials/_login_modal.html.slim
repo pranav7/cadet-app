@@ -2,7 +2,7 @@
   .center.aligned.content
     .padded.bottom
       h3.heading Login to Cadet
-    = simple_form_for(User.new, as: "user", url: session_path("user")) do |f|
+    = simple_form_for User.new, as: "user", url: session_path("user"), html: { id: "login-form" } do |f|
       = f.input :popup, as: :hidden, input_html: { value: true }
       = f.input :email,
         required: false,

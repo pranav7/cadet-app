@@ -17,7 +17,7 @@
 
       .ui.horizontal.divider or
 
-      = link_to user_google_oauth2_omniauth_authorize_path,
+      = link_to "http://app.#{APP_CONFIG['base_domain']}/auth/google_oauth2?subdomain=#{current_company.subdomain}&origin=#{request.url}",
         class: "ui google fluid button" do
         i.google.icon
         | Log in with Google

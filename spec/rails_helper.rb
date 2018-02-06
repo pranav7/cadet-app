@@ -9,6 +9,8 @@ require 'capybara/rails'
 require 'capybara/rspec'
 
 Capybara.server = :puma # Until your setup is working
+Capybara.server_host = "lvh.me"
+Capybara.server_port = 3000
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

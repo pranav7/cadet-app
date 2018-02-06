@@ -17,7 +17,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
         redirect_to edit_user_registration_path
       else
         sign_in_and_redirect @user, event: :authentication # this will throw if @user is not activated
-        set_flash_message(:notice, :success, kind: "Google") if is_navigational_format?
+        flash[:success] = "Hello, #{@user.first_name}. You're logged in!"
       end
     else
       session["devise.google_oauth2_data"] = request.env["omniauth.auth"]

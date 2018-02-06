@@ -37,6 +37,10 @@ class ApplicationController < ActionController::Base
     admin_boards_url(host: "#{current_user.companies.first.host}")
   end
 
+  def after_sign_out_path_for(resource_or_scope)
+    stored_location_for(resource_or_scope) || super
+  end
+
   def prepare_exception_notifier
     exception_data = {
       url: request.url,

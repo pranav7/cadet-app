@@ -27,11 +27,11 @@
                   | Admin
               = link_to destroy_user_session_path, class: "item", method: :delete do
                 i.soft.sign.out.icon
-                | Logout
+                | Log out
 
         - else
           span data-controller="onboarding"
-            a.c.link href="javascript:void(0);" data-action="onboarding#openSignupModal" Login/Signup
+            a.c.link href="javascript:void(0);" data-action="onboarding#openSignupModal" Log in / Sign up
 
 coffee:
   $(".ui.dropdown").dropdown({

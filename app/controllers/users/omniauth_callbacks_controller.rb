@@ -12,7 +12,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     @user = User.from_omniauth(request.env["omniauth.auth"])
 
     if @user.persisted?
-      if @user.companies.empty?
+      if @user.companies.empty? && request.env["omniauth.params"]["register_company"]
         sign_in @user
         redirect_to edit_user_registration_path
       else

@@ -36,7 +36,7 @@
         = form.button :submit, "Sign up", class: "ui basic fluid button"
         .ui.horizontal.divider or
 
-        = link_to user_google_oauth2_omniauth_authorize_path,
+        = link_to user_google_oauth2_omniauth_authorize_path(register_company: true),
           class: "ui google fluid button" do
           i.google.icon
           | Sign up with Google

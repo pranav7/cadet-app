@@ -11,7 +11,12 @@
       = form.input :email, label: false, placeholder: "Email"
       = form.input :password, label: false, placeholder: "Password"
 
-      = form.button :submit, "Sign up", class: "ui fluid primary button"
+      = form.button :submit, "Sign up", class: "ui basic fluid primary button"
+      .ui.horizontal.divider or
+      = link_to "http://app.#{APP_CONFIG['base_domain']}/auth/google_oauth2?subdomain=#{current_company.subdomain}&origin=#{request.url}",
+        class: "ui google fluid button" do
+        i.google.icon
+        | Sign up with Google
   .actions
     | Already have an account? 
     a.c.underlined.link data-action="onboarding#openLoginModal" href="javascript:void(0)"

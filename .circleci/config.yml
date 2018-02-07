@@ -48,7 +48,7 @@ jobs:
             mkdir drivers && cd drivers
             wget https://github.com/mozilla/geckodriver/releases/download/v0.19.1/geckodriver-v0.19.1-linux64.tar.gz
             tar -zxvf geckodriver-v0.19.1-linux64.tar.gz
-            export PATH=$PATH:${HOME}/${CIRCLE_PROJECT_REPONAME}/drivers
+            export PATH=$PATH:/home/circleci/cadet-app/drivers
 
       - run:
           name: install dependencies

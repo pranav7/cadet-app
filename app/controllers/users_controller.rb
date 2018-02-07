@@ -13,8 +13,18 @@ class UsersController < ApplicationController
 
     if @user.errors.empty?
       sign_in @user
-      redirect_back fallback_location: root_path
+      flash[:success] = "Welcome, #{@user.name}!"
+
+      if params[:user][:popup]
+        redirect_back fallback_location: root_path
+      else
+        path = stored_location_for(@user) || root_path
+        redirect_to path
+      end
     else
+      referring_path = URI(request.referrer).path
+      session[:user_return_to] = referring_path unless referring_path == "/users"
+
       render action: :new
     end
   end

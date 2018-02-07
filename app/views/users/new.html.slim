@@ -9,11 +9,18 @@
           .two.fields
             = form.input :first_name, label: false, placeholder: "First Name"
             = form.input :last_name, label: false, placeholder: "Last Name"
-          = form.input :email, label: false, placeholder: "Work Email"
+          = form.input :email, label: false, placeholder: "Email"
           = form.input :password, label: false, placeholder: "Password"
           = form.input :job_title, label: false, placeholder: "Job Title (optional)"
 
-          = form.button :submit, "Sign up", class: "ui fluid primary button"
+          = form.button :submit, "Sign up", class: "ui basic fluid primary button"
+
+          .ui.horizontal.divider or
+          = link_to "http://app.#{APP_CONFIG['base_domain']}/auth/google_oauth2?subdomain=#{current_company.subdomain}&origin=#{current_company.host}",
+            class: "ui google fluid button" do
+            i.google.icon
+            | Sign up with Google
+
       .soft
         | Already have an account? 
-        a.c.underlined.link href=new_session_url(User, subdomain: "app") Login
+        a.c.underlined.link href=new_session_url(User, subdomain: "app") Log in

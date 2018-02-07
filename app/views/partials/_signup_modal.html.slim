@@ -5,6 +5,7 @@
       p.soft We use Cadet to gather feature requests and feedback from customers. Join now to contribute.
 
     = simple_form_for User.new do |form|
+      = form.input :popup, as: :hidden, input_html: { value: true }
       .two.fields
         = form.input :first_name, label: false, placeholder: "First Name"
         = form.input :last_name, label: false, placeholder: "Last Name"

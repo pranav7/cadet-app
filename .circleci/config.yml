@@ -3,17 +3,6 @@
 # Check https://circleci.com/docs/2.0/language-ruby/ for more details
 #
 version: 2
-dependencies:
-  pre:
-    - pip install mozdownload mozinstall
-    - mozdownload --version latest --destination firefox.tar.bz2
-    - mozinstall firefox.tar.bz2
-    - wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
-    - gunzip -c geckodriver.tar.gz | tar xopf -
-    - chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
-machine:
-  environment:
-    PATH: "${HOME}/${CIRCLE_PROJECT_REPONAME}/firefox:${PATH}"
 jobs:
   build:
     docker:
@@ -52,6 +41,13 @@ jobs:
           command: |
             cp config/cadet_config.example.yml config/cadet_config.yml
             cp config/secrets.example.yml config/secrets.yml
+
+      - run:
+        name: Download Geckodriver
+        command: |
+          wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
+          gunzip -c geckodriver.tar.gz | tar xopf -
+          chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
 
       - run:
           name: install dependencies

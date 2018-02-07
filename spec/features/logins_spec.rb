@@ -10,17 +10,11 @@ RSpec.feature "the login process", type: :feature do
     end
 
     it "signs me in" do
-      visit_company @company, "/#{@board.slug}"
+      visit_company @company, board_path(@board)
 
       click_link "Log in / Sign up"
-      click_link "Log in"
+      login
 
-      within("#login-form") do
-        fill_in 'Email', with: @user.email
-        fill_in 'Password', with: "password"
-      end
-
-      click_button "Log in"
       expect(page).to have_content("Signed in successfully.")
     end
 
@@ -30,17 +24,22 @@ RSpec.feature "the login process", type: :feature do
       visit_company @company, board_post_path(@board, post)
 
       find('a.vote-button').click
-      click_link "Log in"
+      login
 
-      within("#login-form") do
-        fill_in 'Email', with: @user.email
-        fill_in 'Password', with: "password"
-      end
-
-      click_button "Log in"
       expect(page).to have_content("Signed in successfully.")
       expect(page).to have_current_path(board_post_path(@board, post))
     end
+  end
+
+  def login
+    click_link "Log in"
+
+    within("#login-form") do
+      fill_in 'Email', with: @user.email
+      fill_in 'Password', with: "password"
+    end
+
+    click_button "Log in"
   end
 
   def visit_company(company, path = "/")

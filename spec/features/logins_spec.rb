@@ -23,6 +23,24 @@ RSpec.feature "the login process", type: :feature do
       click_button "Log in"
       expect(page).to have_content("Signed in successfully.")
     end
+
+    it "takes me back to the same page" do
+      post = create :post, board: @board, requester: @user
+
+      visit_company @company, board_post_path(@board, post)
+
+      find('a.vote-button').click
+      click_link "Log in"
+
+      within("#login-form") do
+        fill_in 'Email', with: @user.email
+        fill_in 'Password', with: "password"
+      end
+
+      click_button "Log in"
+      expect(page).to have_content("Signed in successfully.")
+      expect(page).to have_current_path(board_post_path(@board, post))
+    end
   end
 
   def visit_company(company, path = "/")

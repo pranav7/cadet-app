@@ -148,7 +148,7 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     ffi (1.9.18)
-    friendly_id (5.1.0)
+    friendly_id (5.2.3)
       activerecord (>= 4.0.0)
     gemoji (3.0.0)
     gli (2.17.1)
@@ -426,7 +426,7 @@ DEPENDENCIES
   factory_girl_rails
   faker (~> 1.7.3)
   faye-websocket
-  friendly_id (~> 5.1.0)
+  friendly_id (>= 5.1.0)
   gemoji
   health_check
   html-pipeline

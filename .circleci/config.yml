@@ -43,11 +43,11 @@ jobs:
             cp config/secrets.example.yml config/secrets.yml
 
       - run:
-        name: Download Geckodriver
-        command: |
-          wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
-          gunzip -c geckodriver.tar.gz | tar xopf -
-          chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
+          name: Download Geckodriver
+          command: |
+            wget -O geckodriver.tar.gz https://github.com/mozilla/geckodriver/releases/download/v0.18.0/geckodriver-v0.18.0-linux64.tar.gz
+            gunzip -c geckodriver.tar.gz | tar xopf -
+            chmod +x geckodriver && mv geckodriver /home/ubuntu/bin/
 
       - run:
           name: install dependencies

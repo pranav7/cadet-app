@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "the login process", type: :feature do
-  describe "customer login process", js: true do
+  describe "customer login process" do
     before :each do
       @company = create :company
       @board = create :board, company: @company
@@ -40,7 +40,7 @@ RSpec.feature "the login process", type: :feature do
     end
 
     click_button "Log in"
-  end
+  end 
 
   def visit_company(company, path = "/")
     app_host = URI.join("http://#{company.subdomain}.lvh.me").to_s

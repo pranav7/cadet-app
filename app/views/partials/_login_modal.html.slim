@@ -13,6 +13,9 @@
         required: false,
         label: false,
         placeholder: "Password"
+      .field
+        a.hint href=new_password_path("user")
+          | Forgot password?
       = f.button :submit, "Log in", class: "ui basic fluid button"
 
       .ui.horizontal.divider or

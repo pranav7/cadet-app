@@ -1,6 +1,6 @@
 - admin = admin || false
 
-.create-post-form.box
+.create-post-form.box data-controller="onboarding"
   .padded.bottom
     - if post.new_record?
       .form-header Create Post
@@ -9,9 +9,16 @@
       .form-header Edit Post
 
   = simple_form_for post, url: post_endpoint(board, post, after_create_path: (after_create_path rescue nil), admin: admin) do |f|
-    = f.input :title, placeholder: "Title", label: false
+    = f.input :title,
+      placeholder: "Title",
+      label: false,
+      input_html: { "data-target" => "onboarding.postTitle" }
     = f.simple_fields_for :content do |cf|
-      = cf.input :body, placeholder: "Description", label: false
+      = cf.input :body,
+        placeholder: "Description",
+        label: false,
+        input_html: { "data-target" => "onboarding.postDesc" }
+
     - if admin
       .ui.divider
       .field
@@ -27,7 +34,10 @@
                 = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
         .hint The requester would receive email notifications for this post, only use this option if you have their consent.
 
-    = f.submit post_button(post), class: "ui button"
+    - if user_signed_in?
+      = f.submit post_button(post), class: "ui button"
+    - else
+      a.ui.button data-action="onboarding#handleCreatePost" Create Post
     a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
       span.markdown-icon
         = octicon "markdown", height: 16

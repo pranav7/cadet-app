@@ -8,9 +8,15 @@
       - else
         = react_component "PostList", { boardId: @board.id }, { prerender: false }
 
-  .six.wide.column
+  .tablet.only.computer.only.six.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }
     = render partial: "partials/cadet_power"
+
+  .mobile.only.sixteen.wide.column
+    .board-desc.soft.bottom.padded.large.text= @board.description
+    a.ui.large.primary.fluid.button href=new_board_post_path(@board)
+      | Create a Post
+      i.right.arrow.icon
 
 coffee:
   $('.ui.dropdown').dropdown()

@@ -4,6 +4,7 @@ class PostsController < ApplicationController
 
   def new
     @post = @board.posts.new
+    @post.build_content
   end
 
   def show

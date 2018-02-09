@@ -13,6 +13,7 @@
 //= require tablesort/dist/tablesort.min.js
 //= require tablesort/dist/sorts/tablesort.number.min.js
 //= require clipboard/dist/clipboard
+//= require jquery-resizable-dom/dist/jquery-resizable
 //= require react
 //= require react_ujs
 //= require components

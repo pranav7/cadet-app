@@ -51,10 +51,27 @@ body.admin {
   }
 
   .c-dashboard-grid {
-    display: inline-grid;
+    display: flex;
     grid-column: main / end;
     grid-template-columns: [left] 325px [main] auto [right] 300px [end];
     width: 100%;
+
+    .splitter {
+      flex: 0 0 auto;
+      width: 10px;  
+      min-height: 200px;
+      cursor: col-resize;  
+    }
+
+    .c-left-pane {
+      min-width: 300px;
+      max-width: 500px;
+      width: 325px;
+    }
+
+    .c-right-pane {
+      min-width: 275px;
+    }
   }
 
   .c-settings-grid {

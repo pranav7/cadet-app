@@ -21,6 +21,7 @@
         - @posts.each do |post|
           = render partial: "posts/admin_list",
             locals: { post: post, board: @board, selected_post: @post }
+  .splitter
 
   .c-main-pane
     = render partial: "top_action_bar"
@@ -94,3 +95,8 @@ coffee:
     $("#edit-post-modal").modal('show')
 
   $('.menu .item').tab()
+
+  $(".c-left-pane").resizable({
+    handleSelector: ".splitter",
+    resizeHeight: false
+  })

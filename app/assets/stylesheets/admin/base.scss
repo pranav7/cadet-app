@@ -58,9 +58,13 @@ body.admin {
 
     .splitter {
       flex: 0 0 auto;
-      width: 10px;  
+      width: 4px;  
       min-height: 200px;
       cursor: col-resize;  
+    }
+
+    .c-main-pane {
+      width: 100%;
     }
 
     .c-left-pane {

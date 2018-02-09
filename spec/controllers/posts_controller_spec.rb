@@ -26,6 +26,13 @@ RSpec.describe PostsController, type: :controller do
     end
   end
 
+  describe '#new' do
+    it "responds successfully" do
+      get :new, params: { board_id: board.id }
+      expect(response).to be_success
+    end
+  end
+
   describe "#show" do
     context "public board" do
       let(:post) { create :post, board: board }

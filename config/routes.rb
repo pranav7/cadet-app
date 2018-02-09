@@ -43,7 +43,7 @@ Rails.application.routes.draw do
   health_check_routes
 
   resources :boards, path: "" do
-    resources :posts, only: [:create, :show, :index] do
+    resources :posts, only: [:create, :show, :index, :new] do
       resources :comments, only: [:create]
       resource :votes, only: [:create, :destroy]
     end

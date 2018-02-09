@@ -1,10 +1,12 @@
 class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
+  before_action :get_and_authorize_board
+
+  def new
+    @post = @board.posts.new
+  end
 
   def show
-    @board = current_company.boards.friendly.find(params[:board_id])
-    authorize_admin_access! if @board.private?
-
     @post = @board.posts.friendly.find(params[:id])
     @comment = @post.comments.new
     @comment.build_content
@@ -13,9 +15,6 @@ class PostsController < ApplicationController
   end
 
   def index
-    @board = current_company.boards.friendly.find(params[:board_id])
-    authorize_admin_access! if @board.private?
-
     if params[:search] && params[:search] != ""
       posts = Post.arel_table
       @posts = @board.posts.where(posts[:title].matches("%#{params[:search]}%"))
@@ -25,10 +24,7 @@ class PostsController < ApplicationController
   end
 
   def create
-    board = current_company.boards.friendly.find(params[:board_id])
-    authorize_admin_access! if board.private?
-
-    post = board.posts.new(post_params) 
+    post = @board.posts.new(post_params) 
     post.requester = current_user
     post.votes.build(user: current_user)
 
@@ -41,13 +37,18 @@ class PostsController < ApplicationController
     end
 
     if params[:after_create_path] == "admin"
-      redirect_to admin_board_post_path(board, post)
+      redirect_to admin_board_post_path(@board, post)
     else
-      redirect_to board_path(board)
+      redirect_to board_path(@board)
     end
   end
 
   private
+
+  def get_and_authorize_board
+    @board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if @board.private?
+  end
 
   def post_params
     params.require(:post).permit(:title, :status, content_attributes: [:body])

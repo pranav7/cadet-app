@@ -5,6 +5,7 @@
     "@rails/webpacker": "^3.2.1",
     "axios": "^0.17.1",
     "clipboard": "^1.7.1",
+    "jquery-resizable-dom": "^0.28.0",
     "jquery-ujs": "^1.2.2",
     "js-cookie": "^2.1.4",
     "linkifyjs": "^2.1.4",

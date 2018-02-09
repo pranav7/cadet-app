@@ -3103,13 +3103,19 @@ isstream@~0.1.2:
   version "0.1.2"
   resolved "https://registry.yarnpkg.com/isstream/-/isstream-0.1.2.tgz#47e63f7af55afa6f92e1500e690eb8b8529c099a"
 
+jquery-resizable-dom@^0.28.0:
+  version "0.28.0"
+  resolved "https://registry.yarnpkg.com/jquery-resizable-dom/-/jquery-resizable-dom-0.28.0.tgz#0f5befda7f02e640ec1ccf163680aa2f2e62fa27"
+  dependencies:
+    jquery "~3.2.1"
+
 jquery-ujs@^1.2.2:
   version "1.2.2"
   resolved "https://registry.yarnpkg.com/jquery-ujs/-/jquery-ujs-1.2.2.tgz#6a8ef1020e6b6dda385b90a4bddc128c21c56397"
   dependencies:
     jquery ">=1.8.0"
 
-jquery@>=1.8.0, jquery@>=1.9.0:
+jquery@>=1.8.0, jquery@>=1.9.0, jquery@~3.2.1:
   version "3.2.1"
   resolved "https://registry.yarnpkg.com/jquery/-/jquery-3.2.1.tgz#5c4d9de652af6cd0a770154a631bba12b015c787"
 

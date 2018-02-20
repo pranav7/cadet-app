@@ -33,6 +33,8 @@ gem 'exception_notification'
 gem 'slack-notifier' # Need for exception_notification gem
 gem 'health_check'
 gem 'octicons_helper'
+gem 'webpacker', '~> 3.0'
+gem "intercom-rails"
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'html-pipeline'
@@ -42,7 +44,6 @@ gem 'gemoji'
 gem 'rinku'
 gem 'sanitize'
 
-gem 'webpacker', '~> 3.0'
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

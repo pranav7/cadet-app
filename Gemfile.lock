@@ -166,6 +166,8 @@ GEM
       rouge (>= 2.0.0, < 3)
     i18n (0.9.3)
       concurrent-ruby (~> 1.0)
+    intercom-rails (0.3.8)
+      activesupport (> 3.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
       multi_json (>= 1.2)
@@ -431,6 +433,7 @@ DEPENDENCIES
   health_check
   html-pipeline
   html-pipeline-rouge_filter
+  intercom-rails
   jbuilder (~> 2.5)
   jquery-rails
   listen (>= 3.0.5, < 3.2)

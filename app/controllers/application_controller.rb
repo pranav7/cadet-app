@@ -15,6 +15,8 @@ class ApplicationController < ActionController::Base
   end
 
   def validate_company_expiration
+    return if request.subdomains.first == "app"
+
     if current_company.expired?
       redirect_to trial_expired_path
     end

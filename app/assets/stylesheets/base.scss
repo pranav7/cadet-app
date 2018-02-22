@@ -331,9 +331,7 @@ a.c.link {
   input[type="week"],
   select,
   textarea {
-    @media screen and (-webkit-min-device-pixel-ratio:0) { 
-      font-size: 16px;
-    }
+    @media screen and (min-width: 320px) and (max-width: 480px) { font-size: 16px }
   }
 
   .field .hint {

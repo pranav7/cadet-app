@@ -28,10 +28,25 @@ class Company < ApplicationRecord
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end
 
+  def expired?
+    return false unless company_setting.expires_at
+
+    Time.zone.now > company_setting.expires_at
+  end
+
+  def create_company_setting
+    company_setting = build_company_setting
+    company_setting.expires_at = 14.days.from_now
+    company_setting.billing_plan = "trial"
+    company_setting.pricing_version = "v1"
+    company_setting.save!
+  end
+
   private
 
   def post_create_tasks
     notify_slack
+    create_company_setting
   end
 
   def notify_slack

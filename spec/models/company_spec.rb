@@ -49,4 +49,25 @@ RSpec.describe Company, type: :model do
       expect(company.admins).to eq([admin])
     end
   end
+
+  describe "#expired?" do
+    let(:company) { create :company }
+
+    it "returns true if trial expired" do
+      company_setting = create :company_setting, company: company, expires_at: 1.day.ago
+
+      expect(company.expired?).to eq(true)
+    end
+
+    it "returns false if trial not expired" do
+      company_setting = create :company_setting, company: company, expires_at: 1.day.from_now
+
+      expect(company.expired?).to eq(false)
+    end
+
+    it "returns false if no expiry is set" do
+      company_setting = create :company_setting, company: company, expires_at: nil
+      expect(company.expired?).to eq(false)
+    end
+  end
 end

@@ -7,6 +7,7 @@ Rails.application.routes.draw do
   %w(404 422 500 503).each do |code|
     get code, to: "errors#show", code: code
   end
+  get :trial_expired, to: "errors#trial_expired", as: :trial_expired
 
   devise_for :users, path: '',
     path_names: { sign_in: 'login', sign_up: 'signup' },

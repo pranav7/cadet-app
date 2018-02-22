@@ -13,4 +13,6 @@ class ErrorsController < ApplicationController
 
     render status: @status_code
   end
+
+  def trial_expired; end
 end

@@ -1,4 +1,6 @@
 class UsersController < ApplicationController
+  skip_before_action :verify_authenticity_token
+
   def new
     @user = User.new
   end
@@ -25,8 +27,7 @@ class UsersController < ApplicationController
       referring_path = URI(request.referrer).path
       session[:user_return_to] = referring_path unless referring_path == "/users"
 
-      flash[:error] = @user.errors.full_messages.join("\n")
-      redirect_to join_path
+      render action: :new
     end
   end
 

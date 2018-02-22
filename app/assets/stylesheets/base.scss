@@ -329,9 +329,11 @@ a.c.link {
   input[type="time"],
   input[type="url"],
   input[type="week"],
-  select:focus,
+  select,
   textarea {
-    @media (min-width: 320px) and (max-width: 480px) { font-size: 1em }
+    @media screen and (-webkit-min-device-pixel-ratio:0) { 
+      font-size: 16px;
+    }
   }
 
   .field .hint {

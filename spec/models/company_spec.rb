@@ -6,6 +6,7 @@ RSpec.describe Company, type: :model do
     it { should have_many(:users).through(:memberships) }
     it { should have_many(:boards) }
     it { should have_many(:accounts) }
+    it { should have_one(:company_setting) }
   end
 
   describe "Validations" do

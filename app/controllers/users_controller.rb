@@ -25,7 +25,8 @@ class UsersController < ApplicationController
       referring_path = URI(request.referrer).path
       session[:user_return_to] = referring_path unless referring_path == "/users"
 
-      render action: :new
+      flash[:error] = @user.errors.full_messages.join("\n")
+      redirect_to join_path
     end
   end
 

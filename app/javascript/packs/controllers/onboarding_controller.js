@@ -18,7 +18,7 @@ export default class extends Controller {
   handleCreatePost() {
     Cookies.set("postTitle", this.postTitleTarget.value)
     Cookies.set("postDesc", this.postDescTarget.value)
-    this.openSignupModal()
+    this.openLoginModal()
   }
 
   openSignupModal() {

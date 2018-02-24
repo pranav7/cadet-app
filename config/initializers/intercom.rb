@@ -11,6 +11,7 @@ IntercomRails.config do |config|
   # guide in the "Identity Verification" step.
   #
   # config.api_secret = "..."
+  config.api_secret = Rails.application.secrets.intercom_secure_mode_secret_key
 
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for

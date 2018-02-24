@@ -1,4 +1,5 @@
 .ui.mini.modal#login-modal data-controller="onboarding"
+  i.close.icon
   .center.aligned.content
     .padded.bottom
       h3.heading Login to Cadet
@@ -25,6 +26,6 @@
         i.google.icon
         | Log in with Google
   .actions
-    | Don't have an account? 
-    a.c.underlined.link data-action="onboarding#openSignupModal" href="javascript:void(0);"
+    span.soft Don't have an account? 
+    a.ui.basic.small.button data-action="onboarding#openSignupModal" href="javascript:void(0);"
       | Sign up

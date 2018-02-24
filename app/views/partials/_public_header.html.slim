@@ -30,8 +30,15 @@
                 | Log out
 
         - else
-          span data-controller="onboarding"
-            a.c.link href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in / Sign up
+          .ui.one.column.grid
+            .ui.mobile.only.column
+              span data-controller="onboarding"
+                a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Log in / Sign up
+
+            .ui.tablet.computer.only.column
+              span data-controller="onboarding"
+                a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in
+                a.ui.small.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Sign up
 
 coffee:
   $(".ui.dropdown").dropdown({

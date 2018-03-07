@@ -11,11 +11,12 @@ IntercomRails.config do |config|
   # guide in the "Identity Verification" step.
   #
   # config.api_secret = "..."
+  config.api_secret = Rails.application.secrets.intercom_secure_mode_secret_key
 
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
   #
-  config.enabled_environments = ["development", "production"]
+  config.enabled_environments = ["production"]
 
   # == Current user method/variable
   # The method/variable that contains the logged in user in your controllers.

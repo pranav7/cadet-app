@@ -13,6 +13,17 @@ nav
             = link_to boards_path, class: "item" do
               i.soft.external.icon
               | Public View
+            .ui.divider
+          = link_to "https://feedback.getcadet.com/feature-requests", class: "item", target: "_blank" do
+            i.thumbs.up.soft.icon
+            | Vote on Features
+          = link_to "https://feedback.getcadet.com/bug-reports", class: "item", target: "_blank" do
+            i.bug.soft.icon
+            | Report a Bug
+          = link_to "mailto:hello@getcadet.com", class: "item" do
+            i.question.circle.soft.icon
+            | Help
+          .ui.divider
           = link_to destroy_user_session_path, class: "item", method: :delete do
             i.soft.sign.out.icon
             | Logout

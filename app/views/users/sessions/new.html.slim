@@ -4,6 +4,7 @@
       h2
         | Log in
       = simple_form_for(resource, as: resource_name, url: session_path(resource_name)) do |f|
+        = f.input :remember_me, as: :hidden, input_html: { value: true } if devise_mapping.rememberable?
         = f.input :email,
           required: false,
           autofocus: true,
@@ -13,9 +14,6 @@
           required: false,
           label: false,
           placeholder: "Password"
-        = f.input :remember_me,
-          wrapper: :ui_checkbox,
-          as: :boolean if devise_mapping.rememberable?
         = f.button :submit, "Log in", class: "ui basic fluid button"
 
         .ui.horizontal.divider or

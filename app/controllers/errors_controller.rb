@@ -1,4 +1,5 @@
 class ErrorsController < ApplicationController
+  skip_before_action :validate_company_expiration
   layout "public"
 
   def show
@@ -13,4 +14,6 @@ class ErrorsController < ApplicationController
 
     render status: @status_code
   end
+
+  def trial_expired; end
 end

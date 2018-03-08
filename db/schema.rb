@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_01_18_103518) do
+ActiveRecord::Schema.define(version: 2018_02_22_165554) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -86,6 +86,16 @@ ActiveRecord::Schema.define(version: 2018_01_18_103518) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
+  end
+
+  create_table "company_settings", force: :cascade do |t|
+    t.bigint "company_id"
+    t.datetime "expires_at"
+    t.string "billing_plan"
+    t.string "pricing_version"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_company_settings_on_company_id"
   end
 
   create_table "company_users", force: :cascade do |t|
@@ -199,6 +209,7 @@ ActiveRecord::Schema.define(version: 2018_01_18_103518) do
   add_foreign_key "boards", "companies"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
+  add_foreign_key "company_settings", "companies"
   add_foreign_key "company_users", "companies"
   add_foreign_key "company_users", "users"
   add_foreign_key "contents", "posts"

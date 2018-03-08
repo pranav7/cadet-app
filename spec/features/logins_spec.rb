@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "the login process", type: :feature do
-  describe "customer login process" do 
+  describe "customer login process", js: true do 
     before :each do
       @company = create :company
       @board = create :board, company: @company
@@ -40,20 +40,5 @@ RSpec.feature "the login process", type: :feature do
     end
 
     click_button "Log in"
-  end 
-
-  def visit_company(company, path = "/")
-    app_host = URI.join("http://#{company.subdomain}.lvh.me").to_s
-    using_app_host(app_host) do
-      visit path
-    end
-  end
-
-  def using_app_host(host)
-    original_host = Capybara.app_host
-    Capybara.app_host = host
-    yield
-  ensure
-    Capybara.app_host = original_host
   end
 end

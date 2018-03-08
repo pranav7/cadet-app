@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "the login process", type: :feature do
-  describe "customer login process" do
+  describe "customer login process", js: true do
     before :each do
       @company = create :company
       @board = create :board, company: @company
@@ -9,11 +9,10 @@ RSpec.feature "the login process", type: :feature do
       @user = create :user, password: "password", password_confirmation: 'password'
     end
 
-    it "signs me in" do
+    it "logs me in" do
       visit_company @company, board_path(@board)
-
-      click_link "Log in / Sign up"
-      login
+      click_link "Log in"
+      perform_login
 
       expect(page).to have_content("Signed in successfully.")
     end
@@ -24,16 +23,17 @@ RSpec.feature "the login process", type: :feature do
       visit_company @company, board_post_path(@board, post)
 
       find('a.vote-button').click
-      login
+      within ".actions" do
+        click_link "Log in"
+      end
+      perform_login
 
       expect(page).to have_content("Signed in successfully.")
       expect(page).to have_current_path(board_post_path(@board, post))
     end
   end
 
-  def login
-    click_link "Log in"
-
+  def perform_login
     within("#login-form") do
       fill_in 'Email', with: @user.email
       fill_in 'Password', with: "password"

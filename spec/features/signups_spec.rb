@@ -10,7 +10,9 @@ RSpec.feature "Signups", type: :feature do
     it "signs me up" do
       visit_company @company, board_path(@board)
 
-      click_link "Log in / Sign up"
+      within ".public-header" do
+        click_link "Sign up"
+      end
 
       within("#new_user") do
         fill_in 'First Name', with: "John"

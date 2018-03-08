@@ -1,7 +1,7 @@
 require 'rails_helper'
 
 RSpec.feature "the login process", type: :feature do
-  describe "customer login process", js: true do
+  describe "customer login process" do 
     before :each do
       @company = create :company
       @board = create :board, company: @company

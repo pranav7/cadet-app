@@ -12,6 +12,10 @@ Capybara.server = :puma # Until your setup is working
 Capybara.server_host = "lvh.me"
 Capybara.server_port = 3000
 
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
+
 # Add additional requires below this line. Rails is not loaded until this point!
 
 # Requires supporting ruby files with custom matchers and macros, etc, in

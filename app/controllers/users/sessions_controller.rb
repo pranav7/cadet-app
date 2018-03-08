@@ -15,7 +15,6 @@ class Users::SessionsController < Devise::SessionsController
       session[:user_return_to] = URI(request.referer).path 
       session[:subdomain] = current_company.subdomain
     end
-    params[:user][:remember_me] = true
 
     super
   end

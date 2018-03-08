@@ -5,6 +5,7 @@
       h3.heading Login to Cadet
     = simple_form_for User.new, as: "user", url: session_path("user"), html: { id: "login-form" } do |f|
       = f.input :popup, as: :hidden, input_html: { value: true }
+      = f.input :remember_me, as: :hidden, input_html: { value: true } if Devise.mappings[:user].rememberable?
       = f.input :email,
         required: false,
         autofocus: true,

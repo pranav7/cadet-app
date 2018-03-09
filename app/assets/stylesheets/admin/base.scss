@@ -170,6 +170,7 @@ body.admin {
 
   .ui.settings.menu {
     padding: 24px 0;
+    width: 100%;
 
     .item {
       font-weight: 500;
@@ -179,7 +180,7 @@ body.admin {
         margin-right: 16px;
       }
 
-      & > i.user.circle.outline.icon {
+      & > i.user.circle.icon {
         position: relative;
         bottom: 5px;
       }

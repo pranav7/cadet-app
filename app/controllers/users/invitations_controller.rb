@@ -49,7 +49,7 @@ class Users::InvitationsController < Devise::InvitationsController
       user.invite!(current_user)
 
       flash[:success] = "Invitation Sent!"
-      redirect_to admin_user_path(user)
+      return redirect_to admin_user_path(user)
     end
 
     super

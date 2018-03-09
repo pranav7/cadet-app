@@ -30,9 +30,13 @@
                     .ui.small.rounded.label Admin
                 - else
                   td
-                - if user.invited_to_sign_up? && not(user.invitation_accepted?)
-                  td
-                    .ui.small.yellow.rounded.label Pending
+                - if user.created_by_invite?
+                  - if user.invitation_sent_at.nil?
+                    td
+                      .ui.small.basic.rounded.label Not Invited
+                  - elsif not(user.invitation_accepted?)
+                    td
+                      .ui.small.yellow.rounded.label Pending
                 - else
                   td -
 

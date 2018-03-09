@@ -38,6 +38,15 @@
                 | Please select a board
 
   .c-right-pane
+    .actions
+      a.ui.small.button href=edit_admin_account_path(@account, request.query_parameters)
+        i.pencil.icon
+        | Edit
+
+      = link_to admin_account_path(@account), method: :delete, class: "ui small button", data: { confirm: "Are you sure?" } do
+        i.trash.icon
+        | Delete
+
     .box
       .box-header.c-soft
         .header-text
@@ -62,12 +71,7 @@
       .account-info
         .info-label.c-soft Since
         .info-value= render_time(@account.created_at)
-      .account-info
-        a.c.underlined.link href=edit_admin_account_path(@account, request.query_parameters)
-          | Edit
-        | &nbsp;
-        | &nbsp;
-        = link_to "Delete", admin_account_path(@account), method: :delete, class: "c underlined link", data: { confirm: "Are you sure?" }
+
     = render partial: "add_and_list_users"
 
 coffee:

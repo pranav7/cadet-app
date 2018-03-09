@@ -44,6 +44,14 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def update
+    if params[:invite_again]
+      user = User.find(params[:format])
+      user.invite!(current_user)
+
+      flash[:success] = "Invitation Sent!"
+      redirect_to admin_user_path(user)
+    end
+
     super
   end
   

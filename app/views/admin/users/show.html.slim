@@ -40,6 +40,26 @@
         h4.soft
           | Please select a board
   .c-right-pane
+    .actions
+      a.ui.small.button href=edit_admin_user_path(@user)
+        i.pencil.icon
+        | Edit
+
+      - if @user.created_by_invite?
+        - if @user.invitation_sent_at.nil?
+          = link_to user_invitation_path(@user, invite_again: true),
+            method: :put,
+            class: "ui small button",
+            data: { confirm: "Are you sure?" } do
+            i.paper.plane.icon
+            | Send Invitation
+        - elsif not(@user.invitation_accepted?)
+          = link_to user_invitation_path(@user, invite_again: true),
+            method: :put,
+            class: "ui small button",
+            data: { confirm: "Are you sure?" } do
+            i.redo.icon
+            | Resend Invitation
     .box.user-show-box
       = render partial: "users/avatar", locals: { user: @user, size: "large" }
       .user-name-container
@@ -50,17 +70,19 @@
       .account-info
         .info-label.c-soft Email
         .info-value= @user.email
-      .account-info
-        .info-label.c-soft Invitation Status
-        .info-value
-          - if @user.created_by_invite?
+      - if @user.created_by_invite?
+        .account-info
+          .info-label.c-soft Invitation Status
+          .info-value
             - if @user.invitation_sent_at.nil?
               span.ui.small.basic.rounded.label Not Invited
             - elsif not(@user.invitation_accepted?)
               span.ui.small.yellow.rounded.label Pending
+            - else
+              | -
       .account-info
         .info-label.c-soft Job Title
-        - if @user.job_title
+        - if @user.job_title && !@user.job_title == ""
           .info-value= @user.job_title
         - else
           .info-value -

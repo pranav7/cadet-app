@@ -50,12 +50,14 @@
       .account-info
         .info-label.c-soft Email
         .info-value= @user.email
-      - if @user.invited_to_sign_up? && not(@user.invitation_accepted?)
-        .account-info
-          .info-label.c-soft Invitation Status
-          .info-value
-            span.ui.small.yellow.rounded.label Pending
-
+      .account-info
+        .info-label.c-soft Invitation Status
+        .info-value
+          - if @user.created_by_invite?
+            - if @user.invitation_sent_at.nil?
+              span.ui.small.basic.rounded.label Not Invited
+            - elsif not(@user.invitation_accepted?)
+              span.ui.small.yellow.rounded.label Pending
       .account-info
         .info-label.c-soft Job Title
         - if @user.job_title

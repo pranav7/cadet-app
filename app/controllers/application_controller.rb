@@ -39,7 +39,7 @@ class ApplicationController < ActionController::Base
     return request.env['omniauth.origin'] if request.env['omniauth.origin']
 
     if stored_location = stored_location_for(resource)
-      subdomain = session[:subdomain] || current_user.companies.first.host
+      subdomain = session[:subdomain] || current_user.companies.first.subdomain
       return "http://#{subdomain}.#{APP_CONFIG["base_domain"]}#{stored_location}"
     end
 

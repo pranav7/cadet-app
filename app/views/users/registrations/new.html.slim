@@ -10,6 +10,7 @@
         url: registration_path(resource_name) do |form|
 
         = form.simple_fields_for :memberships do |memberships_form|
+          = memberships_form.input :primary, as: :hidden, input_html: { value: true }
           = memberships_form.simple_fields_for :company do |company_form|
             = company_form.input :name,
               placeholder: "Company Name",

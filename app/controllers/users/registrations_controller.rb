@@ -64,7 +64,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
                                       keys: [:first_name,
                                              :last_name,
                                              :job_title,
-                                             memberships_attributes: [ company_attributes: [:name, :subdomain]]])
+                                             memberships_attributes: [:primary, company_attributes: [:name, :subdomain]]])
   end
 
   # If you have extra params to permit, append them to the sanitizer.

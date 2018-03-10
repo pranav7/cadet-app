@@ -14,14 +14,14 @@
   // Edit Post
   .item
     a#edit-post-btn
-      i.edit.large.icon
+      i.edit.outline.large.icon
 
   // Delete Post
   .item
     = link_to admin_board_post_path(@board, @post),
       method: :delete,
       data: { confirm: "Are you sure you want to delete this post? Please note that this step is irreversible." } do
-      i.trash.outline.large.icon#delete-icon
+      i.trash.alternate.outline.large.icon#delete-icon
 
   // More Options
   .item

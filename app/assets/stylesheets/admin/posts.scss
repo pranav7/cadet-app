@@ -35,18 +35,14 @@ body.admin.posts {
     display: flex;
     border-bottom: 1px solid $lighter;
     margin-bottom: $base-size;
+    padding-bottom: 8px;
 
     .item {
       padding-right: $base-size;
 
       i {
         color: $dark;
-        position: relative;
       }
-    }
-
-    #delete-icon{
-      bottom: 2px;
     }
 
     .status-dropdown {

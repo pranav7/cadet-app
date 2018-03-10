@@ -24,7 +24,7 @@ FactoryGirl.define do
       if evaluator.company
         create :admin_membership, company: evaluator.company, user: user, primary: (evaluator.not_primary ? false : true)
       else
-        create :admin_membership, company: (create :company), user: user, primary: (evaluator.not_primary? ? false : true)
+        create :admin_membership, company: (create :company), user: user, primary: (evaluator.not_primary ? false : true)
       end
     end
   end

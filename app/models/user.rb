@@ -64,8 +64,7 @@ class User < ApplicationRecord
   end
 
   def initials
-    # "#{first_name.slice(0, 1)}#{last_name.slice(0, 1)}".upcase
-    return first_name.slice(0, 1).upcase
+    first_name.slice(0, 1).upcase
   end
 
   def voted?(post)
@@ -99,6 +98,11 @@ class User < ApplicationRecord
 
   def membership_for(company)
     memberships.where(company: company).first
+  end
+
+  def primary_company
+    membership = memberships.where(primary: true).first
+    return membership.company if membership
   end
 
   def notify_slack

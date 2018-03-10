@@ -16,11 +16,17 @@ class Admin::UsersController < Admin::AdminController
   end
 
   def edit
-    @user = User.find(params[:id])
+    @user = current_company.users.find(params[:id])
   end
 
   def update
-    @user = User.find(params[:id])
+    @user = current_company.users.find(params[:id])
+
+    unless user_policy.editable?
+      flash[:error] = "You do not have access to edit this user"
+      return redirect_to admin_user_path(@user)
+    end
+
     @user.assign_attributes(user_params)
 
     if user_params[:role]
@@ -47,4 +53,9 @@ class Admin::UsersController < Admin::AdminController
   def user_params
     params.require(:user).permit(:first_name, :last_name, :email, :role)
   end
+
+  def user_policy
+    @user_policy ||= UserPolicy.new(current_company: current_company, current_user: current_user, resource: @user)
+  end
+  helper_method :user_policy
 end

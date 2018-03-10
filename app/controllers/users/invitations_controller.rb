@@ -16,7 +16,7 @@ class Users::InvitationsController < Devise::InvitationsController
       validate_membership
 
       self.resource = find_or_invite_resource do |user|
-        membership = user.memberships.build(company: current_company, role: params[:role].downcase)
+        membership = user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
         user.skip_invitation = true if params[:send_invitation] != "true"
       end
 
@@ -44,6 +44,14 @@ class Users::InvitationsController < Devise::InvitationsController
   end
 
   def update
+    if params[:invite_again]
+      user = User.find(params[:format])
+      user.invite!(current_user)
+
+      flash[:success] = "Invitation Sent!"
+      return redirect_to admin_user_path(user)
+    end
+
     super
   end
   

@@ -10,7 +10,7 @@ class UsersController < ApplicationController
 
     @user.transaction do
       @user.save
-      Membership.create(user: @user, company: current_company)
+      Membership.create(user: @user, company: current_company, primary: true)
     end
 
     if @user.errors.empty?

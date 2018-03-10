@@ -155,4 +155,14 @@ RSpec.describe User, type: :model do
       expect(user.part_of?(other_company)).to eq(false)
     end
   end
+
+  describe "#primary_company" do
+    let(:company) { create :company }
+
+    it "returns users's primary membership" do
+      user = create :admin, company: company
+
+      expect(user.primary_company).to eq(company)
+    end
+  end
 end

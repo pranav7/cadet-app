@@ -15,6 +15,20 @@ class Board < ApplicationRecord
   scope :non_public, -> { where(private: true) }
   scope :non_private, -> { where(private: false) }
 
+  enum default_sort_order: %w(latest_activity most_voted) + Post.statuses.keys
+
+  class << self
+    def sort_order_collection
+      default_sort_orders.map do |key, value|
+        if Post.statuses.keys.include?(key)
+          ["##{key}", key]
+        else
+          [key.titleize, key]
+        end
+      end
+    end
+  end
+
   def after_create_tasks
     notify_slack
   end

@@ -17,7 +17,6 @@ class BoardsController < ApplicationController
     @board = current_company.boards.friendly.find(params[:id])
     authorize_admin_access! if @board.private?
 
-    @posts = @board.posts.sorted(sort_method: params[:sort_by])
     @post = @board.posts.new
     @post.build_content
     @page_title = "#{@board.name} - #{current_company.name}"

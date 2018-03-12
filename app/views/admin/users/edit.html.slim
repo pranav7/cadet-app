@@ -10,17 +10,17 @@
               i.user.outline.icon
               | Edit #{@user.name}
           .vertical.padded
-            = simple_form_for @user, url: admin_user_path(@user) do |form|
+            = simple_form_for @user, url: admin_user_path(@user), html: { class: "ui custom form" } do |form|
               .two.fields
-                = form.input :first_name, label: false, placeholder: "First Name"
-                = form.input :last_name, label: false, placeholder: "Last Name"
-              = form.input :email, label: false, placeholder: "Email"
-              = form.input :job_title, label: false, placeholder: "Job Title"
+                = form.input :first_name, label: "First Name"
+                = form.input :last_name, label: "Last Name"
+              = form.input :email, label: "Email"
+              = form.input :job_title, label: "Job Title"
               .field
                 = form.input :role,
-                  label: false,
-                  prompt: "Role",
+                  label: "Role",
                   collection: Membership.roles.keys.map(&:titleize),
-                  selected: @user.membership_for(current_company).role.titleize
+                  selected: @user.membership_for(current_company).role.titleize,
+                  input_html: { class: "ui dropdown" }
               = form.submit "Save", class: "ui small button" do
               a.ui.small.basic.button href=admin_user_path(@user) Cancel

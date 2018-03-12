@@ -15,16 +15,12 @@ class Board < ApplicationRecord
   scope :non_public, -> { where(private: true) }
   scope :non_private, -> { where(private: false) }
 
-  enum default_sort_order: %w(latest_activity most_voted) + Post.statuses.keys
+  enum default_sort_order: { latest_activity: 10, most_voted: 20 }
 
   class << self
     def sort_order_collection
       default_sort_orders.map do |key, value|
-        if Post.statuses.keys.include?(key)
-          ["##{key}", key]
-        else
-          [key.titleize, key]
-        end
+        [key.titleize, key]
       end
     end
   end

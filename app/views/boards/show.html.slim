@@ -1,7 +1,7 @@
 .ui.mobile.reversed.stackable.grid
   .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column
     .posts-list.box
-      - if @posts.empty?
+      - if @board.posts.empty?
         h4 No Posts
         - if user_signed_in? && current_user.admin_of?(current_company) && !params[:sort_by]
           p.soft We recommend creating at least 5 posts to help your users get started.

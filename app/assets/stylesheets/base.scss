@@ -649,6 +649,38 @@ a.c.link {
     color: $darker;
     border: 1px solid $light;
   }
+
+  @media (min-width: 320px) and (max-width: 480px) {
+    font-weight: 600;
+    font-size: 13px;
+    padding: 0;
+
+    &.released {
+      background: transparent;
+      color: $released-color;
+    }
+
+    &.developing {
+      background: transparent;
+      color: $secondary-blue;
+    }
+
+    &.planned {
+      background: transparent;
+      color: $planned-color;
+    }
+
+    &.closed {
+      background: transparent;
+      color: $good-red;
+    }
+
+    &.open {
+      background: transparent;
+      color: $darker;
+      border: none;
+    }
+  }
 }
 
 .text-status {

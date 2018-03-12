@@ -32,10 +32,22 @@ class Post < ApplicationRecord
   after_create :perform_after_create_tasks
   after_save :perform_after_update_tasks, on: :update
 
-  def self.sorted(options = {})
-    sort_method = options.delete(:sort_method) || :latest_activity
+  class << self
+    def sorted(options = {})
+      default_sort_method = :latest_activity
+      if board = options.delete(:board)
+        default_sort_method = board.default_sort_order.to_sym
+      end
+      sort_method = options.delete(:sort_method) || default_sort_method
 
-    self.public_send(sort_method)
+      self.public_send(sort_method)
+    end
+
+    def status_collection
+      statuses.map do |key, value|
+        ["##{key}", key]
+      end
+    end
   end
 
   def commenters

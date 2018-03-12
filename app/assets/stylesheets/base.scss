@@ -99,7 +99,7 @@ body {
 }
 
 .c-breadcrumb {
-  @extend .ui.breadcrumb;
+  @extend .ui, .breadcrumb;
   font-size: 12px;
 
   .section a {
@@ -147,7 +147,7 @@ a.c.link {
 // Box Styling
 .c-box,
 .box {
-  @extend .ui.segment;
+  @extend .ui, .segment;
 
   background-color: $white;
   border: 1px solid $lighter;
@@ -335,6 +335,43 @@ a.c.link {
     font-size: 12px;
     color: $dark;
     margin-top: 8px;
+  }
+}
+
+.ui.custom.form {
+  .two.fields {
+    .field {
+      margin-left: 0.5em;
+      margin-right: 0.5em;
+      padding-left: 0;
+      padding-right: 0;
+    }
+  }
+
+  .field.email,
+  .field.string,
+  .field.select {
+    border: 1px solid rgba(34, 36, 38, 0.15);
+    border-radius: 4px;
+    
+    label.email,
+    label.string,
+    label.select {
+      padding: 0.25em 1em 0 1em;
+      margin: 0;
+      color: $dark;
+    }
+
+    input.email,
+    input.string,
+    select.select {
+      border: none;
+      padding-top: 8px;
+    }
+
+    select.select {
+      padding-left: 1em;
+    }
   }
 }
 

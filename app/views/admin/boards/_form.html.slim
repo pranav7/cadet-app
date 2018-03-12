@@ -1,9 +1,14 @@
 - url = @board.new_record? ? admin_boards_path : admin_board_path(@board)
 
-= simple_form_for @board, url: url do |form|
-  = form.input :name, label: false, placeholder: "Board Title"
-  = form.input :description, label: false, placeholder: "Board Description"
-  = form.input :private, label: "Private Board", wrapper: :ui_checkbox, hint: "Private Boards are only accessible by the admins of the company."
+= simple_form_for @board, url: url, html: { class: "ui custom form" } do |form|
+  = form.input :name, label: "Name", placeholder: "Example: Feature Requests"
+  = form.input :description, label: "Description", placeholder: "Example: Let us know the features you'd like us to add."
+  = form.input :default_sort_order,
+    label: "Default Sort Order for Posts",
+    placeholder: "Default Sort Order for Posts",
+    collection: Board.sort_order_collection,
+    input_html: { class: "ui dropdown" }
+  = form.input :private, label: "Private", wrapper: :ui_checkbox, hint: "Private Boards are only accessible to the Admins of the company."
 
   - if @board.new_record?
     = form.submit "Add Board", class: "ui button"

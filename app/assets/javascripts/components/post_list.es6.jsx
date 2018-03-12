@@ -24,7 +24,6 @@ class PostList extends React.Component {
   }
 
   getPosts(params = {}) {
-    let that = this;
     let url = null;
 
     if ($.isEmptyObject(params)) {

@@ -21,4 +21,12 @@ module ApplicationHelper
       end
     end
   end
+
+  def distance_of_time_to_expiry(company)
+    if company.company_setting.expires_at
+      return distance_of_time_in_words_to_now(company.company_setting.expires_at)
+    end
+
+    "0 days"
+  end
 end

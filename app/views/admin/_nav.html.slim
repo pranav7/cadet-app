@@ -37,6 +37,9 @@ nav
         i.user.circle.large.icon
         .item-text Customers
 
+  - if current_company.company_setting.expires_at
+    .trial-expiry
+      | #{distance_of_time_to_expiry(current_company)} left in trial
   .cadet-logo#changelog
     = image_tag "cadet-logo-grey.png", width: 50
 

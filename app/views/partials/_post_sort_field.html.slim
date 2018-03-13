@@ -1,15 +1,11 @@
 - hide_most_voted = hide_most_voted || false
+- default_sort_order = default_sort_order || "latest_activity"
 
 .c.labeled.field
   label Sort By
   select.ui.open.dropdown.sort-post-dropdown name="sort_by" onchange="this.form.submit()"
-    option value="latest_activity" default=true selected=(true if params[:sort_by] == "latest_activity") Latest Activity
-    - unless hide_most_voted
-      option value="most_voted" selected=(true if params[:sort_by] == "most_voted") Most Voted
-    option value="sort_by_new" selected=(true if params[:sort_by] == "sort_by_new") New
-    - Post.statuses.keys.each do |key|
-      option value=key selected=(true if key == params[:sort_by])
-        | ##{key}
-
+    - Board.sort_order_collection.merge(Post.status_collection).each do |key, value|
+      option value=value default=(true if default_sort_order == value) selected=(true if params[:sort_by] == value)
+        = key
 coffee:
   $(".sort-post-dropdown").dropdown()

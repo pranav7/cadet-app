@@ -22,7 +22,6 @@
         - @posts.each do |post|
           = render partial: "posts/admin_list",
             locals: { post: post, board: @board, selected_post: @post }
-  .splitter
 
   .c-main-pane
     = render partial: "top_action_bar"

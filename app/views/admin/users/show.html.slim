@@ -83,7 +83,7 @@
               | -
       .account-info
         .info-label.c-soft Job Title
-        - if @user.job_title && !@user.job_title == ""
+        - if @user.job_title && not(@user.job_title == "")
           .info-value= @user.job_title
         - else
           .info-value -

@@ -32,20 +32,25 @@
   }
 
   code {
-    padding: 0.2em 0.4em;
+    padding: 1px 4px;
     margin: 0;
-    background-color: $lightest;
+    background-color: #F3F3F4;
     border-radius: 4px;
     white-space: pre-wrap;
+    font-size: 14px;
   }
 
   pre {
     background: $lightest;
-    line-height: 0.8;
     border-radius: 4px;
     padding: 16px 16px 0 16px;
     margin: 0;
     font-family: "SFMono-Regular",Consolas,"Liberation Mono",Menlo,Courier,monospace;
+    font-size: 16px;
+
+    &.highlight {
+      line-height: 0.85;
+    }
 
     code {
       display: inline;
@@ -63,10 +68,6 @@
   pre p,
   code p {
     line-height: inherit;
-  }
-
-  .highlight p {
-    line-height: 0.8;
   }
 }
 

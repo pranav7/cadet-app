@@ -38,10 +38,15 @@ body.posts {
   .activity-header {
     @extend .c-soft;
     padding-top: $double-base-size;
+    padding-bottom: 8px;
 
     .text {
       border-bottom: 1px solid $lighter;
       padding-bottom: $half-base-size;
     }
+  }
+
+  form.new_comment {
+    padding: 4px 0;
   }
 }

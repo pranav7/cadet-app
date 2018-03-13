@@ -3,7 +3,7 @@ class Post < ApplicationRecord
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
   scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
-  scope :sort_by_new, -> { order(created_at: :desc) }
+  scope :most_recent, -> { order(created_at: :desc) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
   scope :by_date, -> { order("created_at DESC") }
@@ -36,7 +36,7 @@ class Post < ApplicationRecord
     def sorted(options = {})
       default_sort_method = :latest_activity
       if board = options.delete(:board)
-        default_sort_method = board.default_sort_order.to_sym
+        default_sort_method = board.default_sort_order.try(:to_sym) || :latest_activity
       end
       sort_method = options.delete(:sort_method) || default_sort_method
 
@@ -44,9 +44,12 @@ class Post < ApplicationRecord
     end
 
     def status_collection
+      collection = {}
       statuses.map do |key, value|
-        ["##{key}", key]
+        collection["##{key}"] = key
       end
+
+      collection
     end
   end
 

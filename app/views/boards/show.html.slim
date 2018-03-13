@@ -6,7 +6,10 @@
         - if user_signed_in? && current_user.admin_of?(current_company) && !params[:sort_by]
           p.soft We recommend creating at least 5 posts to help your users get started.
       - else
-        = react_component "PostList", { boardId: @board.id }, { prerender: false }
+        = react_component "PostList",
+          { boardId: @board.id,
+            sortOptions: Board.sort_order_collection.merge(Post.status_collection),
+            defaultSortOrder: (@board.default_sort_order || "latest_activity") }, { prerender: false }
 
   .tablet.only.computer.only.six.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }

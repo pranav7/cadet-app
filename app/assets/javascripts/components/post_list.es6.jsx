@@ -101,16 +101,7 @@ class PostList extends React.Component {
           <div className="no padding column">
             <div className="c labeled field">
               <label>Show</label>
-              <select name="sort_by" className="ui open dropdown sort-post-dropdown selection">
-                <option default value="latest_activity">Latest Activity</option>
-                <option value="most_voted">Most Voted</option>
-                <option value="sort_by_new">New</option>
-                <option value="open">#open</option>
-                <option value="planned">#planned</option>
-                <option value="developing">#developing</option>
-                <option value="released">#released</option>
-                <option value="closed">#closed</option>
-              </select>
+              {this.renderSortDropdown()}
             </div>
           </div>
           <div className="right aligned no padding column">
@@ -131,12 +122,23 @@ class PostList extends React.Component {
     $(".sort-post-dropdown").dropdown({
       onChange: this.handleSortSelectChange
     });
+
+    return (
+      <select name="sort_by" className="ui open dropdown sort-post-dropdown selection" defaultValue={this.props.defaultSortOrder}>
+        {Object.entries(this.props.sortOptions).map(([key, value], i) => {
+          return (
+            <option key={key} value={value}> 
+              {key}
+            </option>
+          )
+        })}
+      </select>
+    )
   }
 
   suggestPosts(event) {
     if (event.target.value == "") {
       this.setState({ suggesting: false });
-      this.renderSortDropdown();
     } else {
       this.setState({ suggesting: true });
     }
@@ -157,7 +159,6 @@ class PostList extends React.Component {
   }
 
   componentDidMount() {
-    this.renderSortDropdown();
     $('#post_title').on("input", this.suggestPosts);
   }
 }

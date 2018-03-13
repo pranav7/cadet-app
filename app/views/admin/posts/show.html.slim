@@ -11,7 +11,8 @@
           i.add.square.primary.big.icon.button
       .container-two
         = form_tag admin_board_post_path(@board, @post), method: :get
-          = render partial: "partials/post_sort_field"
+          = render partial: "partials/post_sort_field",
+            locals: { default_sort_order: @board.default_sort_order }
 
     .post-list-container
       - if @posts.empty?

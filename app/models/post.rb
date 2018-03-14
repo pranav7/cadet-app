@@ -6,9 +6,6 @@ class Post < ApplicationRecord
   scope :most_recent, -> { order(created_at: :desc) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
-
-  # TODO: Remove this! Kep for backward compatibility
-  scope :by_date, -> { order("created_at DESC") }
   scope :reverse_chronologically, -> { order "created_at desc, id desc" }
   scope :chronologically, -> { order "created_at asc, id asc" }
 

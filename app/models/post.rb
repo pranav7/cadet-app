@@ -2,10 +2,12 @@ class Post < ApplicationRecord
   extend FriendlyId
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
+  enum status: %w(open planned developing released closed)
+
   scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
-  scope :most_recent, -> { order(created_at: :desc) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
+  scope :most_recent, -> { order(created_at: :desc) }
   scope :reverse_chronologically, -> { order "created_at desc, id desc" }
   scope :chronologically, -> { order "created_at asc, id asc" }
 
@@ -26,8 +28,6 @@ class Post < ApplicationRecord
   validates :slug, presence: true, uniqueness: { scope: :board }
 
   accepts_nested_attributes_for :content
-
-  enum status: %w(open planned developing released closed)
 
   before_validation :set_last_activity_at, on: :create
   after_create :perform_after_create_tasks
@@ -104,6 +104,8 @@ class Post < ApplicationRecord
 
   def notify_status_changed_to_all_participants(status)
     participants.each do |participant|
+      next if participant == Current.user
+
       PostNotificationMailer.status_changed(self, status, participant).deliver_later
     end
   end

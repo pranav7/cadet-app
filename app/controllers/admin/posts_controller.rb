@@ -1,7 +1,7 @@
 class Admin::PostsController < Admin::AdminController
   def show
     @board = current_company.boards.friendly.find(params[:board_id])
-    @posts = @board.posts.sorted(sort_method: params[:sort_by]).by_date
+    @posts = @board.posts.sorted(sort_method: params[:sort_by]).reverse_chronologically
     @post = @board.posts.friendly.find(params[:id]) || @posts.first || nil
 
     @new_post = @board.posts.new
@@ -17,7 +17,7 @@ class Admin::PostsController < Admin::AdminController
   def create
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
-    
+
     if post_params[:user_id] && not(post_params[:user_id] == "")
       requester = User.find post_params[:user_id]
       post.added_by = current_user
@@ -26,7 +26,7 @@ class Admin::PostsController < Admin::AdminController
       requester = current_user
       post.votes.build(user: requester)
     end
-    
+
     post.requester = requester
     if post.save
       unless requester.part_of?(current_company)
@@ -63,7 +63,7 @@ class Admin::PostsController < Admin::AdminController
   def destroy
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.friendly.find(params[:id])
-    
+
     begin
       post.destroy!
 

@@ -10,5 +10,11 @@ module SetCurrentCompany
         not_found
       end
     end
+
+    before_action do
+      unless request.subdomains.first == "app"
+        Current.company = current_company
+      end
+    end
   end
 end

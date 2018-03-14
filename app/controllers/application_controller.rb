@@ -1,4 +1,5 @@
 class ApplicationController < ActionController::Base
+  include SetCurrentRequestDetails
   include SetCurrentCompany
   include ValidateCompanyExpiry
   include PrepareExceptionNotifier

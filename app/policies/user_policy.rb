@@ -13,8 +13,7 @@ class UserPolicy
   end
 
   private
-
-  def editable_by_current_company?
-    resource.primary_company == current_company
-  end
+    def editable_by_current_company?
+      resource.primary_company == current_company
+    end
 end

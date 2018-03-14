@@ -1,12 +1,12 @@
 class ApplicationController < ActionController::Base
+  before_action :drop_naked_ip_requests
+  protect_from_forgery preprend: true, with: :exception
+
   include SetCurrentRequestDetails
   include SetCurrentCompany
   include ValidateCompanyExpiry
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
-
-  before_action :drop_naked_ip_requests
-  protect_from_forgery preprend: true, with: :exception
 
   protected
     def not_found

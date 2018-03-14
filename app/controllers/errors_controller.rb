@@ -1,5 +1,5 @@
 class ErrorsController < ApplicationController
-  skip_before_action :validate_company_expiration
+  skip_before_action :validate_company_expiry
   layout "public"
 
   def show

@@ -12,7 +12,7 @@ class Users::SessionsController < Devise::SessionsController
   # POST /resource/sign_in
   def create
     if params[:user][:popup] && params[:user][:popup] == "true"
-      session[:user_return_to] = URI(request.referer).path 
+      session[:user_return_to] = URI(request.referer).path
       session[:subdomain] = current_company.subdomain
     end
 
@@ -32,10 +32,9 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   private
-
-  def ensure_app_subdomain
-    unless request.subdomains.first == "app"
-      redirect_to new_user_session_url(subdomain: "app")
+    def ensure_app_subdomain
+      unless request.subdomains.first == "app"
+        redirect_to new_user_session_url(subdomain: "app")
+      end
     end
-  end
 end

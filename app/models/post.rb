@@ -6,7 +6,8 @@ class Post < ApplicationRecord
   scope :most_recent, -> { order(created_at: :desc) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
-  scope :by_date, -> { order("created_at DESC") }
+  scope :reverse_chronologically, -> { order "created_at desc, id desc" }
+  scope :chronologically, -> { order "created_at asc, id asc" }
 
   has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy
@@ -116,21 +117,20 @@ class Post < ApplicationRecord
   end
 
   private
+    def set_last_activity_at
+      self.last_activity_at = Time.zone.now
+    end
 
-  def set_last_activity_at
-    self.last_activity_at = Time.zone.now
-  end
+    def update_last_activity_at
+      self.touch :last_activity_at
+    end
 
-  def update_last_activity_at
-    self.touch :last_activity_at
-  end
+    def notify_slack
+      return if Rails.env.test?
 
-  def notify_slack
-    return if Rails.env.test?
+      message = "*New Post - ##{board.company.subdomain}*"
+      message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
 
-    message = "*New Post - ##{board.company.subdomain}*"
-    message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
-
-    NotifySlackJob.perform_later(message)
-  end
+      NotifySlackJob.perform_later(message)
+    end
 end

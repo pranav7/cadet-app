@@ -20,12 +20,12 @@ class PostsController < ApplicationController
       posts = Post.arel_table
       @posts = @board.posts.where(posts[:title].matches("%#{params[:search]}%"))
     else
-      @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).by_date
+      @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).reverse_chronologically
     end
   end
 
   def create
-    post = @board.posts.new(post_params) 
+    post = @board.posts.new(post_params)
     post.requester = current_user
     post.votes.build(user: current_user)
 
@@ -45,13 +45,12 @@ class PostsController < ApplicationController
   end
 
   private
+    def get_and_authorize_board
+      @board = current_company.boards.friendly.find(params[:board_id])
+      authorize_admin_access! if @board.private?
+    end
 
-  def get_and_authorize_board
-    @board = current_company.boards.friendly.find(params[:board_id])
-    authorize_admin_access! if @board.private?
-  end
-
-  def post_params
-    params.require(:post).permit(:title, :status, content_attributes: [:body])
-  end
+    def post_params
+      params.require(:post).permit(:title, :status, content_attributes: [:body])
+    end
 end

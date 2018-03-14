@@ -1,25 +1,10 @@
 class ApplicationController < ActionController::Base
+  include SetCurrentCompany
+  include ValidateCompanyExpiry
+
   before_action :drop_naked_ip_requests
   protect_from_forgery preprend: true, with: :exception
   before_action :prepare_exception_notifier
-  before_action :validate_company_expiration
-
-  helper_method :current_company
-  def current_company
-    begin
-      @current_company ||= Company.find_by_subdomain!(request.subdomains.first)
-    rescue
-      not_found
-    end
-  end
-
-  def validate_company_expiration
-    return if request.subdomains.first == "app"
-
-    if current_company.expired?
-      redirect_to trial_expired_path
-    end
-  end
 
   protected
     def not_found

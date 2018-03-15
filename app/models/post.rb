@@ -105,7 +105,6 @@ class Post < ApplicationRecord
   def notify_status_changed_to_all_participants(status)
     participants.each do |participant|
       next if participant == Current.user
-
       PostNotificationMailer.status_changed(self, status, participant).deliver_later
     end
   end

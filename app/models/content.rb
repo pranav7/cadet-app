@@ -3,6 +3,8 @@ class Content < ApplicationRecord
 
   validates :body, presence: true
 
+  after_commit :parse_and_deliver_mention_notifications, on: %i(create update)
+
   def parsed
     context = {
       asset_root: "/images/",
@@ -13,7 +15,6 @@ class Content < ApplicationRecord
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::SanitizationFilter,
-      # HTML::Pipeline::EmojiFilter,
       HTML::Pipeline::AutolinkFilter,
       HTML::Pipeline::RougeFilter
     ], context

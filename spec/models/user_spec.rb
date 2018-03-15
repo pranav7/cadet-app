@@ -17,6 +17,7 @@ RSpec.describe User, type: :model do
     end
 
     it { should validate_presence_of(:first_name) }
+    it { should validate_uniqueness_of(:username) }
 
     context "password validation" do
       it { should validate_presence_of(:password) }
@@ -53,6 +54,24 @@ RSpec.describe User, type: :model do
           expect(user.save).to be(true)
           expect(user.errors.full_messages).not_to include("Email is invalid")
         end
+      end
+    end
+  end
+
+  describe "Before Create" do
+    context "username" do
+      it "sets the user's username" do
+        user = create :user, first_name: "Jon", last_name: "Snow", email: "jon@winterfell.com"
+
+        expect(user.username).to_not be_nil
+      end
+
+      it "sets the user's username to a unique string" do
+        user_a = create :user, first_name: "Jon", last_name: "Snow", email: "jon@winterfell.com"
+        user_b = create :user, first_name: "Jon", last_name: "Snow", email: "jon@kingslanding.com"
+
+        expect(user_a.username).to eq(user_a.name.parameterize)
+        expect(user_b.username).to eq(user_b.name.parameterize + "-1")
       end
     end
   end

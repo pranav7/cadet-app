@@ -1,10 +1,13 @@
 class User < ApplicationRecord
   has_many :posts
   has_many :comments
+
   has_many :votes
   has_many :voted_posts, through: :votes, source: :post
+
   has_many :memberships, dependent: :destroy
   has_many :companies, through: :memberships
+
   has_many :account_memberships, dependent: :destroy
   has_many :accounts, through: :account_memberships
   # has_one_attached :image
@@ -15,12 +18,14 @@ class User < ApplicationRecord
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
   
+  before_create :set_username
   after_commit :notify_slack, on: :create
   after_invitation_accepted :notify_slack_invite_accepted
   after_invitation_created :notify_slack_invite_created
 
   accepts_nested_attributes_for :memberships
 
+  validates :username, uniqueness: true
   validates :first_name, presence: true
   validates :email,
     uniqueness: true,
@@ -126,4 +131,23 @@ class User < ApplicationRecord
     message = "*#{formatted_address}* was invited to *#{memberships.first.company.subdomain}* as _#{memberships.first.role.titleize}_ by *#{invited_by.formatted_address}*"
     NotifySlackJob.perform_later(message)
   end
+
+  def set_username
+    self.username = create_username
+  end
+
+  private
+    def create_username
+      username = name.parameterize
+      taken_usernames = User.where("username LIKE ?", "#{username}%").pluck(:username)
+
+      return username unless taken_usernames.include?(username)
+
+      count = 1
+      while true
+        new_username = "#{username}-#{count}"
+        return new_username unless taken_usernames.include?(new_username)
+        count += 1
+      end
+    end
 end

@@ -8,12 +8,20 @@ p
 p Here are our boards on Cadet -
 
 ul.simple-list
-  - @company.boards.each do |board|
+  - @company.boards.non_private.each do |board|
     li
       strong
         a.link href=board_url(board, host: @host) #{board.name}
       br
       span.soft= board.description
+
+  - if @resource.admin_of?(@company)
+    - @company.boards.non_public.each do |board|
+      li
+        strong
+          a.link href=board_url(board, host: @host) #{board.name} (Private)
+        br
+        span.soft= board.description
 
 p Thank you for helping us make #{@company.name} awesome!
 

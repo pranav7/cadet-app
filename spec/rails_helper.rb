@@ -10,7 +10,7 @@ require 'capybara/rspec'
 
 Capybara.server = :puma # Until your setup is working
 Capybara.server_host = "lvh.me"
-Capybara.server_port = 3000
+Capybara.server_port = 4000
 
 Capybara.register_driver :selenium do |app|
   Capybara::Selenium::Driver.new(app, browser: :chrome)

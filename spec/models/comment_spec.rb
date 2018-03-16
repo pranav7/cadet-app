@@ -3,7 +3,7 @@ require 'rails_helper'
 RSpec.describe Comment, type: :model do
   it { should belong_to(:post) }
   it { should have_one(:content) }
-  it { should belong_to(:user) }
+  it { should belong_to(:commenter) }
 
   describe "#note?" do
     it "returns true for private " do
@@ -44,36 +44,117 @@ RSpec.describe Comment, type: :model do
     end
 
     context "Email Notification" do
-      let(:requester) { create :customer }
-      let(:post) { create :post, requester: requester }
-      let!(:admin) { create :admin, company: post.company }
-      let!(:admin2) { create :admin, company: post.company }
+      let(:board) { create :board }
+      let(:company) { board.company }
+      let!(:admin) { create :admin, company: company }
 
-      context "customer comments" do
+      context "customer adds a comment" do
+        let(:requester) { create :customer }
+        let(:post) { create :post, requester: requester, board: board }
+        let!(:admin2) { create :admin, company: company }
         let(:customer) { create :customer }
 
+        it "notifies mentionees" do
+          mailer = double(deliver_later: true)
+          expect(mailer).to receive(:deliver_later)
+          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+
+          create :comment, post: post, commenter: customer,
+            content_attributes: { body: "Hi, @#{admin2.username}." }
+        end
+
         it "notifies all admins of the company" do
-          expect { create :comment, post: post, user: customer }
-            .to have_enqueued_job.on_queue('mailers').exactly(:twice)
+          mailer = double(deliver_later: true)
+          expect(mailer).to receive(:deliver_later).twice
+          expect(CommentNotificationMailer).to receive(:new_comment).twice.and_return(mailer)
+
+          create :comment, post: post, commenter: customer
+        end
+
+        it "does not notify admin of new comment if he is already mentioned" do
+          mailer = double(deliver_later: true)
+          expect(mailer).to receive(:deliver_later).twice
+
+          expect(CommentNotificationMailer).to receive(:new_comment).once.with(kind_of(Comment), admin).and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+
+          create :comment, post: post, commenter: customer,
+            content_attributes: { body: "Hi, @#{admin2.username}." }
         end
       end
 
-      context "staff adds note" do
-        it "notifies all admins of the company" do
-          expect { create :comment, post: post, user: admin, private: true }
-            .to have_enqueued_job.on_queue('mailers').exactly(:once)
+      context "admin adds a comment" do
+        context "requester is a customer" do
+          let(:requester) { create :customer }
+          let(:post) { create :post, requester: requester, board: board }
+
+          it "notifies requester of new comment unless they are mentioned" do
+            mailer = double(deliver_later: true)
+            expect(mailer).to receive(:deliver_later).once
+
+            expect(CommentNotificationMailer).to receive(:new_comment).once.with(kind_of(Comment), requester).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:mention).exactly(0).times.with(kind_of(Comment), requester)
+
+            create :comment, post: post, commenter: admin
+          end
+
+          it "notifies requester of mention if they are mentioned" do
+            mailer = double(deliver_later: true)
+            expect(mailer).to receive(:deliver_later).once
+
+            expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), requester)
+            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), requester).and_return(mailer)
+
+            create :comment, post: post, commenter: admin,
+              content_attributes: { body: "Hey @#{requester.username}" }
+          end
+        end
+
+        context "notifications to other admins" do
+          let(:post) { create :post, requester: admin, board: board }
+          let!(:admin2) { create :admin, company: company }
+
+          it "notifies mentionees" do
+            mailer = double(deliver_later: true)
+            expect(mailer).to receive(:deliver_later)
+            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+
+            create :comment, post: post, commenter: admin,
+              content_attributes: { body: "Hi, @#{admin2.username}." }
+          end
+
+          it "doesn't notify all admins unless they are mentioned" do
+            admin3 = create :admin, company: post.company
+
+            mailer = double(deliver_later: true)
+            expect(mailer).to receive(:deliver_later)
+            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), admin3)
+
+            create :comment, post: post, commenter: admin,
+              content_attributes: { body: "Hi, @#{admin2.username}." }
+          end
         end
       end
 
-      context "staff comments" do
-        it "notifies post requester and other staff members" do
-          expect { create :comment, post: post, user: admin }
-            .to have_enqueued_job.on_queue('mailers').exactly(:twice)
+      context "admin adds a note" do
+        let(:post) { create :post, requester: (create :customer), board: board }
+
+        it "notifies mentionees" do
+          admin2 = create :admin, company: post.company
+          mailer = double(deliver_later: true)
+          expect(mailer).to receive(:deliver_later).once
+
+          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+
+          create :comment, post: post, commenter: admin, private: true,
+            content_attributes: { body: "Hey @#{admin2.username}" }
         end
 
-        it "does not notify if staff adds a note" do
-          expect { create :comment, post: post, user: admin, private: true }
-            .to have_enqueued_job.on_queue('mailers').exactly(:once)
+        it "does not notify requester" do
+          expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), post.requester)
+
+          create :comment, post: post, commenter: admin, private: true
         end
       end
     end

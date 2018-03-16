@@ -4,6 +4,8 @@ p
   strong #{@commenter.name}
   - if @commenter.admin_of?(@post.company)
     = " (Admin) "
+  - else
+    = " "
 
   - if @comment.note?
     a href=@comment_url added a note

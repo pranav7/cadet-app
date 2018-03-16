@@ -44,7 +44,6 @@ gem 'gemoji'
 gem 'rinku'
 gem 'sanitize'
 
-
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use Redis adapter to run Action Cable in production

@@ -3,8 +3,6 @@ class Content < ApplicationRecord
 
   validates :body, presence: true
 
-  after_commit :parse_and_deliver_mention_notifications, on: %i(create update)
-
   def parsed
     context = {
       asset_root: "/images/",

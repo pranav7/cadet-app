@@ -15,7 +15,7 @@ class Content < ApplicationRecord
       HTML::Pipeline::SanitizationFilter,
       HTML::Pipeline::AutolinkFilter,
       HTML::Pipeline::RougeFilter,
-      HTML::Pipeline::NonLinkingMentionFilter
+      Cadet::HTML::Pipeline::NonLinkingMentionFilter
     ], context
 
     pipeline.call(body)[:output].to_s

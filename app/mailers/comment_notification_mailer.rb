@@ -24,11 +24,14 @@ class CommentNotificationMailer < ApplicationMailer
 
   def mention(comment, mentionee)
     @mentionee = mentionee
+    @user = mentionee
+
     @comment = comment
     @post = comment.post
     @company = @post.company
     @commenter = comment.commenter
     @type = @comment.note? ? "note" : "comment"
+    @host = @company.host
 
     build_comment_and_board_urls(@mentionee)
 

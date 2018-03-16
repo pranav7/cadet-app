@@ -7,22 +7,18 @@ class Content < ApplicationRecord
     context = {
       asset_root: "/images/",
       gfm: true,
-      replace_br: true,
-      username_pattern: /(?<!\w)@([a-z0-9-]+)?/
+      replace_br: true
     }
-
-    parsed_body = HTML::Pipeline::MentionFilter.mentioned_logins_in(body) do |match, login, is_mentioned|
-      "<strong>@#{login}</strong>"
-    end
 
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::SanitizationFilter,
       HTML::Pipeline::AutolinkFilter,
-      HTML::Pipeline::RougeFilter
+      HTML::Pipeline::RougeFilter,
+      HTML::Pipeline::NonLinkingMentionFilter
     ], context
 
-    pipeline.call(parsed_body)[:output].to_s
+    pipeline.call(body)[:output].to_s
   end
 
   def summary

@@ -1,14 +1,14 @@
-p Hi #{@mentionee.first_name}
+p Hi #{@mentionee.first_name},
 
 p
   strong #{@commenter.name}
   - if @commenter.admin_of?(@post.company)
     = " (Admin)"
 
-  | mentioned you in a 
+  |  mentioned you in a 
   a href=@comment_url
     = @type
-  | on
+  |  on 
   a href=@post_url
     = @post.title
   |  in #{@post.board.name}

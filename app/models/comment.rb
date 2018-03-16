@@ -28,7 +28,7 @@ class Comment < ApplicationRecord
 
   def notify_mentionees
     mentionees.each do |mentionee|
-      next if mentionee == commenter
+      next unless should_notify_mentionee?(mentionee)
       CommentNotificationMailer.mention(self, mentionee).deliver_later
     end
   end
@@ -47,6 +47,16 @@ class Comment < ApplicationRecord
   end
 
   private
+    def should_notify_mentionee?(mentionee)
+      if not(mentionee.admin_of?(post.company)) && note?
+        return false
+      elsif mentionee == commenter
+        return false
+      end
+
+      return true
+    end
+
     def touch_post_last_activity
       post.touch(:last_activity_at)
     end

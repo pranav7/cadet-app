@@ -156,6 +156,13 @@ RSpec.describe Comment, type: :model do
 
           create :comment, post: post, commenter: admin, private: true
         end
+
+        it "does not notify requester even if they are mentioned" do
+          expect(CommentNotificationMailer).to receive(:mention).exactly(0).times.with(kind_of(Comment), post.requester)
+
+          create :comment, post: post, commenter: admin, private: true,
+            content_attributes: { body: "Hi, @#{post.requester.username}." }
+        end
       end
     end
   end

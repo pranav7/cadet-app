@@ -1,17 +1,18 @@
-- placeholder = note ? "This is an internal note, will only be visible to other admins ... " : "Type your reply ..."
-= simple_form_for comment, url: board_post_comments_path(board, post) do |form|
-  - if note
-    = form.input :private, as: :hidden, input_html: { value: true }
-  = form.simple_fields_for :content do |cf|
-    = cf.input :body,
-      placeholder: placeholder,
-      label: false,
-      input_html: { rows: 4, class: "transparent" }
-  - if note
-    = form.submit "Add Note", class: "ui small button"
-  - else
-    = form.submit "Reply", class: "ui small button"
-  a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
-    span.markdown-icon
-      = octicon "markdown", height: 16
-    span.label Styling with Markdown is supported
+.div data-controller="mentions"
+  - placeholder = note ? "This is an internal note, will only be visible to other admins ... " : "Type your reply ..."
+  = simple_form_for comment, url: board_post_comments_path(board, post) do |form|
+    - if note
+      = form.input :private, as: :hidden, input_html: { value: true }
+    = form.simple_fields_for :content do |cf|
+      = cf.input :body,
+        placeholder: placeholder,
+        label: false,
+        input_html: { rows: 4, class: "transparent" }
+    - if note
+      = form.submit "Add Note", class: "ui small button"
+    - else
+      = form.submit "Reply", class: "ui small button"
+    a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
+      span.markdown-icon
+        = octicon "markdown", height: 16
+      span.label Styling with Markdown is supported

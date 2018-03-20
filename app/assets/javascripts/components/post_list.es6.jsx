@@ -95,7 +95,7 @@ class PostList extends React.Component {
           </div>
         </div>
       )
-    } else { 
+    } else {
       return (
         <div className="two column stackable row">
           <div className="no padding column">
@@ -127,7 +127,7 @@ class PostList extends React.Component {
       <select name="sort_by" className="ui open dropdown sort-post-dropdown selection" defaultValue={this.props.defaultSortOrder}>
         {Object.entries(this.props.sortOptions).map(([key, value], i) => {
           return (
-            <option key={key} value={value}> 
+            <option key={key} value={value}>
               {key}
             </option>
           )

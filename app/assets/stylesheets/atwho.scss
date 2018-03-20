@@ -1,0 +1,94 @@
+.atwho-view {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: none;
+    margin-top: 18px;
+    background: white;
+    color: black;
+    border: 1px solid $lighter;
+    border-radius: 3px;
+    box-shadow: 0 0 5px rgba(0, 0, 0, 0.1);
+    min-width: 120px;
+    z-index: 11110 !important;
+    border-radius: 5px;
+}
+
+.atwho-view .atwho-header {
+    padding: 5px;
+    margin: 5px;
+    cursor: pointer;
+    border-bottom: solid 1px #eaeff1;
+    color: #6f8092;
+    font-size: 11px;
+    font-weight: bold;
+}
+
+.atwho-view .atwho-header .small {
+    color: #6f8092;
+    float: right;
+    padding-top: 2px;
+    margin-right: -5px;
+    font-size: 12px;
+    font-weight: normal;
+}
+
+.atwho-view .atwho-header:hover {
+    cursor: default;
+}
+
+.atwho-view {
+  small {
+    color: $darkest;
+  }
+
+  strong {
+    color: $black
+  }
+  
+  .cur {
+    background: $secondary-blue;
+    color: $white;
+
+    small {
+      color: rgba(255, 255, 255, 0.75);
+    }
+
+    strong {
+      color: white;
+      font: bold;
+    }
+  }
+}
+
+.atwho-view ul {
+    list-style: none;
+    padding: 0;
+    margin: auto;
+    max-height: 250px;
+    overflow-y: auto;
+}
+
+.atwho-view ul li {
+  display: block;
+  padding: 8px 10px;
+  border-bottom: 1px solid $lighter;
+  cursor: pointer;
+
+  &:first-child {
+    border-top-left-radius: 5px;
+    border-top-right-radius: 5px;
+  }
+
+  &:last-child {
+    border: none;
+    border-bottom-left-radius: 5px;
+    border-bottom-right-radius: 5px;
+  }
+}
+
+.atwho-view small {
+    font-size: smaller;
+    color: #777;
+    font-weight: normal;
+}

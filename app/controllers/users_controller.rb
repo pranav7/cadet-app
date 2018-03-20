@@ -31,6 +31,10 @@ class UsersController < ApplicationController
     end
   end
 
+  def index
+    @users = current_company.users
+  end
+
   private
 
   def user_params

@@ -39,7 +39,7 @@ Rails.application.routes.draw do
   end
 
   get :join, to: "users#new"
-  resource :users, only: [:create]
+  resources :users, only: [:create, :index]
 
   health_check_routes
 

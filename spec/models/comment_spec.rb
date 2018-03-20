@@ -6,7 +6,7 @@ RSpec.describe Comment, type: :model do
   it { should belong_to(:commenter) }
 
   describe "#note?" do
-    it "returns true for private " do
+    it "returns true for private notes" do
       comment = build :comment
       comment.private = true
       comment.save

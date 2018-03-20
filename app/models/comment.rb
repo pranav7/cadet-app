@@ -48,7 +48,7 @@ class Comment < ApplicationRecord
 
   private
     def should_notify_mentionee?(mentionee)
-      if not(mentionee.admin_of?(post.company)) && note?
+      if note? && not(mentionee.admin_of?(post.company))
         return false
       elsif mentionee == commenter
         return false

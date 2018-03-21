@@ -1,4 +1,4 @@
-- text_area_id = note ? "new-note-el" : "new-comment-el"
+- text_area_id = note ? "newNote" : "newComment"
 .div data-controller="mentions"
   - placeholder = note ? "This is an internal note, will only be visible to other admins ... " : "Type your reply ..."
   = simple_form_for comment, url: board_post_comments_path(board, post) do |form|
@@ -8,7 +8,7 @@
       = cf.input :body,
         placeholder: placeholder,
         label: false,
-        input_html: { rows: 4, class: "transparent", id: text_area_id }
+        input_html: { rows: 4, class: "transparent", id: text_area_id, "data-target" => "mentions.#{text_area_id}" }
     - if note
       = form.submit "Add Note", class: "ui small button"
     - else

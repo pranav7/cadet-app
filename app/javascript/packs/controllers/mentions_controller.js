@@ -1,30 +1,52 @@
 import { Controller } from "stimulus"
 
 export default class extends Controller {
+  static targets = ["newNote", "newComment"]
+
   connect() {
-    this.getUsers()
+    if (this.hasNewCommentTarget) {
+      this.autoCompleteForComments()
+    }
+
+    if (this.hasNewNoteTarget) {
+      this.autoCompleteForNotes()
+    }
   }
 
-  autocomplete() {
-    $("#new-comment-el").atwho({
-      at: "@",
-      displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
-      insertTpl: "@${username}",
-      data: this.users
-    })
-
-    $("#new-note-el").atwho({
-      at: "@",
-      displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
-      insertTpl: "@${username}",
-      data: this.users
+  autoCompleteForComments() {
+    this.getUsers((users) => {
+      $(this.newCommentTarget).atwho({
+        at: "@",
+        displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
+        insertTpl: "@${username}",
+        data: users
+      })
     })
   }
 
-  getUsers() {
+  autoCompleteForNotes() {
+    this.getUsers((users) => {
+      $(this.newNoteTarget).atwho({
+        at: "@",
+        displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
+        insertTpl: "@${username}",
+        data: users
+      })
+    }, { admins: true })
+  }
+
+  getUsers(callback = null, params = {}) {
+    let url = null
+
+    if (_.isEmpty(params)) {
+      url = "/users"
+    } else {
+      url = `/users?${$.param(params)}`
+    }
+
     axios({
       method: "GET",
-      url: "/users",
+      url: url,
       headers: {
         'Content-Type': "application/json",
         'Accept': "application/json",
@@ -32,8 +54,9 @@ export default class extends Controller {
       }
     })
     .then(response => {
-      this.users = response.data.users
-      this.autocomplete()
+      if (!_.isNull(callback)) {
+        callback(response.data.users)
+      }
     })
   }
 }

@@ -32,7 +32,11 @@ class UsersController < ApplicationController
   end
 
   def index
-    @users = current_company.users
+    if params[:admins] && params[:admins] == true
+      @users = current_company.admins
+    else
+      @users = current_company.users
+    end
   end
 
   private

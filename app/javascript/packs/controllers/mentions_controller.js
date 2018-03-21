@@ -6,7 +6,14 @@ export default class extends Controller {
   }
 
   autocomplete() {
-    $("#comment_content_attributes_body").atwho({
+    $("#new-comment-el").atwho({
+      at: "@",
+      displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
+      insertTpl: "@${username}",
+      data: this.users
+    })
+
+    $("#new-note-el").atwho({
       at: "@",
       displayTpl: "<li><strong>${name}</strong> <small>${username}</small></li>",
       insertTpl: "@${username}",

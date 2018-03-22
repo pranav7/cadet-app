@@ -1,0 +1,21 @@
+p Hi #{@mentionee.first_name},
+
+p
+  strong #{@commenter.name}
+  - if @commenter.admin_of?(@post.company)
+    = " (Admin)"
+
+  |  mentioned you in a 
+  a href=@comment_url
+    = @type
+  |  on 
+  a href=@post_url
+    = @post.title
+  |  in #{@post.board.name}
+
+- if @comment.note?
+  .note
+    = simple_format @comment.content.parsed
+- else
+  .comment
+    = simple_format @comment.content.parsed

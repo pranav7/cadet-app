@@ -24,7 +24,11 @@ RSpec.describe CommentsController, type: :controller do
 
     it "creates a comment" do
       expect {
-        post :create, params: { board_id: board.id, post_id: _post.id, comment: comment_params }
+        post :create, params: {
+          board_id: board.id,
+          post_id: _post.id,
+          comment: comment_params
+        }
       }.to change(Comment, :count).by(1)
     end
   end

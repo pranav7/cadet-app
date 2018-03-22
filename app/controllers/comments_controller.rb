@@ -4,8 +4,12 @@ class CommentsController < ApplicationController
 
   def create
     comment = @post.comments.new(comment_params)
-    comment.user = current_user
+    comment.commenter = current_user
     comment.save
+
+    unless current_user.part_of?(current_company)
+      current_user.companies << current_company
+    end
 
     redirect_back fallback_location: board_post_path(@board, @post)
   end

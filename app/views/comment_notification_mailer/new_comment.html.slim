@@ -3,9 +3,9 @@ p Hi #{@user.first_name},
 p
   strong #{@commenter.name}
   - if @commenter.admin_of?(@post.company)
-    = " (Staff) "
+    = " (Admin) "
   - else
-    = " (#{@commenter.email}) "
+    = " "
 
   - if @comment.note?
     a href=@comment_url added a note
@@ -16,7 +16,7 @@ p
   = @user == @post.requester ? "your" : "the" 
   |  post 
   strong
-    a href=@board_url
+    a href=@post_url
       = @post.title
   |  in #{@post.board.name}
 

@@ -13,9 +13,9 @@ class Content < ApplicationRecord
     pipeline = HTML::Pipeline.new [
       HTML::Pipeline::MarkdownFilter,
       HTML::Pipeline::SanitizationFilter,
-      # HTML::Pipeline::EmojiFilter,
       HTML::Pipeline::AutolinkFilter,
-      HTML::Pipeline::RougeFilter
+      HTML::Pipeline::RougeFilter,
+      Cadet::HTML::Pipeline::NonLinkingMentionFilter
     ], context
 
     pipeline.call(body)[:output].to_s

@@ -5,8 +5,11 @@
 //= require turbolinks
 //= require jquery
 //= require jquery_ujs
+//= require underscore/underscore
 //= require axios/dist/axios
 //= require semantic-ui
+//= require jquery.caret/dist/jquery.caret
+//= require at.js/dist/js/jquery.atwho
 //= require linkifyjs/dist/linkify
 //= require linkifyjs/dist/linkify-jquery
 //= require js-cookie/src/js.cookie

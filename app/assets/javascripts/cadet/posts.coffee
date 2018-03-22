@@ -3,17 +3,8 @@ class Cadet.Posts
     # initialize some stuff here
 
   init: ->
-    # @linkifyText()
     @highlightSelectedComment()
     @initializeCopyPostButton()
-
-  linkifyText: ->
-    $(".comment .content").linkify({
-      className: (href, type) ->
-        "link--#{type}"
-      # tagName:
-      #  mention: "span"
-    })
 
   highlightSelectedComment: ->
     commentId = location.hash.slice(1)

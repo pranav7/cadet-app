@@ -116,17 +116,17 @@ module Cadet::HTML::Pipeline
 
     def link_to_mention_info(text, info_url = nil)
       return "@#{text}" if info_url.nil?
-      "<strong class='user-mention'>" \
+      "<span class='user-mention'>" \
         "@#{text}" \
-        '</strong>'
+        '</span>'
     end
 
     def link_to_mentioned_user(login)
       result[:mentioned_usernames] |= [login]
 
-      "<strong class='user-mention'>" \
+      "<span class='user-mention'>" \
         "@#{login}" \
-        '</strong>'
+        '</span>'
     end
   end
 end

@@ -455,8 +455,11 @@ a.c.link {
 .comment-container {
   padding: 4px 0;
 
-  .content .user-mention {
+  .content span.user-mention {
     font-weight: 600;
+    background-color: $blue-light;
+    padding: 2px 4px;
+    border-radius: 4px;
   }
 
   .note {
@@ -477,6 +480,10 @@ a.c.link {
       border-radius: 50px;
       margin-top: 4px;
       max-width: 600px;
+
+      .user-mention {
+        background-color: $note-border;
+      }
 
       &.selected {
         border-bottom: 3px solid $note-border;

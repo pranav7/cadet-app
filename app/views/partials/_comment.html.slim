@@ -2,7 +2,7 @@
   - if resource.try(:note?)
     .note
       .user= resource.user.name
-      .content id="#{resource.class.to_s.downcase}-#{resource.id}"
+      .content.box id="#{resource.class.to_s.downcase}-#{resource.id}"
         = simple_format resource.content.parsed
         .meta
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
@@ -13,7 +13,8 @@
       .content
         = simple_format resource.content.parsed
 
-      - if resource.class == Comment
-        a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
-      - else
-        p.soft= render_time(resource.created_at)
+      .meta
+        - if resource.class == Comment
+          a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
+        - else
+          p.soft= render_time(resource.created_at)

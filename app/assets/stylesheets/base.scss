@@ -455,11 +455,21 @@ a.c.link {
 .comment-container {
   padding: 4px 0;
 
-  .content span.user-mention {
-    font-weight: 600;
-    background-color: $blue-light;
-    padding: 2px 4px;
-    border-radius: 4px;
+  .content {
+    span.user-mention {
+      font-weight: 600;
+      background-color: $blue-light;
+      padding: 2px 4px;
+      border-radius: 4px;
+    }
+  }
+
+  .comment,
+  .note {
+    .meta {
+      margin-top: 4px;
+      font-size: 13px;
+    }
   }
 
   .note {
@@ -471,8 +481,9 @@ a.c.link {
     }
 
     .content {
-      transition: 0.2s ease;
       @extend .box;
+
+      transition: 0.2s ease;
       background-color: $note-back;
       border-color: $note-border;
       display: inline-block;
@@ -488,14 +499,11 @@ a.c.link {
       &.selected {
         border-bottom: 3px solid $note-border;
       }
-
-      .meta {
-        margin-top: 4px;
-      }
     }
   }
 
   .comment {
+    padding: 8px 16px;
     transition: 0.2s ease;
 
     &.selected {

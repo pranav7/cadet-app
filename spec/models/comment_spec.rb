@@ -119,8 +119,30 @@ RSpec.describe Comment, type: :model do
           end
 
           context "post belongs to a private board" do
-            it "does not notify requester of new comment"
-            it "does not notify requester even if they are mentioned"
+            let(:board) { create :board, private: true }
+
+            it "does not notify requester of new comment" do
+              mailer = double(deliver_later: true)
+              expect(mailer).to receive(:deliver_later).exactly(0).times
+
+              expect(CommentNotificationMailer).to receive(:new_comment).
+                exactly(0).times.with(kind_of(Comment), requester)
+
+              create :comment, post: post, commenter: admin
+            end
+
+            it "does not notify requester even if they are mentioned" do
+              mailer = double(deliver_later: true)
+              expect(mailer).to receive(:deliver_later).exactly(0).times
+
+              expect(CommentNotificationMailer).to receive(:new_comment).
+                exactly(0).times.with(kind_of(Comment), requester)
+              expect(CommentNotificationMailer).to receive(:mention).
+                exactly(0).times.with(kind_of(Comment), requester)
+
+              create :comment, post: post, commenter: admin,
+                content_attributes: { body: "Hey @#{requester.username}" }
+            end
           end
         end
 

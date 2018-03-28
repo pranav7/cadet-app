@@ -40,7 +40,8 @@ RSpec.describe Comment, type: :model do
       Timecop.return
       @post.reload
 
-      expect(@post.last_activity_at.utc.strftime("%a, %b %e, %Y at%l:%M %p")).to eq(comment_created_at.utc.strftime("%a, %b %e, %Y at%l:%M %p"))
+      expect(@post.last_activity_at.utc.strftime("%a, %b %e, %Y at%l:%M %p")).
+        to eq(comment_created_at.utc.strftime("%a, %b %e, %Y at%l:%M %p"))
     end
 
     context "Email Notification" do
@@ -57,7 +58,8 @@ RSpec.describe Comment, type: :model do
         it "notifies mentionees" do
           mailer = double(deliver_later: true)
           expect(mailer).to receive(:deliver_later)
-          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:mention).
+            once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: customer,
             content_attributes: { body: "Hi, @#{admin2.username}." }
@@ -66,7 +68,8 @@ RSpec.describe Comment, type: :model do
         it "notifies all admins of the company" do
           mailer = double(deliver_later: true)
           expect(mailer).to receive(:deliver_later).twice
-          expect(CommentNotificationMailer).to receive(:new_comment).twice.and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:new_comment).
+            twice.and_return(mailer)
 
           create :comment, post: post, commenter: customer
         end
@@ -75,8 +78,10 @@ RSpec.describe Comment, type: :model do
           mailer = double(deliver_later: true)
           expect(mailer).to receive(:deliver_later).twice
 
-          expect(CommentNotificationMailer).to receive(:new_comment).once.with(kind_of(Comment), admin).and_return(mailer)
-          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:new_comment).
+            once.with(kind_of(Comment), admin).and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:mention).
+            once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: customer,
             content_attributes: { body: "Hi, @#{admin2.username}." }
@@ -92,8 +97,10 @@ RSpec.describe Comment, type: :model do
             mailer = double(deliver_later: true)
             expect(mailer).to receive(:deliver_later).once
 
-            expect(CommentNotificationMailer).to receive(:new_comment).once.with(kind_of(Comment), requester).and_return(mailer)
-            expect(CommentNotificationMailer).to receive(:mention).exactly(0).times.with(kind_of(Comment), requester)
+            expect(CommentNotificationMailer).to receive(:new_comment).
+              once.with(kind_of(Comment), requester).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:mention).
+              exactly(0).times.with(kind_of(Comment), requester)
 
             create :comment, post: post, commenter: admin
           end
@@ -102,11 +109,18 @@ RSpec.describe Comment, type: :model do
             mailer = double(deliver_later: true)
             expect(mailer).to receive(:deliver_later).once
 
-            expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), requester)
-            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), requester).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:new_comment).
+              exactly(0).times.with(kind_of(Comment), requester)
+            expect(CommentNotificationMailer).to receive(:mention).
+              once.with(kind_of(Comment), requester).and_return(mailer)
 
             create :comment, post: post, commenter: admin,
               content_attributes: { body: "Hey @#{requester.username}" }
+          end
+
+          context "post belongs to a private board" do
+            it "does not notify requester of new comment"
+            it "does not notify requester even if they are mentioned"
           end
         end
 
@@ -117,7 +131,8 @@ RSpec.describe Comment, type: :model do
           it "notifies mentionees" do
             mailer = double(deliver_later: true)
             expect(mailer).to receive(:deliver_later)
-            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:mention).
+              once.with(kind_of(Comment), admin2).and_return(mailer)
 
             create :comment, post: post, commenter: admin,
               content_attributes: { body: "Hi, @#{admin2.username}." }
@@ -128,8 +143,10 @@ RSpec.describe Comment, type: :model do
 
             mailer = double(deliver_later: true)
             expect(mailer).to receive(:deliver_later)
-            expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
-            expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), admin3)
+            expect(CommentNotificationMailer).to receive(:mention).
+              once.with(kind_of(Comment), admin2).and_return(mailer)
+            expect(CommentNotificationMailer).to receive(:new_comment).
+              exactly(0).times.with(kind_of(Comment), admin3)
 
             create :comment, post: post, commenter: admin,
               content_attributes: { body: "Hi, @#{admin2.username}." }
@@ -145,20 +162,23 @@ RSpec.describe Comment, type: :model do
           mailer = double(deliver_later: true)
           expect(mailer).to receive(:deliver_later).once
 
-          expect(CommentNotificationMailer).to receive(:mention).once.with(kind_of(Comment), admin2).and_return(mailer)
+          expect(CommentNotificationMailer).to receive(:mention).
+            once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: admin, private: true,
             content_attributes: { body: "Hey @#{admin2.username}" }
         end
 
         it "does not notify requester" do
-          expect(CommentNotificationMailer).to receive(:new_comment).exactly(0).times.with(kind_of(Comment), post.requester)
+          expect(CommentNotificationMailer).to receive(:new_comment).
+            exactly(0).times.with(kind_of(Comment), post.requester)
 
           create :comment, post: post, commenter: admin, private: true
         end
 
         it "does not notify requester even if they are mentioned" do
-          expect(CommentNotificationMailer).to receive(:mention).exactly(0).times.with(kind_of(Comment), post.requester)
+          expect(CommentNotificationMailer).to receive(:mention).
+            exactly(0).times.with(kind_of(Comment), post.requester)
 
           create :comment, post: post, commenter: admin, private: true,
             content_attributes: { body: "Hi, @#{post.requester.username}." }

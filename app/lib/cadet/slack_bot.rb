@@ -25,18 +25,13 @@ module Cadet
           client.message channel: data.channel, text: "Hi <@#{data.user}>!"
         when /^bot how many companies/i then
           client.message channel: data.channel, text: "The current number of companies are #{Company.count}"
-        when /^bot how many boards/i then
-          client.message channel: data.channel, text: "#{Board.count} boards"
-        when /^bot how many posts/i then
-          client.message channel: data.channel, text: "#{Post.count} posts"
-        when /^bot how many votes/i then
-          client.message channel: data.channel, text: "#{Vote.count} votes"
-        when /^bot how many comments/i then
-          client.message channel: data.channel, text: "#{Comment.count} comments"
-        when /^bot how many users/ then
-          client.message channel: data.channel, text: "#{Users.count} users"
-        when /^bot print daily report/i then
-          client.message channel: data.channel, text: daily_stats_report
+        when /^bot get trial expiry for (.+)$/i then
+          client.message channel: data.channel, text: get_trial_expiry($1)
+        when /^bot extend expiry for (.+) by (.+) days$/ then
+          duration = $2.to_i.days
+          client.message channel: data.channel, text: extend_expiry($1, duration)
+        when /^bot update (.+) to paying$/ then
+          client.message channel: data.channel, text: update_to_paying
         when /^bot/ then
           client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
         end
@@ -66,27 +61,42 @@ module Cadet
     end
 
     private
+      def update_to_paying(subdomain)
+        company = Company.find_by_subdomain subdomain
 
-    def daily_stats_report
-      message = "*Companies*: #{Company.count}"
-      message << "\n*Boards*: #{Board.count}"
-      message << "\n*Posts*: #{Post.count}"
-      message << "\n*Votes*: #{Vote.count}"
-      message << "\n*Comments*: #{Comment.count}"
+        if company
+          company.company_setting.expires_at = nil
+          company.company_setting.save
 
-      message << "\n\n"
-      Company.all.each do |company|
-        message << "*#{company.name} (http://#{company.subdomain}.getcadet.com/)*"
-        message << "\n```\n"
-        message << "Boards: #{company.boards.count}"
-        posts = company.boards.collect(&:posts).flatten
-        message << ", Posts: #{posts.count}"
-        message << ", Votes: #{posts.collect(&:votes).flatten.count}"
-        message << ", Comments: #{posts.collect(&:comments).flatten.count}"
-        message << "\n```\n"
+          "#{company.name} is now a paying customer!"
+        else
+          "Sorry! I did not find a company with subdomain: #{subdomain}"
+        end
       end
 
-      message
-    end
+      def extend_expiry(subdomain, duration)
+        company = Company.find_by_subdomain subdomain
+
+        if company
+          company.company_setting.expires_at = Time.now  + duration
+          company.company_setting.save
+
+          "#{company.name}'s trial expires on #{company.company_setting.expires_at}"
+        else
+          "Sorry! I did not find a company with subdomain: #{subdomain}"
+        end
+      end
+
+      def get_trial_expiry(subdomain)
+        company = Company.find_by_subdomain subdomain
+
+        if company
+          return "#{company.name} is a paying company" if company.paying?
+
+          "#{company.name}'s trial expires on #{company.company_setting.expires_at}'"
+        else
+          "Sorry! I did not find a company with subdomain: #{$1}"
+        end
+      end
   end
 end

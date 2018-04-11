@@ -83,6 +83,7 @@ RSpec.describe Post, type: :model do
 
     describe "Status Change Notifications" do
       let(:admin) { create :admin, company: company }
+      let(:customer) { create :customer, company: company }
 
       it "should not notify user who is changing the post" do
         Current.user = admin
@@ -97,8 +98,8 @@ RSpec.describe Post, type: :model do
 
       context "public board" do
         it "should notify all participants" do
-          post = create :post
-          create :vote, post: post
+          post = create :post, requester: customer
+          create :vote, post: post, user: customer
           create :comment, post: post
 
           expect {
@@ -109,7 +110,6 @@ RSpec.describe Post, type: :model do
 
       context "private board" do
         let(:board) { create :board, company: company, private: true }
-        let(:customer) { create :customer, company: company }
 
         it "should not notify customers" do
           post = create :post, board: board, requester: customer

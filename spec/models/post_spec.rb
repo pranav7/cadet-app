@@ -81,30 +81,46 @@ RSpec.describe Post, type: :model do
       end
     end
 
-    describe "status changed" do
+    describe "Status Change Notifications" do
       let(:admin) { create :admin, company: company }
+      let(:customer) { create :customer, company: company }
 
-      before :each do
+      it "should not notify user who is changing the post" do
         Current.user = admin
-      end
 
-      it "sends email notification to all participants" do
-        post = create :post
-        create :vote, post: post
-        create :comment, post: post
-
-        expect {
-          post.update_attributes(status: "developing")
-        }.to have_enqueued_job.on_queue('mailers').exactly(:twice)
-      end
-
-      it "should not notification to the current user who has changed the status" do
         post = create :post
         create :vote, post: post, user: admin
 
         expect {
           post.update_attributes(status: "developing")
         }.to have_enqueued_job.on_queue("mailers").exactly(0)
+      end
+
+      context "public board" do
+        it "should notify all participants" do
+          post = create :post, requester: customer
+          create :vote, post: post, user: customer
+          create :comment, post: post
+
+          expect {
+            post.update_attributes(status: "developing")
+          }.to have_enqueued_job.on_queue('mailers').exactly(:twice)
+        end
+      end
+
+      context "private board" do
+        let(:board) { create :board, company: company, private: true }
+
+        it "should not notify customers" do
+          post = create :post, board: board, requester: customer
+          create :vote, post: post, user: customer
+
+          mailer = double(deliver_later: true)
+          expect(PostNotificationMailer).to receive(:status_changed).
+            exactly(0).times.with(post, "developing", customer)
+
+          post.update_attributes(status: "developing")
+        end
       end
     end
   end

@@ -58,6 +58,10 @@ class Post < ApplicationRecord
     comments.map(&:user)
   end
 
+  # Methods added to support
+  # backward compatibility of user relationship
+  # which is now requester
+  # @todo remove this
   def user
     requester
   end
@@ -75,7 +79,10 @@ class Post < ApplicationRecord
   end
 
   def participants
-    (manual_voters + commenters).flatten.uniq
+    (manual_voters + commenters + [requester]).flatten.compact.uniq.reject do |participant|
+      participant == Current.user ||
+        not(BoardPolicy.new(user: participant, resource: board).accessible?)
+    end
   end
 
   # Get all the accounts whose users have upvoted this post
@@ -104,7 +111,6 @@ class Post < ApplicationRecord
 
   def notify_status_changed_to_all_participants(status)
     participants.each do |participant|
-      next if participant == Current.user
       PostNotificationMailer.status_changed(self, status, participant).deliver_later
     end
   end

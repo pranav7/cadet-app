@@ -28,6 +28,10 @@ class Company < ApplicationRecord
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end
 
+  def paying?
+    company_setting.expires_at.nil?
+  end
+
   def expired?
     return false unless company_setting.expires_at
 

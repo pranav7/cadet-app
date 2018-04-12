@@ -52,7 +52,7 @@ class Comment < ApplicationRecord
         return false
       elsif mentionee == commenter
         return false
-      elsif not(mentionee.admin_of?(post.company)) && post.board.private?
+      elsif not(mentionee.has_access_to_board?(post.board))
         return false
       end
 

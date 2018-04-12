@@ -136,11 +136,6 @@ class User < ApplicationRecord
     self.username = create_username
   end
 
-  def has_access_to_board?(board)
-    return false if board.private? && not(admin_of?(board.company))
-    return true
-  end
-
   private
     def create_username
       username = name.parameterize

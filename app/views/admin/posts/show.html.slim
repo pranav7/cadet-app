@@ -58,7 +58,7 @@
         = render partial: "partials/comment", locals: { resource: comment }
 
   .c-right-pane
-    = render partial: "partials/voters", locals: { voters: @post.voters, post: @post, admin: true }
+    = render partial: "partials/voters", locals: { voters: @post.voters, post: @post, admin: true, visible_voters_count: 7 }
     // Companies
     - unless @accounts.blank?
       .box

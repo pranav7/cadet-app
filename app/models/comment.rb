@@ -52,7 +52,7 @@ class Comment < ApplicationRecord
         return false
       elsif mentionee == commenter
         return false
-      elsif not(mentionee.has_access_to_board?(post.board))
+      elsif not(BoardPolicy.new(user: mentionee, resource: post.board).accessible?)
         return false
       end
 

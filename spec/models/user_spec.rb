@@ -184,4 +184,24 @@ RSpec.describe User, type: :model do
       expect(user.primary_company).to eq(company)
     end
   end
+
+  describe "#has_access_to_board?" do
+    let(:company) { create :company }
+    let(:admin) { create :admin, company: company }
+    let(:board) { create :board, company: company, private: true }
+
+    context "user has access" do
+      it "returns true" do
+        expect(admin.has_access_to_board?(board)).to eq(true)
+      end
+    end
+
+    context "user does not have access" do
+      let(:customer) { create :customer, company: company }
+
+      it "returns false" do
+        expect(customer.has_access_to_board?(board)).to eq(false)
+      end
+    end
+  end
 end

@@ -81,7 +81,7 @@ class Post < ApplicationRecord
   def participants
     (manual_voters + commenters + [requester]).flatten.compact.uniq.reject do |participant|
       participant == Current.user ||
-        (not(participant.admin_of?(company)) && board.private?)
+        not(participant.has_access_to_board?(board))
     end
   end
 

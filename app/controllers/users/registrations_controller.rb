@@ -4,7 +4,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
   before_action :ensure_app_subdomain, only: [:new]
   before_action :configure_sign_up_params, only: [:create]
   before_action :configure_account_update_params, only: [:update]
-  after_action :assign_admin_role, only: [:create]
+  after_action :after_create_tasks, only: [:create]
 
   # GET /resource/sign_up
   def new
@@ -52,10 +52,19 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  def assign_admin_role
+  def after_create_tasks
     if @user.persisted? && not(@user.companies.blank?)
-      @user.make_admin!(@user.companies.first)
+      assign_admin_role
+      send_welcome_email
     end
+  end
+
+  def assign_admin_role
+    @user.make_admin!(@user.companies.first)
+  end
+
+  def send_welcome_email
+    WelcomeMailer.welcome_owner(@user).deliver_later
   end
 
   # If you have extra params to permit, append them to the sanitizer.

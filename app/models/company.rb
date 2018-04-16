@@ -38,32 +38,31 @@ class Company < ApplicationRecord
     Time.zone.now > company_setting.expires_at
   end
 
-  def create_company_setting
-    company_setting = build_company_setting
-    company_setting.expires_at = 14.days.from_now
-    company_setting.billing_plan = "trial"
-    company_setting.pricing_version = "v1"
-    company_setting.save!
-  end
-
   private
+    def post_create_tasks
+      notify_slack
+      create_company_setting
+    end
 
-  def post_create_tasks
-    notify_slack
-    create_company_setting
-  end
+    def notify_slack
+      return if Rails.env.test?
 
-  def notify_slack
-    return if Rails.env.test?
+      message = "*##{subdomain} is now on Cadet*"
+      message << "\n_Name:_ #{name}"
+      message << "\n_Admin:_ #{memberships.first.user.formatted_address}"
 
-    message = "*##{subdomain} is now on Cadet*"
-    message << "\n_Name:_ #{name}"
-    message << "\n_Admin:_ #{memberships.first.user.formatted_address}"
+      NotifySlackJob.perform_later(message)
+    end
 
-    NotifySlackJob.perform_later(message)
-  end
+    def downcase_subdomain
+      self.subdomain = subdomain.downcase
+    end
 
-  def downcase_subdomain
-    self.subdomain = subdomain.downcase
-  end
+    def create_company_setting
+      company_setting = build_company_setting
+      company_setting.expires_at = 14.days.from_now
+      company_setting.billing_plan = "trial"
+      company_setting.pricing_version = "v1"
+      company_setting.save!
+    end
 end

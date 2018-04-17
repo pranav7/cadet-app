@@ -35,6 +35,7 @@ gem 'health_check'
 gem 'octicons_helper'
 gem 'webpacker', '~> 3.0'
 gem "intercom-rails"
+gem 'hashie'
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'html-pipeline'

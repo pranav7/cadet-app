@@ -452,6 +452,7 @@ DEPENDENCIES
   faye-websocket
   friendly_id (>= 5.1.0)
   gemoji
+  hashie
   health_check
   html-pipeline
   html-pipeline-rouge_filter

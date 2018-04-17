@@ -36,6 +36,9 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index, :show, :edit, :update]
+    resource :billing, only: [:show], controller: :billing do
+      post "consume_paddle_webhook"
+    end
   end
 
   get :join, to: "users#new"

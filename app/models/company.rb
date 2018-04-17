@@ -40,6 +40,10 @@ class Company < ApplicationRecord
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end
 
+  def in_trial?
+    company_setting.billing_plan == "trial"
+  end
+
   def paying?
     company_setting.expires_at.nil?
   end

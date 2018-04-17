@@ -24,6 +24,18 @@ class Company < ApplicationRecord
     memberships.where(role: :admin).map(&:user)
   end
 
+  def active_users
+    active_users = posts.map(&:requester)
+    active_users << posts.map(&:voters)
+    active_users << posts.map(&:comments).flatten.map(&:commenter)
+
+    active_users.flatten.uniq
+  end
+
+  def posts
+    boards.map(&:posts).flatten
+  end
+
   def host
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end

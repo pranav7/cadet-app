@@ -73,4 +73,23 @@ RSpec.describe Company, type: :model do
       expect(company.expired?).to eq(false)
     end
   end
+
+  describe "#active_users" do
+    let(:company) { create :company }
+    let(:board) { create :board, company: company }
+
+    it "returns all active users" do
+      user_a = create :customer, company: company
+      user_b = create :customer, company: company
+      user_c = create :customer, company: company
+      user_d = create :customer, company: company
+
+      post = create :post, board: board, requester: user_a
+      create :vote, post: post, user: user_b
+      create :comment, post: post, commenter: user_c
+
+      expect(company.active_users.count).to eq(3)
+      expect(company.users.count).to eq(4)
+    end
+  end
 end

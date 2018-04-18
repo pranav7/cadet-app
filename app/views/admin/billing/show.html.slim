@@ -1,12 +1,6 @@
 .c-settings-grid
   .c-left-pane.dark
-    .ui.secondary.vertical.inverted.settings.menu
-      a.item href="#" class=("active" if @sub_nav_selected == :general)
-        i.cog.icon
-        | General
-      a.item href=admin_accounts_path class=("active" if @sub_nav_selected == :billing)
-        i.credit.card.outline.icon
-        | Billing
+    = render partial: "admin/settings_sub_nav"
 
   .c-full-pane
     .ui.grid
@@ -15,16 +9,31 @@
           h1.heading Billing
 
       .row
-        .four.wide.column
-          | You currently have #{current_company.active_users.count} Active Users.
-      .row
-        .sixteen.wide.column
-          a.paddle_button href="javascript:void(0);" data-product="519979" data-email=current_user.email data-passthrough="{company_id: #{current_company.id}}"
-            | Start Subscription @ $29/mo
+        .eight.wide.column
+          .c.notice.message
+            - if current_company.in_trial?
+              | Your trial expires in&nbsp;
+              strong= distance_of_time_to_expiry(current_company)
+              | &nbsp;and&nbsp;
+            - else
+              | You are subscribed to the Basic plan and&nbsp;
+            | you currently have&nbsp;
+            strong= current_company.active_users.count
+            | &nbsp;active users.
+
+      - unless current_company.paying?
+        .row
+          .sixteen.wide.column
+            a.paddle_button href="javascript:void(0);" data-product="519979" data-email=current_user.email data-passthrough="{company_subdomain: #{current_company.subdomain}}" data-success-callback="reloadPage()" data-close-callback="reloadPage()"
+              | Start Subscription @ $29/mo
 
 script src="https://cdn.paddle.com/paddle/paddle.js"
 coffee:
-  Paddle.Setup({
-    vendor: 21845,
-    debug: true
-  })
+  reloadPage = ->
+    location.reload()
+
+  $(document).on "turbolinks:load", ->
+    Paddle.Setup({
+      vendor: 21845,
+      debug: true
+    })

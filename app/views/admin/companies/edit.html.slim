@@ -1,0 +1,17 @@
+.c-settings-grid
+  .c-left-pane.dark
+    = render partial: "admin/settings_sub_nav"
+
+  .c-full-pane
+    .ui.grid
+      .row
+        .sixteen.wide.column
+          h1.heading General
+
+      .row
+        .eight.wide.column
+          .box
+            = simple_form_for current_company,
+              url: admin_company_path(current_company) do |form|
+              = form.input :name
+              = form.submit "Update", class: "ui button"

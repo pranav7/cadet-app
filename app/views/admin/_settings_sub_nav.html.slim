@@ -1,0 +1,7 @@
+.ui.secondary.vertical.inverted.settings.menu
+  a.item href=edit_admin_company_path(current_company) class=("active" if @sub_nav_selected == :general)
+    i.cog.icon
+    | General
+  a.item href=admin_billing_path class=("active" if @sub_nav_selected == :billing)
+    i.credit.card.outline.icon
+    | Billing

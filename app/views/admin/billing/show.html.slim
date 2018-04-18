@@ -16,7 +16,9 @@
               strong= distance_of_time_to_expiry(current_company)
               | &nbsp;and&nbsp;
             - else
-              | You are subscribed to the Basic plan and&nbsp;
+              | You are subscribed to the&nbsp;
+              strong Basic plan
+              | &nbsp;and&nbsp;
             | you currently have&nbsp;
             strong= current_company.active_users.count
             | &nbsp;active users.
@@ -24,7 +26,7 @@
       - unless current_company.paying?
         .row
           .sixteen.wide.column
-            a.paddle_button href="javascript:void(0);" data-product="519979" data-email=current_user.email data-passthrough="{company_subdomain: #{current_company.subdomain}}" data-success-callback="reloadPage()" data-close-callback="reloadPage()"
+            a.paddle_button href="javascript:void(0);" data-product="519979" data-email=current_user.email data-passthrough="{'company_subdomain': '#{current_company.subdomain}'}" data-success-callback="reloadPage()" data-close-callback="reloadPage()"
               | Start Subscription @ $29/mo
 
 script src="https://cdn.paddle.com/paddle/paddle.js"

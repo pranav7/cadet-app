@@ -45,7 +45,7 @@ class Company < ApplicationRecord
   end
 
   def paying?
-    company_setting.expires_at.nil?
+    company_setting.expires_at.nil? || (company_setting.billing_plan == "basic")
   end
 
   def expired?

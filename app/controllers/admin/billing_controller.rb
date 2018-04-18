@@ -11,7 +11,7 @@ class Admin::BillingController < Admin::AdminController
 
   def consume_paddle_webhook
     Cadet::PaddleWebhooks.new(params).consume
-    render text: "OK", status: :ok
+    head :ok
   end
 
   private

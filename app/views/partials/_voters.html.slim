@@ -1,28 +1,32 @@
 - admin = admin || false
 - visible_voters_count = visible_voters_count || 10
+
 .voters.box
   .box-header
     .header-text
       i.user.outline.icon
       | Users who upvoted
 
-  - if voters.count > visible_voters_count
-    - voters.first(visible_voters_count).each do |voter|
-      .voter
-        = render partial: "partials/user",
-          locals: { user: voter, size: "small" }
-        - if admin && not(voter.votes.where(post: post).first.manual?)
-          a.remove-btn href=board_post_votes_path(post.board, post, user_id: voter.id) data-method="delete"
-
-    a.c.underlined.link#show-all-voters href="javascript:void(0);" and #{voters.count - visible_voters_count} more ...
+  - if voters.empty?
+    .soft No user has upvoted this post yet
   - else
-    - voters.each do |voter|
-      .voter
-        = render partial: "partials/user",
-          locals: { user: voter, size: "small" }
-        - if admin && not(voter.votes.where(post: post).first.manual?)
-          a.remove-btn href=board_post_votes_path(post.board, post, user_id: voter.id) data-method="delete"
-            i.remove.icon.softer
+    - if voters.count > visible_voters_count
+      - voters.first(visible_voters_count).each do |voter|
+        .voter
+          = render partial: "partials/user",
+            locals: { user: voter, size: "small" }
+          - if admin && not(voter.votes.where(post: post).first.manual?)
+            a.remove-btn href=board_post_votes_path(post.board, post, user_id: voter.id) data-method="delete"
+
+      a.c.underlined.link#show-all-voters href="javascript:void(0);" and #{voters.count - visible_voters_count} more ...
+    - else
+      - voters.each do |voter|
+        .voter
+          = render partial: "partials/user",
+            locals: { user: voter, size: "small" }
+          - if admin && not(voter.votes.where(post: post).first.manual?)
+            a.remove-btn href=board_post_votes_path(post.board, post, user_id: voter.id) data-method="delete"
+              i.remove.icon.softer
 
 = render partial: "partials/all_voters_modal", locals: { voters: voters, post: post, admin: admin }
 

@@ -11,10 +11,7 @@ export default class extends Controller {
   }
 
   setupPaddle() {
-    Paddle.Setup({
-      vendor: 21845,
-      debug: true
-    });
+    Paddle.Setup({ vendor: 21845 });
   }
 
   setupSubscriptionBtnListener() {

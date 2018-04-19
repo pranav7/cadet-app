@@ -238,6 +238,7 @@ GEM
     parser (2.5.1.0)
       ast (~> 2.4.0)
     pg (0.21.0)
+    php-serialize (1.2.0)
     postmark (1.10.0)
       json
       rake
@@ -463,6 +464,7 @@ DEPENDENCIES
   octicons_helper
   omniauth-google-oauth2
   pg (< 1.0)
+  php-serialize
   postmark-rails
   pry
   pry-rails

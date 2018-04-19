@@ -17,13 +17,20 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
               | Your trial expires in&nbsp;
               strong= distance_of_time_to_expiry(current_company)
               | &nbsp;and&nbsp;
-            - else
+            - elsif current_company.paying?
               | You are subscribed to the&nbsp;
               strong Basic plan
               | &nbsp;and&nbsp;
             | you currently have&nbsp;
             strong= current_company.active_users.count
             | &nbsp;active users.
+
+            br
+            br
+            - if current_company.paying?
+              | To cancel your subscription just write to us at&nbsp;
+              a href="mailto:hello@getcadet.com" target="_blank" hello@getcadetcom
+              |.
 
       - passthrough = { company_subdomain: current_company.subdomain }.to_json
       - unless current_company.paying?

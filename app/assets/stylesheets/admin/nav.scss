@@ -15,7 +15,6 @@ body.admin {
 
     nav .trial-expiry {
       background: #353637;
-      color: #7f7f7f;
       font-size: 12px;
       padding: 4px;
       margin: 4px;
@@ -24,6 +23,10 @@ body.admin {
       bottom: 45px;
       max-width: 65px;
       left: 1px;
+
+      a {
+        color: #7f7f7f;
+      }
     }
 
     nav ul.nav-list {

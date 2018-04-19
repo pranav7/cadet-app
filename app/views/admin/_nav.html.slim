@@ -37,13 +37,14 @@ nav
         i.user.circle.large.icon
         .item-text Customers
     li.list-item class=("active" if @main_selected == :settings)
-      = link_to admin_billing_path, class: "item-link" do
+      = link_to edit_admin_company_path(current_company), class: "item-link" do
         i.cog.large.icon
         .item-text Settings
 
   - if current_company.company_setting.expires_at
     .trial-expiry
-      | #{distance_of_time_to_expiry(current_company)} left in trial
+      a href=admin_billing_path
+        | #{distance_of_time_to_expiry(current_company)} left in trial
   .cadet-logo#changelog
     = image_tag "cadet-logo-grey.png", width: 50
 

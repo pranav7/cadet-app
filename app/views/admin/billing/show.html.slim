@@ -16,18 +16,17 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
             - if current_company.in_trial?
               | Your trial expires in&nbsp;
               strong= distance_of_time_to_expiry(current_company)
-              | &nbsp;and&nbsp;
+              | &nbsp;and you currently have&nbsp;
             - elsif current_company.paying?
-              | You are subscribed to the&nbsp;
-              strong Basic plan
-              | &nbsp;and&nbsp;
-            | you currently have&nbsp;
+              | You're being billed&nbsp;
+              strong $#{current_company.current_monthly_bill}/mo
+              | &nbsp;for&nbsp;
             strong= current_company.active_users.count
             | &nbsp;active users.
 
-            br
-            br
             - if current_company.paying?
+              br
+              br
               | To cancel your subscription just write to us at&nbsp;
               a href="mailto:hello@getcadet.com" target="_blank" hello@getcadetcom
               |.
@@ -36,4 +35,4 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
       - unless current_company.paying?
         .row
           .sixteen.wide.column
-            button.ui.green.button#start-subscription-btn data-email=current_user.email data-passthrough=passthrough Start Subscription @ $29/mo
+            button.ui.green.button#start-subscription-btn data-email=current_user.email data-passthrough=passthrough Start Subscription @ $#{current_company.current_monthly_bill}/mo

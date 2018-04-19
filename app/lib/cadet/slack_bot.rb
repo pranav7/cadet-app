@@ -32,6 +32,9 @@ module Cadet
           client.message channel: data.channel, text: extend_expiry($1, duration)
         when /^bot update (.+) to paying$/ then
           client.message channel: data.channel, text: update_to_paying
+        when /^bot get active users for (.+)$/i then
+          company = Company.find_by subdomain: $1
+          client.message channel: data.channel, text: "#{company.subdomain} has #{company.active_users.count} active users"
         when /^bot/ then
           client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
         end

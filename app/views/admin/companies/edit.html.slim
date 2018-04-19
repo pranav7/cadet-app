@@ -12,6 +12,7 @@
         .eight.wide.column
           .box
             = simple_form_for current_company,
-              url: admin_company_path(current_company) do |form|
-              = form.input :name
-              = form.submit "Update", class: "ui button"
+              url: admin_company_path(current_company),
+              html: { class: "ui custom form" } do |form|
+              = form.input :name, label: "Company Name", required: false
+              = form.submit "Save changes", class: "ui button"

@@ -10,7 +10,7 @@ class Admin::BillingController < Admin::AdminController
   end
 
   def consume_paddle_webhook
-    Cadet::PaddleWebhooks.new(params).consume
+    Cadet::PaddleWebhooks.new(request.params.except(:controller, :action)).consume
     head :ok
   end
 

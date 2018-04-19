@@ -5,6 +5,8 @@ module Cadet
     end
 
     def consume
+      return unless valid_webhook_call?
+
       case event
       when "subscription_created"
         handle_subscription_created
@@ -22,6 +24,8 @@ module Cadet
       end
 
       def notify_slack
+        message = "##{@company.subdomain} became a paying customer!"
+        NotifySlackJob.perform_later(message)
       end
 
       def event
@@ -34,6 +38,25 @@ module Cadet
 
       def company
         @company ||= Company.find_by(subdomain: passthrough.company_subdomain)
+      end
+
+      # Reference: https://paddle.com/docs/reference-verifying-webhooks
+      def valid_webhook_call?
+        signature = Base64.decode64(@params['p_signature'])
+        @params.delete('p_signature')
+
+        @params.each { |key, value| @params[key] = String(value)}
+        data_sorted = @params.sort_by{ |key, value| key }
+        data_serialized = PHP.serialize(data_sorted, true)
+
+        digest = OpenSSL::Digest::SHA1.new
+        pub_key = OpenSSL::PKey::RSA.new(public_key).public_key
+        
+        pub_key.verify(digest, signature, data_serialized)
+      end
+
+      def public_key
+        @public_key ||= File.read("#{Rails.root}/config/paddle_public_key.txt")
       end
   end
 end

@@ -25,15 +25,18 @@ class Company < ApplicationRecord
   end
 
   def active_users
-    active_users = posts.map(&:requester)
-    active_users << posts.map(&:voters)
-    active_users << posts.map(&:comments).flatten.map(&:commenter)
+    # Return all users who have created a post
+    active_users = users.joins(:posts).where(posts: posts).uniq
+    # Return all users who have upvoted a post
+    active_users << users.joins(:votes).uniq
+    # Return all users who have commented on a post
+    active_users << users.joins(:comments).uniq
 
     active_users.flatten.uniq
   end
 
   def posts
-    boards.map(&:posts).flatten
+    Post.joins(:board).where(board: boards)
   end
 
   def host

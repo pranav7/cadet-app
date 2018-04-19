@@ -40,6 +40,16 @@ class Company < ApplicationRecord
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end
 
+  def current_monthly_bill
+    active_users_count = active_users.count
+
+    if active_users_count > 100
+      29 + ((active_users_count / 100) * 9)
+    else
+      29
+    end
+  end
+
   def in_trial?
     company_setting.billing_plan == "trial"
   end

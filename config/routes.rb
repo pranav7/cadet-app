@@ -36,9 +36,7 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index, :show, :edit, :update]
-    resource :billing, only: [:show], controller: :billing do
-      post "consume_paddle_webhook"
-    end
+    resource :billing, only: [:show], controller: :billing
 
     resources :companies, only: [:edit, :update]
   end
@@ -47,6 +45,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :index]
 
   health_check_routes
+  post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
   resources :boards, path: "" do
     resources :posts, only: [:create, :show, :index, :new] do

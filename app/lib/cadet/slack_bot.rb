@@ -65,6 +65,7 @@ module Cadet
         company = Company.find_by_subdomain subdomain
 
         if company
+          company.company_setting.billing_plan = "basic"
           company.company_setting.expires_at = nil
           company.company_setting.save
 

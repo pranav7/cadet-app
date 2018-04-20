@@ -24,7 +24,7 @@ module Cadet
       end
 
       def notify_slack
-        message = "##{@company.subdomain} became a paying customer!"
+        message = "*##{@company.subdomain}* became a paying customer!"
         NotifySlackJob.perform_later(message)
       end
 

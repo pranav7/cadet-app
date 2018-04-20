@@ -8,6 +8,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/sign_up
   def new
+    @page_title = "Sign up - Cadet"
     build_resource({})
     self.resource.memberships.build.build_company
 
@@ -51,46 +52,54 @@ class Users::RegistrationsController < Devise::RegistrationsController
   # end
 
   protected
-
-  def after_create_tasks
-    if @user.persisted? && not(@user.companies.blank?)
-      assign_admin_role
-      send_welcome_email
+    def after_create_tasks
+      if @user.persisted? && not(@user.companies.blank?)
+        assign_admin_role
+        send_welcome_email
+        notify_slack
+      end
     end
-  end
 
-  def assign_admin_role
-    @user.make_admin!(@user.companies.first)
-  end
+    def assign_admin_role
+      @user.make_admin!(@user.companies.first)
+    end
 
-  def send_welcome_email
-    WelcomeMailer.welcome_owner(@user).deliver_later(wait: 5.minutes)
-  end
+    def send_welcome_email
+      WelcomeMailer.welcome_owner(@user).deliver_later(wait: 5.minutes)
+    end
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_sign_up_params
-    devise_parameter_sanitizer.permit(:sign_up,
-                                      keys: [:first_name,
-                                             :last_name,
-                                             :job_title,
-                                             memberships_attributes: [:primary, company_attributes: [:name, :subdomain]]])
-  end
+    def notify_slack
+      company = @user.companies.first
+      message = "*#{company.subdomain}* signed up"
+      message << "\nAdmin: _#{@user.formatted_address}_"
 
-  # If you have extra params to permit, append them to the sanitizer.
-  def configure_account_update_params
-    devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :job_title, memberships_attributes: [:role, company_attributes: [:name, :subdomain]]])
-  end
+      NotifySlackJob.perform_later(message, channel: "#main")
+    end
 
-  # The path used after sign up.
-  def after_sign_up_path_for(resource)
-    admin_boards_url(host: "#{current_user.companies.first.host}")
-    # super(resource)
-  end
+    # If you have extra params to permit, append them to the sanitizer.
+    def configure_sign_up_params
+      devise_parameter_sanitizer.permit(:sign_up,
+                                        keys: [:first_name,
+                                               :last_name,
+                                               :job_title,
+                                               memberships_attributes: [:primary, company_attributes: [:name, :subdomain]]])
+    end
 
-  # The path used after sign up for inactive accounts.
-  # def after_inactive_sign_up_path_for(resource)
-  #   super(resource)
-  # end
+    # If you have extra params to permit, append them to the sanitizer.
+    def configure_account_update_params
+      devise_parameter_sanitizer.permit(:account_update, keys: [:first_name, :last_name, :job_title, memberships_attributes: [:role, company_attributes: [:name, :subdomain]]])
+    end
+
+    # The path used after sign up.
+    def after_sign_up_path_for(resource)
+      admin_boards_url(host: "#{current_user.companies.first.host}")
+      # super(resource)
+    end
+
+    # The path used after sign up for inactive accounts.
+    # def after_inactive_sign_up_path_for(resource)
+    #   super(resource)
+    # end
 
   private
 

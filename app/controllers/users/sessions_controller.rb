@@ -6,6 +6,7 @@ class Users::SessionsController < Devise::SessionsController
 
   # GET /resource/sign_in
   def new
+    @page_title = "Login - Cadet"
     super
   end
 

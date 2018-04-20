@@ -56,7 +56,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
       if @user.persisted? && not(@user.companies.blank?)
         assign_admin_role
         send_welcome_email
-        notify_slack
       end
     end
 
@@ -66,14 +65,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
     def send_welcome_email
       WelcomeMailer.welcome_owner(@user).deliver_later(wait: 5.minutes)
-    end
-
-    def notify_slack
-      company = @user.companies.first
-      message = "*#{company.subdomain}* signed up"
-      message << "\nAdmin: _#{@user.formatted_address}_"
-
-      NotifySlackJob.perform_later(message, channel: "#main")
     end
 
     # If you have extra params to permit, append them to the sanitizer.

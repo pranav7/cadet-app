@@ -13,10 +13,12 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
       .row
         .eight.wide.column
           .c.notice.message
-            - if current_company.in_trial?
+            - if current_company.in_trial? && not(current_company.expired?)
               | Your trial expires in&nbsp;
               strong= distance_of_time_to_expiry(current_company)
               | &nbsp;and you currently have&nbsp;
+            - elsif current_company.expired?
+              | Your trial expired and you currently have&nbsp;
             - elsif current_company.paying?
               | You're being billed&nbsp;
               strong $#{current_company.current_monthly_bill}/mo

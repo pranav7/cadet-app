@@ -4,7 +4,7 @@ class Admin::BillingController < Admin::AdminController
   skip_before_action :verify_authenticity_token, only: [:consume_paddle_webhook]
   skip_before_action :authenticate_user!, only: [:consume_paddle_webhook]
   skip_before_action :authorize!, only: [:consume_paddle_webhook]
-  skip_before_action :validate_company_expiry, only: [:consume_paddle_webhook]
+  skip_before_action :validate_company_expiry, only: [:consume_paddle_webhook, :show]
 
   def show
   end

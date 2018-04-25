@@ -1,5 +1,5 @@
-class WelcomeMailer < ApplicationMailer
-  def welcome_owner(user)
+class OnboardingMailer < ApplicationMailer
+  def welcome(user)
     @user = user
 
     mail(

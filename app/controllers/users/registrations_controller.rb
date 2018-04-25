@@ -55,16 +55,20 @@ class Users::RegistrationsController < Devise::RegistrationsController
     def after_create_tasks
       if @user.persisted? && not(@user.companies.blank?)
         assign_admin_role
-        send_welcome_email
+        schedule_onboarding_emails
       end
+    end
+
+    def schedule_onboarding_emails
+      company = @user.companies.first
+
+      OnboardingMailer.welcome(@user).deliver_later(wait: 2.minutes)
+      TrialReminderWorker.perform_in(7.days, company.id, @user.id)
+      TrialExpiredWorker.perform_in(14.days, company.id, @user.id)
     end
 
     def assign_admin_role
       @user.make_admin!(@user.companies.first)
-    end
-
-    def send_welcome_email
-      OnboardingMailer.welcome(@user).deliver_later(wait: 5.minutes)
     end
 
     # If you have extra params to permit, append them to the sanitizer.

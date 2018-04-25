@@ -64,7 +64,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
     end
 
     def send_welcome_email
-      WelcomeMailer.welcome_owner(@user).deliver_later(wait: 5.minutes)
+      OnboardingMailer.welcome(@user).deliver_later(wait: 5.minutes)
     end
 
     # If you have extra params to permit, append them to the sanitizer.

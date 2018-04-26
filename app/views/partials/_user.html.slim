@@ -11,7 +11,7 @@
     - if show_email && show_email == true
       span.meta.soft= user.email
     - else
-      - if (user.job_title && not(user.job_title.blank)) && user.account_for(current_company)
+      - if (user.job_title && not(user.job_title.blank?)) && user.account_for(current_company)
         span.meta.soft
           | #{user.job_title}, #{user.account_for(current_company).name}
       - elsif user.account_for(current_company)

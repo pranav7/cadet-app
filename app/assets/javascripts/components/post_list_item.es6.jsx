@@ -13,10 +13,10 @@ class PostListItem extends React.Component {
       <div className="post-list-item">
         <div className="post-body">
           <a className="post-link" href={this.state.post.url}>
-            <span className="title-text float left">
-              <h3>{this.state.post.title}</h3>
-            </span>
-            <div className="post-summary soft">
+            <div className="title-text float left">
+              {this.state.post.title}
+            </div>
+            <div className="post-summary">
               {this.state.post.summary}
             </div>
           </a>

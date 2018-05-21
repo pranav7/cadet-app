@@ -59,7 +59,7 @@
         .text
           i.comments.outline.icon
           | Conversation
-      - @post.comments.each do |comment|
+      - @post.comments.reverse_chronologically.each do |comment|
         - next if comment.new_record?
         = render partial: "partials/comment", locals: { resource: comment }
 

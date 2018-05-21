@@ -1,6 +1,9 @@
 class Post < ApplicationRecord
+  include PgSearch
   include ChronologicalScopes
   extend FriendlyId
+
+  pg_search_scope :search_by_title, against: :title
 
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 

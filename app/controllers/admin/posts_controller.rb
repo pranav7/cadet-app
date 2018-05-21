@@ -9,6 +9,7 @@ class Admin::PostsController < Admin::AdminController
       @posts = @board.posts.sorted(sort_method: params[:sort_by])
         .reverse_chronologically
     end
+
     @post = @board.posts.friendly.find(params[:id]) || @posts.first || nil
 
     @new_post = @board.posts.new

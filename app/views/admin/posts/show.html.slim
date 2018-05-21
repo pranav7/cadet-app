@@ -14,7 +14,7 @@
           class: "ui tiny form"
           .ui.icon.fluid.input.field
             i.search.icon
-            = text_field_tag :search, "", placeholder: "Search", value: params[:search]
+            = text_field_tag :search, "", placeholder: "Search", value: params[:search], autocomplete: "off"
         br
         = form_tag admin_board_post_path(@board, @post), method: :get
           = render partial: "partials/post_sort_field",

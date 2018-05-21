@@ -34,7 +34,7 @@
         .padded.vertical.soft
           | There are no comments on this post
       - else
-        - @post.comments.without_notes.reverse_chronologically.each do |comment|
+        - @post.comments.without_notes.chronologically.each do |comment|
           - next if comment.new_record?
           = render partial: "partials/comment", locals: { resource: comment }
 

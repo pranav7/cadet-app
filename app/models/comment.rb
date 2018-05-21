@@ -1,4 +1,6 @@
 class Comment < ApplicationRecord
+  include ChronologicalScopes
+
   belongs_to :post
   belongs_to :commenter, class_name: "User", foreign_key: "user_id"
   has_one :content, as: :parent

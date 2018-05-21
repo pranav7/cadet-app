@@ -1,5 +1,7 @@
 class Post < ApplicationRecord
+  include ChronologicalScopes
   extend FriendlyId
+
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
   enum status: %w(open planned developing released closed)
@@ -8,8 +10,6 @@ class Post < ApplicationRecord
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
   scope :show_all, -> { order(last_activity_at: :desc) }
   scope :most_recent, -> { order(created_at: :desc) }
-  scope :reverse_chronologically, -> { order "created_at desc, id desc" }
-  scope :chronologically, -> { order "created_at asc, id asc" }
 
   has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy

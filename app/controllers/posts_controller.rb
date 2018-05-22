@@ -17,7 +17,7 @@ class PostsController < ApplicationController
 
   def index
     if params[:search] && params[:search] != ""
-      @posts = @board.posts.search_by_title(params[:search])
+      @posts = @board.posts.search_by_title(params[:search].downcase)
     else
       @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).reverse_chronologically
     end

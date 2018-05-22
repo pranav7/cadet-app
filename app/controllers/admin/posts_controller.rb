@@ -3,7 +3,7 @@ class Admin::PostsController < Admin::AdminController
     @board = current_company.boards.friendly.find(params[:board_id])
 
     if params[:search] && params[:search] != ""
-      @posts = @board.posts.search_by_title(params[:search])
+      @posts = @board.posts.search_by_title(params[:search].downcase)
     else
       @posts = @board.posts.sorted(sort_method: params[:sort_by])
         .reverse_chronologically

@@ -733,6 +733,10 @@ a.c.link {
     color: $darker;
     border: 1px solid $light;
   }
+
+  &.small {
+    font-size: 11px;
+  }
 }
 
 .text-status {

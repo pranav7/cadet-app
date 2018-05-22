@@ -7,15 +7,15 @@ a.admin-post-list-item href=admin_board_post_path(board, post, request.query_par
     span
       = render_time(post.created_at, format: :short)
     span &nbsp;
-    span.status class=post.status
+    span.small.status class=post.status
       | ##{post.status}
     span &nbsp;
-    span.ui.rounded.small.label.soft
+    span.ui.rounded.tiny.label.soft
       - if account
         = pluralize(account.votes_for(post).count, "Upvote")
       - else
         = pluralize(post.votes.count, "Upvote")
     span &nbsp;
-    span.ui.rounded.small.label.soft
+    span.ui.rounded.tiny.label.soft
       i.comment.outline.icon
       = post.comments.without_notes.count

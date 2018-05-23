@@ -26,3 +26,10 @@ p
 - else
   .comment
     = simple_format @comment.content.parsed
+
+br
+hr
+i.soft
+  | Please note that this is a notification email. To send a reply&nbsp;
+  a href= @post_url view post on Cadet
+  |.

@@ -37,11 +37,11 @@ module Cadet
           client.message channel: data.channel, text: "#{company.subdomain} has #{company.active_users.count} active users"
         else
           message = "I'm sorry I did not get that. Try these commands:\n"
-          message << "bot how many companies\n"
-          message << "bot get trial expiry for `company_name`\n"
-          message << "bot extrend expiry for `company_name` by `x` days\n"
-          message << "bot update `company_name` to paying\n"
-          message << "bot get active users for `company_name`\n"
+          message << "- bot how many companies\n"
+          message << "- bot get trial expiry for `company_name`\n"
+          message << "- bot extrend expiry for `company_name` by `x` days\n"
+          message << "- bot update `company_name` to paying\n"
+          message << "- bot get active users for `company_name`\n"
 
           client.message channel: data.channel, text: message
         end

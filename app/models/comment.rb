@@ -98,10 +98,10 @@ class Comment < ApplicationRecord
     def mentionees
       mentions = []
       content.body.scan(/(?<!\w)@([a-z0-9-]+)?/) do |username|
-        user = User.find_by_username username
+        user = User.find_by_username(username)
         mentions.unshift user
       end
 
-      mentions
+      mentions.compact
     end
 end

@@ -106,7 +106,7 @@ module Cadet
 
           "#{company.name}'s trial expires on #{company.company_setting.expires_at}'"
         else
-          "Sorry! I did not find a company with subdomain: #{$1}"
+          "Sorry! I did not find a company with subdomain: #{subdomain}"
         end
       end
   end

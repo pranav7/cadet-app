@@ -35,7 +35,7 @@ module Cadet
         when /^bot get active users for (.+)$/i then
           company = Company.find_by subdomain: $1
           client.message channel: data.channel, text: "#{company.subdomain} has #{company.active_users.count} active users"
-        else
+        when /^bot/ then
           message = "I'm sorry I did not get that. Try these commands:\n"
           message << "- bot how many companies\n"
           message << "- bot get trial expiry for `company_name`\n"

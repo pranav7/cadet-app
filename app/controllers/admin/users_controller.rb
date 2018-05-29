@@ -34,13 +34,18 @@ class Admin::UsersController < Admin::AdminController
       @membership.role = user_params[:role].downcase
     end
 
-    @user.transaction do
-      @user.save!
-      @membership.save! if @membership
-    end
+    begin
+      @user.transaction do
+        @user.save!
+        @membership.save! if @membership
+      end
 
-    flash[:success] = "Your changes were saved!"
-    redirect_to admin_user_path(@user)
+      flash[:success] = "Your changes were saved!"
+      redirect_to admin_user_path(@user)
+    rescue => e
+      flash[:error] = "We couldn't save the changes"
+      render :edit
+    end
   end
 
   private

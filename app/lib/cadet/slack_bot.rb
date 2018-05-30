@@ -36,7 +36,14 @@ module Cadet
           company = Company.find_by subdomain: $1
           client.message channel: data.channel, text: "#{company.subdomain} has #{company.active_users.count} active users"
         when /^bot/ then
-          client.message channel: data.channel, text: "Sorry <@#{data.user}>, what?"
+          message = "I'm sorry I did not get that. Try these commands:\n"
+          message << "- bot how many companies\n"
+          message << "- bot get trial expiry for `company_name`\n"
+          message << "- bot extrend expiry for `company_name` by `x` days\n"
+          message << "- bot update `company_name` to paying\n"
+          message << "- bot get active users for `company_name`\n"
+
+          client.message channel: data.channel, text: message
         end
       end
     end
@@ -99,7 +106,7 @@ module Cadet
 
           "#{company.name}'s trial expires on #{company.company_setting.expires_at}'"
         else
-          "Sorry! I did not find a company with subdomain: #{$1}"
+          "Sorry! I did not find a company with subdomain: #{subdomain}"
         end
       end
   end

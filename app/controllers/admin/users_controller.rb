@@ -34,28 +34,32 @@ class Admin::UsersController < Admin::AdminController
       @membership.role = user_params[:role].downcase
     end
 
-    @user.transaction do
-      @user.save!
-      @membership.save! if @membership
-    end
+    begin
+      @user.transaction do
+        @user.save!
+        @membership.save! if @membership
+      end
 
-    flash[:success] = "Your changes were saved!"
-    redirect_to admin_user_path(@user)
+      flash[:success] = "Your changes were saved!"
+      redirect_to admin_user_path(@user)
+    rescue => e
+      flash[:error] = "We couldn't save the changes"
+      render :edit
+    end
   end
 
   private
+    def set_selected_menu_items
+      @main_selected = :customers
+      @sub_nav_selected = :users
+    end
 
-  def set_selected_menu_items
-    @main_selected = :customers
-    @sub_nav_selected = :users
-  end
+    def user_params
+      params.require(:user).permit(:first_name, :last_name, :email, :role, :job_title)
+    end
 
-  def user_params
-    params.require(:user).permit(:first_name, :last_name, :email, :role, :job_title)
-  end
-
-  def user_policy
-    @user_policy ||= UserPolicy.new(current_company: current_company, current_user: current_user, resource: @user)
-  end
-  helper_method :user_policy
+    def user_policy
+      @user_policy ||= UserPolicy.new(current_company: current_company, current_user: current_user, resource: @user)
+    end
+    helper_method :user_policy
 end

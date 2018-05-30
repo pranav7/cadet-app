@@ -1,7 +1,14 @@
 class Admin::PostsController < Admin::AdminController
   def show
     @board = current_company.boards.friendly.find(params[:board_id])
-    @posts = @board.posts.sorted(sort_method: params[:sort_by]).reverse_chronologically
+
+    if params[:search] && params[:search] != ""
+      @posts = @board.posts.search(term: params[:search])
+    else
+      @posts = @board.posts.sorted(sort_method: params[:sort_by])
+        .reverse_chronologically
+    end
+
     @post = @board.posts.friendly.find(params[:id]) || @posts.first || nil
 
     @new_post = @board.posts.new

@@ -153,4 +153,14 @@ RSpec.describe Post, type: :model do
       end
     end
   end
+
+  describe ".search" do
+    it "returns a list of posts that match the term" do
+      create :post, title: "Title 1"
+      create :post, title: "Title 2"
+      create :post, title: "Unrelated"
+
+      expect(Post.search(term: "title").count).to eq(2)
+    end
+  end
 end

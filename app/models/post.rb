@@ -54,7 +54,6 @@ class Post < ApplicationRecord
     end
 
     def search(term:)
-      posts = Post.arel_table
       where(Post.arel_table[:title].matches("%#{term.downcase}%"))
     end
   end

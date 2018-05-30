@@ -37,7 +37,6 @@ gem 'webpacker', '~> 3.0'
 gem "intercom-rails"
 gem 'hashie'
 gem "php-serialize"
-gem 'pg_search'
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'html-pipeline'

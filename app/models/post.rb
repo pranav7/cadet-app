@@ -1,9 +1,6 @@
 class Post < ApplicationRecord
-  include PgSearch
   include ChronologicalScopes
   extend FriendlyId
-
-  pg_search_scope :search_by_title, against: :title, using: { tsearch: { any_word: true } }
 
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
@@ -54,6 +51,11 @@ class Post < ApplicationRecord
       end
 
       collection
+    end
+
+    def search(term:)
+      posts = Post.arel_table
+      where(Post.arel_table[:title].matches("%#{term.downcase}%"))
     end
   end
 

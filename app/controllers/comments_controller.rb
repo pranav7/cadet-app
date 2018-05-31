@@ -14,6 +14,14 @@ class CommentsController < ApplicationController
     redirect_back fallback_location: board_post_path(@board, @post)
   end
 
+  def destroy
+    comment = @post.comments.find(params[:id])
+    comment.destroy
+
+    flash[:success] = "Deleted."
+    redirect_back fallback_location: board_post_path(@board, @post)
+  end
+
   private
 
   def comment_params

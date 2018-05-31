@@ -6,6 +6,10 @@
         = simple_format resource.content.parsed
         .meta-info
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
+          - if current_user == resource.try(:commenter)
+            span.soft &nbsp;|&nbsp;
+            = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
+              method: :delete, class: "c thin soft hoverunderline link", data: { confirm: "Are you sure?" }
   - else
     .comment.box id="#{resource.class.to_s.downcase}-#{resource.id}"
       = render partial: "partials/user",
@@ -18,3 +22,8 @@
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
         - else
           p.soft= render_time(resource.created_at)
+
+        - if resource.class == Comment && current_user == resource.try(:commenter)
+          span.soft &nbsp;|&nbsp;
+          = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
+            method: :delete, class: "c thin soft hoverunderline link", data: { confirm: "Are you sure?" }

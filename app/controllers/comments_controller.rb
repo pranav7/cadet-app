@@ -15,10 +15,14 @@ class CommentsController < ApplicationController
   end
 
   def destroy
-    comment = @post.comments.find(params[:id])
-    comment.destroy
+    @comment = @post.comments.find(params[:id])
 
-    flash[:success] = "Deleted."
+    if authorized?
+      @comment.destroy
+      flash[:success] = "Deleted."
+    else
+      flash[:error] = "That action is not allowed."
+    end
     redirect_back fallback_location: board_post_path(@board, @post)
   end
 
@@ -31,5 +35,9 @@ class CommentsController < ApplicationController
   def load_post
     @board = current_company.boards.friendly.find(params[:board_id])
     @post = @board.posts.friendly.find(params[:post_id])
+  end
+
+  def authorized?
+    @comment.commenter == current_user
   end
 end

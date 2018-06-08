@@ -9,7 +9,7 @@
           - if current_user == resource.try(:commenter)
             span.soft &nbsp;|&nbsp;
             = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
-              method: :delete, class: "c thin soft hoverunderline link", data: { confirm: "Are you sure?" }
+              method: :delete, class: "c thin soft underlined link", data: { confirm: "Are you sure?" }
   - else
     .comment.box id="#{resource.class.to_s.downcase}-#{resource.id}"
       = render partial: "partials/user",
@@ -24,6 +24,6 @@
           p.soft= render_time(resource.created_at)
 
         - if resource.class == Comment && current_user == resource.try(:commenter)
-          span.soft &nbsp;|&nbsp;
+          span.soft &nbsp;&middot;&nbsp;
           = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
-            method: :delete, class: "c thin soft hoverunderline link", data: { confirm: "Are you sure?" }
+            method: :delete, class: "c thin soft underlined link", data: { confirm: "Are you sure?" }

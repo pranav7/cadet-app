@@ -23,7 +23,11 @@
         - else
           p.soft= render_time(resource.created_at)
 
-        - if resource.class == Comment && current_user == resource.try(:commenter)
+        - if current_user == resource.try(:commenter)
           span.soft &nbsp;&middot;&nbsp;
-          = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
-            method: :delete, class: "c thin soft underlined link", data: { confirm: "Are you sure?" }
+          a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" Edit
+          span.soft &nbsp;&middot;&nbsp;
+          = link_to "Delete",
+            board_post_comment_path(resource.post.board, resource.post, resource),
+            method: :delete, class: "c thin soft underlined link",
+            data: { confirm: "Are you sure?" }

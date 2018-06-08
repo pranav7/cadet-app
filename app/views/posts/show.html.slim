@@ -34,9 +34,10 @@
         .padded.vertical.soft
           | There are no comments on this post
       - else
-        - @post.comments.without_notes.chronologically.each do |comment|
-          - next if comment.new_record?
-          = render partial: "partials/comment", locals: { resource: comment }
+        .comments data-controller="comments"
+          - @post.comments.without_notes.chronologically.each do |comment|
+            - next if comment.new_record?
+            = render partial: "partials/comment", locals: { resource: comment }
 
     .tablet.computer.only.six.wide.tablet.five.wide.computer.column
       = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }

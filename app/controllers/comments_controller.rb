@@ -14,6 +14,13 @@ class CommentsController < ApplicationController
     redirect_back fallback_location: board_post_path(@board, @post)
   end
 
+  def update
+    comment = @post.comments.find(params[:id])
+    comment.update_attributes(comment_params)
+
+    redirect_back fallback_location: board_post_path(@board, @post)
+  end
+
   def destroy
     @comment = @post.comments.find(params[:id])
 

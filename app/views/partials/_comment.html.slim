@@ -1,4 +1,4 @@
-.comment-container
+.comment-container data-controller="comments"
   - if resource.try(:note?)
     .note
       .user= resource.user.name
@@ -8,8 +8,10 @@
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
           - if current_user == resource.try(:commenter)
             span.soft &nbsp;|&nbsp;
-            = link_to "Delete", board_post_comment_path(resource.post.board, resource.post, resource),
-              method: :delete, class: "c thin soft underlined link", data: { confirm: "Are you sure?" }
+            = link_to "Delete",
+              board_post_comment_path(resource.post.board, resource.post, resource),
+              method: :delete, class: "c thin soft underlined link",
+              data: { confirm: "Are you sure?" }
   - else
     .comment.box id="#{resource.class.to_s.downcase}-#{resource.id}"
       = render partial: "partials/user",
@@ -25,9 +27,26 @@
 
         - if current_user == resource.try(:commenter)
           span.soft &nbsp;&middot;&nbsp;
-          a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" Edit
+          a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" data-target="comments.source" data-value="#{resource.id}" Edit
           span.soft &nbsp;&middot;&nbsp;
           = link_to "Delete",
             board_post_comment_path(resource.post.board, resource.post, resource),
             method: :delete, class: "c thin soft underlined link",
             data: { confirm: "Are you sure?" }
+
+- if resource.class == Comment
+  .ui.tiny.modal id="edit-comment-#{resource.id}-modal"
+    .header Edit Comment
+    .content
+      - text_area_id = resource.try(:note?) ? "newNote" : "newComment"
+      .div data-controller="mentions"
+        = simple_form_for resource, url: board_post_comment_path(resource.post.board, resource.post, resource) do |form|
+          = form.simple_fields_for :content do |cf|
+            = cf.input :body,
+              label: false,
+              input_html: { rows: 4, class: "transparent", "data-target" => "mentions.#{text_area_id}" }
+          = form.submit "Update", class: "ui small button"
+          a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
+            span.markdown-icon
+              = octicon "markdown", height: 16
+            span.label Styling with Markdown is supported

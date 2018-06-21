@@ -16,7 +16,11 @@ class CommentsController < ApplicationController
 
   def update
     comment = @post.comments.find(params[:id])
-    comment.update_attributes(comment_params)
+    if comment.update_attributes(comment_params)
+      flash[:success] = "Changes saved."
+    else
+      flash[:error] = "Something went wrong, your changes were not saved."
+    end
 
     redirect_back fallback_location: board_post_path(@board, @post)
   end

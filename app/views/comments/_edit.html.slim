@@ -1,7 +1,7 @@
-- text_area_id = resource.try(:note?) ? "newNote" : "newComment"
+- text_area_id = comment.try(:note?) ? "newNote" : "newComment"
 
 div data-controller="mentions"
-  = simple_form_for resource, url: board_post_comment_path(resource.post.board, resource.post, resource) do |form|
+  = simple_form_for comment, url: board_post_comment_path(comment.post.board, comment.post, comment) do |form|
     = form.simple_fields_for :content do |cf|
       = cf.input :body, label: false,
         input_html: { rows: 4, class: "transparent", "data-target" => "mentions.#{text_area_id}" }

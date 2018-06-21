@@ -41,4 +41,4 @@
   .ui.tiny.modal.comment-editor id="edit-comment-#{resource.id}-modal"
     .header Edit #{resource.note? ? "Note" : "Comment"}
     .content class=("is-note" if resource.note?)
-      = render partial: "comments/edit", locals: { resource: resource }
+      = render partial: "comments/edit", locals: { comment: resource }

@@ -14,6 +14,29 @@ class CommentsController < ApplicationController
     redirect_back fallback_location: board_post_path(@board, @post)
   end
 
+  def update
+    comment = @post.comments.find(params[:id])
+    if comment.update_attributes(comment_params)
+      flash[:success] = "Changes saved."
+    else
+      flash[:error] = "Something went wrong, your changes were not saved."
+    end
+
+    redirect_back fallback_location: board_post_path(@board, @post)
+  end
+
+  def destroy
+    @comment = @post.comments.find(params[:id])
+
+    if authorized?
+      @comment.destroy
+      flash[:success] = "Deleted."
+    else
+      flash[:error] = "That action is not allowed."
+    end
+    redirect_back fallback_location: board_post_path(@board, @post)
+  end
+
   private
 
   def comment_params
@@ -23,5 +46,9 @@ class CommentsController < ApplicationController
   def load_post
     @board = current_company.boards.friendly.find(params[:board_id])
     @post = @board.posts.friendly.find(params[:post_id])
+  end
+
+  def authorized?
+    @comment.commenter == current_user
   end
 end

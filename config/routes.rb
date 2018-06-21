@@ -49,7 +49,7 @@ Rails.application.routes.draw do
 
   resources :boards, path: "" do
     resources :posts, only: [:create, :show, :index, :new] do
-      resources :comments, only: [:create]
+      resources :comments, only: [:create, :update, :destroy]
       resource :votes, only: [:create, :destroy]
     end
   end

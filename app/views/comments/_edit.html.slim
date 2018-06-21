@@ -1,6 +1,6 @@
 - text_area_id = resource.try(:note?) ? "newNote" : "newComment"
 
-.div data-controller="mentions"
+div data-controller="mentions"
   = simple_form_for resource, url: board_post_comment_path(resource.post.board, resource.post, resource) do |form|
     = form.simple_fields_for :content do |cf|
       = cf.input :body, label: false,

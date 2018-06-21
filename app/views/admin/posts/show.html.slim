@@ -48,10 +48,10 @@
 
       .ui.bottom.attached.tab.segment.active data-tab='comment'
         = render partial: "comments/new",
-          locals: { board: @board, post: @post, comment: @comment, note: false }
+          locals: { board: @board, post: @post, comment: @comment, note: false, transparent: true }
       .ui.bottom.attached.tab.segment#note-container data-tab='note'
         = render partial: "comments/new",
-          locals: { board: @board, post: @post, comment: @comment, note: true }
+          locals: { board: @board, post: @post, comment: @comment, note: true, transparent: true }
 
     .post-activity
       .activity-header

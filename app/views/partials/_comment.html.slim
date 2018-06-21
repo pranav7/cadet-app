@@ -6,7 +6,8 @@
         = simple_format resource.content.parsed
         .meta-info
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
-          - if current_user == resource.try(:commenter)
+
+          - if is_commenter?(resource)
             span.soft &nbsp;&middot;&nbsp;
             a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" data-target="comments.source" data-value="#{resource.id}" Edit
             span.soft &nbsp;&middot;&nbsp;
@@ -27,7 +28,7 @@
         - else
           p.soft= render_time(resource.created_at)
 
-        - if current_user == resource.try(:commenter) && resource.class == Comment
+        - if is_commenter?(resource)
           span.soft &nbsp;&middot;&nbsp;
           a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" data-target="comments.source" data-value="#{resource.id}" Edit
           span.soft &nbsp;&middot;&nbsp;

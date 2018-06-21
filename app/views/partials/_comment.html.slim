@@ -7,7 +7,9 @@
         .meta-info
           a.c.thin.hoverunderline.link.soft href="#{request.path}#comment-#{resource.id}"= render_time(resource.created_at)
           - if current_user == resource.try(:commenter)
-            span.soft &nbsp;|&nbsp;
+            span.soft &nbsp;&middot;&nbsp;
+            a.c.thin.soft.underlined.link href="javascript:void(0);" data-action="click->comments#editClickHandler" data-target="comments.source" data-value="#{resource.id}" Edit
+            span.soft &nbsp;&middot;&nbsp;
             = link_to "Delete",
               board_post_comment_path(resource.post.board, resource.post, resource),
               method: :delete, class: "c thin soft underlined link",
@@ -35,7 +37,7 @@
             data: { confirm: "Are you sure?" }
 
 - if resource.class == Comment
-  .ui.tiny.modal id="edit-comment-#{resource.id}-modal"
-    .header Edit Comment
-    .content
+  .ui.tiny.modal.comment-editor id="edit-comment-#{resource.id}-modal"
+    .header Edit #{resource.note? ? "Note" : "Comment"}
+    .content class=("is-note" if resource.note?)
       = render partial: "comments/edit", locals: { resource: resource }

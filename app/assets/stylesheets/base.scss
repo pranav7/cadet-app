@@ -342,6 +342,12 @@ a.c.link {
     color: $dark;
     margin-top: 8px;
   }
+
+  textarea.transparent {
+    background: transparent;
+    border: none;
+    padding: 0;
+  }
 }
 
 .ui.custom.form {

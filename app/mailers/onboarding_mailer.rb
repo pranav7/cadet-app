@@ -14,7 +14,7 @@ class OnboardingMailer < ApplicationMailer
     @company = company
 
     mail(
-      subject: "Checking-in for your Cadet Trial",
+      subject: "Checking-in on your Cadet Trial",
       to: @user.formatted_address,
       from: "Pranav from Cadet <pranav@getcadet.com>"
     )

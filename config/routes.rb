@@ -27,7 +27,7 @@ Rails.application.routes.draw do
   end
 
   resource :inbound_emails, only: [] do
-    post :process
+    post :consume
   end
 
   namespace :admin do

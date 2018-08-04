@@ -1,6 +1,5 @@
 class ApplicationMailer < ActionMailer::Base
   require 'mail'
-  # default from: 'notifications@getcadet.com'
   layout 'mailer'
 
   def from_address

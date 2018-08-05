@@ -8,8 +8,8 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    headers["X-CADET-COMPANY"] = @company.subdomain
-    headers["X-CADET-NOTIFICATION-TYPE"] = "new-post"
+    headers["X-Cadet-Company"] = @company.subdomain
+    headers["X-Cadet-Notification"] = "new-post"
 
     mail(
       subject: "New Post #{@post.title} in #{@post.board.name}",
@@ -43,8 +43,8 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    headers["X-CADET-COMPANY"] = @company.subdomain
-    headers["X-CADET-NOTIFICATION-TYPE"] = "status-changed"
+    headers["X-Cadet-Company"] = @company.subdomain
+    headers["X-Cadet-Notification"] = "status-changed"
 
     mail({
       subject: "#{@post.title} was marked as ##{@status}",

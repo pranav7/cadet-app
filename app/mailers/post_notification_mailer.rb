@@ -10,6 +10,7 @@ class PostNotificationMailer < ApplicationMailer
 
     headers["X-Cadet-Company"] = @company.subdomain
     headers["X-Cadet-Notification-Type"] = "new-post"
+    headers["X-Cadet-PostId"] = @post.id
 
     mail(
       subject: "New Post #{@post.title} in #{@post.board.name}",
@@ -45,6 +46,7 @@ class PostNotificationMailer < ApplicationMailer
 
     headers["X-Cadet-Company"] = @company.subdomain
     headers["X-Cadet-Notification-Type"] = "status-changed"
+    headers["X-Cadet-PostId"] = @post.id
 
     mail({
       subject: "#{@post.title} was marked as ##{@status}",

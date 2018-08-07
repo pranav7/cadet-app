@@ -18,7 +18,7 @@ class CommentNotificationMailer < ApplicationMailer
     end
 
     headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification"] = @type
+    headers["X-Cadet-Notification-Type"] = @type
 
     mail(
       subject: @subject,
@@ -39,7 +39,7 @@ class CommentNotificationMailer < ApplicationMailer
     @host = @company.host
 
     headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification"] = @type
+    headers["X-Cadet-Notification-Type"] = @type
 
     build_comment_and_board_urls(@mentionee)
 

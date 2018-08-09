@@ -12,6 +12,14 @@ class Comment < ApplicationRecord
 
   scope :without_notes, -> { where.not(private: true) }
 
+  class << self
+    def create_from_email(email, post)
+      user = User.find_by(email: email.From)
+      Comment.create(commenter: user, post: post,
+        content_attributes: { body: email.StrippedTextReply })
+    end
+  end
+
   def note?
     !!self.private
   end

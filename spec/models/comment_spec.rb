@@ -227,11 +227,11 @@ RSpec.describe Comment, type: :model do
     end
 
     it "doesn't create a comment if user does not exist" do
-      email = Hashie::Mash.new({ StrippedTextReply: "this is a comment" })
+      email = Hashie::Mash.new({ From: "somerandom@example.io", StrippedTextReply: "this is a comment" })
 
       expect {
         Comment.create_from_email(email, post)
-      }.to_not change { Comment.count }
+      }.to raise_error(ActiveRecord::RecordNotFound)
     end
   end
 end

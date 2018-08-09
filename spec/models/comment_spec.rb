@@ -233,5 +233,10 @@ RSpec.describe Comment, type: :model do
         Comment.create_from_email(email, post)
       }.to raise_error(ActiveRecord::RecordNotFound)
     end
+
+    it "creates a private comment if option is passed" do
+      comment = Comment.create_from_email(email, post, private: true)
+      expect(comment.note?).to eq(true)
+    end
   end
 end

@@ -4,7 +4,10 @@ class InboundEmailsController < ApplicationController
   def consume
     @email = Hashie::Mash.new(JSON.parse(request.body.read))
     post = Post.find(post_id.to_i)
-    Comment.create_from_email(@email, post)
+
+    options = {}
+    options[:private] = true if notification_type == "note"
+    Comment.create_from_email(@email, post, options)
 
     head :no_content
   end

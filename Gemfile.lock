@@ -183,7 +183,6 @@ GEM
       railties (>= 4.2.0)
       thor (>= 0.14, < 2.0)
     json (2.1.0)
-    json_pure (2.1.0)
     jwt (1.5.6)
     listen (3.1.5)
       rb-fsevent (~> 0.9, >= 0.9.4)
@@ -243,9 +242,6 @@ GEM
     postmark (1.10.0)
       json
       rake
-    postmark-mitt (0.0.11)
-      json_pure
-      multi_json
     postmark-rails (0.15.0)
       actionmailer (>= 3.0.0)
       postmark (~> 1.10.0)
@@ -469,7 +465,6 @@ DEPENDENCIES
   omniauth-google-oauth2
   pg (< 1.0)
   php-serialize
-  postmark-mitt
   postmark-rails
   pry
   pry-rails

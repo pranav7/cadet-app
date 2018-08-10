@@ -8,14 +8,11 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification-Type"] = "new-post"
-    headers["X-Cadet-PostId"] = @post.id
-
     mail(
       subject: "New Post #{@post.title} in #{@post.board.name}",
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address("new-post", @post.id)
     )
   end
 
@@ -44,14 +41,11 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification-Type"] = "status-changed"
-    headers["X-Cadet-PostId"] = @post.id
-
     mail({
       subject: "#{@post.title} was marked as ##{@status}",
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address("status-changed", @post.id)
     })
   end
 

@@ -17,14 +17,11 @@ class CommentNotificationMailer < ApplicationMailer
       @subject = "New Reply: #{@post.title}"
     end
 
-    headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification-Type"] = @type
-    headers["X-Cadet-PostId"] = @post.id
-
     mail(
       subject: @subject,
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address(@type, @post.id)
     )
   end
 
@@ -39,16 +36,13 @@ class CommentNotificationMailer < ApplicationMailer
     @type = @comment.note? ? "note" : "comment"
     @host = @company.host
 
-    headers["X-Cadet-Company"] = @company.subdomain
-    headers["X-Cadet-Notification-Type"] = @type
-    headers["X-Cadet-PostId"] = @post.id
-
     build_comment_and_board_urls(@mentionee)
 
     mail(
       subject: "#{@commenter.name} mentioned you in a #{@type}",
       to: @mentionee.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address(@type, @post.id)
     )
   end
 

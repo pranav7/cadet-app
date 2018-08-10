@@ -11,4 +11,8 @@ class ApplicationMailer < ActionMailer::Base
   def signature
     @signature ||= @user.customer_of?(@company) ? "#{@company.name}" : "Team Cadet"
   end
+
+  def reply_to_address(type, post_id)
+    "#{APP_CONFIG['postmark']['reply_to_hash']}+#{type}-#{post_id}@#{APP_CONFIG['postmark']['inbound_domain']}"
+  end
 end

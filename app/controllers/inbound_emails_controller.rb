@@ -3,7 +3,8 @@ class InboundEmailsController < ApplicationController
 
   def consume
     @email = Hashie::Mash.new(JSON.parse(request.body.read))
-    post = Post.find(post_id.to_i)
+    binding.pry
+    post = Post.find(post_id)
 
     options = {}
     options[:private] = true if notification_type == "note"
@@ -14,14 +15,10 @@ class InboundEmailsController < ApplicationController
 
   private
     def post_id
-      @email.Headers.each do |header|
-        return header.Value if header.Name == "X-Cadet-PostId"
-      end
+      @email.MailboxHash.split("-").last.to_i
     end
     
     def notification_type
-      @email.Headers.each do |header|
-        return header.Value if header.Name == "X-Cadet-Notification-Type"
-      end
+      @email.MailboxHash.split("-").first
     end
 end

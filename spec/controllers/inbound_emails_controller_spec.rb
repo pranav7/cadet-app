@@ -17,6 +17,7 @@ RSpec.describe InboundEmailsController, type: :controller do
       email_raw.gsub!(/{{FromName}}/, user.name)
       email_raw.gsub!(/{{NotificationType}}/, "comment")
       email_raw.gsub!(/{{PostId}}/, post_record.id.to_s)
+      email_raw.gsub!(/{{MailboxHash}}/, "comment-#{post_record.id}")
 
       post :consume, body: email_raw, format: :json
 
@@ -29,6 +30,7 @@ RSpec.describe InboundEmailsController, type: :controller do
       email_raw.gsub!(/{{FromName}}/, user.name)
       email_raw.gsub!(/{{NotificationType}}/, "comment")
       email_raw.gsub!(/{{PostId}}/, post_record.id.to_s)
+      email_raw.gsub!(/{{MailboxHash}}/, "comment-#{post_record.id}")
 
       expect {
         post :consume, body: email_raw, format: :json

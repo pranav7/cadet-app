@@ -3,7 +3,6 @@ class InboundEmailsController < ApplicationController
 
   def consume
     @email = Hashie::Mash.new(JSON.parse(request.body.read))
-    binding.pry
     post = Post.find(post_id)
 
     options = {}

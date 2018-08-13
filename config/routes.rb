@@ -26,6 +26,10 @@ Rails.application.routes.draw do
     root to: redirect('signup')
   end
 
+  resource :inbound_emails, only: [] do
+    post :consume
+  end
+
   namespace :admin do
     resources :boards do
       resources :posts, except: [:new, :edit]

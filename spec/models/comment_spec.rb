@@ -208,4 +208,43 @@ RSpec.describe Comment, type: :model do
       end
     end
   end
+
+  describe ".create_from_email" do
+    let(:user) { create :user }
+    let(:post) { create :post }
+    let(:comment_content) { "this is the body of the comment" }
+    let(:email) do
+      Hashie::Mash.new({
+        From: user.email,
+        StrippedTextReply: comment_content
+      })
+    end
+
+      
+    it "creates a comment from an incoming email object" do
+      expect {
+        Comment.create_from_email(email, post)
+      }.to change { Comment.count }
+    end
+
+    it "creates a comment with the right attributes" do
+      comment = Comment.create_from_email(email, post)
+
+      expect(comment.commenter).to eq(user)
+      expect(comment.content.body).to eq(comment_content)
+    end
+
+    it "doesn't create a comment if user does not exist" do
+      email = Hashie::Mash.new({ From: "somerandom@example.io", StrippedTextReply: "this is a comment" })
+
+      expect {
+        Comment.create_from_email(email, post)
+      }.to raise_error(ActiveRecord::RecordNotFound)
+    end
+
+    it "creates a private comment if option is passed" do
+      comment = Comment.create_from_email(email, post, private: true)
+      expect(comment.note?).to eq(true)
+    end
+  end
 end

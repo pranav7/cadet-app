@@ -10,15 +10,18 @@ class CommentNotificationMailer < ApplicationMailer
     build_comment_and_board_urls(@user)
 
     if @comment.note?
+      @type = "note"
       @subject = "New Note: #{@post.title}"
     else
+      @type = "comment"
       @subject = "New Reply: #{@post.title}"
     end
 
     mail(
       subject: @subject,
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address(@type, @post.id)
     )
   end
 
@@ -38,7 +41,8 @@ class CommentNotificationMailer < ApplicationMailer
     mail(
       subject: "#{@commenter.name} mentioned you in a #{@type}",
       to: @mentionee.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address(@type, @post.id)
     )
   end
 

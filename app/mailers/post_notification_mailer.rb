@@ -11,7 +11,8 @@ class PostNotificationMailer < ApplicationMailer
     mail(
       subject: "New Post #{@post.title} in #{@post.board.name}",
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address("new-post", @post.id)
     )
   end
 
@@ -43,7 +44,8 @@ class PostNotificationMailer < ApplicationMailer
     mail({
       subject: "#{@post.title} was marked as ##{@status}",
       to: @user.formatted_address,
-      from: from_address
+      from: from_address,
+      reply_to: reply_to_address("status-changed", @post.id)
     })
   end
 

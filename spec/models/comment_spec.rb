@@ -212,10 +212,11 @@ RSpec.describe Comment, type: :model do
   describe ".create_from_email" do
     let(:user) { create :user }
     let(:post) { create :post }
+    let(:comment_content) { "this is the body of the comment" }
     let(:email) do
       Hashie::Mash.new({
         From: user.email,
-        StrippedTextReply: "this is the body of the comment"
+        StrippedTextReply: comment_content
       })
     end
 
@@ -224,6 +225,13 @@ RSpec.describe Comment, type: :model do
       expect {
         Comment.create_from_email(email, post)
       }.to change { Comment.count }
+    end
+
+    it "creates a comment with the right attributes" do
+      comment = Comment.create_from_email(email, post)
+
+      expect(comment.commenter).to eq(user)
+      expect(comment.content.body).to eq(comment_content)
     end
 
     it "doesn't create a comment if user does not exist" do

@@ -9,7 +9,8 @@
         = react_component "PostList",
           { boardId: @board.id,
             sortOptions: Board.sort_order_collection.merge(Post.status_collection),
-            defaultSortOrder: (@board.default_sort_order || "latest_activity") }, { prerender: false }
+            defaultSortOrder: (@board.default_sort_order || "latest_activity") },
+            { prerender: false }
 
   .tablet.only.computer.only.six.wide.column
     = render partial: "posts/form", locals: { board: @board, post: @post }

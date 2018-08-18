@@ -1,5 +1,5 @@
 import React from "react";
-import PostListItem from "./PostListItem"
+import PostListItem from "./PostListItem";
 
 class SuggestivePostList extends React.Component {
   constructor(props) {

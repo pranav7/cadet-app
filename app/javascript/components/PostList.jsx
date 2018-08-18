@@ -1,5 +1,7 @@
 import React from "react";
-import PostListItem from "./PostListItem"
+import PostListItem from "./PostListItem";
+import Cookies from "js-cookie";
+import _ from "underscore";
 
 class PostList extends React.Component {
   constructor(props) {
@@ -11,9 +13,11 @@ class PostList extends React.Component {
       posts: [],
       suggesting: false,
       searching: false,
-      noPosts: false
+      noPosts: false,
+      currentSortValue: this.props.defaultSortOrder
     };
 
+    this.init = this.init.bind(this);
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -22,8 +26,19 @@ class PostList extends React.Component {
     this.renderPostList = this.renderPostList.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
     this.renderSortDropdown = this.renderSortDropdown.bind(this);
+    this.restoreScrollPosition = this.restoreScrollPosition.bind(this);
 
-    this.getPosts();
+    this.init();
+  }
+
+  init() {
+    if (_.isUndefined(Cookies.get("currentSortValue"))) {
+      this.getPosts();
+    } else {
+      this.state.currentSortValue = Cookies.get("currentSortValue")
+      Cookies.remove("currentSortValue")
+      this.getPosts({sort_by: this.state.currentSortValue})
+    }
   }
 
   getPosts(params = {}) {
@@ -64,6 +79,7 @@ class PostList extends React.Component {
   }
 
   handleSortSelectChange(value) {
+    Cookies.set("currentSortValue", value);
     this.getPosts({sort_by: value});
   }
 
@@ -127,7 +143,9 @@ class PostList extends React.Component {
     });
 
     return (
-      <select name="sort_by" className="ui open dropdown sort-post-dropdown selection" defaultValue={this.props.defaultSortOrder}>
+      <select name="sort_by"
+              className="ui open dropdown sort-post-dropdown selection"
+              defaultValue={this.state.currentSortValue}>
         {Object.entries(this.props.sortOptions).map(([key, value], i) => {
           return (
             <option key={key} value={value}>
@@ -163,6 +181,15 @@ class PostList extends React.Component {
 
   componentDidMount() {
     $('#post_title').on("input", this.suggestPosts);
+    setTimeout(this.restoreScrollPosition, 500);
+  }
+
+  restoreScrollPosition() {
+    let scrollPos = Cookies.get("scrollPos")
+    if (!_.isUndefined(scrollPos) && scrollPos != "0") {
+      $(window).scrollTop(scrollPos);
+      Cookies.remove("scrollPos")
+    }    
   }
 }
 

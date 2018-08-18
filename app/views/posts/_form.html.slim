@@ -12,7 +12,7 @@
     = f.input :title,
       placeholder: "Title",
       label: false,
-      input_html: { "data-target" => "onboarding.postTitle" }
+      input_html: { "data-target" => "onboarding.postTitle", "autocomplete" => "off" }
     = f.simple_fields_for :content do |cf|
       = cf.input :body,
         placeholder: "Description",

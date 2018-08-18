@@ -1,3 +1,6 @@
+import React from "react";
+import UpvoteButton from "./UpvoteButton";
+
 class PostListItem extends React.Component {
   constructor(props) {
     super(props);
@@ -41,4 +44,4 @@ class PostListItem extends React.Component {
   }
 }
 
-
+export default PostListItem;

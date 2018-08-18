@@ -1,3 +1,5 @@
+import React from "react";
+
 class UpvoteButton extends React.Component {
   constructor(props) {
     super(props)
@@ -86,3 +88,5 @@ class UpvoteButton extends React.Component {
     );
   }
 }
+
+export default UpvoteButton;

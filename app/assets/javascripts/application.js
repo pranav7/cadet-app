@@ -16,9 +16,6 @@
 //= require tablesort/dist/tablesort.min.js
 //= require tablesort/dist/sorts/tablesort.number.min.js
 //= require clipboard/dist/clipboard
-//= require react
-//= require react_ujs
-//= require components
 //= require init
 //= require cadet/posts
 //= require cadet/admin/dashboard

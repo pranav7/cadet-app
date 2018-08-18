@@ -608,11 +608,22 @@ a.c.link {
 
 // Start
 // Styling for Post Item in Post List
+.create-posts.mobile .posts-list{
+  .post-list-item {
+    border-top: 1px solid #ececec;
+    padding: $base-size 0;
+  }
+
+  .post-list-item:nth-child(2) {
+    border-top: none;
+  }
+}
+
 .posts-list {
   padding: $base-size $double-base-size;
 
   @media (max-device-width: 480px) {
-    padding: $base-size;
+    padding: 0 $base-size;
   }
 
   .post-list-item-container {
@@ -781,6 +792,13 @@ a.c.link {
 
   .form-summary {
     margin-top: 4px;
+  }
+
+  .new_post #post_content_attributes_body {
+    @media (min-width: 320px) and (max-width: 480px) {
+      height: auto;
+      min-height: auto;
+    }
   }
 }
 

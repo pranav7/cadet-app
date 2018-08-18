@@ -1,3 +1,6 @@
+import React from "react";
+import PostListItem from "./PostListItem"
+
 class SuggestivePostList extends React.Component {
   constructor(props) {
     super(props);
@@ -56,9 +59,9 @@ class SuggestivePostList extends React.Component {
           </span>
 
           {this.state.posts.map((post) =>
-            <div key={post.id}>
+            <React.Fragment key={post.id}>
               <PostListItem boardId={this.state.boardId} post={post} />
-            </div>
+            </React.Fragment>
           )}
         </div>
       );
@@ -79,3 +82,5 @@ class SuggestivePostList extends React.Component {
     $('#post_title').on("input", this.suggestPosts);
   }
 }
+
+export default SuggestivePostList;

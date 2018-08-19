@@ -14,7 +14,7 @@ class PostList extends React.Component {
       suggesting: false,
       searching: false,
       noPosts: false,
-      currentSortValue: this.props.defaultSortOrder
+      currentSortOrder: this.props.defaultSortOrder
     };
 
     this.init = this.init.bind(this);
@@ -32,12 +32,11 @@ class PostList extends React.Component {
   }
 
   init() {
-    if (_.isUndefined(Cookies.get("currentSortValue"))) {
+    if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
     } else {
-      this.state.currentSortValue = Cookies.get("currentSortValue")
-      Cookies.remove("currentSortValue")
-      this.getPosts({sort_by: this.state.currentSortValue})
+      this.state.currentSortOrder = Cookies.get("currentSortOrder")
+      this.getPosts({sort_by: this.state.currentSortOrder})
     }
   }
 
@@ -79,7 +78,7 @@ class PostList extends React.Component {
   }
 
   handleSortSelectChange(value) {
-    Cookies.set("currentSortValue", value);
+    Cookies.set("currentSortOrder", value, { expires: 1 });
     this.getPosts({sort_by: value});
   }
 
@@ -145,7 +144,7 @@ class PostList extends React.Component {
     return (
       <select name="sort_by"
               className="ui open dropdown sort-post-dropdown selection"
-              defaultValue={this.state.currentSortValue}>
+              defaultValue={this.state.currentSortOrder}>
         {Object.entries(this.props.sortOptions).map(([key, value], i) => {
           return (
             <option key={key} value={value}>
@@ -181,7 +180,7 @@ class PostList extends React.Component {
 
   componentDidMount() {
     $('#post_title').on("input", this.suggestPosts);
-    setTimeout(this.restoreScrollPosition, 500);
+    setTimeout(this.restoreScrollPosition, 940);
   }
 
   restoreScrollPosition() {

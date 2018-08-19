@@ -39,7 +39,10 @@ class PostListItem extends React.Component {
           </div>
         </div>
         <div className="post-info soft">
-          <UpvoteButton voteCount={this.state.post.votes_count} upvoted={this.state.post.upvoted} boardId={this.state.boardId} postId={this.state.post.id} />
+          <UpvoteButton voteCount={this.state.post.votes_count}
+            upvoted={this.state.post.upvoted}
+            boardId={this.state.boardId}
+            postId={this.state.post.id} />
           <div className="meta">
             <strong className={`status ${this.state.post.status}`}>
               #{this.state.post.status}

@@ -1,7 +1,6 @@
 import React from "react";
 import UpvoteButton from "./UpvoteButton";
 import Cookies from "js-cookie";
-import $ from "jquery";
 
 class PostListItem extends React.Component {
   constructor(props) {

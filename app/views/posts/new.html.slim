@@ -1,4 +1,10 @@
 a.ui.small.basic.button href=board_path(@board)
   i.left.arrow.icon
   | Back
-= render partial: "posts/form", locals: { board: @board, post: @post }
+
+.create-posts.mobile
+  = render partial: "posts/form", locals: { board: @board, post: @post }
+
+  .posts-list
+    = react_component "SuggestivePostList",
+      { boardId: @board.id }, { prerender: false }

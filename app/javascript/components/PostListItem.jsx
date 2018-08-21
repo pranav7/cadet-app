@@ -1,3 +1,7 @@
+import React from "react";
+import UpvoteButton from "./UpvoteButton";
+import Cookies from "js-cookie";
+
 class PostListItem extends React.Component {
   constructor(props) {
     super(props);
@@ -6,13 +10,21 @@ class PostListItem extends React.Component {
       boardId: this.props.boardId,
       post: this.props.post
     };
+
+    this.handlePostItemClick = this.handlePostItemClick.bind(this);
+  }
+
+  handlePostItemClick() {
+    Cookies.set("scrollPos", $(window).scrollTop())
   }
 
   render() {
     return (
       <div className="post-list-item">
         <div className="post-body">
-          <a className="post-link" href={this.state.post.url}>
+          <a  className="post-link"
+              href={this.state.post.url}
+              onClick={this.handlePostItemClick}>
             <div className="title-text float left">
               {this.state.post.title}
             </div>
@@ -26,7 +38,10 @@ class PostListItem extends React.Component {
           </div>
         </div>
         <div className="post-info soft">
-          <UpvoteButton voteCount={this.state.post.votes_count} upvoted={this.state.post.upvoted} boardId={this.state.boardId} postId={this.state.post.id} />
+          <UpvoteButton voteCount={this.state.post.votes_count}
+            upvoted={this.state.post.upvoted}
+            boardId={this.state.boardId}
+            postId={this.state.post.id} />
           <div className="meta">
             <strong className={`status ${this.state.post.status}`}>
               #{this.state.post.status}
@@ -41,4 +56,4 @@ class PostListItem extends React.Component {
   }
 }
 
-
+export default PostListItem;

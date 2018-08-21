@@ -1,3 +1,8 @@
+import React from "react";
+import PostListItem from "./PostListItem";
+import Cookies from "js-cookie";
+import _ from "underscore";
+
 class PostList extends React.Component {
   constructor(props) {
     super(props);
@@ -8,9 +13,11 @@ class PostList extends React.Component {
       posts: [],
       suggesting: false,
       searching: false,
-      noPosts: false
+      noPosts: false,
+      currentSortOrder: this.props.defaultSortOrder
     };
 
+    this.init = this.init.bind(this);
     this.getPosts = this.getPosts.bind(this);
     this.search = this.search.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
@@ -19,8 +26,18 @@ class PostList extends React.Component {
     this.renderPostList = this.renderPostList.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
     this.renderSortDropdown = this.renderSortDropdown.bind(this);
+    this.restoreScrollPosition = this.restoreScrollPosition.bind(this);
 
-    this.getPosts();
+    this.init();
+  }
+
+  init() {
+    if (_.isUndefined(Cookies.get("currentSortOrder"))) {
+      this.getPosts();
+    } else {
+      this.state.currentSortOrder = Cookies.get("currentSortOrder")
+      this.getPosts({sort_by: this.state.currentSortOrder})
+    }
   }
 
   getPosts(params = {}) {
@@ -61,6 +78,7 @@ class PostList extends React.Component {
   }
 
   handleSortSelectChange(value) {
+    Cookies.set("currentSortOrder", value, { expires: 1 });
     this.getPosts({sort_by: value});
   }
 
@@ -73,9 +91,9 @@ class PostList extends React.Component {
       return (
         <div className="post-list-item-container">
           {this.state.posts.map((post) =>
-            <div key={post.id}>
+            <React.Fragment key={post.id}>
               <PostListItem boardId={this.state.boardId} post={post} />
-            </div>
+            </React.Fragment>
           )}
         </div>
       );
@@ -124,7 +142,9 @@ class PostList extends React.Component {
     });
 
     return (
-      <select name="sort_by" className="ui open dropdown sort-post-dropdown selection" defaultValue={this.props.defaultSortOrder}>
+      <select name="sort_by"
+              className="ui open dropdown sort-post-dropdown selection"
+              defaultValue={this.state.currentSortOrder}>
         {Object.entries(this.props.sortOptions).map(([key, value], i) => {
           return (
             <option key={key} value={value}>
@@ -160,5 +180,16 @@ class PostList extends React.Component {
 
   componentDidMount() {
     $('#post_title').on("input", this.suggestPosts);
+    setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  restoreScrollPosition() {
+    let scrollPos = Cookies.get("scrollPos")
+    if (!_.isUndefined(scrollPos) && scrollPos != "0") {
+      $(window).scrollTop(scrollPos);
+      Cookies.remove("scrollPos")
+    }    
   }
 }
+
+export default PostList;

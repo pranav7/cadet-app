@@ -2,6 +2,7 @@ import React from "react";
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
 import _ from "underscore";
+import Posts from "./Posts";
 
 class PostList extends React.Component {
   constructor(props) {
@@ -41,39 +42,28 @@ class PostList extends React.Component {
   }
 
   getPosts(params = {}) {
-    let url = null;
+    Posts.get(this.state.boardId, params)
+      .then((posts) => {
+        this.setState({
+          posts: posts
+        });
 
-    if ($.isEmptyObject(params)) {
-      url = `/${this.state.boardId}/posts`
-    } else {
-      url = `/${this.state.boardId}/posts?${$.param(params)}`
-    }
-
-    axios({
-      method: "GET",
-      url: url,
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then(response => {
-      this.setState({
-        posts: response.data.posts
-      });
-
-      if (response.data.posts.length == 0) {
-        this.setState({ noPosts: true })
-      }
-    });
+        if (posts.length == 0) {
+          this.setState({ noPosts: true });
+        }
+      })
+      .catch((status) => {
+        this.setState({ noPosts: true });
+      })
   }
 
   handleSearchInput(event) {
     if (event.target.value == "") {
-      this.setState({ searchTerm: event.target.value, searching: false }, this.search);
+      this.setState({ searchTerm: event.target.value,
+        searching: false }, this.search);
     } else {
-      this.setState({ searchTerm: event.target.value, searching: true }, this.search);
+      this.setState({ searchTerm: event.target.value,
+        searching: true }, this.search);
     }
   }
 
@@ -188,7 +178,7 @@ class PostList extends React.Component {
     if (!_.isUndefined(scrollPos) && scrollPos != "0") {
       $(window).scrollTop(scrollPos);
       Cookies.remove("scrollPos")
-    }    
+    }
   }
 }
 

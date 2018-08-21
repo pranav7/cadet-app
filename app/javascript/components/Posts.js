@@ -2,7 +2,7 @@ export default class {
   static get(boardId, options = {}) {
     let url = null;
 
-    if ($.isEmptyObject(options)) {
+    if (_.isEmpty(options)) {
       url = `/${boardId}/posts`
     } else {
       url = `/${boardId}/posts?${$.param(options)}`

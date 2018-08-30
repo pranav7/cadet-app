@@ -1,5 +1,6 @@
 import React from "react";
 import PostListItem from "./PostListItem";
+import Posts from "./Posts";
 
 class SuggestivePostList extends React.Component {
   constructor(props) {
@@ -17,32 +18,10 @@ class SuggestivePostList extends React.Component {
   }
 
   getPosts(params = {}) {
-    let url = null;
-
-    if ($.isEmptyObject(params)) {
-      url = `/${this.state.boardId}/posts`
-    } else {
-      url = `/${this.state.boardId}/posts?${$.param(params)}`
-    }
-
-    axios({
-      method: "GET",
-      url: url,
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then(response => {
-      this.setState({
-        posts: response.data.posts
+    Posts.get(this.state.boardId, params)
+      .then((posts) => {
+        this.setState({ posts: posts });
       });
-
-      if (response.data.posts.length == 0) {
-        this.setState({ noPosts: true })
-      }
-    });
   }
 
   suggestPosts(event) {

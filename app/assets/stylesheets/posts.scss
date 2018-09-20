@@ -8,7 +8,6 @@ body.posts {
     align-items: center;
 
     @media (min-width: 320px) and (max-width: 480px) {
-      flex-direction: column-reverse;
       align-items: left;
     }
 

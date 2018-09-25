@@ -20,6 +20,7 @@ class PostList extends React.Component {
 
     this.init = this.init.bind(this);
     this.getPosts = this.getPosts.bind(this);
+    this.getMorePosts = this.getMorePosts.bind(this);
     this.search = this.search.bind(this);
     this.handleSearchInput = this.handleSearchInput.bind(this);
     this.handleSortSelectChange = this.handleSortSelectChange.bind(this);
@@ -28,6 +29,7 @@ class PostList extends React.Component {
     this.renderHeader = this.renderHeader.bind(this);
     this.renderSortDropdown = this.renderSortDropdown.bind(this);
     this.restoreScrollPosition = this.restoreScrollPosition.bind(this);
+    this.onScroll = this.onScroll.bind(this);
 
     this.init();
   }
@@ -37,23 +39,39 @@ class PostList extends React.Component {
       this.getPosts();
     } else {
       this.state.currentSortOrder = Cookies.get("currentSortOrder")
-      this.getPosts({sort_by: this.state.currentSortOrder})
+      this.getPosts({ sort_by: this.state.currentSortOrder })
     }
   }
 
   getPosts(params = {}) {
     Posts.get(this.state.boardId, params)
-      .then((posts) => {
+      .then((response) => {
         this.setState({
-          posts: posts
-        });
+          posts: response.posts,
+          currentPage: parseInt(response.headers["x-page"]),
+          totalPosts: parseInt(response.headers["x-total"]),
+          perPage: parseInt(response.headers["x-per-page"])
+        })
 
-        if (posts.length == 0) {
+        if (response.posts.length == 0) {
           this.setState({ noPosts: true });
         }
       })
-      .catch((status) => {
+      .catch(() => {
         this.setState({ noPosts: true });
+      })
+  }
+
+  getMorePosts(params = {}) {
+    Posts.get(this.state.boardId, params)
+      .then(response => {
+        let existingPosts = this.state.posts
+
+        this.setState({
+          posts: existingPosts.concat(response.posts),
+          currentPage: parseInt(response.headers["x-page"]),
+          isFetching: false
+        });
       })
   }
 
@@ -69,7 +87,7 @@ class PostList extends React.Component {
 
   handleSortSelectChange(value) {
     Cookies.set("currentSortOrder", value, { expires: 1 });
-    this.getPosts({sort_by: value});
+    this.getPosts({ sort_by: value });
   }
 
   search() {
@@ -169,8 +187,31 @@ class PostList extends React.Component {
   }
 
   componentDidMount() {
+    window.addEventListener('scroll', this.onScroll, false); 
     $('#post_title').on("input", this.suggestPosts);
     setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
+  onScroll() {
+    if ((window.innerHeight + window.scrollY) >= (this._getDocHeight() - 500)
+      && !this.state.isFetching) {
+
+      console.log("time to call")
+      let nextPage = this.state.currentPage + 1
+      let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage)
+      
+      if (nextPage <= totalPages) {
+        this.setState({ isFetching: true })
+        this.getMorePosts({
+          sorty_by: this.state.currentSortOrder,
+          page: nextPage
+        });
+      }
+    }
   }
 
   restoreScrollPosition() {
@@ -179,6 +220,14 @@ class PostList extends React.Component {
       $(window).scrollTop(scrollPos);
       Cookies.remove("scrollPos")
     }
+  }
+
+  _getDocHeight() {
+    return Math.max(
+      document.body.scrollHeight, document.documentElement.scrollHeight,
+      document.body.offsetHeight, document.documentElement.offsetHeight,
+      document.body.clientHeight, document.documentElement.clientHeight
+    );
   }
 }
 

@@ -7,6 +7,7 @@ class ApplicationController < ActionController::Base
   include ValidateCompanyExpiry
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
+  include Rails::Pagination
 
   protected
     def not_found

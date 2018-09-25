@@ -19,8 +19,8 @@ class SuggestivePostList extends React.Component {
 
   getPosts(params = {}) {
     Posts.get(this.state.boardId, params)
-      .then((posts) => {
-        this.setState({ posts: posts });
+      .then((response) => {
+        this.setState({ posts: response.posts });
       });
   }
 

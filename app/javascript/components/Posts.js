@@ -19,7 +19,10 @@ export default class {
         }
       })
       .then(response => {
-        resolve(response.data.posts);
+        resolve({
+          posts: response.data.posts,
+          headers: response.headers
+        });
       })
       .catch(response => {
         reject(response.status)

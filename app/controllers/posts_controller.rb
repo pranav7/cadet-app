@@ -21,6 +21,8 @@ class PostsController < ApplicationController
     else
       @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).reverse_chronologically
     end
+
+    @posts = paginate @posts, per_page: 3
   end
 
   def create

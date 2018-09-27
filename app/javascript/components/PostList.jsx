@@ -2,7 +2,7 @@ import React from "react";
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
 import _ from "underscore";
-import Posts from "./Posts";
+import Posts from "../wrappers/Posts";
 
 class PostList extends React.Component {
   constructor(props) {

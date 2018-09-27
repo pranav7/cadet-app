@@ -200,7 +200,6 @@ class PostList extends React.Component {
     if ((window.innerHeight + window.scrollY) >= (this._getDocHeight() - 500)
       && !this.state.isFetching) {
 
-      console.log("time to call")
       let nextPage = this.state.currentPage + 1
       let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage)
       

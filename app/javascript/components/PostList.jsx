@@ -30,8 +30,6 @@ class PostList extends React.Component {
     this.renderSortDropdown = this.renderSortDropdown.bind(this);
     this.restoreScrollPosition = this.restoreScrollPosition.bind(this);
     this.onScroll = this.onScroll.bind(this);
-
-    this.init();
   }
 
   init() {
@@ -174,6 +172,10 @@ class PostList extends React.Component {
     this.getPosts({ search: event.target.value });
   }
 
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
   render() {
     return(
       <div className="ui no margin grid">
@@ -187,13 +189,11 @@ class PostList extends React.Component {
   }
 
   componentDidMount() {
+    this.init();
+
     window.addEventListener('scroll', this.onScroll, false); 
     $('#post_title').on("input", this.suggestPosts);
     setTimeout(this.restoreScrollPosition, 940);
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
   }
 
   onScroll() {

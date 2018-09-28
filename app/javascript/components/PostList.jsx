@@ -32,6 +32,18 @@ class PostList extends React.Component {
     this.onScroll = this.onScroll.bind(this);
   }
 
+  componentDidMount() {
+    this.init();
+
+    window.addEventListener('scroll', this.onScroll, false); 
+    $('#post_title').on("input", this.suggestPosts);
+    setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this.onScroll, false);
+  }
+
   init() {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
@@ -92,22 +104,14 @@ class PostList extends React.Component {
     this.getPosts({ search: this.state.searchTerm });
   }
 
-  renderPostList() {
-    if (this.state.posts.length > 0) {
-      return (
-        <div className="post-list-item-container">
-          {this.state.posts.map((post) =>
-            <React.Fragment key={post.id}>
-              <PostListItem boardId={this.state.boardId} post={post} />
-            </React.Fragment>
-          )}
-        </div>
-      );
-    } else if (this.state.noPosts == false && this.state.searching == false && this.state.suggesting == false) {
-      return(<div className="ui active centered inline loader"></div>);
+  suggestPosts(event) {
+    if (event.target.value == "") {
+      this.setState({ suggesting: false });
     } else {
-      return(<div className="post-list-item">There are no matching posts</div>);
+      this.setState({ suggesting: true });
     }
+
+    this.getPosts({ search: event.target.value });
   }
 
   renderHeader() {
@@ -162,18 +166,22 @@ class PostList extends React.Component {
     )
   }
 
-  suggestPosts(event) {
-    if (event.target.value == "") {
-      this.setState({ suggesting: false });
+  renderPostList() {
+    if (this.state.posts.length > 0) {
+      return (
+        <div className="post-list-item-container">
+          {this.state.posts.map((post) =>
+            <React.Fragment key={post.id}>
+              <PostListItem boardId={this.state.boardId} post={post} />
+            </React.Fragment>
+          )}
+        </div>
+      );
+    } else if (!this.state.noPosts && !this.state.searching && !this.state.suggesting) {
+      return(<div className="ui active centered inline loader"></div>);
     } else {
-      this.setState({ suggesting: true });
+      return(<div className="post-list-item">There are no matching posts</div>);
     }
-
-    this.getPosts({ search: event.target.value });
-  }
-
-  componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
   }
 
   render() {
@@ -186,14 +194,6 @@ class PostList extends React.Component {
         </div>
       </div>
     );
-  }
-
-  componentDidMount() {
-    this.init();
-
-    window.addEventListener('scroll', this.onScroll, false); 
-    $('#post_title').on("input", this.suggestPosts);
-    setTimeout(this.restoreScrollPosition, 940);
   }
 
   onScroll() {

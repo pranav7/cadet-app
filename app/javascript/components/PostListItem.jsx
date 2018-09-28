@@ -43,4 +43,4 @@ const PostListItem = ({post, boardId}) => {
   );
 }
 
-export default PostListItem;
+export default PostListItem

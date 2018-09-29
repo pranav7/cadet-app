@@ -22,7 +22,7 @@ class PostsController < ApplicationController
       @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).reverse_chronologically
     end
 
-    @posts = paginate @posts, per_page: 3
+    @posts = paginate @posts, per_page: 25
   end
 
   def create

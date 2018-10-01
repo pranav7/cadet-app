@@ -2,6 +2,7 @@ json.id @post.id
 json.slug @post.slug
 json.title @post.title
 json.status @post.status
+json.upvoted user_signed_in? ? current_user.voted?(@post) : false
 json.votes_count @post.votes.count
 
 json.content do

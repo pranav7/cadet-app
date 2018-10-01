@@ -1,5 +1,31 @@
 export default class {
-  static get(boardId, options = {}) {
+  static get(boardId, postId) {
+    let url = `/${boardId}/posts/${postId}`
+
+    console.log(url)
+    return new Promise((resolve, reject) => {
+      axios({
+        method: "GET",
+        url: url,
+        headers: {
+          'Content-Type': "application/json",
+          'Accept': "application/json",
+          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
+        }
+      })
+      .then(response => {
+        resolve({
+          post: response.data,
+          headers: response.headers
+        });
+      })
+      .catch(response => {
+        reject(response.status)
+      })
+    });
+  }
+
+  static getAll(boardId, options = {}) {
     let url = null;
 
     if (_.isEmpty(options)) {

@@ -7,7 +7,7 @@ class AdminApp extends Component {
     return (
       <BrowserRouter>
         <div className="AdminApp">
-          <Route  path="/admin/:board_id/:post_id"
+          <Route  path="/admin/:boardId/posts/:postId"
                   render={(props) => <PostView {...props} boardId={this.props.boardId} />} />
         </div>
       </BrowserRouter>

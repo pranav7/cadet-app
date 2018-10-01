@@ -76,7 +76,6 @@ class PostList extends React.Component {
   render() {
     return(
       <div className="post-list-container">
-        {/* {this.renderHeader()} */}
         {this.renderPostList()}
       </div>
     )

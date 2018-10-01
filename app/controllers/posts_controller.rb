@@ -9,17 +9,25 @@ class PostsController < ApplicationController
 
   def show
     @post = @board.posts.friendly.find(params[:id])
-    @comment = @post.comments.new
-    @comment.build_content
 
-    @page_title = @post.title
+    respond_to do |format|
+      format.json
+      format.html do
+        @comment = @post.comments.new
+        @comment.build_content
+
+        @page_title = @post.title
+      end
+    end
   end
 
   def index
     if params[:search] && params[:search] != ""
       @posts = @board.posts.search(term: params[:search])
     else
-      @posts = @board.posts.sorted(board: @board, sort_method: params[:sort_by]).reverse_chronologically
+      @posts = @board.posts.
+        sorted(board: @board, sort_method: params[:sort_by]).
+        reverse_chronologically
     end
 
     @posts = paginate @posts, per_page: 25

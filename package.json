@@ -20,6 +20,7 @@
     "react-router-dom": "^4.3.1",
     "react_ujs": "^2.4.4",
     "redux": "^4.0.0",
+    "semantic-ui-react": "^0.82.5",
     "stimulus": "^1.0.0",
     "tablesort": "^5.0.1",
     "underscore": "^1.8.3"

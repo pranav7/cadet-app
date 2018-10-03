@@ -2,7 +2,6 @@ export default class {
   static get(boardId, postId) {
     let url = `/${boardId}/posts/${postId}`
 
-    console.log(url)
     return new Promise((resolve, reject) => {
       axios({
         method: "GET",

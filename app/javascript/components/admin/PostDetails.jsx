@@ -17,10 +17,12 @@ class PostDetails extends Component {
 
   componentDidMount() {
     this.getPost(this.props.match.params.boardId, this.props.match.params.postId)
+    window.scrollTo(0, 0)
   }
 
   componentWillReceiveProps(nextProps) {
     this.getPost(nextProps.match.params.boardId, nextProps.match.params.postId)
+    window.scrollTo(0, 0)
   }
 
   getPost(boardId, postId) {
@@ -35,12 +37,14 @@ class PostDetails extends Component {
   renderComment(comment) {
     if(comment.private) {
       return (
-        <div className="note" key={comment.id}>
-          <div className="user">{comment.commenter.name}</div>
-          <div className="content box">
-            {renderHTML(comment.content.body)}
-            <div className="meta-info soft">
-              {comment.created_at}
+        <div className="comment-container" key={comment.id}>
+          <div className="note" key={comment.id}>
+            <div className="user">{comment.commenter.name}</div>
+            <div className="content box">
+              {renderHTML(comment.content.body)}
+              <div className="meta-info soft">
+                {comment.created_at}
+              </div>
             </div>
           </div>
         </div>
@@ -119,9 +123,7 @@ class PostDetails extends Component {
               </div>
             </div>
             {this.state.post.comments.map((comment) =>
-              <div className="comment-container">
-                {this.renderComment(comment)}
-              </div>
+              this.renderComment(comment)
             )}
           </div>
         </div>

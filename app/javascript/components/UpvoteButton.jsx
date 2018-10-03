@@ -9,13 +9,22 @@ class UpvoteButton extends React.Component {
       voteCount: this.props.voteCount,
       boardId: this.props.boardId,
       postId: this.props.postId
-    };
+    }
 
-    this.handleClick = this.handleClick.bind(this);
-    this.upvote = this.upvote.bind(this);
-    this.downvote = this.downvote.bind(this);
-    this.toggleUp = this.toggleUp.bind(this);
-    this.toggleDown = this.toggleDown.bind(this);
+    this.handleClick = this.handleClick.bind(this)
+    this.upvote = this.upvote.bind(this)
+    this.downvote = this.downvote.bind(this)
+    this.toggleUp = this.toggleUp.bind(this)
+    this.toggleDown = this.toggleDown.bind(this)
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({
+      upvoted: nextProps.upvoted,
+      voteCount: nextProps.voteCount,
+      boardId: nextProps.boardId,
+      postId: nextProps.postId
+    })
   }
 
   handleClick() {

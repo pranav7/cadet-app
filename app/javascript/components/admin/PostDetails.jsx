@@ -36,7 +36,7 @@ class PostDetails extends Component {
     if(comment.private) {
       return (
         <div className="comment-container" key={comment.id}>
-          <div className="note" key={comment.id}>
+          <div className="note">
             <div className="user">{comment.commenter.name}</div>
             <div className="content box">
               {renderHTML(comment.content.body)}
@@ -135,7 +135,7 @@ class PostDetails extends Component {
                 </div>
               </div>
               {this.state.post.voters.map((voter) => 
-                <div className="voter">
+                <div className="voter" key={voter.id}>
                   <div className="user">
                     <div className="details">{voter.name}</div>
                   </div>

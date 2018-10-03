@@ -35,6 +35,7 @@ end
 
 json.voters do
   json.array! @post.voters do |voter|
+    json.id voter.id
     json.name voter.name
     json.role voter.membership_for(current_company).role
   end

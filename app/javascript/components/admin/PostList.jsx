@@ -9,7 +9,7 @@ class PostList extends React.Component {
     super(props);
 
     this.state = {
-      boardId: this.props.boardId,
+      boardId: this.props.match.params.boardId,
       searchTerm: '',
       posts: [],
       suggesting: false,
@@ -61,7 +61,7 @@ class PostList extends React.Component {
         <div className="post-list-item-container">
           {this.state.posts.map((post) =>
             <React.Fragment key={post.id}>
-              <PostListItem boardId={this.state.boardId} post={post} />
+              <PostListItem boardId={this.state.boardId} post={post} {...this.props} />
             </React.Fragment>
           )}
         </div>

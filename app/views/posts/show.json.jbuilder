@@ -10,7 +10,7 @@ json.content do
   json.summary @post.content.summary
 end
 
-json.created_by do
+json.requester do
   json.name @post.requester.name
   json.email @post.requester.email
   json.role @post.requester.membership_for(current_company).role
@@ -18,8 +18,9 @@ end
 
 json.comments do
   json.array! @post.comments do |comment|
+    json.id comment.id
     json.content do
-      json.body comment.content.body
+      json.body simple_format(comment.content.parsed)
     end
     json.commenter do
       json.name comment.commenter.name

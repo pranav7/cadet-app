@@ -75,8 +75,23 @@ class PostList extends React.Component {
 
   render() {
     return(
-      <div className="post-list-container">
-        {this.renderPostList()}
+      <div className="c-left-pane">
+        <div className="list-action-bar">
+          <div className="container-one">
+            <div id="create-post-btn">
+              <i className="add square primary big icon button"></i>
+            </div>
+          </div>
+          <div className="container-two">
+            <div className="ui icon fluid input field">
+              <i className="search icon"></i>
+              <input name="search" placeholder="Search Posts"></input>
+            </div>
+          </div>
+        </div>
+        <div className="post-list-container">
+          {this.renderPostList()}
+        </div>
       </div>
     )
   }

@@ -17,27 +17,22 @@ class AdminApp extends Component {
     return (
       <Router>
         <div className="AdminApp c-dashboard-grid">
-          <div className="c-left-pane">
-            <div className="list-action-bar"></div>
-            {routes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.sidebar}
-              />
-            ))}
-          </div>
-          <div className="c-main-pane">
-            {routes.map((route, index) => (
-              <Route
-                key={index}
-                path={route.path}
-                exact={route.exact}
-                component={route.main}
-              />
-            ))}
-          </div>
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.sidebar}
+            />
+          ))}
+          {routes.map((route, index) => (
+            <Route
+              key={index}
+              path={route.path}
+              exact={route.exact}
+              component={route.main}
+            />
+          ))}
           <div className="c-right-pane"></div>
         </div>
       </Router>

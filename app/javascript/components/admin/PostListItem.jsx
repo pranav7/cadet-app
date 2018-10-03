@@ -8,13 +8,25 @@ class PostListItem extends React.Component {
     this.state = {
       path: `/admin/${this.props.boardId}/posts/${this.props.post.slug}`
     }
+
+    this.handleLinkClick = this.handleLinkClick.bind(this)
+  }
+
+  handleLinkClick(e) {
+    [].forEach.call(document.querySelectorAll('.admin-post-list-item'), (element) => {
+      element.classList.remove("selected")
+    })
+    document.getElementById(`post-${this.props.post.id}`).classList.add("selected")
+
+    this.props.history.push(this.state.path)
   }
 
   render() {
     return (
       <Link className="admin-post-list-item"
+            id={`post-${this.props.post.id}`}
             to={this.state.path}
-            onClick={() => this.props.history.push(this.state.path)} >
+            onClick={this.handleLinkClick} >
         <div className="post-title">{this.props.post.title}</div>
         <div className="post-summary c-soft">{this.props.post.summary}</div>
         <div className="post-meta c-soft">

@@ -1,7 +1,8 @@
 import React, { Component } from 'react'
 import renderHTML from 'react-render-html'
 import Posts from '../../wrappers/Posts'
-import UpvoteButton from '../UpvoteButton';
+import UpvoteButton from '../UpvoteButton'
+import CreateComment from './CreateComment'
 
 class PostDetails extends Component {
   constructor(props) {
@@ -105,13 +106,17 @@ class PostDetails extends Component {
               </div>
             </div>
 
-            <div className="post-content vertically padded">
+            <div className="post-content vertical padded">
               {this.renderComment({
                 content: this.state.post.content,
                 created_at: this.state.post.created_at,
                 id: this.state.post.id,
                 commenter: this.state.post.requester
               })}
+            </div>
+
+            <div className="create-comment">
+              <CreateComment />
             </div>
 
             <div className="post-activity">

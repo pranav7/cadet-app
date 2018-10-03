@@ -16,8 +16,8 @@ class PostListItem extends React.Component {
     [].forEach.call(document.querySelectorAll('.admin-post-list-item'), (element) => {
       element.classList.remove("selected")
     })
-    document.getElementById(`post-${this.props.post.id}`).classList.add("selected")
 
+    document.getElementById(`post-${this.props.post.id}`).classList.add("selected")
     this.props.history.push(this.state.path)
   }
 

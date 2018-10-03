@@ -33,7 +33,6 @@ class AdminApp extends Component {
               component={route.main}
             />
           ))}
-          <div className="c-right-pane"></div>
         </div>
       </Router>
     )

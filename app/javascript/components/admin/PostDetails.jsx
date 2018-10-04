@@ -9,7 +9,9 @@ class PostDetails extends Component {
     super(props)
 
     this.state = {
-      post: null
+      post: null,
+      boardId: this.props.match.params.boardId,
+      postId: this.props.match.params.postId
     }
 
     this.getPost = this.getPost.bind(this)
@@ -17,15 +19,18 @@ class PostDetails extends Component {
   }
 
   componentDidMount() {
-    this.getPost(this.props.match.params.boardId, this.props.match.params.postId)
+    this.getPost()
   }
 
   componentWillReceiveProps(nextProps) {
-    this.getPost(nextProps.match.params.boardId, nextProps.match.params.postId)
+    this.setState({
+      boardId: nextProps.match.params.boardId,
+      postId: nextProps.match.params.postId
+    }, () => { this.getPost() })
   }
 
-  getPost(boardId, postId) {
-    Posts.get(boardId, postId)
+  getPost() {
+    Posts.get(this.state.boardId, this.state.postId)
       .then((response) => {
         this.setState({
           post: response.post
@@ -100,8 +105,8 @@ class PostDetails extends Component {
                 <UpvoteButton
                     voteCount={this.state.post.votes_count}
                     upvoted={this.state.post.upvoted}
-                    boardId={this.props.boardId}
-                    postId={this.props.postId}
+                    boardId={this.state.boardId}
+                    postId={this.state.postId}
                 />
               </div>
             </div>

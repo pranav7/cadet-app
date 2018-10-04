@@ -9,6 +9,13 @@ const User = function({name, initials, role, avatarSize=null}) {
       <div className="details">
         <span className="name">{name}</span>
       </div>
+
+      { role == "admin" &&
+        <div className="staff-label">
+          <span className="ui small basic label float right">Team</span>
+        </div>
+      }
+
     </div>
   )
 }

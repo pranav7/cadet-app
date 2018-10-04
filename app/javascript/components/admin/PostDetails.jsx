@@ -1,9 +1,9 @@
 import React, { Component } from 'react'
-import renderHTML from 'react-render-html'
 import Posts from '../../wrappers/Posts'
 import UpvoteButton from '../UpvoteButton'
 import CreateComment from './CreateComment'
 import User from '../User'
+import Comment from '../Comment'
 
 class PostDetails extends Component {
   constructor(props) {
@@ -16,7 +16,6 @@ class PostDetails extends Component {
     }
 
     this.getPost = this.getPost.bind(this)
-    this.renderComment = this.renderComment.bind(this)
   }
 
   componentDidMount() {
@@ -37,42 +36,6 @@ class PostDetails extends Component {
           post: response.post
         })
       })
-  }
-
-  renderComment(comment) {
-    if(comment.private) {
-      return (
-        <div className="comment-container" key={comment.id}>
-          <div className="note">
-            <div className="user">{comment.commenter.name}</div>
-            <div className="content box">
-              {renderHTML(comment.content.body)}
-              <div className="meta-info soft">
-                {comment.created_at}
-              </div>
-            </div>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div className="comment-container" key={comment.id}>
-          <div className="comment box">
-            <User name={comment.commenter.name}
-                  initials={comment.commenter.initials}
-                  role={comment.commenter.role} />
-
-            <div className="content">
-              {renderHTML(comment.content.body)}
-            </div>
-
-            <div className="meta-info soft">
-              {comment.created_at}
-            </div>
-          </div>
-        </div>
-      )
-    }
   }
 
   render() {
@@ -113,12 +76,12 @@ class PostDetails extends Component {
             </div>
 
             <div className="post-content vertical padded">
-              {this.renderComment({
-                content: this.state.post.content,
-                created_at: this.state.post.created_at,
-                id: this.state.post.id,
-                commenter: this.state.post.requester
-              })}
+              <Comment
+                content={this.state.post.content}
+                created_at={this.state.post.created_at}
+                id={this.state.post.id}
+                commenter={this.state.post.requester}
+                isNote={false} />
             </div>
 
             <div className="create-comment bottom padded">
@@ -132,8 +95,12 @@ class PostDetails extends Component {
                   Conversation
                 </div>
               </div>
+
               {this.state.post.comments.map((comment) =>
-                this.renderComment(comment)
+                <Comment
+                  {...comment}
+                  isNote={comment.private}
+                  key={comment.id} />
               )}
             </div>
           </div>

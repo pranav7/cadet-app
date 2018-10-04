@@ -1,6 +1,6 @@
 import React from 'react'
 
-const User = function({name, initials, role, avatarSize=null}) {
+const User = ({name, initials, role, avatarSize=null}) => {
   return (
     <div className="user">
       <div className={`avatar circle ${avatarSize}`}>

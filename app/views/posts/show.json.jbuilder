@@ -13,6 +13,7 @@ end
 
 json.requester do
   json.name @post.requester.name
+  json.initials @post.requester.initials
   json.email @post.requester.email
   json.role @post.requester.membership_for(current_company).role
 end
@@ -26,8 +27,10 @@ json.comments do
     json.content do
       json.body simple_format(comment.content.parsed)
     end
+
     json.commenter do
       json.name comment.commenter.name
+      json.initials comment.commenter.initials
       json.role comment.commenter.membership_for(current_company).role
     end
   end
@@ -37,6 +40,7 @@ json.voters do
   json.array! @post.voters do |voter|
     json.id voter.id
     json.name voter.name
+    json.initials voter.initials
     json.role voter.membership_for(current_company).role
   end
 end

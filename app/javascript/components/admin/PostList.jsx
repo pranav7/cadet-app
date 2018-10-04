@@ -15,12 +15,14 @@ class PostList extends React.Component {
       suggesting: false,
       searching: false,
       noPosts: false,
-      currentSortOrder: this.props.defaultSortOrder
-    };
+      currentSortOrder: this.props.defaultSortOrder,
+      currentSelected: this.props.match.params.postId
+    }
 
-    this.init = this.init.bind(this);
-    this.getPosts = this.getPosts.bind(this);
-    this.renderPostList = this.renderPostList.bind(this);
+    this.init = this.init.bind(this)
+    this.getPosts = this.getPosts.bind(this)
+    this.renderPostList = this.renderPostList.bind(this)
+    this.handlePostItemClick = this.handlePostItemClick.bind(this)
   }
 
   componentDidMount() {
@@ -55,21 +57,37 @@ class PostList extends React.Component {
       })
   }
 
+  handlePostItemClick(id) {
+    this.setState({ currentSelected: id });
+  }
+
   renderPostList() {
     if (this.state.posts.length > 0) {
       return (
         <div className="post-list-item-container">
           {this.state.posts.map((post) =>
             <React.Fragment key={post.id}>
-              <PostListItem boardId={this.state.boardId} post={post} {...this.props} />
+              <PostListItem boardId={this.state.boardId}
+                selected={this.state.currentSelected == post.slug}
+                post={post}
+                onPostItemClick={this.handlePostItemClick}
+                {...this.props} />
             </React.Fragment>
           )}
         </div>
       );
-    } else if (!this.state.noPosts && !this.state.searching && !this.state.suggesting) {
-      return(<div className="ui active centered inline loader"></div>);
+    } else if (!this.state.noPosts &&
+      !this.state.searching &&
+      !this.state.suggesting) {
+      return(
+        <div className="ui active centered inline loader" />
+      )
     } else {
-      return(<div className="post-list-item">There are no matching posts</div>);
+      return(
+        <div className="post-list-item">
+          There are no matching posts
+        </div>
+      );
     }
   }
 

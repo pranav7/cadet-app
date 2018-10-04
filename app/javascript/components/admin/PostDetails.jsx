@@ -3,6 +3,7 @@ import renderHTML from 'react-render-html'
 import Posts from '../../wrappers/Posts'
 import UpvoteButton from '../UpvoteButton'
 import CreateComment from './CreateComment'
+import User from '../User'
 
 class PostDetails extends Component {
   constructor(props) {
@@ -57,14 +58,14 @@ class PostDetails extends Component {
       return (
         <div className="comment-container" key={comment.id}>
           <div className="comment box">
-            <div className="user">
-              <div className="details">
-                <span className="name">{comment.commenter.name}</span>
-              </div>
-            </div>
+            <User name={comment.commenter.name}
+                  initials={comment.commenter.initials}
+                  role={comment.commenter.role} />
+
             <div className="content">
               {renderHTML(comment.content.body)}
             </div>
+
             <div className="meta-info soft">
               {comment.created_at}
             </div>
@@ -103,10 +104,10 @@ class PostDetails extends Component {
               </div>
               <div className="votes">
                 <UpvoteButton
-                    voteCount={this.state.post.votes_count}
-                    upvoted={this.state.post.upvoted}
-                    boardId={this.state.boardId}
-                    postId={this.state.postId}
+                  voteCount={this.state.post.votes_count}
+                  upvoted={this.state.post.upvoted}
+                  boardId={this.state.boardId}
+                  postId={this.state.postId}
                 />
               </div>
             </div>
@@ -120,7 +121,7 @@ class PostDetails extends Component {
               })}
             </div>
 
-            <div className="create-comment">
+            <div className="create-comment bottom padded">
               <CreateComment />
             </div>
 
@@ -146,9 +147,10 @@ class PostDetails extends Component {
               </div>
               {this.state.post.voters.map((voter) => 
                 <div className="voter" key={voter.id}>
-                  <div className="user">
-                    <div className="details">{voter.name}</div>
-                  </div>
+                  <User name={voter.name}
+                    initials={voter.initials}
+                    role={voter.role}
+                    avatarSize="small" />
                 </div>
               )}
             </div>

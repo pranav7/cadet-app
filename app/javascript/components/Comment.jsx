@@ -21,9 +21,10 @@ const Comment = ({id, content, commenter, created_at, isNote}) => {
     return (
       <div className="comment-container">
         <div className="comment box">
-          <User name={commenter.name}
-                initials={commenter.initials}
-                role={commenter.role} />
+          <User
+            name={commenter.name}
+            initials={commenter.initials}
+            role={commenter.role} />
 
           <div className="content">
             {renderHTML(content.body)}

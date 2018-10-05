@@ -22,6 +22,7 @@ class Post < ApplicationRecord
     optional: true,
     foreign_key: "user_id"
   belongs_to :board
+  # If created by an Admin on behalf of a Customer
   belongs_to :added_by, class_name: "User", optional: true
 
   validates :title, presence: true

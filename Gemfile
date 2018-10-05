@@ -39,6 +39,7 @@ gem 'hashie'
 gem "php-serialize"
 gem 'kaminari'
 gem 'api-pagination'
+gem 'fast_jsonapi'
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'html-pipeline'

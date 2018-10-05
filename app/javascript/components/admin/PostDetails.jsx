@@ -1,32 +1,32 @@
-import React, { Component } from 'react'
-import Posts from '../../wrappers/Posts'
-import UpvoteButton from '../UpvoteButton'
-import CreateComment from './CreateComment'
-import User from '../User'
-import Comment from '../Comment'
+import React, { Component } from 'react';
+import Posts from '../../wrappers/Posts';
+import UpvoteButton from '../UpvoteButton';
+import CreateComment from './CreateComment';
+import User from '../User';
+import Comment from '../Comment';
 
 class PostDetails extends Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       post: null,
       boardId: this.props.match.params.boardId,
       postId: this.props.match.params.postId
-    }
+    };
 
-    this.getPost = this.getPost.bind(this)
+    this.getPost = this.getPost.bind(this);
   }
 
   componentDidMount() {
-    this.getPost()
+    this.getPost();
   }
 
   componentWillReceiveProps(nextProps) {
     this.setState({
       boardId: nextProps.match.params.boardId,
       postId: nextProps.match.params.postId
-    }, () => { this.getPost() })
+    }, () => { this.getPost(); });
   }
 
   getPost() {

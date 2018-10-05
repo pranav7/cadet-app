@@ -1,8 +1,8 @@
-import React from "react"
-import PostListItem from "./PostListItem"
-import Cookies from "js-cookie"
-import _ from "underscore"
-import Posts from "../../wrappers/Posts"
+import React from "react";
+import PostListItem from "./PostListItem";
+import Cookies from "js-cookie";
+import _ from "underscore";
+import Posts from "../../wrappers/Posts";
 
 class PostList extends React.Component {
   constructor(props) {
@@ -17,12 +17,12 @@ class PostList extends React.Component {
       noPosts: false,
       currentSortOrder: this.props.defaultSortOrder,
       currentSelected: this.props.match.params.postId
-    }
+    };
 
-    this.init = this.init.bind(this)
-    this.getPosts = this.getPosts.bind(this)
-    this.renderPostList = this.renderPostList.bind(this)
-    this.handlePostItemClick = this.handlePostItemClick.bind(this)
+    this.init = this.init.bind(this);
+    this.getPosts = this.getPosts.bind(this);
+    this.renderPostList = this.renderPostList.bind(this);
+    this.handlePostItemClick = this.handlePostItemClick.bind(this);
   }
 
   componentDidMount() {
@@ -33,8 +33,8 @@ class PostList extends React.Component {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
     } else {
-      this.state.currentSortOrder = Cookies.get("currentSortOrder")
-      this.getPosts({ sort_by: this.state.currentSortOrder })
+      this.state.currentSortOrder = Cookies.get("currentSortOrder");
+      this.getPosts({ sort_by: this.state.currentSortOrder });
     }
   }
 
@@ -46,7 +46,7 @@ class PostList extends React.Component {
           currentPage: parseInt(response.headers["x-page"]),
           totalPosts: parseInt(response.headers["x-total"]),
           perPage: parseInt(response.headers["x-per-page"])
-        })
+        });
 
         if (response.posts.length == 0) {
           this.setState({ noPosts: true });
@@ -54,7 +54,7 @@ class PostList extends React.Component {
       })
       .catch(() => {
         this.setState({ noPosts: true });
-      })
+      });
   }
 
   handlePostItemClick(id) {
@@ -111,7 +111,7 @@ class PostList extends React.Component {
           {this.renderPostList()}
         </div>
       </div>
-    )
+    );
   }
 }
 

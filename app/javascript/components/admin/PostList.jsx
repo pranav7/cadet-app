@@ -57,8 +57,8 @@ class PostList extends React.Component {
       });
   }
 
-  handlePostItemClick(id) {
-    this.setState({ currentSelected: id });
+  handlePostItemClick(slug) {
+    this.setState({ currentSelected: slug });
   }
 
   renderPostList() {
@@ -81,7 +81,7 @@ class PostList extends React.Component {
       !this.state.suggesting) {
       return(
         <div className="ui active centered inline loader" />
-      )
+      );
     } else {
       return(
         <div className="post-list-item">

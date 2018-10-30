@@ -1,26 +1,20 @@
+import HTTP from "../services/http";
+
 export default class {
   static get(boardId, postId) {
     let url = `/${boardId}/posts/${postId}`
 
     return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: url,
-        headers: {
-          'Content-Type': "application/json",
-          'Accept': "application/json",
-          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-        }
-      })
-      .then(response => {
-        resolve({
-          post: response.data,
-          headers: response.headers
+      HTTP.get(url)
+        .then(response => {
+          resolve({
+            post: response.data,
+            headers: response.headers
+          });
+        })
+        .catch(response => {
+          reject(response.status);
         });
-      })
-      .catch(response => {
-        reject(response.status)
-      })
     });
   }
 
@@ -34,24 +28,16 @@ export default class {
     }
 
     return new Promise((resolve, reject) => {
-      axios({
-        method: "GET",
-        url: url,
-        headers: {
-          'Content-Type': "application/json",
-          'Accept': "application/json",
-          'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-        }
-      })
-      .then(response => {
-        resolve({
-          posts: response.data.posts,
-          headers: response.headers
-        });
-      })
-      .catch(response => {
-        reject(response.status)
-      })
+      HTTP.get(url)
+        .then(response => {
+          resolve({
+            posts: response.data.posts,
+            headers: response.headers
+          });
+        })
+        .catch(response => {
+          reject(response.status)
+        })
     });
   }
 }

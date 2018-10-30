@@ -1,6 +1,6 @@
 import React from "react";
 import PostListItem from "./PostListItem";
-import Posts from "../wrappers/Posts";
+import Posts from "../api/Posts";
 
 class SuggestivePostList extends React.Component {
   constructor(props) {

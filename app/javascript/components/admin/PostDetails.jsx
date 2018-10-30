@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Posts from '../../wrappers/Posts';
+import Posts from '../../api/Posts';
 import UpvoteButton from '../UpvoteButton';
 import CreateComment from './CreateComment';
 import User from '../User';

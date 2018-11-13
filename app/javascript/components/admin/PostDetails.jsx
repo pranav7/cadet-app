@@ -32,7 +32,9 @@ class PostDetails extends Component {
   }
 
   getPost() {
-    Posts.get(this.state.boardId, this.state.postId)
+    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
+
+    postsApi.getOne()
       .then((response) => {
         this.setState({
           post: response.post

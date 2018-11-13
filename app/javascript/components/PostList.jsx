@@ -3,6 +3,11 @@ import PostListItem from "./PostListItem"
 import Cookies from "js-cookie"
 import _ from "underscore"
 import Posts from "../api/Posts"
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+import PostReducer from "../reducers/PostReducer";
+
+const store = createStore(PostReducer);
 
 class PostList extends React.Component {
   constructor(props) {
@@ -186,13 +191,15 @@ class PostList extends React.Component {
 
   render() {
     return(
-      <div className="ui no margin grid">
-        {this.renderHeader()}
+      <Provider store={store}>
+        <div className="ui no margin grid">
+          {this.renderHeader()}
 
-        <div className="row">
-          {this.renderPostList()}
+          <div className="row">
+            {this.renderPostList()}
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 

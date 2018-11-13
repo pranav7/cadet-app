@@ -1,7 +1,13 @@
-import React, { Component } from "react"
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import PostDetails from "./admin/PostDetails";
-import PostList from "./admin/PostList";
+import React, { Component } from "react";
+import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+
+import PostDetails from "AdminComponents/PostDetails";
+import PostList from "AdminComponents/PostList";
+import PostReducer from 'Reducers/PostReducer';
+
+const store = createStore(PostReducer);
 
 class AdminApp extends Component {
   render() {
@@ -15,26 +21,28 @@ class AdminApp extends Component {
     ];
 
     return (
-      <Router>
-        <div className="AdminApp c-dashboard-grid">
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.sidebar}
-            />
-          ))}
-          {routes.map((route, index) => (
-            <Route
-              key={index}
-              path={route.path}
-              exact={route.exact}
-              component={route.main}
-            />
-          ))}
-        </div>
-      </Router>
+      <Provider store={store}>
+        <Router>
+          <div className="AdminApp c-dashboard-grid">
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.sidebar}
+              />
+            ))}
+            {routes.map((route, index) => (
+              <Route
+                key={index}
+                path={route.path}
+                exact={route.exact}
+                component={route.main}
+              />
+            ))}
+          </div>
+        </Router>
+      </Provider>
     )
   }
 }

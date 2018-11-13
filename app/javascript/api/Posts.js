@@ -1,11 +1,16 @@
-import HTTP from "../services/http";
+import API from "Services/api";
 
-export default class {
+class Posts {
+  constructor(boardId, options = {}) {
+    this.boardId = boardId;
+    this.postId = options.postId || null;
+  }
+
   static get(boardId, postId) {
-    let url = `/${boardId}/posts/${postId}`
+    let api = new API(`/${boardId}/posts/${postId}`)
 
     return new Promise((resolve, reject) => {
-      HTTP.get(url)
+      api.execute()
         .then(response => {
           resolve({
             post: response.data,
@@ -18,17 +23,11 @@ export default class {
     });
   }
 
-  static getAll(boardId, options = {}) {
-    let url = null;
-
-    if (_.isEmpty(options)) {
-      url = `/${boardId}/posts`
-    } else {
-      url = `/${boardId}/posts?${$.param(options)}`
-    }
+  static getAll(boardId, params = {}) {
+    let api = new API(`/${boardId}/posts`, { params: params });
 
     return new Promise((resolve, reject) => {
-      HTTP.get(url)
+      api.execute()
         .then(response => {
           resolve({
             posts: response.data.posts,
@@ -40,4 +39,38 @@ export default class {
         })
     });
   }
+
+  upvote() {
+    let api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
+      method: "post"
+    });
+
+    return new Promise((resolve, reject) => {
+      api.execute()
+        .then(response => {
+          resolve(response);
+        })
+        .catch(response => {
+          reject(response.status);
+        })
+    })
+  }
+
+  downvote() {
+    let api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
+      method: "delete"
+    })
+
+    return new Promise((resolve, reject) => {
+      api.execute()
+        .then(response => {
+          resolve(response);
+        })
+        .catch(response => {
+          reject(response.status);
+        })
+    })
+  }
 }
+
+export default Posts;

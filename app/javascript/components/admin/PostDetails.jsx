@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
-import Posts from '../../api/Posts';
-import UpvoteButton from '../UpvoteButton';
-import CreateComment from './CreateComment';
-import User from '../User';
-import Comment from '../Comment';
+import { connect } from 'react-redux';
+
+import Posts from 'API/Posts';
+import UpvoteButton from 'Components/UpvoteButton';
+import CreateComment from 'AdminComponents/CreateComment';
+import User from 'Components/User';
+import Comment from 'Components/Comment';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -130,4 +132,4 @@ class PostDetails extends Component {
   }
 }
 
-export default PostDetails
+export default connect()(PostDetails);

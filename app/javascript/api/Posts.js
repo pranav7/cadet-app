@@ -24,7 +24,7 @@ class Posts {
   }
 
   getAll(params = {}) {
-    let api = new API(`/${this.boardId}/posts`, { params: params });
+    let api = new API(`/${this.boardId}/posts`, { params });
 
     return new Promise((resolve, reject) => {
       api.execute()

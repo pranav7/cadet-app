@@ -1,4 +1,6 @@
-import React from "react"
+import React from "react";
+import { connect } from 'react-redux';
+import Posts from 'API/Posts';
 
 class UpvoteButton extends React.Component {
   constructor(props) {
@@ -36,42 +38,28 @@ class UpvoteButton extends React.Component {
   }
 
   upvote() {
-    let that = this;
-    axios({
-      method: "POST",
-      url: `/${this.state.boardId}/posts/${this.state.postId}/votes`,
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then(response => {
-      that.toggleUp();
-    })
-    .catch(error => {
-      if (error.response.status == 401) {
-        $("#signup-modal")
-          .modal({ duration: 250 })
-          .modal("show")
-      }
-    });
+    let posts_api = new Posts(this.state.boardId, { postId: this.state.postId });
+
+    posts_api.upvote()
+      .then(response => {
+        this.toggleUp();
+      })
+      .catch(status => {
+        if (status == 401) {
+          $("#signup-modal")
+            .modal({ duration: 250 })
+            .modal("show")
+        }
+      });
   }
 
   downvote() {
-    let that = this;
-    axios({
-      method: "DELETE",
-      url: `/${this.state.boardId}/posts/${this.state.postId}/votes`,
-      headers: {
-        'Content-Type': "application/json",
-        'Accept': "application/json",
-        'X-CSRF-Token': document.querySelector("meta[name=csrf-token]").content
-      }
-    })
-    .then(response => {
-      that.toggleDown();
-    });
+    let posts_api = new Posts(this.state.boardId, { postId: this.state.postId });
+
+    posts_api.downvote()
+      .then(response => {
+        this.toggleDown();
+      });
   }
 
   toggleDown() {
@@ -86,6 +74,11 @@ class UpvoteButton extends React.Component {
       voteCount: this.state.voteCount + 1,
       upvoted: true
     })
+
+    this.props.dispatch({
+      type: "UPVOTED",
+      postId: this.state.postId
+    })
   }
 
   render() {
@@ -98,4 +91,4 @@ class UpvoteButton extends React.Component {
   }
 }
 
-export default UpvoteButton;
+export default connect()(UpvoteButton);

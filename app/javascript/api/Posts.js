@@ -6,8 +6,8 @@ class Posts {
     this.postId = options.postId || null;
   }
 
-  static get(boardId, postId) {
-    let api = new API(`/${boardId}/posts/${postId}`)
+  getOne() {
+    let api = new API(`/${this.boardId}/posts/${this.postId}`)
 
     return new Promise((resolve, reject) => {
       api.execute()
@@ -23,8 +23,8 @@ class Posts {
     });
   }
 
-  static getAll(boardId, params = {}) {
-    let api = new API(`/${boardId}/posts`, { params: params });
+  getAll(params = {}) {
+    let api = new API(`/${this.boardId}/posts`, { params: params });
 
     return new Promise((resolve, reject) => {
       api.execute()

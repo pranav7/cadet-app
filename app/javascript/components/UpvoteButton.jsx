@@ -38,9 +38,9 @@ class UpvoteButton extends React.Component {
   }
 
   upvote() {
-    let posts_api = new Posts(this.state.boardId, { postId: this.state.postId });
+    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
 
-    posts_api.upvote()
+    postsApi.upvote()
       .then(response => {
         this.toggleUp();
       })
@@ -54,9 +54,9 @@ class UpvoteButton extends React.Component {
   }
 
   downvote() {
-    let posts_api = new Posts(this.state.boardId, { postId: this.state.postId });
+    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
 
-    posts_api.downvote()
+    postsApi.downvote()
       .then(response => {
         this.toggleDown();
       });

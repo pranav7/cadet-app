@@ -1,11 +1,12 @@
 import React from "react"
-import PostListItem from "./PostListItem"
 import Cookies from "js-cookie"
 import _ from "underscore"
-import Posts from "../api/Posts"
 import { createStore } from "redux";
 import { Provider } from 'react-redux';
-import PostReducer from "../reducers/PostReducer";
+
+import PostListItem from "Components/PostListItem"
+import Posts from "API/Posts"
+import PostReducer from "Reducers/PostReducer";
 
 const store = createStore(PostReducer);
 

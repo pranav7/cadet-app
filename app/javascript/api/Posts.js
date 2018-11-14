@@ -23,7 +23,7 @@ class Posts {
     });
   }
 
-  getAll(params = {}) {
+  getMany(params = {}) {
     let api = new API(`/${this.boardId}/posts`, { params });
 
     return new Promise((resolve, reject) => {

@@ -5,9 +5,9 @@ import { Provider } from 'react-redux';
 
 import PostDetails from "AdminComponents/PostDetails";
 import PostList from "AdminComponents/PostList";
-import PostReducer from 'Reducers/PostReducer';
+import RootReducer from "Store/RootReducer";
 
-const store = createStore(PostReducer);
+const store = createStore(RootReducer);
 
 class AdminApp extends Component {
   render() {

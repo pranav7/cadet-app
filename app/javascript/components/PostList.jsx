@@ -6,9 +6,9 @@ import { Provider } from 'react-redux';
 
 import PostListItem from "Components/PostListItem"
 import Posts from "API/Posts"
-import PostReducer from "Reducers/PostReducer";
+import RootReducer from "Store/RootReducer";
 
-const store = createStore(PostReducer);
+const store = createStore(RootReducer);
 
 class PostList extends React.Component {
   constructor(props) {

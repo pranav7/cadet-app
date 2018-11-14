@@ -1,12 +1,12 @@
 import React from "react";
-import PostListItem from "./PostListItem";
-import Posts from "../api/Posts";
-import PostReducer from "Reducers/PostReducer";
+import PostListItem from "Components/PostListItem";
+import Posts from "API/Posts";
+import RootReducer from "Store/RootReducer";
 
 import { createStore } from "redux";
 import { Provider } from 'react-redux';
 
-const store = createStore(PostReducer);
+const store = createStore(RootReducer);
 
 class SuggestivePostList extends React.Component {
   constructor(props) {

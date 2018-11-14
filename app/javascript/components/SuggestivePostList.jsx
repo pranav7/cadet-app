@@ -1,6 +1,12 @@
 import React from "react";
 import PostListItem from "./PostListItem";
 import Posts from "../api/Posts";
+import PostReducer from "Reducers/PostReducer";
+
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+
+const store = createStore(PostReducer);
 
 class SuggestivePostList extends React.Component {
   constructor(props) {
@@ -51,11 +57,13 @@ class SuggestivePostList extends React.Component {
 
   render() {
     return(
-      <div className="ui no margin grid">
-        <div className="row">
-          {this.renderPostList()}
+      <Provider store={store}>
+        <div className="ui no margin grid">
+          <div className="row">
+            {this.renderPostList()}
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 

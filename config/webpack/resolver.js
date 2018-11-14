@@ -4,8 +4,9 @@ module.exports = {
       API: "api/",
       Components: 'components/',
       AdminComponents: 'components/admin',
+      Modules: 'modules/',
       Services: 'services/',
-      Reducers: 'reducers'
+      Store: 'store/'
     }
   }
 }

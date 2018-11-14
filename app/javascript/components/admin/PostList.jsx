@@ -41,7 +41,7 @@ class PostList extends React.Component {
   getPosts(params = {}) {
     let postsApi = new Posts(this.state.boardId);
 
-    postsApi.getAll({ params: params })
+    postsApi.getMany(params)
       .then((response) => {
         this.setState({
           posts: response.posts,

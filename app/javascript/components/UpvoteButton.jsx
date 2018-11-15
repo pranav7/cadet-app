@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from 'react-redux';
 import Posts from 'API/Posts';
+import { fetchPost } from 'Modules/Posts/Actions';
 
 class UpvoteButton extends React.Component {
   constructor(props) {
@@ -38,7 +39,7 @@ class UpvoteButton extends React.Component {
   }
 
   upvote() {
-    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
+    const postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
 
     postsApi.upvote()
       .then(response => {
@@ -54,7 +55,7 @@ class UpvoteButton extends React.Component {
   }
 
   downvote() {
-    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
+    const postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
 
     postsApi.downvote()
       .then(response => {
@@ -67,6 +68,8 @@ class UpvoteButton extends React.Component {
       voteCount: this.state.voteCount - 1,
       upvoted: false
     });
+
+    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
   }
 
   toggleUp() {
@@ -75,10 +78,7 @@ class UpvoteButton extends React.Component {
       upvoted: true
     })
 
-    this.props.dispatch({
-      type: "UPVOTED",
-      postId: this.state.postId
-    })
+    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
   }
 
   render() {

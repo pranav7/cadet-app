@@ -24,7 +24,7 @@ class Posts {
   }
 
   getMany(params = {}) {
-    let api = new API(`/${this.boardId}/posts`, { params });
+    const api = new API(`/${this.boardId}/posts`, { params });
 
     return new Promise((resolve, reject) => {
       api.execute()
@@ -41,7 +41,7 @@ class Posts {
   }
 
   upvote() {
-    let api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
+    const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
       method: "post"
     });
 
@@ -57,7 +57,7 @@ class Posts {
   }
 
   downvote() {
-    let api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
+    const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
       method: "delete"
     })
 

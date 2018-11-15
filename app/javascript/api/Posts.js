@@ -7,7 +7,7 @@ class Posts {
   }
 
   getOne() {
-    let api = new API(`/${this.boardId}/posts/${this.postId}`)
+    const api = new API(`/${this.boardId}/posts/${this.postId}`)
 
     return new Promise((resolve, reject) => {
       api.execute()

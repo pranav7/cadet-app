@@ -6,6 +6,7 @@ import UpvoteButton from 'Components/UpvoteButton';
 import CreateComment from 'AdminComponents/CreateComment';
 import User from 'Components/User';
 import Comment from 'Components/Comment';
+import { fetchPost } from 'Modules/Posts/Actions';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -25,25 +26,20 @@ class PostDetails extends Component {
   }
 
   componentWillReceiveProps(nextProps) {
-    this.setState({
-      boardId: nextProps.match.params.boardId,
-      postId: nextProps.match.params.postId
-    }, () => { this.getPost(); });
+    if (this.state.postId != nextProps.match.params.postId) {
+      this.setState({
+        boardId: nextProps.match.params.boardId,
+        postId: nextProps.match.params.postId
+      }, () => { this.getPost(); });
+    }
   }
 
   getPost() {
-    let postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
-
-    postsApi.getOne()
-      .then((response) => {
-        this.setState({
-          post: response.post
-        })
-      })
+    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
   }
 
   render() {
-    if(this.state.post != null) {
+    if (this.props.post != null) {
       return (
         <React.Fragment>
           <div className="c-main-pane">
@@ -62,17 +58,17 @@ class PostDetails extends Component {
 
             <div className="post-header">
               <div className="header">
-                <h1 className="post-title">{this.state.post.title}</h1>
+                <h1 className="post-title">{this.props.post.title}</h1>
                 <div className="post-header-info">
-                  <strong className={`status ${this.state.post.status}`}>
-                    #{this.state.post.status}
+                  <strong className={`status ${this.props.post.status}`}>
+                    #{this.props.post.status}
                   </strong>
                 </div>
               </div>
               <div className="votes">
                 <UpvoteButton
-                  voteCount={this.state.post.votes_count}
-                  upvoted={this.state.post.upvoted}
+                  voteCount={this.props.post.votes_count}
+                  upvoted={this.props.post.upvoted}
                   boardId={this.state.boardId}
                   postId={this.state.postId}
                 />
@@ -81,10 +77,10 @@ class PostDetails extends Component {
 
             <div className="post-content vertical padded">
               <Comment
-                content={this.state.post.content}
-                created_at={this.state.post.created_at}
-                id={this.state.post.id}
-                commenter={this.state.post.requester}
+                content={this.props.post.content}
+                created_at={this.props.post.created_at}
+                id={this.props.post.id}
+                commenter={this.props.post.requester}
                 isNote={false} />
             </div>
 
@@ -100,7 +96,7 @@ class PostDetails extends Component {
                 </div>
               </div>
 
-              {this.state.post.comments.map((comment) =>
+              {this.props.post.comments.map((comment) =>
                 <Comment
                   {...comment}
                   isNote={comment.private}
@@ -116,7 +112,7 @@ class PostDetails extends Component {
                   Users who upvoted
                 </div>
               </div>
-              {this.state.post.voters.map((voter) => 
+              {this.props.post.voters.map((voter) => 
                 <div className="voter" key={voter.id}>
                   <User name={voter.name}
                     initials={voter.initials}
@@ -134,4 +130,11 @@ class PostDetails extends Component {
   }
 }
 
-export default connect()(PostDetails);
+const mapStateToProps = (state) => {
+  return {
+    isFetching: state.isFetching,
+    post: state.selectedPost
+  }
+}
+
+export default connect(mapStateToProps)(PostDetails);

@@ -1,13 +1,16 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { createStore } from "redux";
+import thunkMiddleware from 'redux-thunk';
+import { createStore, applyMiddleware } from "redux";
 import { Provider } from 'react-redux';
 
 import PostDetails from "AdminComponents/PostDetails";
 import PostList from "AdminComponents/PostList";
 import RootReducer from "Store/RootReducer";
 
-const store = createStore(RootReducer);
+const store = createStore(
+  RootReducer,
+  applyMiddleware(thunkMiddleware));
 
 class AdminApp extends Component {
   render() {

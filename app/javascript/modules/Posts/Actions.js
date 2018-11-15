@@ -18,14 +18,32 @@ function receivePost(post) {
   }
 }
 
+export const RECEIVE_POSTS = 'RECEIVE_POSTS';
+function receivePosts(posts) {
+  return {
+    type: RECEIVE_POSTS,
+    posts
+  }
+}
+
 export function fetchPost(boardId, postId) {
   return function(dispatch) {
-    dispatch(requestPost())
+    dispatch(requestPost());
 
-    const postsAPI = new Posts(boardId, { postId })
-    postsAPI.getOne()
+    const postsApi = new Posts(boardId, { postId });
+    postsApi.getOne()
       .then(response => {
         dispatch(receivePost(response.post));
+      });
+  }
+}
+
+export function fetchPosts(boardId, params = {}) {
+  return function(dipsatch) {
+    const postsApi = new Posts(boardId);
+    postsApi.getMany(params)
+      .then(response => {
+        dispatch(receivePosts(response.posts));
       })
   }
 }

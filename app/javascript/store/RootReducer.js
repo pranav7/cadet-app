@@ -13,11 +13,11 @@
  */
 
 // import { combineReducers } from 'redux';
-// import PostReducer from 'Modules/Posts/Reducer';
 import {
   UPVOTED,
   REQUEST_POST,
-  RECEIVE_POST
+  RECEIVE_POST,
+  RECEIVE_POSTS
 } from 'Modules/Posts/Actions';
 
 const initialState = {
@@ -43,6 +43,10 @@ export default (state = initialState, action) => {
         didInvalidate: false,
         selectedPost: action.post
       });
+    case RECEIVE_POSTS:
+      return Object.assign({}, state, {
+        posts: action.posts
+      })
     default:
       return state;
   }

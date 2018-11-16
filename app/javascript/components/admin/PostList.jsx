@@ -11,14 +11,7 @@ class PostList extends React.Component {
     super(props);
 
     this.state = {
-      boardId: this.props.match.params.boardId,
-      searchTerm: '',
-      posts: [],
-      suggesting: false,
-      searching: false,
-      noPosts: false,
-      currentSortOrder: this.props.defaultSortOrder,
-      currentSelected: this.props.match.params.postId
+      boardId: this.props.match.params.boardId
     };
 
     this.init = this.init.bind(this);

@@ -1,8 +1,5 @@
 import Posts from 'API/Posts';
 
-export const UPVOTED = 'UPVOTED';
-export const DOWNVOTED = 'DOWNVOTED';
-
 export const REQUEST_POST = 'REQUEST_POST';
 function requestPost() {
   return {

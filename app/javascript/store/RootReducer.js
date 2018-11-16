@@ -17,13 +17,16 @@ import {
   UPVOTED,
   REQUEST_POST,
   RECEIVE_POST,
-  RECEIVE_POSTS
+  RECEIVE_POSTS,
+  REQUEST_POSTS,
+  FETCH_POSTS_FAILED
 } from 'Modules/Posts/Actions';
 
 const initialState = {
   isFetching: false,
   didInvalidate: false,
-  selectedPost: null
+  selectedPost: null,
+  posts: []
 }
 
 export default (state = initialState, action) => {
@@ -34,18 +37,28 @@ export default (state = initialState, action) => {
       return newState;
     case REQUEST_POST:
       return Object.assign({}, state, {
-        isFetching: true,
+        isFetchingPost: true,
         didInvalidate: false
       })
     case RECEIVE_POST:
       return Object.assign({}, state, {
-        isFetching: false,
+        isFetchingPost: false,
         didInvalidate: false,
         selectedPost: action.post
       });
+    case REQUEST_POSTS:
+      return Object.assign({}, state, {
+        isFetchingPosts: true
+      })
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
+        isFetchingPosts: false,
         posts: action.posts
+      })
+    case FETCH_POSTS_FAILED:
+      return Object.assign({}, state, {
+        isFetchingPosts: false,
+        noPosts: true
       })
     default:
       return state;

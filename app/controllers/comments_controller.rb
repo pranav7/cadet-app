@@ -11,7 +11,15 @@ class CommentsController < ApplicationController
       current_user.companies << current_company
     end
 
-    redirect_back fallback_location: board_post_path(@board, @post)
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: board_post_path(@board, @post)
+      end
+
+      format.json do
+        head :created
+      end
+    end
   end
 
   def update

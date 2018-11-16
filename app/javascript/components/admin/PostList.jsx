@@ -1,8 +1,10 @@
 import React from "react";
+import { connect } from 'react-redux';
+
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
 import _ from "underscore";
-import Posts from "../../api/Posts";
+import { fetchPosts } from 'Modules/Posts/Actions';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -39,24 +41,7 @@ class PostList extends React.Component {
   }
 
   getPosts(params = {}) {
-    let postsApi = new Posts(this.state.boardId);
-
-    postsApi.getMany(params)
-      .then((response) => {
-        this.setState({
-          posts: response.posts,
-          currentPage: parseInt(response.headers["x-page"]),
-          totalPosts: parseInt(response.headers["x-total"]),
-          perPage: parseInt(response.headers["x-per-page"])
-        });
-
-        if (response.posts.length == 0) {
-          this.setState({ noPosts: true });
-        }
-      })
-      .catch(() => {
-        this.setState({ noPosts: true });
-      });
+    this.props.dispatch(fetchPosts(this.state.boardId, params));
   }
 
   handlePostItemClick(slug) {
@@ -64,10 +49,10 @@ class PostList extends React.Component {
   }
 
   renderPostList() {
-    if (this.state.posts.length > 0) {
+    if (this.props.posts.length > 0) {
       return (
         <div className="post-list-item-container">
-          {this.state.posts.map((post) =>
+          {this.props.posts.map((post) =>
             <React.Fragment key={post.id}>
               <PostListItem boardId={this.state.boardId}
                 selected={this.state.currentSelected == post.slug}
@@ -78,9 +63,8 @@ class PostList extends React.Component {
           )}
         </div>
       );
-    } else if (!this.state.noPosts &&
-      !this.state.searching &&
-      !this.state.suggesting) {
+    } else if (!this.props.noPosts &&
+      this.props.isFetchingPosts) {
       return(
         <div className="ui active centered inline loader" />
       );
@@ -117,4 +101,12 @@ class PostList extends React.Component {
   }
 }
 
-export default PostList;
+const mapStateToProps = (state) => {
+  return {
+    isFetchingPosts: state.isFetchingPosts,
+    noPosts: state.noPosts,
+    posts: state.posts
+  }
+}
+
+export default connect(mapStateToProps)(PostList);

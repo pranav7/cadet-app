@@ -10,11 +10,25 @@ function requestPost() {
   }
 }
 
+export const REQUEST_POSTS = 'REQUEST_POSTS';
+function requestPosts() {
+  return {
+    type: REQUEST_POSTS
+  }
+}
+
 export const RECEIVE_POST = 'RECEIVE_POST';
 function receivePost(post) {
   return {
     type: RECEIVE_POST,
     post
+  }
+}
+
+export const FETCH_POSTS_FAILED = 'FETCH_POSTS_FAILED';
+function fetchPostsFailed(status) {
+  return {
+    type: FETCH_POSTS_FAILED
   }
 }
 
@@ -39,11 +53,16 @@ export function fetchPost(boardId, postId) {
 }
 
 export function fetchPosts(boardId, params = {}) {
-  return function(dipsatch) {
+  return function(dispatch) {
+    dispatch(requestPosts());
+
     const postsApi = new Posts(boardId);
     postsApi.getMany(params)
       .then(response => {
         dispatch(receivePosts(response.posts));
+      })
+      .catch(response => {
+        dispatch(fetchPostsFailed(response.status));
       })
   }
 }

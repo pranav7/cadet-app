@@ -2,7 +2,8 @@ class API {
   constructor(url, options = {}) {
     this.url = url;
     this.method = options.method || "get";
-    this.params = options.params || {}
+    this.params = options.params || {};
+    this.data = options.data || {}
     this.headers = {
       'Content-Type': "application/json",
       'Accept': "application/json",
@@ -16,7 +17,8 @@ class API {
         method: this.method,
         url: this.url,
         headers: this.headers,
-        params: this.params
+        params: this.params,
+        data: this.data
       })
       .then(response => {
         resolve(response);

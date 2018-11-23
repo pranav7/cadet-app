@@ -46,4 +46,7 @@ RSpec.describe CommentsController, type: :controller do
       end
     end
   end
+
+  describe "#update" do
+  end
 end

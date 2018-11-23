@@ -42,6 +42,7 @@ class CommentsController < ApplicationController
     else
       flash[:error] = "That action is not allowed."
     end
+
     redirect_back fallback_location: board_post_path(@board, @post)
   end
 

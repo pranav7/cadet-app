@@ -54,22 +54,20 @@ RSpec.describe Company, type: :model do
     let(:company) { create :company }
 
     it "returns true if trial expired" do
-      company_setting = create :company_setting,
-                               company: company, expires_at: 1.day.ago
+      create :company_setting, company: company, expires_at: 1.day.ago
 
       expect(company.expired?).to eq(true)
     end
 
     it "returns false if trial not expired" do
-      company_setting = create :company_setting,
-                               company: company, expires_at: 1.day.from_now
+      create :company_setting, company: company, expires_at: 1.day.from_now
 
       expect(company.expired?).to eq(false)
     end
 
     it "returns false if no expiry is set" do
-      company_setting = create :company_setting,
-                               company: company, expires_at: nil
+      create :company_setting, company: company, expires_at: nil
+
       expect(company.expired?).to eq(false)
     end
   end
@@ -82,7 +80,7 @@ RSpec.describe Company, type: :model do
       user_a = create :customer, company: company
       user_b = create :customer, company: company
       user_c = create :customer, company: company
-      user_d = create :customer, company: company
+      create :customer, company: company
 
       post = create :post, board: board, requester: user_a
       create :vote, post: post, user: user_b

@@ -115,7 +115,7 @@ RSpec.describe Post, type: :model do
           post = create :post, board: board, requester: customer
           create :vote, post: post, user: customer
 
-          mailer = double(deliver_later: true)
+          double(deliver_later: true)
           expect(PostNotificationMailer).to receive(:status_changed)
             .exactly(0).times.with(post, "developing", customer)
 

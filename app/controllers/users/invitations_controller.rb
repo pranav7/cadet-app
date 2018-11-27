@@ -58,7 +58,9 @@ class Users::InvitationsController < Devise::InvitationsController
   protected
 
   def find_or_invite_resource(&block)
-    if user = User.find_by_email(invite_params[:email])
+    user = User.find_by_email(invite_params[:email])
+
+    if user
       flash[:sucess] = "We've added #{user.name} to your company"
       user.memberships.create(company: current_company, role: params[:role].downcase)
       user

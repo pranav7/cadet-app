@@ -42,9 +42,9 @@ role :db, %w{rails@web1.getcadet.com}
 # Global options
 # --------------
 # set :ssh_options, {
-  # keys: %w(/home/#{fetch(:user)}/.ssh/id_rsa),
-  # forward_agent: true,
-  # auth_methods: %w(publickey password)
+# keys: %w(/home/#{fetch(:user)}/.ssh/id_rsa),
+# forward_agent: true,
+# auth_methods: %w(publickey password)
 # }
 #
 # The server-based syntax can be used to override options:

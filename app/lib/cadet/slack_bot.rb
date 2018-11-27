@@ -89,7 +89,7 @@ module Cadet
         company = Company.find_by_subdomain subdomain
 
         if company
-          company.company_setting.expires_at = Time.now  + duration
+          company.company_setting.expires_at = Time.now + duration
           company.company_setting.save
 
           "#{company.name}'s trial expires on #{company.company_setting.expires_at}"

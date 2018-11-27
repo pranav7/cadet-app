@@ -65,7 +65,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui checkbox' do |input|
       input.use :label_input
-      input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+      input.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
   end
 
@@ -73,7 +73,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui slider checkbox' do |input|
       input.use :label_input
-      input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+      input.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
   end
 
@@ -81,7 +81,7 @@ SimpleForm.setup do |config|
     b.use :html5
     b.wrapper tag: 'div', class: 'ui toggle checkbox' do |input|
       input.use :label_input
-      input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+      input.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
   end
 
@@ -90,7 +90,7 @@ SimpleForm.setup do |config|
     b.use :label
     b.wrapper tag: 'div', class: 'ui left labeled input' do |input|
       input.use :input
-      input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+      input.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
     b.use :error, wrap_with: { tag: 'div', class: 'custom error message' }
   end
@@ -100,7 +100,7 @@ SimpleForm.setup do |config|
     b.use :label
     b.wrapper tag: 'div', class: 'ui right labeled input' do |input|
       input.use :input
-      input.use :hint,  wrap_with: { tag: 'div', class: 'hint' }
+      input.use :hint, wrap_with: { tag: 'div', class: 'hint' }
     end
     b.use :error, wrap_with: { tag: 'div', class: 'custom error message' }
   end

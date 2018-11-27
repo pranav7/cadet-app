@@ -6,7 +6,7 @@ class Admin::PostsController < Admin::AdminController
       @posts = @board.posts.search(term: params[:search])
     else
       @posts = @board.posts.sorted(sort_method: params[:sort_by])
-        .reverse_chronologically
+                     .reverse_chronologically
     end
 
     @post = @board.posts.friendly.find(params[:id]) || @posts.first || nil

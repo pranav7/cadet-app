@@ -3,7 +3,7 @@ class UserPolicy
 
   def initialize(current_company:, current_user:, resource:)
     @current_company = current_company
-    @current_user= current_user
+    @current_user = current_user
     @resource = resource
   end
 

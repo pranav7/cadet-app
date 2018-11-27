@@ -47,7 +47,7 @@ module Cadet
       signature = Base64.decode64(@params['p_signature'])
       @params.delete('p_signature')
 
-      @params.each { |key, value| @params[key] = String(value)}
+      @params.each { |key, value| @params[key] = String(value) }
       data_sorted = @params.sort_by { |key, value| key }
       data_serialized = PHP.serialize(data_sorted, true)
 

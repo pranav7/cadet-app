@@ -17,7 +17,7 @@ Rails.application.routes.draw do
       passwords: 'users/passwords',
       invitations: 'users/invitations',
       omniauth_callbacks: "users/omniauth_callbacks"
-  }
+    }
 
   constraints subdomain: 'app' do
     get '/login', to: 'users/sessions#new'

@@ -70,8 +70,8 @@ class Post < ApplicationRecord
     requester
   end
 
-  def user=(x)
-    requester = x
+  def user=(value)
+    requester = value
   end
 
   def company

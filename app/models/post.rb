@@ -36,9 +36,9 @@ class Post < ApplicationRecord
   class << self
     def sorted(options = {})
       default_sort_method = :latest_activity
-      if board = options.delete(:board)
-        default_sort_method = board.default_sort_order.to_sym if board.default_sort_order
-      end
+      board = options.delete(:board)
+
+      default_sort_method = board.default_sort_order.to_sym if board&.default_sort_order
 
       sort_method = options.delete(:sort_method) || default_sort_method
       self.public_send(sort_method)

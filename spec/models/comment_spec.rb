@@ -62,7 +62,7 @@ RSpec.describe Comment, type: :model do
             once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: customer,
-            content_attributes: { body: "Hi, @#{admin2.username}." }
+                           content_attributes: { body: "Hi, @#{admin2.username}." }
         end
 
         it "notifies all admins of the company" do
@@ -84,7 +84,7 @@ RSpec.describe Comment, type: :model do
             once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: customer,
-            content_attributes: { body: "Hi, @#{admin2.username}." }
+                           content_attributes: { body: "Hi, @#{admin2.username}." }
         end
       end
 
@@ -115,7 +115,7 @@ RSpec.describe Comment, type: :model do
               once.with(kind_of(Comment), requester).and_return(mailer)
 
             create :comment, post: post, commenter: admin,
-              content_attributes: { body: "Hey @#{requester.username}" }
+                             content_attributes: { body: "Hey @#{requester.username}" }
           end
 
           context "post belongs to a private board" do
@@ -141,7 +141,7 @@ RSpec.describe Comment, type: :model do
                 exactly(0).times.with(kind_of(Comment), requester)
 
               create :comment, post: post, commenter: admin,
-                content_attributes: { body: "Hey @#{requester.username}" }
+                               content_attributes: { body: "Hey @#{requester.username}" }
             end
           end
         end
@@ -157,7 +157,7 @@ RSpec.describe Comment, type: :model do
               once.with(kind_of(Comment), admin2).and_return(mailer)
 
             create :comment, post: post, commenter: admin,
-              content_attributes: { body: "Hi, @#{admin2.username}." }
+                             content_attributes: { body: "Hi, @#{admin2.username}." }
           end
 
           it "doesn't notify all admins unless they are mentioned" do
@@ -171,7 +171,7 @@ RSpec.describe Comment, type: :model do
               exactly(0).times.with(kind_of(Comment), admin3)
 
             create :comment, post: post, commenter: admin,
-              content_attributes: { body: "Hi, @#{admin2.username}." }
+                             content_attributes: { body: "Hi, @#{admin2.username}." }
           end
         end
       end
@@ -188,7 +188,7 @@ RSpec.describe Comment, type: :model do
             once.with(kind_of(Comment), admin2).and_return(mailer)
 
           create :comment, post: post, commenter: admin, private: true,
-            content_attributes: { body: "Hey @#{admin2.username}" }
+                           content_attributes: { body: "Hey @#{admin2.username}" }
         end
 
         it "does not notify requester" do
@@ -203,7 +203,7 @@ RSpec.describe Comment, type: :model do
             exactly(0).times.with(kind_of(Comment), post.requester)
 
           create :comment, post: post, commenter: admin, private: true,
-            content_attributes: { body: "Hi, @#{post.requester.username}." }
+                           content_attributes: { body: "Hi, @#{post.requester.username}." }
         end
       end
     end

@@ -18,7 +18,7 @@ class Comment < ApplicationRecord
       
       user = User.find_by!(email: email.From)
       Comment.create(commenter: user, post: post, private: is_private,
-        content_attributes: { body: email.StrippedTextReply })
+                     content_attributes: { body: email.StrippedTextReply })
     end
   end
 

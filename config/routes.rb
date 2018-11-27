@@ -10,14 +10,14 @@ Rails.application.routes.draw do
   get :trial_expired, to: "errors#trial_expired", as: :trial_expired
 
   devise_for :users, path: '',
-    path_names: { sign_in: 'login', sign_up: 'signup' },
-    controllers: {
-      sessions: 'users/sessions',
-      registrations: 'users/registrations',
-      passwords: 'users/passwords',
-      invitations: 'users/invitations',
-      omniauth_callbacks: "users/omniauth_callbacks"
-  }
+                     path_names: { sign_in: 'login', sign_up: 'signup' },
+                     controllers: {
+                       sessions: 'users/sessions',
+                       registrations: 'users/registrations',
+                       passwords: 'users/passwords',
+                       invitations: 'users/invitations',
+                       omniauth_callbacks: "users/omniauth_callbacks"
+                     }
 
   constraints subdomain: 'app' do
     get '/login', to: 'users/sessions#new'

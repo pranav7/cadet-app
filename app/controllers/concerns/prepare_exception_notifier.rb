@@ -6,13 +6,13 @@ module PrepareExceptionNotifier
   end
 
   private
-    def prepare_exception_notifier
-      exception_data = {
-        url: request.url,
-        ip: request.ip
-      }
-      exception_data[:current_user] = current_user.serializable_hash if user_signed_in?
+  def prepare_exception_notifier
+    exception_data = {
+      url: request.url,
+      ip: request.ip
+    }
+    exception_data[:current_user] = current_user.serializable_hash if user_signed_in?
 
-      request.env["exception_notifier.exception_data"] = exception_data
-    end
+    request.env["exception_notifier.exception_data"] = exception_data
+  end
 end

@@ -137,17 +137,18 @@ class User < ApplicationRecord
   end
 
   private
-    def create_username
-      username = name.parameterize
-      taken_usernames = User.where("username LIKE ?", "#{username}%").pluck(:username)
 
-      return username unless taken_usernames.include?(username)
+  def create_username
+    username = name.parameterize
+    taken_usernames = User.where("username LIKE ?", "#{username}%").pluck(:username)
 
-      count = 1
-      while true
-        new_username = "#{username}-#{count}"
-        return new_username unless taken_usernames.include?(new_username)
-        count += 1
-      end
+    return username unless taken_usernames.include?(username)
+
+    count = 1
+    while true
+      new_username = "#{username}-#{count}"
+      return new_username unless taken_usernames.include?(new_username)
+      count += 1
     end
+  end
 end

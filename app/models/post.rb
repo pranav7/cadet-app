@@ -128,20 +128,20 @@ class Post < ApplicationRecord
   end
 
   private
-    def set_last_activity_at
-      self.last_activity_at = Time.zone.now
-    end
+  def set_last_activity_at
+    self.last_activity_at = Time.zone.now
+  end
 
-    def update_last_activity_at
-      self.touch :last_activity_at
-    end
+  def update_last_activity_at
+    self.touch :last_activity_at
+  end
 
-    def notify_slack
-      return if Rails.env.test?
+  def notify_slack
+    return if Rails.env.test?
 
-      message = "*New Post - ##{board.company.subdomain}*"
-      message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
+    message = "*New Post - ##{board.company.subdomain}*"
+    message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
 
-      NotifySlackJob.perform_later(message)
-    end
+    NotifySlackJob.perform_later(message)
+  end
 end

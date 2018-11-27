@@ -6,11 +6,11 @@ module ValidateCompanyExpiry
   end
 
   private
-    def validate_company_expiry
-      return if request.subdomains.first == "app"
+  def validate_company_expiry
+    return if request.subdomains.first == "app"
 
-      if current_company.expired?
-        redirect_to trial_expired_path
-      end
+    if current_company.expired?
+      redirect_to trial_expired_path
     end
+  end
 end

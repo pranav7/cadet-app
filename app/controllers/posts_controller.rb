@@ -44,12 +44,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def get_and_authorize_board
-      @board = current_company.boards.friendly.find(params[:board_id])
-      authorize_admin_access! if @board.private?
-    end
+  def get_and_authorize_board
+    @board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if @board.private?
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :status, content_attributes: [:body])
-    end
+  def post_params
+    params.require(:post).permit(:title, :status, content_attributes: [:body])
+  end
 end

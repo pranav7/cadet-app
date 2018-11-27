@@ -13,7 +13,7 @@ class Comment < ApplicationRecord
   scope :without_notes, -> { where.not(private: true) }
 
   class << self
-    def create_from_email(email, post, options={})
+    def create_from_email(email, post, options = {})
       is_private = options.delete(:private) || false
       
       user = User.find_by!(email: email.From)

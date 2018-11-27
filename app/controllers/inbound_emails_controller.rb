@@ -16,7 +16,7 @@ class InboundEmailsController < ApplicationController
   def post_id
     @email.MailboxHash.split("-").last.to_i
   end
-    
+
   def notification_type
     @email.MailboxHash.split("-").first
   end

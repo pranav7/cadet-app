@@ -220,7 +220,6 @@ RSpec.describe Comment, type: :model do
       })
     end
 
-      
     it "creates a comment from an incoming email object" do
       expect {
         Comment.create_from_email(email, post)

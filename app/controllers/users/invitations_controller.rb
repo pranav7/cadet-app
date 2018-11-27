@@ -54,7 +54,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
     super
   end
-  
+
   protected
 
   def find_or_invite_resource(&block)
@@ -92,7 +92,7 @@ class Users::InvitationsController < Devise::InvitationsController
     user = User.find_by_email(invite_params[:email])
     return unless user
 
-    membership = current_company.memberships.where(user: user).first 
+    membership = current_company.memberships.where(user: user).first
     if membership
       raise "Oops! A user with this email already exists."
     end

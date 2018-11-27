@@ -23,7 +23,7 @@ RSpec.describe Board, type: :model do
     it "returns only public boards" do
       private_board = create :board, private: true
       public_board = create :board
-      
+
       expect(Board.non_private).to eq([public_board])
     end
   end

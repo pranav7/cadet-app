@@ -53,7 +53,7 @@ module Cadet
 
       digest = OpenSSL::Digest::SHA1.new
       pub_key = OpenSSL::PKey::RSA.new(public_key).public_key
-      
+
       pub_key.verify(digest, signature, data_serialized)
     end
 

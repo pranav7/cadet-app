@@ -18,9 +18,9 @@ class Post < ApplicationRecord
   has_many :voters, through: :votes, source: :user
 
   belongs_to :requester,
-    class_name: "User",
-    optional: true,
-    foreign_key: "user_id"
+             class_name: "User",
+             optional: true,
+             foreign_key: "user_id"
   belongs_to :board
   belongs_to :added_by, class_name: "User", optional: true
 

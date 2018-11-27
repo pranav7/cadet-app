@@ -28,9 +28,9 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :first_name, presence: true
   validates :email,
-    uniqueness: true,
-    presence: true,
-    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+            uniqueness: true,
+            presence: true,
+            format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|

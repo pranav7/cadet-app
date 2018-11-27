@@ -71,7 +71,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   private
 
-  def after_invite_path_for(current_inviter)
+  def after_invite_path_for(_current_inviter)
     admin_users_path
   end
 

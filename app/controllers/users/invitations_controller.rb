@@ -16,7 +16,7 @@ class Users::InvitationsController < Devise::InvitationsController
       validate_membership
 
       self.resource = find_or_invite_resource do |user|
-        membership = user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
+        user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
         user.skip_invitation = true if params[:send_invitation] != "true"
       end
 

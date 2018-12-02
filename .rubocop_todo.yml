@@ -177,7 +177,6 @@ Lint/AssignmentInCondition:
 # Offense count: 1
 Lint/LiteralAsCondition:
   Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 1
 Lint/RescueException:

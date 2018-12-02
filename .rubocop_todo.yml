@@ -399,14 +399,6 @@ Style/FrozenStringLiteralComment:
 # Configuration parameters: MinBodyLength.
 Style/GuardClause:
   Exclude:
-    - 'app/controllers/admin/accounts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/concerns/validate_company_expiry.rb'
-    - 'app/controllers/users/invitations_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/controllers/users/sessions_controller.rb'
-    - 'app/helpers/application_helper.rb'
     - 'app/models/comment.rb'
     - 'app/models/post.rb'
     - 'app/policies/board_policy.rb'

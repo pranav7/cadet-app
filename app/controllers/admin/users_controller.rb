@@ -9,10 +9,10 @@ class Admin::UsersController < Admin::AdminController
   def show
     @user = current_company.users.find(params[:id])
 
-    if params[:board]
-      @board = current_company.boards.friendly.find(params[:board])
-      @posts = @user.voted_posts.where(board: @board).sorted(sort_method: params[:sort_by])
-    end
+    return if params[:board].blank?
+
+    @board = current_company.boards.friendly.find(params[:board])
+    @posts = @user.voted_posts.where(board: @board).sorted(sort_method: params[:sort_by])
   end
 
   def edit

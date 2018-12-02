@@ -59,6 +59,7 @@ class Comment < ApplicationRecord
   end
 
   private
+
   def should_notify_mentionee?(mentionee)
     if note? && !mentionee.admin_of?(post.company)
       return false

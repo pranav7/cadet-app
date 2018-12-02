@@ -533,11 +533,6 @@ Style/RedundantReturn:
 # Cop supports --auto-correct.
 Style/RedundantSelf:
   Exclude:
-    - 'app/controllers/users/invitations_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/models/comment.rb'
-    - 'app/models/post.rb'
-    - 'config/environments/production.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

@@ -10,9 +10,9 @@ class Users::RegistrationsController < Devise::RegistrationsController
   def new
     @page_title = "Sign up - Cadet"
     build_resource({})
-    self.resource.memberships.build.build_company
+    resource.memberships.build.build_company
 
-    respond_with self.resource
+    respond_with resource
   end
 
   # POST /resource
@@ -22,7 +22,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # GET /resource/edit
   def edit
-    self.resource.memberships.build.build_company
+    resource.memberships.build.build_company
     super
   end
 

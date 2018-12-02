@@ -41,7 +41,7 @@ class Post < ApplicationRecord
       default_sort_method = board.default_sort_order.to_sym if board&.default_sort_order
 
       sort_method = options.delete(:sort_method) || default_sort_method
-      self.public_send(sort_method)
+      public_send(sort_method)
     end
 
     def status_collection
@@ -133,7 +133,7 @@ class Post < ApplicationRecord
   end
 
   def update_last_activity_at
-    self.touch :last_activity_at
+    touch :last_activity_at
   end
 
   def notify_slack

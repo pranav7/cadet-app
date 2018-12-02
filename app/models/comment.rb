@@ -23,7 +23,7 @@ class Comment < ApplicationRecord
   end
 
   def note?
-    !!self.private
+    !!private
   end
 
   def user

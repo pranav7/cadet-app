@@ -511,7 +511,6 @@ Style/PerlBackrefs:
 # SupportedStyles: compact, exploded
 Style/RaiseArgs:
   Exclude:
-    - 'app/controllers/application_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

@@ -517,8 +517,6 @@ Style/RaiseArgs:
 # Cop supports --auto-correct.
 Style/RedundantBegin:
   Exclude:
-    - 'app/controllers/concerns/set_current_company.rb'
-    - 'app/controllers/users/invitations_controller.rb'
 
 # Offense count: 7
 # Cop supports --auto-correct.

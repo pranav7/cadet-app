@@ -11,32 +11,30 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # POST /resource/invitation
   def create
-    begin
-      validate_role
-      validate_membership
+    validate_role
+    validate_membership
 
-      self.resource = find_or_invite_resource do |user|
-        user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
-        user.skip_invitation = true if params[:send_invitation] != "true"
-      end
-
-      resource_invited = resource.errors.empty?
-
-      yield resource if block_given?
-
-      if resource_invited
-        if is_flashing_format? && resource.invitation_sent_at
-          set_flash_message :notice, :send_instructions, email: resource.email
-        end
-
-        respond_with resource, location: admin_users_path
-      else
-        respond_with_navigational(resource) { redirect_to admin_users_path }
-      end
-    rescue StandardError => e
-      flash[:error] = e.message
-      redirect_to admin_users_path
+    self.resource = find_or_invite_resource do |user|
+      user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
+      user.skip_invitation = true if params[:send_invitation] != "true"
     end
+
+    resource_invited = resource.errors.empty?
+
+    yield resource if block_given?
+
+    if resource_invited
+      if is_flashing_format? && resource.invitation_sent_at
+        set_flash_message :notice, :send_instructions, email: resource.email
+      end
+
+      respond_with resource, location: admin_users_path
+    else
+      respond_with_navigational(resource) { redirect_to admin_users_path }
+    end
+  rescue StandardError => e
+    flash[:error] = e.message
+    redirect_to admin_users_path
   end
 
   def edit

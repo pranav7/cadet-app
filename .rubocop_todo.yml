@@ -444,14 +444,12 @@ Style/IfUnlessModifier:
 # Cop supports --auto-correct.
 Style/InfiniteLoop:
   Exclude:
-    - 'app/models/user.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.
 # Configuration parameters: InverseMethods, InverseBlocks.
 Style/InverseMethods:
   Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

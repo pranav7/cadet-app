@@ -144,7 +144,7 @@ class User < ApplicationRecord
     return username unless taken_usernames.include?(username)
 
     count = 1
-    while true
+    loop do
       new_username = "#{username}-#{count}"
       return new_username unless taken_usernames.include?(new_username)
       count += 1

@@ -33,7 +33,7 @@ class Users::InvitationsController < Devise::InvitationsController
       else
         respond_with_navigational(resource) { redirect_to admin_users_path }
       end
-    rescue => e
+    rescue StandardError => e
       flash[:error] = e.message
       redirect_to admin_users_path
     end

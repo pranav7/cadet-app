@@ -553,10 +553,6 @@ Style/RegexpLiteral:
 # SupportedStyles: implicit, explicit
 Style/RescueStandardError:
   Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/admin/users_controller.rb'
-    - 'app/controllers/concerns/set_current_company.rb'
-    - 'app/controllers/users/invitations_controller.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

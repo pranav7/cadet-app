@@ -42,7 +42,7 @@ class Admin::UsersController < Admin::AdminController
 
       flash[:success] = "Your changes were saved!"
       redirect_to admin_user_path(@user)
-    rescue
+    rescue StandardError
       flash[:error] = "We couldn't save the changes"
       render :edit
     end

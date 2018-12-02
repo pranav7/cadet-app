@@ -6,7 +6,7 @@ module SetCurrentCompany
     def current_company
       begin
         @current_company ||= Company.find_by_subdomain!(request.subdomains.first)
-      rescue
+      rescue StandardError
         not_found
       end
     end

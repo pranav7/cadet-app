@@ -76,7 +76,7 @@ class Admin::PostsController < Admin::AdminController
 
       flash[:success] = "Post was deleted!"
       redirect_to admin_board_path(post.board)
-    rescue
+    rescue StandardError
       flash[:error] = "Something went wrong while deleting the post"
       redirect_to board_post_path(board, post)
     end

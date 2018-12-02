@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
-  enum status: %w(open planned developing released closed)
+  enum status: %w[open planned developing released closed]
 
   scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }

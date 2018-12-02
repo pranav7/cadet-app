@@ -4,7 +4,7 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  %w(404 422 500 503).each do |code|
+  %w[404 422 500 503].each do |code|
     get code, to: "errors#show", code: code
   end
   get :trial_expired, to: "errors#trial_expired", as: :trial_expired

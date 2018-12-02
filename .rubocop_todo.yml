@@ -492,11 +492,7 @@ Style/NumericLiterals:
 Style/PercentLiteralDelimiters:
   Exclude:
     - 'app/lib/cadet/html/pipeline/non_linking_mention_filter.rb'
-    - 'app/models/company.rb'
-    - 'app/models/post.rb'
     - 'config/deploy/production.rb'
-    - 'config/initializers/friendly_id.rb'
-    - 'config/routes.rb'
     - 'config/spring.rb'
 
 # Offense count: 4

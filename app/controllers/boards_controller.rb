@@ -6,9 +6,7 @@ class BoardsController < ApplicationController
       @boards = current_company.boards.non_private
     end
 
-    if @boards.count == 1
-      return redirect_to(board_path(@boards.first))
-    end
+    return redirect_to(board_path(@boards.first)) if @boards.count == 1
 
     @page_title = "Boards - #{current_company.name}"
   end

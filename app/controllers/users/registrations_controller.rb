@@ -99,8 +99,6 @@ class Users::RegistrationsController < Devise::RegistrationsController
   private
 
   def ensure_app_subdomain
-    unless request.subdomains.first == "app"
-      redirect_to new_user_registration_url(subdomain: "app")
-    end
+    redirect_to new_user_registration_url(subdomain: "app") unless request.subdomains.first == "app"
   end
 end

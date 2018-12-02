@@ -29,9 +29,7 @@ class PostsController < ApplicationController
     post.votes.build(user: current_user)
 
     if post.save
-      unless current_user.part_of?(current_company)
-        current_user.companies << current_company
-      end
+      current_user.companies << current_company unless current_user.part_of?(current_company)
     else
       # Hanlde Post Error
     end

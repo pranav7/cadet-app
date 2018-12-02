@@ -425,20 +425,6 @@ Style/HashSyntax:
 # Cop supports --auto-correct.
 Style/IfUnlessModifier:
   Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/boards_controller.rb'
-    - 'app/controllers/comments_controller.rb'
-    - 'app/controllers/concerns/set_current_company.rb'
-    - 'app/controllers/concerns/validate_company_expiry.rb'
-    - 'app/controllers/posts_controller.rb'
-    - 'app/controllers/users/invitations_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/controllers/users/sessions_controller.rb'
-    - 'app/controllers/votes_controller.rb'
-    - 'app/helpers/application_helper.rb'
-    - 'app/workers/trial_expired_worker.rb'
-    - 'app/workers/trial_reminder_worker.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

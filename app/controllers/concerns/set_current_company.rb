@@ -10,9 +10,7 @@ module SetCurrentCompany
     end
 
     before_action do
-      unless request.subdomains.first == "app"
-        Current.company = current_company
-      end
+      Current.company = current_company unless request.subdomains.first == "app"
     end
   end
 end

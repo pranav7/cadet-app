@@ -24,9 +24,7 @@ class Users::InvitationsController < Devise::InvitationsController
     yield resource if block_given?
 
     if resource_invited
-      if is_flashing_format? && resource.invitation_sent_at
-        set_flash_message :notice, :send_instructions, email: resource.email
-      end
+      set_flash_message :notice, :send_instructions, email: resource.email if is_flashing_format? && resource.invitation_sent_at
 
       respond_with resource, location: admin_users_path
     else
@@ -93,8 +91,6 @@ class Users::InvitationsController < Devise::InvitationsController
     return unless user
 
     membership = current_company.memberships.where(user: user).first
-    if membership
-      raise "Oops! A user with this email already exists."
-    end
+    raise "Oops! A user with this email already exists." if membership
   end
 end

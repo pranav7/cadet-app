@@ -36,9 +36,7 @@ class Admin::PostsController < Admin::AdminController
 
     post.requester = requester
     if post.save
-      unless requester.part_of?(current_company)
-        requester.companies << current_company
-      end
+      requester.companies << current_company unless requester.part_of?(current_company)
     else
       # Hanlde Post Error
     end

@@ -6,8 +6,6 @@ class TrialReminderWorker
     company = Company.find company_id
     user = company.users.find user_id
 
-    unless company.paying?
-      OnboardingMailer.trial_reminder(user, company).deliver
-    end
+    OnboardingMailer.trial_reminder(user, company).deliver unless company.paying?
   end
 end

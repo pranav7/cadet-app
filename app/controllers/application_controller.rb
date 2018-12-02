@@ -35,8 +35,6 @@ class ApplicationController < ActionController::Base
     Rails.logger.info "Request IP: #{request.ip}"
     Rails.logger.info "Request URL: #{request.method} #{request.url}"
 
-    if request.url == "https://18.218.51.86/"
-      head :not_found
-    end
+    head :not_found if request.url == "https://18.218.51.86/"
   end
 end

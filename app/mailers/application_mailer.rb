@@ -9,7 +9,7 @@ class ApplicationMailer < ActionMailer::Base
   end
 
   def signature
-    @signature ||= @user.customer_of?(@company) ? "#{@company.name}" : "Team Cadet"
+    @signature ||= @user.customer_of?(@company) ? @company.name.to_s : "Team Cadet"
   end
 
   def reply_to_address(type, post_id)

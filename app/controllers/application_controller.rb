@@ -24,7 +24,7 @@ class ApplicationController < ActionController::Base
       return "http://#{subdomain}.#{APP_CONFIG["base_domain"]}#{stored_location}"
     end
 
-    admin_boards_url(host: "#{current_user.companies.first.host}")
+    admin_boards_url(host: current_user.companies.first.host.to_s)
   end
 
   def after_sign_out_path_for(resource_or_scope)

@@ -599,10 +599,6 @@ Style/SymbolArray:
 # Cop supports --auto-correct.
 Style/UnneededInterpolation:
   Exclude:
-    - 'app/controllers/application_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/mailers/application_mailer.rb'
-    - 'config/initializers/simple_form.rb'
 
 # Offense count: 9
 # Cop supports --auto-correct.

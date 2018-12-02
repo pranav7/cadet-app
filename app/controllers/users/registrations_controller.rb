@@ -87,7 +87,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   # The path used after sign up.
   def after_sign_up_path_for(_resource)
-    admin_boards_url(host: "#{current_user.companies.first.host}")
+    admin_boards_url(host: current_user.companies.first.host.to_s)
     # super(resource)
   end
 

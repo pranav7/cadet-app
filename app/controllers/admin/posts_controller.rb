@@ -25,7 +25,7 @@ class Admin::PostsController < Admin::AdminController
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
 
-    if post_params[:user_id] && not(post_params[:user_id] == "")
+    if post_params[:user_id] && (post_params[:user_id] != "")
       requester = User.find post_params[:user_id]
       post.added_by = current_user
       post.votes.build(user: requester, added_by: current_user)

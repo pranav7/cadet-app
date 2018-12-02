@@ -5,7 +5,7 @@ class BoardPolicy
   end
 
   def accessible?
-    if @resource.private? and not(@user.admin_of?(@resource.company))
+    if @resource.private? and !@user.admin_of?(@resource.company)
       false
     else
       true

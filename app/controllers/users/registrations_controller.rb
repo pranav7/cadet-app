@@ -53,7 +53,7 @@ class Users::RegistrationsController < Devise::RegistrationsController
 
   protected
   def after_create_tasks
-    if @user.persisted? && not(@user.companies.blank?)
+    if @user.persisted? && !@user.companies.blank?
       assign_admin_role
       schedule_onboarding_emails
     end

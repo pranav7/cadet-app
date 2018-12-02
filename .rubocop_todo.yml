@@ -473,11 +473,6 @@ Style/MixinUsage:
 # Cop supports --auto-correct.
 Style/Not:
   Exclude:
-    - 'app/controllers/admin/posts_controller.rb'
-    - 'app/controllers/users/registrations_controller.rb'
-    - 'app/models/comment.rb'
-    - 'app/models/post.rb'
-    - 'app/policies/board_policy.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

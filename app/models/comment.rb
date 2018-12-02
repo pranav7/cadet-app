@@ -60,11 +60,11 @@ class Comment < ApplicationRecord
 
   private
   def should_notify_mentionee?(mentionee)
-    if note? && not(mentionee.admin_of?(post.company))
+    if note? && !mentionee.admin_of?(post.company)
       return false
     elsif mentionee == commenter
       return false
-    elsif not(BoardPolicy.new(user: mentionee, resource: post.board).accessible?)
+    elsif !BoardPolicy.new(user: mentionee, resource: post.board).accessible?
       return false
     end
 
@@ -76,11 +76,11 @@ class Comment < ApplicationRecord
   end
 
   def should_notify_requester?
-    not(note?) &&
+    !note? &&
       staff_commented? &&
       requester_not_admin? &&
       requester_not_mentioned? &&
-      not(post.board.private?)
+      !post.board.private?
   end
 
   def staff_commented?

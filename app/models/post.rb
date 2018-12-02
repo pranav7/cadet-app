@@ -85,7 +85,7 @@ class Post < ApplicationRecord
   def participants
     (manual_voters + commenters + [requester]).flatten.compact.uniq.reject do |participant|
       participant == Current.user ||
-        not(BoardPolicy.new(user: participant, resource: board).accessible?)
+        !BoardPolicy.new(user: participant, resource: board).accessible?
     end
   end
 

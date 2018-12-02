@@ -564,7 +564,6 @@ Style/RescueStandardError:
 # Whitelist: present?, blank?, presence, try
 Style/SafeNavigation:
   Exclude:
-    - 'app/controllers/admin/users_controller.rb'
 
 # Offense count: 2
 # Cop supports --auto-correct.

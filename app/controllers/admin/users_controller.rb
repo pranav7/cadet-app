@@ -37,7 +37,7 @@ class Admin::UsersController < Admin::AdminController
     begin
       @user.transaction do
         @user.save!
-        @membership.save! if @membership
+        @membership&.save!
       end
 
       flash[:success] = "Your changes were saved!"

@@ -525,14 +525,12 @@ Style/RedundantBegin:
 # Configuration parameters: AllowMultipleReturnValues.
 Style/RedundantReturn:
   Exclude:
-    - 'app/models/comment.rb'
-    - 'app/models/user.rb'
-    - 'app/policies/board_policy.rb'
 
 # Offense count: 9
 # Cop supports --auto-correct.
 Style/RedundantSelf:
   Exclude:
+    - 'config/environments/production.rb'
 
 # Offense count: 1
 # Cop supports --auto-correct.

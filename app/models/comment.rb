@@ -68,7 +68,7 @@ class Comment < ApplicationRecord
       return false
     end
 
-    return true
+    true
   end
 
   def touch_post_last_activity

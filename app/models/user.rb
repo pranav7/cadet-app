@@ -73,7 +73,7 @@ class User < ApplicationRecord
 
   def voted?(post)
     return false if votes.where(post: post).empty?
-    return true
+    true
   end
 
   # @todo Add Test
@@ -83,17 +83,17 @@ class User < ApplicationRecord
 
   def admin_of?(company)
     return false if memberships.where(company: company, role: :admin).empty?
-    return true
+    true
   end
 
   def customer_of?(company)
     return false if memberships.where(company: company, role: :customer).empty?
-    return true
+    true
   end
 
   def part_of?(company)
     return false if memberships.where(company: company).empty?
-    return true
+    true
   end
 
   def account_for(company)

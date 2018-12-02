@@ -585,7 +585,6 @@ Style/StringLiterals:
 # SupportedStyles: single_quotes, double_quotes
 Style/StringLiteralsInInterpolation:
   Exclude:
-    - 'app/controllers/application_controller.rb'
     - 'bin/yarn'
 
 # Offense count: 26

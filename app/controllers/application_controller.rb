@@ -21,7 +21,7 @@ class ApplicationController < ActionController::Base
     if stored_location
       subdomain = session[:subdomain] || current_user.companies.first.subdomain
 
-      return "http://#{subdomain}.#{APP_CONFIG["base_domain"]}#{stored_location}"
+      return "http://#{subdomain}.#{APP_CONFIG['base_domain']}#{stored_location}"
     end
 
     admin_boards_url(host: current_user.companies.first.host.to_s)

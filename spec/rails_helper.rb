@@ -4,14 +4,10 @@ ENV['RAILS_ENV'] ||= 'test'
 require File.expand_path('../../config/environment', __FILE__)
 # Prevent database truncation if the environment is production
 abort("The Rails environment is running in production mode!") if Rails.env.production?
+
 require 'rspec/rails'
 require 'capybara/rails'
 require 'capybara/rspec'
-
-Capybara.server = :puma # Until your setup is working
-Capybara.server_host = "lvh.me"
-Capybara.server_port = 4000
-Capybara.javascript_driver = :selenium
 
 # Add additional requires below this line. Rails is not loaded until this point!
 

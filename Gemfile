@@ -1,5 +1,7 @@
 source 'https://rubygems.org'
 
+ruby '2.4.2'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
@@ -64,7 +66,6 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'capybara', '~> 2.13'
-  gem "chromedriver-helper"
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing'

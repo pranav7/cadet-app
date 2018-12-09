@@ -11,12 +11,12 @@ class Admin::CompaniesController < Admin::AdminController
   end
 
   private
-    def select_menu_items
-      @main_selected = :settings
-      @sub_nav_selected = :general
-    end
+  def select_menu_items
+    @main_selected = :settings
+    @sub_nav_selected = :general
+  end
 
-    def company_params
-      params.require(:company).permit(:name)
-    end
+  def company_params
+    params.require(:company).permit(:name)
+  end
 end

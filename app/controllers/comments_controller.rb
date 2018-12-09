@@ -7,9 +7,7 @@ class CommentsController < ApplicationController
     comment.commenter = current_user
     comment.save
 
-    unless current_user.part_of?(current_company)
-      current_user.companies << current_company
-    end
+    current_user.companies << current_company unless current_user.part_of?(current_company)
 
     respond_to do |format|
       format.html do

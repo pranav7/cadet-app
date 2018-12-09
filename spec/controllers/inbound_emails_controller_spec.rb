@@ -38,5 +38,3 @@ RSpec.describe InboundEmailsController, type: :controller do
     end
   end
 end
-
-

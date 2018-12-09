@@ -10,10 +10,8 @@ class VotesController < ApplicationController
       user = current_user
       @post.votes.create(user: user)
     end
-    
-    unless user.part_of?(current_company)
-      user.companies << current_company
-    end
+
+    user.companies << current_company unless user.part_of?(current_company)
 
     respond_to do |format|
       format.html do

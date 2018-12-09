@@ -17,7 +17,7 @@ class User < ApplicationRecord
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
          :omniauthable, omniauth_providers: [:google_oauth2]
-  
+
   before_create :set_username
   after_commit :notify_slack, on: :create
   after_invitation_accepted :notify_slack_invite_accepted
@@ -28,9 +28,9 @@ class User < ApplicationRecord
   validates :username, uniqueness: true
   validates :first_name, presence: true
   validates :email,
-    uniqueness: true,
-    presence: true,
-    format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
+            uniqueness: true,
+            presence: true,
+            format: { with: /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i }
 
   def self.from_omniauth(auth)
     where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
@@ -38,7 +38,7 @@ class User < ApplicationRecord
       user.password = Devise.friendly_token[0, 20]
       user.name = auth.info.name
       # user.image = auth.info.image # assuming the user model has an image
-      # If you are using confirmable and the provider(s) you use validate emails, 
+      # If you are using confirmable and the provider(s) you use validate emails,
       # uncomment the line below to skip the confirmation emails.
       # user.skip_confirmation!
     end
@@ -46,9 +46,8 @@ class User < ApplicationRecord
 
   def self.new_with_session(params, session)
     super.tap do |user|
-      if data = session["devise.google_oauth2_data"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
+      data = session["devise.google_oauth2_data"] && session["devise.google_oauth2_data"]["extra"]["raw_info"]
+      user.email = data["email"] if data && user.email.blank?
     end
   end
 
@@ -74,7 +73,7 @@ class User < ApplicationRecord
 
   def voted?(post)
     return false if votes.where(post: post).empty?
-    return true
+    true
   end
 
   # @todo Add Test
@@ -84,17 +83,17 @@ class User < ApplicationRecord
 
   def admin_of?(company)
     return false if memberships.where(company: company, role: :admin).empty?
-    return true
+    true
   end
 
   def customer_of?(company)
     return false if memberships.where(company: company, role: :customer).empty?
-    return true
+    true
   end
 
   def part_of?(company)
     return false if memberships.where(company: company).empty?
-    return true
+    true
   end
 
   def account_for(company)
@@ -137,17 +136,18 @@ class User < ApplicationRecord
   end
 
   private
-    def create_username
-      username = name.parameterize
-      taken_usernames = User.where("username LIKE ?", "#{username}%").pluck(:username)
 
-      return username unless taken_usernames.include?(username)
+  def create_username
+    username = name.parameterize
+    taken_usernames = User.where("username LIKE ?", "#{username}%").pluck(:username)
 
-      count = 1
-      while true
-        new_username = "#{username}-#{count}"
-        return new_username unless taken_usernames.include?(new_username)
-        count += 1
-      end
+    return username unless taken_usernames.include?(username)
+
+    count = 1
+    loop do
+      new_username = "#{username}-#{count}"
+      return new_username unless taken_usernames.include?(new_username)
+      count += 1
     end
+  end
 end

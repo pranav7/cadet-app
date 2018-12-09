@@ -31,8 +31,6 @@ role :db, %w{rails@web1.getcadet.com}
 # http://capistranorb.com/documentation/getting-started/configuration/
 # Feel free to add new variables to customise your setup.
 
-
-
 # Custom SSH Options
 # ==================
 # You may pass any option but keep in mind that net/ssh understands a
@@ -42,9 +40,9 @@ role :db, %w{rails@web1.getcadet.com}
 # Global options
 # --------------
 # set :ssh_options, {
-  # keys: %w(/home/#{fetch(:user)}/.ssh/id_rsa),
-  # forward_agent: true,
-  # auth_methods: %w(publickey password)
+# keys: %w(/home/#{fetch(:user)}/.ssh/id_rsa),
+# forward_agent: true,
+# auth_methods: %w(publickey password)
 # }
 #
 # The server-based syntax can be used to override options:

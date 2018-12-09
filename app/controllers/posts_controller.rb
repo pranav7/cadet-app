@@ -39,9 +39,7 @@ class PostsController < ApplicationController
     post.votes.build(user: current_user)
 
     if post.save
-      unless current_user.part_of?(current_company)
-        current_user.companies << current_company
-      end
+      current_user.companies << current_company unless current_user.part_of?(current_company)
     else
       # Hanlde Post Error
     end
@@ -54,12 +52,12 @@ class PostsController < ApplicationController
   end
 
   private
-    def get_and_authorize_board
-      @board = current_company.boards.friendly.find(params[:board_id])
-      authorize_admin_access! if @board.private?
-    end
+  def get_and_authorize_board
+    @board = current_company.boards.friendly.find(params[:board_id])
+    authorize_admin_access! if @board.private?
+  end
 
-    def post_params
-      params.require(:post).permit(:title, :status, content_attributes: [:body])
-    end
+  def post_params
+    params.require(:post).permit(:title, :status, content_attributes: [:body])
+  end
 end

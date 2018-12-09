@@ -4,7 +4,7 @@ class Post < ApplicationRecord
 
   friendly_id :title, use: [:scoped, :slugged, :history], scope: :board
 
-  enum status: %w(open planned developing released closed)
+  enum status: %w[open planned developing released closed]
 
   scope :latest_activity, -> { order(last_activity_at: :desc).where.not(status: :closed) }
   scope :most_voted, -> { left_joins(:votes).group(:id).order('COUNT(votes.id) DESC').where.not(status: ["released", "closed"]) }
@@ -18,9 +18,9 @@ class Post < ApplicationRecord
   has_many :voters, through: :votes, source: :user
 
   belongs_to :requester,
-    class_name: "User",
-    optional: true,
-    foreign_key: "user_id"
+             class_name: "User",
+             optional: true,
+             foreign_key: "user_id"
   belongs_to :board
   # If created by an Admin on behalf of a Customer
   belongs_to :added_by, class_name: "User", optional: true
@@ -37,17 +37,17 @@ class Post < ApplicationRecord
   class << self
     def sorted(options = {})
       default_sort_method = :latest_activity
-      if board = options.delete(:board)
-        default_sort_method = board.default_sort_order.to_sym if board.default_sort_order
-      end
+      board = options.delete(:board)
+
+      default_sort_method = board.default_sort_order.to_sym if board&.default_sort_order
 
       sort_method = options.delete(:sort_method) || default_sort_method
-      self.public_send(sort_method)
+      public_send(sort_method)
     end
 
     def status_collection
       collection = {}
-      statuses.map do |key, value|
+      statuses.map do |key, _value|
         collection["##{key}"] = key
       end
 
@@ -71,8 +71,8 @@ class Post < ApplicationRecord
     requester
   end
 
-  def user=(x)
-    requester = x
+  def user=(value)
+    requester = value
   end
 
   def company
@@ -86,7 +86,7 @@ class Post < ApplicationRecord
   def participants
     (manual_voters + commenters + [requester]).flatten.compact.uniq.reject do |participant|
       participant == Current.user ||
-        not(BoardPolicy.new(user: participant, resource: board).accessible?)
+        !BoardPolicy.new(user: participant, resource: board).accessible?
     end
   end
 
@@ -129,20 +129,20 @@ class Post < ApplicationRecord
   end
 
   private
-    def set_last_activity_at
-      self.last_activity_at = Time.zone.now
-    end
+  def set_last_activity_at
+    self.last_activity_at = Time.zone.now
+  end
 
-    def update_last_activity_at
-      self.touch :last_activity_at
-    end
+  def update_last_activity_at
+    touch :last_activity_at
+  end
 
-    def notify_slack
-      return if Rails.env.test?
+  def notify_slack
+    return if Rails.env.test?
 
-      message = "*New Post - ##{board.company.subdomain}*"
-      message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
+    message = "*New Post - ##{board.company.subdomain}*"
+    message << "\n#{requester.formatted_address} posted _#{title}_ in #{board.name}"
 
-      NotifySlackJob.perform_later(message)
-    end
+    NotifySlackJob.perform_later(message)
+  end
 end

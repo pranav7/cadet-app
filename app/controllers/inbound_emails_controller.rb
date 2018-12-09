@@ -13,11 +13,11 @@ class InboundEmailsController < ApplicationController
   end
 
   private
-    def post_id
-      @email.MailboxHash.split("-").last.to_i
-    end
-    
-    def notification_type
-      @email.MailboxHash.split("-").first
-    end
+  def post_id
+    @email.MailboxHash.split("-").last.to_i
+  end
+
+  def notification_type
+    @email.MailboxHash.split("-").first
+  end
 end

@@ -61,7 +61,6 @@ group :development, :test do
   gem 'pry-rails'
 
   gem 'capybara', '~> 2.13'
-  gem "chromedriver-helper"
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing'

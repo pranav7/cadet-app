@@ -13,6 +13,7 @@ jobs:
           PGHOST: 127.0.0.1
           PGUSER: cadet
           RAILS_ENV: test
+          SELENIUM_DRIVER_URL: http://localhost:4444/wd/hub
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

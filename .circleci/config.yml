@@ -23,7 +23,7 @@ jobs:
           POSTGRES_USER: cadet
           POSTGRES_DB: cadet_test
           POSTGRES_PASSWORD: ""
-      - image: selenium/standalone-chrome:3.4.0
+      - image: selenium/standalone-chrome:latest
 
     working_directory: ~/cadet-app
 

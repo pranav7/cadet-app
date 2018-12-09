@@ -33,9 +33,7 @@ class Users::SessionsController < Devise::SessionsController
   # end
 
   private
-    def ensure_app_subdomain
-      unless request.subdomains.first == "app"
-        redirect_to new_user_session_url(subdomain: "app")
-      end
-    end
+  def ensure_app_subdomain
+    redirect_to new_user_session_url(subdomain: "app") unless request.subdomains.first == "app"
+  end
 end

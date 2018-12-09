@@ -6,8 +6,6 @@ class TrialExpiredWorker
     company = Company.find company_id
     user = company.users.find user_id
 
-    unless company.paying?
-      OnboardingMailer.trial_expired(user, company).deliver
-    end
+    OnboardingMailer.trial_expired(user, company).deliver unless company.paying?
   end
 end

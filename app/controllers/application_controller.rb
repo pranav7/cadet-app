@@ -9,32 +9,32 @@ class ApplicationController < ActionController::Base
   include AuthorizeAdminAccess
 
   protected
-    def not_found
-      raise ActionController::RoutingError.new('Not Found')
-    end
+  def not_found
+    raise ActionController::RoutingError, 'Not Found'
+  end
 
   private
-    def after_sign_in_path_for(resource)
-      return request.env['omniauth.origin'] if request.env['omniauth.origin']
+  def after_sign_in_path_for(resource)
+    return request.env['omniauth.origin'] if request.env['omniauth.origin']
 
-      if stored_location = stored_location_for(resource)
-        subdomain = session[:subdomain] || current_user.companies.first.subdomain
-        return "http://#{subdomain}.#{APP_CONFIG["base_domain"]}#{stored_location}"
-      end
+    stored_location = stored_location_for(resource)
+    if stored_location
+      subdomain = session[:subdomain] || current_user.companies.first.subdomain
 
-      admin_boards_url(host: "#{current_user.companies.first.host}")
+      return "http://#{subdomain}.#{APP_CONFIG['base_domain']}#{stored_location}"
     end
 
-    def after_sign_out_path_for(resource_or_scope)
-      request.referrer || stored_location_for(resource_or_scope) || super
-    end
+    admin_boards_url(host: current_user.companies.first.host.to_s)
+  end
 
-    def drop_naked_ip_requests
-      Rails.logger.info "Request IP: #{request.ip}"
-      Rails.logger.info "Request URL: #{request.method} #{request.url}"
+  def after_sign_out_path_for(resource_or_scope)
+    request.referrer || stored_location_for(resource_or_scope) || super
+  end
 
-      if request.url == "https://18.218.51.86/"
-        head :not_found
-      end
-    end
+  def drop_naked_ip_requests
+    Rails.logger.info "Request IP: #{request.ip}"
+    Rails.logger.info "Request URL: #{request.method} #{request.url}"
+
+    head :not_found if request.url == "https://18.218.51.86/"
+  end
 end

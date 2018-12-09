@@ -15,8 +15,9 @@ class Admin::BillingController < Admin::AdminController
   end
 
   private
-    def set_menu_items
-      @main_selected = :settings
-      @sub_nav_selected = :billing
-    end
+
+  def set_menu_items
+    @main_selected = :settings
+    @sub_nav_selected = :billing
+  end
 end

@@ -106,7 +106,7 @@ RSpec.describe User, type: :model do
       expect(user.initials).to eq("J")
     end
   end
-  
+
   describe User, "#voted?" do
     let(:company) { create :company }
     let(:user) { create :admin, company: company }

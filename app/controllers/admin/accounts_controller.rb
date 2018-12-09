@@ -13,10 +13,10 @@ class Admin::AccountsController < Admin::AdminController
     @main_selected = :customers
     @sub_nav_selected = :accounts
 
-    if params[:board]
-      @board = current_company.boards.friendly.find(params[:board])
-      @posts = @account.posts(@board).sorted(sort_method: params[:sort_by])
-    end
+    return if params[:board].blank?
+
+    @board = current_company.boards.friendly.find(params[:board])
+    @posts = @account.posts(@board).sorted(sort_method: params[:sort_by])
   end
 
   def create

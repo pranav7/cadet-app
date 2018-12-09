@@ -20,7 +20,7 @@ class Board < ApplicationRecord
   class << self
     def sort_order_collection
       sort_order_collection = {}
-      default_sort_orders.map do |key, value|
+      default_sort_orders.map do |key, _value|
         sort_order_collection[key.titleize] = key
       end
 

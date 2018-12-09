@@ -6,7 +6,7 @@ class Admin::PostsController < Admin::AdminController
       @posts = @board.posts.search(term: params[:search])
     else
       @posts = @board.posts.sorted(sort_method: params[:sort_by])
-        .reverse_chronologically
+                     .reverse_chronologically
     end
 
     @post = @board.posts.friendly.find(params[:id]) || @posts.first || nil
@@ -25,7 +25,7 @@ class Admin::PostsController < Admin::AdminController
     board = current_company.boards.friendly.find(params[:board_id])
     post = board.posts.new(post_params)
 
-    if post_params[:user_id] && not(post_params[:user_id] == "")
+    if post_params[:user_id] && (post_params[:user_id] != "")
       requester = User.find post_params[:user_id]
       post.added_by = current_user
       post.votes.build(user: requester, added_by: current_user)
@@ -36,9 +36,7 @@ class Admin::PostsController < Admin::AdminController
 
     post.requester = requester
     if post.save
-      unless requester.part_of?(current_company)
-        requester.companies << current_company
-      end
+      requester.companies << current_company unless requester.part_of?(current_company)
     else
       # Hanlde Post Error
     end
@@ -76,7 +74,7 @@ class Admin::PostsController < Admin::AdminController
 
       flash[:success] = "Post was deleted!"
       redirect_to admin_board_path(post.board)
-    rescue
+    rescue StandardError
       flash[:error] = "Something went wrong while deleting the post"
       redirect_to board_post_path(board, post)
     end

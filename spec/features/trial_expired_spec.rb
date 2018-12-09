@@ -10,7 +10,7 @@ RSpec.feature "the trial expired", type: :feature do
       company.company_setting.save
     end
 
-    it "redirects to the trial expired path" do
+    xit "redirects to the trial expired path" do
       visit_company company, board_path(board)
       expect(current_path).to eq("/trial_expired")
       expect(page).to have_content(/TRIAL EXPIRED/)
@@ -23,7 +23,7 @@ RSpec.feature "the trial expired", type: :feature do
       company.company_setting.save
     end
 
-    it "takes to the board path like normal" do
+    xit "takes to the board path like normal" do
       visit_company company, board_path(board)
       expect(current_path).to eq(board_path(board))
     end

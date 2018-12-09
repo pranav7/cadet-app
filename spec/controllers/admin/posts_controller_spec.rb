@@ -17,7 +17,7 @@ RSpec.describe Admin::PostsController, type: :controller do
       expect(post.closed?).to eq(false)
 
       put :update, params: { board_id: board.id, id: post.id, post: { status: "closed" } }
-      
+
       post.reload
       expect(post.closed?).to eq(true)
     end

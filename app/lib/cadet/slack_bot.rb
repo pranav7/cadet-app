@@ -71,43 +71,43 @@ module Cadet
     end
 
     private
-      def update_to_paying(subdomain)
-        company = Company.find_by_subdomain subdomain
+    def update_to_paying(subdomain)
+      company = Company.find_by_subdomain subdomain
 
-        if company
-          company.company_setting.billing_plan = "basic"
-          company.company_setting.expires_at = nil
-          company.company_setting.save
+      if company
+        company.company_setting.billing_plan = "basic"
+        company.company_setting.expires_at = nil
+        company.company_setting.save
 
-          "#{company.name} is now a paying customer!"
-        else
-          "Sorry! I did not find a company with subdomain: #{subdomain}"
-        end
+        "#{company.name} is now a paying customer!"
+      else
+        "Sorry! I did not find a company with subdomain: #{subdomain}"
       end
+    end
 
-      def extend_expiry(subdomain, duration)
-        company = Company.find_by_subdomain subdomain
+    def extend_expiry(subdomain, duration)
+      company = Company.find_by_subdomain subdomain
 
-        if company
-          company.company_setting.expires_at = Time.now  + duration
-          company.company_setting.save
+      if company
+        company.company_setting.expires_at = Time.now + duration
+        company.company_setting.save
 
-          "#{company.name}'s trial expires on #{company.company_setting.expires_at}"
-        else
-          "Sorry! I did not find a company with subdomain: #{subdomain}"
-        end
+        "#{company.name}'s trial expires on #{company.company_setting.expires_at}"
+      else
+        "Sorry! I did not find a company with subdomain: #{subdomain}"
       end
+    end
 
-      def get_trial_expiry(subdomain)
-        company = Company.find_by_subdomain subdomain
+    def get_trial_expiry(subdomain)
+      company = Company.find_by_subdomain subdomain
 
-        if company
-          return "#{company.name} is a paying company" if company.paying?
+      if company
+        return "#{company.name} is a paying company" if company.paying?
 
-          "#{company.name}'s trial expires on #{company.company_setting.expires_at}'"
-        else
-          "Sorry! I did not find a company with subdomain: #{subdomain}"
-        end
+        "#{company.name}'s trial expires on #{company.company_setting.expires_at}'"
+      else
+        "Sorry! I did not find a company with subdomain: #{subdomain}"
       end
+    end
   end
 end

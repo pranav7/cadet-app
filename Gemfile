@@ -1,48 +1,50 @@
 source 'https://rubygems.org'
 
+ruby '2.4.2'
+
 git_source(:github) do |repo_name|
   repo_name = "#{repo_name}/#{repo_name}" unless repo_name.include?("/")
   "https://github.com/#{repo_name}.git"
 end
 
-gem 'rails', '~> 5.2.0.rc1'
-gem "pg", "< 1.0"
-gem 'puma', '~> 3.7'
-gem 'sass-rails', '~> 5.0'
-gem 'uglifier', '>= 1.3.0'
-gem 'coffee-rails', '~> 4.2'
-gem 'turbolinks', '~> 5'
-gem 'jbuilder', '~> 2.5'
-gem 'jquery-rails'
-gem 'react-rails'
 gem 'autoprefixer-rails'
 gem 'bourbon'
-gem 'simple_form'
-gem 'slim-rails'
+gem 'coffee-rails', '~> 4.2'
 gem 'devise'
 gem 'devise_invitable', '~> 1.7.0'
-gem 'omniauth-google-oauth2'
-gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
-gem 'friendly_id', '>= 5.1.0'
-gem 'slack-ruby-client'
 gem 'eventmachine'
-gem 'faye-websocket'
-gem 'postmark-rails'
-gem 'sidekiq'
 gem 'exception_notification'
-gem 'slack-notifier' # Need for exception_notification gem
-gem 'health_check'
-gem 'octicons_helper'
-gem 'webpacker', '~> 3.0'
-gem "intercom-rails"
+gem 'faye-websocket'
+gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
+gem 'health_check'
+gem "intercom-rails"
+gem 'jbuilder', '~> 2.5'
+gem 'jquery-rails'
+gem 'octicons_helper'
+gem 'omniauth-google-oauth2'
+gem "pg", "< 1.0"
 gem "php-serialize"
+gem 'postmark-rails'
+gem 'puma', '~> 3.7'
+gem 'rails', '~> 5.2.0.rc1'
+gem 'react-rails'
+gem 'sass-rails', '~> 5.0'
+gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
+gem 'sidekiq'
+gem 'simple_form'
+gem 'slack-notifier' # Need for exception_notification gem
+gem 'slack-ruby-client'
+gem 'slim-rails'
+gem 'turbolinks', '~> 5'
+gem 'uglifier', '>= 1.3.0'
+gem 'webpacker', '~> 3.0'
 
 # All HTML Pipeline for Content Formatting Gems
-gem 'html-pipeline'
-gem 'html-pipeline-rouge_filter'
 gem 'commonmarker'
 gem 'gemoji'
+gem 'html-pipeline'
+gem 'html-pipeline-rouge_filter'
 gem 'rinku'
 gem 'sanitize'
 
@@ -62,12 +64,11 @@ group :development, :test do
 
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
-  gem "chromedriver-helper"
 
-  gem 'rspec'
-  gem 'rspec-rails', '~> 3.6'
-  gem 'rspec-mocks'
   gem 'rails-controller-testing'
+  gem 'rspec'
+  gem 'rspec-mocks'
+  gem 'rspec-rails', '~> 3.6'
 
   gem 'factory_girl_rails'
   gem 'faker', '~> 1.7.3'
@@ -77,20 +78,20 @@ end
 
 group :development do
   # Access an IRB console on exception pages or by using <%= console %> anywhere in the code.
-  gem 'web-console', '>= 3.3.0'
   gem 'listen', '>= 3.0.5', '< 3.2'
+  gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
+  gem 'rubocop', '~> 0.54.0', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
-  gem 'rubocop', '~> 0.54.0', require: false
 
   gem 'capistrano', '< 3.10.0'
-  gem 'capistrano-rails', '~> 1.3'
   gem 'capistrano-bundler', '~> 1.2'
-  gem 'capistrano-rvm'
   gem 'capistrano-npm'
-  gem 'capistrano3-puma'
+  gem 'capistrano-rails', '~> 1.3'
+  gem 'capistrano-rvm'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
+  gem 'capistrano3-puma'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

@@ -3,7 +3,7 @@ class UserPolicy
 
   def initialize(current_company:, current_user:, resource:)
     @current_company = current_company
-    @current_user= current_user
+    @current_user = current_user
     @resource = resource
   end
 
@@ -13,7 +13,7 @@ class UserPolicy
   end
 
   private
-    def editable_by_current_company?
-      resource.primary_company == current_company
-    end
+  def editable_by_current_company?
+    resource.primary_company == current_company
+  end
 end

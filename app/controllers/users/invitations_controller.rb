@@ -11,32 +11,28 @@ class Users::InvitationsController < Devise::InvitationsController
 
   # POST /resource/invitation
   def create
-    begin
-      validate_role
-      validate_membership
+    validate_role
+    validate_membership
 
-      self.resource = find_or_invite_resource do |user|
-        membership = user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
-        user.skip_invitation = true if params[:send_invitation] != "true"
-      end
-
-      resource_invited = resource.errors.empty?
-
-      yield resource if block_given?
-
-      if resource_invited
-        if is_flashing_format? && self.resource.invitation_sent_at
-          set_flash_message :notice, :send_instructions, email: self.resource.email
-        end
-
-        respond_with resource, location: admin_users_path
-      else
-        respond_with_navigational(resource) { redirect_to admin_users_path }
-      end
-    rescue => e
-      flash[:error] = e.message
-      redirect_to admin_users_path
+    self.resource = find_or_invite_resource do |user|
+      user.memberships.build(company: current_company, role: params[:role].downcase, primary: true)
+      user.skip_invitation = true if params[:send_invitation] != "true"
     end
+
+    resource_invited = resource.errors.empty?
+
+    yield resource if block_given?
+
+    if resource_invited
+      set_flash_message :notice, :send_instructions, email: resource.email if is_flashing_format? && resource.invitation_sent_at
+
+      respond_with resource, location: admin_users_path
+    else
+      respond_with_navigational(resource) { redirect_to admin_users_path }
+    end
+  rescue StandardError => e
+    flash[:error] = e.message
+    redirect_to admin_users_path
   end
 
   def edit
@@ -54,11 +50,13 @@ class Users::InvitationsController < Devise::InvitationsController
 
     super
   end
-  
+
   protected
 
   def find_or_invite_resource(&block)
-    if user = User.find_by_email(invite_params[:email])
+    user = User.find_by_email(invite_params[:email])
+
+    if user
       flash[:sucess] = "We've added #{user.name} to your company"
       user.memberships.create(company: current_company, role: params[:role].downcase)
       user
@@ -69,7 +67,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   private
 
-  def after_invite_path_for(current_inviter)
+  def after_invite_path_for(_current_inviter)
     admin_users_path
   end
 
@@ -92,9 +90,7 @@ class Users::InvitationsController < Devise::InvitationsController
     user = User.find_by_email(invite_params[:email])
     return unless user
 
-    membership = current_company.memberships.where(user: user).first 
-    if membership
-      raise "Oops! A user with this email already exists."
-    end
+    membership = current_company.memberships.where(user: user).first
+    raise "Oops! A user with this email already exists." if membership
   end
 end

@@ -4,20 +4,20 @@ Rails.application.routes.draw do
     mount Sidekiq::Web => '/sidekiq'
   end
 
-  %w(404 422 500 503).each do |code|
+  %w[404 422 500 503].each do |code|
     get code, to: "errors#show", code: code
   end
   get :trial_expired, to: "errors#trial_expired", as: :trial_expired
 
   devise_for :users, path: '',
-    path_names: { sign_in: 'login', sign_up: 'signup' },
-    controllers: {
-      sessions: 'users/sessions',
-      registrations: 'users/registrations',
-      passwords: 'users/passwords',
-      invitations: 'users/invitations',
-      omniauth_callbacks: "users/omniauth_callbacks"
-  }
+                     path_names: { sign_in: 'login', sign_up: 'signup' },
+                     controllers: {
+                       sessions: 'users/sessions',
+                       registrations: 'users/registrations',
+                       passwords: 'users/passwords',
+                       invitations: 'users/invitations',
+                       omniauth_callbacks: "users/omniauth_callbacks"
+                     }
 
   constraints subdomain: 'app' do
     get '/login', to: 'users/sessions#new'

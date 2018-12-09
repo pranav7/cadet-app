@@ -1,5 +1,5 @@
 Rails.application.configure do
-   config.webpacker.check_yarn_integrity = false  # Settings specified here will take precedence over those in config/application.rb.
+  config.webpacker.check_yarn_integrity = false # Settings specified here will take precedence over those in config/application.rb.
 
   # Code is not reloaded between requests.
   config.cache_classes = true
@@ -55,7 +55,7 @@ Rails.application.configure do
   config.log_level = :info
 
   # Prepend all log lines with the following tags.
-  config.log_tags = [ :request_id ]
+  config.log_tags = [:request_id]
 
   # Use a different cache store in production.
   # config.cache_store = :mem_cache_store
@@ -94,11 +94,11 @@ Rails.application.configure do
   config.active_record.dump_schema_after_migration = false
 
   config.middleware.use ExceptionNotification::Rack,
-    slack: {
-      webhook_url: "https://hooks.slack.com/services/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",
-      channel: "#alerts",
-      additional_parameters: {
-        mrkdwn: true
-      }
-    }
+                        slack: {
+                          webhook_url: "https://hooks.slack.com/services/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",
+                          channel: "#alerts",
+                          additional_parameters: {
+                            mrkdwn: true
+                          }
+                        }
 end

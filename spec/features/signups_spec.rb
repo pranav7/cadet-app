@@ -1,13 +1,13 @@
 require 'rails_helper'
 
-RSpec.feature "Signups", type: :feature do
-  describe "customer signup process", js: true do
+RSpec.feature "Signups" do
+  describe "customer signup process", type: :feature do
     before :each do
       @company = create :company
       @board = create :board, company: @company
     end
 
-    it "signs me up" do
+    xit "signs me up", js: true do
       visit_company @company, board_path(@board)
 
       within ".public-header" do

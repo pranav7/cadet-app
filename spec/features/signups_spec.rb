@@ -7,7 +7,7 @@ RSpec.feature "Signups" do
       @board = create :board, company: @company
     end
 
-    it "signs me up", js: true do
+    xit "signs me up", js: true do
       visit_company @company, board_path(@board)
 
       within ".public-header" do

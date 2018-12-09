@@ -9,7 +9,7 @@ RSpec.feature "the login process" do
       @user = create :user, password: "password", password_confirmation: 'password'
     end
 
-    it "logs me in", js: true do
+    xit "logs me in", js: true do
       visit_company @company, board_path(@board)
       click_link "Log in"
       perform_login
@@ -17,7 +17,7 @@ RSpec.feature "the login process" do
       expect(page).to have_content("Signed in successfully.")
     end
 
-    it "takes me back to the same page", js: true do
+    xit "takes me back to the same page", js: true do
       post = create :post, board: @board, requester: @user
 
       visit_company @company, board_post_path(@board, post)

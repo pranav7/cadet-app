@@ -1,3 +1,6 @@
+# @todo: Fix Feature Specs on CircleCI
+# https://docs.knapsackpro.com/2017/circleci-2-0-capybara-feature-specs-selenium-webdriver-with-chrome-headless
+
 JS_DRIVER = :selenium_chrome_headless
 
 Capybara.default_driver = :rack_test

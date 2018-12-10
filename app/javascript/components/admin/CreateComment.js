@@ -49,6 +49,7 @@ class CreateComment extends Component {
         this.setState({ comment: '' });
       })
       .catch(response => {
+        // TODO: Add Notification Toast
         console.log("Error Creating Comment", response)
       })
   }
@@ -77,7 +78,7 @@ class CreateComment extends Component {
 
   renderComment() {
     return (
-      <Tab.Pane>
+      <Tab.Pane attached={false} >
         <Form onSubmit={this.submitComment}>
           <TextArea
             value={this.state.comment}
@@ -101,7 +102,7 @@ class CreateComment extends Component {
 
   renderNote() {
     return (
-      <Tab.Pane>
+      <Tab.Pane id="note-container" attached={false} >
         <Form onSubmit={this.submitNote}>
           <TextArea
             value={this.state.note}
@@ -129,7 +130,7 @@ class CreateComment extends Component {
     ]
 
     return (
-      <Tab panes={panes} />
+      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
     )
   }
 }

@@ -35,7 +35,7 @@ class PostDetails extends Component {
   }
 
   getPost() {
-    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
+    this.props.fetchPost(this.state.boardId, this.state.postId);
   }
 
   render() {
@@ -130,11 +130,13 @@ class PostDetails extends Component {
   }
 }
 
-const mapStateToProps = (state) => {
-  return {
-    isFetching: state.isFetching,
-    post: state.selectedPost
-  }
-}
+const mapStateToProps = (state) => ({
+  isFetching: state.isFetching,
+  post: state.selectedPost
+});
 
-export default connect(mapStateToProps)(PostDetails);
+const mapDispatchToProps = (dispatch) => ({
+  fetchPost: (boardId, postId) => { dispatch(fetchPost(boardId, postId)) }
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

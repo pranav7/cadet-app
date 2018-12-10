@@ -25,7 +25,7 @@ before_script:
 
   - cp config/cadet_config.example.yml config/cadet_config.yml
   - cp config/secrets.example.yml config/secrets.yml
-  - cp config/database.yml.ci config/database.yml
+  # - cp config/database.yml.ci config/database.yml
 
   - bundle check || bundle install --jobs $(nproc)
   - yarn install

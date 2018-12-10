@@ -34,7 +34,7 @@ Rails.application.routes.draw do
     resource :billing, only: [:show], controller: :billing
 
     get "boards/:board_id/posts/:post_id",
-      to: redirect("%{board_id}/posts/%{post_id}")
+        to: redirect("%{board_id}/posts/%{post_id}")
 
     resources :boards, path: "" do
       resources :posts, except: [:new, :edit]

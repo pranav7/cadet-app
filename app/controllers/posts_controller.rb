@@ -25,9 +25,9 @@ class PostsController < ApplicationController
     if params[:search] && params[:search] != ""
       @posts = @board.posts.search(term: params[:search])
     else
-      @posts = @board.posts.
-        sorted(board: @board, sort_method: params[:sort_by]).
-        reverse_chronologically
+      @posts = @board.posts
+                     .sorted(board: @board, sort_method: params[:sort_by])
+                     .reverse_chronologically
     end
 
     @posts = paginate @posts, per_page: 25

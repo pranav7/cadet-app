@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { Container, Icon } from 'semantic-ui-react'
 
 import Posts from 'API/Posts';
 import UpvoteButton from 'Components/UpvoteButton';
@@ -125,7 +126,12 @@ class PostDetails extends Component {
         </React.Fragment>
       )
     } else {
-      return(<div>Loading Post ...</div>)
+      return(
+        <Container className="padded full">
+          <Icon loading name='circle notch' size="large" color="grey" />
+          <span className="soft">Loading ...</span>
+        </Container>
+      )
     }
   }
 }

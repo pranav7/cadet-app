@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
+import { Container, Icon } from 'semantic-ui-react'
 
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
@@ -59,7 +60,9 @@ class PostList extends React.Component {
     } else if (!this.props.noPosts &&
       this.props.isFetchingPosts) {
       return(
-        <div className="ui active centered inline loader" />
+        <Container textAlign="center" className="top padded">
+          <Icon loading name='circle notch' size="large" color="grey" />
+        </Container>
       );
     } else {
       return(

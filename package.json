@@ -16,6 +16,7 @@
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-dom": "^16.4.2",
+    "react-octicon": "^3.0.1",
     "react-redux": "^5.1.1",
     "react-render-html": "^0.6.0",
     "react-router-dom": "^4.3.1",

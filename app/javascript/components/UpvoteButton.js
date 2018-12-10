@@ -51,6 +51,7 @@ class UpvoteButton extends React.Component {
             .modal({ duration: 250 })
             .modal("show")
         }
+        // TODO: Add Notification Toast in else condition
       });
   }
 

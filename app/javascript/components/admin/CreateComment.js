@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Form, TextArea, Tab } from 'semantic-ui-react';
+import {
+  Form,
+  TextArea,
+  Tab,
+  Button
+} from 'semantic-ui-react';
 
 import Posts from 'API/Posts';
 import { fetchPost } from 'Modules/Posts/Actions';
@@ -65,6 +70,7 @@ class CreateComment extends Component {
         this.setState({ note: '' });
       })
       .catch(response => {
+        // TODO: Add Notification Toast
         console.log("Error Creating Comment", response)
       })
   }
@@ -82,7 +88,12 @@ class CreateComment extends Component {
             rows="4"
           />
           
-          <button type="submit">Create Comment</button>
+          <Button type="submit" size="small">Reply</Button>
+          <a className="styling-with-markdown"
+            href="https://guides.github.com/features/mastering-markdown/"
+            target="_blank" >
+            <span className="label">Styling with Markdown is supported</span>
+          </a>
         </Form>
       </Tab.Pane>
     )
@@ -100,7 +111,12 @@ class CreateComment extends Component {
             placeholder="Type your reply ..."
             rows="4" />
 
-          <button type="submit">Create Note</button>
+          <Button type="submit" size="small">Add Note</Button>
+          <a className="styling-with-markdown"
+            href="https://guides.github.com/features/mastering-markdown/"
+            target="_blank" >
+            <span className="label">Styling with Markdown is supported</span>
+          </a>
         </Form>
       </Tab.Pane>
     )

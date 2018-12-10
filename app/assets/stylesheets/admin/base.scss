@@ -195,6 +195,12 @@ body.admin {
     align-items: center;
     justify-content: space-between;
   }
+
+  a.styling-with-markdown {
+    span.label {
+      margin-left: 0;
+    }
+  }
 }
 
 // Start Table Sort CSS

@@ -68,7 +68,7 @@ class Posts {
           resolve(response);
         })
         .catch(response => {
-          reject(response.status);
+          reject(response);
         })
     })
   }

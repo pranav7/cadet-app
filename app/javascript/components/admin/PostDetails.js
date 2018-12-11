@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Icon } from 'semantic-ui-react'
+import { Container, Icon } from 'semantic-ui-react';
 
 import Posts from 'API/Posts';
 import UpvoteButton from 'Components/UpvoteButton';

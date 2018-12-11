@@ -5229,6 +5229,10 @@ react-attr-converter@^0.3.1:
   version "0.3.1"
   resolved "https://registry.yarnpkg.com/react-attr-converter/-/react-attr-converter-0.3.1.tgz#4a2abf6d907b7ddae4d862dfec80e489ce41ad6e"
 
+react-device-detect@^1.6.1:
+  version "1.6.1"
+  resolved "https://registry.yarnpkg.com/react-device-detect/-/react-device-detect-1.6.1.tgz#3730e74e25fd79be19ac99fc6a07e751255b9232"
+
 react-dom@>=0.14.0:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-15.6.1.tgz#2cb0ed4191038e53c209eb3a79a23e2a4cf99470"
@@ -5246,6 +5250,10 @@ react-dom@^16.4.2:
     loose-envify "^1.1.0"
     object-assign "^4.1.1"
     prop-types "^15.6.0"
+
+react-icons@^3.2.2:
+  version "3.2.2"
+  resolved "https://registry.yarnpkg.com/react-icons/-/react-icons-3.2.2.tgz#7b1dc795004a119a35175e62ecef91e5c9c90962"
 
 react-is@^16.3.2, react-is@^16.6.0:
   version "16.6.1"

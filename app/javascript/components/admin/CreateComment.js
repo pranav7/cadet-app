@@ -104,7 +104,7 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small">Reply</Button>
+                <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
                 { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
               </Grid.Column>
 
@@ -136,7 +136,7 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small">Add Note</Button>
+                <Button type="submit" size="small" disabled={this.state.note == ''}>Add Note</Button>
                 { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
               </Grid.Column>
 

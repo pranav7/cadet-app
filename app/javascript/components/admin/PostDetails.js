@@ -76,7 +76,7 @@ class PostDetails extends Component {
               </div>
             </div>
 
-            <div className="post-content vertical padded">
+            <div className="post-content">
               <Comment
                 content={this.props.post.content}
                 created_at={this.props.post.created_at}

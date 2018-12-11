@@ -9,7 +9,7 @@ class DeviseMailer < Devise::Mailer
     @no_signatures = true
 
     options[:subject] = "Help us make #{@company.name} better"
-    options[:from] = from_address(@invited_by.name)
+    options[:from] = from_address("#{@invited_by.name} via Cadet")
 
     super
   end
@@ -17,7 +17,7 @@ class DeviseMailer < Devise::Mailer
   private
 
   def from_address(display_name)
-    address = Mail::Address.new "notifications@getcadet.com"
+    address = Mail::Address.new("notifications@getcadet.com")
     address.display_name = display_name
     address.format
   end

@@ -13,10 +13,7 @@ development:
 # Do not set this db to the same as development or production.
 test:
   <<: *default
-  username: postgres
-  password: postgres
-  host: <%= ENV['DB_HOST'] %>
-  database: ci_db
+  database: cadet_test
 
 production:
   <<: *default

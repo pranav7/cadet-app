@@ -47,7 +47,15 @@ class Admin::PostsController < Admin::AdminController
       flash[:error] = "Something went wrong"
     end
 
-    redirect_back fallback_location: admin_board_post_path(@post)
+    respond_to do |format|
+      format.json do
+        head :ok
+      end
+
+      format.html do
+        redirect_back fallback_location: admin_board_post_path(@post)
+      end
+    end
   end
 
   def destroy

@@ -2,7 +2,7 @@
 lock "3.9.1"
 
 set :application, "cadet-app"
-set :repo_url, "git@gitlab.com:iarepranav/cadet.git"
+set :repo_url, 'git@github.com:pranav7/cadet-app.git'
 set :user, 'rails'
 
 # Default value for :format is :airbrussh.

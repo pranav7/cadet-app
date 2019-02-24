@@ -184,4 +184,62 @@ RSpec.describe User, type: :model do
       expect(user.primary_company).to eq(company)
     end
   end
+
+  describe "#from_omniauth" do
+    it "returns a user if one already exists" do
+      user = create :user, provider: "google_oauth2", uid: "1234578910"
+      auth = Hashie::Mash.new(
+        provider: "google_oauth2",
+        uid: "1234578910",
+        info: {
+          name: user.name,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name
+        },
+        credentials: {},
+        extra: {
+          raw_info: {
+            sub: "",
+            name: user.name,
+            given_name: user.first_name,
+            family_name: user.last_name,
+            email: user.email,
+            email_verified: true,
+            locale: "en"
+          }
+        }
+      )
+
+      expect(User.from_omniauth(auth)).to eq(user)
+    end
+
+    it "creates a new user nd returns it" do
+      user = build :user
+      auth = Hashie::Mash.new(
+        provider: "google_oauth2",
+        uid: "1234578910",
+        info: {
+          name: user.name,
+          email: user.email,
+          first_name: user.first_name,
+          last_name: user.last_name
+        },
+        credentials: {},
+        extra: {
+          raw_info: {
+            sub: "",
+            name: user.name,
+            given_name: user.first_name,
+            family_name: user.last_name,
+            email: user.email,
+            email_verified: true,
+            locale: "en"
+          }
+        }
+      )
+
+      expect(User.from_omniauth(auth).email).to eq(user.email)
+    end
+  end
 end

@@ -1,8 +1,8 @@
 development:
   base_domain: lvh.me:3000
   google_oauth2: &google_oauth2
-    client_id: "190695340637-cr7bskeeu590eds6l28ocjg8gm11dbh0.apps.googleusercontent.com"
-    client_secret: "w-CSRjdjZ5Jh73_QKhnxXtCl"
+    client_id: ""
+    client_secret: ""
   mixpanel_token: ""
   slack: &slack
     channel: '#test'

@@ -40,9 +40,9 @@ class Posts {
     });
   }
 
-  update() {
+  update(data) {
     const api = new API(`/admin/${this.boardId}/posts/${this.postId}`, {
-      method: 'post',
+      method: 'put',
       data
     });
 

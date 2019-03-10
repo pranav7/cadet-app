@@ -47,7 +47,10 @@ class PostDetails extends Component {
           <div className="c-main-pane">
             <div className="top-action-bar">
               <div className="item">
-                <StatusDropdown />
+                <StatusDropdown
+                  boardId={this.state.boardId}
+                  postId={this.state.postId}
+                />
               </div>
 
               <div className="item">

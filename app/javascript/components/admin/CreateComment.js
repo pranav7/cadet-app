@@ -32,7 +32,7 @@ class CreateComment extends Component {
 
   handleCmdEnter(e, resolve) {
     if(e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
-      resolve()
+      resolve();
     }
   }
 
@@ -52,7 +52,7 @@ class CreateComment extends Component {
           body: this.state.comment
         }
       }
-    }
+    };
 
     postsApi.comment(data)
       .then(response => {
@@ -61,8 +61,8 @@ class CreateComment extends Component {
       })
       .catch(response => {
         // TODO: Add Notification Toast
-        console.log("Error Creating Comment", response)
-      })
+        console.log("Error Creating Comment", response);
+      });
   }
 
   submitNote() {

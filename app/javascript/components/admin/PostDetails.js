@@ -130,14 +130,14 @@ class PostDetails extends Component {
             </div>
           </div>
         </React.Fragment>
-      )
+      );
     } else {
       return(
         <Container className="padded full">
           <Icon loading name='circle notch' size="large" color="grey" />
           <span className="soft">Loading ...</span>
         </Container>
-      )
+      );
     }
   }
 }
@@ -148,7 +148,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPost: (boardId, postId) => { dispatch(fetchPost(boardId, postId)) }
+  fetchPost: (boardId, postId) => { dispatch(fetchPost(boardId, postId)); }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

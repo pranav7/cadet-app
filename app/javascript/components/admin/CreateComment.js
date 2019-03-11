@@ -161,7 +161,7 @@ class CreateComment extends Component {
           <FiCornerDownLeft />
         </kbd>
       </div>
-    )
+    );
   }
 
   renderWithMarkdown() {
@@ -172,18 +172,18 @@ class CreateComment extends Component {
         <GoMarkdown size="1.25em" />
         <span className="label">Markdown is supported</span>
       </a>
-    )
+    );
   }
 
   render() {
     const panes = [
       { menuItem: 'Reply', render: () => this.renderComment() },
       { menuItem: 'Note', render: () =>  this.renderNote() }
-    ]
+    ];
 
     return (
       <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-    )
+    );
   }
 }
 

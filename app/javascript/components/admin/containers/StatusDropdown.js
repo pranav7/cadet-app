@@ -1,7 +1,9 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
 import { Dropdown } from 'semantic-ui-react';
 
 import Posts from 'API/Posts';
+import { fetchPost, fetchPosts } from 'Modules/Posts/Actions';
 
 const statusOptions = [
   {
@@ -43,10 +45,11 @@ class StatusDropdown extends Component {
 
     postsApi.update(data)
       .then(response => {
-        console.log("updated", response);
+        this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
+        this.props.dispatch(fetchPosts(this.props.boardId));
       })
       .catch(response => {
-        console.log("failed", response);
+        console.log("Failed", response);
       });
   }
 
@@ -64,4 +67,4 @@ class StatusDropdown extends Component {
   }
 }
 
-export default StatusDropdown;
+export default connect()(StatusDropdown);

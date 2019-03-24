@@ -8,6 +8,7 @@ import CreateComment from 'AdminComponents/CreateComment';
 import User from 'Components/User';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
+import StatusDropdown from 'AdminContainers/StatusDropdown';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -46,10 +47,18 @@ class PostDetails extends Component {
           <div className="c-main-pane">
             <div className="top-action-bar">
               <div className="item">
+                <StatusDropdown
+                  boardId={this.state.boardId}
+                  postId={this.state.postId}
+                />
+              </div>
+
+              <div className="item">
                 <a href="" id="edit-post-btn">
                   <i className="edit outline large icon"></i>
                 </a>
               </div>
+
               <div className="item">
                 <a href="" id="delete-post-btn">
                   <i className="trash alternate outline large icon"></i>
@@ -124,14 +133,14 @@ class PostDetails extends Component {
             </div>
           </div>
         </React.Fragment>
-      )
+      );
     } else {
       return(
         <Container className="padded full">
           <Icon loading name='circle notch' size="large" color="grey" />
           <span className="soft">Loading ...</span>
         </Container>
-      )
+      );
     }
   }
 }
@@ -142,7 +151,7 @@ const mapStateToProps = (state) => ({
 });
 
 const mapDispatchToProps = (dispatch) => ({
-  fetchPost: (boardId, postId) => { dispatch(fetchPost(boardId, postId)) }
+  fetchPost: (boardId, postId) => { dispatch(fetchPost(boardId, postId)); }
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

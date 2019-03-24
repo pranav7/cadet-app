@@ -7,7 +7,7 @@ class Posts {
   }
 
   getOne() {
-    const api = new API(`/admin/${this.boardId}/posts/${this.postId}`)
+    const api = new API(`/admin/${this.boardId}/posts/${this.postId}`);
 
     return new Promise((resolve, reject) => {
       api.execute()
@@ -35,14 +35,14 @@ class Posts {
           });
         })
         .catch(response => {
-          reject(response.status)
-        })
+          reject(response.status);
+        });
     });
   }
 
-  update() {
+  update(data) {
     const api = new API(`/admin/${this.boardId}/posts/${this.postId}`, {
-      method: 'post',
+      method: 'put',
       data
     });
 
@@ -70,8 +70,8 @@ class Posts {
         })
         .catch(response => {
           reject(response.status);
-        })
-    })
+        });
+    });
   }
 
   upvote() {
@@ -86,14 +86,14 @@ class Posts {
         })
         .catch(response => {
           reject(response);
-        })
-    })
+        });
+    });
   }
 
   downvote() {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
       method: "delete"
-    })
+    });
 
     return new Promise((resolve, reject) => {
       api.execute()
@@ -102,8 +102,8 @@ class Posts {
         })
         .catch(response => {
           reject(response.status);
-        })
-    })
+        });
+    });
   }
 }
 

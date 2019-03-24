@@ -47,9 +47,6 @@ class StatusDropdown extends Component {
       .then(response => {
         this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
         this.props.dispatch(fetchPosts(this.props.boardId));
-      })
-      .catch(response => {
-        console.log("Failed", response);
       });
   }
 

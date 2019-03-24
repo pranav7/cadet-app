@@ -56,9 +56,10 @@ class StatusDropdown extends Component {
   render() {
     return(
       <span>
-        Status{' '}
         <Dropdown
-          inline
+          className="posts__status-dropdown"
+          simple
+          text="Status"
           options={statusOptions}
           onChange={this.handleChange}
         />

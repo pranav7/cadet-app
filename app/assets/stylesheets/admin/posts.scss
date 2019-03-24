@@ -44,49 +44,14 @@ body.admin.posts {
 
     .item {
       padding-right: $base-size;
-
-      i {
-        color: $dark;
-      }
     }
 
-    .status-dropdown {
-      background: none;
-      border: none;
-      min-width: 6 * $base-size;
-      min-height: 2 * $base-size;
-      box-shadow: none;
-      padding: 0;
-
-      .menu {
-        border-top-width: 1px !important;
-        border-color: $lighter;
-        min-width: 8rem;
-
-        & > .item {
-          border-top: 2px solid $lightest;
-          padding: $base-size !important;
-        }
-
-        & > .item:hover {
-          background: $white;
-          border-top: 2px solid $primary-blue;
-        }
-      }
-
-      & > .default.text {
-        color: $dark; 
-        font-weight: bold;
-      }
-
-      & > .dropdown.icon {
-        color: $dark;
-        left: -4px;
-      }
+    .item i {
+      color: $darker;
     }
 
     .item a {
-      color: $dark; 
+      color: $darker; 
       font-weight: bold;
       cursor: pointer;
     }
@@ -110,5 +75,12 @@ body.admin.posts {
 
   .activity-header {
     padding-top: 8px;
+  }
+
+  .posts__status-dropdown {
+    & > .text {
+      color: $darker; 
+      font-weight: bold;
+    }
   }
 }

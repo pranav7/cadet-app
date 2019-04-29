@@ -10,7 +10,7 @@ RSpec.describe VotesController, type: :controller do
     sign_in user
   end
 
-  describe "#create" do
+  describe "POST create" do
     let(:_post) { create :post, board: board }
 
     it "creates a vote" do
@@ -28,7 +28,7 @@ RSpec.describe VotesController, type: :controller do
     end
   end
 
-  describe "#destroy" do
+  describe "DELETE destroy" do
     let(:_post) { create :post, board: board }
     let!(:vote) { create :vote, post: _post, user: user }
 

@@ -15,7 +15,7 @@ class ApplicationController < ActionController::Base
   end
 
   private
-  
+
   def after_sign_in_path_for(resource)
     return request.env['omniauth.origin'] if request.env['omniauth.origin']
 

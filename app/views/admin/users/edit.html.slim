@@ -11,11 +11,12 @@
               | Edit #{@user.name}
           .vertical.padded
             = simple_form_for @user, url: admin_user_path(@user), html: { class: "ui custom form" } do |form|
-              .two.fields
-                = form.input :first_name, label: "First Name"
-                = form.input :last_name, label: "Last Name"
-              = form.input :email, label: "Email"
-              = form.input :job_title, label: "Job Title"
+              -if user_policy.editable?
+                .two.fields
+                  = form.input :first_name, label: "First Name"
+                  = form.input :last_name, label: "Last Name"
+                = form.input :email, label: "Email"
+                = form.input :job_title, label: "Job Title"
               .field
                 = form.input :role,
                   label: "Role",

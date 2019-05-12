@@ -8,7 +8,14 @@
     placeholder: "Default Sort Order for Posts",
     collection: Board.sort_order_collection,
     input_html: { class: "ui dropdown" }
-  = form.input :private, label: "Private", wrapper: :ui_checkbox, hint: "Private Boards are only accessible to the Admins of the company."
+  = form.input :private,
+    label: "Private",
+    wrapper: :ui_checkbox,
+    hint: "Private Boards are only accessible to the Admins of the company"
+  = form.input :unlisted,
+    label: "Unlisted",
+    wrapper: :ui_checkbox,
+    hint: "Unlisted Boards are not indexed on Google"
 
   - if @board.new_record?
     = form.submit "Add Board", class: "ui button"

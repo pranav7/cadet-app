@@ -15,7 +15,7 @@
   = form.input :unlisted,
     label: "Unlisted",
     wrapper: :ui_checkbox,
-    hint: "Unlisted Boards are not indexed on Google"
+    hint: "Unlisted Boards are not indexed on search engines"
 
   - if @board.new_record?
     = form.submit "Add Board", class: "ui button"

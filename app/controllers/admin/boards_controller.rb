@@ -60,6 +60,8 @@ class Admin::BoardsController < Admin::AdminController
   private
 
   def board_params
-    params.require(:board).permit(:name, :description, :private, :default_sort_order)
+    params
+      .require(:board)
+      .permit(:name, :description, :private, :default_sort_order, :unlisted)
   end
 end

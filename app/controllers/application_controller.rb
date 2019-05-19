@@ -10,11 +10,13 @@ class ApplicationController < ActionController::Base
   include Rails::Pagination
 
   protected
+
   def not_found
     raise ActionController::RoutingError, 'Not Found'
   end
 
   private
+
   def after_sign_in_path_for(resource)
     return request.env['omniauth.origin'] if request.env['omniauth.origin']
 

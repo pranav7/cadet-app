@@ -22,12 +22,7 @@ class Admin::UsersController < Admin::AdminController
   def update
     @user = current_company.users.find(params[:id])
 
-    unless user_policy.editable?
-      flash[:error] = "You do not have access to edit this user"
-      return redirect_to admin_user_path(@user)
-    end
-
-    @user.assign_attributes(user_params)
+    @user.assign_attributes(user_params) if user_policy.editable?
 
     if user_params[:role]
       @membership = @user.membership_for(current_company)

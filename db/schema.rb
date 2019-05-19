@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_04_17_113849) do
+ActiveRecord::Schema.define(version: 2019_05_12_225649) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -67,6 +67,7 @@ ActiveRecord::Schema.define(version: 2018_04_17_113849) do
     t.string "slug"
     t.boolean "private", default: false
     t.integer "default_sort_order"
+    t.boolean "unlisted", default: false
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
   end
@@ -98,15 +99,6 @@ ActiveRecord::Schema.define(version: 2018_04_17_113849) do
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
     t.index ["company_id"], name: "index_company_settings_on_company_id"
-  end
-
-  create_table "company_users", force: :cascade do |t|
-    t.bigint "user_id"
-    t.bigint "company_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["company_id"], name: "index_company_users_on_company_id"
-    t.index ["user_id"], name: "index_company_users_on_user_id"
   end
 
   create_table "contents", force: :cascade do |t|
@@ -189,6 +181,7 @@ ActiveRecord::Schema.define(version: 2018_04_17_113849) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"
@@ -215,8 +208,6 @@ ActiveRecord::Schema.define(version: 2018_04_17_113849) do
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "company_settings", "companies"
-  add_foreign_key "company_users", "companies"
-  add_foreign_key "company_users", "users"
   add_foreign_key "contents", "posts"
   add_foreign_key "memberships", "companies"
   add_foreign_key "memberships", "users"

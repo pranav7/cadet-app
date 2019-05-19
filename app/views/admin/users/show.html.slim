@@ -41,10 +41,9 @@
           | Please select a board
   .c-right-pane
     .actions
-      - if user_policy.editable?
-        a.ui.small.button href=edit_admin_user_path(@user)
-          i.pencil.icon
-          | Edit
+      a.ui.small.button href=edit_admin_user_path(@user)
+        i.pencil.icon
+        | Edit
 
       - if @user.created_by_invite?
         - if @user.invitation_sent_at.nil?

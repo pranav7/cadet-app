@@ -26,7 +26,7 @@ class AdminApp extends Component {
     return (
       <Provider store={store}>
         <Router>
-          <div className="AdminApp c-dashboard-grid">
+          <React.Fragment>
             {routes.map((route, index) => (
               <Route
                 key={index}
@@ -43,7 +43,7 @@ class AdminApp extends Component {
                 component={route.main}
               />
             ))}
-          </div>
+          </React.Fragment>
         </Router>
       </Provider>
     )

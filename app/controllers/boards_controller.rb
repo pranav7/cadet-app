@@ -1,4 +1,6 @@
 class BoardsController < ApplicationController
+  skip_after_action :intercom_rails_auto_include
+
   def index
     if user_signed_in? && current_user.admin_of?(current_company)
       @boards = current_company.boards

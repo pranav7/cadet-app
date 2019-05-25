@@ -20,7 +20,7 @@ nav
           = link_to "https://feedback.getcadet.com/bug-reports", class: "item", target: "_blank" do
             i.bug.soft.icon
             | Report a Bug
-          = link_to "mailto:hello@getcadet.com", class: "item" do
+          a.item id="help-btn" href="#"
             i.question.circle.soft.icon
             | Help
           .ui.divider
@@ -48,8 +48,13 @@ nav
   .cadet-logo#changelog
     = image_tag "cadet-logo-grey.png", width: 50
 
-coffee:
+javascript:
+  $("#help-btn").click(function(e) {
+    e.preventDefault(); 
+    Intercom('show');
+  });
+
   $(".c-profile-menu").dropdown({
-    action: "select"
-    on: "hover"
-  })
+    action: "select",
+    on: "hover",
+  });

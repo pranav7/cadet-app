@@ -1,7 +1,7 @@
 IntercomRails.config do |config|
   # == Intercom app_id
   #
-  config.app_id = ENV["INTERCOM_APP_ID"] || "zfmc7m57"
+  config.app_id = Rails.application.secrets.intercom_app_id || "zfmc7m57"
 
   # == Intercom session_duration
   #
@@ -15,8 +15,7 @@ IntercomRails.config do |config|
 
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
-  #
-  config.enabled_environments = ["production"]
+  config.enabled_environments = ["production", "development"]
 
   # == Current user method/variable
   # The method/variable that contains the logged in user in your controllers.
@@ -67,7 +66,7 @@ IntercomRails.config do |config|
   #
   # Or if you are using devise you can just use the following config
   #
-  # config.company.current = Proc.new { current_user.company }
+  config.company.current = proc { current_user.primary_company }
 
   # == Exclude company
   # A Proc that given a company returns true if the company should be excluded
@@ -83,12 +82,15 @@ IntercomRails.config do |config|
   #   :number_of_messages => Proc.new { |app| app.messages.count },
   #   :is_interesting => :is_interesting?
   # }
+  config.company.custom_data = {
+    subdomain: proc { |current_company| current_company.subdomain }
+  }
 
   # == Company Plan name
   # This is the name of the plan a company is currently paying (or not paying) for.
   # e.g. Messaging, Free, Pro, etc.
   #
-  # config.company.plan = Proc.new { |current_company| current_company.plan.name }
+  config.company.plan = proc { |current_company| current_company.company_setting.billing_plan }
 
   # == Company Monthly Spend
   # This is the amount the company spends each month on your app. If your company

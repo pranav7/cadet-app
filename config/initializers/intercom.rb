@@ -1,7 +1,7 @@
 IntercomRails.config do |config|
   # == Intercom app_id
   #
-  config.app_id = ENV["INTERCOM_APP_ID"] || "zfmc7m57"
+  config.app_id = Rails.application.secrets.intercom_app_id || "zfmc7m57"
 
   # == Intercom session_duration
   #
@@ -15,7 +15,7 @@ IntercomRails.config do |config|
 
   # == Enabled Environments
   # Which environments is auto inclusion of the Javascript enabled for
-  config.enabled_environments = ["development"]
+  config.enabled_environments = ["production", "development"]
 
   # == Current user method/variable
   # The method/variable that contains the logged in user in your controllers.

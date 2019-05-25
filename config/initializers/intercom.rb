@@ -82,6 +82,9 @@ IntercomRails.config do |config|
   #   :number_of_messages => Proc.new { |app| app.messages.count },
   #   :is_interesting => :is_interesting?
   # }
+  config.company.custom_data = {
+    subdomain: proc { |current_company| current_company.subdomain }
+  }
 
   # == Company Plan name
   # This is the name of the plan a company is currently paying (or not paying) for.

@@ -2,6 +2,8 @@ class PostsController < ApplicationController
   before_action :authenticate_user!, only: [:create]
   before_action :get_and_authorize_board
 
+  skip_after_action :intercom_rails_auto_include
+
   def new
     @post = @board.posts.new
     @post.build_content

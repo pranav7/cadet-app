@@ -115,7 +115,7 @@ GEM
     coffee-script-source (1.12.2)
     commonmarker (0.17.7.1)
       ruby-enum (~> 0.5)
-    concurrent-ruby (1.0.5)
+    concurrent-ruby (1.1.5)
     connection_pool (2.2.2)
     crass (1.0.4)
     devise (4.4.0)
@@ -167,7 +167,7 @@ GEM
       rouge (>= 2.0.0, < 3)
     i18n (0.9.5)
       concurrent-ruby (~> 1.0)
-    intercom-rails (0.3.8)
+    intercom-rails (0.4.0)
       activesupport (> 3.0)
     jbuilder (2.7.0)
       activesupport (>= 4.2.0)
@@ -492,4 +492,4 @@ RUBY VERSION
    ruby 2.4.1p111
 
 BUNDLED WITH
-   1.17.1
+  1.17.1

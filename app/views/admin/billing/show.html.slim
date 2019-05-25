@@ -29,12 +29,18 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
             - if current_company.paying?
               br
               br
-              | To cancel your subscription just write to us at&nbsp;
-              a href="mailto:hello@getcadet.com" target="_blank" hello@getcadet.com
-              |.
+              | To cancel your subscription just&nbsp;
+              a.send-us-a-message href="#" send us a message
+              |!
 
       - passthrough = { company_subdomain: current_company.subdomain }.to_json
       - unless current_company.paying?
         .row
           .sixteen.wide.column
             button.ui.green.button#start-subscription-btn data-email=current_user.email data-passthrough=passthrough Start Subscription @ $#{current_company.current_monthly_bill}/mo
+
+javascript:
+  $(".send-us-a-message").click(function(event) {
+    event.preventDefault();
+    Intercom('showNewMessage', 'Hello! I wanted to cancel my subscription.');
+  });

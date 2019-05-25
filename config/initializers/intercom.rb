@@ -66,7 +66,7 @@ IntercomRails.config do |config|
   #
   # Or if you are using devise you can just use the following config
   #
-  # config.company.current = Proc.new { current_user.company }
+  config.company.current = Proc.new { current_user.primary_company }
 
   # == Exclude company
   # A Proc that given a company returns true if the company should be excluded
@@ -87,7 +87,7 @@ IntercomRails.config do |config|
   # This is the name of the plan a company is currently paying (or not paying) for.
   # e.g. Messaging, Free, Pro, etc.
   #
-  # config.company.plan = Proc.new { |current_company| current_company.plan.name }
+  config.company.plan = Proc.new { |current_company| current_company.company_setting.billing_plan }
 
   # == Company Monthly Spend
   # This is the amount the company spends each month on your app. If your company

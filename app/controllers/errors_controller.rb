@@ -1,5 +1,6 @@
 class ErrorsController < ApplicationController
   skip_before_action :validate_company_expiry
+  skip_after_action :intercom_rails_auto_include
   layout "public"
 
   def show

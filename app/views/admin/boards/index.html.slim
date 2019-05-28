@@ -32,3 +32,8 @@
           | Add Board
 
       = render partial: "form"
+
+javascript:
+  $(document).on('turbolinks:load', function() {
+    Intercom('update');
+  });

@@ -8,6 +8,8 @@ class ApplicationController < ActionController::Base
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
 
+  skip_after_action :intercom_rails_auto_include
+
   protected
 
   def not_found

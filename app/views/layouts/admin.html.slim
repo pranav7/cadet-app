@@ -8,7 +8,6 @@ html
     = javascript_pack_tag 'application'
     = favicon_link_tag 'favicon.png'
   body.admin class="#{controller_name} #{action_name}"
-    = intercom_script_tag.to_s.html_safe
     = render partial: "partials/flash_messages"
 
     main.c-container
@@ -16,6 +15,7 @@ html
         = render partial: "admin/nav"
       = yield
 
+    = intercom_script_tag({ custom_data: { role: current_user.membership_for(current_company).role, owner: current_user.membership_for(current_company).owner }}).to_s.html_safe
   = render partial: "partials/external_js"
 
   javascript:

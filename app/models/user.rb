@@ -78,7 +78,9 @@ class User < ApplicationRecord
 
   # @todo Add Test
   def make_admin!(company)
-    memberships.where(company: company).first.admin!
+    membership = memberships.where(company: company).first
+    membership.owner = true
+    membership.admin!
   end
 
   def admin_of?(company)

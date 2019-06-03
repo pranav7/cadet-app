@@ -15,7 +15,7 @@ html
         = render partial: "admin/nav"
       = yield
 
-    = intercom_script_tag({ custom_data: { role: current_user.membership_for(current_company).role, owner: current_user.membership_for(current_company).owner }}).to_s.html_safe
+    = intercom_script_tag(intercom_hash).to_s.html_safe
   = render partial: "partials/external_js"
 
   javascript:

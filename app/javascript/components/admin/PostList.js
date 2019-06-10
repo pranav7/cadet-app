@@ -43,11 +43,6 @@ class PostList extends React.Component {
     this.setState({ currentSelected: slug });
   }
 
-  openCreatePostModal(event) {
-    event.preventDefault();
-    console.log("open modal");
-  }
-
   renderPostList() {
     if (this.props.posts.length > 0) {
       return (

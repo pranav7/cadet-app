@@ -9,6 +9,8 @@ class ApplicationController < ActionController::Base
   include AuthorizeAdminAccess
   include Rails::Pagination
 
+  skip_after_action :intercom_rails_auto_include
+
   protected
 
   def not_found

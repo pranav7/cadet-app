@@ -68,6 +68,7 @@ class Company < ApplicationRecord
   end
 
   private
+
   def post_create_tasks
     notify_slack
     create_company_setting

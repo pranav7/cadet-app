@@ -15,6 +15,7 @@ html
         = render partial: "admin/nav"
       = yield
 
+    = intercom_script_tag(intercom_hash).to_s.html_safe
   = render partial: "partials/external_js"
 
   javascript:

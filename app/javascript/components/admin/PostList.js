@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { Container, Icon } from 'semantic-ui-react'
+import { Container, Icon } from 'semantic-ui-react';
 
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
@@ -102,7 +102,7 @@ const mapStateToProps = (state) => {
     isFetchingPosts: state.isFetchingPosts,
     noPosts: state.noPosts,
     posts: state.posts
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(PostList);

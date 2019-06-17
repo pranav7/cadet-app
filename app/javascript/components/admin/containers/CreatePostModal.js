@@ -7,7 +7,7 @@ const CreatePostModal = (props) => (
   <Modal
     trigger={props.children}
     centered={false}
-    size="mini"
+    size="tiny"
   >
     <Modal.Header>Create a Post</Modal.Header>
     <Modal.Content>

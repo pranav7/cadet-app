@@ -5,7 +5,8 @@ import {
   Form,
   TextArea,
   Tab,
-  Button
+  Button,
+  Popup
 } from 'semantic-ui-react';
 import { osName } from 'react-device-detect';
 import { FiCommand, FiCornerDownLeft, FiPlus } from 'react-icons/fi';
@@ -104,8 +105,15 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
-                { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
+                <Popup
+                  content={this.cmdOrCtrl()}
+                  size="mini"
+                  position="bottom center"
+                  trigger={
+                    <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
+                  }
+                  inverted
+                />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
@@ -136,8 +144,15 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small" disabled={this.state.note == ''}>Add Note</Button>
-                { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
+                <Popup
+                  content={this.cmdOrCtrl()}
+                  size="mini"
+                  position="bottom center"
+                  trigger={
+                    <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
+                  }
+                  inverted
+                />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
@@ -150,20 +165,6 @@ class CreateComment extends Component {
     )
   }
 
-  renderHitCommandEnter() {
-    return (
-      <div className="create-comment-keyboard-shortcut">
-        <kbd className="keyboard-button">
-          <FiCommand />
-        </kbd>
-        <FiPlus className="soft" />
-        <kbd className="keyboard-button">
-          <FiCornerDownLeft />
-        </kbd>
-      </div>
-    );
-  }
-
   renderWithMarkdown() {
     return (
       <a className="styling-with-markdown"
@@ -173,6 +174,14 @@ class CreateComment extends Component {
         <span className="label">Markdown is supported</span>
       </a>
     );
+  }
+
+  cmdOrCtrl() {
+    if (osName == "Mac OS") {
+      return "⌘+Enter";
+    } else {
+      return "Ctrl+Enter";
+    }
   }
 
   render() {

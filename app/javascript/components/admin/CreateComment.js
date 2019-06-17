@@ -9,11 +9,10 @@ import {
   Popup
 } from 'semantic-ui-react';
 import { osName } from 'react-device-detect';
-import { FiCommand, FiCornerDownLeft, FiPlus } from 'react-icons/fi';
-import { GoMarkdown } from 'react-icons/go';
 
 import Posts from 'API/Posts';
 import { fetchPost } from 'Modules/Posts/Actions';
+import MarkdownStyling from 'Common/MarkdownStyling';
 
 class CreateComment extends Component {
   constructor(props) {
@@ -110,14 +109,14 @@ class CreateComment extends Component {
                   size="mini"
                   position="bottom center"
                   trigger={
-                    <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
+                    <Button primary type="submit" size="tiny" disabled={this.state.comment == ''}>Reply</Button>
                   }
                   inverted
                 />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
-                {this.renderWithMarkdown()}
+                <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
           </Grid>  
@@ -149,31 +148,20 @@ class CreateComment extends Component {
                   size="mini"
                   position="bottom center"
                   trigger={
-                    <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
+                    <Button primary type="submit" size="tiny" disabled={this.state.note == ''}>Add Note</Button>
                   }
                   inverted
                 />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
-                {this.renderWithMarkdown()}
+                <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
           </Grid>  
         </Form>
       </Tab.Pane>
     )
-  }
-
-  renderWithMarkdown() {
-    return (
-      <a className="styling-with-markdown"
-        href="https://guides.github.com/features/mastering-markdown/"
-        target="_blank" >
-        <GoMarkdown size="1.25em" />
-        <span className="label">Markdown is supported</span>
-      </a>
-    );
   }
 
   cmdOrCtrl() {

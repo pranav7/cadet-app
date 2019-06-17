@@ -1,5 +1,7 @@
 import React from 'react';
-import { Button, Modal, Form } from 'semantic-ui-react';
+import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
+
+import MarkdownStyling from 'Common/MarkdownStyling';
 
 const CreatePostModal = (props) => (
   <Modal
@@ -12,19 +14,18 @@ const CreatePostModal = (props) => (
       <Modal.Description>
         <Form>
           <Form.Field>
-            <label>Title</label>
-            <input placeholder='First Name' />
+            <Form.Input placeholder='Title' />
           </Form.Field>
           <Form.Field>
-            <label>Description</label>
-            <input placeholder='Last Name' />
+            <Form.TextArea placeholder='Description' rows={13} />
           </Form.Field>
 
           <Button type='submit'>Create</Button>
+          <MarkdownStyling />
         </Form>
       </Modal.Description>
     </Modal.Content>
   </Modal>
-)
+);
 
 export default CreatePostModal;

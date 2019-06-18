@@ -6,6 +6,19 @@ import MarkdownStyling from 'Common/MarkdownStyling';
 class CreatePostModal extends Component {
   constructor(props) {
     super(props);
+
+    this.state = {
+      title: '',
+      description: ''
+    };
+  }
+
+  handleChange(e, { name, value }) {
+    this.setState({ [name]: value });
+  }
+
+  handleSubmit() {
+    console.log("Submitted", this.state.name, this.state.description);
   }
 
   render() {
@@ -18,12 +31,21 @@ class CreatePostModal extends Component {
         <Modal.Header>Create a Post</Modal.Header>
         <Modal.Content>
           <Modal.Description>
-            <Form>
+            <Form onSubmit={this.handleSubmit}>
               <Form.Field>
-                <Form.Input placeholder='Title' />
+                <Form.Input
+                  name="title"
+                  placeholder='Title'
+                  onChange={this.handleChange}
+                />
               </Form.Field>
               <Form.Field>
-                <Form.TextArea placeholder='Description' rows={13} />
+                <Form.TextArea
+                  name="description"
+                  placeholder='Description'
+                  rows={13}
+                  onChange={this.handleChange}
+                />
               </Form.Field>
 
               <Button type='submit'>Create</Button>

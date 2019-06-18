@@ -11,6 +11,9 @@ class CreatePostModal extends Component {
       title: '',
       description: ''
     };
+
+    this.handleChange = this.handleChange.bind(this);
+    this.handleSubmit = this.handleSubmit.bind(this);
   }
 
   handleChange(e, { name, value }) {
@@ -18,7 +21,7 @@ class CreatePostModal extends Component {
   }
 
   handleSubmit() {
-    console.log("Submitted", this.state.name, this.state.description);
+    console.log("Submitted", this.state.title, this.state.description);
   }
 
   render() {

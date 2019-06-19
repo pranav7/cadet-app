@@ -8,8 +8,14 @@ class CreatePostModal extends Component {
     super(props);
 
     this.state = {
-      title: '',
-      description: ''
+      title: {
+        value: '',
+        hasError: false
+      },
+      description: {
+        value: '',
+        hasError: false
+      }
     };
 
     this.handleChange = this.handleChange.bind(this);
@@ -17,10 +23,26 @@ class CreatePostModal extends Component {
   }
 
   handleChange(e, { name, value }) {
-    this.setState({ [name]: value });
+    this.setState({ [name]: { ...this.state[name], value } });
   }
 
   handleSubmit() {
+    if (this.state.title.value === '') {
+      this.setState({
+        title: {
+          ...this.state.title,
+          hasError: true
+        }
+      });
+    } else {
+      this.setState({
+        title: {
+          ...this.state.title,
+          hasError: false
+        }
+      });
+    }
+
     console.log("Submitted", this.state.title, this.state.description);
   }
 
@@ -40,6 +62,7 @@ class CreatePostModal extends Component {
                   name="title"
                   placeholder='Title'
                   onChange={this.handleChange}
+                  error={this.state.title.hasError}
                 />
               </Form.Field>
               <Form.Field>

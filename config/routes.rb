@@ -38,16 +38,16 @@ Rails.application.routes.draw do
     get "boards/:board_id/posts/:post_id",
         to: redirect("%{board_id}/posts/%{post_id}")
 
-    resources :boards, path: "" do
-      resources :posts, except: [:new, :edit]
-    end
-
     resources :accounts do
       resource :account_memberships, only: [:create, :destroy]
     end
 
     resources :users, only: [:index, :show, :edit, :update]
     resources :companies, only: [:edit, :update]
+
+    resources :boards, path: "" do
+      resources :posts, except: [:new, :edit]
+    end
   end
 
   get :join, to: "users#new"

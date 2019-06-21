@@ -115,10 +115,13 @@ class PostDetails extends Component {
             </div>
           </div>
           <div className="c-right-pane">
-            <div className="voters">
-              <i className="user outline icon c__soft"></i>
-              Users who upvoted
-              <hr className="ui divider"/>
+            <div className="voters box o__transparent o__no-padding">
+              <div className="box-header">
+                <div className="header-text">
+                  <i className="user outline icon"></i>
+                  Users who upvoted
+                </div>
+              </div>
 
               {this.props.post.voters.map((voter) => 
                 <div className="voter" key={voter.id}>

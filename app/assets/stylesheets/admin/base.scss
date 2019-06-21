@@ -4,7 +4,7 @@ body.admin {
   h1.heading {
     font-weight: 600;
     color: $darkest;
-    border-bottom: 1px solid $lighter;
+    border-bottom: 1px dashed $lighter;
     font-size: 24px;
   }
 
@@ -106,7 +106,7 @@ body.admin {
 
   .c-right-pane {
     grid-column: right / end;
-    padding: $base-size $half-base-size;
+    padding: 10px $half-base-size;
 
     @include restrict-height-to-window;
   }

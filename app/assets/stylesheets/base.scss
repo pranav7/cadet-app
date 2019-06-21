@@ -39,13 +39,13 @@ body {
   display: flex;
 }
 
-.u__soft,
+.t__soft,
 .c-soft,
 .soft {
   color: $darker;
 }
 
-.u__softer,
+.t__softer,
 .c-softer,
 .softer {
   color: $dark;
@@ -168,10 +168,11 @@ a.c.link {
 
     .header-text {
       padding-bottom: $half-base-size;
-      border-bottom: 1px solid $lighter;
+      border-bottom: 1px dashed $lighter;
     }
   }
 
+  &.o__transparent,
   &.transparent {
     background-color: transparent;
     border-color: transparent;
@@ -179,6 +180,10 @@ a.c.link {
 
   &.with.border {
     border: 1px solid $lighter;
+  }
+
+  &.o__no-padding {
+    padding: 0;
   }
 }
 // End

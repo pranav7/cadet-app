@@ -85,6 +85,7 @@ class CreatePostModal extends Component {
         }
         centered={false}
         open={this.state.modalOpen}
+        onClose={this.handleClose}
         size="tiny"
       >
         <Modal.Header>Create a Post</Modal.Header>

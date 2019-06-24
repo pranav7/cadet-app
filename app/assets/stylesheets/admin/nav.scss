@@ -34,10 +34,13 @@ body.admin {
       padding: 0;
 
       li.list-item {
-        text-align: center;
         color: $darker;
         font-weight: 600;
         font-size: 13px;
+        height: 64px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &.active {
           background: $darkest;
@@ -48,10 +51,6 @@ body.admin {
           display: block;
           transition: 0.4s ease;
           padding: $half-base-size 0;
-
-          &:hover {
-            background: darken($black-light, 5);
-          }
 
           i.icon {
             vertical-align: super;

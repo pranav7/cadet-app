@@ -7,7 +7,7 @@ json.votes_count @post.votes.count
 json.created_at render_time(@post.created_at, format: :short)
 
 json.content do
-  json.body @post.content.body
+  json.body simple_format(@post.content.parsed)
   json.summary @post.content.summary
 end
 

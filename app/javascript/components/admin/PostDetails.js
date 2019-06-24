@@ -95,7 +95,10 @@ class PostDetails extends Component {
             </div>
 
             <div className="create-comment bottom padded">
-              <CreateComment boardId={this.state.boardId} postId={this.state.postId}/>
+              <CreateComment
+                boardId={this.state.boardId}
+                postId={this.state.postId}
+              />
             </div>
 
             <div className="post-activity">

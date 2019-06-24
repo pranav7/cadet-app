@@ -89,11 +89,7 @@ class PostList extends React.Component {
               </div>
             </div>
 
-            <CreatePostModal>
-              <a id="create-post-btn" href="#" onClick={ (e) => { e.preventDefault(); } }>
-                <i className="add square primary big icon button"></i>
-              </a>
-            </CreatePostModal>
+            <CreatePostModal boardId={this.state.boardId} />
           </div>
           <div className="container-two">
             <div className="ui icon fluid input field">

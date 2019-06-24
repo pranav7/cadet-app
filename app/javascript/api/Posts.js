@@ -57,6 +57,23 @@ class Posts {
     });
   }
 
+  create(data) {
+    const api = new API(`/admin/${this.boardId}/posts/`, {
+      method: 'post',
+      data
+    });
+
+    return new Promise((resolve, reject) => {
+      api.execute()
+        .then(response => {
+          resolve(response);
+        })
+        .catch(response => {
+          reject(response.status);
+        });
+    });
+  }
+
   comment(data) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/comments`, {
       method: "post",

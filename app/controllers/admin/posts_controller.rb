@@ -27,7 +27,7 @@ class Admin::PostsController < Admin::AdminController
 
     respond_to do |format|
       format.json do
-        render json: post.to_json, status: :created
+        render json: { post: { slug: post.slug } }, status: :created
       end
 
       format.html do

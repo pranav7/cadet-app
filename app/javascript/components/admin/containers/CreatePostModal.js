@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
 import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 
 import Posts from 'API/Posts';
@@ -52,13 +53,19 @@ class CreatePostModal extends Component {
 
     postsApi.create(data)
       .then(response => {
-        console.log('Successfully Created Post!');
+        this.setState({
+          title: "",
+          description: "",
+          titleHasError: false,
+          modalOpen: false,
+        });
+
         this.props.dispatch(fetchPosts(this.props.boardId));
-        this.setState({ modalOpen: false });
+        this.props.history.push(`/admin/${this.props.boardId}/posts/${response.data.post.slug}`);
       })
       .catch(response => {
         // TODO: Add Notification Toast
-        console.log("Error Creating Comment", response);
+        console.log("Error Creating Post", response);
       });
   }
 
@@ -68,7 +75,12 @@ class CreatePostModal extends Component {
   }
   
   handleClose() {
-    this.setState({ modalOpen: false });
+    this.setState({
+      title: "",
+      description: "",
+      titleHasError: false,
+      modalOpen: false,
+    });
   }
 
   render() {
@@ -121,4 +133,4 @@ class CreatePostModal extends Component {
   }
 }
 
-export default connect()(CreatePostModal);
+export default withRouter(connect()(CreatePostModal));

@@ -5,6 +5,7 @@ class Admin::PostsController < Admin::AdminController
     @post = @board.posts.friendly.find(params[:id])
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     post = @board.posts.new(post_params)
 
@@ -39,6 +40,7 @@ class Admin::PostsController < Admin::AdminController
       end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def update
     @post = @board.posts.friendly.find(params[:id])

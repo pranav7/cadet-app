@@ -18,19 +18,13 @@ class CreatePostModal extends Component {
       titleHasError: false,
       modalOpen: false
     };
-
-    this.handleChange = this.handleChange.bind(this);
-    this.handleSubmit = this.handleSubmit.bind(this);
-    this.handleOpen = this.handleOpen.bind(this);
-    this.handleClose = this.handleClose.bind(this);
-    this.createPost = this.createPost.bind(this);
   }
 
-  handleChange(e, { name, value }) {
+  handleChange = (e, { name, value }) => {
     this.setState({ [name]: value });
   }
 
-  handleSubmit() {
+  handleSubmit = () => {
     if (this.state.title === '') {
       return this.setState({ titleHasError: true });
     } else {
@@ -40,7 +34,7 @@ class CreatePostModal extends Component {
     }
   }
 
-  createPost() {
+  createPost = () => {
     const postsApi = new Posts(this.props.boardId);
     const data = {
       post: {
@@ -69,12 +63,12 @@ class CreatePostModal extends Component {
       });
   }
 
-  handleOpen(e) {
+  handleOpen = (e) => {
     e.preventDefault();
     this.setState({ modalOpen: true });
   }
   
-  handleClose() {
+  handleClose = () => {
     this.setState({
       title: "",
       description: "",

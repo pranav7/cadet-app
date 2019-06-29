@@ -60,7 +60,13 @@ class PostDetails extends Component {
               </div>
 
               <div className="item">
-                <a href="" id="delete-post-btn">
+                <a
+                  id="delete-post-btn"
+                  data-confirm="Are you sure you want to delete this post? Please note that this step is IRREVERSIBLE."
+                  rel="nofollow"
+                  data-method="delete"
+                  href={`/admin/${this.state.boardId}/posts/${this.props.post.slug}/`}
+                >
                   <i className="trash alternate outline large icon"></i>
                 </a>
               </div>

@@ -1,11 +1,12 @@
 import React from "react";
 import { connect } from 'react-redux';
-import { Container, Icon } from 'semantic-ui-react'
+import { Container, Icon } from 'semantic-ui-react';
 
 import PostListItem from "./PostListItem";
 import Cookies from "js-cookie";
 import _ from "underscore";
 import { fetchPosts } from 'Modules/Posts/Actions';
+import CreatePostModal from 'AdminContainers/CreatePostModal';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -78,9 +79,17 @@ class PostList extends React.Component {
       <div className="c-left-pane">
         <div className="list-action-bar">
           <div className="container-one">
-            <div id="create-post-btn">
-              <i className="add square primary big icon button"></i>
+            <div className="c-breadcrumb">
+              <div className="section">
+                <a>Boards</a>
+              </div>
+              <div className="divider">/</div>
+              <div className="section active">
+                <a>Feature Requests</a>
+              </div>
             </div>
+
+            <CreatePostModal boardId={this.state.boardId} />
           </div>
           <div className="container-two">
             <div className="ui icon fluid input field">
@@ -102,7 +111,7 @@ const mapStateToProps = (state) => {
     isFetchingPosts: state.isFetchingPosts,
     noPosts: state.noPosts,
     posts: state.posts
-  }
-}
+  };
+};
 
 export default connect(mapStateToProps)(PostList);

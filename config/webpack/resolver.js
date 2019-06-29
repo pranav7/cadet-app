@@ -7,7 +7,8 @@ module.exports = {
       AdminContainers: 'components/admin/containers',
       Modules: 'modules/',
       Services: 'services/',
-      Store: 'store/'
+      Store: 'store/',
+      Common: 'common/'
     }
   }
 }

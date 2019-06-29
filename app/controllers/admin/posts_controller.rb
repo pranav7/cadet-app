@@ -5,6 +5,7 @@ class Admin::PostsController < Admin::AdminController
     @post = @board.posts.friendly.find(params[:id])
   end
 
+  # rubocop:disable Metrics/MethodLength
   def create
     post = @board.posts.new(post_params)
 
@@ -25,12 +26,21 @@ class Admin::PostsController < Admin::AdminController
       # Hanlde Post Error
     end
 
-    if params[:after_create_path] == "admin"
-      redirect_to admin_board_post_path(@board, post)
-    else
-      redirect_to board_path(@board)
+    respond_to do |format|
+      format.json do
+        render json: { post: { slug: post.slug } }, status: :created
+      end
+
+      format.html do
+        if params[:after_create_path] == "admin"
+          redirect_to admin_board_post_path(@board, post)
+        else
+          redirect_to board_path(@board)
+        end
+      end
     end
   end
+  # rubocop:enable Metrics/MethodLength
 
   def update
     @post = @board.posts.friendly.find(params[:id])

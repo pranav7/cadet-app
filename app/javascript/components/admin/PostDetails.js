@@ -95,7 +95,10 @@ class PostDetails extends Component {
             </div>
 
             <div className="create-comment bottom padded">
-              <CreateComment boardId={this.state.boardId} postId={this.state.postId}/>
+              <CreateComment
+                boardId={this.state.boardId}
+                postId={this.state.postId}
+              />
             </div>
 
             <div className="post-activity">
@@ -115,13 +118,14 @@ class PostDetails extends Component {
             </div>
           </div>
           <div className="c-right-pane">
-            <div className="voters box">
+            <div className="voters box o__transparent o__no-padding">
               <div className="box-header">
                 <div className="header-text">
                   <i className="user outline icon"></i>
                   Users who upvoted
                 </div>
               </div>
+
               {this.props.post.voters.map((voter) => 
                 <div className="voter" key={voter.id}>
                   <User name={voter.name}

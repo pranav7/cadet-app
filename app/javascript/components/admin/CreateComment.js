@@ -5,14 +5,14 @@ import {
   Form,
   TextArea,
   Tab,
-  Button
+  Button,
+  Popup
 } from 'semantic-ui-react';
 import { osName } from 'react-device-detect';
-import { FiCommand, FiCornerDownLeft, FiPlus } from 'react-icons/fi';
-import { GoMarkdown } from 'react-icons/go';
 
 import Posts from 'API/Posts';
 import { fetchPost } from 'Modules/Posts/Actions';
+import MarkdownStyling from 'Common/MarkdownStyling';
 
 class CreateComment extends Component {
   constructor(props) {
@@ -104,12 +104,19 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small" disabled={this.state.comment == ''}>Reply</Button>
-                { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
+                <Popup
+                  content={this.cmdOrCtrl()}
+                  size="mini"
+                  position="bottom center"
+                  trigger={
+                    <Button primary type="submit" size="tiny" disabled={this.state.comment == ''}>Reply</Button>
+                  }
+                  inverted
+                />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
-                {this.renderWithMarkdown()}
+                <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
           </Grid>  
@@ -136,12 +143,19 @@ class CreateComment extends Component {
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
-                <Button type="submit" size="small" disabled={this.state.note == ''}>Add Note</Button>
-                { osName == "Mac OS" ? this.renderHitCommandEnter() : "" }
+                <Popup
+                  content={this.cmdOrCtrl()}
+                  size="mini"
+                  position="bottom center"
+                  trigger={
+                    <Button primary type="submit" size="tiny" disabled={this.state.note == ''}>Add Note</Button>
+                  }
+                  inverted
+                />
               </Grid.Column>
 
               <Grid.Column textAlign="right" width={10}>
-                {this.renderWithMarkdown()}
+                <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
           </Grid>  
@@ -150,29 +164,12 @@ class CreateComment extends Component {
     )
   }
 
-  renderHitCommandEnter() {
-    return (
-      <div className="create-comment-keyboard-shortcut">
-        <kbd className="keyboard-button">
-          <FiCommand />
-        </kbd>
-        <FiPlus className="soft" />
-        <kbd className="keyboard-button">
-          <FiCornerDownLeft />
-        </kbd>
-      </div>
-    );
-  }
-
-  renderWithMarkdown() {
-    return (
-      <a className="styling-with-markdown"
-        href="https://guides.github.com/features/mastering-markdown/"
-        target="_blank" >
-        <GoMarkdown size="1.25em" />
-        <span className="label">Markdown is supported</span>
-      </a>
-    );
+  cmdOrCtrl() {
+    if (osName == "Mac OS") {
+      return "⌘+Enter";
+    } else {
+      return "Ctrl+Enter";
+    }
   }
 
   render() {

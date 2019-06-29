@@ -38,7 +38,7 @@ body.admin.posts {
 
   .top-action-bar {
     display: flex;
-    border-bottom: 1px solid $lighter;
+    border-bottom: 1px dashed $lighter;
     margin-bottom: $base-size;
     padding-bottom: 8px;
 

@@ -2,7 +2,7 @@
   "name": "cadet-app",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.5.5",
+    "@rails/webpacker": "^3.6.0",
     "at.js": "^1.5.3",
     "axios": "^0.17.1",
     "babel-preset-react": "^6.24.1",
@@ -27,7 +27,8 @@
     "semantic-ui-react": "^0.82.5",
     "stimulus": "^1.0.0",
     "tablesort": "^5.0.1",
-    "underscore": "^1.8.3"
+    "underscore": "^1.9.1",
+    "fsevents": "1.2.9"
   },
   "devDependencies": {
     "webpack-cli": "^3.1.0",

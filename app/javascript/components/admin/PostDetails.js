@@ -54,7 +54,7 @@ class PostDetails extends Component {
               </div>
 
               <div className="item u__pr__x2">
-                <a href="" id="edit-post-btn" class="fluid ui tiny button">
+                <a href="" id="edit-post-btn" className="fluid ui tiny button">
                   <i className="pencil icon"></i>
                   Edit
                 </a>

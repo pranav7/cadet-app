@@ -89,6 +89,10 @@ body {
   &.vertical {
     padding: $base-size 0;
   }
+
+  &.horizontal {
+    padding: 0 $base-size;
+  }
 }
 
 .float {

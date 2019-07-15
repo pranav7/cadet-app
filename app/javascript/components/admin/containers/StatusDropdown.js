@@ -52,7 +52,7 @@ class StatusDropdown extends Component {
 
   render() {
     return(
-      <span>
+      <span class="ui tiny button">
         <Dropdown
           className="posts__status-dropdown"
           simple

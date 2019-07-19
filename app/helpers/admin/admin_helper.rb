@@ -8,7 +8,7 @@ module Admin::AdminHelper
       created_at: current_user.created_at,
       role: current_user.membership_for(current_company).role,
       owner: current_user.membership_for(current_company).owner,
-      primary_company_id: current_user.primary_company.id,
+      primary_company_id: current_user.primary_company.try(:id),
       company: {
         company_id: current_company.id,
         name: current_company.name,

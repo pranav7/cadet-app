@@ -10,7 +10,7 @@ end
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
-gem 'devise'
+gem 'devise', '~> 4.5.0'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'eventmachine'
 gem 'exception_notification'
@@ -27,7 +27,7 @@ gem "pg", "< 1.0"
 gem "php-serialize"
 gem 'postmark-rails'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.2.0.rc1'
+gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'

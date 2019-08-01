@@ -19,8 +19,7 @@
     "react_ujs": "^2.4.4",
     "stimulus": "^1.0.0",
     "tablesort": "^5.0.1",
-    "underscore": "^1.9.1",
-    "fsevents": "1.2.9"
+    "underscore": "^1.9.1"
   },
   "devDependencies": {
     "webpack-cli": "^3.1.0",

@@ -80,6 +80,7 @@ class User < ApplicationRecord
   def make_admin!(company)
     membership = memberships.where(company: company).first
     membership.owner = true
+    membership.primary = true
     membership.admin!
   end
 

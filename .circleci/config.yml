@@ -38,8 +38,8 @@ jobs:
       - run:
           name: Update Bundler
           command: |
+            gem update --system
             bundle update --bundler
-            gem install bundler:2.0.1
 
       - run:
           name: install dependencies

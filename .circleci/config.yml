@@ -36,10 +36,14 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: install dependencies
+          name: Update Bundler
           command: |
             bundle update --bundler
             gem install bundler:2.0.1
+
+      - run:
+          name: install dependencies
+          command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
       - save_cache:

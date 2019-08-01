@@ -10,7 +10,7 @@ end
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
-gem 'devise'
+gem 'devise', '~> 4.5.0'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'eventmachine'
 gem 'exception_notification'
@@ -27,12 +27,12 @@ gem "pg", "< 1.0"
 gem "php-serialize"
 gem 'postmark-rails'
 gem 'puma', '~> 3.7'
-gem 'rails', '~> 5.2.0.rc1'
+gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'sidekiq'
-gem 'simple_form'
+gem 'simple_form', '~> 4.0.0'
 gem 'slack-notifier' # Need for exception_notification gem
 gem 'slack-ruby-client'
 gem 'slim-rails'
@@ -92,6 +92,7 @@ group :development do
   gem 'capistrano-rvm'
   gem 'capistrano-sidekiq', github: 'seuros/capistrano-sidekiq'
   gem 'capistrano3-puma'
+  gem 'capistrano-yarn'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

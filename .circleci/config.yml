@@ -36,9 +36,13 @@ jobs:
           - v1-dependencies-
 
       - run:
-          name: Update Bundler
+          name: Update system gems
           command: |
             sudo gem update --system
+
+      - run:
+          name: Update Bundler
+          command: |
             bundle update --bundler
 
       - run:

@@ -57,10 +57,15 @@ class Users::RegistrationsController < Devise::RegistrationsController
     return if !@user.persisted? && @user.companies.blank?
 
     assign_admin_role
+    create_sample_board_and_post
   end
 
   def assign_admin_role
     @user.make_admin!(@user.companies.first)
+  end
+
+  def create_sample_board_and_post
+    @user.primary_company.create_sample_board_and_post
   end
 
   # If you have extra params to permit, append them to the sanitizer.

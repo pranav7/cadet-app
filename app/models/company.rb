@@ -81,7 +81,7 @@ class Company < ApplicationRecord
       title: "Getting started",
       user_id: owner.id,
       content_attributes: {
-        body: "This is a sample post created for you to help you get started. Posts can have rich formatting through [markdown](https://guides.github.com/features/mastering-markdown/).\r\n\r\n**You can do the following things with ease:**\r\n- Format with bullet point\r\n- Easily share links\r\n- Tag others in comments/notes through @mentions to send them a notification email\r\n\r\nYou can also share code snippets, this particularly comes in handy when you create boards to capture bug reports.\r\n\r\n```js\r\nconsole.log(\"Hello, there!\");\r\n```"
+        body: "To help you get started we've created this sample post. Posts can have rich formatting through [markdown](https://guides.github.com/features/mastering-markdown/).\r\n\r\n**You can do the following things with ease:**\r\n- Format with bullet point\r\n- Easily share links\r\n- Tag others in comments/notes through @mentions to send them a notification email\r\n\r\nYou can also share code snippets, this particularly comes in handy when you create boards to capture bug reports.\r\n\r\n```js\r\nconsole.log(\"Hello, there!\");\r\n```"
       }
     )
   end

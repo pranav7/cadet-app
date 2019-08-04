@@ -1,8 +1,7 @@
 IntercomRails.config do |config|
   # == Intercom app_id
   #
-  # config.app_id = Rails.application.secrets.intercom_app_id || "zfmc7m57"
-  config.app_id = "zfmc7m57"
+  config.app_id = Rails.application.secrets.intercom_app_id || "zfmc7m57"
 
   # == Intercom session_duration
   #

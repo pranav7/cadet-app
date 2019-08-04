@@ -24,6 +24,10 @@ class Company < ApplicationRecord
     memberships.where(role: :admin).map(&:user)
   end
 
+  def owner
+    memberships.where(owner: true).first.try(:user)
+  end
+
   def active_users
     # Return all users who have created a post
     active_users = users.joins(:posts).where(posts: posts).uniq
@@ -65,6 +69,21 @@ class Company < ApplicationRecord
     return false unless company_setting.expires_at
 
     Time.zone.now > company_setting.expires_at
+  end
+
+  def create_sample_board_and_post
+    board = boards.create(
+      title: "Feature Requests",
+      description: "Let us know your feedback or feature requests"
+    )
+
+    board.posts.create(
+      title: "Getting started",
+      user_id: owner.id,
+      content_attributes: {
+        body: "To help you get started we've created this sample post. Posts can have rich formatting through [markdown](https://guides.github.com/features/mastering-markdown/).\r\n\r\n**You can do the following things with ease:**\r\n- Format with bullet point\r\n- Easily share links\r\n- Tag others in comments/notes through @mentions to send them a notification email\r\n\r\nYou can also share code snippets, this particularly comes in handy when you create boards to capture bug reports.\r\n\r\n```js\r\nconsole.log(\"Hello, there!\");\r\n```"
+      }
+    )
   end
 
   private

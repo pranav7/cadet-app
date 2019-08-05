@@ -46,28 +46,31 @@ class PostDetails extends Component {
         <React.Fragment>
           <div className="c-main-pane">
             <div className="top-action-bar">
-              <div className="item">
+              <div className="item grow">
                 <StatusDropdown
                   boardId={this.state.boardId}
                   postId={this.state.postId}
                 />
               </div>
 
-              <div className="item">
-                <a href="" id="edit-post-btn">
-                  <i className="edit outline large icon"></i>
+              <div className="item u__pr__x2">
+                <a href="" id="edit-post-btn" className="fluid ui tiny button">
+                  <i className="pencil icon"></i>
+                  Edit
                 </a>
               </div>
 
               <div className="item">
                 <a
+                  className="fluid ui tiny button"
                   id="delete-post-btn"
                   data-confirm="Are you sure you want to delete this post? Please note that this step is IRREVERSIBLE."
                   rel="nofollow"
                   data-method="delete"
                   href={`/admin/${this.state.boardId}/posts/${this.props.post.slug}/`}
                 >
-                  <i className="trash alternate outline large icon"></i>
+                  <i className="trash alternate icon"></i>
+                  Delete
                 </a>
               </div>
             </div>

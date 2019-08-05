@@ -1,9 +1,27 @@
 $base-size: 16px;
 
-$x1: 2px;
-$x2: $x1 * 2;
-$x3: $x1 * 3;
-$x4: $x1 * 4;
+$x0: 0;
+$x1: 4px;
+$x2: 8px;
+$x3: 12px;
+$x4: 16px;
+$x6: 24px;
+$x8: 32px;
+$x10: 40px;
+$x12: 48px;
+$x16: 64px;
+
+$tokenMap: (
+  x0: $x0,
+  x1: $x1,
+  x2: $x2,
+  x3: $x3,
+  x4: $x4,
+  x6: $x6,
+  x8: $x8,
+  x10: $x10,
+  x16: $x16,
+);
 
 $half-base-size: $base-size * 0.5;
 $double-base-size: $base-size * 2;

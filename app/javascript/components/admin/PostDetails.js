@@ -9,6 +9,7 @@ import User from 'Components/User';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
+import EditPostModal from 'AdminContainers/EditPostModal';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -53,12 +54,7 @@ class PostDetails extends Component {
                 />
               </div>
 
-              <div className="item u__pr__x2">
-                <a href="" id="edit-post-btn" className="fluid ui tiny button">
-                  <i className="pencil icon"></i>
-                  Edit
-                </a>
-              </div>
+              <EditPostModal post={this.props.post}/>
 
               <div className="item">
                 <a

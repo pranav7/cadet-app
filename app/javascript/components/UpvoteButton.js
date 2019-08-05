@@ -1,24 +1,24 @@
 import React from "react";
-import { connect } from 'react-redux';
-import Posts from 'API/Posts';
-import { fetchPost } from 'Modules/Posts/Actions';
+import { connect } from "react-redux";
+import Posts from "API/Posts";
+import { fetchPost } from "Modules/Posts/Actions";
 
 class UpvoteButton extends React.Component {
   constructor(props) {
-    super(props)
+    super(props);
 
     this.state = {
       upvoted: this.props.upvoted,
       voteCount: this.props.voteCount,
       boardId: this.props.boardId,
       postId: this.props.postId
-    }
+    };
 
-    this.handleClick = this.handleClick.bind(this)
-    this.upvote = this.upvote.bind(this)
-    this.downvote = this.downvote.bind(this)
-    this.toggleUp = this.toggleUp.bind(this)
-    this.toggleDown = this.toggleDown.bind(this)
+    this.handleClick = this.handleClick.bind(this);
+    this.upvote = this.upvote.bind(this);
+    this.downvote = this.downvote.bind(this);
+    this.toggleUp = this.toggleUp.bind(this);
+    this.toggleDown = this.toggleDown.bind(this);
   }
 
   componentWillReceiveProps(nextProps) {
@@ -27,7 +27,7 @@ class UpvoteButton extends React.Component {
       voteCount: nextProps.voteCount,
       boardId: nextProps.boardId,
       postId: nextProps.postId
-    })
+    });
   }
 
   handleClick() {
@@ -39,9 +39,12 @@ class UpvoteButton extends React.Component {
   }
 
   upvote() {
-    const postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
+    const postsApi = new Posts(this.state.boardId, {
+      postId: this.state.postId
+    });
 
-    postsApi.upvote()
+    postsApi
+      .upvote()
       .then(response => {
         this.toggleUp();
       })
@@ -49,19 +52,20 @@ class UpvoteButton extends React.Component {
         if (response.status == 401) {
           $("#signup-modal")
             .modal({ duration: 250 })
-            .modal("show")
+            .modal("show");
         }
         // TODO: Add Notification Toast in else condition
       });
   }
 
   downvote() {
-    const postsApi = new Posts(this.state.boardId, { postId: this.state.postId });
+    const postsApi = new Posts(this.state.boardId, {
+      postId: this.state.postId
+    });
 
-    postsApi.downvote()
-      .then(response => {
-        this.toggleDown();
-      });
+    postsApi.downvote().then(response => {
+      this.toggleDown();
+    });
   }
 
   toggleDown() {
@@ -70,22 +74,27 @@ class UpvoteButton extends React.Component {
       upvoted: false
     });
 
-    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
+    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId));
   }
 
   toggleUp() {
     this.setState({
       voteCount: this.state.voteCount + 1,
       upvoted: true
-    })
+    });
 
-    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId))
+    this.props.dispatch(fetchPost(this.state.boardId, this.state.postId));
   }
 
   render() {
     return (
-      <a className={this.state.upvoted ? 'upvoted vote-button' : 'vote-button'} onClick={this.handleClick}>
-        <span className="text">{this.state.upvoted ? 'Upvoted' : 'Upvote'}</span>
+      <a
+        className={this.state.upvoted ? "upvoted vote-button" : "vote-button"}
+        onClick={this.handleClick}
+      >
+        <span className="text">
+          {this.state.upvoted ? "Upvoted" : "Upvote"}
+        </span>
         <span className="vote-count">{this.state.voteCount}</span>
       </a>
     );

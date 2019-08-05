@@ -1,6 +1,6 @@
-import React from 'react'
+import React from "react";
 
-const User = ({name, initials, role, avatarSize=null}) => {
+const User = ({ name, initials, role, avatarSize = null }) => {
   return (
     <div className="user">
       <div className={`avatar circle ${avatarSize}`}>
@@ -10,14 +10,13 @@ const User = ({name, initials, role, avatarSize=null}) => {
         <span className="name">{name}</span>
       </div>
 
-      { role == "admin" &&
+      {role == "admin" && (
         <div className="staff-label">
           <span className="ui small basic label float right">Team</span>
         </div>
-      }
-
+      )}
     </div>
-  )
-}
+  );
+};
 
-export default User
+export default User;

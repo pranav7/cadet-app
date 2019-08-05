@@ -15,6 +15,7 @@ jobs:
           PGHOST: 127.0.0.1
           PGUSER: cadet
           RAILS_ENV: test
+          BUNDLER_VERSION: 2.0.1
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images
@@ -33,6 +34,16 @@ jobs:
           - v1-dependencies-{{ checksum "Gemfile.lock" }}
           # fallback to using the latest cache if no exact match is found
           - v1-dependencies-
+
+      - run:
+          name: Update system gems
+          command: |
+            sudo gem update --system
+
+      - run:
+          name: Update Bundler
+          command: |
+            gem install bundler:2.0.1
 
       - run:
           name: install dependencies

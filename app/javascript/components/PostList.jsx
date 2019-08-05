@@ -1,11 +1,11 @@
-import React from "react"
-import Cookies from "js-cookie"
-import _ from "underscore"
+import React from "react";
+import Cookies from "js-cookie";
+import _ from "underscore";
 import { createStore } from "redux";
-import { Provider } from 'react-redux';
+import { Provider } from "react-redux";
 
-import PostListItem from "Components/PostListItem"
-import Posts from "API/Posts"
+import PostListItem from "Components/PostListItem";
+import Posts from "API/Posts";
 import RootReducer from "Store/RootReducer";
 
 const store = createStore(RootReducer);
@@ -16,7 +16,7 @@ class PostList extends React.Component {
 
     this.state = {
       boardId: this.props.boardId,
-      searchTerm: '',
+      searchTerm: "",
       posts: [],
       suggesting: false,
       searching: false,
@@ -41,35 +41,36 @@ class PostList extends React.Component {
   componentDidMount() {
     this.init();
 
-    window.addEventListener('scroll', this.onScroll, false); 
-    $('#post_title').on("input", this.suggestPosts);
+    window.addEventListener("scroll", this.onScroll, false);
+    $("#post_title").on("input", this.suggestPosts);
     setTimeout(this.restoreScrollPosition, 940);
   }
 
   componentWillUnmount() {
-    window.removeEventListener('scroll', this.onScroll, false);
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   init() {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
     } else {
-      this.state.currentSortOrder = Cookies.get("currentSortOrder")
-      this.getPosts({ sort_by: this.state.currentSortOrder })
+      this.state.currentSortOrder = Cookies.get("currentSortOrder");
+      this.getPosts({ sort_by: this.state.currentSortOrder });
     }
   }
 
   getPosts(params = {}) {
-    let postsApi = new Posts(this.state.boardId)
+    let postsApi = new Posts(this.state.boardId);
 
-    postsApi.getMany(params)
-      .then((response) => {
+    postsApi
+      .getMany(params)
+      .then(response => {
         this.setState({
           posts: response.posts,
           currentPage: parseInt(response.headers["x-page"]),
           totalPosts: parseInt(response.headers["x-total"]),
           perPage: parseInt(response.headers["x-per-page"])
-        })
+        });
 
         if (response.posts.length == 0) {
           this.setState({ noPosts: true });
@@ -77,31 +78,34 @@ class PostList extends React.Component {
       })
       .catch(() => {
         this.setState({ noPosts: true });
-      })
+      });
   }
 
   getMorePosts(params = {}) {
     let postsApi = new Posts(this.state.boardId);
 
-    postsApi.getMany(params)
-      .then(response => {
-        let existingPosts = this.state.posts
+    postsApi.getMany(params).then(response => {
+      let existingPosts = this.state.posts;
 
-        this.setState({
-          posts: existingPosts.concat(response.posts),
-          currentPage: parseInt(response.headers["x-page"]),
-          isFetching: false
-        });
-      })
+      this.setState({
+        posts: existingPosts.concat(response.posts),
+        currentPage: parseInt(response.headers["x-page"]),
+        isFetching: false
+      });
+    });
   }
 
   handleSearchInput(event) {
     if (event.target.value == "") {
-      this.setState({ searchTerm: event.target.value,
-        searching: false }, this.search);
+      this.setState(
+        { searchTerm: event.target.value, searching: false },
+        this.search
+      );
     } else {
-      this.setState({ searchTerm: event.target.value,
-        searching: true }, this.search);
+      this.setState(
+        { searchTerm: event.target.value, searching: true },
+        this.search
+      );
     }
   }
 
@@ -132,7 +136,7 @@ class PostList extends React.Component {
             <strong>Suggesting posts</strong>
           </div>
         </div>
-      )
+      );
     } else {
       return (
         <div className="two column stackable row">
@@ -145,10 +149,12 @@ class PostList extends React.Component {
           <div className="right aligned no padding column">
             <div className="ui icon input field">
               <i className="search icon" />
-              <input  type="text"
-                      placeholder="Search"
-                      value={this.state.searchTerm}
-                      onChange={this.handleSearchInput} />
+              <input
+                type="text"
+                placeholder="Search"
+                value={this.state.searchTerm}
+                onChange={this.handleSearchInput}
+              />
             </div>
           </div>
         </div>
@@ -162,61 +168,66 @@ class PostList extends React.Component {
     });
 
     return (
-      <select name="sort_by"
-              className="ui open dropdown sort-post-dropdown selection"
-              defaultValue={this.state.currentSortOrder}>
+      <select
+        name="sort_by"
+        className="ui open dropdown sort-post-dropdown selection"
+        defaultValue={this.state.currentSortOrder}
+      >
         {Object.entries(this.props.sortOptions).map(([key, value], i) => {
           return (
             <option key={key} value={value}>
               {key}
             </option>
-          )
+          );
         })}
       </select>
-    )
+    );
   }
 
   renderPostList() {
     if (this.state.posts.length > 0) {
       return (
         <div className="post-list-item-container">
-          {this.state.posts.map((post) =>
+          {this.state.posts.map(post => (
             <React.Fragment key={post.id}>
               <PostListItem boardId={this.state.boardId} post={post} />
             </React.Fragment>
-          )}
+          ))}
         </div>
       );
-    } else if (!this.state.noPosts && !this.state.searching && !this.state.suggesting) {
-      return(<div className="ui active centered inline loader"></div>);
+    } else if (
+      !this.state.noPosts &&
+      !this.state.searching &&
+      !this.state.suggesting
+    ) {
+      return <div className="ui active centered inline loader"></div>;
     } else {
-      return(<div className="post-list-item">There are no matching posts</div>);
+      return <div className="post-list-item">There are no matching posts</div>;
     }
   }
 
   render() {
-    return(
+    return (
       <Provider store={store}>
         <div className="ui no margin grid">
           {this.renderHeader()}
 
-          <div className="row">
-            {this.renderPostList()}
-          </div>
+          <div className="row">{this.renderPostList()}</div>
         </div>
       </Provider>
     );
   }
 
   onScroll() {
-    if ((window.innerHeight + window.scrollY) >= (this._getDocHeight() - 500)
-      && !this.state.isFetching) {
+    if (
+      window.innerHeight + window.scrollY >= this._getDocHeight() - 500 &&
+      !this.state.isFetching
+    ) {
+      let nextPage = this.state.currentPage + 1;
+      let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage);
 
-      let nextPage = this.state.currentPage + 1
-      let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage)
-      
       if (nextPage <= totalPages) {
-        this.setState({ isFetching: true })
+        this.setState({ isFetching: true });
         this.getMorePosts({
           sorty_by: this.state.currentSortOrder,
           page: nextPage
@@ -226,18 +237,21 @@ class PostList extends React.Component {
   }
 
   restoreScrollPosition() {
-    let scrollPos = Cookies.get("scrollPos")
+    let scrollPos = Cookies.get("scrollPos");
     if (!_.isUndefined(scrollPos) && scrollPos != "0") {
       $(window).scrollTop(scrollPos);
-      Cookies.remove("scrollPos")
+      Cookies.remove("scrollPos");
     }
   }
 
   _getDocHeight() {
     return Math.max(
-      document.body.scrollHeight, document.documentElement.scrollHeight,
-      document.body.offsetHeight, document.documentElement.offsetHeight,
-      document.body.clientHeight, document.documentElement.clientHeight
+      document.body.scrollHeight,
+      document.documentElement.scrollHeight,
+      document.body.offsetHeight,
+      document.documentElement.offsetHeight,
+      document.body.clientHeight,
+      document.documentElement.clientHeight
     );
   }
 }

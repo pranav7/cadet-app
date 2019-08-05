@@ -73,6 +73,7 @@ body {
 }
 
 // Deprecated
+// Use padding classes in utilities.scss
 .padded {
   &.full {
     padding: $base-size;

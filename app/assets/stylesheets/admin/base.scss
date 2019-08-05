@@ -99,7 +99,7 @@ body.admin {
 
   .c-main-pane {
     grid-column: main / right;
-    padding: $base-size;
+    padding: $x2 $x4;
 
     @include restrict-height-to-window;
   }

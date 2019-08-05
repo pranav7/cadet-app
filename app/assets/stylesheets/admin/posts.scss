@@ -38,22 +38,17 @@ body.admin.posts {
 
   .top-action-bar {
     display: flex;
+    align-items: center;
     border-bottom: 1px dashed $lighter;
     margin-bottom: $base-size;
-    padding-bottom: 8px;
+    padding-bottom: $x4;
 
     .item {
-      padding-right: $base-size;
+      min-width: 100px;
     }
 
-    .item i {
-      color: $darker;
-    }
-
-    .item a {
-      color: $darker; 
-      font-weight: bold;
-      cursor: pointer;
+    .item.grow {
+      flex-grow: 1;
     }
   }
 
@@ -75,12 +70,5 @@ body.admin.posts {
 
   .activity-header {
     padding-top: 8px;
-  }
-
-  .posts__status-dropdown {
-    & > .text {
-      color: $darker; 
-      font-weight: bold;
-    }
   }
 }

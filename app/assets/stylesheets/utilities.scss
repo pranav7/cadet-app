@@ -1,7 +1,3 @@
-.u__pr__x2 {
-  padding-right: $x2;
-}
-
 // BEGIN-SNIPPET u__m__n.scss
 @each $tokenName, $tokenValue in $tokenMap {
   .u__m__#{$tokenName} {

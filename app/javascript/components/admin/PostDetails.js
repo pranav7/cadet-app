@@ -9,6 +9,7 @@ import User from 'Components/User';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
+import EditPostModal from 'AdminContainers/EditPostModal';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -46,22 +47,26 @@ class PostDetails extends Component {
         <React.Fragment>
           <div className="c-main-pane">
             <div className="top-action-bar">
-              <div className="item">
+              <div className="item grow">
                 <StatusDropdown
                   boardId={this.state.boardId}
                   postId={this.state.postId}
                 />
               </div>
 
-              <div className="item">
-                <a href="" id="edit-post-btn">
-                  <i className="edit outline large icon"></i>
-                </a>
-              </div>
+              <EditPostModal post={this.props.post}/>
 
               <div className="item">
-                <a href="" id="delete-post-btn">
-                  <i className="trash alternate outline large icon"></i>
+                <a
+                  className="fluid ui tiny button"
+                  id="delete-post-btn"
+                  data-confirm="Are you sure you want to delete this post? Please note that this step is IRREVERSIBLE."
+                  rel="nofollow"
+                  data-method="delete"
+                  href={`/admin/${this.state.boardId}/posts/${this.props.post.slug}/`}
+                >
+                  <i className="trash alternate icon"></i>
+                  Delete
                 </a>
               </div>
             </div>

@@ -34,6 +34,10 @@ nav
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Customers", position: "right center", inverted: "" }  do
         i.user.circle.big.icon
+
+    .padded.horizontal
+      .ui.divider
+
     li.list-item class=("active" if @main_selected == :settings)
       = link_to edit_admin_company_path(current_company), class: "item-link", data: { tooltip: "Settings", position: "right center", inverted: "" }  do
         i.cog.big.icon

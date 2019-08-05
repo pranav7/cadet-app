@@ -90,4 +90,35 @@ RSpec.describe Company, type: :model do
       expect(company.users.count).to eq(4)
     end
   end
+
+  describe "#owner" do
+    let(:company) { create :company }
+    let!(:membership) { create :membership, company: company, user: user, owner: true }
+    let(:user) { create :user }
+
+    it "returns the owner of the company" do
+      expect(company.owner).to eq(user)
+    end
+  end
+
+  describe "#create_sample_board_and_post" do
+    let(:company) { create :company }
+    let!(:membership) { create :membership, company: company, owner: true }
+
+    it "creates sample board" do
+      company.create_sample_board_and_post
+
+      expect(company.boards.count).to eq(1)
+      expect(company.boards.first.title).to eq("Feature Requests")
+      expect(company.boards.first.description).to eq("Let us know your feedback or feature requests")
+    end
+
+    it "creates sample post in sample board" do
+      company.create_sample_board_and_post
+      board = company.boards.first
+
+      expect(board.posts.count).to eq(1)
+      expect(board.posts.first.title).to eq("Getting started")
+    end
+  end
 end

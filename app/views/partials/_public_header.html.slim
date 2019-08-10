@@ -22,7 +22,7 @@
                 .sub-text= current_user.email
               .divider
               - if current_user.admin_of?(current_company)
-                = link_to admin_boards_path, class: "item" do
+                = link_to admin_boards_path, class: "item", data: { turbolinks: false} do
                   i.soft.columns.icon
                   | Admin
               = link_to destroy_user_session_path, class: "item", method: :delete do

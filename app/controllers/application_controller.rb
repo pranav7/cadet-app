@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   before_action :drop_naked_ip_requests
-
   protect_from_forgery preprend: true, with: :exception
 
   include SetCurrentRequestDetails
@@ -41,5 +40,5 @@ class ApplicationController < ActionController::Base
     Rails.logger.info "Request URL: #{request.method} #{request.url}"
 
     head :not_found if request.url == "https://18.218.51.86/"
-  end  
+  end
 end

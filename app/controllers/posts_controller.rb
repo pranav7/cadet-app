@@ -42,6 +42,7 @@ class PostsController < ApplicationController
   end
 
   private
+
   def get_and_authorize_board
     @board = current_company.boards.friendly.find(params[:board_id])
     authorize_admin_access! if @board.private?

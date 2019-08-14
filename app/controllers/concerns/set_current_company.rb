@@ -12,7 +12,7 @@ module SetCurrentCompany
     end
 
     before_action do
-      unless ["app", "95838aa7"].include?(request.subdomains.first)
+      unless ["app"].include?(request.subdomains.first)
         Current.company = current_company
       end
     end

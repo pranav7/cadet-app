@@ -34,13 +34,12 @@ class IntercomController < ApplicationController
 
   def sheets
     intercom_data = validate_request_and_decrtypt_data
-    company = Company.find_by_subdomain("priyankas-company")
+    company = Company.find_by_subdomain("feedback")
     user = User.find_by_email(intercom_data.email)
 
     sign_in(user)
 
-    # redirect_to board_url(company.boards.first, host: "#{company.subdomain}.lvh.me", port: 3000, protocol: "http")
-    redirect_to board_url(company.boards.first, host: "7b5610e3.ngrok.io")
+    redirect_to board_url(company.boards.first)
   end
 
   private

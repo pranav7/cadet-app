@@ -39,7 +39,7 @@ class IntercomController < ApplicationController
 
     sign_in(user)
 
-    redirect_to board_url(company.boards.first)
+    redirect_to board_url(company.boards.first, host: "#{company.subdomain}.getcadet.com")
   end
 
   private

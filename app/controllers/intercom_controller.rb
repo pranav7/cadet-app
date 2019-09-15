@@ -23,7 +23,7 @@ class IntercomController < ApplicationController
               "style": "primary",
               "action": {
                 "type": "sheet",
-                "url": "https://d6499de5.ngrok.io/intercom/sheets"
+                "url": "https://app.getcadet.com/intercom/sheets"
               }
             }
           ]
@@ -33,6 +33,19 @@ class IntercomController < ApplicationController
   end
 
   def sheets
+    intercom_data = validate_request_and_decrtypt_data
+    company = Company.find_by_subdomain("priyankas-company")
+    user = User.find_by_email(intercom_data.email)
+
+    sign_in(user)
+
+    # redirect_to board_url(company.boards.first, host: "#{company.subdomain}.lvh.me", port: 3000, protocol: "http")
+    redirect_to board_url(company.boards.first, host: "7b5610e3.ngrok.io")
+  end
+
+  private
+
+  def validate_request_and_decrtypt_data
     intercom_data = JSON.parse(params[:intercom_data])
     decoded_user = Base64.decode64(intercom_data["user"].encode('utf-8'))
 
@@ -46,15 +59,6 @@ class IntercomController < ApplicationController
     decipher.auth_tag = decoded_user[(decoded_user.length - GCM_AUTH_TAG_LENGTH), GCM_AUTH_TAG_LENGTH]
     ciphertext = decoded_user[GCM_IV_LENGTH, (decoded_user.length - GCM_AUTH_TAG_LENGTH - GCM_IV_LENGTH)]
 
-    intercom_user = JSON.parse(decipher.update(ciphertext) + decipher.final)
-    user = User.find_by_email(intercom_user["email"])
-    sign_in(user)
-
-    @board = Board.find(1)
-    @post = @board.posts.new
-    @post.build_content
-
-    response.headers["X-Frame-Options"] = "ALLOW-FROM https://intercom-sheets.com"
-    render template: "boards/show"
+    Hashie::Mash.new(JSON.parse(decipher.update(ciphertext) + decipher.final))
   end
 end

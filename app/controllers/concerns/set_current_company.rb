@@ -5,7 +5,7 @@ module SetCurrentCompany
     helper_method :current_company
 
     def current_company
-      Company.find_by_subdomain!(request.subdomains.first)
+      @current_company ||= Company.find_by_subdomain!(request.subdomains.first)
     rescue StandardError
       not_found
     end

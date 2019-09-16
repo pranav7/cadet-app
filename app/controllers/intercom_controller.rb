@@ -48,7 +48,7 @@ class IntercomController < ApplicationController
     intercom_data = JSON.parse(params[:intercom_data])
     decoded_user = Base64.decode64(intercom_data["user"].encode('utf-8'))
 
-    secret = "6bfef898-6d0d-4809-b920-584821a1f785"
+    secret = Rails.application.secrets.intercom[:app_store_secret]
     key = Digest::SHA256.digest(secret)
     decipher = ::OpenSSL::Cipher.new('aes-256-gcm')
 

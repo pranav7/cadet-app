@@ -1,7 +1,7 @@
 module Admin::AdminHelper
   def intercom_hash
     {
-      app_id: Rails.application.secrets.intercom_app_id || "zfmc7m57",
+      app_id: Rails.application.secrets.intercom[:app_id] || "zfmc7m57",
       user_id: current_user.id,
       email: current_user.email,
       name: current_user.name,

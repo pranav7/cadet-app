@@ -65,4 +65,6 @@ Rails.application.routes.draw do
   post "intercom/sheets", to: "intercom#sheets"
   get "intercom/sheets", to: "intercom#sheets"
   post "intercom/initialize", to: "intercom#new"
+
+  post "intercom/configure", to: "intercom#configure"
 end

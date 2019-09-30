@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_25_072536) do
+ActiveRecord::Schema.define(version: 2019_09_30_195803) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -87,7 +87,6 @@ ActiveRecord::Schema.define(version: 2019_09_25_072536) do
     t.string "subdomain"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.string "intercom_workspace_id"
     t.index ["subdomain"], name: "index_companies_on_subdomain", unique: true
   end
 
@@ -101,6 +100,8 @@ ActiveRecord::Schema.define(version: 2019_09_25_072536) do
     t.string "paddle_subscription_id"
     t.string "stripe_customer_id"
     t.string "api_key"
+    t.string "intercom_workspace_id"
+    t.string "intercom_default_board_slug"
     t.index ["company_id"], name: "index_company_settings_on_company_id"
   end
 

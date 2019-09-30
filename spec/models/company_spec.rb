@@ -13,7 +13,6 @@ RSpec.describe Company, type: :model do
     subject { create :company }
     it { should validate_presence_of(:subdomain) }
     it { should validate_uniqueness_of(:subdomain) }
-    it { should validate_uniqueness_of(:intercom_workspace_id) }
 
     it { should validate_presence_of(:name) }
 

@@ -15,7 +15,6 @@ class Company < ApplicationRecord
             exclusion: { in: %w[app], message: "This subdomain is not available" }
 
   validates :name, presence: true
-  validates :intercom_workspace_id, uniqueness: true
 
   def customers
     memberships.where(role: :customer).map(&:user)

@@ -1,4 +1,4 @@
-class IntercomController < ApplicationController
+class IntercomController < ApplicationController # rubocop:disable Metrics/ClassLength
   skip_before_action :verify_authenticity_token
   skip_before_action :validate_company_expiry
 
@@ -7,13 +7,13 @@ class IntercomController < ApplicationController
 
   def sheets
     intercom_data = validate_request_and_decrtypt_data
-    company = CompanySetting.find_by_intercom_workspace_id!(params[:workspace_id]).company
+    company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
+    board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
 
     sign_in(user)
 
-    redirect_to board_url(company.boards.first, host: "#{company.subdomain}.getcadet.com")
-  rescue ActiveRecord::RecordNotFound => error
+    redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com")
   end
 
   def new

@@ -31,8 +31,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
             "style": "primary",
             "action": {
               "type": "sheet",
-              "url": "https://cadet-dev.serveo.net/intercom/sheets"
-              # "url": "https://app.getcadet.com/intercom/sheets"
+              "url": "https://app.getcadet.com/intercom/sheets"
             }
           }]
         }

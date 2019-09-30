@@ -5,44 +5,130 @@ class IntercomController < ApplicationController
   GCM_IV_LENGTH = 12
   GCM_AUTH_TAG_LENGTH = 16
 
-  def new
-    render json: {
-      canvas: {
-        content: {
-          components: [
-            {
-              "type": "text",
-              "text": "*Have ideas or feedback?*",
-              "style": "header"
-            },
-
-            {
-              "type": "button",
-              "id": "submit-issue-form",
-              "label": "Submit Feature Request",
-              "style": "primary",
-              "action": {
-                "type": "sheet",
-                "url": "https://app.getcadet.com/intercom/sheets"
-              }
-            }
-          ]
-        }
-      }
-    }
-  end
-
   def sheets
     intercom_data = validate_request_and_decrtypt_data
-    company = Company.find_by_subdomain("feedback")
+    company = CompanySetting.find_by_intercom_workspace_id!(params[:workspace_id]).company
     user = User.find_by_email(intercom_data.email)
 
     sign_in(user)
 
     redirect_to board_url(company.boards.first, host: "#{company.subdomain}.getcadet.com")
+  rescue ActiveRecord::RecordNotFound => error
+  end
+
+  def new
+    render json: {
+      canvas: {
+        content: {
+          components: [{
+            "type": "text",
+            "text": "*Have ideas or feedback?*",
+            "style": "header"
+          }, {
+            "type": "button",
+            "id": "submit-issue-form",
+            "label": "Submit Feature Request",
+            "style": "primary",
+            "action": {
+              "type": "sheet",
+              "url": "https://cadet-dev.serveo.net/intercom/sheets"
+              # "url": "https://app.getcadet.com/intercom/sheets"
+            }
+          }]
+        }
+      }
+    }
+  end
+
+  def configure
+    if params.key?(:input_values)
+      save_and_render_configuration
+    else
+      render_canvas(configuration_components)
+    end
   end
 
   private
+
+  def save_and_render_configuration
+    input_values = params[:input_values]
+    company = Company.find_by_subdomain!(input_values[:subdomain])
+    board = company.boards.friendly.find(input_values[:board_slug])
+
+    # if company.company_setting.api_key == input_values["api_key"]
+    if input_values["api_key"] == "123abc"
+      company.company_setting.intercom_workspace_id = params[:workspace_id]
+      company.company_setting.intercom_default_board_slug = board.slug
+      company.company_setting.save!
+
+      render json: {
+        results: {
+          success: true
+        }
+      }
+    else
+      render_canvas(configuration_components(
+        subdomain: input_values[:subdomain],
+        board_slug: input_values[:board_slug]
+      ) << {
+        "type": "text",
+        "text": "*API Key Incorrect*",
+        "style": "error"
+      })
+    end
+  rescue ActiveRecord::RecordNotFound => error
+    error_message = error.message
+    # if model is nil, its because boards.friendly.find failed to find a record
+    error_message = "Couldn't find Board" if error.model.nil?
+
+    render_canvas(configuration_components(
+      subdomain: input_values[:subdomain],
+      board_slug: input_values[:board_slug]
+    ) << {
+      "type": "text",
+      "text": "*#{error_message}*",
+      "style": "error"
+    })
+  end
+
+  def render_canvas(components)
+    render json: {
+      canvas: {
+        content: {
+          components: components
+        }
+      }
+    }
+  end
+
+  def configuration_components(subdomain: nil, board_slug: nil) # rubocop:disable Method/MethodLength
+    [{
+      "type": "input",
+      "id": "subdomain",
+      "label": "Enter the subdomain of your Cadet account",
+      "placeholder": "Cadet Subdomain",
+      "value": subdomain
+    }, {
+      "type": "input",
+      "id": "board_slug",
+      "label": "Enter the Board ID to show your users",
+      "placeholder": "Board ID",
+      "value": board_slug
+    }, {
+      "type": "input",
+      "id": "api_key",
+      "label": "API Key",
+      "placeholder": "Find your API key in Cadet > Settings"
+    }, {
+      "type": "button",
+      "id": "submit-api-token",
+      "label": "Submit",
+      "style": "primary",
+      "action": {
+        "type": "submit"
+      }
+    }]
+  end
 
   def validate_request_and_decrtypt_data
     intercom_data = JSON.parse(params[:intercom_data])

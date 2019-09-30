@@ -50,13 +50,12 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
   private
 
-  def save_and_render_configuration
+  def save_and_render_configuration # rubocop:disable Metrics/MethodLength
     input_values = params[:input_values]
     company = Company.find_by_subdomain!(input_values[:subdomain])
     board = company.boards.friendly.find(input_values[:board_slug])
 
-    # if company.company_setting.api_key == input_values["api_key"]
-    if input_values["api_key"] == "123abc"
+    if ActiveSupport::SecurityUtils.secure_compare(company.company_setting.api_key, input_values["api_key"])
       company.company_setting.intercom_workspace_id = params[:workspace_id]
       company.company_setting.intercom_default_board_slug = board.slug
       company.company_setting.save!

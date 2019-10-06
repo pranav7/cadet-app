@@ -235,7 +235,7 @@ Metrics/CyclomaticComplexity:
 # Offense count: 25
 # Configuration parameters: CountComments.
 Metrics/MethodLength:
-  Max: 25
+  Max: 30
   Exclude:
     - 'app/mailers/comment_notification_mailer.rb'
     - app/lib/cadet/slack_bot.rb

@@ -99,7 +99,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     }
   end
 
-  def configuration_components(subdomain: nil, board_slug: nil) # rubocop:disable Method/MethodLength
+  def configuration_components(subdomain: nil, board_slug: nil)
     [{
       "type": "input",
       "id": "subdomain",

@@ -13,7 +13,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
     sign_in(user)
 
-    redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com")
+    redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end
 
   def new

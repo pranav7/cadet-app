@@ -14,7 +14,8 @@ html
 
   body class="#{controller_name} #{action_name}"
     = render partial: "partials/flash_messages"
-    = render partial: "partials/public_header"
+    - unless session[:hide_public_header]
+      = render partial: "partials/public_header"
     .ui.container
       = yield
     = render partial: "partials/external_js"

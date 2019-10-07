@@ -1,0 +1,16 @@
+.c-settings-grid
+  .c-left-pane.dark
+    = render partial: "admin/settings_sub_nav"
+
+  .c-full-pane
+    .ui.grid
+      .row
+        .sixteen.wide.column
+          h1.heading Integrations
+      
+      .row
+        .six.wide.column
+          .ui.form
+            .field
+              label API key
+              input type="text" disabled=true value=@api_key

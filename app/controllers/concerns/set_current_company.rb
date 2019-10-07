@@ -3,6 +3,7 @@ module SetCurrentCompany
 
   included do
     helper_method :current_company
+
     def current_company
       @current_company ||= Company.find_by_subdomain!(request.subdomains.first)
     rescue StandardError
@@ -10,7 +11,7 @@ module SetCurrentCompany
     end
 
     before_action do
-      Current.company = current_company unless request.subdomains.first == "app"
+      Current.company = current_company unless ["app"].include?(request.subdomains.first)
     end
   end
 end

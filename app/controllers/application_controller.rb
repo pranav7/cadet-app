@@ -8,8 +8,7 @@ class ApplicationController < ActionController::Base
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
   include Rails::Pagination
-
-  skip_after_action :intercom_rails_auto_include
+  include IntercomIframe
 
   protected
 

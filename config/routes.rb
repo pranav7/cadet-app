@@ -9,6 +9,7 @@ Rails.application.routes.draw do
   %w[404 422 500 503].each do |code|
     get code, to: "errors#show", code: code
   end
+
   get :trial_expired, to: "errors#trial_expired", as: :trial_expired
 
   devise_for :users, path: '',
@@ -43,6 +44,9 @@ Rails.application.routes.draw do
     end
 
     resources :users, only: [:index, :show, :edit, :update]
+    resource :billing, only: [:show], controller: :billing
+    resource :integrations, only: [:show], controller: :integrations
+
     resources :companies, only: [:edit, :update]
 
     resources :boards, path: "" do
@@ -54,6 +58,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :index]
 
   health_check_routes
+
   post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
   resources :boards, path: "" do
@@ -62,4 +67,10 @@ Rails.application.routes.draw do
       resource :votes, only: [:create, :destroy]
     end
   end
+
+  post "intercom/sheets", to: "intercom#sheets"
+  get "intercom/sheets", to: "intercom#sheets"
+  post "intercom/initialize", to: "intercom#new"
+
+  post "intercom/configure", to: "intercom#configure"
 end

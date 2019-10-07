@@ -8,4 +8,13 @@ RSpec.describe CompanySetting, type: :model do
   describe "Validations" do
     it { should validate_uniqueness_of(:intercom_workspace_id) }
   end
+
+  describe "before create" do
+    let(:company) { create :company }
+    let!(:company_setting) { create :company_setting, company: company }
+
+    it "generates and stores api key" do
+      expect(company_setting.api_key).to_not be_nil
+    end
+  end
 end

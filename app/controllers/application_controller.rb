@@ -7,9 +7,7 @@ class ApplicationController < ActionController::Base
   include ValidateCompanyExpiry
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
-
-  after_action :allow_iframe_from_intercom
-  skip_after_action :intercom_rails_auto_include
+  include IntercomIframe
 
   protected
 
@@ -18,10 +16,6 @@ class ApplicationController < ActionController::Base
   end
 
   private
-
-  def allow_iframe_from_intercom
-    response.headers["X-FRAME-OPTIONS"] = "ALLOW-FROM https://intercom-sheets.com"
-  end
 
   def after_sign_in_path_for(resource)
     return request.env['omniauth.origin'] if request.env['omniauth.origin']

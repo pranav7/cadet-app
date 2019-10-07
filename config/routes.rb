@@ -44,6 +44,7 @@ Rails.application.routes.draw do
 
     resources :users, only: [:index, :show, :edit, :update]
     resource :billing, only: [:show], controller: :billing
+    resource :integrations, only: [:show], controller: :integrations
 
     resources :companies, only: [:edit, :update]
   end

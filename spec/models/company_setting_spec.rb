@@ -13,7 +13,7 @@ RSpec.describe CompanySetting, type: :model do
     let(:company) { create :company }
     let!(:company_setting) { create :company_setting, company: company }
 
-    it "generates and stores api token" do
+    it "generates and stores api key" do
       expect(company_setting.api_key).to_not be_nil
     end
   end

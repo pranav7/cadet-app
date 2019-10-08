@@ -22,7 +22,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
         content: {
           components: [{
             "type": "text",
-            "text": "*Have ideas or feedback?*",
+            "text": "*Share ideas or feedback*",
             "style": "header"
           }, {
             "type": "button",

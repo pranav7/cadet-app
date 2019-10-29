@@ -10,7 +10,7 @@ end
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
-gem 'devise', '~> 4.5.0'
+gem 'devise', '~> 4.7.1'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'eventmachine'
 gem 'exception_notification'

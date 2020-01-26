@@ -5,6 +5,7 @@
   a.item href=admin_billing_path class=("active" if @sub_nav_selected == :billing)
     i.credit.card.outline.icon
     | Billing
-  a.item href=admin_integrations_path class=("active" if @sub_nav_selected == :integrations)
-    i.cube.icon
-    | Integrations
+  - if Rails.env.development? || current_company.subdomain == 'feedback'
+    a.item href=admin_integrations_path class=("active" if @sub_nav_selected == :integrations)
+      i.cube.icon
+      | Integrations

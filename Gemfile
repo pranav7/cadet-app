@@ -35,7 +35,7 @@ gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'sidekiq'
-gem 'simple_form', '~> 4.0.0'
+gem 'simple_form', '~> 5.0.0'
 gem 'slack-notifier' # Need for exception_notification gem
 gem 'slack-ruby-client'
 gem 'slim-rails'

@@ -5,7 +5,11 @@
     .ui.grid
       .row
         .sixteen.wide.column
-          h1.heading Users
+          h1.heading
+            - if params[:role] == "admin"
+              | Admins
+            - else
+              | Customers
       .row
         .sixteen.wide.column
           table.ui.selectable.table#users-table
@@ -54,9 +58,10 @@
         = form.submit "Add User", class: "ui small button"
 
         p.soft.text.small If you have the option checked, we will send an email invitation to them. Once they accept, they can start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
-      .ui.divider
-      p.soft.text.small You can also share this link with you customers to let them signup themselves.
-      .invite-link= "https://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
+      - if params[:role] == "customer"
+        .ui.divider
+        p.soft.text.small You can also share this link with your customers to let them signup themselves.
+        .invite-link= "https://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).ready ->

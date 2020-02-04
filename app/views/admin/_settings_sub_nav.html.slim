@@ -1,11 +1,8 @@
 .ui.secondary.vertical.inverted.settings.menu
   a.item href=edit_admin_company_path(current_company) class=("active" if @sub_nav_selected == :general)
-    i.cog.icon
     | General
   a.item href=admin_billing_path class=("active" if @sub_nav_selected == :billing)
-    i.credit.card.outline.icon
     | Billing
   - if Rails.env.development? || current_company.subdomain == 'feedback'
     a.item href=admin_integrations_path class=("active" if @sub_nav_selected == :integrations)
-      i.cube.icon
       | Integrations

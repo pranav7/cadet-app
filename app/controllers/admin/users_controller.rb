@@ -60,8 +60,7 @@ class Admin::UsersController < Admin::AdminController
                           :customers
                         else
                           :customers
-    end
-
+                        end
   end
 
   def user_params

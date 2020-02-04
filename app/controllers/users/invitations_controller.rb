@@ -28,7 +28,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
       respond_with resource, location: admin_users_path
     else
-      respond_with_navigational(resource) { redirect_to admin_users_path }
+      respond_with_navigational(resource) { redirect_to admin_users_path(role: params[:role]) }
     end
   rescue StandardError => e
     flash[:error] = e.message

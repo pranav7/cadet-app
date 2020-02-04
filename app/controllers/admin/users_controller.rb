@@ -58,7 +58,8 @@ class Admin::UsersController < Admin::AdminController
     elsif params[:role] && params[:role] == "customer"
       @sub_nav_selected = :customers
     else
-      @sub_nav_selected = :admins
+      @sub_nav_selected = :customers
+      redirect_to admin_users_path(role: "customer")
     end
     
   end

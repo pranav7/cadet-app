@@ -2,12 +2,13 @@ class Admin::UsersController < Admin::AdminController
   before_action :set_selected_menu_items
 
   def index
-    if params[:role] && params[:role] == "admin"
+    if params[:role] == "admin"
       @users = current_company.admins
-    elsif params[:role] && params[:role] == "customer"
+    elsif params[:role] == "customer"
       @users = current_company.customers
-    else
+    else      
       @users = current_company.customers
+      redirect_to admin_users_path(role: "customer")
     end
     @user = User.new
   end
@@ -53,13 +54,12 @@ class Admin::UsersController < Admin::AdminController
   def set_selected_menu_items
     @main_selected = :customers
     
-    if params[:role] && params[:role] == "admin"
+    if params[:role] == "admin"
       @sub_nav_selected = :admins
-    elsif params[:role] && params[:role] == "customer"
+    elsif params[:role] == "customer"
       @sub_nav_selected = :customers
     else
       @sub_nav_selected = :customers
-      redirect_to admin_users_path(role: "customer")
     end
     
   end

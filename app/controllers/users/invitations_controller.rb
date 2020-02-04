@@ -26,13 +26,13 @@ class Users::InvitationsController < Devise::InvitationsController
     if resource_invited
       set_flash_message :notice, :send_instructions, email: resource.email if is_flashing_format? && resource.invitation_sent_at
 
-      respond_with resource, location: admin_users_path
+      respond_with resource, location: admin_users_path(role: params[:role])
     else
       respond_with_navigational(resource) { redirect_to admin_users_path(role: params[:role]) }
     end
   rescue StandardError => e
     flash[:error] = e.message
-    redirect_to admin_users_path
+    redirect_to admin_users_path(role: "customer")
   end
 
   def edit

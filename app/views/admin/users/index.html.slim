@@ -41,14 +41,12 @@
       .box-header
         .header-text
           i.user.outline.icon
-          | Invite User
-      = simple_form_for @user, url: user_invitation_path, method: :post do |form|
+          | Invite #{params[:role].titleize }
+      = simple_form_for @user, url: user_invitation_path(role: params[:role]), method: :post do |form|
         .two.fields
           = form.input :first_name, label: false, placeholder: "First Name"
           = form.input :last_name, label: false, placeholder: "Last Name"
         = form.input :email, label: false, placeholder: "Email"
-        .field
-          = select_tag "role", options_for_select(Membership.roles.keys.map(&:titleize)), class: "ui dropdown"
         .field
           .ui.checkbox
             = check_box_tag :send_invitation, true, true

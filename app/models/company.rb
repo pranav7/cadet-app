@@ -21,6 +21,7 @@ class Company < ApplicationRecord
   end
 
   def admins
+    # move to scope
     memberships.where(role: :admin).map(&:user)
   end
 

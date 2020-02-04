@@ -7,7 +7,7 @@ class Admin::UsersController < Admin::AdminController
     elsif params[:role] && params[:role] == "customer"
       @users = current_company.customers
     else
-      @users = current_company.users
+      @users = current_company.customers
     end
     @user = User.new
   end

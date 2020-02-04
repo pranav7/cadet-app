@@ -6,7 +6,7 @@ class Admin::UsersController < Admin::AdminController
       @users = current_company.admins
     elsif params[:role] == "customer"
       @users = current_company.customers
-    else      
+    else
       @users = current_company.customers
       redirect_to admin_users_path(role: "customer")
     end
@@ -53,15 +53,15 @@ class Admin::UsersController < Admin::AdminController
   private
   def set_selected_menu_items
     @main_selected = :customers
-    
-    if params[:role] == "admin"
-      @sub_nav_selected = :admins
-    elsif params[:role] == "customer"
-      @sub_nav_selected = :customers
-    else
-      @sub_nav_selected = :customers
+
+    @sub_nav_selected = if params[:role] == "admin"
+                          :admins
+                        elsif params[:role] == "customer"
+                          :customers
+                        else
+                          :customers
     end
-    
+
   end
 
   def user_params

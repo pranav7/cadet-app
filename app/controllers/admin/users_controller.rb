@@ -2,7 +2,13 @@ class Admin::UsersController < Admin::AdminController
   before_action :set_selected_menu_items
 
   def index
-    @users = current_company.users.order(created_at: :desc).compact
+    if params[:role] && params[:role] == "admin"
+      @users = current_company.admins
+    elsif params[:role] && params[:role] == "customer"
+      @users = current_company.customers
+    else
+      @users = current_company.users
+    end
     @user = User.new
   end
 
@@ -46,7 +52,15 @@ class Admin::UsersController < Admin::AdminController
   private
   def set_selected_menu_items
     @main_selected = :customers
-    @sub_nav_selected = :users
+    
+    if params[:role] && params[:role] == "admin"
+      @sub_nav_selected = :admins
+    elsif params[:role] && params[:role] == "customer"
+      @sub_nav_selected = :customers
+    else
+      @sub_nav_selected = :admins
+    end
+    
   end
 
   def user_params

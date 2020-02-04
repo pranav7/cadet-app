@@ -1,7 +1,10 @@
 .ui.secondary.vertical.inverted.settings.menu
-  a.item href=admin_users_path class=("active" if @sub_nav_selected == :users)
+  a.item href=admin_users_path(:role => 'admin') class=("active" if @sub_nav_selected == :admins)
     i.user.outline.icon
-    | Users
+    | Admins
+  a.item href=admin_users_path(:role => 'customer') class=("active" if @sub_nav_selected == :customers)
+    i.user.outline.icon
+    | Customers
   a.item href=admin_accounts_path class=("active" if @sub_nav_selected == :accounts)
     i.suitcase.icon
     | Accounts

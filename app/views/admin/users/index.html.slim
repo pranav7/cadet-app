@@ -14,7 +14,6 @@
                 th Name
                 th Email
                 th Account
-                th Role
                 th Invitation Status
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
@@ -25,11 +24,6 @@
                   td= user.account_for(current_company).name
                 - else
                   td -
-                - if user.admin_of?(current_company)
-                  td
-                    .ui.small.rounded.label Admin
-                - else
-                  td
                 - if user.created_by_invite?
                   - if user.invitation_sent_at.nil?
                     td

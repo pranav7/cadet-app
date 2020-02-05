@@ -172,9 +172,11 @@ body.admin {
   .ui.settings.menu {
     padding: 24px 0;
     width: 100%;
+    margin: 0px; 
 
     .item {
       font-weight: 500;
+      margin: 0 8px;
 
       & > i.icon {
         float: left;

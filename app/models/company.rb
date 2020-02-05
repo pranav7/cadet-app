@@ -17,11 +17,11 @@ class Company < ApplicationRecord
   validates :name, presence: true
 
   def customers
-    memberships.where(role: :customer).map(&:user)
+    memberships.where(role: :customer).map(&:user).compact
   end
 
   def admins
-    memberships.where(role: :admin).map(&:user)
+    memberships.where(role: :admin).map(&:user).compact
   end
 
   def owner

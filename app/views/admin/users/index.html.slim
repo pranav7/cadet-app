@@ -5,7 +5,11 @@
     .ui.grid
       .row
         .sixteen.wide.column
-          h1.heading Users
+          h1.heading
+            - if params[:role] == "admin"
+              | Admins
+            - else
+              | Customers
       .row
         .sixteen.wide.column
           table.ui.selectable.table#users-table
@@ -14,7 +18,6 @@
                 th Name
                 th Email
                 th Account
-                th Role
                 th Invitation Status
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
@@ -25,11 +28,6 @@
                   td= user.account_for(current_company).name
                 - else
                   td -
-                - if user.admin_of?(current_company)
-                  td
-                    .ui.small.rounded.label Admin
-                - else
-                  td
                 - if user.created_by_invite?
                   - if user.invitation_sent_at.nil?
                     td
@@ -47,14 +45,12 @@
       .box-header
         .header-text
           i.user.outline.icon
-          | Invite User
-      = simple_form_for @user, url: user_invitation_path, method: :post do |form|
+          | Invite #{params[:role].titleize }
+      = simple_form_for @user, url: user_invitation_path(role: params[:role]), method: :post do |form|
         .two.fields
           = form.input :first_name, label: false, placeholder: "First Name"
           = form.input :last_name, label: false, placeholder: "Last Name"
         = form.input :email, label: false, placeholder: "Email"
-        .field
-          = select_tag "role", options_for_select(Membership.roles.keys.map(&:titleize)), class: "ui dropdown"
         .field
           .ui.checkbox
             = check_box_tag :send_invitation, true, true
@@ -62,9 +58,10 @@
         = form.submit "Add User", class: "ui small button"
 
         p.soft.text.small If you have the option checked, we will send an email invitation to them. Once they accept, they can start participating on your boards. Even if they don't accept, you would still be able to add votes on their behalf.
-      .ui.divider
-      p.soft.text.small You can also share this link with you customers to let them signup themselves.
-      .invite-link= "https://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
+      - if params[:role] == "customer"
+        .ui.divider
+        p.soft.text.small You can also share this link with your customers to let them signup themselves.
+        .invite-link= "https://#{current_company.subdomain}.#{APP_CONFIG['base_domain']}/join"
 
 coffee:
   $(document).ready ->

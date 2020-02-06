@@ -12,6 +12,10 @@
     label: "Private",
     wrapper: :ui_checkbox,
     hint: "Private Boards are only accessible to the Admins of the company"
+  = form.input :roadmap_enabled,
+    label: "Roadmap Enabled",
+    wrapper: :ui_checkbox,
+    hint: "Roadmap disabled boards will not appear in the roadmap"
   = form.input :unlisted,
     label: "Unlisted",
     wrapper: :ui_checkbox,

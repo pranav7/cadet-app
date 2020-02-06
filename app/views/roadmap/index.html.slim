@@ -1,0 +1,18 @@
+.ui.grid
+  .sixteen.wide.column
+    p.page-heading.soft
+      i.clone.outline.icon
+      | Roadmap
+  .roadmap_container
+    - @roadmap.each do |status, posts|
+      .roadmap-single-bucket
+        .status-header-section
+          .p.status-title
+            = status
+        .ui.divider
+        - posts.each do |post|
+          .roadmap_list_item
+            .title
+              = post.title
+            .subtitle
+              = post.board.name

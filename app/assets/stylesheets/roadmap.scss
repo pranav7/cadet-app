@@ -1,0 +1,28 @@
+body.roadmap {
+    display: flex;
+    flex-wrap: wrap;
+
+    .roadmap-single-bucket {
+        width: 235px;
+        min-height: 295px;
+        margin: 0 20px 20px 0;
+        padding: 24px;
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+
+        border-top: 4px solid $lighter;
+        transition: 0.25s ease;
+
+        .status-header-section {
+            padding: 8px;
+            .status-title {
+                color: $darkest;
+                font-weight: 600;
+                font-size: 18px;
+            }
+
+        }
+    }
+}

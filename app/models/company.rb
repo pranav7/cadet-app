@@ -43,6 +43,10 @@ class Company < ApplicationRecord
     Post.joins(:board).where(board: boards)
   end
 
+  def roadmap
+    Post.joins(:board).where(boards: {roadmap_enabled: true}).group_by{|t| t.status}
+  end
+
   def host
     "#{subdomain}.#{APP_CONFIG['base_domain']}"
   end

@@ -1,28 +1,60 @@
 body.roadmap {
-    display: flex;
-    flex-wrap: wrap;
 
-    .roadmap-single-bucket {
-        width: 235px;
-        min-height: 295px;
-        margin: 0 20px 20px 0;
-        padding: 24px;
+    .roadmap_container{
+      display: flex;
+      .roadmap-single-bucket {
+          background: $white;
+          border-radius: 4px;
+          width: 335px;
+          min-height: 395px;
+          margin: 0 20px 20px 0;
+          
+          display: flex;
+          flex-direction: column;
+  
+          border: 1px solid $light;
+          transition: 0.25s ease;
 
-        display: flex;
-        flex-direction: column;
-        justify-content: space-between;
+          .roadmap-list-item-link {
+            cursor: pointer;
+            text-decoration: none;
+          }
 
-        border-top: 4px solid $lighter;
-        transition: 0.25s ease;
+          .status-header-section {
+              .status-title {
+                  padding: 16px 16px 2px 16px;
+                  color: $darkest;
+                  font-weight: 600;
+                  font-size: 24px;
+              }
+          }
 
-        .status-header-section {
+          .roadmap_list_item{
+            border: 1px solid $lighter;
+            width: 300px;
+            min-height: 60px;
+            margin: 8px 16px;
             padding: 8px;
-            .status-title {
-                color: $darkest;
-                font-weight: 600;
-                font-size: 18px;
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+  
+            .title{
+              color: $darkest;
+              font-weight: 600;
+              font-size: 18px;
             }
-
-        }
+  
+            .subtitle {
+              color: $darker;
+              font-weight: 600;
+              font-size: 14px;
+              margin-bottom: 4px;
+            }
+            .vote_container {
+                margin-top: 8px;
+            }
+          }
+      }
     }
-}
+  }

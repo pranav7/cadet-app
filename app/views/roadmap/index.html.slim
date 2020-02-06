@@ -8,11 +8,16 @@
       .roadmap-single-bucket
         .status-header-section
           .p.status-title
-            = status
+            | #
+            = status.titleize
         .ui.divider
         - posts.each do |post|
-          .roadmap_list_item
-            .title
-              = post.title
-            .subtitle
-              = post.board.name
+            .roadmap_list_item
+              .title
+                a.roadmap-list-item-link href=build_post_link(post, link_to: link_to)
+                  = post.title
+              .subtitle
+                = post.board.name
+              .vote_container
+                = render partial: "posts/vote",
+                  locals: { post: post, react: true }

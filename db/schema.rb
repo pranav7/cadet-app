@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_195803) do
+ActiveRecord::Schema.define(version: 2020_02_06_134214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.boolean "private", default: false
     t.integer "default_sort_order"
     t.boolean "unlisted", default: false
+    t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
   end
@@ -98,7 +99,6 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
-    t.string "stripe_customer_id"
     t.string "api_key"
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
@@ -186,6 +186,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

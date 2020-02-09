@@ -100,7 +100,7 @@ class Company < ApplicationRecord
     message << "\n_Name:_ #{name}"
     message << "\n_Admin:_ #{memberships.first.user.formatted_address}"
 
-    NotifySlackJob.perform_later(message, channel: "#main")
+    NotifySlackJob.perform_later(message, channel: "#new-signups")
   end
 
   def downcase_subdomain

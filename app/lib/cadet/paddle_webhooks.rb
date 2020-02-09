@@ -25,7 +25,7 @@ module Cadet
 
     def notify_slack
       message = "*##{@company.subdomain}* became a paying customer!"
-      NotifySlackJob.perform_later(message, channel: "#main")
+      NotifySlackJob.perform_later(message, channel: "#new-signup")
     end
 
     def event

@@ -1,36 +1,36 @@
 @for $i from 1 through 4 {
-  .u__pl__$i {
+  .u__pl__#{$i} {
     padding-left: $i * 4px;
   }
-  .u__pr__$i {
+  .u__pr__#{$i} {
     padding-right: $i * 4px;
   }
-  .u__pt__$i {
+  .u__pt__#{$i} {
     padding-top: $i * 4px;
   }
-  .u__pb__$i {
+  .u__pb__#{$i} {
     padding-bottom: $i * 4px;
   }
-  .u__p__$i {
+  .u__p__#{$i} {
     @extend .u__pl__4;
     @extend .u__pr__4;
     @extend .u__pt__4;
     @extend .u__pb__4;
   }
 
-  .u__ml__$i {
+  .u__ml__#{$i} {
     margin-left: $i * 4px;
   }
-  .u__mr__$i {
+  .u__mr__#{$i} {
     margin-right: $i * 4px;
   }
-  .u__mt__$i {
+  .u__mt__#{$i} {
     margin-top: $i * 4px;
   }
-  .u__mb__$i {
+  .u__mb__#{$i} {
     margin-bottom: $i * 4px;
   }
-  .u__m__$i {
+  .u__m__#{$i} {
     @extend .u__ml__4;
     @extend .u__mr__4;
     @extend .u__mt__4;

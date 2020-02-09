@@ -71,39 +71,6 @@ body {
   }
 }
 
-.padded {
-  &.full {
-    padding: $base-size;
-  }
-
-  &.bottom {
-    padding-bottom: $base-size;
-  }
-
-  &.top {
-    padding-top: $base-size;
-  }
-
-  &.vertical {
-    padding: $base-size 0;
-  }
-}
-
-.float {
-  &.left { float: left; }
-  &.right { float: right; }
-}
-
-.margined {
-  &.left {
-    margin-left: 8px;
-
-    &.small {
-      margin-left: 4px;
-    }
-  }
-}
-
 .c-breadcrumb {
   @extend .ui, .breadcrumb;
   font-size: 12px;
@@ -751,8 +718,9 @@ a.c.link {
     border: 1px solid $light;
   }
 
-  &.small {
+  &.o__small {
     font-size: 11px;
+    padding: 2px 4px;
   }
 }
 

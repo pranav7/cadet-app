@@ -5,12 +5,14 @@ body.roadmap {
       .roadmap-single-bucket {
           background: $white;
           border-radius: 4px;
-          width: 335px;
-          height: 80vh;
+          width: 324px;
+          min-height: 300px;
           max-height: 80vh;
           overflow-y: auto;
           margin: 0 20px 20px 0;
-          
+          padding: 8px;
+          background: $light;
+
           display: flex;
           flex-direction: column;
   
@@ -23,38 +25,38 @@ body.roadmap {
           }
 
           .status-header-section {
-              .status-title {
-                  padding: 16px 16px 2px 16px;
-                  color: $darkest;
-                  font-weight: 600;
-                  font-size: 24px;
-              }
+            margin-bottom: 16px;
           }
 
           .roadmap_list_item{
             border: 1px solid $lighter;
             width: 300px;
             min-height: 60px;
-            margin: 8px 16px;
+            margin: 4px 0;
             padding: 8px;
             display: flex;
             flex-direction: column;
             padding: 12px;
-  
+            background: $white;
+            border-radius: 6px;
+
             .title{
               color: $darkest;
               font-weight: 600;
-              font-size: 18px;
+              font-size: 16px;
             }
   
             .subtitle {
               color: $darker;
               font-weight: 600;
-              font-size: 14px;
+              font-size: 13px;
               margin-bottom: 4px;
             }
-            .vote_container {
-                margin-top: 8px;
+            .post_summary {
+              margin-top: 8px;
+              .label{
+                margin-right: 8px;
+              }
             }
           }
       }

@@ -7,17 +7,18 @@
     - @roadmap.each do |status, posts|
       .roadmap-single-bucket
         .status-header-section
-          .p.status-title
-            | #
-            = status.titleize
-        .ui.divider
+          strong.margined.status class=status ##{status}
         - posts.each do |post|
+          a href=build_post_link(post, link_to: link_to)
             .roadmap_list_item
               .title
-                a.roadmap-list-item-link href=build_post_link(post, link_to: link_to)
-                  = post.title
+                = post.title
               .subtitle
                 = post.board.name
-              .vote_container
-                = render partial: "posts/vote",
-                  locals: { post: post, react: true }
+              .post_summary
+                strong.ui.label
+                  i.icon class="caret up"
+                  = post.votes.count
+                strong.ui.label
+                  i.comment.outline.icon
+                  = post.comments.count

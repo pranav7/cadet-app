@@ -1,11 +1,31 @@
 class RoadmapController < ApplicationController
     def index
+      if not current_company.is_cadet_app?
+        redirect_to root_path
+      end
+
       if user_signed_in? && current_user.admin_of?(current_company)
-        @roadmap = current_company.roadmap
+        @planned_posts = get_posts(status: Post.statuses[:planned])
+        @devloping_posts = get_posts(status: Post.statuses[:developing])
+        @released_posts = get_posts(status: Post.statuses[:released])
+
+
       else
         # If user is not signed in, the roadmap should not contain
         # any posts from private board
-        @roadmap = current_company.public_roadmap
+        @planned_posts = get_posts(status: Post.statuses[:planned], public_boards: true)
+        @devloping_posts = get_posts(status: Post.statuses[:developing], public_boards: true)
+        @released_posts = get_posts(status: Post.statuses[:released], public_boards: true)
+      end
+    end
+
+    private
+
+    def get_posts(status:, public_boards: false)
+      if public_boards
+        Post.joins(:board).where(status: status, private: false, boards: { roadmap_enabled: true })
+      else
+        Post.joins(:board).where(status: status, boards: { roadmap_enabled: true })
       end
     end
   end

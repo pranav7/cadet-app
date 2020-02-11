@@ -16,6 +16,10 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
+  def is_cadet_app?
+    subdomain === "feedback"
+  end
+
   def customers
     memberships.where(role: :customer).map(&:user).compact
   end
@@ -41,14 +45,6 @@ class Company < ApplicationRecord
 
   def posts
     Post.joins(:board).where(board: boards)
-  end
-
-  def roadmap
-    Post.joins(:board).where(boards: {roadmap_enabled: true}).group_by{|t| t.status}
-  end
-
-  def public_roadmap
-    Post.joins(:board).where(boards: {roadmap_enabled: true, private: false}).group_by{|t| t.status}
   end
 
   def host

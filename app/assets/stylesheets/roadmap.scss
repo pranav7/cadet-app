@@ -3,21 +3,27 @@ body.roadmap {
     .roadmap_container{
       display: flex;
       .roadmap-single-bucket {
-          background: $white;
           border-radius: 4px;
-          width: 324px;
-          min-height: 300px;
+          width: 300px;
+          min-height: 158px;
           max-height: 80vh;
           overflow-y: auto;
           margin: 0 20px 20px 0;
           padding: 8px;
-          background: $light;
+          background: $lighter;
 
           display: flex;
           flex-direction: column;
-  
-          border: 1px solid $light;
           transition: 0.25s ease;
+
+          .no_posts_container {
+            height: 82px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            color: $darker;
+            font-size: 12px;
+          }
 
           .roadmap-list-item-link {
             cursor: pointer;
@@ -25,12 +31,12 @@ body.roadmap {
           }
 
           .status-header-section {
-            margin-bottom: 16px;
+            margin-bottom: 24px;
           }
 
           .roadmap_list_item{
             border: 1px solid $lighter;
-            width: 300px;
+            width: 284px;
             min-height: 60px;
             margin: 4px 0;
             padding: 8px;
@@ -43,19 +49,20 @@ body.roadmap {
             .title{
               color: $darkest;
               font-weight: 600;
-              font-size: 16px;
+              font-size: 14px;
             }
   
             .subtitle {
               color: $darker;
-              font-weight: 600;
-              font-size: 13px;
+              font-size: 12px;
               margin-bottom: 4px;
             }
             .post_summary {
               margin-top: 8px;
-              .label{
+              .label {
+                font-size: 12px;
                 margin-right: 8px;
+                border-radius: 4px;
               }
             }
           }

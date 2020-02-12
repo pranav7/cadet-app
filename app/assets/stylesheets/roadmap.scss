@@ -1,13 +1,19 @@
 body.roadmap {
+    .center{
+      justify-content: center;
+    }
 
     .roadmap_container{
       display: flex;
+      overflow-x: auto;
       .roadmap-single-bucket {
           border-radius: 4px;
-          width: 300px;
+          min-width: 300px;
+          max-width: 300px;
           min-height: 158px;
+          height: fit-content;
           max-height: 80vh;
-          overflow-y: auto;
+          overflow-y: hidden;
           margin: 0 20px 20px 0;
           padding: 8px;
           background: $lighter;
@@ -15,6 +21,10 @@ body.roadmap {
           display: flex;
           flex-direction: column;
           transition: 0.25s ease;
+
+          &:hover{
+            overflow-y: auto;
+          }
 
           .no_posts_container {
             height: 82px;
@@ -45,13 +55,19 @@ body.roadmap {
             padding: 12px;
             background: $white;
             border-radius: 6px;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.15);
 
+            &:hover{
+              background: #f3f3f3;
+            }
+            
             .title{
               color: $darkest;
               font-weight: 600;
-              font-size: 14px;
+              font-size: 14px;           
+              line-height: 18px;   
             }
-  
+
             .subtitle {
               color: $darker;
               font-size: 12px;
@@ -67,5 +83,6 @@ body.roadmap {
             }
           }
       }
+
     }
   }

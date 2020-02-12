@@ -1,4 +1,4 @@
-.ui.grid
+.ui.grid.center
   .sixteen.wide.column
     p.page-heading.soft
       i.columns.outline.icon
@@ -16,7 +16,7 @@
           a href=build_post_link(post, link_to: link_to)
             .roadmap_list_item
               .title
-                = post.title
+                = truncate(post.title, :length => 350, :omission => "...")
               .subtitle
                 = post.board.name
               .post_summary
@@ -39,7 +39,7 @@
           a href=build_post_link(post, link_to: link_to)
             .roadmap_list_item
               .title
-                = post.title
+                = truncate(post.title, :length => 350, :omission => "...")
               .subtitle
                 = post.board.name
               .post_summary
@@ -62,7 +62,7 @@
           a href=build_post_link(post, link_to: link_to)
             .roadmap_list_item
               .title
-                = post.title
+                = truncate(post.title, :length => 350, :omission => "...")
               .subtitle
                 = post.board.name
               .post_summary

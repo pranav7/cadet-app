@@ -8,8 +8,6 @@ class RoadmapController < ApplicationController
         @planned_posts = get_posts(status: Post.statuses[:planned])
         @devloping_posts = get_posts(status: Post.statuses[:developing])
         @released_posts = get_posts(status: Post.statuses[:released])
-
-
       else
         # If user is not signed in, the roadmap should not contain
         # any posts from private board

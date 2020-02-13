@@ -12,20 +12,21 @@
           div.no_posts_container
             | No Posts
       - else
-        - @planned_posts.each do |post|
-          a href=build_post_link(post, link_to: link_to)
-            .roadmap_list_item
-              .title
-                = truncate(post.title, :length => 350, :omission => "...")
-              .subtitle
-                = post.board.name
-              .post_summary
-                strong.ui.tiny.label
-                  i.icon class="caret up"
-                  = post.votes.count
-                strong.ui.tiny.label
-                  i.comment.icon
-                  = post.comments.count
+        .posts_container
+          - @planned_posts.each do |post|
+            a href=build_post_link(post, link_to: link_to)
+              .roadmap_list_item
+                .title
+                  = truncate(post.title, :length => 350, :omission => "...")
+                .subtitle
+                  = post.board.name
+                .post_summary
+                  strong.ui.tiny.label
+                    i.icon class="caret up"
+                    = post.votes.count
+                  strong.ui.tiny.label
+                    i.comment.icon
+                    = post.comments.count
     
     .roadmap-single-bucket
       .status-header-section
@@ -35,20 +36,21 @@
           div.no_posts_container
             | No Posts
       - else
-        - @devloping_posts.each do |post|
-          a href=build_post_link(post, link_to: link_to)
-            .roadmap_list_item
-              .title
-                = truncate(post.title, :length => 350, :omission => "...")
-              .subtitle
-                = post.board.name
-              .post_summary
-                strong.ui.tiny.label
-                  i.icon class="caret up"
-                  = post.votes.count
-                strong.ui.tiny.label
-                  i.comment.icon
-                  = post.comments.count
+        .posts_container
+          - @devloping_posts.each do |post|
+            a href=build_post_link(post, link_to: link_to)
+              .roadmap_list_item
+                .title
+                  = truncate(post.title, :length => 350, :omission => "...")
+                .subtitle
+                  = post.board.name
+                .post_summary
+                  strong.ui.tiny.label
+                    i.icon class="caret up"
+                    = post.votes.count
+                  strong.ui.tiny.label
+                    i.comment.icon
+                    = post.comments.count
     
     .roadmap-single-bucket
       .status-header-section
@@ -58,17 +60,18 @@
           div.no_posts_container
             | No Posts
       - else
-        - @released_posts.each do |post|
-          a href=build_post_link(post, link_to: link_to)
-            .roadmap_list_item
-              .title
-                = truncate(post.title, :length => 350, :omission => "...")
-              .subtitle
-                = post.board.name
-              .post_summary
-                strong.ui.tiny.label
-                  i.icon class="caret up"
-                  = post.votes.count
-                strong.ui.tiny.label
-                  i.comment.icon
-                  = post.comments.count
+        .posts_container
+          - @released_posts.each do |post|
+            a href=build_post_link(post, link_to: link_to)
+              .roadmap_list_item
+                .title
+                  = truncate(post.title, :length => 350, :omission => "...")
+                .subtitle
+                  = post.board.name
+                .post_summary
+                  strong.ui.tiny.label
+                    i.icon class="caret up"
+                    = post.votes.count
+                  strong.ui.tiny.label
+                    i.comment.icon
+                    = post.comments.count

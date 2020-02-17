@@ -1,8 +1,10 @@
-.ui.grid.center
-  .sixteen.wide.column
-    p.page-heading.soft
-      i.columns.outline.icon
-      | Roadmap
+div
+  div.center
+    div.ui.pointing.secondary.menu
+      a.item.active data-tab="roadmap"
+        | Roadmap
+      a.item data-tab="boards" href=boards_path
+        | Boards
   .roadmap_container
     .roadmap-single-bucket
       .status-header-section

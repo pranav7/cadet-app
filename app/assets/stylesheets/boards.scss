@@ -1,4 +1,10 @@
 body.boards {
+  .tab_container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
   .boards-list {
     display: flex;
     flex-wrap: wrap;

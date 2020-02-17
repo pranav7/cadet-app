@@ -1,11 +1,15 @@
 body.roadmap {
     .center{
+      display: flex;
       justify-content: center;
     }
 
     .roadmap_container{
+      margin: 12px 0;
       display: flex;
       overflow-x: auto;
+      justify-content: center;
+
       .roadmap-single-bucket {
           border-radius: 4px;
           min-width: 300px;

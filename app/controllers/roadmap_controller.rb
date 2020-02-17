@@ -21,9 +21,9 @@ class RoadmapController < ApplicationController
 
     def get_posts(status:, public_boards: false)
       if public_boards
-        Post.joins(:board).where(status: status, private: false, boards: { roadmap_enabled: true })
+        Post.latest_activity.joins(:board).where(status: status, private: false, boards: { roadmap_enabled: true })
       else
-        Post.joins(:board).where(status: status, boards: { roadmap_enabled: true })
+        Post.latest_activity.joins(:board).where(status: status, boards: { roadmap_enabled: true })
       end
     end
   end

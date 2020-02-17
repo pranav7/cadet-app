@@ -1,0 +1,98 @@
+body.roadmaps {
+  .center{
+    display: flex;
+    justify-content: center;
+  }
+
+  .roadmap_container{
+    margin: 12px 0;
+    display: flex;
+    overflow-x: auto;
+    justify-content: center;
+
+    .roadmap-single-bucket {
+        border-radius: 4px;
+        min-width: 300px;
+        max-width: 300px;
+        min-height: 158px;
+        height: fit-content;
+        max-height: 80vh;
+        margin: 0 20px 20px 0;
+        background: $lighter;
+
+        display: flex;
+        flex-direction: column;
+        transition: 0.25s ease;
+
+        .no_posts_container {
+          height: 82px;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: $darker;
+          font-size: 12px;
+        }
+
+        .roadmap-list-item-link {
+          cursor: pointer;
+          text-decoration: none;
+        }
+
+        .status-header-section {
+          padding: 8px;
+          margin-bottom: 16px;
+        }
+
+        .posts_container{
+          display: flex;
+          flex-direction: column;
+          overflow-y: hidden;
+          padding: 0 8px 8px 8px;
+
+          &:hover{
+            overflow-y: auto;
+          }
+
+          .roadmap_list_item{
+            border: 1px solid $lighter;
+            width: 284px;
+            min-height: 60px;
+            margin: 4px 0;
+            padding: 8px;
+            display: flex;
+            flex-direction: column;
+            padding: 12px;
+            background: $white;
+            border-radius: 6px;
+            box-shadow: 0 2px 2px -1px rgba(0, 0, 0, 0.15);
+
+            &:hover{
+              background: #f3f3f3;
+            }
+            
+            .title{
+              color: $darkest;
+              font-weight: 600;
+              font-size: 14px;           
+              line-height: 18px;   
+            }
+
+            .subtitle {
+              color: $darker;
+              font-size: 12px;
+              margin-bottom: 4px;
+            }
+            .post_summary {
+              margin-top: 8px;
+              .label {
+                font-size: 12px;
+                margin-right: 8px;
+                border-radius: 4px;
+              }
+            }
+          }
+        }
+    }
+
+  }
+}

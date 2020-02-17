@@ -1,4 +1,4 @@
-class RoadmapController < ApplicationController
+class RoadmapsController < ApplicationController
     def index
       # if not current_company.is_cadet_app?
       #   redirect_to root_path

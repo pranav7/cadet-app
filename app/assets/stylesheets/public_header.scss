@@ -7,6 +7,11 @@
   display: flex;
   align-items: center;
 
+  .nav-items__wrapper{
+    display: flex;
+    justify-content: space-between;
+  }
+
   .company-name {
     font-weight: 600;
     font-size: 20px;
@@ -60,5 +65,17 @@
 
   .login-signup-container {
     display: flex;
+  }
+
+  .nav-item {
+    font-size: 14px;
+    color: $darkest;
+    margin: 0 8px;
+    padding: 8px 0;
+  }
+
+  .nav-item.active {
+    color: $darker;
+    border-bottom: 2px solid $secondary-blue;
   }
 }

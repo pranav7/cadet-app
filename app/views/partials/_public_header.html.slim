@@ -8,7 +8,7 @@
           span.board-name= link_to @board.name, board_path(@board)
           - if @board.private?
             i.small.lock.icon.soft
-      .center.aligned.column.navigation-container
+      .column
         a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
           i.soft.columns.icon
           | Roadmap

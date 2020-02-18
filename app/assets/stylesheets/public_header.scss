@@ -10,6 +10,7 @@
   .nav-items__wrapper{
     display: flex;
     justify-content: space-between;
+    align-items: center;
   }
 
   .company-name {
@@ -72,10 +73,11 @@
     color: $darkest;
     margin: 0 8px;
     padding: 8px 0;
+    border-bottom: 2px solid $white;
   }
 
   .nav-item.active {
     color: $darker;
-    border-bottom: 2px solid $secondary-blue;
+    border-bottom-color: $secondary-blue;
   }
 }

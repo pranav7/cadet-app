@@ -20,20 +20,19 @@ RSpec.describe RoadmapsController, type: :controller do
 
     it "Index only planned posts belonging roadmap enabled boards" do
       sign_in user
-      
+
       get :index
       expect(assigns(:planned_posts)).to eq([post3, post1])
     end
 
     it "Index posts only from public boards" do
-      
       get :index
       expect(assigns(:planned_posts)).to eq([post1])
     end
 
     it "Index planned posts ordered by latest activity" do
       sign_in user
-      
+
       get :index
       expect(assigns(:planned_posts)).to eq([post3, post1])
     end

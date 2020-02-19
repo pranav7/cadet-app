@@ -16,8 +16,8 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
-  def is_cadet_app?
-    subdomain === "feedback"
+  def cadet_app?
+    subdomain == "feedback"
   end
 
   def customers

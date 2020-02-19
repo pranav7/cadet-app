@@ -2,21 +2,25 @@ require 'rails_helper'
 
 RSpec.describe RoadmapsController, type: :controller do
   render_views
-  let(:company) { create :company }
-  let(:user) { create :user, company: company }
-  let!(:membership) { create :membership, company: company, user: user, owner: true, primary: true, role: :admin }
+  let(:company1) { create :company }
+  let(:company2) { create :company }
+  let(:user) { create :user, company: company1 }
+  let!(:membership) { create :membership, company: company1, user: user, owner: true, primary: true, role: :admin }
+
+  let(:board) { create :board, company: company1 }
+  let(:board2) { create :board, company: company2 }
+  let(:roadmap_disabled_board) { create :board, company: company1, roadmap_enabled: false }
+  let!(:post1) { create :post, board: board, status: 1 }
+  let!(:post2) { create :post, board: roadmap_disabled_board, status: 1 }
+  let(:private_board) { create :board, company: company1, private: true }
+  let!(:post3) { create :post, board: private_board, status: 1 }
+  let!(:post4) { create :post, board: board2, status: 1 }
 
   before :each do
-    request.host = "#{company.subdomain}.example.com"
+    request.host = "#{company1.subdomain}.example.com"
   end
 
   describe "GET index" do
-    let(:board) { create :board, company: company }
-    let!(:post1) { create :post, board: board, status: 1 }
-    let(:roadmap_disabled_board) { create :board, company: company, roadmap_enabled: false }
-    let!(:post2) { create :post, board: roadmap_disabled_board, status: 1 }
-    let(:private_board) { create :board, company: company, private: true }
-    let!(:post3) { create :post, board: private_board, status: 1 }
 
     it "Index only planned posts belonging roadmap enabled boards" do
       sign_in user

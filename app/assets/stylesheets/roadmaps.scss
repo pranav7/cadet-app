@@ -1,4 +1,11 @@
 body.roadmaps {
+
+  .tab_container{
+    display: flex;
+    justify-content: center;
+    margin-bottom: 12px;
+  }
+
   .center{
     display: flex;
     justify-content: center;
@@ -8,6 +15,9 @@ body.roadmaps {
     display: flex;
     overflow-x: auto;
     justify-content: center;
+    @media (min-width: 320px) and (max-width: 1220px) {
+      justify-content: flex-start;
+    }
 
     .roadmap-single-bucket {
         border-radius: 4px;

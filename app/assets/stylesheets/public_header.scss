@@ -9,8 +9,19 @@
 
   .nav-items__wrapper{
     display: flex;
-    justify-content: space-between;
-    align-items: center;
+    justify-content: center;
+    .nav-item {
+      font-size: 14px;
+      color: $darkest;
+      margin: 0 8px;
+      padding: 8px 0;
+      border-bottom: 2px solid $white;
+    }
+  
+    .nav-item.active {
+      color: $darker;
+      border-bottom-color: $secondary-blue;
+    }
   }
 
   .company-name {
@@ -66,18 +77,5 @@
 
   .login-signup-container {
     display: flex;
-  }
-
-  .nav-item {
-    font-size: 14px;
-    color: $darkest;
-    margin: 0 8px;
-    padding: 8px 0;
-    border-bottom: 2px solid $white;
-  }
-
-  .nav-item.active {
-    color: $darker;
-    border-bottom-color: $secondary-blue;
   }
 }

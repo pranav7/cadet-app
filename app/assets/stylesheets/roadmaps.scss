@@ -1,9 +1,26 @@
 body.roadmaps {
 
-  .tab_container{
-    display: flex;
-    justify-content: center;
-    margin-bottom: 12px;
+  .nav-items__wrapper {
+    display: none;
+
+    @media (max-device-width: 992px) {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 12px;
+    }
+
+    .nav-item {
+      font-size: 14px;
+      color: $darkest;
+      margin: 0 8px;
+      padding: 8px 0;
+      border-bottom: 2px solid $lightest;
+    }
+  
+    .nav-item.active {
+      color: $darker;
+      border-bottom-color: $secondary-blue;
+    }
   }
 
   .center{
@@ -15,7 +32,7 @@ body.roadmaps {
     display: flex;
     overflow-x: auto;
     justify-content: center;
-    @media (min-width: 320px) and (max-width: 1220px) {
+    @media (min-width: 320px) and (max-width: 1130px) {
       justify-content: flex-start;
     }
 

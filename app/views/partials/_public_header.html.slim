@@ -1,6 +1,6 @@
 .public-header
   .ui.full.width.container.grid
-    .computer.only.three.column.row
+    .three.column.row.computer.only
       .left.aligned.column
         span.company-name
           = link_to current_company.name, boards_path
@@ -8,7 +8,7 @@
           span.board-name= link_to @board.name, board_path(@board)
           - if @board.private?
             i.small.lock.icon.soft
-      .center.aligned.column.nav-items__wrapper
+      .center.aligned.column.top-navigation__wrapper
         a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
           i.soft.columns.icon
           | Roadmap
@@ -46,7 +46,7 @@
               span data-controller="onboarding"
                 a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in
                 a.ui.small.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Sign up
-    .mobile.tablet.only.two.column.row
+    .two.column.row.mobile.tablet.only
       .left.aligned.column
         span.company-name
           = link_to current_company.name, boards_path

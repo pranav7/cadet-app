@@ -21,7 +21,6 @@ RSpec.describe RoadmapsController, type: :controller do
   end
 
   describe "GET index" do
-
     it "Index only planned posts belonging roadmap enabled boards" do
       sign_in user
 

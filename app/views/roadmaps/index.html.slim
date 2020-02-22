@@ -1,9 +1,10 @@
-/ div.ui.mobile.only.tab_container
-/   div.ui.pointing.secondary.menu
-/     a.item.active data-tab="roadmap" href=roadmaps_path
-/       | Roadmap
-/     a.item data-tab="boards" href=boards_path
-/       | Boards
+div.nav-items__wrapper
+  a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
+    i.soft.columns.icon
+    | Roadmap
+  a.nav-item data-tab="boards" class=("active" if current_page?('/')) href=boards_path
+    i.soft.clone.icon
+    | Boards
 
 .roadmap_container
   .roadmap-single-bucket

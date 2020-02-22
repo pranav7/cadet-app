@@ -1,8 +1,8 @@
 class RoadmapsController < ApplicationController
   def index
-    if not current_company.cadet_app?
-      redirect_to root_path
-    end
+    # if not current_company.cadet_app?
+    #   redirect_to root_path
+    # end
 
     if user_signed_in? && current_user.admin_of?(current_company)
       @planned_posts = get_posts(status: Post.statuses[:planned])
@@ -26,4 +26,4 @@ class RoadmapsController < ApplicationController
       Post.latest_activity.joins(:board).where(status: status, boards: { roadmap_enabled: true, company_id: current_company.id })
     end
   end
-  end
+end

@@ -30,7 +30,7 @@ nav
 
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link" do
-        i.clone.large.icon
+        i.window.restore.large.icon
         .item-text Boards
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link" do

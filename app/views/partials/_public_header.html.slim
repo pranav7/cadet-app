@@ -30,7 +30,7 @@
               .divider
               - if current_user.admin_of?(current_company)
                 = link_to admin_boards_path, class: "item", data: { turbolinks: false} do
-                  i.soft.columns.icon
+                  i.soft.user.outline.icon
                   | Admin
               = link_to destroy_user_session_path, class: "item", method: :delete do
                 i.soft.sign.out.icon

@@ -1,11 +1,3 @@
-div.nav-items__wrapper
-  a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
-    i.soft.columns.icon
-    | Roadmap
-  a.nav-item data-tab="boards" class=("active" if current_page?('/')) href=boards_path
-    i.soft.clone.icon
-    | Boards
-
 .ui.grid
   .sixteen.wide.column
     - if @boards.empty?

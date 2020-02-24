@@ -8,6 +8,7 @@ class ApplicationController < ActionController::Base
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
   include IntercomIframe
+  include ProtectedFeatures
 
   protected
 

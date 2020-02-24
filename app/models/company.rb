@@ -16,6 +16,10 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
+  def cadet_app?
+    subdomain == "feedback"
+  end
+
   def customers
     memberships.where(role: :customer).map(&:user).compact
   end

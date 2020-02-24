@@ -5,15 +5,16 @@ RSpec.describe RoadmapsController, type: :controller do
   let(:company1) { create :company }
   let(:company2) { create :company }
   let(:user) { create :user, company: company1 }
+  let(:user2) { create :user, company: company1 }
   let!(:membership) { create :membership, company: company1, user: user, owner: true, primary: true, role: :admin }
 
   let(:board) { create :board, company: company1 }
   let(:board2) { create :board, company: company2 }
-  let(:roadmap_disabled_board) { create :board, company: company1, roadmap_enabled: false }
-  let!(:post1) { create :post, board: board, status: 1 }
-  let!(:post2) { create :post, board: roadmap_disabled_board, status: 1 }
+  let(:roadmap_disabled_board) { create :board, :roadmap_disabled, company: company1 }
+  let!(:post1) { create :post, :planned, board: board}
+  let!(:post2) { create :post, :planned, board: roadmap_disabled_board }
   let(:private_board) { create :board, company: company1, private: true }
-  let!(:post3) { create :post, board: private_board, status: 1 }
+  let!(:post3) { create :post, :planned, board: private_board }
   let!(:post4) { create :post, board: board2, status: 1 }
 
   before :each do
@@ -22,6 +23,13 @@ RSpec.describe RoadmapsController, type: :controller do
 
   describe "GET index" do
     it "Index only planned posts belonging roadmap enabled boards" do
+      sign_in user2     
+
+      get :index
+      expect(assigns(:planned_posts)).to eq([post1])
+    end
+
+    it "Index posts from Private boards if the user is admin" do
       sign_in user
 
       get :index

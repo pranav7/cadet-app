@@ -57,7 +57,7 @@ Rails.application.routes.draw do
 
   post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
-  resources :boards, path: "/" do
+  resources :boards, path: "" do
     resources :posts, only: [:create, :show, :index, :new] do
       resources :comments, only: [:create, :update, :destroy]
       resource :votes, only: [:create, :destroy]

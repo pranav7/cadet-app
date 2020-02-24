@@ -11,11 +11,11 @@ RSpec.describe RoadmapsController, type: :controller do
   let(:board) { create :board, company: company1 }
   let(:board2) { create :board, company: company2 }
   let(:roadmap_disabled_board) { create :board, :roadmap_disabled, company: company1 }
-  let!(:post1) { create :post, :planned, board: board}
+  let!(:post1) { create :post, :planned, board: board }
   let!(:post2) { create :post, :planned, board: roadmap_disabled_board }
   let(:private_board) { create :board, company: company1, private: true }
   let!(:post3) { create :post, :planned, board: private_board }
-  let!(:post4) { create :post, board: board2, status: 1 }
+  let!(:post4) { create :post, :planned, board: board2 }
 
   before :each do
     request.host = "#{company1.subdomain}.example.com"
@@ -23,7 +23,7 @@ RSpec.describe RoadmapsController, type: :controller do
 
   describe "GET index" do
     it "Index only planned posts belonging roadmap enabled boards" do
-      sign_in user2     
+      sign_in user2
 
       get :index
       expect(assigns(:planned_posts)).to eq([post1])

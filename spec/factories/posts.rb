@@ -3,7 +3,7 @@ FactoryGirl.define do
     title "My Awesome Post Title"
     board
     content_attributes { { body: "Post Content" } }
-    
+
     trait :planned do
       status Post.statuses[:planned]
     end

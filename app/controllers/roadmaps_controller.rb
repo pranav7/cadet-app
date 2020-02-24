@@ -1,7 +1,6 @@
 class RoadmapsController < ApplicationController
   before_action :verify_feature_access
 
-
   def index
     if user_signed_in? && current_user.admin_of?(current_company)
       @planned_posts = get_posts(status: Post.statuses[:planned])

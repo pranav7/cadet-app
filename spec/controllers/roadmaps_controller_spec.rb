@@ -13,7 +13,7 @@ RSpec.describe RoadmapsController, type: :controller do
   let(:roadmap_disabled_board) { create :board, :roadmap_disabled, company: company1 }
   let!(:post1) { create :post, :planned, board: board }
   let!(:post2) { create :post, :planned, board: roadmap_disabled_board }
-  let(:private_board) { create :board, company: company1, private: true }
+  let(:private_board) { create :board, :private, company: company1 }
   let!(:post3) { create :post, :planned, board: private_board }
   let!(:post4) { create :post, :planned, board: board2 }
 

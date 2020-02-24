@@ -7,5 +7,9 @@ FactoryGirl.define do
     trait :roadmap_disabled do
       roadmap_enabled { false }
     end
+
+    trait :private do
+      private { true }
+    end
   end
 end

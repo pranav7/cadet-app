@@ -1,0 +1,21 @@
+.top-navigation__wrapper{
+    display: flex;
+    justify-content: center;
+    border: none;
+    align-items: center;
+
+    .nav-item {
+      font-size: 14px;
+      color: $darkest;
+      margin: 0 8px;
+      padding: 8px 0;
+      background: none;
+    }
+  
+    .nav-item.active {
+      color: $darker;
+      background: $lighter;
+      padding: 4px 6px;
+      border-radius: 4px;
+    }
+  }

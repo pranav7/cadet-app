@@ -1,8 +1,8 @@
 - if can_access_feature?
 	div.top-navigation__wrapper
-		a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
+		a.nav-item data-tab="roadmap" class=("active" if current_page?(roadmaps_path)) href=roadmaps_path
 			i.soft.columns.icon
 			| Roadmap
-		a.nav-item data-tab="boards" class=("active" if current_page?('/')) href=boards_path
+		a.nav-item data-tab="boards" class=("active" if (current_page?(boards_path) || current_page?(board_path) || current_page?(board_post_path))) href=boards_path
 			i.soft.window.restore.icon
 			| Boards

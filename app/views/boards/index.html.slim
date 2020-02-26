@@ -1,22 +1,19 @@
 .ui.grid
   .sixteen.wide.column
-    p.page-heading.soft
-      i.clone.outline.icon
-      | Boards
-      - if @boards.empty?
-        p This company has no boards.
-        - if user_signed_in? && current_user.admin_of?(current_company)
-          a.ui.primary.button href=admin_boards_path
-            | + Add Board
-      - else
-        .boards-list
-          - @boards.each do |board|
-            a.board-link href=board_path(board)
-              .board.box
-                .top
-                  - if board.private?
-                    i.lock.icon.soft
-                  span.board-name= board.name
-                  .board-description.soft= board.description
-                .bottom
-                  span.soft.foat.left= pluralize(board.posts.count, "Post")
+    - if @boards.empty?
+      p This company has no boards.
+      - if user_signed_in? && current_user.admin_of?(current_company)
+        a.ui.primary.button href=admin_boards_path
+          | + Add Board
+    - else
+      .boards-list
+        - @boards.each do |board|
+          a.board-link href=board_path(board)
+            .board.box
+              .top
+                - if board.private?
+                  i.lock.icon.soft
+                span.board-name= board.name
+                .board-description.soft= board.description
+              .bottom
+                span.soft.foat.left= pluralize(board.posts.count, "Post")

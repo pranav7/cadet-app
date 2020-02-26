@@ -1,6 +1,53 @@
 .public-header
-  .ui.full.width.container
-    .ui.two.column.middle.aligned.grid
+  .ui.full.width.container.grid
+    .three.column.row.computer.only
+      .left.middle.aligned.column
+        span.company-name
+          = link_to current_company.name, boards_path
+        - if @board
+          span.board-name= link_to @board.name, board_path(@board)
+          - if @board.private?
+            i.small.lock.icon.soft
+      .center.aligned.column.top-navigation__wrapper
+        - if can_access_feature?
+          a.nav-item data-tab="roadmap" class=("active" if current_page?('/roadmap')) href=roadmaps_path
+            i.soft.columns.icon
+            | Roadmap
+          a.nav-item data-tab="boards" class=("active" if current_page?('/')) href=boards_path
+            i.soft.window.restore.icon
+            | Boards
+      .right.aligned.column
+        - if user_signed_in?
+          .c-profile-menu.ui.left.top.pointing.dropdown
+            .text
+              .avatar.circle.small
+                .initials= current_user.initials
+
+            i.dropdown.icon
+            .menu
+              .header
+                .main-text= current_user.name
+                .sub-text= current_user.email
+              .divider
+              - if current_user.admin_of?(current_company)
+                = link_to admin_boards_path, class: "item", data: { turbolinks: false} do
+                  i.soft.user.outline.icon
+                  | Admin
+              = link_to destroy_user_session_path, class: "item", method: :delete do
+                i.soft.sign.out.icon
+                | Log out
+
+        - else
+          .ui.one.column.grid
+            .ui.mobile.only.column
+              span data-controller="onboarding"
+                a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Log in / Sign up
+
+            .ui.tablet.computer.only.column
+              span data-controller="onboarding"
+                a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in
+                a.ui.small.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Sign up
+    .two.column.row.mobile.tablet.only
       .left.aligned.column
         span.company-name
           = link_to current_company.name, boards_path

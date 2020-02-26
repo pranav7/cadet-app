@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_195803) do
+ActiveRecord::Schema.define(version: 2020_02_06_134214) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -68,6 +68,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.boolean "private", default: false
     t.integer "default_sort_order"
     t.boolean "unlisted", default: false
+    t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
   end

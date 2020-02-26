@@ -16,12 +16,16 @@ class Company < ApplicationRecord
 
   validates :name, presence: true
 
+  def cadet_app?
+    subdomain == "feedback"
+  end
+
   def customers
-    memberships.where(role: :customer).map(&:user)
+    memberships.where(role: :customer).map(&:user).compact
   end
 
   def admins
-    memberships.where(role: :admin).map(&:user)
+    memberships.where(role: :admin).map(&:user).compact
   end
 
   def owner
@@ -100,7 +104,7 @@ class Company < ApplicationRecord
     message << "\n_Name:_ #{name}"
     message << "\n_Admin:_ #{memberships.first.user.formatted_address}"
 
-    NotifySlackJob.perform_later(message, channel: "#main")
+    NotifySlackJob.perform_later(message, channel: "#new-signups")
   end
 
   def downcase_subdomain

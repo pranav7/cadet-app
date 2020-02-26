@@ -9,6 +9,7 @@ class ApplicationController < ActionController::Base
   include AuthorizeAdminAccess
   include Rails::Pagination
   include IntercomIframe
+  include ProtectedFeatures
 
   protected
 

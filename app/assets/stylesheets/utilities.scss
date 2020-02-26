@@ -43,3 +43,37 @@
   }
 }
 // END-SNIPPET
+
+// DEPRECATED
+.padded {
+  &.full {
+    padding: $base-size;
+  }
+
+  &.bottom {
+    padding-bottom: $base-size;
+  }
+
+  &.top {
+    padding-top: $base-size;
+  }
+
+  &.vertical {
+    padding: $base-size 0;
+  }
+}
+
+.float {
+  &.left { float: left; }
+  &.right { float: right; }
+}
+
+.margined {
+  &.left {
+    margin-left: 8px;
+
+    &.small {
+      margin-left: 4px;
+    }
+  }
+}

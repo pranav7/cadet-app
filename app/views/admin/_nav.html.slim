@@ -30,7 +30,7 @@ nav
 
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "" } do
-        i.clone.big.icon
+        i.window.restore.large.icon
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Customers", position: "right center", inverted: "" }  do
         i.user.circle.big.icon

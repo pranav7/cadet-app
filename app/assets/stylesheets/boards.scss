@@ -1,27 +1,4 @@
 body.boards {
-  .nav-items__wrapper {
-    display: none;
-
-    @media (max-device-width: 992px) {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
-
-    .nav-item {
-      font-size: 14px;
-      color: $darkest;
-      margin: 0 8px;
-      padding: 8px 0;
-      border-bottom: 2px solid $lightest;
-    }
-  
-    .nav-item.active {
-      color: $darker;
-      border-bottom-color: $secondary-blue;
-    }
-  }
-
   .boards-list {
     display: flex;
     flex-wrap: wrap;

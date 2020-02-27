@@ -2,6 +2,8 @@ class RoadmapsController < ApplicationController
   before_action :verify_feature_access
 
   def index
+    @top_nav_selected = :roadmaps
+
     if user_signed_in? && current_user.admin_of?(current_company)
       @planned_posts = get_posts(status: Post.statuses[:planned])
       @devloping_posts = get_posts(status: Post.statuses[:developing])

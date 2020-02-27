@@ -1,5 +1,4 @@
 class BoardsController < ApplicationController
-
   def index
     if user_signed_in? && current_user.admin_of?(current_company)
       @boards = current_company.boards

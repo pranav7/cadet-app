@@ -13,6 +13,7 @@ class PostsController < ApplicationController
     @comment.build_content
 
     @page_title = @post.title
+    @top_nav_selected = :boards
   end
 
   def index

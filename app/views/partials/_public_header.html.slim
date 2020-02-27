@@ -81,6 +81,11 @@
                 a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in
                 a.ui.small.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Sign up
 
+.ui.grid.mobile.tablet.only.center.aligned
+  - if can_access_feature?
+    .center.aligned.u__mb__8.u__mt__8
+      = render partial: "partials/top_navigation"
+
 coffee:
   $(".ui.dropdown").dropdown({
     action: "select"

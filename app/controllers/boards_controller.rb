@@ -1,4 +1,5 @@
 class BoardsController < ApplicationController
+
   def index
     if user_signed_in? && current_user.admin_of?(current_company)
       @boards = current_company.boards
@@ -9,6 +10,7 @@ class BoardsController < ApplicationController
     return redirect_to(board_path(@boards.first)) if @boards.count == 1
 
     @page_title = "Boards - #{current_company.name}"
+    @top_nav_selected = :boards
   end
 
   def show
@@ -18,5 +20,6 @@ class BoardsController < ApplicationController
     @post = @board.posts.new
     @post.build_content
     @page_title = "#{@board.name} - #{current_company.name}"
+    @top_nav_selected = :boards
   end
 end

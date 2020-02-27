@@ -1,0 +1,19 @@
+.top-navigation__wrapper {
+  display: flex;
+  justify-content: center;
+  border: none;
+  align-items: center;
+
+  .nav-item {
+    font-size: 14px;
+    color: $darkest;
+    padding: 8px 12px;
+    background: none;
+  }
+
+  .nav-item.active {
+    color: $darkest;
+    background: #f3f3f3; // TODO: Fix palette variables
+    border-radius: 4px;
+  }
+}

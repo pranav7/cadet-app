@@ -9,21 +9,14 @@ nav
             .main-text= current_user.name
             .sub-text= current_user.email
           .divider
-          - if can_access_feature?
-            .header Public View
-            = link_to roadmaps_path, class: "item" do
-              i.soft.columns.icon
-              | Roadmap
-            = link_to boards_path, class: "item" do
-              i.soft.window.restore.icon
-              | Boards
-          - else
-            = link_to boards_path, class: "item" do
-              i.soft.external.icon
-              | Public View
+          = link_to roadmaps_path, class: "item" do
+            i.soft.columns.icon
+            | Roadmap
+          = link_to boards_path, class: "item" do
+            i.soft.window.restore.icon
+            | Boards
           .divider
-          - if can_access_feature?
-            .header Help & Feedback
+          .header Help & Feedback
           = link_to "https://feedback.getcadet.com/feature-requests", class: "item", target: "_blank" do
             i.thumbs.up.soft.icon
             | Vote on Features

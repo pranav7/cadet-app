@@ -1,5 +1,4 @@
 class RoadmapsController < ApplicationController
-  before_action :verify_feature_access
 
   def index
     @top_nav_selected = :roadmaps
@@ -25,9 +24,5 @@ class RoadmapsController < ApplicationController
     else
       Post.latest_activity.joins(:board).where(status: status, boards: { roadmap_enabled: true, company_id: current_company.id })
     end
-  end
-
-  def verify_feature_access
-    redirect_to(root_path) unless can_access_feature?
   end
 end

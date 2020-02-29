@@ -3,6 +3,6 @@
     | General
   a.item href=admin_billing_path class=("active" if @sub_nav_selected == :billing)
     | Billing
-  - if Rails.env.development? || current_company.subdomain == 'feedback'
+  - if can_access_feature?
     a.item href=admin_integrations_path class=("active" if @sub_nav_selected == :integrations)
       | Integrations

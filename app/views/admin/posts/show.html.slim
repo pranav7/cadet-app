@@ -2,12 +2,6 @@
   .c-left-pane
     .list-action-bar
       .container-one
-        - if !can_access_feature?
-          .c-breadcrumb
-            .section= link_to "Boards", admin_boards_path
-            .divider
-                | /
-            .section.active= link_to @board.name, admin_board_path(@board)
         #create-post-btn
           i.add.square.primary.big.icon.button
       .container-two

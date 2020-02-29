@@ -1,5 +1,4 @@
 class RoadmapsController < ApplicationController
-
   def index
     @top_nav_selected = :roadmaps
 

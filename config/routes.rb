@@ -56,7 +56,7 @@ Rails.application.routes.draw do
 
   post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
-  get "/", to: "roadmaps#index", as: :roadmaps
+  root to: "roadmaps#index", as: :roadmaps
   get '/boards', to: 'boards#index'
   resources :boards, path: "", except: [:index] do
     resources :posts, only: [:create, :show, :index, :new] do

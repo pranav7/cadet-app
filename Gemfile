@@ -26,7 +26,7 @@ gem 'omniauth-google-oauth2'
 gem "pg", "< 1.0"
 gem "php-serialize"
 gem 'postmark-rails'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'

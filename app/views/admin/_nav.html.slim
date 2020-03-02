@@ -9,19 +9,15 @@ nav
             .main-text= current_user.name
             .sub-text= current_user.email
           .divider
-          - if current_user.admin_of?(current_company)
-            - if can_access_feature?
-              = link_to boards_path, class: "item" do
-                i.soft.window.restore.icon
-                | Boards
-              = link_to roadmaps_path, class: "item" do
-                i.soft.columns.icon
-                | Roadmap
-            - else
-              = link_to boards_path, class: "item" do
-                i.soft.external.icon
-                | Public View
-            .ui.divider
+          .header Public View
+          = link_to roadmaps_path, class: "item" do
+            i.soft.columns.icon
+            | Roadmap
+          = link_to boards_path, class: "item" do
+            i.soft.window.restore.icon
+            | Boards
+          .divider
+          .header Help & Feedback
           = link_to "https://feedback.getcadet.com/feature-requests", class: "item", target: "_blank" do
             i.thumbs.up.soft.icon
             | Vote on Features

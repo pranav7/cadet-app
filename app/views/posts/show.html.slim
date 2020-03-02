@@ -1,13 +1,4 @@
 .ui.grid
-  - if !can_access_feature?
-    .row
-      .sixteen.wide.column
-        .c-breadcrumb
-          .section= link_to "Boards", boards_path
-          .divider
-              | /
-          .section.active= link_to @board.name, board_path(@board)
-
   .row
     .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column
       // Post Header

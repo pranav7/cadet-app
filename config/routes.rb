@@ -11,7 +11,6 @@ Rails.application.routes.draw do
   end
 
   get :trial_expired, to: "errors#trial_expired", as: :trial_expired
-  get "/roadmap", to: "roadmaps#index", as: :roadmaps
 
   devise_for :users, path: '',
                      path_names: { sign_in: 'login', sign_up: 'signup' },
@@ -57,7 +56,9 @@ Rails.application.routes.draw do
 
   post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
-  resources :boards, path: "" do
+  root to: "roadmaps#index", as: :roadmaps
+  get '/boards', to: 'boards#index'
+  resources :boards, path: "", except: [:index] do
     resources :posts, only: [:create, :show, :index, :new] do
       resources :comments, only: [:create, :update, :destroy]
       resource :votes, only: [:create, :destroy]

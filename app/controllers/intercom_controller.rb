@@ -6,7 +6,11 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   GCM_AUTH_TAG_LENGTH = 16
 
   def sheets
-    intercom_data = validate_request_and_decrtypt_data
+    
+    binding.pry
+    
+    @user = User.from_omniauth(request.env["omniauth.auth"])
+    # intercom_data = validate_request_and_decrtypt_data
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
@@ -31,7 +35,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
             "style": "primary",
             "action": {
               "type": "sheet",
-              "url": "https://app.getcadet.com/intercom/sheets"
+              "url": "https://6cb33666.ngrok.io/intercom/sheets"
             }
           }]
         }

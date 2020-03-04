@@ -25,6 +25,9 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     end
   end
 
+  def intercom
+    
+  end
   # GET|POST /resource/auth/twitter
   # def passthru
   #   super

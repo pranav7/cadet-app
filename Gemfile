@@ -8,6 +8,7 @@ git_source(:github) do |repo_name|
 end
 
 gem 'autoprefixer-rails'
+gem 'omniauth-intercom', '~> 0.1.9'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.5.0'

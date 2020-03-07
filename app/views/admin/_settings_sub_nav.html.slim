@@ -1,8 +1,5 @@
 .ui.secondary.vertical.inverted.settings.menu
-  a.item href=edit_admin_company_path(current_company) class=("active" if @sub_nav_selected == :general)
-    | General
-  a.item href=admin_billing_path class=("active" if @sub_nav_selected == :billing)
-    | Billing
+  = link_to "General", edit_admin_company_path(current_company), class: "item #{'active' if @sub_nav_selected == :general}"
+  = link_to "Billing", admin_billing_path, class: "item #{'active' if @sub_nav_selected == :billing}", data: { turbolinks: false }
   - if can_access_feature?
-    a.item href=admin_integrations_path class=("active" if @sub_nav_selected == :integrations)
-      | Integrations
+    = link_to "Integrations", admin_integrations_path, class: "item #{'active' if @sub_nav_selected == :integrations}"

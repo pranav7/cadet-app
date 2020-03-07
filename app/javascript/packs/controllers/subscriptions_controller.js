@@ -1,13 +1,13 @@
-import { Controller } from "stimulus"
+import { Controller } from "stimulus";
 
 export default class extends Controller {
   connect() {
-    this.setupPaddle()
-    this.setupSubscriptionBtnListener()
+    this.setupPaddle();
+    this.setupSubscriptionBtnListener();
   }
 
   reloadPage() {
-    location.reload()
+    location.reload();
   }
 
   setupPaddle() {
@@ -21,7 +21,7 @@ export default class extends Controller {
         email: event.target.dataset.email,
         passthrough: event.target.dataset.passthrough,
         closeCallback: this.reloadPage
-      }, false)
+      }, false);
     })
   }
 }

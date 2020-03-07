@@ -1,6 +1,8 @@
 v1.1:
   base: 49
   per_user: 19
+  paddle_product_id: 586321
 v1.0:
   base: 29
   per_user: 9
+  paddle_product_id: 519979

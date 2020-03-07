@@ -17,7 +17,7 @@ export default class extends Controller {
   setupSubscriptionBtnListener() {
     $("#start-subscription-btn").click((event) => {
       Paddle.Checkout.open({
-        product: 519979,
+        product: 586321,
         email: event.target.dataset.email,
         passthrough: event.target.dataset.passthrough,
         closeCallback: this.reloadPage

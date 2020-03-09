@@ -14,8 +14,7 @@
             .field
               label API key
               input type="text" disabled=true value=@api_key
-
-
-      = link_to "https://app.intercom.com/oauth?client_id=459610f5-95ab-419d-bbe7-f22f104a46bd&client_secret=bbe9e1e2-9d5e-47f0-a449-4b1c43ff8561",
-        class: "ui google fluid button" do
-        | Authorize Intercm
+            - unless @intercom_access_token
+              = link_to user_intercom_omniauth_authorize_path,
+                  class: "ui button" do
+                  | Authorize Intercom

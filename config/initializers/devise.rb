@@ -301,6 +301,7 @@ Devise.setup do |config|
   # up on your models and hooks.
   # config.omniauth :github, 'APP_ID', 'APP_SECRET', scope: 'user,public_repo'
   config.omniauth :google_oauth2, APP_CONFIG['google_oauth2']['client_id'], APP_CONFIG['google_oauth2']['client_secret']
+
   config.omniauth :intercom, '459610f5-95ab-419d-bbe7-f22f104a46bd', 'bbe9e1e2-9d5e-47f0-a449-4b1c43ff8561'
 
   # ==> Warden configuration

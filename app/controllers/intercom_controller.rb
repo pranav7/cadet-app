@@ -6,11 +6,8 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   GCM_AUTH_TAG_LENGTH = 16
 
   def sheets
-    
-    binding.pry
-    
-    @user = User.from_omniauth(request.env["omniauth.auth"])
-    # intercom_data = validate_request_and_decrtypt_data
+
+    intercom_data = validate_request_and_decrtypt_data
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)

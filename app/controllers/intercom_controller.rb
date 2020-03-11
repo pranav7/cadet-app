@@ -31,7 +31,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
             "style": "primary",
             "action": {
               "type": "sheet",
-              "url": "https://6cb33666.ngrok.io/intercom/sheets"
+              "url": "https://app.getcadet.com/intercom/sheets"
             }
           }]
         }

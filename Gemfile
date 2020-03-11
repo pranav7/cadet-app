@@ -8,7 +8,6 @@ git_source(:github) do |repo_name|
 end
 
 gem 'autoprefixer-rails'
-gem 'omniauth-intercom', '~> 0.1.9'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.5.0'
@@ -24,6 +23,7 @@ gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
 gem 'octicons_helper'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-intercom', '~> 0.1.9'
 gem "pg", "< 1.0"
 gem "php-serialize"
 gem 'postmark-rails'

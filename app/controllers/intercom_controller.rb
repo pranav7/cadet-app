@@ -6,7 +6,6 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   GCM_AUTH_TAG_LENGTH = 16
 
   def sheets
-
     intercom_data = validate_request_and_decrtypt_data
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)

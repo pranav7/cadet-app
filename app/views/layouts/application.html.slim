@@ -11,11 +11,18 @@ html
 
     - if @board && @board.unlisted
       meta name="robots" content="noindex"
+    
+    javascript:
+      (function(d, w) {
+        if (w.self !== w.top) {
+          /* this document is loaded in a frame/iframe */
+          d.className += "iframe";
+        }
+      }(document.documentElement, window));
 
   body class="#{controller_name} #{action_name}"
     = render partial: "partials/flash_messages"
-    - unless session[:hide_public_header]
-      = render partial: "partials/public_header"
+    = render partial: "partials/public_header"
     .ui.container
       = yield
     = render partial: "partials/external_js"

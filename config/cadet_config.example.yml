@@ -15,6 +15,7 @@ development:
 test:
   base_domain: lvh.me:4000
   google_oauth2: *google_oauth2
+  intercom: *intercom
   mixpanel_token: ""
   slack: *slack
   sentry: ""

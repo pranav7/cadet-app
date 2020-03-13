@@ -13,10 +13,10 @@ html
       meta name="robots" content="noindex"
     
     javascript:
-      (function(d, w) {
-        if (w.self !== w.top) {
+      (function(document, window) {
+        if (window.self !== window.top) {
           /* this document is loaded in a frame/iframe */
-          d.className += "iframe";
+          document.className += "iframe";
         }
       }(document.documentElement, window));
 

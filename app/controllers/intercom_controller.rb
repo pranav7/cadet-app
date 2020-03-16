@@ -13,7 +13,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
     sign_in(user)
 
-    redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
+    redirect_to board_url(board, host: "https://33adbcb4.ngrok.io")
   end
 
   def new
@@ -31,7 +31,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
             "style": "primary",
             "action": {
               "type": "sheet",
-              "url": "https://app.getcadet.com/intercom/sheets"
+              "url": "https://33adbcb4.ngrok.io/intercom/sheets"
             }
           }]
         }

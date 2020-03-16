@@ -26,9 +26,16 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   end
 
   def intercom
-    token = request.env["omniauth.auth"].credentials.token
-    @current_company.company_setting.intercom_access_token = token
-    @current_company.company_setting.save!
+    
+    binding.pry
+
+    data = request.env["omniauth.auth"]
+    token = data.credentials.token
+    app_id = data.extra.app.id_code
+
+    company = company = CompanySetting.find_by_intercom_workspace_id!(app_id).company
+    company.company_setting.intercom_access_token = token
+    company.company_setting.save!
   end
   # GET|POST /resource/auth/twitter
   # def passthru

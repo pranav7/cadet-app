@@ -1,13 +1,13 @@
-import { Controller } from "stimulus"
+import { Controller } from "stimulus";
 
 export default class extends Controller {
   connect() {
-    this.setupPaddle()
-    this.setupSubscriptionBtnListener()
+    this.setupPaddle();
+    this.setupSubscriptionBtnListener();
   }
 
   reloadPage() {
-    location.reload()
+    location.reload();
   }
 
   setupPaddle() {
@@ -17,11 +17,11 @@ export default class extends Controller {
   setupSubscriptionBtnListener() {
     $("#start-subscription-btn").click((event) => {
       Paddle.Checkout.open({
-        product: 519979,
+        product: 586321,
         email: event.target.dataset.email,
         passthrough: event.target.dataset.passthrough,
         closeCallback: this.reloadPage
-      }, false)
+      }, false);
     })
   }
 }

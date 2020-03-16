@@ -14,3 +14,7 @@
             .field
               label API key
               input type="text" disabled=true value=@api_key
+            - unless @intercom_access_token
+              = link_to user_intercom_omniauth_authorize_path,
+                  class: "ui button" do
+                  | Authorize Intercom

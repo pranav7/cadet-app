@@ -1,0 +1,7 @@
+div.top-navigation__wrapper
+  a.nav-item data-tab="roadmap" class=("active" if @top_nav_selected == :roadmaps) href=roadmaps_path
+    i.soft.columns.icon
+    | Roadmap
+  a.nav-item data-tab="boards" class=("active" if @top_nav_selected == :boards) href=boards_path
+    i.soft.window.restore.icon
+    | Boards

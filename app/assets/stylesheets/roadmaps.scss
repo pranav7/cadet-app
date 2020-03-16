@@ -1,28 +1,5 @@
 body.roadmaps {
 
-  .nav-items__wrapper {
-    display: none;
-
-    @media (max-device-width: 992px) {
-      display: flex;
-      justify-content: center;
-      margin-bottom: 12px;
-    }
-
-    .nav-item {
-      font-size: 14px;
-      color: $darkest;
-      margin: 0 8px;
-      padding: 8px 0;
-      border-bottom: 2px solid $lightest;
-    }
-  
-    .nav-item.active {
-      color: $darker;
-      border-bottom-color: $secondary-blue;
-    }
-  }
-
   .center{
     display: flex;
     justify-content: center;
@@ -74,6 +51,10 @@ body.roadmaps {
           flex-direction: column;
           overflow-y: hidden;
           padding: 0 8px 8px 8px;
+
+          @media (min-width: 320px) and (max-width: 767px) {
+            overflow-y: auto;            
+          }
 
           &:hover{
             overflow-y: auto;

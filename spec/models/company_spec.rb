@@ -122,11 +122,11 @@ RSpec.describe Company, type: :model do
     end
   end
 
-  describe "#active_plan" do
+  describe "#pricing_plan" do
     let(:company) { create :company }
     let!(:company_setting) { create :company_setting, company: company, pricing_version: "v1" }
 
-    subject { company.active_plan }
+    subject { company.pricing_plan }
 
     it "returns the active plan of the company" do
       expect(subject.version).to eq("v1")

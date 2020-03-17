@@ -54,10 +54,10 @@ class Company < ApplicationRecord
   def current_monthly_bill
     active_users_count = active_users.count
 
-    if active_users_count > active_plan.per_user_modulus
-      active_plan.base_price + ((active_users_count / active_plan.per_user_modulus) * active_plan.per_user_price)
+    if active_users_count > pricing_plan.per_user_modulus
+      pricing_plan.base_price + ((active_users_count / pricing_plan.per_user_modulus) * pricing_plan.per_user_price)
     else
-      active_plan.base_price
+      pricing_plan.base_price
     end
   end
 

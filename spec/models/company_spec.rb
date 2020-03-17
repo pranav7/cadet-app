@@ -121,4 +121,15 @@ RSpec.describe Company, type: :model do
       expect(board.posts.first.title).to eq("Getting started")
     end
   end
+
+  describe "#active_plan" do
+    let(:company) { create :company }
+    let!(:company_setting) { create :company_setting, company: company, pricing_version: "v1" }
+
+    subject { company.active_plan }
+
+    it "returns the active plan of the company" do
+      expect(subject.version).to eq("v1")
+    end
+  end
 end

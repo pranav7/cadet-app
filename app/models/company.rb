@@ -91,7 +91,7 @@ class Company < ApplicationRecord
   end
 
   def active_plan
-    Pricing::Plan.new
+    Pricing::Plan.new(version: company_setting.pricing_version)
   end
 
   private

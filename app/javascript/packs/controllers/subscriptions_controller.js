@@ -15,12 +15,14 @@ export default class extends Controller {
   }
 
   setupSubscriptionBtnListener() {
+    const paddleProductId = this.element.getAttribute("data-paddle-product-id");
+
     $("#start-subscription-btn").click((event) => {
       Paddle.Checkout.open({
-        product: 586321,
+        product: paddleProductId,
         email: event.target.dataset.email,
         passthrough: event.target.dataset.passthrough,
-        closeCallback: this.reloadPage
+        closeCallback: this.reloadPage,
       }, false);
     })
   }

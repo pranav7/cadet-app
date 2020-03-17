@@ -1,11 +1,11 @@
 v1.1:
-  plan_name: "base"
+  name: "base"
   base_price: 49
   per_user_price: 19
   per_user_modulus: 100
   paddle_product_id: 586321
 v1:
-  plan_name: "base"
+  name: "base"
   base_price: 29
   per_user_price: 9
   per_user_modulus: 100

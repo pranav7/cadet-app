@@ -21,7 +21,7 @@ script src="https://cdn.paddle.com/paddle/paddle.js"
               | Your trial expired and you currently have&nbsp;
             - elsif current_company.paying?
               | You're being billed&nbsp;
-              strong $#{current_company.current_monthly_bill}/mo
+              strong $#{current_company.current_monthly_bill}/month
               | &nbsp;for&nbsp;
             strong= current_company.active_users.count
             | &nbsp;active users.

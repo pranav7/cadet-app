@@ -22,6 +22,5 @@ module Pricing
     private def plan
       @plan ||= config[@version]
     end
-
   end
 end

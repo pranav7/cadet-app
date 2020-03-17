@@ -117,7 +117,7 @@ class Company < ApplicationRecord
 
   def create_company_setting
     company_setting = build_company_setting
-    company_setting.expires_at = Pricing::Plan::ACTIVE_VERSION.days.from_now
+    company_setting.expires_at = Pricing::Plan::TRIAL_PERIOD.days.from_now
     company_setting.billing_plan = "trial"
     company_setting.pricing_version = Pricing::Plan::ACTIVE_VERSION
     company_setting.save!

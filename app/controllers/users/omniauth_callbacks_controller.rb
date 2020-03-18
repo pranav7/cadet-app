@@ -34,6 +34,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     company.company_setting.intercom_access_token = token
     company.company_setting.save!
   end
+
   # GET|POST /resource/auth/twitter
   # def passthru
   #   super

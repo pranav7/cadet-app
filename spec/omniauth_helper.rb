@@ -1,0 +1,34 @@
+def set_omniauth_intercom
+    OmniAuth.config.test_mode = true 
+    OmniAuth.config.mock_auth[:intercom] = OmniAuth::AuthHash.new({
+      :provider => 'intercom',
+      :uid => '342324',
+      :info => {
+        :email => 'john.dev@intercom.io',
+        :name => 'John Dev'
+      },
+      :credentials => {
+        :token => 'dG9rOmNdrWt0ZjtgzzE0MDdfNGM5YVe4MzsmXzFmOGd2MDhiMfJmYTrxOtA=', # OAuth 2.0 access_token, which you may wish to store
+        :expires => false
+      },
+      :extra => {
+        :raw_info => {
+          :email => 'john.dev@intercom.io',
+          :name => 'John Dev'
+          :type => 'admin',
+          :id => '342324',
+          :email_verified => true,
+          :app => {
+            :id_code => 'abc123', # Company app_id
+            :type => 'app',
+            :secure => true, # Secure mode enabled for this app
+            :timezone => "Dublin",
+            :name => "Cadet-Test"
+          },
+          :avatar => {
+            :image_url => "https://static.intercomassets.com/avatars/343616/square_128/me.jpg?1454165491"
+          }
+        }
+      }
+    })
+  end

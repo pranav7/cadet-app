@@ -8,7 +8,7 @@ def set_omniauth_intercom
         :name => 'John Dev'
       },
       :credentials => {
-        :token => 'dG9rOmNdrWt0ZjtgzzE0MDdfNGM5YVe4MzsmXzFmOGd2MDhiMfJmYTrxOtA=', # OAuth 2.0 access_token, which you may wish to store
+        :token => 'dG9rOmNdrWt0ZjtgzzE0MDdfNGM5YVe4MzsmXzFmOGd2MDhiMfJmYTrxOtA=',
         :expires => false
       },
       :extra => {
@@ -19,9 +19,9 @@ def set_omniauth_intercom
           :id => '342324',
           :email_verified => true,
           :app => {
-            :id_code => 'abc123', # Company app_id
+            :id_code => 'abc123',
             :type => 'app',
-            :secure => true, # Secure mode enabled for this app
+            :secure => true,
             :timezone => "Dublin",
             :name => "Cadet-Test"
           },

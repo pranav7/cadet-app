@@ -1,4 +1,4 @@
-require "spec_helper"
+require 'rails_helper'
 
 RSpec.describe OmniauthCallbacksController, type: :controller do
   let(:company) { create :company }
@@ -8,8 +8,8 @@ RSpec.describe OmniauthCallbacksController, type: :controller do
     request.host = "#{company.subdomain}.example.com"
     sign_in user
 
-    get user_intercom_omniauth_authorize_path
     set_omniauth_intercom
+    get user_intercom_omniauth_authorize_path
   end
 
   describe "Triggers intercom callback" do

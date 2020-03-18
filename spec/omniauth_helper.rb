@@ -1,5 +1,5 @@
 def set_omniauth_intercom
-    OmniAuth.config.test_mode = true 
+    OmniAuth.config.test_mode = true
     OmniAuth.config.mock_auth[:intercom] = OmniAuth::AuthHash.new({
       :provider => 'intercom',
       :uid => '342324',

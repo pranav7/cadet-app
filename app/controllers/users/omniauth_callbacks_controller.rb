@@ -28,11 +28,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
   def intercom
     data = request.env["omniauth.auth"]
     token = data.credentials.token
-    app_id = data.extra.app.id_code
+    app_id = data.extra.raw_info.app.id_code
 
     company = CompanySetting.find_by_intercom_workspace_id!(app_id).company
     company.company_setting.intercom_access_token = token
     company.company_setting.save!
+
+    flash[:success] = "You've successfully connected with Intercom"
+    redirect_to admin_integrations_path
   end
 
   # GET|POST /resource/auth/twitter

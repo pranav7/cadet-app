@@ -54,10 +54,10 @@ class Company < ApplicationRecord
   def current_monthly_bill
     active_users_count = active_users.count
 
-    if active_users_count > 100
-      29 + ((active_users_count / 100) * 9)
+    if active_users_count > pricing_plan.per_user_modulus
+      pricing_plan.base_price + ((active_users_count / pricing_plan.per_user_modulus) * pricing_plan.per_user_price)
     else
-      29
+      pricing_plan.base_price
     end
   end
 
@@ -90,6 +90,10 @@ class Company < ApplicationRecord
     )
   end
 
+  def pricing_plan
+    Pricing::Plan.new(version: company_setting.pricing_version)
+  end
+
   private
 
   def post_create_tasks
@@ -113,9 +117,9 @@ class Company < ApplicationRecord
 
   def create_company_setting
     company_setting = build_company_setting
-    company_setting.expires_at = 14.days.from_now
+    company_setting.expires_at = Pricing::Plan::TRIAL_PERIOD.days.from_now
     company_setting.billing_plan = "trial"
-    company_setting.pricing_version = "v1"
+    company_setting.pricing_version = Pricing::Plan::ACTIVE_VERSION
     company_setting.save!
   end
 end

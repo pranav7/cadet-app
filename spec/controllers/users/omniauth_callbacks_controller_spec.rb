@@ -19,7 +19,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
         .to eq(auth_token)
     end
 
-    it "redirects to root path" do
+    it "redirects to integrations page" do
       get :intercom
       expect(response).to redirect_to(admin_integrations_path)
     end

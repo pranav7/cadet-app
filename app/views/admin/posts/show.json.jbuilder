@@ -20,6 +20,7 @@ json.requester do
   json.initials @post.requester.initials
   json.email @post.requester.email
   json.role @post.requester.membership_for(current_company).role
+  json.id @post.requester.id
 end
 
 json.comments do

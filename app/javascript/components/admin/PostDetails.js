@@ -64,8 +64,7 @@ class PostDetails extends Component {
               <div className="u__pr__x2">
               <Popup
                 content='Copied'
-                mouseEnterDelay={500}
-                on='hover'
+                on='click'
                 inverted
                 trigger={
                   <Button size="tiny" onClick={() => {

@@ -91,9 +91,27 @@ class Posts {
     });
   }
 
-  upvote() {
+  getUsers() {
+    const usersApi = new API(`/users`, {
+      method: "get",
+    });
+
+    return new Promise((resolve, reject) => {
+      usersApi.execute()
+        .then(response => {
+          console.log('Users-response', response);
+          resolve(response);
+        })
+        .catch(response => {
+          reject(response);
+        });
+    });
+  }
+
+  upvote(data=undefined) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
-      method: "post"
+      method: "post",
+      data
     });
 
     return new Promise((resolve, reject) => {

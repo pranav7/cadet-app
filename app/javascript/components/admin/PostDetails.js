@@ -10,6 +10,7 @@ import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
+import AddVoterModal from 'AdminContainers/AddVoterModal';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -37,6 +38,10 @@ class PostDetails extends Component {
     }
   }
 
+  onAddVoter = () => {
+    this.getPost();
+  };
+
   getPost() {
     this.props.fetchPost(this.state.boardId, this.state.postId);
   }
@@ -55,6 +60,7 @@ class PostDetails extends Component {
               </div>
 
               <EditPostModal post={this.props.post}/>
+              <AddVoterModal post={this.props.post} onAddVoter={this.onAddVoter} />
 
               <div className="item">
                 <a

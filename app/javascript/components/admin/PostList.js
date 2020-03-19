@@ -15,8 +15,13 @@ class PostList extends React.Component {
     this.state = {
       boardId: this.props.match.params.boardId,
       searchTerm: "",
-      loading: false
+      loading: false,
+      currentPage: 1,
     };
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener("scroll", this.onScroll, false);
   }
 
   componentDidMount() {
@@ -25,6 +30,36 @@ class PostList extends React.Component {
     } else {
       this.state.currentSortOrder = Cookies.get("currentSortOrder");
       this.getPosts({ sort_by: this.state.currentSortOrder });
+    }
+
+    window.addEventListener("scroll", this.onScroll, false);
+    $("#post_title").on("input", this.suggestPosts);
+    setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  restoreScrollPosition() {
+    let scrollPos = Cookies.get("scrollPos");
+    if (!_.isUndefined(scrollPos) && scrollPos != "0") {
+      $(window).scrollTop(scrollPos);
+      Cookies.remove("scrollPos");
+    }
+  }
+
+  onScroll() {
+    if (
+      window.innerHeight + window.scrollY >= this._getDocHeight() - 500 &&
+      !this.state.isFetching
+    ) {
+      let nextPage = this.state.currentPage + 1;
+      let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage);
+
+      if (nextPage <= totalPages) {
+        this.setState({ isFetching: true });
+        this.getPosts({
+          sorty_by: this.state.currentSortOrder,
+          page: nextPage
+        });
+      }
     }
   }
 

@@ -33,7 +33,10 @@ export default (state = initialState, action) => {
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
         isFetchingPosts: false,
-        posts: action.posts
+        posts: action.posts,
+        currentPage: action.x_page,
+        totalPosts: action.x_total,
+        perPage: action.x_per_page
       })
     case FETCH_POSTS_FAILED:
       return Object.assign({}, state, {

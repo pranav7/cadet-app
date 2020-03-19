@@ -10,6 +10,7 @@ import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
 import { copyTextToClipboard } from 'Common/utils';
+import UpvotedUsersListModal from 'AdminContainers/UpvotedUsersModal';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -143,7 +144,7 @@ class PostDetails extends Component {
             </div>
           </div>
           <div className="c-right-pane">
-            <div className="voters box o__transparent o__no-padding">
+            <div className="voters box">
               <div className="box-header">
                 <div className="header-text">
                   <i className="user outline icon"></i>
@@ -151,13 +152,16 @@ class PostDetails extends Component {
                 </div>
               </div>
 
-              {this.props.post.voters.map((voter) => 
+              {this.props.post.voters.slice(0,7).map((voter) => 
                 <div className="voter" key={voter.id}>
                   <User name={voter.name}
                     initials={voter.initials}
                     role={voter.role}
                     avatarSize="small" />
                 </div>
+              )}
+              {this.props.post.voters.length > 7 && (
+                <UpvotedUsersListModal voters={this.props.post.voters} />
               )}
             </div>
           </div>

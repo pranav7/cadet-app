@@ -1,8 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Icon } from 'semantic-ui-react';
-
-import Posts from 'API/Posts';
+import { Container, Icon, Button, Popup } from 'semantic-ui-react';
 import UpvoteButton from 'Components/UpvoteButton';
 import CreateComment from 'AdminComponents/CreateComment';
 import User from 'Components/User';
@@ -11,6 +9,7 @@ import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
+import { copyTextToClipboard } from 'Common/utils';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -61,6 +60,22 @@ class PostDetails extends Component {
 
               <EditPostModal post={this.props.post}/>
               <AddVoterModal post={this.props.post} onAddVoter={this.onAddVoter} />
+
+              <div className="u__pr__x2">
+              <Popup
+                content='Copied'
+                mouseEnterDelay={500}
+                on='hover'
+                inverted
+                trigger={
+                  <Button size="tiny" onClick={() => {
+                    copyTextToClipboard(window.location.href);
+                  }}>
+                    <i className="link icon"></i>
+                  </Button>
+                }
+              />
+              </div>
 
               <div className="item">
                 <a

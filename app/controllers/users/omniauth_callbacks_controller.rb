@@ -35,7 +35,7 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
     company.company_setting.save!
 
     flash[:success] = "You've successfully connected with Intercom"
-    redirect_to admin_integrations_path
+    redirect_to admin_integrations_url(host: company.host)
   end
 
   # GET|POST /resource/auth/twitter

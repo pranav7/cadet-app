@@ -21,7 +21,7 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
 
     it "redirects to integrations page" do
       get :intercom
-      expect(response).to redirect_to(admin_integrations_path)
+      expect(response).to redirect_to(admin_integrations_url(host: company.host))
     end
   end
 

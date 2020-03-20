@@ -48,3 +48,12 @@ json.voters do
     json.role voter.membership_for(current_company).role
   end
 end
+
+json.accounts do
+  json.array! @accounts do |account|
+    json.id account.id
+    json.name account.name
+    json.votes account.votes_for(@post).count
+    json.mrr account.mrr
+  end
+end

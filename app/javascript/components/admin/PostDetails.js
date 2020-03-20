@@ -2,10 +2,10 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
 
-import Posts from 'API/Posts';
 import UpvoteButton from 'Components/UpvoteButton';
 import CreateComment from 'AdminComponents/CreateComment';
 import User from 'Components/User';
+import Account from 'Components/Account';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
@@ -140,6 +140,21 @@ class PostDetails extends Component {
                 </div>
               )}
             </div>
+
+            {this.props.post.accounts.length > 0 && (
+              <div className="voters box">
+                <div className="box-header">
+                  <div className="header-text">
+                    <i className="suitcase icon"></i>
+                    Accounts
+                  </div>
+                </div>
+
+                {this.props.post.accounts.map((account) => 
+                  <Account key={account.id} {...account} />
+                )}
+              </div>
+            )}
           </div>
         </React.Fragment>
       );

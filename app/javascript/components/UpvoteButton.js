@@ -47,6 +47,7 @@ class UpvoteButton extends React.Component {
       .upvote()
       .then(response => {
         this.toggleUp();
+        this.props.onChange()
       })
       .catch(response => {
         if (response.status == 401) {
@@ -65,6 +66,7 @@ class UpvoteButton extends React.Component {
 
     postsApi.downvote().then(response => {
       this.toggleDown();
+      this.props.onChange()
     });
   }
 

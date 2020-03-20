@@ -25,8 +25,6 @@ class EditPostModal extends Component {
   constructor(props) {
     super(props);
 
-    console.log(this.props);
-
     this.state = {
       title: props.post.title,
       description: props.post.content.raw,
@@ -49,7 +47,6 @@ class EditPostModal extends Component {
     const usersApi = new Users();
 
     usersApi.get().then(response => {
-      console.log('USERS -> ', response);
       this.setState({
         users: response.data.users.map(user => ({
           key: user.id,
@@ -135,7 +132,6 @@ class EditPostModal extends Component {
   };
 
   render() {
-    console.log(this.state.users);
     return (
       <Modal
         trigger={

@@ -80,7 +80,7 @@ class EditPostModal extends Component {
     postApi.upvote(data).then(response => {
       this.setState({
         modalOpen: false
-      }, this.props.onAddVoter);
+      }, this.props.onChange);
     });
   };
 

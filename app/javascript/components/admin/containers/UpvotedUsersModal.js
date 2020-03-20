@@ -1,8 +1,9 @@
 import React from "react";
 import { Modal } from "semantic-ui-react";
-import User from 'Components/User';
+import UpvotedUsersList from "./UpvotedUsersList";
 
 const UpvotedUsersListModal = ({ voters }) => {
+
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleOpen = (e) => {
@@ -28,19 +29,11 @@ const UpvotedUsersListModal = ({ voters }) => {
       centered={false}
       open={isModalOpen}
       onClose={handleClose}
-      size="tiny"
+      size="mini"
     >
         <Modal.Header>Upvoted Users</Modal.Header>
         <Modal.Content>
-          {voters.map((voter) => 
-            <div className="voter" key={voter.id}>
-              <User name={voter.name}
-                initials={voter.initials}
-                role={voter.role}
-                jobTitle={voter.job_title}
-                avatarSize="small" />
-            </div>
-          )}
+          <UpvotedUsersList />
         </Modal.Content>
       </Modal>
   );

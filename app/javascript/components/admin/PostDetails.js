@@ -3,14 +3,12 @@ import { connect } from 'react-redux';
 import { Container, Icon, Button, Popup } from 'semantic-ui-react';
 import UpvoteButton from 'Components/UpvoteButton';
 import CreateComment from 'AdminComponents/CreateComment';
-import User from 'Components/User';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
-import { copyTextToClipboard } from 'Common/utils';
-import UpvotedUsersListModal from 'AdminContainers/UpvotedUsersModal';
+import UpvotedUsersList from './containers/UpvotedUsersList';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -38,7 +36,8 @@ class PostDetails extends Component {
     }
   }
 
-  onAddVoter = () => {
+  onPostChange = () => {
+    console.log('UPDATE');
     this.getPost();
   };
 
@@ -60,24 +59,8 @@ class PostDetails extends Component {
               </div>
 
               <EditPostModal post={this.props.post}/>
-              <AddVoterModal post={this.props.post} onAddVoter={this.onAddVoter} />
 
-              <div className="u__pr__x2">
-              <Popup
-                content='Copied'
-                on='click'
-                inverted
-                trigger={
-                  <Button size="tiny" onClick={() => {
-                    copyTextToClipboard(window.location.href);
-                  }}>
-                    <i className="link icon"></i>
-                  </Button>
-                }
-              />
-              </div>
-
-              <div className="item">
+              <div className="item u__pr__x2">
                 <a
                   className="fluid ui tiny button"
                   id="delete-post-btn"
@@ -90,6 +73,8 @@ class PostDetails extends Component {
                   Delete
                 </a>
               </div>
+
+              <AddVoterModal post={this.props.post} onChange={this.onPostChange} />
             </div>
 
             <div className="post-header">
@@ -107,6 +92,7 @@ class PostDetails extends Component {
                   upvoted={this.props.post.upvoted}
                   boardId={this.state.boardId}
                   postId={this.state.postId}
+                  onChange={this.onPostChange}
                 />
               </div>
             </div>
@@ -152,17 +138,7 @@ class PostDetails extends Component {
                 </div>
               </div>
 
-              {this.props.post.voters.slice(0,7).map((voter) => 
-                <div className="voter" key={voter.id}>
-                  <User name={voter.name}
-                    initials={voter.initials}
-                    role={voter.role}
-                    avatarSize="small" />
-                </div>
-              )}
-              {this.props.post.voters.length > 7 && (
-                <UpvotedUsersListModal voters={this.props.post.voters} />
-              )}
+              <UpvotedUsersList voters={this.props.post.voters} compact onDelete={this.onPostChange} />
             </div>
           </div>
         </React.Fragment>

@@ -125,9 +125,10 @@ class Posts {
     });
   }
 
-  downvote() {
+  downvote(data=undefined) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
-      method: "delete"
+      method: "delete",
+      data
     });
 
     return new Promise((resolve, reject) => {

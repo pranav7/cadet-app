@@ -35,7 +35,13 @@ const UpvotedUsersList = ({ voters:originalVoters, onDelete, compact = false, ma
             jobTitle={voter.job_title}
             companyName={voter.company_name}
             avatarSize="small" />
-          <i className="close icon pointer" onClick={() => downvote(voter.id)}></i>
+            {
+              voter.deletable && (
+                <i
+                className="close icon pointer soft u__pl__x2"
+                onClick={() => downvote(voter.id)} />
+              )
+            }
         </div>
       )}
       {compact && voters.length > 7 && (

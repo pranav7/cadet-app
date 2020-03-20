@@ -114,7 +114,7 @@ class EditPostModal extends Component {
     };
 
     if (this.state.requester) {
-      data["requester_id"] = this.state.requester;
+      data.post["user_id"] = this.state.requester;
     }
 
     postApi.update(data).then(response => {

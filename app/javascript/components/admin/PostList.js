@@ -18,6 +18,9 @@ class PostList extends React.Component {
       loading: false,
       currentPage: 1,
     };
+
+    this.listContainerNode = React.createRef();
+    this.onScroll = this.onScroll.bind(this);
   }
 
   componentWillUnmount() {
@@ -32,7 +35,7 @@ class PostList extends React.Component {
       this.getPosts({ sort_by: this.state.currentSortOrder });
     }
 
-    window.addEventListener("scroll", this.onScroll, false);
+    this.listContainerNode.addEventListener("scroll", this.onScroll, false);
     $("#post_title").on("input", this.suggestPosts);
     setTimeout(this.restoreScrollPosition, 940);
   }
@@ -47,11 +50,11 @@ class PostList extends React.Component {
 
   onScroll() {
     if (
-      window.innerHeight + window.scrollY >= this._getDocHeight() - 500 &&
-      !this.state.isFetching
+      this.listContainerNode && this.listContainerNode.offsetHeight + this.listContainerNode.scrollTop >= this.listContainerNode.scrollHeight &&
+      !this.props.isFetchingPosts
     ) {
-      let nextPage = this.state.currentPage + 1;
-      let totalPages = Math.ceil(this.state.totalPosts / this.state.perPage);
+      let nextPage = this.props.currentPage + 1;
+      let totalPages = Math.ceil(this.props.totalPosts / this.props.perPage);
 
       if (nextPage <= totalPages) {
         this.setState({ isFetching: true });
@@ -150,7 +153,7 @@ class PostList extends React.Component {
             </div>
           </div>
         </div>
-        <div className="post-list-container">{this.renderPostList()}</div>
+        <div className="post-list-container" ref={(node) => this.listContainerNode = node}>{this.renderPostList()}</div>
       </div>
     );
   }
@@ -160,7 +163,10 @@ const mapStateToProps = state => {
   return {
     isFetchingPosts: state.isFetchingPosts,
     noPosts: state.noPosts,
-    posts: state.posts
+    posts: state.posts,
+    currentPage: state.currentPage,
+    totalPosts: state.totalPosts,
+    perPage: state.perPage
   };
 };
 

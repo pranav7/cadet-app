@@ -33,7 +33,7 @@ export default (state = initialState, action) => {
     case RECEIVE_POSTS:
       return Object.assign({}, state, {
         isFetchingPosts: false,
-        posts: action.posts,
+        posts: [...state.posts, ...action.posts],
         currentPage: action.x_page,
         totalPosts: action.x_total,
         perPage: action.x_per_page

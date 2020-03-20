@@ -49,6 +49,6 @@ json.voters do
     json.role voter.membership_for(current_company).role
     json.job_title voter.job_title
     json.company_name voter.membership_for(current_company).company.name
-    json.deletable not(voter.votes.where(post: @post).first.manual?)
+    json.deletable !voter.votes.where(post: @post).first.manual?
   end
 end

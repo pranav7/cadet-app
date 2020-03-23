@@ -24,7 +24,7 @@ class PostList extends React.Component {
   }
 
   componentWillUnmount() {
-    window.removeEventListener("scroll", this.onScroll, false);
+    this.listContainerNode.removeEventListener("scroll", this.onScroll, false);
   }
 
   componentDidMount() {

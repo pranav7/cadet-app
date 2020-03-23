@@ -37,13 +37,14 @@ body.admin {
         color: $darker;
         font-weight: 600;
         font-size: 13px;
-        height: 64px;
         display: flex;
         align-items: center;
         justify-content: center;
 
         &.active {
-          background: $darkest;
+          i.icon {
+            color: $yellow-dark;
+          }
         }
 
         a.item-link {

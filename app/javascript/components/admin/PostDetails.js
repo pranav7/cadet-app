@@ -1,15 +1,14 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { Container, Icon } from 'semantic-ui-react';
-
-import Posts from 'API/Posts';
+import { Container, Icon, Button, Popup } from 'semantic-ui-react';
 import UpvoteButton from 'Components/UpvoteButton';
 import CreateComment from 'AdminComponents/CreateComment';
-import User from 'Components/User';
 import Comment from 'Components/Comment';
 import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
+import AddVoterModal from 'AdminContainers/AddVoterModal';
+import UpvotedUsersList from './containers/UpvotedUsersList';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -37,6 +36,10 @@ class PostDetails extends Component {
     }
   }
 
+  onPostChange = () => {
+    this.getPost();
+  };
+
   getPost() {
     this.props.fetchPost(this.state.boardId, this.state.postId);
   }
@@ -56,7 +59,7 @@ class PostDetails extends Component {
 
               <EditPostModal post={this.props.post}/>
 
-              <div className="item">
+              <div className="item u__pr__x2">
                 <a
                   className="fluid ui tiny button"
                   id="delete-post-btn"
@@ -69,6 +72,8 @@ class PostDetails extends Component {
                   Delete
                 </a>
               </div>
+
+              <AddVoterModal post={this.props.post} onChange={this.onPostChange} />
             </div>
 
             <div className="post-header">
@@ -86,6 +91,7 @@ class PostDetails extends Component {
                   upvoted={this.props.post.upvoted}
                   boardId={this.state.boardId}
                   postId={this.state.postId}
+                  onChange={this.onPostChange}
                 />
               </div>
             </div>
@@ -123,7 +129,7 @@ class PostDetails extends Component {
             </div>
           </div>
           <div className="c-right-pane">
-            <div className="voters box o__transparent o__no-padding">
+            <div className="voters box">
               <div className="box-header">
                 <div className="header-text">
                   <i className="user outline icon"></i>
@@ -131,14 +137,7 @@ class PostDetails extends Component {
                 </div>
               </div>
 
-              {this.props.post.voters.map((voter) => 
-                <div className="voter" key={voter.id}>
-                  <User name={voter.name}
-                    initials={voter.initials}
-                    role={voter.role}
-                    avatarSize="small" />
-                </div>
-              )}
+              <UpvotedUsersList voters={this.props.post.voters} compact onDelete={this.onPostChange} />
             </div>
           </div>
         </React.Fragment>

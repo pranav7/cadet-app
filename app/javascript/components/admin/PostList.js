@@ -15,8 +15,16 @@ class PostList extends React.Component {
     this.state = {
       boardId: this.props.match.params.boardId,
       searchTerm: "",
-      loading: false
+      loading: false,
+      currentPage: 1,
     };
+
+    this.listContainerNode = React.createRef();
+    this.onScroll = this.onScroll.bind(this);
+  }
+
+  componentWillUnmount() {
+    this.listContainerNode.removeEventListener("scroll", this.onScroll, false);
   }
 
   componentDidMount() {
@@ -25,6 +33,36 @@ class PostList extends React.Component {
     } else {
       this.state.currentSortOrder = Cookies.get("currentSortOrder");
       this.getPosts({ sort_by: this.state.currentSortOrder });
+    }
+
+    this.listContainerNode.addEventListener("scroll", this.onScroll, false);
+    $("#post_title").on("input", this.suggestPosts);
+    setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  restoreScrollPosition() {
+    let scrollPos = Cookies.get("scrollPos");
+    if (!_.isUndefined(scrollPos) && scrollPos != "0") {
+      $(window).scrollTop(scrollPos);
+      Cookies.remove("scrollPos");
+    }
+  }
+
+  onScroll() {
+    if (
+      this.listContainerNode && this.listContainerNode.offsetHeight + this.listContainerNode.scrollTop >= this.listContainerNode.scrollHeight &&
+      !this.props.isFetchingPosts
+    ) {
+      let nextPage = this.props.currentPage + 1;
+      let totalPages = Math.ceil(this.props.totalPosts / this.props.perPage);
+
+      if (nextPage <= totalPages) {
+        this.setState({ isFetching: true });
+        this.getPosts({
+          sorty_by: this.state.currentSortOrder,
+          page: nextPage
+        });
+      }
     }
   }
 
@@ -115,7 +153,7 @@ class PostList extends React.Component {
             </div>
           </div>
         </div>
-        <div className="post-list-container">{this.renderPostList()}</div>
+        <div className="post-list-container" ref={(node) => this.listContainerNode = node}>{this.renderPostList()}</div>
       </div>
     );
   }
@@ -125,7 +163,10 @@ const mapStateToProps = state => {
   return {
     isFetchingPosts: state.isFetchingPosts,
     noPosts: state.noPosts,
-    posts: state.posts
+    posts: state.posts,
+    currentPage: state.currentPage,
+    totalPosts: state.totalPosts,
+    perPage: state.perPage
   };
 };
 

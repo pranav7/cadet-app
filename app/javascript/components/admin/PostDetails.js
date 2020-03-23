@@ -37,7 +37,6 @@ class PostDetails extends Component {
   }
 
   onPostChange = () => {
-    console.log('UPDATE');
     this.getPost();
   };
 

@@ -50,7 +50,7 @@ json.voters do
 end
 
 json.accounts do
-  json.array! @accounts do |account|
+  json.array! @post.accounts do |account|
     json.id account.id
     json.name account.name
     json.votes account.votes_for(@post).count

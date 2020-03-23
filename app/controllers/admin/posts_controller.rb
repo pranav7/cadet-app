@@ -3,6 +3,7 @@ class Admin::PostsController < Admin::AdminController
 
   def show
     @post = @board.posts.friendly.find(params[:id])
+    @accounts = @post.accounts
   end
 
   # rubocop:disable Metrics/MethodLength

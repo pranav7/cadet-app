@@ -30,10 +30,13 @@ function fetchPostsFailed(status) {
 }
 
 export const RECEIVE_POSTS = 'RECEIVE_POSTS';
-function receivePosts(posts) {
+function receivePosts(response) {
   return {
     type: RECEIVE_POSTS,
-    posts
+    posts: response.posts,
+    x_page: parseInt(response.headers["x-page"]),
+    x_total: parseInt(response.headers["x-total"]),
+    x_per_page: parseInt(response.headers["x-per-page"]),
   }
 }
 
@@ -56,7 +59,7 @@ export function fetchPosts(boardId, params = {}) {
     const postsApi = new Posts(boardId);
     postsApi.getMany(params)
       .then(response => {
-        dispatch(receivePosts(response.posts));
+        dispatch(receivePosts(response));
       })
       .catch(response => {
         dispatch(fetchPostsFailed(response.status));

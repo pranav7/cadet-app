@@ -13,6 +13,9 @@ import { osName } from 'react-device-detect';
 import Posts from 'API/Posts';
 import { fetchPost } from 'Modules/Posts/Actions';
 import MarkdownStyling from 'Common/MarkdownStyling';
+import { MentionsInput, Mention } from 'react-mentions'
+import Users from 'API/Users';
+import { CommentTextAreaWithMentionStyles, MentionStyles } from 'Common/MentionsStyling';
 
 class CreateComment extends Component {
   constructor(props) {
@@ -20,7 +23,8 @@ class CreateComment extends Component {
 
     this.state = {
       comment: '',
-      note: ''
+      note: '',
+      users: [],
     };
 
     this.handleNoteChange = this.handleNoteChange.bind(this);
@@ -28,6 +32,20 @@ class CreateComment extends Component {
     this.submitComment = this.submitComment.bind(this);
     this.submitNote = this.submitNote.bind(this);
     this.handleCmdEnter = this.handleCmdEnter.bind(this);
+  }
+
+  componentDidMount(){
+    const usersApi = new Users();
+
+    usersApi.get().then(response => {
+      this.setState({
+        users: response.data.users.map(user => ({
+          id: user.username,
+          display: user.name
+        }
+        )),
+      });
+    });
   }
 
   handleCmdEnter(e, resolve) {
@@ -91,7 +109,7 @@ class CreateComment extends Component {
     return (
       <Tab.Pane attached={false} >
         <Form onSubmit={this.submitComment} >
-          <TextArea
+          <MentionsInput
             value={this.state.comment}
             onChange={this.handleCommentChange}
             onKeyDown={(event) => { this.handleCmdEnter(event, this.submitComment) }}
@@ -99,8 +117,17 @@ class CreateComment extends Component {
             className="text transparent"
             placeholder='Type your reply ...'
             rows="4"
-          />
-
+            style={CommentTextAreaWithMentionStyles}
+          >
+            <Mention
+              trigger="@"
+              data={this.state.users}
+              style={MentionStyles}
+              displayTransform={username => `@${username}`}
+              markup="@__id__"
+              regex={/@(\S+)/}
+            />
+          </MentionsInput>
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>

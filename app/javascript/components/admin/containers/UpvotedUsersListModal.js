@@ -28,7 +28,7 @@ const UpvotedUsersListModal = ({ voters }) => {
     >
       <Modal.Header>Upvoted Users</Modal.Header>
       <Modal.Content>
-        <UpvotedUsersList />
+        <UpvotedUsersList voters={voters} />
       </Modal.Content>
     </Modal>
   );

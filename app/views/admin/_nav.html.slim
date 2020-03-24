@@ -33,18 +33,14 @@ nav
             | Logout
 
     li.list-item class=("active" if @main_selected == :boards)
-      = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "" } do
-        i.window.restore.big.icon
+      = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "", variation: "tiny" } do
+        i.window.restore.large.icon
     li.list-item class=("active" if @main_selected == :customers)
-      = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "" }  do
-        i.user.circle.big.icon
-
-    .padded.horizontal
-      .ui.divider
-
+      = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "", variation: "tiny" }  do
+        i.users.large.icon
     li.list-item class=("active" if @main_selected == :settings)
       = link_to edit_admin_company_path(current_company), class: "item-link", data: { tooltip: "Settings", position: "right center", inverted: "" }  do
-        i.cog.big.icon
+        i.cog.large.icon
 
   - if current_company.company_setting.expires_at
     .trial-expiry

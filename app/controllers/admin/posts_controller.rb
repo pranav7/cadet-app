@@ -3,6 +3,7 @@ class Admin::PostsController < Admin::AdminController
 
   def show
     @post = @board.posts.friendly.find(params[:id])
+    @main_selected = :boards
   end
 
   def create

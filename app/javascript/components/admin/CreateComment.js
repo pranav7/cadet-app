@@ -158,14 +158,25 @@ class CreateComment extends Component {
     return (
       <Tab.Pane id="note-container" attached={false} >
         <Form onSubmit={this.submitNote}>
-          <TextArea
+          <MentionsInput
             value={this.state.note}
             onChange={this.handleNoteChange}
             onKeyDown={(event) => { this.handleCmdEnter(event, this.submitNote) }}
             id="newNote"
             className="text transparent"
             placeholder='Notes are only visible to Admins. Type your note ...'
-            rows="4" />
+            rows="4"
+            style={CommentTextAreaWithMentionStyles}
+          >
+            <Mention
+              trigger="@"
+              data={this.state.users}
+              style={MentionStyles}
+              displayTransform={username => `@${username}`}
+              markup="@__id__"
+              regex={/@(\S+)/}
+            />
+          </MentionsInput>
 
           <Grid verticalAlign='middle'>
             <Grid.Row>

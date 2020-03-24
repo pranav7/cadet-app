@@ -1,6 +1,6 @@
 export const CommentTextAreaWithMentionStyles =  {
   control: {
-    backgroundColor: '#fff',
+    backgroundColor: 'transparent',
 
     fontSize: 14,
     fontWeight: 'normal',

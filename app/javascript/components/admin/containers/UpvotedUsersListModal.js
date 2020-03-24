@@ -3,12 +3,11 @@ import { Modal } from "semantic-ui-react";
 import UpvotedUsersList from "./UpvotedUsersList";
 
 const UpvotedUsersListModal = ({ voters }) => {
-
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
-  const handleOpen = (e) => {
+  const handleOpen = e => {
     e.preventDefault();
-    setIsModalOpen(true)
+    setIsModalOpen(true);
   };
 
   const handleClose = () => setIsModalOpen(false);
@@ -17,11 +16,7 @@ const UpvotedUsersListModal = ({ voters }) => {
     <Modal
       trigger={
         <div className="item u__pr__x2">
-          <a
-            href=""
-            className="c underlined link"
-            onClick={handleOpen}
-          >
+          <a href="" className="c underlined link" onClick={handleOpen}>
             and {voters.length - 7} more...
           </a>
         </div>
@@ -31,12 +26,12 @@ const UpvotedUsersListModal = ({ voters }) => {
       onClose={handleClose}
       size="mini"
     >
-        <Modal.Header>Upvoted Users</Modal.Header>
-        <Modal.Content>
-          <UpvotedUsersList />
-        </Modal.Content>
-      </Modal>
+      <Modal.Header>Upvoted Users</Modal.Header>
+      <Modal.Content>
+        <UpvotedUsersList />
+      </Modal.Content>
+    </Modal>
   );
-}
+};
 
 export default UpvotedUsersListModal;

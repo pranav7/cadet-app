@@ -2,7 +2,7 @@ import React from "react";
 import { Modal } from "semantic-ui-react";
 import UpvotedUsersList from "./UpvotedUsersList";
 
-const UpvotedUsersListModal = ({ voters }) => {
+const UpvotedUsersListModal = ({ voters, onDelete }) => {
   const [isModalOpen, setIsModalOpen] = React.useState(false);
 
   const handleOpen = e => {
@@ -28,7 +28,7 @@ const UpvotedUsersListModal = ({ voters }) => {
     >
       <Modal.Header>Upvoted Users</Modal.Header>
       <Modal.Content>
-        <UpvotedUsersList voters={voters} />
+        <UpvotedUsersList voters={voters} onDelete={onDelete} />
       </Modal.Content>
     </Modal>
   );

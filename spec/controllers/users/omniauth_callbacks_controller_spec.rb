@@ -3,8 +3,7 @@ require 'rails_helper'
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:intercom_workspace_id) { "abc123" }
   let(:auth_token) { "auth_token" }
-  let!(:company) { create :company }
-  let!(:company_setting) { create :company_setting, company: company }
+  let(:company) { create :company }
   let(:user) { create :user, company: company }
 
   before do

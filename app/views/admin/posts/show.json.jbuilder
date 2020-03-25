@@ -52,3 +52,12 @@ json.voters do
     json.deletable !voter.votes.where(post: @post).first.manual?
   end
 end
+
+json.accounts do
+  json.array! @post.accounts do |account|
+    json.id account.id
+    json.name account.name
+    json.votes account.votes_for(@post).count
+    json.mrr account.mrr
+  end
+end

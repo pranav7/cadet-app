@@ -89,7 +89,7 @@ class CreateComment extends Component {
       comment: {
         private: true,
         content_attributes: {
-          body: this.state.note
+          body: this.state.note.replace(/@@/g, '@')
         }
       }
     }
@@ -174,8 +174,9 @@ class CreateComment extends Component {
               data={this.state.users}
               style={MentionStyles}
               displayTransform={username => `@${username}`}
-              markup="@__id__"
-              regex={/@(\S+)/}
+              // https://github.com/signavio/react-mentions/issues/78
+              regex={/@@([\w_-]+)/}
+              markup="@@__id__"
             />
           </MentionsInput>
 

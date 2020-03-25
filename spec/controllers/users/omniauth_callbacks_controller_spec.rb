@@ -3,8 +3,8 @@ require 'rails_helper'
 RSpec.describe Users::OmniauthCallbacksController, type: :controller do
   let(:intercom_workspace_id) { "abc123" }
   let(:auth_token) { "auth_token" }
-  let(:company) { create :company }
-  let!(:company_setting) { create :company_setting, company: company, intercom_workspace_id: intercom_workspace_id }
+  let!(:company) { create :company }
+  let!(:company_setting) { create :company_setting, company: company }
   let(:user) { create :user, company: company }
 
   before do
@@ -17,6 +17,12 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
       get :intercom
       expect(company.company_setting.reload.intercom_access_token)
         .to eq(auth_token)
+    end
+
+    it "saves app_id" do
+      get :intercom
+      expect(company.company_setting.reload.intercom_workspace_id)
+        .to eq(intercom_workspace_id)
     end
 
     it "redirects to integrations page" do
@@ -58,6 +64,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
         }
       }
     )
-    request.env["omniauth.params"] = {"company_subdomain"=> company.subdomain}
+    request.env["omniauth.params"] = { "company_subdomain" => company.subdomain }
   end
 end

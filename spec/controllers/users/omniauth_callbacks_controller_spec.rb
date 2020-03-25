@@ -63,6 +63,6 @@ RSpec.describe Users::OmniauthCallbacksController, type: :controller do
         }
       }
     )
-    request.env["omniauth.params"] = { "company_subdomain" => company.subdomain }
+    request.env["omniauth.params"] = { company_subdomain: company.subdomain }
   end
 end

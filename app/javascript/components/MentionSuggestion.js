@@ -1,20 +1,15 @@
 import React, { Component } from 'react'
 
-
 const getSubstringIndex = (str, substr) => str.toLowerCase().indexOf(substr.toLowerCase());
 
 class Suggestion extends Component {
-
   renderContent() {
     let { suggestion, query } = this.props
-
     return this.renderHighlightedDisplay(suggestion.display, suggestion.id, query);
   }
 
   renderHighlightedDisplay(display, id, query) {
-
     const { suggestion, focused } = this.props;
-
     let i = getSubstringIndex(display, query)
 
     if (i === -1) {

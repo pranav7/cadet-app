@@ -43,7 +43,8 @@ class EditPostModal extends Component {
         users: response.data.users.map(user => ({
           key: user.id,
           value: user.id,
-          text: <User name={user.name} email={user.email} />,
+          text: user.name,
+          content: <User name={user.name} email={user.email} />,
           description: user.description,
         }
         )),
@@ -87,6 +88,7 @@ class EditPostModal extends Component {
   render() {
     return (
       <Modal
+        id="vote-on-behalf-modal"
         trigger={
           <div className="item u__pr__x2">
             <a

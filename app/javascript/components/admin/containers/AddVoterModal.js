@@ -43,7 +43,8 @@ class EditPostModal extends Component {
         users: response.data.users.map(user => ({
           key: user.id,
           value: user.id,
-          text: <User name={user.name} email={user.email} />,
+          text: user.name,
+          content: <User name={user.name} email={user.email} />,
           description: user.description,
         }
         )),

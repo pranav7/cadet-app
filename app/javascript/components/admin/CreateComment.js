@@ -13,6 +13,10 @@ import { osName } from 'react-device-detect';
 import Posts from 'API/Posts';
 import { fetchPost } from 'Modules/Posts/Actions';
 import MarkdownStyling from 'Common/MarkdownStyling';
+import { MentionsInput, Mention } from 'react-mentions'
+import Users from 'API/Users';
+import { CommentTextAreaWithMentionStyles, MentionStyles } from 'Common/MentionsStyling';
+import MentionSuggestion from 'Components/MentionSuggestion';
 
 class CreateComment extends Component {
   constructor(props) {
@@ -20,7 +24,8 @@ class CreateComment extends Component {
 
     this.state = {
       comment: '',
-      note: ''
+      note: '',
+      users: [],
     };
 
     this.handleNoteChange = this.handleNoteChange.bind(this);
@@ -28,6 +33,20 @@ class CreateComment extends Component {
     this.submitComment = this.submitComment.bind(this);
     this.submitNote = this.submitNote.bind(this);
     this.handleCmdEnter = this.handleCmdEnter.bind(this);
+  }
+
+  componentDidMount(){
+    const usersApi = new Users();
+
+    usersApi.get().then(response => {
+      this.setState({
+        users: response.data.users.map(user => ({
+          id: user.username,
+          display: user.name
+        }
+        )),
+      });
+    });
   }
 
   handleCmdEnter(e, resolve) {
@@ -49,7 +68,7 @@ class CreateComment extends Component {
     const data = {
       comment: {
         content_attributes: {
-          body: this.state.comment
+          body: this.state.comment.replace(/@@/g, '@')
         }
       }
     };
@@ -71,7 +90,7 @@ class CreateComment extends Component {
       comment: {
         private: true,
         content_attributes: {
-          body: this.state.note
+          body: this.state.note.replace(/@@/g, '@')
         }
       }
     }
@@ -91,7 +110,7 @@ class CreateComment extends Component {
     return (
       <Tab.Pane attached={false} >
         <Form onSubmit={this.submitComment} >
-          <TextArea
+          <MentionsInput
             value={this.state.comment}
             onChange={this.handleCommentChange}
             onKeyDown={(event) => { this.handleCmdEnter(event, this.submitComment) }}
@@ -99,8 +118,29 @@ class CreateComment extends Component {
             className="text transparent"
             placeholder='Type your reply ...'
             rows="4"
-          />
-
+            style={CommentTextAreaWithMentionStyles}
+          >
+            <Mention
+              trigger="@"
+              data={this.state.users}
+              style={MentionStyles}
+              displayTransform={username => `@${username}`}
+              appendSpaceOnAdd
+              // https://github.com/signavio/react-mentions/issues/78
+              regex={/@@([\w_-]+)/}
+              markup="@@__id__"
+              renderSuggestion={
+                (suggestion, query, highlightedDisplay, index, focused) => 
+                  <MentionSuggestion 
+                    suggestion={suggestion}
+                    query={query}
+                    highlightedDisplay={highlightedDisplay}
+                    index={index}
+                    focused={focused}
+                  />
+                }
+            />
+          </MentionsInput>
           <Grid verticalAlign='middle'>
             <Grid.Row>
               <Grid.Column width={6}>
@@ -131,14 +171,37 @@ class CreateComment extends Component {
     return (
       <Tab.Pane id="note-container" attached={false} >
         <Form onSubmit={this.submitNote}>
-          <TextArea
+          <MentionsInput
             value={this.state.note}
             onChange={this.handleNoteChange}
             onKeyDown={(event) => { this.handleCmdEnter(event, this.submitNote) }}
             id="newNote"
             className="text transparent"
             placeholder='Notes are only visible to Admins. Type your note ...'
-            rows="4" />
+            rows="4"
+            style={CommentTextAreaWithMentionStyles}
+          >
+            <Mention
+              trigger="@"
+              data={this.state.users}
+              style={MentionStyles}
+              displayTransform={username => `@${username}`}
+              // https://github.com/signavio/react-mentions/issues/78
+              appendSpaceOnAdd
+              regex={/@@([\w_-]+)/}
+              markup="@@__id__"
+              renderSuggestion={
+                (suggestion, query, highlightedDisplay, index, focused) => 
+                  <MentionSuggestion 
+                    suggestion={suggestion}
+                    query={query}
+                    highlightedDisplay={highlightedDisplay}
+                    index={index}
+                    focused={focused}
+                  />
+                }
+            />
+          </MentionsInput>
 
           <Grid verticalAlign='middle'>
             <Grid.Row>

@@ -36,16 +36,18 @@ export const CommentTextAreaWithMentionStyles =  {
   suggestions: {
     list: {
       backgroundColor: 'white',
-      border: '1px solid rgba(0,0,0,0.15)',
-      fontSize: 14,
+      border: '1px solid #e2e2e2',
+      borderRadius: 5,
     },
 
     item: {
       padding: '5px 15px',
-      borderBottom: '1px solid rgba(0,0,0,0.15)',
+      borderBottom: '1px solid #e2e2e2',
+      color: '#212121',
 
       '&focused': {
-        backgroundColor: '#cee4e5',
+        backgroundColor: '#4a90e2',
+        color: '#fff !important',
       },
     },
   },

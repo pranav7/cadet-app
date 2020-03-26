@@ -16,6 +16,7 @@ import MarkdownStyling from 'Common/MarkdownStyling';
 import { MentionsInput, Mention } from 'react-mentions'
 import Users from 'API/Users';
 import { CommentTextAreaWithMentionStyles, MentionStyles } from 'Common/MentionsStyling';
+import MentionSuggestion from 'Components/MentionSuggestion';
 
 class CreateComment extends Component {
   constructor(props) {
@@ -124,9 +125,20 @@ class CreateComment extends Component {
               data={this.state.users}
               style={MentionStyles}
               displayTransform={username => `@${username}`}
+              appendSpaceOnAdd
               // https://github.com/signavio/react-mentions/issues/78
               regex={/@@([\w_-]+)/}
               markup="@@__id__"
+              renderSuggestion={
+                (suggestion, query, highlightedDisplay, index, focused) => 
+                  <MentionSuggestion 
+                    suggestion={suggestion}
+                    query={query}
+                    highlightedDisplay={highlightedDisplay}
+                    index={index}
+                    focused={focused}
+                  />
+                }
             />
           </MentionsInput>
           <Grid verticalAlign='middle'>
@@ -175,8 +187,19 @@ class CreateComment extends Component {
               style={MentionStyles}
               displayTransform={username => `@${username}`}
               // https://github.com/signavio/react-mentions/issues/78
+              appendSpaceOnAdd
               regex={/@@([\w_-]+)/}
               markup="@@__id__"
+              renderSuggestion={
+                (suggestion, query, highlightedDisplay, index, focused) => 
+                  <MentionSuggestion 
+                    suggestion={suggestion}
+                    query={query}
+                    highlightedDisplay={highlightedDisplay}
+                    index={index}
+                    focused={focused}
+                  />
+                }
             />
           </MentionsInput>
 

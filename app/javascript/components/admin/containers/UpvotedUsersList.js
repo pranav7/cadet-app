@@ -17,17 +17,18 @@ const UpvotedUsersList = ({
   }, [originalVoters]);
 
   const downvote = downvoterId => {
-    const postApi = new Posts(match.params.boardId, {
-      postId: match.params.postId
-    });
-    const data = {
-      user_id: downvoterId
-    };
-
-    postApi.downvote(data).then(response => {
-      setVoters(voters.filter(voter => voter.id != downvoterId));
-      onDelete();
-    });
+    if(window.confirm('Are you sure you want to delete the casted vote?')) {
+      const postApi = new Posts(match.params.boardId, {
+        postId: match.params.postId
+      });
+      const data = {
+        user_id: downvoterId
+      };
+  
+      postApi.downvote(data).then(response => {
+        onDelete();
+      });
+    }
   };
 
   return (
@@ -51,7 +52,7 @@ const UpvotedUsersList = ({
         </div>
       ))}
       {compact && voters.length > 7 && (
-        <UpvotedUsersListModal voters={voters} />
+        <UpvotedUsersListModal voters={voters} onDelete={onDelete} />
       )}
     </React.Fragment>
   );

@@ -88,6 +88,7 @@ class EditPostModal extends Component {
   render() {
     return (
       <Modal
+        id="vote-on-behalf-modal"
         trigger={
           <div className="item u__pr__x2">
             <a

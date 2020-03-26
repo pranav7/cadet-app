@@ -71,7 +71,6 @@ class PostList extends React.Component {
   };
 
   handleSearchInput = event => {
-    console.log(event);
     if (event.target.value == "") {
       this.setState(
         { searchTerm: event.target.value, loading: false },

@@ -27,7 +27,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
           }, {
             "type": "button",
             "id": "submit-issue-form",
-            "label": "Submit Feature Request",
+            "label": "Share Feedback",
             "style": "primary",
             "action": {
               "type": "sheet",

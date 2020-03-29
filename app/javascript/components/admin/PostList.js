@@ -66,8 +66,8 @@ class PostList extends React.Component {
     }
   }
 
-  getPosts = (params = {}) => {
-    this.props.dispatch(fetchPosts(this.state.boardId, params));
+  getPosts = (params = {}, flushPosts = false) => {
+    this.props.dispatch(fetchPosts(this.state.boardId, params, flushPosts));
   };
 
   handleSearchInput = event => {
@@ -85,7 +85,7 @@ class PostList extends React.Component {
   };
 
   search = () => {
-    this.getPosts({ search: this.state.searchTerm });
+    this.getPosts({ search: this.state.searchTerm }, true);
   };
 
   handlePostItemClick = slug => {

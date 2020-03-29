@@ -1,8 +1,24 @@
 import React from 'react'
 import renderHTML from 'react-render-html'
 import User from './User'
+import CommentAPI from 'API/Comment';
 
-const Comment = ({id, content, commenter, created_at, isNote}) => { 
+const Comment = ({id, content, commenter, created_at, isNote, isEditable = false, isPost = false, boardId, postId, onChange }) => {
+  const handleEditComment = () => {
+    const updatedPost = window.prompt('Edit to?', '');
+    const api = new CommentAPI(boardId, postId, id);
+    api.update({
+      content_attributes: {
+        body: updatedPost
+      }
+    }).then(_ => onChange());
+  };
+
+  const handleDeleteComment = () => {
+    const api = new CommentAPI(boardId, postId, id);
+    api.delete();
+  };
+
   if (isNote) {
     return (
       <div className="comment-container">
@@ -13,6 +29,7 @@ const Comment = ({id, content, commenter, created_at, isNote}) => {
             <div className="meta-info soft">
               {created_at}
             </div>
+            {(!isPost && isEditable) ? "Edit" : 'Cannot Edit'}
           </div>
         </div>
       </div>
@@ -32,6 +49,16 @@ const Comment = ({id, content, commenter, created_at, isNote}) => {
 
           <div className="meta-info soft">
             {created_at}
+            {
+              (!isPost && isEditable) && (
+                <React.Fragment>
+                  <span class="soft">&nbsp;·&nbsp;</span>
+                  <a class="c thin soft underlined link pointer" onClick={handleEditComment}>Edit</a>
+                  <span class="soft">&nbsp;·&nbsp;</span>
+                  <a class="c thin soft underlined link pointer" onClick={handleDeleteComment}>Delete</a>
+                </React.Fragment>
+              )
+            }
           </div>
         </div>
       </div>

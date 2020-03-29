@@ -34,6 +34,7 @@ json.comments do
     end
 
     json.commenter do
+      json.id comment.commenter.id
       json.name comment.commenter.name
       json.initials comment.commenter.initials
       json.role comment.commenter.membership_for(current_company).role

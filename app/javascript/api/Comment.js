@@ -10,13 +10,8 @@ class Comment {
   update(data) {
     const commentApi = new API(`/${this.boardId}/posts/${this.postId}/comments/${this.id}`, {
       method: "put",
-      params: {
-        id: this.id
-      },
       data,
     });
-
-    console.log(commentApi);
 
     return new Promise((resolve, reject) => {
       commentApi.execute()
@@ -30,7 +25,6 @@ class Comment {
   }
 
   delete() {
-    console.log('DELETE');
     const commentApi = new API(`/${this.boardId}/posts/${this.postId}/comments/${this.id}`, {
       method: "delete",
     });

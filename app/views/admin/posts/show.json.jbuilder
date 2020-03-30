@@ -31,6 +31,7 @@ json.comments do
 
     json.content do
       json.body simple_format(comment.content.parsed)
+      json.raw comment.content.body
     end
 
     json.commenter do

@@ -33,15 +33,29 @@ class CommentsController < ApplicationController
 
   def destroy
     @comment = @post.comments.find(params[:id])
+    respond_to do |format|
+      if authorized?
+        @comment.destroy!
+        
+        format.html do
+          flash[:success] = "Deleted."
+          redirect_back fallback_location: board_post_path(@board, @post)
+        end
+  
+        format.json do
+          head :ok
+        end
+      else
+        format.html do
+          flash[:error] = "That action is not allowed."
+          redirect_back fallback_location: board_post_path(@board, @post)
+        end
 
-    if authorized?
-      @comment.destroy
-      flash[:success] = "Deleted."
-    else
-      flash[:error] = "That action is not allowed."
+        format.json do
+          head :unauthorized
+        end
+      end
     end
-
-    redirect_back fallback_location: board_post_path(@board, @post)
   end
 
   private

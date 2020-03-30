@@ -27,10 +27,14 @@ class Users::OmniauthCallbacksController < Devise::OmniauthCallbacksController
 
   def intercom
     data = request.env["omniauth.auth"]
+    params = request.env["omniauth.params"]
+
     token = data.credentials.token
     app_id = data.extra.raw_info.app.id_code
 
-    company = CompanySetting.find_by_intercom_workspace_id!(app_id).company
+    company = Company.find_by_subdomain!(params["company_subdomain"])
+
+    company.company_setting.intercom_workspace_id = app_id
     company.company_setting.intercom_access_token = token
     company.company_setting.save!
 

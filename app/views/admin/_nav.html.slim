@@ -24,7 +24,7 @@ nav
           = link_to "https://feedback.getcadet.com/bug-reports", class: "item", target: "_blank" do
             i.bug.soft.icon
             | Report a Bug
-          a.item id="help-btn" href="#"
+          = link_to "https://intercom.help/cadet/en/", class: 'item', target: "_blank" do
             i.question.circle.soft.icon
             | Help
           .ui.divider
@@ -53,11 +53,6 @@ nav
     = image_tag "cadet-logo-grey.png", width: 50
 
 javascript:
-  $("#help-btn").click(function(e) {
-    e.preventDefault(); 
-    Intercom('show');
-  });
-
   $(".c-profile-menu").dropdown({
     action: "select",
     on: "hover",

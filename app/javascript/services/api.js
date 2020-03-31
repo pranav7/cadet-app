@@ -13,7 +13,6 @@ class API {
 
   execute() {
     return new Promise((resolve, reject) => {
-      console.log(this);
       axios({
         method: this.method,
         url: this.url,

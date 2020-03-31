@@ -25,7 +25,7 @@ class CreatePostModal extends Component {
   };
 
   handleSubmit = () => {
-    if(!this.state.title) {
+    if(!!this.state.title) {
       this.createPost();
     }
   };
@@ -50,7 +50,7 @@ class CreatePostModal extends Component {
           modalOpen: false
         });
 
-        this.props.dispatch(fetchPosts(this.props.boardId));
+        this.props.dispatch(fetchPosts(this.props.boardId, _, true));
         this.props.history.push(
           `/admin/${this.props.boardId}/posts/${response.data.post.slug}`
         );

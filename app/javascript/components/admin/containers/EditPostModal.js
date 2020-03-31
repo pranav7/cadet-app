@@ -106,7 +106,7 @@ class EditPostModal extends Component {
     }
 
     postApi.update(data).then(response => {
-      this.props.dispatch(fetchPosts(this.props.match.params.boardId));
+      this.props.dispatch(fetchPosts(this.props.match.params.boardId, _, true));
       this.props.dispatch(
         fetchPost(
           this.props.match.params.boardId,

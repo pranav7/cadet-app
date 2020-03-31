@@ -80,7 +80,6 @@ class CreateComment extends Component {
       return;
     }
 
-  debugger;
     const postsApi = new Posts(this.props.boardId, { postId: this.props.postId });
     const data = {
       comment: {

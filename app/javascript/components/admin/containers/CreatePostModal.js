@@ -15,27 +15,18 @@ class CreatePostModal extends Component {
     this.state = {
       title: "",
       description: "",
-      titleHasError: false,
-      modalOpen: false
+      modalOpen: false,
+      hasChangedTitle: false,
     };
   }
 
   handleChange = (e, { name, value }) => {
-    this.setState({ [name]: value });
-  };
-
-  handleOnBlur = () => {
-    if (this.state.title === "") {
-      return this.setState({ titleHasError: true });
-    }
+    this.setState({ [name]: value, hasChangedTitle: true });
   };
 
   handleSubmit = () => {
-    if (this.state.title === "") {
-      return this.setState({ titleHasError: true });
-    } else {
+    if(!this.state.title) {
       this.createPost();
-      this.setState({ titleHasError: false });
     }
   };
 
@@ -56,7 +47,6 @@ class CreatePostModal extends Component {
         this.setState({
           title: "",
           description: "",
-          titleHasError: false,
           modalOpen: false
         });
 
@@ -80,7 +70,6 @@ class CreatePostModal extends Component {
     this.setState({
       title: "",
       description: "",
-      titleHasError: false,
       modalOpen: false
     });
   };
@@ -107,9 +96,8 @@ class CreatePostModal extends Component {
                   name="title"
                   placeholder="Title"
                   autoComplete="off"
-                  onBlur={this.handleOnBlur}
                   onChange={this.handleChange}
-                  error={this.state.titleHasError}
+                  error={!this.state.title && this.state.hasChangedTitle}
                 />
               </Form.Field>
               <Form.Field>
@@ -121,7 +109,7 @@ class CreatePostModal extends Component {
                 />
               </Form.Field>
 
-              <Button primary type="submit">
+              <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
                 Save
               </Button>
               <Button basic onClick={this.handleClose}>

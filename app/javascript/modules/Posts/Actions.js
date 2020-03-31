@@ -41,7 +41,7 @@ function receivePosts(response, flushPosts) {
   }
 }
 
-export function fetchPost(boardId, postId) {
+export function fetchPost({ boardId, postId }) {
   return function(dispatch) {
     dispatch(requestPost());
 
@@ -53,14 +53,14 @@ export function fetchPost(boardId, postId) {
   }
 }
 
-export function fetchPosts(boardId, params = {}, flushPosts) {
+export function fetchPosts({ boardId, flushPosts, params = {} }) {
   return function(dispatch) {
     dispatch(requestPosts());
 
     const postsApi = new Posts(boardId);
     postsApi.getMany(params)
       .then(response => {
-        dispatch(receivePosts(response,flushPosts));
+        dispatch(receivePosts(response, flushPosts));
       })
       .catch(response => {
         dispatch(fetchPostsFailed(response.status));

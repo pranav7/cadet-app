@@ -79,7 +79,6 @@ class CommentsController < ApplicationController
   end
 
   def authorized?
-    
     @comment.commenter == current_user
   end
 end

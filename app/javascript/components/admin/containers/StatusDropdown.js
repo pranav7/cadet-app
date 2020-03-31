@@ -46,7 +46,7 @@ class StatusDropdown extends Component {
     postsApi.update(data)
       .then(response => {
         this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
-        this.props.dispatch(fetchPosts(this.props.boardId));
+        this.props.dispatch(fetchPosts(this.props.boardId, _, true));
       });
   }
 

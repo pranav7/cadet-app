@@ -28,7 +28,6 @@ class EditPostModal extends Component {
     this.state = {
       title: props.post.title,
       description: props.post.content.raw,
-      titleHasError: false,
       modalOpen: false,
       fetchingUsers: false,
       users: this.props.post.requester ? [{
@@ -65,7 +64,6 @@ class EditPostModal extends Component {
     this.setState({
       title: nextProps.post.title,
       description: nextProps.post.content.raw,
-      titleHasError: false,
       modalOpen: false
     });
   };
@@ -74,21 +72,13 @@ class EditPostModal extends Component {
     this.setState({ [name]: value });
   };
 
-  handleOnBlur = () => {
-    if (this.state.title === "") {
-      return this.setState({ titleHasError: true });
-    }
-  };
-
   handleOpen = e => {
     e.preventDefault();
     this.setState({ modalOpen: true });
   };
 
   handleSubmit = () => {
-    if (this.state.title === "") {
-      return this.setState({ titleHasError: true });
-    } else {
+    if(!!this.state.title) {
       this.updatePost();
     }
   };
@@ -116,7 +106,7 @@ class EditPostModal extends Component {
     }
 
     postApi.update(data).then(response => {
-      this.props.dispatch(fetchPosts(this.props.match.params.boardId));
+      this.props.dispatch(fetchPosts(this.props.match.params.boardId, _, true));
       this.props.dispatch(
         fetchPost(
           this.props.match.params.boardId,
@@ -126,7 +116,6 @@ class EditPostModal extends Component {
       this.setState({
         title: "",
         description: "",
-        titleHasError: false,
         modalOpen: false
       });
     });
@@ -164,8 +153,7 @@ class EditPostModal extends Component {
                   placeholder="Title"
                   autoComplete="off"
                   onChange={this.handleChange}
-                  onBlur={this.handleOnBlur}
-                  error={this.state.titleHasError}
+                  error={!this.state.title}
                 />
               </Form.Field>
               <Form.Field>
@@ -193,7 +181,7 @@ class EditPostModal extends Component {
                 <div class="hint">The requester would receive email notifications for this post, only use this option if you have their consent.</div>
               </Form.Field>
 
-              <Button primary type="submit">
+              <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
                 Save
               </Button>
               <Button basic onClick={this.handleClose}>

@@ -47,6 +47,17 @@ class CreateComment extends Component {
         )),
       });
     });
+    if(this.props.value && this.props.value.comment) {
+      this.setState({
+        comment: this.props.value.comment,
+      });
+    }
+
+    if(this.props.value && this.props.value.note) {
+      this.setState({
+        note: this.props.value.note,
+      });
+    }
   }
 
   handleCmdEnter(e, resolve) {
@@ -64,6 +75,12 @@ class CreateComment extends Component {
   }
 
   submitComment() {
+    if(this.props.value) {
+      // https://github.com/signavio/react-mentions/issues/78
+      this.props.onSubmit(this.state.comment.replace(/@@/g, '@'))
+      return;
+    }
+
     const postsApi = new Posts(this.props.boardId, { postId: this.props.postId });
     const data = {
       comment: {
@@ -85,6 +102,12 @@ class CreateComment extends Component {
   }
 
   submitNote() {
+    if(this.props.value) {
+      // https://github.com/signavio/react-mentions/issues/78
+      this.props.onSubmit(this.state.note.replace(/@@/g, '@'));
+      return;
+    }
+
     const postsApi = new Posts(this.props.boardId, { postId: this.props.postId });
     const data = {
       comment: {
@@ -236,6 +259,14 @@ class CreateComment extends Component {
   }
 
   render() {
+    if(this.props.renderCommentOnly) {
+      return this.renderComment();
+    }
+
+    if(this.props.renderNoteOnly) {
+      return this.renderNote();
+    }
+
     const panes = [
       { menuItem: 'Reply', render: () => this.renderComment() },
       { menuItem: 'Note', render: () =>  this.renderNote() }

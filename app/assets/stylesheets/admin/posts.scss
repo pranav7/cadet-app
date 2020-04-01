@@ -52,13 +52,11 @@ body.admin.posts {
     }
   }
 
-  .create-comment {
-    #note-container,
+  #note-container,
     .item.note.active {
       background: $note-back;
       border-color: $note-border;
     }
-  }
 
   #vote-on-behalf-modal {
     & > .actions {

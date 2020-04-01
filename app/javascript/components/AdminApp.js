@@ -19,7 +19,7 @@ class AdminApp extends Component {
         path: "/admin/:boardId/posts/:postId",
         exact: true,
         sidebar: PostList,
-        main: PostDetails
+        main: (params) => <PostDetails currentUser={this.props.current_user} {...params} />
       }
     ];
 

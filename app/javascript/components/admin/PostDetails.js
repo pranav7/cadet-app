@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
 
 import UpvoteButton from 'Components/UpvoteButton';
-import CreateComment from 'AdminComponents/CreateComment';
+import CommentInput from 'AdminComponents/CommentInput';
 import User from 'Components/User';
 import Account from 'Components/Account';
 import Comment from 'Components/Comment';
@@ -101,15 +101,19 @@ class PostDetails extends Component {
 
             <div className="post-content">
               <Comment
+                isPost={true}
                 content={this.props.post.content}
                 created_at={this.props.post.created_at}
                 id={this.props.post.id}
                 commenter={this.props.post.requester}
-                isNote={false} />
+                isNote={false}
+                boardId={this.state.boardId}
+                postId={this.state.postId}
+              />
             </div>
 
             <div className="create-comment bottom padded">
-              <CreateComment
+              <CommentInput
                 boardId={this.state.boardId}
                 postId={this.state.postId}
               />
@@ -126,8 +130,13 @@ class PostDetails extends Component {
               {this.props.post.comments.map((comment) =>
                 <Comment
                   {...comment}
+                  isEditable={comment.commenter.id === this.props.currentUser.id}
                   isNote={comment.private}
-                  key={comment.id} />
+                  key={comment.id}
+                  boardId={this.state.boardId}
+                  postId={this.state.postId}
+                  onChange={() => this.getPost()}
+                />
               )}
             </div>
           </div>

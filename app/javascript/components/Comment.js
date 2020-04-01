@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import renderHTML from 'react-render-html'
 import User from './User'
 import CommentAPI from 'API/Comment';
-import CreateComment from 'AdminComponents/CreateComment';
+import CommentInput from 'AdminComponents/CommentInput';
 import { Button, Modal, Form, Input, TextArea } from "semantic-ui-react";
 
 const Comment = ({id, content, commenter, created_at, isNote, isEditable = false, isPost = false, boardId, postId, onChange }) => {
@@ -65,7 +65,7 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
                   >
                     <Modal.Content>
                       <Modal.Description>
-                        <CreateComment
+                        <CommentInput
                           boardId={boardId}
                           postId={postId}
                           renderNoteOnly={true}
@@ -116,7 +116,7 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
                   >
                     <Modal.Content>
                       <Modal.Description>
-                        <CreateComment
+                        <CommentInput
                           boardId={boardId}
                           postId={postId}
                           renderCommentOnly={true}

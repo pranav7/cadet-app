@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
 
 import UpvoteButton from 'Components/UpvoteButton';
-import CreateComment from 'AdminComponents/CreateComment';
+import CommentInput from 'AdminComponents/CommentInput';
 import User from 'Components/User';
 import Account from 'Components/Account';
 import Comment from 'Components/Comment';
@@ -113,7 +113,7 @@ class PostDetails extends Component {
             </div>
 
             <div className="create-comment bottom padded">
-              <CreateComment
+              <CommentInput
                 boardId={this.state.boardId}
                 postId={this.state.postId}
               />

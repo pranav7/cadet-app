@@ -76,6 +76,7 @@ class CreateComment extends Component {
 
   submitComment() {
     if(this.props.value) {
+      // https://github.com/signavio/react-mentions/issues/78
       this.props.onSubmit(this.state.comment.replace(/@@/g, '@'))
       return;
     }
@@ -102,6 +103,7 @@ class CreateComment extends Component {
 
   submitNote() {
     if(this.props.value) {
+      // https://github.com/signavio/react-mentions/issues/78
       this.props.onSubmit(this.state.note.replace(/@@/g, '@'));
       return;
     }

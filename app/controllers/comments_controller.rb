@@ -24,13 +24,13 @@ class CommentsController < ApplicationController
     @comment = @post.comments.find(params[:id])
 
     respond_to do |format|
-      if authorized? and @comment.update_attributes(comment_params)
-        flash[:success] = "Changes saved." 
+      if authorized? && @comment.update_attributes(comment_params)
+        flash[:success] = "Changes saved."
 
         format.html do
           redirect_back fallback_location: board_post_path(@board, @post)
         end
-  
+
         format.json do
           head :ok
         end
@@ -45,12 +45,12 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if authorized?
         @comment.destroy!
-        
+
         format.html do
           flash[:success] = "Deleted."
           redirect_back fallback_location: board_post_path(@board, @post)
         end
-  
+
         format.json do
           head :ok
         end

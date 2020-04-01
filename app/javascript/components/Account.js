@@ -3,7 +3,7 @@ import { Label } from "semantic-ui-react";
 
 const Account = ({ id, name, votes, mrr }) => {
   return (
-    <div className="u__p__x2" style={{ display: "flex" }}>
+    <div style={{ display: "flex" }}>
       <span className="u__pr__x2">{name}</span>
       <Label.Group circular>
         <Label size="mini">

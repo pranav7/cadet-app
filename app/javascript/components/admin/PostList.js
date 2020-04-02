@@ -7,45 +7,8 @@ import Cookies from "js-cookie";
 import _ from "underscore";
 import { fetchPosts } from "Modules/Posts/Actions";
 import CreatePostModal from "AdminContainers/CreatePostModal";
-import { Dropdown } from 'semantic-ui-react'
-
-const sortOptions = [
-  {
-    text: 'Latest Activity',
-    value: 'latest_activity'
-  },
-  {
-    text: 'Most Voted',
-    value: 'most_voted'
-  },
-  {
-    text: 'Most Recent',
-    value: 'most_recent'
-  }
-];
-
-const filterOptions = [
-  {
-    text: '#Open',
-    value: 'open'
-  },
-  {
-    text: '#Planned',
-    value: 'planned'
-  },
-  {
-    text: '#Developing',
-    value: 'developing'
-  },
-  {
-    text: '#Released',
-    value: 'released'
-  },
-  {
-    text: '#Closed',
-    value: 'closed'
-  }
-];
+import PostsFilterDropdown from "Components/PostsFilterDropdown";
+import { PostsFilterOptions } from 'Common/constants';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -56,6 +19,7 @@ class PostList extends React.Component {
       searchTerm: "",
       loading: false,
       currentPage: 1,
+      currentSortOrder: PostsFilterOptions[0].value,
     };
 
     this.listContainerNode = React.createRef();
@@ -68,10 +32,13 @@ class PostList extends React.Component {
 
   componentDidMount() {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
-      this.getPosts();
-    } else {
-      this.state.currentSortOrder = Cookies.get("currentSortOrder");
       this.getPosts({ sort_by: this.state.currentSortOrder });
+    } else {
+      this.setState({
+        currentSortOrder: Cookies.get("currentSortOrder"),
+      }, () => {
+        this.getPosts({ sort_by: this.state.currentSortOrder });
+      });
     }
 
     this.listContainerNode.addEventListener("scroll", this.onScroll, false);
@@ -163,34 +130,13 @@ class PostList extends React.Component {
     }
   };
 
-  renderSortDropdown() {
-    $(".sort-post-dropdown").dropdown({
-      onChange: (value) => this.getPosts({ sort_by: value }, true)
+  handleFilterChange = (appliedFilter) => {
+    Cookies.set("currentSortOrder", value, { expires: 1 });
+    this.setState({
+      currentSortOrder: appliedFilter,
+    }, () => {
+      this.getPosts({ sort_by: this.state.currentSortOrder }, true);
     });
-
-    return (
-      <select
-        name="sort_by"
-        className="ui open dropdown sort-post-dropdown button"
-        defaultValue={this.state.currentSortOrder}
-      >
-        <div class="text">{this.state.currentSortOrder || sortOptions[0].text}</div>
-        <div class="menu">
-          <div class="header">Sort By</div>
-          {sortOptions.map(option => (
-            <div class="item" key={option.value} data-value={option.value}>
-              {option.text}
-            </div>
-          ))}
-          <div class="header">Filter By</div>
-          {filterOptions.map(option => (
-            <div class="item" key={option.value} data-value={option.value}>
-              {option.text}
-            </div>
-          ))}
-        </div>
-      </select>
-    );
   }
 
   render() {
@@ -223,7 +169,7 @@ class PostList extends React.Component {
           </div>
           <div className="c labeled field">
               <label>Show</label>
-              {this.renderSortDropdown()}
+              <PostsFilterDropdown value={this.state.currentSortOrder} onChange={this.handleFilterChange} />
           </div>
         </div>
         <div className="post-list-container" ref={(node) => this.listContainerNode = node}>{this.renderPostList()}</div>

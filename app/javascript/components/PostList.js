@@ -7,6 +7,7 @@ import { Provider } from "react-redux";
 import PostListItem from "Components/PostListItem";
 import Posts from "API/Posts";
 import RootReducer from "Store/RootReducer";
+import PostsFilterDropdown from "Components/PostsFilterDropdown";
 
 const store = createStore(RootReducer);
 
@@ -33,7 +34,6 @@ class PostList extends React.Component {
     this.suggestPosts = this.suggestPosts.bind(this);
     this.renderPostList = this.renderPostList.bind(this);
     this.renderHeader = this.renderHeader.bind(this);
-    this.renderSortDropdown = this.renderSortDropdown.bind(this);
     this.restoreScrollPosition = this.restoreScrollPosition.bind(this);
     this.onScroll = this.onScroll.bind(this);
   }
@@ -54,8 +54,11 @@ class PostList extends React.Component {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
     } else {
-      this.state.currentSortOrder = Cookies.get("currentSortOrder");
-      this.getPosts({ sort_by: this.state.currentSortOrder });
+      this.setState({
+        currentSortOrder: Cookies.get("currentSortOrder"),
+      }, () => {
+        this.getPosts({ sort_by: this.state.currentSortOrder });
+      });
     }
   }
 
@@ -111,7 +114,11 @@ class PostList extends React.Component {
 
   handleSortSelectChange(value) {
     Cookies.set("currentSortOrder", value, { expires: 1 });
-    this.getPosts({ sort_by: value });
+    this.setState({
+      currentSortOrder: value,
+    }, () => {
+      this.getPosts({ sort_by: this.state.currentSortOrder });
+    });
   }
 
   search() {
@@ -143,7 +150,7 @@ class PostList extends React.Component {
           <div className="no padding column">
             <div className="c labeled field">
               <label>Show</label>
-              {this.renderSortDropdown()}
+              <PostsFilterDropdown value={this.state.currentSortOrder} onChange={this.handleSortSelectChange} />
             </div>
           </div>
           <div className="right aligned no padding column">
@@ -160,28 +167,6 @@ class PostList extends React.Component {
         </div>
       );
     }
-  }
-
-  renderSortDropdown() {
-    $(".sort-post-dropdown").dropdown({
-      onChange: this.handleSortSelectChange
-    });
-
-    return (
-      <select
-        name="sort_by"
-        className="ui open dropdown sort-post-dropdown selection"
-        defaultValue={this.state.currentSortOrder}
-      >
-        {Object.entries(this.props.sortOptions).map(([key, value], i) => {
-          return (
-            <option key={key} value={value}>
-              {key}
-            </option>
-          );
-        })}
-      </select>
-    );
   }
 
   renderPostList() {

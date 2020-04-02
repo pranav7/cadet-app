@@ -13,7 +13,6 @@ const PostsFilterDropDown = ({ value, onChange }) => {
       >
         <Dropdown.Menu style={{ maxHeight: 250, overflow: 'auto' }}>
           <Dropdown.Header content='Sort By' />
-          <Dropdown.Divider />
           {PostsFilterOptions.filter(option => option.type === 'sort').map(option => (
             <Dropdown.Item
               key={option.value}

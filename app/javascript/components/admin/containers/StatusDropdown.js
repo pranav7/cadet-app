@@ -7,29 +7,6 @@ import { fetchPost, fetchPosts } from 'Modules/Posts/Actions';
 import { PostsFilterOptions } from 'Common/constants';
 import _ from "underscore";
 
-const statusOptions = [
-  {
-    text: '#open',
-    value: 'open'
-  },
-  {
-    text: '#planned',
-    value: 'planned'
-  },
-  {
-    text: '#developing',
-    value: 'developing'
-  },
-  {
-    text: '#released',
-    value: 'released'
-  },
-  {
-    text: '#closed',
-    value: 'closed'
-  }
-];
-
 class StatusDropdown extends Component {
   constructor(props) {
     super(props);

@@ -9,7 +9,7 @@ import { fetchPosts } from "Modules/Posts/Actions";
 import CreatePostModal from "AdminContainers/CreatePostModal";
 import PostsFilterDropdown from "Components/PostsFilterDropdown";
 import { PostsFilterOptions } from 'Common/constants';
-import eventBus from 'Common/eventBus';
+import EventBus from 'Common/EventBus';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -21,12 +21,13 @@ class PostList extends React.Component {
       loading: false,
       currentPage: 1,
       currentSortOrder: PostsFilterOptions[0].value,
+      currentSelected: this.props.match.params.postId,
     };
 
     this.listContainerNode = React.createRef();
     this.onScroll = this.onScroll.bind(this);
     this.handlePostUpdate = this.handlePostUpdate.bind(this);
-    eventBus.register('updated-post', this.handlePostUpdate);
+    EventBus.register('updated-post', this.handlePostUpdate);
   }
 
   componentWillUnmount() {

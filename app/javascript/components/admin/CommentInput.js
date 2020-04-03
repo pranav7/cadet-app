@@ -1,31 +1,27 @@
-import React, { Component } from 'react';
-import { connect } from 'react-redux';
-import {
-  Grid,
-  Form,
-  TextArea,
-  Tab,
-  Button,
-  Popup
-} from 'semantic-ui-react';
-import { osName } from 'react-device-detect';
+import React, { Component } from "react";
+import { connect } from "react-redux";
+import { Grid, Form, TextArea, Tab, Button, Popup } from "semantic-ui-react";
+import { osName } from "react-device-detect";
 
-import Posts from 'API/Posts';
-import { fetchPost } from 'Modules/Posts/Actions';
-import MarkdownStyling from 'Common/MarkdownStyling';
-import { MentionsInput, Mention } from 'react-mentions'
-import Users from 'API/Users';
-import { CommentTextAreaWithMentionStyles, MentionStyles } from 'Common/MentionsStyling';
-import MentionSuggestion from 'Components/MentionSuggestion';
+import Posts from "API/Posts";
+import { fetchPost } from "Modules/Posts/Actions";
+import MarkdownStyling from "Common/MarkdownStyling";
+import { MentionsInput, Mention } from "react-mentions";
+import Users from "API/Users";
+import {
+  CommentTextAreaWithMentionStyles,
+  MentionStyles
+} from "Common/MentionsStyling";
+import MentionSuggestion from "Components/MentionSuggestion";
 
 class CreateComment extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      comment: '',
-      note: '',
-      users: [],
+      comment: "",
+      note: "",
+      users: []
     };
 
     this.handleNoteChange = this.handleNoteChange.bind(this);
@@ -35,7 +31,7 @@ class CreateComment extends Component {
     this.handleCmdEnter = this.handleCmdEnter.bind(this);
   }
 
-  componentDidMount(){
+  componentDidMount() {
     const usersApi = new Users();
 
     usersApi.get().then(response => {
@@ -43,25 +39,24 @@ class CreateComment extends Component {
         users: response.data.users.map(user => ({
           id: user.username,
           display: user.name
-        }
-        )),
+        }))
       });
     });
-    if(this.props.value && this.props.value.comment) {
+    if (this.props.value && this.props.value.comment) {
       this.setState({
-        comment: this.props.value.comment,
+        comment: this.props.value.comment
       });
     }
 
-    if(this.props.value && this.props.value.note) {
+    if (this.props.value && this.props.value.note) {
       this.setState({
-        note: this.props.value.note,
+        note: this.props.value.note
       });
     }
   }
 
   handleCmdEnter(e, resolve) {
-    if(e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
+    if (e.keyCode == 13 && (e.metaKey || e.ctrlKey)) {
       resolve();
     }
   }
@@ -75,25 +70,28 @@ class CreateComment extends Component {
   }
 
   submitComment() {
-    if(this.props.value) {
+    if (this.props.value) {
       // https://github.com/signavio/react-mentions/issues/78
-      this.props.onSubmit(this.state.comment.replace(/@@/g, '@'))
+      this.props.onSubmit(this.state.comment.replace(/@@/g, "@"));
       return;
     }
 
-    const postsApi = new Posts(this.props.boardId, { postId: this.props.postId });
+    const postsApi = new Posts(this.props.boardId, {
+      postId: this.props.postId
+    });
     const data = {
       comment: {
         content_attributes: {
-          body: this.state.comment.replace(/@@/g, '@')
+          body: this.state.comment.replace(/@@/g, "@")
         }
       }
     };
 
-    postsApi.comment(data)
+    postsApi
+      .comment(data)
       .then(response => {
         this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
-        this.setState({ comment: '' });
+        this.setState({ comment: "" });
       })
       .catch(response => {
         // TODO: Add Notification Toast
@@ -102,44 +100,49 @@ class CreateComment extends Component {
   }
 
   submitNote() {
-    if(this.props.value) {
+    if (this.props.value) {
       // https://github.com/signavio/react-mentions/issues/78
-      this.props.onSubmit(this.state.note.replace(/@@/g, '@'));
+      this.props.onSubmit(this.state.note.replace(/@@/g, "@"));
       return;
     }
 
-    const postsApi = new Posts(this.props.boardId, { postId: this.props.postId });
+    const postsApi = new Posts(this.props.boardId, {
+      postId: this.props.postId
+    });
     const data = {
       comment: {
         private: true,
         content_attributes: {
-          body: this.state.note.replace(/@@/g, '@')
+          body: this.state.note.replace(/@@/g, "@")
         }
       }
-    }
+    };
 
-    postsApi.comment(data)
+    postsApi
+      .comment(data)
       .then(response => {
         this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
-        this.setState({ note: '' });
+        this.setState({ note: "" });
       })
       .catch(response => {
         // TODO: Add Notification Toast
-        console.log("Error Creating Comment", response)
-      })
+        console.log("Error Creating Comment", response);
+      });
   }
 
   renderComment() {
     return (
-      <Tab.Pane attached={false} >
-        <Form onSubmit={this.submitComment} >
+      <Tab.Pane attached={false}>
+        <Form onSubmit={this.submitComment}>
           <MentionsInput
             value={this.state.comment}
             onChange={this.handleCommentChange}
-            onKeyDown={(event) => { this.handleCmdEnter(event, this.submitComment) }}
+            onKeyDown={event => {
+              this.handleCmdEnter(event, this.submitComment);
+            }}
             id="newComment"
             className="text transparent"
-            placeholder='Type your reply ...'
+            placeholder="Type your reply ..."
             rows="4"
             style={CommentTextAreaWithMentionStyles}
           >
@@ -152,19 +155,24 @@ class CreateComment extends Component {
               // https://github.com/signavio/react-mentions/issues/78
               regex={/@@([\w_-]+)/}
               markup="@@__id__"
-              renderSuggestion={
-                (suggestion, query, highlightedDisplay, index, focused) => 
-                  <MentionSuggestion 
-                    suggestion={suggestion}
-                    query={query}
-                    highlightedDisplay={highlightedDisplay}
-                    index={index}
-                    focused={focused}
-                  />
-                }
+              renderSuggestion={(
+                suggestion,
+                query,
+                highlightedDisplay,
+                index,
+                focused
+              ) => (
+                <MentionSuggestion
+                  suggestion={suggestion}
+                  query={query}
+                  highlightedDisplay={highlightedDisplay}
+                  index={index}
+                  focused={focused}
+                />
+              )}
             />
           </MentionsInput>
-          <Grid verticalAlign='middle'>
+          <Grid verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={6}>
                 <Popup
@@ -172,7 +180,14 @@ class CreateComment extends Component {
                   size="mini"
                   position="bottom center"
                   trigger={
-                    <Button primary type="submit" size="tiny" disabled={this.state.comment == ''}>Reply</Button>
+                    <Button
+                      primary
+                      type="submit"
+                      size="tiny"
+                      disabled={this.state.comment == ""}
+                    >
+                      Reply
+                    </Button>
                   }
                   inverted
                 />
@@ -182,25 +197,27 @@ class CreateComment extends Component {
                 <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
-          </Grid>  
+          </Grid>
         </Form>
       </Tab.Pane>
-    )
+    );
   }
 
   renderNote() {
     // TODO: Extract TextArea into a sub-component
     // https://stackoverflow.com/a/29810951
     return (
-      <Tab.Pane id="note-container" attached={false} >
+      <Tab.Pane id="note-container" attached={false}>
         <Form onSubmit={this.submitNote}>
           <MentionsInput
             value={this.state.note}
             onChange={this.handleNoteChange}
-            onKeyDown={(event) => { this.handleCmdEnter(event, this.submitNote) }}
+            onKeyDown={event => {
+              this.handleCmdEnter(event, this.submitNote);
+            }}
             id="newNote"
             className="text transparent"
-            placeholder='Notes are only visible to Admins. Type your note ...'
+            placeholder="Notes are only visible to Admins. Type your note ..."
             rows="4"
             style={CommentTextAreaWithMentionStyles}
           >
@@ -213,20 +230,25 @@ class CreateComment extends Component {
               appendSpaceOnAdd
               regex={/@@([\w_-]+)/}
               markup="@@__id__"
-              renderSuggestion={
-                (suggestion, query, highlightedDisplay, index, focused) => 
-                  <MentionSuggestion 
-                    suggestion={suggestion}
-                    query={query}
-                    highlightedDisplay={highlightedDisplay}
-                    index={index}
-                    focused={focused}
-                  />
-                }
+              renderSuggestion={(
+                suggestion,
+                query,
+                highlightedDisplay,
+                index,
+                focused
+              ) => (
+                <MentionSuggestion
+                  suggestion={suggestion}
+                  query={query}
+                  highlightedDisplay={highlightedDisplay}
+                  index={index}
+                  focused={focused}
+                />
+              )}
             />
           </MentionsInput>
 
-          <Grid verticalAlign='middle'>
+          <Grid verticalAlign="middle">
             <Grid.Row>
               <Grid.Column width={6}>
                 <Popup
@@ -234,7 +256,14 @@ class CreateComment extends Component {
                   size="mini"
                   position="bottom center"
                   trigger={
-                    <Button primary type="submit" size="tiny" disabled={this.state.note == ''}>Add Note</Button>
+                    <Button
+                      primary
+                      type="submit"
+                      size="tiny"
+                      disabled={this.state.note == ""}
+                    >
+                      Add Note
+                    </Button>
                   }
                   inverted
                 />
@@ -244,10 +273,10 @@ class CreateComment extends Component {
                 <MarkdownStyling />
               </Grid.Column>
             </Grid.Row>
-          </Grid>  
+          </Grid>
         </Form>
       </Tab.Pane>
-    )
+    );
   }
 
   cmdOrCtrl() {
@@ -259,22 +288,20 @@ class CreateComment extends Component {
   }
 
   render() {
-    if(this.props.renderCommentOnly) {
+    if (this.props.renderCommentOnly) {
       return this.renderComment();
     }
 
-    if(this.props.renderNoteOnly) {
+    if (this.props.renderNoteOnly) {
       return this.renderNote();
     }
 
     const panes = [
-      { menuItem: 'Reply', render: () => this.renderComment() },
-      { menuItem: 'Note', render: () =>  this.renderNote() }
+      { menuItem: "Reply", render: () => this.renderComment() },
+      { menuItem: "Note", render: () => this.renderNote() }
     ];
 
-    return (
-      <Tab menu={{ secondary: true, pointing: true }} panes={panes} />
-    );
+    return <Tab menu={{ secondary: true, pointing: true }} panes={panes} />;
   }
 }
 

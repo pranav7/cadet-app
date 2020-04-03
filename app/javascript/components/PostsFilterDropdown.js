@@ -24,7 +24,7 @@ const PostsFilterDropDown = ({ value, onChange }) => {
           ))}
           <Dropdown.Divider />
           <Dropdown.Header content='Filter By' />
-          {PostsFilterOptions.filter(option => option.type === 'filter').map(option => (
+          {PostsFilterOptions.filter(option => option.type === 'status').map(option => (
             <Dropdown.Item
               key={option.value}
               onClick={() => onChange(option.value)}

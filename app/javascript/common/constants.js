@@ -17,26 +17,26 @@ export const PostsFilterOptions = [
   {
     text: '#open',
     value: 'open',
-    type: "filter"
+    type: "status"
   },
   {
     text: '#planned',
     value: 'planned',
-    type: "filter"
+    type: "status"
   },
   {
     text: '#developing',
     value: 'developing',
-    type: "filter"
+    type: "status"
   },
   {
     text: '#released',
     value: 'released',
-    type: "filter"
+    type: "status"
   },
   {
     text: '#closed',
     value: 'closed',
-    type: "filter"
+    type: "status"
   }
 ];

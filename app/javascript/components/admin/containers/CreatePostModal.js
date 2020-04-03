@@ -49,11 +49,13 @@ class CreatePostModal extends Component {
           description: "",
           modalOpen: false
         });
-
-        this.props.dispatch(fetchPosts(this.props.boardId, _, true));
+        this.props.dispatch(fetchPosts({
+          boardId: this.props.boardId
+        }));
         this.props.history.push(
           `/admin/${this.props.boardId}/posts/${response.data.post.slug}`
         );
+        this.props.onCreatePost(response.data.post.slug);
       })
       .catch(response => {
         // TODO: Add Notification Toast

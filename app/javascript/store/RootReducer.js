@@ -24,7 +24,17 @@ export default (state = initialState, action) => {
       return Object.assign({}, state, {
         isFetchingPost: false,
         didInvalidate: false,
-        selectedPost: action.post
+        selectedPost: action.post,
+        posts: state.posts.map(post => {
+          if(state.selectedPost && post.id === action.post.id) {
+            return ({
+              ...post,
+              comments_count: action.post.comments.length,
+              votes_count: action.post.voters.length,
+            });
+          }
+          return post;
+        })
       });
     case REQUEST_POSTS:
       return Object.assign({}, state, {

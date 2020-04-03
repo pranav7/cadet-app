@@ -131,7 +131,7 @@ class PostList extends React.Component {
   };
 
   handleFilterChange = (appliedFilter) => {
-    Cookies.set("currentSortOrder", value, { expires: 1 });
+    Cookies.set("currentSortOrder", appliedFilter, { expires: 1 });
     this.setState({
       currentSortOrder: appliedFilter,
     }, () => {

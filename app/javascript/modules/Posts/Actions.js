@@ -53,7 +53,7 @@ export function fetchPost(boardId, postId) {
   }
 }
 
-export function fetchPosts(boardId, params = {}, flushPosts) {
+export function fetchPosts({ boardId, params = {}, flushPosts = true }) {
   return function(dispatch) {
     dispatch(requestPosts());
 

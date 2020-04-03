@@ -4,6 +4,8 @@ import { Dropdown } from 'semantic-ui-react';
 
 import Posts from 'API/Posts';
 import { fetchPost, fetchPosts } from 'Modules/Posts/Actions';
+import { PostsFilterOptions } from 'Common/constants';
+import _ from "underscore";
 
 const statusOptions = [
   {
@@ -45,8 +47,14 @@ class StatusDropdown extends Component {
 
     postsApi.update(data)
       .then(response => {
+        const currentSortOrder = Cookies.get("currentSortOrder");
         this.props.dispatch(fetchPost(this.props.boardId, this.props.postId));
-        this.props.dispatch(fetchPosts(this.props.boardId, _, true));
+        this.props.dispatch(fetchPosts({
+          boardId:this.props.boardId,
+          params: {
+            sort_by: currentSortOrder
+          }
+        }));
       });
   }
 
@@ -56,7 +64,7 @@ class StatusDropdown extends Component {
         className="ui tiny button"
         floating
         text="Status"
-        options={statusOptions}
+        options={PostsFilterOptions.filter(option => option.type === 'status' )}
         onChange={this.handleChange}
       />
     );

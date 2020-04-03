@@ -9,6 +9,7 @@ import { fetchPosts } from "Modules/Posts/Actions";
 import CreatePostModal from "AdminContainers/CreatePostModal";
 import PostsFilterDropdown from "Components/PostsFilterDropdown";
 import { PostsFilterOptions } from 'Common/constants';
+import eventBus from 'Common/eventBus';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -24,6 +25,8 @@ class PostList extends React.Component {
 
     this.listContainerNode = React.createRef();
     this.onScroll = this.onScroll.bind(this);
+    this.handlePostUpdate = this.handlePostUpdate.bind(this);
+    eventBus.register('updated-post', this.handlePostUpdate);
   }
 
   componentWillUnmount() {
@@ -54,6 +57,12 @@ class PostList extends React.Component {
     }
   }
 
+  handlePostUpdate(event) {
+    this.setState({
+      currentSelected: event.detail.post_slug
+    });
+  }
+
   onScroll() {
     if (
       this.listContainerNode && this.listContainerNode.offsetHeight + this.listContainerNode.scrollTop >= this.listContainerNode.scrollHeight &&
@@ -67,13 +76,17 @@ class PostList extends React.Component {
         this.getPosts({
           sorty_by: this.state.currentSortOrder,
           page: nextPage
-        });
+        }, false);
       }
     }
   }
 
-  getPosts = (params = {}, flushPosts = false) => {
-    this.props.dispatch(fetchPosts(this.state.boardId, params, flushPosts));
+  getPosts = (params = {}, flushPosts) => {
+    this.props.dispatch(fetchPosts({
+      boardId: this.state.boardId,
+      params,
+      flushPosts
+    }));
   };
 
   handleSearchInput = event => {
@@ -91,7 +104,7 @@ class PostList extends React.Component {
   };
 
   search = () => {
-    this.getPosts({ search: this.state.searchTerm }, true);
+    this.getPosts({ search: this.state.searchTerm });
   };
 
   handlePostItemClick = slug => {
@@ -131,11 +144,11 @@ class PostList extends React.Component {
   };
 
   handleFilterChange = (appliedFilter) => {
-    Cookies.set("currentSortOrder", value, { expires: 1 });
+    Cookies.set("currentSortOrder", appliedFilter, { expires: 1 });
     this.setState({
       currentSortOrder: appliedFilter,
     }, () => {
-      this.getPosts({ sort_by: this.state.currentSortOrder }, true);
+      this.getPosts({ sort_by: this.state.currentSortOrder });
     });
   }
 
@@ -154,7 +167,14 @@ class PostList extends React.Component {
               </div>
             </div>
 
-            <CreatePostModal boardId={this.state.boardId} />
+            <CreatePostModal boardId={this.state.boardId} onCreatePost={(addedPostSlug) => {
+              const defaultSortOrder = PostsFilterOptions[0].value;
+              Cookies.set("currentSortOrder", defaultSortOrder, { expires: 1 });
+              this.setState({
+                currentSortOrder: defaultSortOrder,
+                currentSelected: addedPostSlug
+              })
+            }} />
           </div>
           <div className="container-two">
             <div className="ui icon fluid input field">

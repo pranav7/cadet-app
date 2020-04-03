@@ -58,7 +58,7 @@ class Admin::PostsController < Admin::AdminController
 
     respond_to do |format|
       format.json do
-        head :ok
+        render json: { post: { slug: @post.slug } }
       end
 
       format.html do

@@ -31,7 +31,7 @@ class PostsController < ApplicationController
                      .reverse_chronologically
     end
 
-    @posts = paginate @posts, per_page: 25
+    @posts = paginate @posts, per_page: 7
   end
 
   def create

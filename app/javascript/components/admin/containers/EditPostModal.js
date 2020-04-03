@@ -6,6 +6,8 @@ import { fetchPosts, fetchPost } from "Modules/Posts/Actions";
 import MarkdownStyling from "Common/MarkdownStyling";
 import Posts from "API/Posts";
 import Users from "API/Users";
+import eventBus from 'Common/eventBus';
+import _ from "underscore";
 
 const User = ({ name, email }) => {
 
@@ -106,13 +108,26 @@ class EditPostModal extends Component {
     }
 
     postApi.update(data).then(response => {
-      this.props.dispatch(fetchPosts(this.props.match.params.boardId, _, true));
+      if (_.isUndefined(Cookies.get("currentSortOrder"))) {
+        this.props.dispatch(fetchPosts({
+          boardId:this.props.match.params.boardId
+        }));
+      } else {
+        this.props.dispatch(fetchPosts({
+          boardId:this.props.match.params.boardId,
+          params: {
+            sort_by: Cookies.get("currentSortOrder")
+          }
+        }));
+      }
+
       this.props.dispatch(
         fetchPost(
           this.props.match.params.boardId,
           this.props.match.params.postId
         )
       );
+      eventBus.fire('updated-post', { post_slug: response.data.post.slug });
       this.setState({
         title: "",
         description: "",

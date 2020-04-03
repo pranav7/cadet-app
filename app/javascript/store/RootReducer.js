@@ -26,9 +26,9 @@ export default (state = initialState, action) => {
         didInvalidate: false,
         selectedPost: action.post,
         posts: state.posts.map(post => {
-          if(state.selectedPost && post.id === state.selectedPost.id) {
+          if(state.selectedPost && post.id === action.post.id) {
             return ({
-              ...action.post,
+              ...post,
               comments_count: action.post.comments.length,
               votes_count: action.post.voters.length,
             });

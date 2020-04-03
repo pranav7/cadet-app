@@ -8,12 +8,12 @@ import Posts from "API/Posts";
 const User = ({ name, email }) => {
 
   return (
-    <div class="item" data-value="20">
-      <div class="user">
-        <div class="details">
-          <span class="name">{name}</span>
+    <div className="item" data-value="20">
+      <div className="user">
+        <div className="details">
+          <span className="name">{name}</span>
           <br />
-          <span class="meta soft">{email}</span>
+          <span className="meta soft">{email}</span>
         </div>
       </div>
     </div>

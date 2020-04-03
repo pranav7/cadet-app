@@ -53,10 +53,10 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
               {
               (!isPost && isEditable) && (
                 <React.Fragment>
-                  <span class="soft">&nbsp;·&nbsp;</span>
+                  <span className="soft">&nbsp;·&nbsp;</span>
                   <Modal
                     trigger={
-                      <a class="c thin soft underlined link pointer" onClick={() => toggleEditCommentModalVisibility('note')}>Edit</a>
+                      <a className="c thin soft underlined link pointer" onClick={() => toggleEditCommentModalVisibility('note')}>Edit</a>
                     }
                     centered={false}
                     open={isEditingNote}
@@ -76,8 +76,8 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
                       </Modal.Description>
                     </Modal.Content>
                   </Modal>
-                  <span class="soft">&nbsp;·&nbsp;</span>
-                  <a class="c thin soft underlined link pointer" onClick={handleDeleteComment}>Delete</a>
+                  <span className="soft">&nbsp;·&nbsp;</span>
+                  <a className="c thin soft underlined link pointer" onClick={handleDeleteComment}>Delete</a>
                 </React.Fragment>
               )
             }
@@ -104,10 +104,10 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
             {
               (!isPost && isEditable) && (
                 <React.Fragment>
-                  <span class="soft">&nbsp;·&nbsp;</span>
+                  <span className="soft">&nbsp;·&nbsp;</span>
                   <Modal
                     trigger={
-                      <a class="c thin soft underlined link pointer" onClick={() => toggleEditCommentModalVisibility('comment')}>Edit</a>
+                      <a className="c thin soft underlined link pointer" onClick={() => toggleEditCommentModalVisibility('comment')}>Edit</a>
                     }
                     centered={false}
                     open={isEditingComment}
@@ -126,8 +126,8 @@ const Comment = ({id, content, commenter, created_at, isNote, isEditable = false
                       </Modal.Description>
                     </Modal.Content>
                   </Modal>
-                  <span class="soft">&nbsp;·&nbsp;</span>
-                  <a class="c thin soft underlined link pointer" onClick={handleDeleteComment}>Delete</a>
+                  <span className="soft">&nbsp;·&nbsp;</span>
+                  <a className="c thin soft underlined link pointer" onClick={handleDeleteComment}>Delete</a>
                 </React.Fragment>
               )
             }

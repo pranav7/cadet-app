@@ -10,12 +10,12 @@ import Users from "API/Users";
 const User = ({ name, email }) => {
 
   return (
-    <div class="item" data-value="20">
-      <div class="user">
-        <div class="details">
-          <span class="name">{name}</span>
+    <div className="item" data-value="20">
+      <div className="user">
+        <div className="details">
+          <span className="name">{name}</span>
           <br />
-          <span class="meta soft">{email}</span>
+          <span className="meta soft">{email}</span>
         </div>
       </div>
     </div>
@@ -178,7 +178,7 @@ class EditPostModal extends Component {
                   placeholder='Select user'
                   loading={this.state.fetchingUsers}
                 />
-                <div class="hint">The requester would receive email notifications for this post, only use this option if you have their consent.</div>
+                <div className="hint">The requester would receive email notifications for this post, only use this option if you have their consent.</div>
               </Form.Field>
 
               <Button primary type="submit" disabled={!this.state.title || !this.state.description}>

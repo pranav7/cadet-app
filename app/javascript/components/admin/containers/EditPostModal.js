@@ -6,7 +6,7 @@ import { fetchPosts, fetchPost } from "Modules/Posts/Actions";
 import MarkdownStyling from "Common/MarkdownStyling";
 import Posts from "API/Posts";
 import Users from "API/Users";
-import eventBus from 'Common/eventBus';
+import EventBus from 'Common/EventBus';
 import _ from "underscore";
 
 const User = ({ name, email }) => {
@@ -127,7 +127,7 @@ class EditPostModal extends Component {
           this.props.match.params.postId
         )
       );
-      eventBus.fire('updated-post', { post_slug: response.data.post.slug });
+      EventBus.fire('updated-post', { post_slug: response.data.post.slug });
       this.setState({
         title: "",
         description: "",

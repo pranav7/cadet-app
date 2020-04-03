@@ -7,6 +7,8 @@ import Cookies from "js-cookie";
 import _ from "underscore";
 import { fetchPosts } from "Modules/Posts/Actions";
 import CreatePostModal from "AdminContainers/CreatePostModal";
+import PostsFilterDropdown from "Components/PostsFilterDropdown";
+import { PostsFilterOptions } from 'Common/constants';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -17,6 +19,7 @@ class PostList extends React.Component {
       searchTerm: "",
       loading: false,
       currentPage: 1,
+      currentSortOrder: PostsFilterOptions[0].value,
     };
 
     this.listContainerNode = React.createRef();
@@ -29,10 +32,13 @@ class PostList extends React.Component {
 
   componentDidMount() {
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
-      this.getPosts();
-    } else {
-      this.state.currentSortOrder = Cookies.get("currentSortOrder");
       this.getPosts({ sort_by: this.state.currentSortOrder });
+    } else {
+      this.setState({
+        currentSortOrder: Cookies.get("currentSortOrder"),
+      }, () => {
+        this.getPosts({ sort_by: this.state.currentSortOrder });
+      });
     }
 
     this.listContainerNode.addEventListener("scroll", this.onScroll, false);
@@ -124,6 +130,15 @@ class PostList extends React.Component {
     }
   };
 
+  handleFilterChange = (appliedFilter) => {
+    Cookies.set("currentSortOrder", value, { expires: 1 });
+    this.setState({
+      currentSortOrder: appliedFilter,
+    }, () => {
+      this.getPosts({ sort_by: this.state.currentSortOrder }, true);
+    });
+  }
+
   render() {
     return (
       <div className="c-left-pane">
@@ -151,6 +166,10 @@ class PostList extends React.Component {
                 onChange={this.handleSearchInput}
               />
             </div>
+          </div>
+          <div className="c labeled field">
+              <label>Show</label>
+              <PostsFilterDropdown value={this.state.currentSortOrder} onChange={this.handleFilterChange} />
           </div>
         </div>
         <div className="post-list-container" ref={(node) => this.listContainerNode = node}>{this.renderPostList()}</div>

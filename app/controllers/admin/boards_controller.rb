@@ -39,7 +39,14 @@ class Admin::BoardsController < Admin::AdminController
       @post = @board.posts.new
       @post.build_content
     else
-      redirect_to admin_board_post_path(@board, @board.posts.sorted(sort_method: params[:sort_by]).first)
+      respond_to do |format|
+        format.html do
+          redirect_to admin_board_post_path(@board, @board.posts.sorted(sort_method: params[:sort_by]).first)
+        end
+
+        format.json do
+        end
+      end
     end
   end
 

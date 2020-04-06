@@ -12,7 +12,7 @@ class VotesController < ApplicationController
             flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
             redirect_back fallback_location: board_post_path(@board, @post)
           end
-    
+
           format.json do
             head :created
           end
@@ -23,7 +23,7 @@ class VotesController < ApplicationController
             flash[:success] = "Vote for #{user.name} was already added" if params[:user_id]
             redirect_back fallback_location: board_post_path(@board, @post)
           end
-    
+
           format.json do
             head :ok
           end
@@ -38,7 +38,7 @@ class VotesController < ApplicationController
             flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
             redirect_back fallback_location: board_post_path(@board, @post)
           end
-    
+
           format.json do
             head :created
           end

@@ -51,7 +51,6 @@ class PostList extends React.Component {
   }
 
   init() {
-    this.getBoardDetails();
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts();
     } else {

@@ -3,61 +3,30 @@ class VotesController < ApplicationController
   before_action :load_post
 
   def create
-    if params[:user_id]
-      user = User.find params[:user_id]
-      if not @post.voters.where(id: user.id).first
-        @post.votes.create(user: user, added_by: current_user)
-        respond_to do |format|
-          format.html do
-            flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
-            redirect_back fallback_location: board_post_path(@board, @post)
-          end
+    voter = find_voter
+    Votes::Create.run!(post: @post, voter: voter)
 
-          format.json do
-            head :created
-          end
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash[:success] = "Vote for #{user.name} was already added" if params[:user_id]
-            redirect_back fallback_location: board_post_path(@board, @post)
-          end
-
-          format.json do
-            head :ok
-          end
-        end
+    respond_to do |format|
+      format.html do
+        flash[:success] = "Vote for #{voter.name} was added" if params[:user_id]
+        redirect_back fallback_location: board_post_path(@board, @post)
       end
-    else
-      user = current_user
-      if not @post.voters.where(id: user.id).first
-        @post.votes.create(user: user)
-        respond_to do |format|
-          format.html do
-            flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
-            redirect_back fallback_location: board_post_path(@board, @post)
-          end
 
-          format.json do
-            head :created
-          end
-        end
-      else
-        respond_to do |format|
-          format.html do
-            flash[:success] = "Vote for #{user.name} was already added" if params[:user_id]
-            redirect_back fallback_location: board_post_path(@board, @post)
-          end
-    
-          format.json do
-            head :ok
-          end
-        end
+      format.json do
+        head :created
       end
     end
+  rescue => e
+    raise e
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: board_post_path(@board, @post)
+      end
 
-    user.companies << current_company unless user.part_of?(current_company)
+      format.json do
+        head :bad_request
+      end
+    end
   end
 
   def destroy
@@ -86,5 +55,10 @@ class VotesController < ApplicationController
   def load_post
     @board = current_company.boards.friendly.find(params[:board_id])
     @post = @board.posts.friendly.find(params[:post_id])
+  end
+
+  def find_voter
+    return User.find(params[:user_id]) if params[:user_id]
+    current_user
   end
 end

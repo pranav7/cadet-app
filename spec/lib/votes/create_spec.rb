@@ -3,10 +3,9 @@ require 'rails_helper'
 describe Votes::Create do
   let(:voter) { create :user }
   let(:company) { create :company }
-  let(:admin) { create :user, company: company }
   let(:post) { create :post }
 
-  subject { described_class.run!(post: post, voter: voter) }
+  subject { described_class.run(post: post, voter: voter) }
 
   before do
     Current.company = company
@@ -34,10 +33,23 @@ describe Votes::Create do
       Current.user = admin
     end
 
-    it "creates a vote and with the correct details" do
-      subject
-      vote = post.votes.reload.find_by(user_id: voter.id)
-      expect(vote.added_by).to eq(admin)
+    context "when admin does not have permission" do
+      let(:admin) { create :admin, company: company }
+
+      it "creates a vote and with the correct details" do
+        subject
+        vote = post.votes.reload.find_by(user_id: voter.id)
+        expect(vote.added_by).to eq(admin)
+      end
+    end
+
+    context "when admin does not have permission" do
+      let(:admin) { create :admin }
+
+      it "creates a vote and with the correct details" do
+        subject
+        expect(voter.voted?(post)).to eq(false)
+      end
     end
   end
 end

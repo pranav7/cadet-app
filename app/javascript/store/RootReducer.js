@@ -7,7 +7,7 @@ import {
 } from 'Modules/Posts/Actions';
 
 const initialState = {
-  isFetchingPost: false,
+  isFetchingPost: true,
   isFetchingPosts: false,
   selectedPost: null,
   posts: []

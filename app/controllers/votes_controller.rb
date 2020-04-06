@@ -16,8 +16,7 @@ class VotesController < ApplicationController
         head :created
       end
     end
-  rescue => e
-    raise e
+  rescue StandardError
     respond_to do |format|
       format.html do
         redirect_back fallback_location: board_post_path(@board, @post)

@@ -1,17 +1,16 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { Container, Icon } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { Container, Icon } from 'semantic-ui-react';
 
-import UpvoteButton from "Components/UpvoteButton";
-import CommentInput from "AdminComponents/CommentInput";
-import User from "Components/User"
-import Account from "Components/Account"
-import Comment from "Components/Comment";
-import { fetchPost } from "Modules/Posts/Actions";
-import StatusDropdown from "AdminContainers/StatusDropdown";
-import EditPostModal from "AdminContainers/EditPostModal";
-import AddVoterModal from "AdminContainers/AddVoterModal";
-import UpvotedUsersList from "./containers/UpvotedUsersList";
+import UpvoteButton from 'Components/UpvoteButton';
+import CommentInput from 'AdminComponents/CommentInput';
+import Account from 'Components/Account';
+import Comment from 'Components/Comment';
+import { fetchPost } from 'Modules/Posts/Actions';
+import StatusDropdown from 'AdminContainers/StatusDropdown';
+import EditPostModal from 'AdminContainers/EditPostModal';
+import AddVoterModal from 'AdminContainers/AddVoterModal';
+import UpvotedUsersList from './containers/UpvotedUsersList';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -20,7 +19,7 @@ class PostDetails extends Component {
     this.state = {
       post: null,
       boardId: this.props.match.params.boardId,
-      postId: this.props.match.params.postId
+      postId: this.props.match.params.postId,
     };
 
     this.getPost = this.getPost.bind(this);
@@ -35,11 +34,11 @@ class PostDetails extends Component {
       this.setState(
         {
           boardId: nextProps.match.params.boardId,
-          postId: nextProps.match.params.postId
+          postId: nextProps.match.params.postId,
         },
         () => {
           this.getPost();
-        }
+        },
       );
     }
   }
@@ -53,7 +52,6 @@ class PostDetails extends Component {
   }
 
   render() {
-
     if (!this.props.post) {
       return (
         <Container className="padded full">
@@ -68,10 +66,7 @@ class PostDetails extends Component {
             <div className="top-action-bar">
               <div className="item grow">
                 <button onClick={testMethodDoesNotExist}>Break the world</button>;
-                <StatusDropdown
-                  boardId={this.state.boardId}
-                  postId={this.state.postId}
-                />
+                <StatusDropdown boardId={this.state.boardId} postId={this.state.postId} />
               </div>
 
               <EditPostModal post={this.props.post} />
@@ -90,19 +85,14 @@ class PostDetails extends Component {
                 </a>
               </div>
 
-              <AddVoterModal
-                post={this.props.post}
-                onChange={this.onPostChange}
-              />
+              <AddVoterModal post={this.props.post} onChange={this.onPostChange} />
             </div>
 
             <div className="post-header">
               <div className="header">
                 <h1 className="post-title">{this.props.post.title}</h1>
                 <div className="post-header-info">
-                  <strong
-                    className={`status o__small ${this.props.post.status}`}
-                  >
+                  <strong className={`status o__small ${this.props.post.status}`}>
                     #{this.props.post.status}
                   </strong>
                 </div>
@@ -132,10 +122,7 @@ class PostDetails extends Component {
             </div>
 
             <div className="create-comment bottom padded">
-              <CommentInput
-                boardId={this.state.boardId}
-                postId={this.state.postId}
-              />
+              <CommentInput boardId={this.state.boardId} postId={this.state.postId} />
             </div>
 
             <div className="post-activity">
@@ -146,12 +133,10 @@ class PostDetails extends Component {
                 </div>
               </div>
 
-              {this.props.post.comments.map(comment => (
+              {this.props.post.comments.map((comment) => (
                 <Comment
                   {...comment}
-                  isEditable={
-                    comment.commenter.id === this.props.currentUser.id
-                  }
+                  isEditable={comment.commenter.id === this.props.currentUser.id}
                   isNote={comment.private}
                   key={comment.id}
                   boardId={this.state.boardId}
@@ -186,7 +171,7 @@ class PostDetails extends Component {
                   </div>
                 </div>
 
-                {this.props.post.accounts.map(account => (
+                {this.props.post.accounts.map((account) => (
                   <Account key={account.id} {...account} />
                 ))}
               </div>
@@ -198,18 +183,15 @@ class PostDetails extends Component {
   }
 }
 
-const mapStateToProps = state => ({
+const mapStateToProps = (state) => ({
   isFetchingPost: state.isFetchingPost,
-  post: state.selectedPost
+  post: state.selectedPost,
 });
 
-const mapDispatchToProps = dispatch => ({
+const mapDispatchToProps = (dispatch) => ({
   fetchPost: (boardId, postId) => {
     dispatch(fetchPost(boardId, postId));
-  }
+  },
 });
 
-export default connect(
-  mapStateToProps,
-  mapDispatchToProps
-)(PostDetails);
+export default connect(mapStateToProps, mapDispatchToProps)(PostDetails);

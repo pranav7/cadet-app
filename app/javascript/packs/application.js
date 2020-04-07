@@ -11,7 +11,9 @@ import { Application } from "stimulus"
 import { definitionsFromContext } from "stimulus/webpack-helpers"
 import * as Sentry from '@sentry/browser';
 
-Sentry.init({dsn: "https://2234c89fb9f34a1aaae5a8910141202e@o374501.ingest.sentry.io/5192625"});
+if (process.env.NODE_ENV === 'production') {
+  Sentry.init({dsn: "https://2234c89fb9f34a1aaae5a8910141202e@o374501.ingest.sentry.io/5192625"});
+}
 
 const application = Application.start()
 const context = require.context("./controllers", true, /\.js$/)

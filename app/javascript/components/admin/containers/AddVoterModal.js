@@ -4,53 +4,16 @@ import { withRouter } from "react-router-dom";
 import { Button, Modal, Form } from "semantic-ui-react";
 import Users from "API/Users";
 import Posts from "API/Posts";
-
-const User = ({ name, email }) => {
-
-  return (
-    <div className="item" data-value="20">
-      <div className="user">
-        <div className="details">
-          <span className="name">{name}</span>
-          <br />
-          <span className="meta soft">{email}</span>
-        </div>
-      </div>
-    </div>
-  )
-};
+import UsersDropdown from 'Components/UsersDropdown';
 
 class EditPostModal extends Component {
   constructor(props) {
     super(props);
 
     this.state = {
-      selectedUser: null,
+      voter: null,
       modalOpen: false,
-      users: [],
-      loading: false,
     };
-  }
-
-  componentDidMount(){
-    this.setState({
-      loading: true
-    });
-    const usersApi = new Users();
-
-    usersApi.get().then(response => {
-      this.setState({
-        users: response.data.users.map(user => ({
-          key: user.id,
-          value: user.id,
-          text: user.name,
-          content: <User name={user.name} email={user.email} />,
-          description: user.description,
-        }
-        )),
-        loading: false,
-      });
-    });
   }
 
   handleChange = (e, { name, value }) => {
@@ -67,7 +30,7 @@ class EditPostModal extends Component {
   };
 
   handleClose = () => {
-    this.setState({ modalOpen: false });
+    this.setState({ modalOpen: false, voter: null });
   };
 
   addVoter = () => {
@@ -75,12 +38,13 @@ class EditPostModal extends Component {
       postId: this.props.match.params.postId
     });
     const data = {
-      user_id: this.state.selectedUser
+      user_id: this.state.voter
     };
 
     postApi.upvote(data).then(response => {
       this.setState({
-        modalOpen: false
+        modalOpen: false,
+        voter: null
       }, this.props.onChange);
     });
   };
@@ -112,13 +76,10 @@ class EditPostModal extends Component {
           <Modal.Description>
             <Form onSubmit={this.handleSubmit}>
               <Form.Field>
-                <Form.Select
-                  fluid
-                  name="selectedUser"
+                <UsersDropdown
                   onChange={this.handleChange}
-                  search
-                  options={this.state.users}
-                  placeholder='Select user'
+                  value={this.state.voter}
+                  name="voter"
                 />
               </Form.Field>
               <Button size="tiny" type="submit">

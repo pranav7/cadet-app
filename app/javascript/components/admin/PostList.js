@@ -10,6 +10,7 @@ import CreatePostModal from "AdminContainers/CreatePostModal";
 import PostsFilterDropdown from "Components/PostsFilterDropdown";
 import { PostsFilterOptions } from 'Common/constants';
 import EventBus from 'Common/EventBus';
+import Board from 'API/Board';
 
 class PostList extends React.Component {
   constructor(props) {
@@ -17,6 +18,7 @@ class PostList extends React.Component {
 
     this.state = {
       boardId: this.props.match.params.boardId,
+      boardName: "Loading...",
       searchTerm: "",
       loading: false,
       currentPage: 1,
@@ -27,6 +29,7 @@ class PostList extends React.Component {
     this.listContainerNode = React.createRef();
     this.onScroll = this.onScroll.bind(this);
     this.handlePostUpdate = this.handlePostUpdate.bind(this);
+    this.getBoardDetails = this.getBoardDetails.bind(this);
     EventBus.register('updated-post', this.handlePostUpdate);
   }
 
@@ -35,6 +38,7 @@ class PostList extends React.Component {
   }
 
   componentDidMount() {
+    this.getBoardDetails();
     if (_.isUndefined(Cookies.get("currentSortOrder"))) {
       this.getPosts({ sort_by: this.state.currentSortOrder });
     } else {
@@ -48,6 +52,18 @@ class PostList extends React.Component {
     this.listContainerNode.addEventListener("scroll", this.onScroll, false);
     $("#post_title").on("input", this.suggestPosts);
     setTimeout(this.restoreScrollPosition, 940);
+  }
+
+  getBoardDetails() {
+    const boardApi = new Board(this.state.boardId);
+
+    boardApi
+      .get({ id: this.state.boardId })
+      .then(response => {
+        this.setState({
+          boardName: response.data.name
+        })
+      });
   }
 
   restoreScrollPosition() {
@@ -164,7 +180,7 @@ class PostList extends React.Component {
               </div>
               <div className="divider">/</div>
               <div className="section active">
-                <a>Feature Requests</a>
+                <a>{this.state.boardName}</a>
               </div>
             </div>
 

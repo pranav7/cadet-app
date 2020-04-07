@@ -7,6 +7,7 @@ import Posts from "API/Posts";
 import MarkdownStyling from "Common/MarkdownStyling";
 
 import { fetchPosts } from "Modules/Posts/Actions";
+import UsersDropdown from 'Components/UsersDropdown';
 
 class CreatePostModal extends Component {
   constructor(props) {
@@ -15,6 +16,7 @@ class CreatePostModal extends Component {
     this.state = {
       title: "",
       description: "",
+      requester: null,
       modalOpen: false,
       hasChangedTitle: false,
     };
@@ -41,13 +43,18 @@ class CreatePostModal extends Component {
       }
     };
 
+    if (this.state.requester) {
+      data.post["user_id"] = this.state.requester;
+    }
+
     postsApi
       .create(data)
       .then(response => {
         this.setState({
           title: "",
           description: "",
-          modalOpen: false
+          modalOpen: false,
+          requester: null,
         });
         this.props.dispatch(fetchPosts({
           boardId: this.props.boardId
@@ -72,7 +79,8 @@ class CreatePostModal extends Component {
     this.setState({
       title: "",
       description: "",
-      modalOpen: false
+      modalOpen: false,
+      requester: null,
     });
   };
 
@@ -110,7 +118,12 @@ class CreatePostModal extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
-
+              <UsersDropdown
+                onChange={this.handleChange}
+                value={this.state.requester}
+                name="requester"
+                hint="The requester would receive email notifications for this post, only use this option if you have their consent."
+              />
               <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
                 Save
               </Button>

@@ -53,7 +53,15 @@ class PostDetails extends Component {
   }
 
   render() {
-    if (this.props.post != null) {
+
+    if (!this.props.post) {
+      return (
+        <Container className="padded full">
+          <Icon loading name="circle notch" size="large" color="grey" />
+          <span className="soft">Loading ...</span>
+        </Container>
+      );
+    } else {
       return (
         <React.Fragment>
           <div className="c-main-pane">
@@ -185,19 +193,12 @@ class PostDetails extends Component {
           </div>
         </React.Fragment>
       );
-    } else {
-      return (
-        <Container className="padded full">
-          <Icon loading name="circle notch" size="large" color="grey" />
-          <span className="soft">Loading ...</span>
-        </Container>
-      );
     }
   }
 }
 
 const mapStateToProps = state => ({
-  isFetching: state.isFetching,
+  isFetchingPost: state.isFetchingPost,
   post: state.selectedPost
 });
 

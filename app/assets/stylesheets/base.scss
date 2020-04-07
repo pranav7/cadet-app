@@ -785,6 +785,7 @@ a.styling-with-markdown {
   align-items: center;
   margin-left: 10px;
   font-size: 12px;
+  fill: $darker;
 
   // In Mobile
   @media (min-width: 320px) and (max-width: 480px) {

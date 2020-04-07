@@ -8,7 +8,7 @@ class Admin::UsersController < Admin::AdminController
       @users = current_company.customers
     else
       @users = current_company.users
-      
+
       respond_to do |format|
         format.html do
           redirect_to admin_users_path(role: "customer")

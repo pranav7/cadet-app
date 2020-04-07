@@ -2,6 +2,20 @@ import React, { useState, useEffect } from 'react';
 import { Form } from "semantic-ui-react";
 import Users from "API/Users";
 
+const User = ({ name, email }) => {
+  return (
+    <div className="item" data-value="20">
+      <div className="user">
+        <div className="details">
+          <span className="name">{name}</span>
+          <br />
+          <span className="meta soft">{email}</span>
+        </div>
+      </div>
+    </div>
+  )
+};
+
 const UsersDropdown = ({ value, onChange, name, hint = null }) => {
   const [isFetchingUsers, setIsFetchingUsers] = useState(false);
   const [users, setUsers] = useState([]);
@@ -17,6 +31,7 @@ const UsersDropdown = ({ value, onChange, name, hint = null }) => {
         value: user.id,
         text: user.name,
         description: user.description,
+        content: <User name={user.name} email={user.email} />,
       }));
       setUsers(options);
     });

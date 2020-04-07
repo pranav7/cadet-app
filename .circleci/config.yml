@@ -63,7 +63,7 @@ jobs:
 
       - run:
           name: Yarn Install
-          command: yarn install --production=true --ignore-optional
+          command: yarn install --production --ignore-optional
 
       # Database setup
       - run: bundle exec rake db:create

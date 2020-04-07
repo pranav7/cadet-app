@@ -4,8 +4,10 @@ import { capitalizeFirstLetter } from 'Common/utils';
 const User = ({ name, initials, role, avatarSize = null, jobTitle = undefined, companyName = undefined}) => {
   return (
       <div className="user">
-        <div className={`avatar circle ${avatarSize}`}>
-          <div className="initials">{initials}</div>
+        <div className="avatar-container">
+          <div className={`avatar circle ${avatarSize}`}>
+            <div className="initials">{initials}</div>
+          </div>
         </div>
         <div className="details">
           <span className="name">{name}</span>

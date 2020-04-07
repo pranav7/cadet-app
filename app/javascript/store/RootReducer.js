@@ -9,7 +9,6 @@ import {
 const initialState = {
   isFetchingPost: true,
   isFetchingPosts: false,
-  selectedPost: null,
   posts: []
 }
 

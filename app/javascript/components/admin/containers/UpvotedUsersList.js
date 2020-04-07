@@ -33,8 +33,8 @@ const UpvotedUsersList = ({
 
   return (
     <React.Fragment>
-      {voters.slice(0, compact ? 7 : voters.length).map(voter => (
-        <div key={voter.id} style={{ display: 'flex', alignItems: 'center'}}>
+      {voters.slice(0, compact ? 7 : voters.length).map((voter, index) => (
+        <div key={index} style={{ display: 'flex', alignItems: 'center'}}>
           <User
             name={voter.name}
             initials={voter.initials}

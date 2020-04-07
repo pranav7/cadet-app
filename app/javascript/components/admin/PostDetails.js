@@ -54,7 +54,7 @@ class PostDetails extends Component {
 
   render() {
 
-    if (this.props.isFetchingPost) {
+    if (!this.props.post) {
       return (
         <Container className="padded full">
           <Icon loading name="circle notch" size="large" color="grey" />

@@ -65,7 +65,6 @@ class PostDetails extends Component {
           <div className="c-main-pane">
             <div className="top-action-bar">
               <div className="item grow">
-                <button onClick={testMethodDoesNotExist}>Break the world</button>;
                 <StatusDropdown boardId={this.state.boardId} postId={this.state.postId} />
               </div>
 

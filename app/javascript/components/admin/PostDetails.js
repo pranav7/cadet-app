@@ -4,8 +4,8 @@ import { Container, Icon } from "semantic-ui-react";
 
 import UpvoteButton from "Components/UpvoteButton";
 import CommentInput from "AdminComponents/CommentInput";
-import User from "Components/User";
-import Account from "Components/Account";
+import User from "Components/User"
+import Account from "Components/Account"
 import Comment from "Components/Comment";
 import { fetchPost } from "Modules/Posts/Actions";
 import StatusDropdown from "AdminContainers/StatusDropdown";

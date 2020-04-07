@@ -61,10 +61,6 @@ jobs:
             cp config/cadet_config.example.yml config/cadet_config.yml
             cp config/secrets.example.yml config/secrets.yml
 
-      - run:
-          name: Yarn Install
-          command: yarn install --production --ignore-optional
-
       # Database setup
       - run: bundle exec rake db:create
       - run: bundle exec rake db:schema:load

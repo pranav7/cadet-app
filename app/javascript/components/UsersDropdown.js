@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from "react";
 import { Form } from "semantic-ui-react";
 import Users from "API/Users";
 
@@ -13,10 +13,16 @@ const User = ({ name, email }) => {
         </div>
       </div>
     </div>
-  )
+  );
 };
 
-const UsersDropdown = ({ value, onChange, name, hint = null }) => {
+const UsersDropdown = ({
+  value,
+  onChange,
+  name,
+  hint = null,
+  label = "Requester (optional)"
+}) => {
   const [isFetchingUsers, setIsFetchingUsers] = useState(false);
   const [users, setUsers] = useState([]);
 
@@ -31,7 +37,7 @@ const UsersDropdown = ({ value, onChange, name, hint = null }) => {
         value: user.id,
         text: user.name,
         description: user.description,
-        content: <User name={user.name} email={user.email} />,
+        content: <User name={user.name} email={user.email} />
       }));
       setUsers(options);
     });
@@ -42,17 +48,15 @@ const UsersDropdown = ({ value, onChange, name, hint = null }) => {
       <Form.Select
         fluid
         name={name}
-        label="Add Requester(optional)"
+        label={label}
         onChange={onChange}
         search
         value={value}
         options={users}
-        placeholder='Select user'
+        placeholder="Select user"
         loading={isFetchingUsers}
       />
-      <div className="hint">
-        {hint}
-      </div>
+      <div className="hint">{hint}</div>
     </Form.Field>
   );
 };

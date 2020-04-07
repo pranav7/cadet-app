@@ -8,21 +8,8 @@ import Posts from "API/Posts";
 import Users from "API/Users";
 import EventBus from 'Common/EventBus';
 import _ from "underscore";
+import UsersDropdown from 'Components/UsersDropdown';
 
-const User = ({ name, email }) => {
-
-  return (
-    <div className="item" data-value="20">
-      <div className="user">
-        <div className="details">
-          <span className="name">{name}</span>
-          <br />
-          <span className="meta soft">{email}</span>
-        </div>
-      </div>
-    </div>
-  )
-};
 class EditPostModal extends Component {
   constructor(props) {
     super(props);
@@ -31,12 +18,6 @@ class EditPostModal extends Component {
       title: props.post.title,
       description: props.post.content.raw,
       modalOpen: false,
-      fetchingUsers: false,
-      users: this.props.post.requester ? [{
-        name: this.props.post.requester.name,
-        email: this.props.post.requester.email,
-        id: this.props.post.requester.id,
-      }] : [],
       requester: this.props.post.requester ? this.props.post.requester.id : null,
     };
   }
@@ -66,6 +47,7 @@ class EditPostModal extends Component {
     this.setState({
       title: nextProps.post.title,
       description: nextProps.post.content.raw,
+      requester: nextProps.post.requester.id,
       modalOpen: false
     });
   };
@@ -180,22 +162,12 @@ class EditPostModal extends Component {
                   onChange={this.handleChange}
                 />
               </Form.Field>
-
-              <Form.Field>
-                <Form.Select
-                  fluid
-                  name="requester"
-                  label="Add Requester(optional)"
-                  onChange={this.handleChange}
-                  search
-                  value={this.state.requester}
-                  options={this.state.users}
-                  placeholder='Select user'
-                  loading={this.state.fetchingUsers}
-                />
-                <div className="hint">The requester would receive email notifications for this post, only use this option if you have their consent.</div>
-              </Form.Field>
-
+              <UsersDropdown
+                onChange={this.handleChange}
+                value={this.state.requester}
+                name="requester"
+                hint="The requester would receive email notifications for this post, only use this option if you have their consent."
+              />
               <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
                 Save
               </Button>

@@ -22,27 +22,6 @@ class EditPostModal extends Component {
     };
   }
 
-  componentDidMount(){
-    this.setState({
-      fetchingUsers: true
-    });
-    const usersApi = new Users();
-
-    usersApi.get().then(response => {
-      this.setState({
-        users: response.data.users.map(user => ({
-          key: user.id,
-          value: user.id,
-          text: user.name,
-          content: <User name={user.name} email={user.email} />,
-          description: user.description,
-        }
-        )),
-        fetchingUsers: false,
-      });
-    });
-  }
-
   componentWillReceiveProps = nextProps => {
     this.setState({
       title: nextProps.post.title,

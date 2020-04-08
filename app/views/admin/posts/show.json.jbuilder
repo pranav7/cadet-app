@@ -24,7 +24,7 @@ json.requester do
 end
 
 json.comments do
-  json.array! @post.comments do |comment|
+  json.array! @post.comments.chronologically do |comment|
     json.id comment.id
     json.private comment.private
     json.created_at render_time(comment.created_at, format: :short)

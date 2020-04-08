@@ -12,10 +12,12 @@ jobs:
       # specify the version you desire here
       - image: circleci/ruby:2.4.1-node-browsers
         environment:
+          BUNDLE_JOBS: 3
+          BUNDLE_RETRY: 3
+          BUNDLE_PATH: vendor/bundle
           PGHOST: 127.0.0.1
           PGUSER: cadet
           RAILS_ENV: test
-          BUNDLER_VERSION: 2.0.1
       
       # Specify service dependencies here if necessary
       # CircleCI maintains a library of pre-built images

@@ -29,41 +29,58 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
-      - run:
-          name: Update system gems
-          command: |
-            sudo gem update --system
-
-      - run:
-          name: Update Bundler
-          command: |
-            gem install bundler:2.0.1
-
-      - run:
-          name: install dependencies
-          command: |
-            bundle install --jobs=4 --retry=3 --path vendor/bundle
-
-      - save_cache:
-          paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
-
       - run:
           name: Copy Config Files
           command: |
             cp config/cadet_config.example.yml config/cadet_config.yml
             cp config/secrets.example.yml config/secrets.yml
 
+      # Which version of bundler?
+      - run:
+          name: Which bundler?
+          command: bundle -v
+      
+      # Restore bundle cache
+      # Read about caching dependencies: https://circleci.com/docs/2.0/caching/
+      - restore_cache:
+          keys:
+            - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - cadet-bundle-v2-
+
+      - run: # Install Ruby dependencies
+          name: Bundle Install
+          command: bundle check --path vendor/bundle || bundle install --deployment
+
+      # Store bundle cache for Ruby dependencies
+      - save_cache:
+          key: cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
+          paths:
+            - vendor/bundle
+
+      # Only necessary if app uses webpacker or yarn in some other way
+      - restore_cache:
+          keys:
+            - cadet-yarn-{{ checksum "yarn.lock" }}
+            - cadet-yarn-
+
+      - run:
+          name: Yarn Install
+          command: yarn install --cache-folder ~/.cache/yarn
+
+      # Store yarn / webpacker cache
+      - save_cache:
+          key: cadet-yarn-{{ checksum "yarn.lock" }}
+          paths:
+            - ~/.cache/yarn
+      
       # Database setup
-      - run: bundle exec rake db:create
-      - run: bundle exec rake db:schema:load
+      - run:
+          name: Wait for DB
+          command: dockerize -wait tcp://localhost:5432 -timeout 1m
+
+      - run:
+          name: Database setup
+          command: bin/rails db:schema:load --trace
 
       # run tests!
       - run:

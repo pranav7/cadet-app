@@ -13,7 +13,7 @@ import * as Sentry from '@sentry/browser';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
-    dsn: 'https://2234c89fb9f34a1aaae5a8910141202e@o374501.ingest.sentry.io/5192625',
+    dsn: "https://80448e1f433c413bac9ff91282cf436e@o374876.ingest.sentry.io/5193555"
   });
 }
 

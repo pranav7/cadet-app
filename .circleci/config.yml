@@ -37,6 +37,12 @@ jobs:
             cp config/cadet_config.example.yml config/cadet_config.yml
             cp config/secrets.example.yml config/secrets.yml
 
+      - run:
+          name: install dependencies
+          command: |
+            gem update --system
+            gem install bundler
+      
       # Which version of bundler?
       - run:
           name: Which bundler?

@@ -59,10 +59,15 @@ jobs:
           keys:
             - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
             - cadet-bundle-v2-
+      
+      - run: # Set bundle config
+          command: |
+            bundle config set path 'vendor/bundle'
+            bundle config set deployment 'true'
 
       - run: # Install Ruby dependencies
           name: Bundle Install
-          command: bundle check --path vendor/bundle || bundle install --deployment
+          command: bundle install
 
       # Store bundle cache for Ruby dependencies
       - save_cache:

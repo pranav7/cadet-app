@@ -45,15 +45,26 @@ jobs:
           command: |
             gem install bundler:2.0.1
 
-      - run:
+      - restore_cache:
+        keys:
+          - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
+          - cadet-bundle-v2-
+
+      - run: # Install Ruby dependencies
+          name: Bundle Install
           name: install dependencies
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
+      # Store bundle cache for Ruby dependencies
       - save_cache:
+          key: cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
-            - ./vendor/bundle
-          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
+            - vendor/bundle
+
+      - run:
+          name: Yarn Install
+          command: bin/yarn install --ignore-optional --cache-folder ~/.cache/yarn
 
       - run:
           name: Copy Config Files

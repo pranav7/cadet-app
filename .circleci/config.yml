@@ -29,12 +29,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run:
           name: Update system gems
           command: |
@@ -43,12 +37,12 @@ jobs:
       - run:
           name: Update Bundler
           command: |
-            gem install bundler:2.0.1
+            gem install bundler:2.1.4
 
       - restore_cache:
-        keys:
-          - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
-          - cadet-bundle-v2-
+          keys:
+            - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
+            - cadet-bundle-v2-
 
       - run: # Install Ruby dependencies
           name: Bundle Install

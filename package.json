@@ -2,7 +2,7 @@
   "name": "cadet-app",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.6.0",
+    "@rails/webpacker": "^5.0.1",
     "@sentry/browser": "^5.15.4",
     "at.js": "^1.5.3",
     "axios": "^0.17.1",
@@ -35,7 +35,7 @@
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
     "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "3.1.11"
+    "webpack-dev-server": "3.10.3"
   },
   "optionalDependencies": {
     "fsevents": "^1.2.7",

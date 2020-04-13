@@ -57,10 +57,6 @@ jobs:
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
-          name: Yarn Install
-          command: bin/yarn install --ignore-optional --cache-folder ~/.cache/yarn
-
-      - run:
           name: Copy Config Files
           command: |
             cp config/cadet_config.example.yml config/cadet_config.yml

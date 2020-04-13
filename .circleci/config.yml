@@ -37,7 +37,7 @@ jobs:
       - run:
           name: Update Bundler
           command: |
-            gem install bundler:2.1.4
+            gem install bundler:2.0.1
 
       - restore_cache:
           keys:

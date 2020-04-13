@@ -41,8 +41,9 @@ jobs:
 
       - restore_cache:
           keys:
-            - cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
-            - cadet-bundle-v2-
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
 
       - run: # Install Ruby dependencies
           name: Bundle Install
@@ -51,9 +52,9 @@ jobs:
 
       # Store bundle cache for Ruby dependencies
       - save_cache:
-          key: cadet-bundle-v2-{{ checksum "Gemfile.lock" }}
           paths:
             - vendor/bundle
+          key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
           name: Yarn Install

@@ -2,6 +2,7 @@ require 'rails_helper'
 
 RSpec.describe RoadmapsController, type: :controller do
   render_views
+
   let(:company1) { create :company }
   let(:company2) { create :company }
   let(:user) { create :user, company: company1 }

@@ -7,14 +7,10 @@ module ApplicationHelper
     case
     when created_at > 1.week.ago
       return "#{time_ago_in_words(created_at)} ago"
-    when created_at > 1.year.ago
-      return created_at.strftime("%e %b") if format && format == :short
-
-      created_at.strftime("%e %B, %Y")
+    when created_at > 60.days.ago
+      created_at.strftime("%e %b")
     else
-      return created_at.strftime("%e %b, %y") if format && format == :short
-
-      created_at.strftime("%e %B, %Y")
+      created_at.strftime("%e %b, %Y")
     end
   end
 

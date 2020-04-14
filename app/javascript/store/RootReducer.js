@@ -28,7 +28,7 @@ export default (state = initialState, action) => {
           if(state.selectedPost && post.id === action.post.id) {
             return ({
               ...post,
-              comments_count: action.post.comments.length,
+              comments_count: action.post.comments.filter(comment => !comment.private).length,
               votes_count: action.post.voters.length,
             });
           }

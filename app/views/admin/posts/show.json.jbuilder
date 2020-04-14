@@ -50,11 +50,7 @@ json.voters do
     json.initials voter.initials
     json.role voter.membership_for(current_company).role
     json.job_title voter.job_title
-    json.company_name (begin
-                         voter.account_for(current_company).name
-                       rescue StandardError
-                         ""
-                       end)
+    json.company_name voter.account_for(current_company)&.name || ""
     json.deletable !voter.votes.where(post: @post).first.manual?
   end
 end

@@ -43,18 +43,17 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     @post = @board.posts.friendly.find(params[:id])
-    @post.assign_attributes(post_params)
+    Post::Update.run!(
+      post: @post,
+      title: params[:title],
+      status: params[:status],
+      user_id: params[:user_id]
+      content: {
+        body: params[:content_attributes][:body]
+      }
+    )
 
-    # slug needs to be set to nil to regenerate slug
-    @post.slug = nil if @post.title_changed?
-
-    add_voter if @post.user_id_changed?
-
-    if @post.save
-      flash[:success] = "Changes to post saved"
-    else
-      flash[:error] = "Something went wrong"
-    end
+    flash[:success] = "Changes to post saved"
 
     respond_to do |format|
       format.json do
@@ -62,6 +61,17 @@ class Admin::PostsController < Admin::AdminController
       end
 
       format.html do
+        redirect_back fallback_location: admin_board_post_path(@post)
+      end
+    end
+  rescue StandardServiceError => error
+    respond_to do |format|
+      format.json do
+        render json: { message: error.message } }, status: :bad_request
+      end
+
+      format.html do
+        flash[:error] = error.message
         redirect_back fallback_location: admin_board_post_path(@post)
       end
     end

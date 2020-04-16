@@ -2,8 +2,10 @@ module Votes
   class Create
     attr_reader :post, :voter
 
-    def self.run(post:, voter:)
-      new(post: post, voter: voter).run
+    def self.run!(post:, voter:)
+      service = new(post: post, voter: voter)
+      service.validate!
+      service.run!
     end
 
     def initialize(post:, voter:)
@@ -11,7 +13,7 @@ module Votes
       @voter = voter
     end
 
-    def valid?
+    def validate!
       return false if voter.voted?(post)
       return false unless user_has_permission?
       true

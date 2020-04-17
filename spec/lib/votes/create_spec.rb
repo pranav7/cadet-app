@@ -33,7 +33,7 @@ describe Votes::Create do
       Current.user = admin
     end
 
-    context "when admin does has permissions" do
+    context "when admin has permissions" do
       let(:admin) { create :admin, company: company }
 
       it "creates a vote and with the correct details" do

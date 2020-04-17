@@ -5,7 +5,7 @@ describe Votes::Create do
   let(:company) { create :company }
   let(:post) { create :post }
 
-  subject { described_class.run(post: post, voter: voter) }
+  subject { described_class.run!(post: post, voter: voter) }
 
   before do
     Current.company = company
@@ -33,7 +33,7 @@ describe Votes::Create do
       Current.user = admin
     end
 
-    context "when admin does not have permission" do
+    context "when admin does has permissions" do
       let(:admin) { create :admin, company: company }
 
       it "creates a vote and with the correct details" do
@@ -47,8 +47,7 @@ describe Votes::Create do
       let(:admin) { create :admin }
 
       it "creates a vote and with the correct details" do
-        subject
-        expect(voter.voted?(post)).to eq(false)
+        expect { subject }.to raise_error(Errors::AdminLacksPermission)
       end
     end
   end

@@ -44,3 +44,4 @@ tmux-client-*
 tmux-server-*
 
 tags
+.vscode/tasks.json

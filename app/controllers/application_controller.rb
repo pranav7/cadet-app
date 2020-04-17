@@ -11,10 +11,20 @@ class ApplicationController < ActionController::Base
   include IntercomIframe
   include ProtectedFeatures
 
+  rescue_from AdminLacksPermission, with: :handle_missing_permissions
+ 
   protected
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
+  end
+
+  def handle_missing_permissions(error)
+    respond_to do |format|
+      format.html { redirect_back fallback_location: root_path }
+      format.json { render status: 403, json: { message: 'permissions_error' } }
+      format.json_api { render status: 403, json: { message: 'permissions_error' } }
+    end
   end
 
   private

@@ -11,7 +11,8 @@ class ApplicationController < ActionController::Base
   include IntercomIframe
   include ProtectedFeatures
 
-  rescue_from AdminLacksPermission, with: :handle_missing_permissions
+  rescue_from Errors::AdminLacksPermission, with: :handle_missing_permissions
+  rescue_from Errors::ServiceValidationException, with: :handle_validation_error
  
   protected
 
@@ -22,8 +23,18 @@ class ApplicationController < ActionController::Base
   def handle_missing_permissions(error)
     respond_to do |format|
       format.html { redirect_back fallback_location: root_path }
-      format.json { render status: 403, json: { message: 'permissions_error' } }
-      format.json_api { render status: 403, json: { message: 'permissions_error' } }
+      format.json { render status: :forbidden, json: { message: 'permissions_error' } }
+    end
+  end
+
+  def handle_validation_error(error)
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_back fallback_location: root_path
+      end
+
+      format.json { render status: :unprocessable_entity, json: { message: error.message } }
     end
   end
 

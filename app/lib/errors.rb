@@ -1,4 +1,4 @@
 module Errors
   class AdminLacksPermission < StandardError; end
-  class ServiceValidationError < StandardError; end
+  class ServiceValidationException < StandardError; end
 end 

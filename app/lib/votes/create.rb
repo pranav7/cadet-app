@@ -38,7 +38,7 @@ module Votes
 
     def validate_user_has_not_voted
       return unless voter.voted?(post)
-      raise Errors::ServiceValidationError, "User already upvoted the post"
+      raise Errors::ServiceValidationException, "User already upvoted the post"
     end
   end
 end

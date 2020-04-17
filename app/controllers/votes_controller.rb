@@ -4,7 +4,7 @@ class VotesController < ApplicationController
 
   def create
     voter = find_voter
-    Votes::Create.run(post: @post, voter: voter)
+    Votes::Create.run!(post: @post, voter: voter)
 
     respond_to do |format|
       format.html do

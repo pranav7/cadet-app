@@ -1,0 +1,29 @@
+{
+	"version": "2.0.0",
+	"tasks": [
+		{
+      "label": "rspec current line",
+      "type": "shell",
+      "command": "bundle exec rspec ${relativeFile}:${lineNumber}",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true
+      },
+		},
+		{
+      "label": "rspec current file",
+      "type": "shell",
+      "command": "bundle exec rspec ${relativeFile}",
+      "group": "test",
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated",
+        "focus": true,
+        "clear": true
+      },
+    }
+	]
+}

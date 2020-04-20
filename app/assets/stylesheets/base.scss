@@ -15,8 +15,6 @@ body {
 // Start
 // Utility Classes
 .text {
-  line-height: 1.5;
-
   &.large {
     font-size: 16px;
   }
@@ -25,6 +23,7 @@ body {
     font-size: 13px;
   }
 }
+
 .c-table--object,
 .table--object {
   display: table;
@@ -39,11 +38,13 @@ body {
   display: flex;
 }
 
+.t__soft,
 .c-soft,
 .soft {
   color: $darker;
 }
 
+.t__softer,
 .c-softer,
 .softer {
   color: $dark;
@@ -133,10 +134,11 @@ a.c.link {
 
     .header-text {
       padding-bottom: $half-base-size;
-      border-bottom: 1px solid $lighter;
+      border-bottom: 1px dashed $lighter;
     }
   }
 
+  &.o__transparent,
   &.transparent {
     background-color: transparent;
     border-color: transparent;
@@ -144,6 +146,10 @@ a.c.link {
 
   &.with.border {
     border: 1px solid $lighter;
+  }
+
+  &.o__no-padding {
+    padding: 0;
   }
 }
 // End
@@ -775,18 +781,16 @@ a.c.link {
 a.styling-with-markdown {
   @extend .soft;
 
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
   margin-left: 10px;
   font-size: 12px;
+  fill: $darker;
 
   // In Mobile
   @media (min-width: 320px) and (max-width: 480px) {
     margin-left: 4px;
     margin-top: 4px;
-  }
-
-  svg {
-    fill: currentColor;
   }
 
   span.markdown-icon {
@@ -814,3 +818,21 @@ a.styling-with-markdown {
 }
 // End
 // Changelog Styling
+
+.create-comment-keyboard-shortcut {
+  display: inline;
+  padding: 8px;
+
+  kbd.keyboard-button {
+    border: 1px solid $lighter;
+    padding: 2px;
+    display: inline-flex;
+    border-radius: 4px;
+    box-shadow: 0px 1px 0 $lighter;
+    color: $darker;
+  }
+}
+
+.pointer {
+  cursor: pointer !important;
+}

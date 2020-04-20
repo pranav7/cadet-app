@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'api-pagination'
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
@@ -14,6 +15,7 @@ gem 'devise', '~> 4.5.0'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'eventmachine'
 gem 'exception_notification'
+gem 'fast_jsonapi'
 gem 'faye-websocket'
 gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
@@ -21,6 +23,7 @@ gem 'health_check'
 gem "intercom-rails"
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'octicons_helper'
 gem 'omniauth-google-oauth2'
 gem 'omniauth-intercom', '~> 0.1.9'

@@ -7,13 +7,39 @@ class ApplicationController < ActionController::Base
   include ValidateCompanyExpiry
   include PrepareExceptionNotifier
   include AuthorizeAdminAccess
+  include Rails::Pagination
   include IntercomIframe
   include ProtectedFeatures
+
+  rescue_from Errors::AdminLacksPermission, with: :handle_missing_permissions
+  rescue_from Errors::ServiceValidationException, with: :handle_validation_error
 
   protected
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'
+  end
+
+  def handle_missing_permissions(error)
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message || "User does not have permission"
+        redirect_back fallback_location: root_path
+      end
+
+      format.json { render status: :forbidden, json: { message: 'permissions_error' } }
+    end
+  end
+
+  def handle_validation_error(error)
+    respond_to do |format|
+      format.html do
+        flash[:error] = error.message
+        redirect_back fallback_location: root_path
+      end
+
+      format.json { render status: :unprocessable_entity, json: { message: error.message } }
+    end
   end
 
   private

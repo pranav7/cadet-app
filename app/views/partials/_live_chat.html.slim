@@ -1,9 +1,0 @@
-/* Start of Async Crisp Chat Code */
-javascript:
-  window.$crisp=[];window.CRISP_WEBSITE_ID="0841e61d-51c0-4172-ad87-ec9c688b6828";(function(){d=document;s=d.createElement("script");s.src="https://client.crisp.chat/l.js";s.async=1;d.getElementsByTagName("head")[0].appendChild(s);})();
-/* End of Async Crisp Chat Code */
-
-- if user_signed_in?
-  javascript:
-    $crisp.push(["set", "user:email", '#{current_user.email}']);
-    $crisp.push(["set", "user:nickname", '#{current_user.name}']);

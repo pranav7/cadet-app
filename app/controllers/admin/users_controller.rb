@@ -7,8 +7,16 @@ class Admin::UsersController < Admin::AdminController
     elsif params[:role] == "customer"
       @users = current_company.customers
     else
-      @users = current_company.customers
-      redirect_to admin_users_path(role: "customer")
+      @users = current_company.users
+
+      respond_to do |format|
+        format.html do
+          redirect_to admin_users_path(role: "customer")
+        end
+
+        format.json do
+        end
+      end
     end
     @user = User.new
   end

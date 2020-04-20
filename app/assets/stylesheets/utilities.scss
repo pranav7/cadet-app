@@ -1,78 +1,48 @@
-.u__pl__4 {
-  padding-left: 4px;
-}
-.u__pr__4 {
-  padding-right: 4px;
-}
-.u__pt__4 {
-  padding-top: 4px;
-}
-.u__pb__4 {
-  padding-bottom: 4px;
-}
-.u__p__4 {
-  @extend .u__pl__4;
-  @extend .u__pr__4;
-  @extend .u__pt__4;
-  @extend .u__pb__4;
+// BEGIN-SNIPPET u__m__n.scss
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__m__#{$tokenName} {
+    margin: $tokenValue !important;
+  }
 }
 
-.u__ml__4 {
-  margin-left: 4px;
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__mt__#{$tokenName} {
+    margin-top: $tokenValue !important;
+  }
+  .u__mr__#{$tokenName} {
+    margin-right: $tokenValue !important;
+  }
+  .u__mb__#{$tokenName} {
+    margin-bottom: $tokenValue !important;
+  }
+  .u__ml__#{$tokenName} {
+    margin-left: $tokenValue !important;
+  }
 }
-.u__mr__4 {
-  margin-right: 4px;
-}
-.u__mt__4 {
-  margin-top: 4px;
-}
-.u__mb__4 {
-  margin-bottom: 4px;
-}
-.u__m__4 {
-  @extend .u__ml__4;
-  @extend .u__mr__4;
-  @extend .u__mt__4;
-  @extend .u__mb__4;
+// END-SNIPPET
+
+// BEGIN-SNIPPET u__pad__n.scss
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__p__#{$tokenName} {
+    padding: $tokenValue !important;
+  }
 }
 
-.u__pl__8 {
-  padding-left: 8px;
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__pt__#{$tokenName} {
+    padding-top: $tokenValue !important;
+  }
+  .u__pr__#{$tokenName} {
+    padding-right: $tokenValue !important;
+  }
+  .u__pb__#{$tokenName} {
+    padding-bottom: $tokenValue !important;
+  }
+  .u__pl__#{$tokenName} {
+    padding-left: $tokenValue !important;
+  }
 }
-.u__pr__8 {
-  padding-right: 8px;
-}
-.u__pt__8 {
-  padding-top: 8px;
-}
-.u__pb__8 {
-  padding-bottom: 8px;
-}
-.u__p__8 {
-  @extend .u__pl__8;
-  @extend .u__pr__8;
-  @extend .u__pt__8;
-  @extend .u__pb__8;
-}
-
-.u__ml__8 {
-  margin-left: 8px;
-}
-.u__mr__8 {
-  margin-right: 8px;
-}
-.u__mt__8 {
-  margin-top: 8px;
-}
-.u__mb__8 {
-  margin-bottom: 8px;
-}
-.u__m__8 {
-  @extend .u__ml__8;
-  @extend .u__mr__8;
-  @extend .u__mt__8;
-  @extend .u__mb__8;
-}
+// END-SNIPPET
 
 // DEPRECATED
 .padded {

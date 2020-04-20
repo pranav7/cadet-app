@@ -29,12 +29,6 @@ jobs:
     steps:
       - checkout
 
-      - restore_cache:
-          keys:
-          - v1-dependencies-{{ checksum "Gemfile.lock" }}
-          # fallback to using the latest cache if no exact match is found
-          - v1-dependencies-
-
       - run:
           name: Update system gems
           command: |
@@ -45,14 +39,21 @@ jobs:
           command: |
             gem install bundler:2.0.1
 
-      - run:
-          name: install dependencies
+      - restore_cache:
+          keys:
+            - v1-dependencies-{{ checksum "Gemfile.lock" }}
+            # fallback to using the latest cache if no exact match is found
+            - v1-dependencies-
+
+      - run: # Install Ruby dependencies
+          name: Bundle Install
           command: |
             bundle install --jobs=4 --retry=3 --path vendor/bundle
 
+      # Store bundle cache for Ruby dependencies
       - save_cache:
           paths:
-            - ./vendor/bundle
+            - vendor/bundle
           key: v1-dependencies-{{ checksum "Gemfile.lock" }}
 
       - run:
@@ -60,10 +61,6 @@ jobs:
           command: |
             cp config/cadet_config.example.yml config/cadet_config.yml
             cp config/secrets.example.yml config/secrets.yml
-
-      - run:
-          name: Yarn Install
-          command: bin/yarn install
 
       # Database setup
       - run: bundle exec rake db:create
@@ -73,7 +70,7 @@ jobs:
       - run:
           name: RSpec Unit Tests
           command: |
-            bundle exec rspec --format documentation spec/
+            bundle exec rspec spec/
 
       - run:
           name: Run Rubocop for Style Violations

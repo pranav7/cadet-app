@@ -4,7 +4,8 @@
 
 .user
   - unless hide_avatar
-    = render partial: "users/avatar", locals: { user: user, size: (size rescue nil) }
+    = render partial: "users/avatar",
+      locals: { user: user, size: (size rescue nil) }
   .details
     span.name= user.name
     br

@@ -38,67 +38,25 @@ body.admin.posts {
 
   .top-action-bar {
     display: flex;
-    border-bottom: 1px solid $lighter;
+    align-items: center;
+    border-bottom: 1px dashed $lighter;
     margin-bottom: $base-size;
-    padding-bottom: 8px;
+    padding-bottom: $x4;
 
     .item {
-      padding-right: $base-size;
-
-      i {
-        color: $dark;
-      }
+      min-width: 100px;
     }
 
-    .status-dropdown {
-      background: none;
-      border: none;
-      min-width: 6 * $base-size;
-      min-height: 2 * $base-size;
-      box-shadow: none;
-      padding: 0;
-
-      .menu {
-        border-top-width: 1px !important;
-        border-color: $lighter;
-        min-width: 8rem;
-
-        & > .item {
-          border-top: 2px solid $lightest;
-          padding: $base-size !important;
-        }
-
-        & > .item:hover {
-          background: $white;
-          border-top: 2px solid $primary-blue;
-        }
-      }
-
-      & > .default.text {
-        color: $dark; 
-        font-weight: bold;
-      }
-
-      & > .dropdown.icon {
-        color: $dark;
-        left: -4px;
-      }
-    }
-
-    .item a {
-      color: $dark; 
-      font-weight: bold;
-      cursor: pointer;
+    .item.grow {
+      flex-grow: 1;
     }
   }
 
-  .create-comment {
-    #note-container,
+  #note-container,
     .item.note.active {
       background: $note-back;
       border-color: $note-border;
     }
-  }
 
   #vote-on-behalf-modal {
     & > .actions {

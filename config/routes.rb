@@ -34,9 +34,10 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :boards do
-      resources :posts, except: [:new, :edit]
-    end
+    resource :billing, only: [:show], controller: :billing
+
+    get "boards/:board_id/posts/:post_id",
+        to: redirect("%{board_id}/posts/%{post_id}")
 
     resources :accounts do
       resource :account_memberships, only: [:create, :destroy]
@@ -47,6 +48,10 @@ Rails.application.routes.draw do
     resource :integrations, only: [:show], controller: :integrations
 
     resources :companies, only: [:edit, :update]
+
+    resources :boards, path: "" do
+      resources :posts, except: [:new, :edit]
+    end
   end
 
   get :join, to: "users#new"

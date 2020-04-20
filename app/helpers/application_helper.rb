@@ -1,10 +1,10 @@
 module ApplicationHelper
   # User this helper to render time in the view
   #   options :format [:short]
-  def render_time(created_at, options = {})
+  def render_time(created_at, _options = {})
     case
     when created_at > 1.week.ago
-      return "#{time_ago_in_words(created_at)} ago"
+      "#{time_ago_in_words(created_at)} ago"
     when created_at > 60.days.ago
       created_at.strftime("%e %b")
     else

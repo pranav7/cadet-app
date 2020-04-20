@@ -15,7 +15,7 @@ RSpec.describe VotesController, type: :controller do
 
     it "creates a vote" do
       expect(Votes::Create)
-        .to receive(:run)
+        .to receive(:run!)
         .with(post: _post, voter: user)
       post :create, params: { board_id: board.id, post_id: _post.id }
     end
@@ -25,7 +25,7 @@ RSpec.describe VotesController, type: :controller do
 
       it "finds the correct user" do
         expect(Votes::Create)
-          .to receive(:run)
+          .to receive(:run!)
           .with(post: _post, voter: user_2)
         post :create, params: { board_id: board.id, post_id: _post.id, user_id: user_2.id }
       end

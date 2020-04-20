@@ -13,7 +13,7 @@ class ApplicationController < ActionController::Base
 
   rescue_from Errors::AdminLacksPermission, with: :handle_missing_permissions
   rescue_from Errors::ServiceValidationException, with: :handle_validation_error
- 
+
   protected
 
   def not_found
@@ -22,7 +22,11 @@ class ApplicationController < ActionController::Base
 
   def handle_missing_permissions(error)
     respond_to do |format|
-      format.html { redirect_back fallback_location: root_path }
+      format.html do
+        flash[:error] = error.message || "User does not have permission"
+        redirect_back fallback_location: root_path
+      end
+
       format.json { render status: :forbidden, json: { message: 'permissions_error' } }
     end
   end

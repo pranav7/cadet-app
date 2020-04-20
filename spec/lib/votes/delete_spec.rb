@@ -7,44 +7,57 @@ describe Votes::Delete do
 
   subject { described_class.run!(post: post, voter: voter) }
 
-  before do
-    Current.company = company
-    create :vote, post: post, user: voter
-  end
-
-  context "when current user is the voter" do
+  context "when vote exists" do
     before do
-      Current.user = voter
+      Current.company = company
+      create :vote, post: post, user: voter
     end
 
-    it "removes the vote" do
-      expect(voter.voted?(post)).to eq(true)
-      subject
-      expect(voter.voted?(post)).to eq(false)
-    end
-  end
+    context "when current user is the voter" do
+      before do
+        Current.user = voter
+      end
 
-  context "when current user is not the voter" do
-    before do
-      Current.user = admin
-    end
-
-    context "when admin has permissions" do
-      let(:admin) { create :admin, company: company }
-
-      it "creates a vote and with the correct details" do
+      it "removes the vote" do
         expect(voter.voted?(post)).to eq(true)
         subject
         expect(voter.voted?(post)).to eq(false)
       end
     end
 
-    context "when admin does not have permission" do
-      let(:admin) { create :admin }
-
-      it "creates a vote and with the correct details" do
-        expect { subject }.to raise_error(Errors::AdminLacksPermission)
+    context "when current user is not the voter" do
+      before do
+        Current.user = admin
       end
+
+      context "when admin has permissions" do
+        let(:admin) { create :admin, company: company }
+
+        it "creates a vote and with the correct details" do
+          expect(voter.voted?(post)).to eq(true)
+          subject
+          expect(voter.voted?(post)).to eq(false)
+        end
+      end
+
+      context "when admin does not have permission" do
+        let(:admin) { create :admin }
+
+        it "creates a vote and with the correct details" do
+          expect { subject }.to raise_error(Errors::AdminLacksPermission)
+        end
+      end
+    end
+  end
+
+  context "when vote does not exist" do
+    before do
+      Current.company = company
+      Current.user = voter
+    end
+
+    it "does not fail" do
+      expect { subject }.to_not raise_error
     end
   end
 end

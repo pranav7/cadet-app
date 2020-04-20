@@ -19,14 +19,7 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    if params[:user_id]
-      user = User.find params[:user_id]
-    else
-      user = current_user
-    end
-
-    vote = Vote.where(post: @post, user: user).first
-    vote.destroy!
+    Votes::Delete.run!(post: @post, voter: find_voter)
 
     respond_to do |format|
       format.html do

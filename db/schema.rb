@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_164652) do
+ActiveRecord::Schema.define(version: 2020_04_16_160500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,16 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activity_logs", force: :cascade do |t|
+    t.integer "event_type"
+    t.bigint "event_id"
+    t.bigint "company_id"
+    t.string "visibility"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "boards", force: :cascade do |t|
     t.bigint "company_id"
     t.string "name"
@@ -99,7 +109,6 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
-    t.string "stripe_customer_id"
     t.string "api_key"
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
@@ -158,6 +167,16 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "status_changed_events", force: :cascade do |t|
+    t.integer "old_value"
+    t.integer "new_value"
+    t.integer "admin_id"
+    t.bigint "company_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name"
@@ -188,6 +207,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

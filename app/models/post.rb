@@ -14,6 +14,8 @@ class Post < ApplicationRecord
   has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :activity_log, dependent: :destroy
+
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 

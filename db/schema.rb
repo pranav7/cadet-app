@@ -160,7 +160,7 @@ ActiveRecord::Schema.define(version: 2020_04_21_183150) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
-  create_table "merge_events", force: :cascade do |t|
+  create_table "merged_events", force: :cascade do |t|
     t.bigint "primary_post_id"
     t.bigint "secondary_post_id"
     t.bigint "admin_id"

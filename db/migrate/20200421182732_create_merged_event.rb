@@ -1,6 +1,6 @@
-class CreateMergeEvent < ActiveRecord::Migration[5.2]
+class CreateMergedEvent < ActiveRecord::Migration[5.2]
   def up
-    create_table :merge_events do |t|
+    create_table :merged_events do |t|
       t.bigint :primary_post_id
       t.bigint :secondary_post_id
       t.bigint :admin_id
@@ -11,6 +11,6 @@ class CreateMergeEvent < ActiveRecord::Migration[5.2]
   end
 
   def down
-    drop_table :merge_events
+    drop_table :merged_events
   end
 end

@@ -49,9 +49,11 @@ module Posts
           company_id: @post.company.id
         )
         ActivityLog.create(
+          # event_type: Constants::EventTypes::STATUS_CHANGED,
           event_type: 0,
           event_id: event.id,
           company_id: @post.company.id,
+          # visibility: Constants::VisibilityTypes::PUBLIC,
           visibility: 'public',
           post_id: @post.id
         )
@@ -60,7 +62,6 @@ module Posts
 
     def add_voter
       voter = find_voter
-      binding.pry
       Votes::Create.run(post: @post, voter: voter)
     end
 

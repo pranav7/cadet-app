@@ -49,12 +49,10 @@ module Posts
           company_id: @post.company.id
         )
         ActivityLog.create(
-          # event_type: Constants::EventTypes::STATUS_CHANGED,
-          event_type: 0,
+          event_type: Constants::EventTypes::STATUS_CHANGED,
           event_id: event.id,
           company_id: @post.company.id,
-          # visibility: Constants::VisibilityTypes::PUBLIC,
-          visibility: 'public',
+          visibility: Constants::VisibilityTypes::PUBLIC,
           post_id: @post.id
         )
       end

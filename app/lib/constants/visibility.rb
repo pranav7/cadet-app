@@ -1,4 +1,4 @@
-module Constants::VisibilityTypes
-  PUBLIC = 'public'
-  PRIVATE = 'private'
+module Constants::Visibility
+  PUBLIC = 0
+  PRIVATE = 1
 end

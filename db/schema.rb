@@ -62,10 +62,12 @@ ActiveRecord::Schema.define(version: 2020_04_21_183150) do
     t.integer "event_type"
     t.bigint "event_id"
     t.bigint "company_id"
-    t.string "visibility"
+    t.integer "visibility"
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_activity_logs_on_company_id"
+    t.index ["post_id"], name: "index_activity_logs_on_post_id"
   end
 
   create_table "boards", force: :cascade do |t|

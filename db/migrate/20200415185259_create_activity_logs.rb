@@ -4,12 +4,15 @@ class CreateActivityLogs < ActiveRecord::Migration[5.2]
       t.integer :event_type
       t.bigint :event_id
       t.bigint :company_id
-      t.string :visibility
+      t.integer :visibility
       t.bigint :post_id
       t.datetime :created_at
       t.datetime :updated_at
 
       t.timestamps
+
+      t.index :post_id
+      t.index :company_id
     end
   end
 

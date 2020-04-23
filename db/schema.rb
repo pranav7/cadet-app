@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_164652) do
+ActiveRecord::Schema.define(version: 2020_04_21_183150) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,18 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activity_logs", force: :cascade do |t|
+    t.integer "event_type"
+    t.bigint "event_id"
+    t.bigint "company_id"
+    t.integer "visibility"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_activity_logs_on_company_id"
+    t.index ["post_id"], name: "index_activity_logs_on_post_id"
+  end
+
   create_table "boards", force: :cascade do |t|
     t.bigint "company_id"
     t.string "name"
@@ -71,6 +83,15 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
+  end
+
+  create_table "comment_created_events", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.bigint "post_id"
+    t.bigint "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "comments", force: :cascade do |t|
@@ -99,7 +120,6 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
-    t.string "stripe_customer_id"
     t.string "api_key"
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
@@ -142,6 +162,15 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["user_id"], name: "index_memberships_on_user_id"
   end
 
+  create_table "merged_events", force: :cascade do |t|
+    t.bigint "primary_post_id"
+    t.bigint "secondary_post_id"
+    t.bigint "admin_id"
+    t.bigint "company_id"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "posts", force: :cascade do |t|
     t.string "title"
     t.integer "status", default: 0
@@ -156,6 +185,16 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["slug", "board_id"], name: "index_posts_on_slug_and_board_id", unique: true
     t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "status_changed_events", force: :cascade do |t|
+    t.integer "old_value"
+    t.integer "new_value"
+    t.integer "admin_id"
+    t.bigint "company_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|
@@ -188,6 +227,7 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

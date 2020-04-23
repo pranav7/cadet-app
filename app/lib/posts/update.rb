@@ -1,22 +1,9 @@
 module Posts
-  class Update
+  class Update < Base
     attr_reader :post, :params
 
-    def self.run!(post:, title:, status:, user_id:, content:)
-      service = new(post: post, title: title, status: status, user_id: user_id, content: content)
-      service.validate!
-      service.run!
-    end
-
-    def initialize(post:, title:, status:, user_id:, content:)
-      @post = post
-      @title = title
-      @status = status
-      @user_id = user_id
-      @content = content
-    end
-
     def validate!
+      validate_user_has_permission
     end
 
     def run!
@@ -43,8 +30,8 @@ module Posts
         event = StatusChangedEvent.create(
           post_id: @post.id,
           company: @post.company,
-          old_value: @post.status,
-          new_value: @status,
+          old_value: Post.statuses[@post.status],
+          new_value: Post.statuses[@status],
           admin_id: Current.user.id,
           company_id: @post.company.id
         )
@@ -52,7 +39,7 @@ module Posts
           event_type: Constants::EventTypes::STATUS_CHANGED,
           event_id: event.id,
           company_id: @post.company.id,
-          visibility: Constants::VisibilityTypes::PUBLIC,
+          visibility: Constants::Visibility::PUBLIC,
           post_id: @post.id
         )
       end

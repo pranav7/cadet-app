@@ -18,7 +18,7 @@ module Posts
         log_activity
         @post.status = @status
       end
-      if (@requester_id && @requester_id != @post.user_id)
+      if @requester_id && @requester_id != @post.user_id
         @post.user_id = @requester_id
         add_voter
       end

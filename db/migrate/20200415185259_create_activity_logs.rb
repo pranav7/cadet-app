@@ -19,5 +19,4 @@ class CreateActivityLogs < ActiveRecord::Migration[5.2]
   def down
     drop_table :activity_logs
   end
-
 end

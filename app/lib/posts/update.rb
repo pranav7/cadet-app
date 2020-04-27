@@ -18,7 +18,7 @@ module Posts
         log_activity
         @post.status = @status
       end
-      if @requester_id
+      if (@requester_id && @requester_id != @post.user_id)
         @post.user_id = @requester_id
         add_voter
       end
@@ -34,7 +34,7 @@ module Posts
           post_id: @post.id,
           company: @post.company,
           old_value: Post.statuses[@post.status],
-          new_value: Post.statuses[@status],
+          new_value: @status,
           admin_id: Current.user.id,
           company_id: @post.company.id
         )

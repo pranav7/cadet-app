@@ -2,8 +2,9 @@ require 'rails_helper'
 
 describe Posts::Update do
   let(:company) { create :company }
+  let(:board) { create :board, company: company }
   let(:admin) { create :admin, company: company }
-  let(:post) { create :post, company: company }
+  let(:post) { create :post, board: board }
   let(:title) { "Test Title" }
   let(:content) { { body: "Test Body" } }
   let(:status) { Post.statuses[:developing] }
@@ -44,13 +45,22 @@ describe Posts::Update do
       expect(visibility).to eq(Constants::Visibility::PUBLIC)
     end
 
-    it "the status changed event records the correct values"
+    it "the status changed event records the correct values" do
+      expect { subject }.to change(StatusChangedEvent, :count).by(1)
+
+      activity_log = ActivityLog.find_by(post_id: post.id, company_id: company.id)
+      status_changed_event = activity_log.event
+
+      expect(status_changed_event).to_not eq(nil)
+      expect(status_changed_event.old_value).to eq(Post.statuses[post.status])
+      expect(status_changed_event.new_value).to eq(status)
+    end
   end
 
   context "when requester is changed" do
     it "recoreds a new vote"
   end
-  
+
   context "validations" do
   end
 end

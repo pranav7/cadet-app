@@ -47,7 +47,7 @@ class Admin::PostsController < Admin::AdminController
       post: @post,
       title: post_params["title"],
       status: post_params["status"],
-      user_id: post_params["user_id"],
+      requester_id: post_params["user_id"],
       content: post_params["content_attributes"]
     )
 

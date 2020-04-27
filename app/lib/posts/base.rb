@@ -1,16 +1,16 @@
 module Posts
   class Base
-    def self.run!(post:, title:, status:, user_id:, content:)
-      service = new(post: post, title: title, status: status, user_id: user_id, content: content)
+    def self.run!(post:, title:, status:, requester_id:, content:)
+      service = new(post: post, title: title, status: status, requester_id: requester_id, content: content)
       service.validate!
       service.run!
     end
 
-    def initialize(post:, title:, status:, user_id:, content:)
+    def initialize(post:, title:, status:, requester_id:, content:)
       @post = post
       @title = title
       @status = status
-      @user_id = user_id
+      @requester_id = requester_id
       @content = content
     end
 

@@ -65,6 +65,24 @@ describe Posts::Update do
     end
   end
 
+  context "when the status is not updated" do
+    before do
+      Current.user = admin
+      subject do
+        described_class.run!(
+          post: post,
+          status: post.status,
+          title: title,
+          requester_id: requester.id,
+          content: content
+        )
+      end
+    end
+    it "should not record an activity_log" do
+      expect { subject }.to change(ActivityLog, :count).by(0)
+    end
+  end
+
   context "when requester is changed" do
     before do
       Current.user = admin

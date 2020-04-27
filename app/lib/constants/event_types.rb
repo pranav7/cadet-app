@@ -5,5 +5,5 @@ module Constants::EventTypes
 
   CLASSES = {
     STATUS_CHANGED => StatusChangedEvent
-  }
+  }.freeze
 end

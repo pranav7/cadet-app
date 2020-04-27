@@ -1,6 +1,6 @@
 module Posts
   class Update < Base
-    attr_reader :post, :params
+    attr_reader :post, :title, :status, :user_id, :content
 
     def validate!
       validate_user_has_permission
@@ -18,7 +18,10 @@ module Posts
         log_activity
         @post.status = @status
       end
-      @post.user_id = @user_id if @user_id
+      if @user_id
+        @post.user_id = @user_id
+        add_voter
+      end
       @post.content.body = @content["body"] if @content && @content["body"]
       @post.slug = nil if @post.title_changed?
 
@@ -47,11 +50,11 @@ module Posts
 
     def add_voter
       voter = find_voter
-      Votes::Create.run(post: @post, voter: voter)
+      Votes::Create.run!(post: @post, voter: voter)
     end
 
     def find_voter
-      return User.find(params[:user_id]) if params[:user_id]
+      return User.find(@user_id)
       Current.user
     end
   end

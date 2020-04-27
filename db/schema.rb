@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_21_183150) do
+ActiveRecord::Schema.define(version: 2020_04_16_160500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -85,15 +85,6 @@ ActiveRecord::Schema.define(version: 2020_04_21_183150) do
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
   end
 
-  create_table "comment_created_events", force: :cascade do |t|
-    t.bigint "comment_id"
-    t.bigint "user_id"
-    t.bigint "post_id"
-    t.bigint "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
   create_table "comments", force: :cascade do |t|
     t.bigint "post_id"
     t.bigint "user_id"
@@ -160,15 +151,6 @@ ActiveRecord::Schema.define(version: 2020_04_21_183150) do
     t.boolean "owner", default: false
     t.index ["company_id"], name: "index_memberships_on_company_id"
     t.index ["user_id"], name: "index_memberships_on_user_id"
-  end
-
-  create_table "merged_events", force: :cascade do |t|
-    t.bigint "primary_post_id"
-    t.bigint "secondary_post_id"
-    t.bigint "admin_id"
-    t.bigint "company_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "posts", force: :cascade do |t|

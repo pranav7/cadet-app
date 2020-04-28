@@ -11,7 +11,7 @@ class CreateActivityLogs < ActiveRecord::Migration[5.2]
 
       t.timestamps
 
-      t.index ["post_id", "company_id"], name: "index_activity_logs_on_post_id_and_company_id", unique: true
+      t.index :post_id, name: "index_activity_logs_on_post_id"
     end
   end
 

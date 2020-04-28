@@ -4,6 +4,7 @@ describe Posts::Update do
   let(:company) { create :company }
   let(:board) { create :board, company: company }
   let(:admin) { create :admin, company: company }
+  let(:user) { create :user }
   let(:post) { create :post, board: board, user_id: admin.id }
   let(:title) { "Test Title" }
   let(:content) { { "body" => "Test Body" } }
@@ -95,6 +96,9 @@ describe Posts::Update do
   end
 
   context "validations" do
+    before do
+      Current.user = user
+    end
     it "should throw Insufficient permissions error" do
       expect { subject }.to raise_error(Errors::AdminLacksPermission)
     end

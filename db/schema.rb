@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_06_164652) do
+ActiveRecord::Schema.define(version: 2020_04_16_160500) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -56,6 +56,17 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.string "checksum"
     t.time "created_at"
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
+  end
+
+  create_table "activity_logs", force: :cascade do |t|
+    t.integer "event_type"
+    t.bigint "event_id"
+    t.bigint "company_id"
+    t.integer "visibility"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_activity_logs_on_post_id"
   end
 
   create_table "boards", force: :cascade do |t|
@@ -156,6 +167,16 @@ ActiveRecord::Schema.define(version: 2020_03_06_164652) do
     t.index ["slug", "board_id"], name: "index_posts_on_slug_and_board_id", unique: true
     t.index ["title"], name: "index_posts_on_title"
     t.index ["user_id"], name: "index_posts_on_user_id"
+  end
+
+  create_table "status_changed_events", force: :cascade do |t|
+    t.integer "old_value"
+    t.integer "new_value"
+    t.integer "admin_id"
+    t.bigint "company_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

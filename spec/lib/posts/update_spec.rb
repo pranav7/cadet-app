@@ -91,7 +91,7 @@ describe Posts::Update do
     it "recoreds a new vote" do
       subject
 
-      expect(post.user_id).to eq(requester.id)
+      expect(requester.voted?(post)).to eq(true)
     end
   end
 

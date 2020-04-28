@@ -23,12 +23,10 @@ describe Posts::Update do
 
   before do
     Current.company = company
+    Current.user = admin
   end
 
   describe "updating the post should" do
-    before do
-      Current.user = admin
-    end
     it "successfully updates the attributes" do
       subject
 
@@ -40,9 +38,6 @@ describe Posts::Update do
   end
 
   context "when the status is being updated" do
-    before do
-      Current.user = admin
-    end
     it "records an activity log for status changed" do
       expect { subject }.to change(ActivityLog, :count).by(1)
 
@@ -67,38 +62,23 @@ describe Posts::Update do
   end
 
   context "when the status is not updated" do
-    before do
-      Current.user = admin
-      subject do
-        described_class.run!(
-          post: post,
-          status: post.status,
-          title: title,
-          requester_id: requester.id,
-          content: content
-        )
-      end
-    end
+    let(:status) { nil }
+
     it "should not record an activity_log" do
       expect { subject }.to change(ActivityLog, :count).by(0)
     end
   end
 
   context "when requester is changed" do
-    before do
-      Current.user = admin
-    end
     it "recoreds a new vote" do
       subject
-
-      expect(post.user_id).to eq(requester.id)
+      expect(requester.voted?(post)).to eq(true)
     end
   end
 
   context "validations" do
-    before do
-      Current.user = user
-    end
+    let(:admin) { create(:admin) }
+
     it "should throw Insufficient permissions error" do
       expect { subject }.to raise_error(Errors::AdminLacksPermission)
     end

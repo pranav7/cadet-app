@@ -7,6 +7,22 @@ class CommentsController < ApplicationController
     comment.commenter = current_user
     comment.save
 
+    ActiveRecord::Base.transaction do
+      event = CommentCreatedEvent.create(
+        comment_id: comment.id,
+        user_id: current_user.id,
+        company_id: comment.post.company.id,
+        post_id: @post.id,
+      )
+
+      ActivityLog.create(
+        event_type: Constants::EventTypes::COMMENT_CREATED,
+        event_id: event.id,
+        company_id: @post.company.id,
+        visibility: Constants::Visibility::PUBLIC,
+        post_id: @post.id
+      )
+    end
     current_user.companies << current_company unless current_user.part_of?(current_company)
 
     respond_to do |format|

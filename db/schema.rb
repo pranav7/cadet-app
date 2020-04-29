@@ -66,7 +66,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_160500) do
     t.bigint "post_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["post_id"], name: "index_activity_logs_on_post_id"
+    t.index ["post_id", "company_id"], name: "index_activity_logs_on_post_id_and_company_id"
   end
 
   create_table "boards", force: :cascade do |t|

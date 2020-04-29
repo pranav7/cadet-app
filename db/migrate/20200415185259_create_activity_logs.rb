@@ -11,8 +11,7 @@ class CreateActivityLogs < ActiveRecord::Migration[5.2]
 
       t.timestamps
 
-      t.index :post_id
-      t.index :company_id
+      t.index :post_id, name: "index_activity_logs_on_post_id"
     end
   end
 

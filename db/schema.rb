@@ -84,7 +84,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_181425) do
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
   end
 
-  create_table "comment_created_event", force: :cascade do |t|
+  create_table "comment_created_events", force: :cascade do |t|
     t.bigint "comment_id"
     t.bigint "user_id"
     t.bigint "company_id"

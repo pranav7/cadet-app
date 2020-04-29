@@ -8,7 +8,6 @@ module Comments
     end
 
     def run!
-      binding.pry
       create_comment
     end
 

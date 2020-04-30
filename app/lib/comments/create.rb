@@ -32,7 +32,7 @@ module Comments
           comment_id: comment.id,
           user_id: Current.user.id,
           company_id: comment.post.company.id,
-          post_id: @post.id,
+          post_id: @post.id
         )
 
         ActivityLog.create(

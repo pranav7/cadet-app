@@ -56,7 +56,6 @@ describe Comments::Create do
   end
 
   context "when creating a comment" do
-
     it "records the correct visibility" do
       subject
 

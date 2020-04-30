@@ -110,7 +110,6 @@ ActiveRecord::Schema.define(version: 2020_04_16_160500) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
-    t.string "stripe_customer_id"
     t.string "api_key"
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
@@ -209,6 +208,7 @@ ActiveRecord::Schema.define(version: 2020_04_16_160500) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

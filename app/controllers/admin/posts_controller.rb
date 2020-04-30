@@ -43,18 +43,13 @@ class Admin::PostsController < Admin::AdminController
 
   def update
     @post = @board.posts.friendly.find(params[:id])
-    @post.assign_attributes(post_params)
-
-    # slug needs to be set to nil to regenerate slug
-    @post.slug = nil if @post.title_changed?
-
-    add_voter if @post.user_id_changed?
-
-    if @post.save
-      flash[:success] = "Changes to post saved"
-    else
-      flash[:error] = "Something went wrong"
-    end
+    Posts::Update.run!(
+      post: @post,
+      title: post_params["title"],
+      status: post_params["status"],
+      requester_id: post_params["user_id"],
+      content: post_params["content_attributes"]
+    )
 
     respond_to do |format|
       format.json do

@@ -15,8 +15,10 @@ module Comments
     protected
 
     def validate_user_has_permission
-      # return if Current.user == @comment.commenter
-      raise Errors::AdminLacksPermission
+      return if Current.user.admin_of?(Current.company)
+      if (@is_private and not(Current.user.admin_of?(Current.company)))
+        raise Errors::AdminLacksPermission
+      end
     end
   end
 end

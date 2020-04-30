@@ -3,8 +3,7 @@ module Comments
     attr_reader :post, :is_private, :content
 
     def validate!
-      # validate_user_has_permission
-      # validate_user_has_not_voted
+      validate_user_has_permission
     end
 
     def run!
@@ -40,15 +39,10 @@ module Comments
           event_type: Constants::EventTypes::COMMENT_CREATED,
           event_id: event.id,
           company_id: @post.company.id,
-          visibility: Constants::Visibility::PUBLIC,
+          visibility: @is_private ? Constants::Visibility::PRIVATE : Constants::Visibility::PUBLIC,
           post_id: @post.id
         )
       end
-    end
-
-    def validate_user_has_not_voted
-      return unless voter.voted?(post)
-      raise Errors::ServiceValidationException, "User already upvoted the post"
     end
   end
 end

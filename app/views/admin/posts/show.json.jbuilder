@@ -63,3 +63,23 @@ json.accounts do
     json.mrr account.mrr
   end
 end
+
+json.activity_log do
+  json.array! @post.activity_log do |activity|
+    json.event_type activity.event_type
+    json.created_at render_time(activity.created_at, format: :short)
+
+    if activity.event_type === Constants::EventTypes::COMMENT_CREATED
+      json.event do
+        json.visibility activity.visibility
+        json.comment do
+          json.partial! 'comments/show', comment: Comment.find(CommentCreatedEvent.find(activity.event_id).comment_id)
+        end
+      end
+    end
+
+    if activity.event_type === Constants::EventTypes::STATUS_CHANGED
+      json.event StatusChangedEvent.find(activity.event_id)
+    end
+  end
+end

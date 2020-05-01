@@ -1,15 +1,16 @@
 module Comments
   class Base
-    def self.run!(post:, is_private:, content:)
-      service = new(post: post, is_private: is_private, content: content)
+    def self.run!(post:, is_private:, content:, commenter:)
+      service = new(post: post, is_private: is_private, content: content, commenter: commenter)
       service.validate!
       service.run!
     end
 
-    def initialize(post:, is_private:, content:)
+    def initialize(post:, is_private:, content:, commenter:)
       @post = post
       @is_private = is_private
       @content = content
+      @commenter = commenter || Current.user
     end
 
     protected

@@ -6,7 +6,8 @@ class CommentsController < ApplicationController
     Comments::Create.run!(
       post: @post,
       is_private: comment_params["private"],
-      content: comment_params["content_attributes"]
+      content: comment_params["content_attributes"],
+      commenter: current_user
     )
 
     respond_to do |format|

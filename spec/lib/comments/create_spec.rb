@@ -9,7 +9,7 @@ describe Comments::Create do
   let(:content) { { "body" => "Test Body" } }
   let(:is_private) { false }
 
-  subject { described_class.run!(post: post, is_private: is_private, content: content) }
+  subject { described_class.run!(post: post, is_private: is_private, content: content, commenter: user) }
 
   before do
     Current.company = company
@@ -46,6 +46,7 @@ describe Comments::Create do
       Current.user = admin
     end
 
+    let(:user) { admin }
     let(:is_private) { true }
     it "records the correct visibility" do
       subject

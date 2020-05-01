@@ -1,6 +1,6 @@
 module Comments
   class Create < Base
-    attr_reader :post, :is_private, :content
+    attr_reader :post, :is_private, :content, :commenter
 
     def validate!
       validate_user_has_permission
@@ -15,11 +15,10 @@ module Comments
     def create_comment
       comment = @post.comments.new(
         post_id: @post.id,
-        user_id: Current.user.id,
         content_attributes: @content,
         private: @is_private
       )
-      comment.commenter = Current.user
+      comment.commenter = @commenter
       comment.save
 
       log_activity(comment)

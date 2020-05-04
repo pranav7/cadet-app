@@ -11,6 +11,7 @@ import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
 import UpvotedUsersList from './containers/UpvotedUsersList';
+import StatusChangedEvent from 'AdminComponents/StatusChangedEvent';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -128,21 +129,29 @@ class PostDetails extends Component {
               <div className="activity-header">
                 <div className="text">
                   <i className="comments outline icon" />
-                  Conversation
+                  Activity
                 </div>
               </div>
 
-              {this.props.post.comments.map((comment) => (
-                <Comment
-                  {...comment}
-                  isEditable={comment.commenter.id === this.props.currentUser.id}
-                  isNote={comment.private}
-                  key={comment.id}
-                  boardId={this.state.boardId}
-                  postId={this.state.postId}
-                  onChange={() => this.getPost()}
-                />
-              ))}
+              {this.props.post.activity_log.map((activity) => {
+                if(activity.event_type === 1) {
+                  const { comment } = activity.event;
+                  return (
+                    <Comment
+                      {...comment}
+                      isEditable={comment.commenter.id === this.props.currentUser.id}
+                      isNote={activity.event.visibility}
+                      key={comment.id}
+                      boardId={this.state.boardId}
+                      postId={this.state.postId}
+                      onChange={() => this.getPost()}
+                    />
+                  )
+                }
+                if(activity.event_type === 0) {
+                  return <StatusChangedEvent event={activity.event} createdAt={activity.created_at} />
+                }
+              })}
             </div>
           </div>
           <div className="c-right-pane">

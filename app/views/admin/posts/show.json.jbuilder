@@ -69,7 +69,7 @@ json.activity_log do
     json.event_type activity.event_type
     json.created_at render_time(activity.created_at, format: :short)
 
-    if activity.event_type === Constants::EventTypes::COMMENT_CREATED
+    if activity.event_type == Constants::EventTypes::COMMENT_CREATED
       json.event do
         json.visibility activity.visibility
         json.comment do
@@ -78,8 +78,6 @@ json.activity_log do
       end
     end
 
-    if activity.event_type === Constants::EventTypes::STATUS_CHANGED
-      json.event StatusChangedEvent.find(activity.event_id)
-    end
+    json.event StatusChangedEvent.find(activity.event_id) if activity.event_type == Constants::EventTypes::STATUS_CHANGED
   end
 end

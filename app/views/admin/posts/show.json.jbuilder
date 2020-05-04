@@ -78,6 +78,12 @@ json.activity_log do
       end
     end
 
-    json.event StatusChangedEvent.find(activity.event_id) if activity.event_type == Constants::EventTypes::STATUS_CHANGED
+    if activity.event_type === Constants::EventTypes::STATUS_CHANGED
+      json.event do
+        json.admin_username User.find(StatusChangedEvent.find(activity.event_id).admin_id).name
+        json.old_value activity.event.old_value
+        json.new_value activity.event.new_value
+      end
+    end
   end
 end

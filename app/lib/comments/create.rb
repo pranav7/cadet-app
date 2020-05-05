@@ -19,29 +19,29 @@ module Comments
         private: @is_private
       )
       comment.commenter = @commenter
-      comment.save
+      comment.save!
 
-      log_activity(comment)
+      ActiveRecord::Base.transaction do
+        log_activity(comment)
+      end
       Current.user.companies << Current.company unless Current.user.part_of?(Current.company)
     end
 
     def log_activity(comment)
-      ActiveRecord::Base.transaction do
-        event = CommentCreatedEvent.create(
-          comment_id: comment.id,
-          user_id: Current.user.id,
-          company_id: comment.post.company.id,
-          post_id: @post.id
-        )
+      event = CommentCreatedEvent.create(
+        comment_id: comment.id,
+        user_id: Current.user.id,
+        company_id: comment.post.company.id,
+        post_id: @post.id
+      )
 
-        ActivityLog.create(
-          event_type: Constants::EventTypes::COMMENT_CREATED,
-          event_id: event.id,
-          company_id: @post.company.id,
-          visibility: @is_private ? Constants::Visibility::PRIVATE : Constants::Visibility::PUBLIC,
-          post_id: @post.id
-        )
-      end
+      ActivityLog.create(
+        event_type: Constants::EventTypes::COMMENT_CREATED,
+        event_id: event.id,
+        company_id: @post.company.id,
+        visibility: @is_private ? Constants::Visibility::PRIVATE : Constants::Visibility::PUBLIC,
+        post_id: @post.id
+      )
     end
   end
 end

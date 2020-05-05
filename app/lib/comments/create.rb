@@ -13,18 +13,18 @@ module Comments
     private
 
     def create_comment
-      comment = @post.comments.new(
-        post_id: @post.id,
-        content_attributes: @content,
-        private: @is_private
-      )
-      comment.commenter = @commenter
-      comment.save!
-
       ActiveRecord::Base.transaction do
+        comment = @post.comments.new(
+          post_id: @post.id,
+          content_attributes: @content,
+          private: @is_private
+        )
+        comment.commenter = @commenter
+        comment.save!
+
         log_activity(comment)
+        Current.user.companies << Current.company unless Current.user.part_of?(Current.company)
       end
-      Current.user.companies << Current.company unless Current.user.part_of?(Current.company)
     end
 
     def log_activity(comment)

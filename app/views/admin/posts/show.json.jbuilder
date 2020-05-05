@@ -73,7 +73,7 @@ json.activity_log do
       json.event do
         json.visibility activity.visibility
         json.comment do
-          json.partial! 'comments/show', comment: Comment.find(CommentCreatedEvent.find(activity.event_id).comment_id)
+          json.partial! 'comments/show', comment: activity_log.event.comment
         end
       end
     end

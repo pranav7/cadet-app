@@ -6,8 +6,5 @@ json.content do
   json.raw comment.content.body
 end
 json.commenter do
-  json.id comment.commenter.id
-  json.name comment.commenter.name
-  json.initials comment.commenter.initials
-  json.role comment.commenter.membership_for(current_company).role
+  json.partial! 'partials/user_show', user: comment.commenter
 end

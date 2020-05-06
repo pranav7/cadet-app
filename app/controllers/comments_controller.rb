@@ -3,11 +3,12 @@ class CommentsController < ApplicationController
   before_action :load_post
 
   def create
-    comment = @post.comments.new(comment_params)
-    comment.commenter = current_user
-    comment.save
-
-    current_user.companies << current_company unless current_user.part_of?(current_company)
+    Comments::Create.run!(
+      post: @post,
+      is_private: comment_params["private"],
+      content: comment_params["content_attributes"],
+      commenter: current_user
+    )
 
     respond_to do |format|
       format.html do

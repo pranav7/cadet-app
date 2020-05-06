@@ -4,6 +4,7 @@ module Constants::EventTypes
   MERGED = 2
 
   CLASSES = {
-    STATUS_CHANGED => StatusChangedEvent
+    STATUS_CHANGED => StatusChangedEvent,
+    COMMENT_CREATED => CommentCreatedEvent
   }.freeze
 end

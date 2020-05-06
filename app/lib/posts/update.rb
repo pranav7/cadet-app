@@ -35,7 +35,7 @@ module Posts
           post_id: @post.id,
           company: @post.company,
           old_value: Post.statuses[@post.status],
-          new_value: @status,
+          new_value: Post.statuses[@status],
           admin_id: Current.user.id,
           company_id: @post.company.id
         )

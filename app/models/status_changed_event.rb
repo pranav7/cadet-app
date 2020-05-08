@@ -5,4 +5,8 @@ class StatusChangedEvent < ApplicationRecord
   def changed_by
     User.find(admin_id)
   end
+
+  def serializer
+    'partials/status_changed_event'
+  end
 end

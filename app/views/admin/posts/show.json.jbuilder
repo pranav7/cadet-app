@@ -55,16 +55,8 @@ json.activity_log do
     json.event_type activity.event_type
     json.created_at render_time(activity.created_at, format: :short)
 
-    if activity.event_type == Constants::EventTypes::COMMENT_CREATED
-      json.event do
-        json.partial! 'partials/comment_created_event', activity: activity
-      end
-    end
-
-    if activity.event_type == Constants::EventTypes::STATUS_CHANGED
-      json.event do
-        json.partial! 'partials/status_changed_event', activity: activity
-      end
+    json.event do
+      json.partial! activity.event.serializer, activity: activity
     end
   end
 end

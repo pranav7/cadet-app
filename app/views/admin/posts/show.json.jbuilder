@@ -25,21 +25,7 @@ end
 
 json.comments do
   json.array! @post.comments.chronologically do |comment|
-    json.id comment.id
-    json.private comment.private
-    json.created_at render_time(comment.created_at, format: :short)
-
-    json.content do
-      json.body simple_format(comment.content.parsed)
-      json.raw comment.content.body
-    end
-
-    json.commenter do
-      json.id comment.commenter.id
-      json.name comment.commenter.name
-      json.initials comment.commenter.initials
-      json.role comment.commenter.membership_for(current_company).role
-    end
+    json.partial! 'comments/show', comment: comment
   end
 end
 
@@ -71,18 +57,13 @@ json.activity_log do
 
     if activity.event_type == Constants::EventTypes::COMMENT_CREATED
       json.event do
-        json.visibility activity.visibility
-        json.comment do
-          json.partial! 'comments/show', comment: Comment.find(CommentCreatedEvent.find(activity.event_id).comment_id)
-        end
+        json.partial! 'partials/comment_created_event', activity: activity
       end
     end
 
     if activity.event_type == Constants::EventTypes::STATUS_CHANGED
       json.event do
-        json.admin_username User.find(StatusChangedEvent.find(activity.event_id).admin_id).name
-        json.old_value activity.event.old_value
-        json.new_value activity.event.new_value
+        json.partial! 'partials/status_changed_event', activity: activity
       end
     end
   end

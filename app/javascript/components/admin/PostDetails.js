@@ -12,7 +12,7 @@ import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
 import UpvotedUsersList from './containers/UpvotedUsersList';
 import StatusChangedEvent from 'AdminComponents/StatusChangedEvent';
-
+import { postStatuses, EventTypes } from 'Common/constants';
 class PostDetails extends Component {
   constructor(props) {
     super(props);
@@ -128,30 +128,38 @@ class PostDetails extends Component {
             <div className="post-activity">
               <div className="activity-header">
                 <div className="text">
-                  <i className="comments outline icon" />
+                  <i className="icon align left" />
                   Activity
                 </div>
               </div>
-
-              {this.props.post.activity_log.map((activity) => {
-                if(activity.event_type === 1) {
-                  const { comment } = activity.event;
-                  return (
-                    <Comment
-                      {...comment}
-                      isEditable={comment.commenter.id === this.props.currentUser.id}
-                      isNote={activity.event.visibility}
-                      key={comment.id}
-                      boardId={this.state.boardId}
-                      postId={this.state.postId}
-                      onChange={() => this.getPost()}
-                    />
-                  )
-                }
-                if(activity.event_type === 0) {
-                  return <StatusChangedEvent event={activity.event} createdAt={activity.created_at} />
-                }
-              })}
+              <div class="activity-log">
+                {this.props.post.activity_log.map((activity) => {
+                  if(activity.event_type === EventTypes.COMMENT_CREATED_EVENT) {
+                    const { comment } = activity.event;
+                    return (
+                      <Comment
+                        {...comment}
+                        isEditable={comment.commenter.id === this.props.currentUser.id}
+                        isNote={activity.event.visibility}
+                        key={comment.id}
+                        boardId={this.state.boardId}
+                        postId={this.state.postId}
+                        onChange={() => this.getPost()}
+                      />
+                    )
+                  }
+                  if(activity.event_type === EventTypes.STATUS_CHANGED_EVENT) {
+                    return (
+                    <StatusChangedEvent admin={activity.event.admin} createdAt={activity.created_at}>
+                      <span>changed the status to</span>
+                      <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
+                        #{postStatuses[activity.event.new_value]}
+                      </strong>
+                    </StatusChangedEvent>
+                    );
+                  }
+                })}
+              </div>
             </div>
           </div>
           <div className="c-right-pane">

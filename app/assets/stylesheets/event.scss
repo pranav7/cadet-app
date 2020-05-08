@@ -1,0 +1,18 @@
+.activity-log {
+  .activity-log-item {
+    //basic padding and margins
+
+  }
+
+  .activity-log-item.status-changed-event{
+    .username{
+      font-weight: 500;
+      margin-right: 4px;
+    }
+    .timestamp{
+      margin-left: 4px;
+      font-size: 12px;
+      opacity: 0.6;
+    }
+  }
+}

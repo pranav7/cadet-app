@@ -3,8 +3,9 @@ module Comments
     attr_reader :comment
 
     def self.run!(comment:)
-      service = new(comment: comment).run!
+      service = new(comment: comment)
       service.validate!
+      service.run!
     end
 
     def initialize(comment:)
@@ -26,7 +27,7 @@ module Comments
     private
 
     def validate_user_has_permission
-      return Current.user == comment.commenter
+      return if Current.user == comment.commenter
       raise Errors::AdminLacksPermission
     end
   end

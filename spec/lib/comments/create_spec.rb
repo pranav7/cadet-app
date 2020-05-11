@@ -67,13 +67,14 @@ describe Comments::Create do
 
   context "validations" do
     before do
-      Current.user = admin
+      Current.user = user
     end
     let(:is_private) { true }
-    it "should not throw Insufficient permissions error" do
+
+    it "throws Insufficient permissions error" do
       subject
 
-      expect { subject }.to_not raise_error(Errors::AdminLacksPermission)
+      expect { subject }.to raise_error(Errors::AdminLacksPermission)
     end
   end
 end

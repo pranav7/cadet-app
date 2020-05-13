@@ -11,8 +11,8 @@ import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
 import UpvotedUsersList from './containers/UpvotedUsersList';
-import StatusChangedEvent from 'AdminComponents/StatusChangedEvent';
-import { postStatuses, EventTypes } from 'Common/constants';
+import Event from 'AdminComponents/Event';
+import { postStatuses, eventTypes } from 'Common/constants';
 class PostDetails extends Component {
   constructor(props) {
     super(props);
@@ -54,7 +54,7 @@ class PostDetails extends Component {
 
   getActivty = (activity) => {
     switch (activity.event_type) {
-      case EventTypes.COMMENT_CREATED_EVENT:
+      case eventTypes.commentCreatedEvent:
         const { comment } = activity.event;
         return (
           <Comment
@@ -67,14 +67,14 @@ class PostDetails extends Component {
             onChange={() => this.getPost()}
           />
         );
-      case EventTypes.STATUS_CHANGED_EVENT:
+      case eventTypes.statusChangedEvent:
         return (
-          <StatusChangedEvent admin={activity.event.admin} createdAt={activity.created_at}>
+          <Event admin={activity.event.admin} createdAt={activity.created_at}>
             <span>changed the status to</span>
             <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
               #{postStatuses[activity.event.new_value]}
             </strong>
-          </StatusChangedEvent>
+          </Event>
         );
       default:
         break;

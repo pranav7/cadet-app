@@ -44,7 +44,7 @@ export const PostsFilterOptions = [
 
 export const postStatuses = [ 'open', 'planned', 'developing', 'released', 'closed' ];
 
-export const EventTypes = {
-  STATUS_CHANGED_EVENT: 0,
-  COMMENT_CREATED_EVENT: 1,
+export const eventTypes = {
+  statusChangedEvent: 0,
+  commentCreatedEvent: 1,
 }

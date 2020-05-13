@@ -1,8 +1,8 @@
 import React from 'react';
 
-const StatusChangedEvent = ({ admin , createdAt, children }) => {
+const Event = ({ admin , createdAt, children }) => {
   return (
-    <div class="activity-log__item" style={{ padding: '8px 4px' }}>
+    <div class="activity-log__item">
       <span class="activity-log__username">{admin.name}</span>
       {children}
       <span class="activity-log__timestamp">
@@ -12,4 +12,4 @@ const StatusChangedEvent = ({ admin , createdAt, children }) => {
   )
 };
 
-export default StatusChangedEvent;
+export default Event;

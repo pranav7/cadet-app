@@ -58,6 +58,7 @@ module Comments
     end
 
     def validate_user_has_permission
+      return if not @is_private
       return if @is_private && Current.user.admin_of?(Current.company)
       raise Errors::AdminLacksPermission
     end

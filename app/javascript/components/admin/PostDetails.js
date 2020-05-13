@@ -52,6 +52,35 @@ class PostDetails extends Component {
     this.props.fetchPost(this.state.boardId, this.state.postId);
   }
 
+  getActivty = (activity) => {
+    switch (activity.event_type) {
+      case EventTypes.COMMENT_CREATED_EVENT:
+        const { comment } = activity.event;
+        return (
+          <Comment
+            {...comment}
+            isEditable={comment.commenter.id === this.props.currentUser.id}
+            isNote={activity.event.visibility}
+            key={comment.id}
+            boardId={this.state.boardId}
+            postId={this.state.postId}
+            onChange={() => this.getPost()}
+          />
+        );
+      case EventTypes.STATUS_CHANGED_EVENT:
+        return (
+          <StatusChangedEvent admin={activity.event.admin} createdAt={activity.created_at}>
+            <span>changed the status to</span>
+            <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
+              #{postStatuses[activity.event.new_value]}
+            </strong>
+          </StatusChangedEvent>
+        );
+      default:
+        break;
+    }
+  }
+
   render() {
     if (!this.props.post) {
       return (
@@ -133,32 +162,7 @@ class PostDetails extends Component {
                 </div>
               </div>
               <div class="activity-log">
-                {this.props.post.activity_log.map((activity) => {
-                  if(activity.event_type === EventTypes.COMMENT_CREATED_EVENT) {
-                    const { comment } = activity.event;
-                    return (
-                      <Comment
-                        {...comment}
-                        isEditable={comment.commenter.id === this.props.currentUser.id}
-                        isNote={activity.event.visibility}
-                        key={comment.id}
-                        boardId={this.state.boardId}
-                        postId={this.state.postId}
-                        onChange={() => this.getPost()}
-                      />
-                    )
-                  }
-                  if(activity.event_type === EventTypes.STATUS_CHANGED_EVENT) {
-                    return (
-                    <StatusChangedEvent admin={activity.event.admin} createdAt={activity.created_at}>
-                      <span>changed the status to</span>
-                      <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
-                        #{postStatuses[activity.event.new_value]}
-                      </strong>
-                    </StatusChangedEvent>
-                    );
-                  }
-                })}
+                {this.props.post.activity_log.map(this.getActivty)}
               </div>
             </div>
           </div>

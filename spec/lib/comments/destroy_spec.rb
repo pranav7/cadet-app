@@ -5,11 +5,11 @@ describe Comments::Destroy do
   let(:board) { create :board, company: company }
   let(:user) { create :user }
   let(:user2) { create :user }
-  let(:admin) { create :admin, company: company }
   let(:post) { create :post, board: board }
   let(:comment) { create :comment, post: post, commenter: user }
   let(:comment_created_event) { create :comment_created_event, post: post, company: company, comment: comment }
   let!(:activity_log) { create :activity_log, :comment_created_event, event_id: comment_created_event.id, company: comment_created_event.company, post: comment_created_event.post }
+
   subject { described_class.run!(comment: comment) }
 
   before do

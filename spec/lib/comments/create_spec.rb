@@ -71,9 +71,7 @@ describe Comments::Create do
     end
     let(:is_private) { true }
 
-    it "throws Insufficient permissions error" do
-      subject
-
+    it "validates permissions when creating a note" do
       expect { subject }.to raise_error(Errors::AdminLacksPermission)
     end
   end

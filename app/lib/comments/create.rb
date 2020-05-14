@@ -16,7 +16,7 @@ module Comments
     end
 
     def validate!
-      validate_user_has_permission
+      validate_admin_can_create_note if @is_private
     end
 
     def run!
@@ -57,9 +57,8 @@ module Comments
       )
     end
 
-    def validate_user_has_permission
-      return if not @is_private
-      return if @is_private && Current.user.admin_of?(Current.company)
+    def validate_admin_can_create_note
+      return if Current.user.admin_of?(Current.company)
       raise Errors::AdminLacksPermission
     end
   end

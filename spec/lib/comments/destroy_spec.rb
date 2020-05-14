@@ -18,11 +18,10 @@ describe Comments::Destroy do
   end
 
   it "deletes the comment" do
-    subject
-
-    expect(Comment.count).to eq(0)
-    expect(CommentCreatedEvent.count).to eq(0)
-    expect(ActivityLog.count).to eq(0)
+    expect { subject }
+      .to change(Comment, :count).by(-1)
+      .and change(CommentCreatedEvent, :count).by(-1)
+      .and change(ActivityLog, :count).by(-1)
   end
 
   context "validations" do
@@ -30,9 +29,7 @@ describe Comments::Destroy do
       Current.user = user2
     end
 
-    it "throws Insufficient permissions error" do
-      subject
-
+    it "validates that only the user who created the event can delete it" do
       expect { subject }.to raise_error(Errors::AdminLacksPermission)
     end
   end

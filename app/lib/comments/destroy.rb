@@ -13,7 +13,7 @@ module Comments
     end
 
     def validate!
-      validate_user_has_permission
+      validate_user_can_delete
     end
 
     def run!
@@ -26,7 +26,7 @@ module Comments
 
     private
 
-    def validate_user_has_permission
+    def validate_user_can_delete
       return if Current.user == comment.commenter
       raise Errors::AdminLacksPermission
     end

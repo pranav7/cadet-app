@@ -8,7 +8,7 @@ module Comments
 
     def initialize(post:, is_private:, content:, commenter:)
       @post = post
-      @is_private = is_private
+      @is_private = is_private || false
       @content = content
       @commenter = commenter || Current.user
     end

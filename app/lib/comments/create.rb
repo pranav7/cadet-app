@@ -1,9 +1,22 @@
 module Comments
-  class Create < Base
+  class Create
     attr_reader :post, :is_private, :content, :commenter
 
+    def self.run!(post:, is_private:, content:, commenter:)
+      service = new(post: post, is_private: is_private, content: content, commenter: commenter)
+      service.validate!
+      service.run!
+    end
+
+    def initialize(post:, is_private:, content:, commenter:)
+      @post = post
+      @is_private = is_private || false
+      @content = content
+      @commenter = commenter || Current.user
+    end
+
     def validate!
-      validate_user_has_permission
+      validate_admin_can_create_note if @is_private
     end
 
     def run!
@@ -13,35 +26,40 @@ module Comments
     private
 
     def create_comment
-      comment = @post.comments.new(
-        post_id: @post.id,
-        content_attributes: @content,
-        private: @is_private
-      )
-      comment.commenter = @commenter
-      comment.save
+      ActiveRecord::Base.transaction do
+        comment = @post.comments.new(
+          post_id: @post.id,
+          content_attributes: @content,
+          private: @is_private
+        )
+        comment.commenter = @commenter
+        comment.save!
 
-      log_activity(comment)
-      Current.user.companies << Current.company unless Current.user.part_of?(Current.company)
+        log_activity(comment)
+        Current.user.companies << Current.company unless Current.user.part_of?(Current.company)
+      end
     end
 
     def log_activity(comment)
-      ActiveRecord::Base.transaction do
-        event = CommentCreatedEvent.create(
-          comment_id: comment.id,
-          user_id: Current.user.id,
-          company_id: comment.post.company.id,
-          post_id: @post.id
-        )
+      event = CommentCreatedEvent.create(
+        comment_id: comment.id,
+        user_id: Current.user.id,
+        company_id: comment.post.company.id,
+        post_id: @post.id
+      )
 
-        ActivityLog.create(
-          event_type: Constants::EventTypes::COMMENT_CREATED,
-          event_id: event.id,
-          company_id: @post.company.id,
-          visibility: @is_private ? Constants::Visibility::PRIVATE : Constants::Visibility::PUBLIC,
-          post_id: @post.id
-        )
-      end
+      ActivityLog.create(
+        event_type: Constants::EventTypes::COMMENT_CREATED,
+        event_id: event.id,
+        company_id: @post.company.id,
+        visibility: @is_private ? Constants::Visibility::PRIVATE : Constants::Visibility::PUBLIC,
+        post_id: @post.id
+      )
+    end
+
+    def validate_admin_can_create_note
+      return if Current.user.admin_of?(Current.company)
+      raise Errors::AdminLacksPermission
     end
   end
 end

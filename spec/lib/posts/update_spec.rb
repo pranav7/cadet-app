@@ -57,7 +57,7 @@ describe Posts::Update do
 
       expect(status_changed_event).to_not eq(nil)
       expect(status_changed_event.old_value).to eq(old_value)
-      expect(status_changed_event.new_value).to eq(status)
+      expect(status_changed_event.new_value).to eq(Post.statuses[status])
     end
   end
 

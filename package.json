@@ -5,7 +5,7 @@
     "@rails/webpacker": "^3.6.0",
     "@sentry/browser": "^5.15.4",
     "at.js": "^1.5.3",
-    "axios": "^0.17.1",
+    "axios": "^0.18.1",
     "babel-preset-react": "^6.24.1",
     "clipboard": "^1.7.1",
     "jquery-resizable-dom": "^0.28.0",

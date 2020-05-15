@@ -5,4 +5,6 @@ class ActivityLog < ApplicationRecord
   def event
     Constants::EventTypes::CLASSES[event_type].find(event_id)
   end
+
+  scope :public_activity, -> { where(visibility: Constants::Visibility::PUBLIC) }
 end

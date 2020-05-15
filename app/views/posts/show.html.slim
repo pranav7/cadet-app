@@ -1,6 +1,6 @@
 .ui.grid
   .row
-    .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column
+    .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column.activity-log
       // Post Header
       .post-header.vertical-padded
         .header
@@ -20,16 +20,14 @@
       // Post Activity
       .activity-header
         .text
-          i.comments.outline.icon
-          | Conversation
-      - if @post.comments.without_notes.empty?
-        .padded.vertical.soft
-          | There are no comments on this post
-      - else
-        .comments
-          - @post.comments.without_notes.chronologically.each do |comment|
-            - next if comment.new_record?
-            = render partial: "partials/comment", locals: { resource: comment }
+          i.align.left.icon
+          | Activity
+      - @post.activity_log.public_activity.each do |activity|
+        - case activity.event_type
+        - when Constants::EventTypes::COMMENT_CREATED
+          = render partial: "partials/comment", locals: { resource: activity.event.comment }
+        - when Constants::EventTypes::STATUS_CHANGED
+          = render partial: "partials/status_changed_event", locals: { event: activity.event }
 
     .tablet.computer.only.six.wide.tablet.five.wide.computer.column
       = render partial: "partials/voters", locals: { voters: @post.voters, post: @post }

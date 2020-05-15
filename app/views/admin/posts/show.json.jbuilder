@@ -25,21 +25,7 @@ end
 
 json.comments do
   json.array! @post.comments.chronologically do |comment|
-    json.id comment.id
-    json.private comment.private
-    json.created_at render_time(comment.created_at, format: :short)
-
-    json.content do
-      json.body simple_format(comment.content.parsed)
-      json.raw comment.content.body
-    end
-
-    json.commenter do
-      json.id comment.commenter.id
-      json.name comment.commenter.name
-      json.initials comment.commenter.initials
-      json.role comment.commenter.membership_for(current_company).role
-    end
+    json.partial! 'comments/show', comment: comment
   end
 end
 
@@ -61,5 +47,16 @@ json.accounts do
     json.name account.name
     json.votes account.votes_for(@post).count
     json.mrr account.mrr
+  end
+end
+
+json.activity_log do
+  json.array! @post.activity_log do |activity|
+    json.event_type activity.event_type
+    json.created_at render_time(activity.created_at, format: :short)
+
+    json.event do
+      json.partial! activity.event.serializer, activity: activity
+    end
   end
 end

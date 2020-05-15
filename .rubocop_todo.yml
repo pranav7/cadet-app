@@ -77,7 +77,7 @@ Layout/ExtraSpacing:
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/IndentFirstHashElement:
+Layout/IndentHash:
   # EnforcedStyle: align_braces
   # EnforcedStyle: special_inside_parentheses
   EnforcedStyle: consistent

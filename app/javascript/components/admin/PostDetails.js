@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
-
 import UpvoteButton from 'Components/UpvoteButton';
 import CommentInput from 'AdminComponents/CommentInput';
 import Account from 'Components/Account';
@@ -13,6 +12,7 @@ import AddVoterModal from 'AdminContainers/AddVoterModal';
 import UpvotedUsersList from './containers/UpvotedUsersList';
 import Event from 'AdminComponents/Event';
 import { postStatuses, eventTypes } from 'Common/constants';
+
 class PostDetails extends Component {
   constructor(props) {
     super(props);
@@ -76,10 +76,8 @@ class PostDetails extends Component {
             </strong>
           </Event>
         );
-      default:
-        break;
     }
-  }
+  };
 
   render() {
     if (!this.props.post) {
@@ -161,9 +159,7 @@ class PostDetails extends Component {
                   Activity
                 </div>
               </div>
-              <div class="activity-log">
-                {this.props.post.activity_log.map(this.getActivty)}
-              </div>
+              <div class="activity-log">{this.props.post.activity_logs.map(this.getActivty)}</div>
             </div>
           </div>
           <div className="c-right-pane">

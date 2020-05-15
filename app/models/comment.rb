@@ -4,6 +4,7 @@ class Comment < ApplicationRecord
   belongs_to :post
   belongs_to :commenter, class_name: "User", foreign_key: "user_id"
   has_one :content, as: :parent
+  has_one :comment_created_event
 
   accepts_nested_attributes_for :content
 

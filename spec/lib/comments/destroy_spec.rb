@@ -20,8 +20,8 @@ describe Comments::Destroy do
   it "deletes the comment" do
     expect { subject }
       .to change(Comment, :count).by(-1)
-      .and change(CommentCreatedEvent, :count).by(-1)
-      .and change(ActivityLog, :count).by(-1)
+                                 .and change(CommentCreatedEvent, :count).by(-1)
+                                                                         .and change(ActivityLog, :count).by(-1)
   end
 
   context "validations" do

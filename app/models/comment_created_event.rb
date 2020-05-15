@@ -12,4 +12,8 @@ class CommentCreatedEvent < ApplicationRecord
       event_type: Constants::EventTypes::COMMENT_CREATED
     )
   end
+
+  def serializer
+    'partials/comment_created_event'
+  end
 end

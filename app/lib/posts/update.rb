@@ -30,6 +30,7 @@ module Posts
 
     def log_activity
       return if @post.status == @status
+
       ActiveRecord::Base.transaction do
         event = StatusChangedEvent.create(
           post_id: @post.id,

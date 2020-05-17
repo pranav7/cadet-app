@@ -28,6 +28,7 @@ module Comments
 
     def validate_user_can_delete
       return if Current.user == comment.commenter
+
       raise Errors::AdminLacksPermission
     end
   end

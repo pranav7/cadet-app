@@ -73,10 +73,10 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
         "style": "error"
       })
     end
-  rescue ActiveRecord::RecordNotFound => error
-    error_message = error.message
+  rescue ActiveRecord::RecordNotFound => e
+    error_message = e.message
     # if model is nil, its because boards.friendly.find failed to find a record
-    error_message = "Couldn't find Board" if error.model.nil?
+    error_message = "Couldn't find Board" if e.model.nil?
 
     render_canvas(configuration_components(
       subdomain: input_values[:subdomain],

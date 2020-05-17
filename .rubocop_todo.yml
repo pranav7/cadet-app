@@ -15,7 +15,7 @@ Bundler/OrderedGems:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Layout/AlignArray:
+Layout/ArrayAlignment:
   Exclude:
 
 # Offense count: 11
@@ -24,14 +24,14 @@ Layout/AlignArray:
 # SupportedHashRocketStyles: key, separator, table
 # SupportedColonStyles: key, separator, table
 # SupportedLastArgumentHashStyles: always_inspect, always_ignore, ignore_implicit, ignore_explicit
-Layout/AlignHash:
+Layout/HashAlignment:
   Exclude:
 
 # Offense count: 11
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle, IndentationWidth.
 # SupportedStyles: with_first_parameter, with_fixed_indentation
-Layout/AlignParameters:
+Layout/ParameterAlignment:
   Exclude:
     - 'bin/webpack'
     - 'bin/webpack-dev-server'
@@ -77,7 +77,7 @@ Layout/ExtraSpacing:
 # Cop supports --auto-correct.
 # Configuration parameters: IndentationWidth.
 # SupportedStyles: special_inside_parentheses, consistent, align_braces
-Layout/IndentHash:
+Layout/FirstHashElementIndentation:
   # EnforcedStyle: align_braces
   # EnforcedStyle: special_inside_parentheses
   EnforcedStyle: consistent
@@ -155,7 +155,7 @@ Layout/SpaceInsideHashLiteralBraces:
 # Cop supports --auto-correct.
 # Configuration parameters: EnforcedStyle.
 # SupportedStyles: final_newline, final_blank_line
-Layout/TrailingBlankLines:
+Layout/TrailingEmptyLines:
   Exclude:
 
 # Offense count: 18
@@ -190,7 +190,7 @@ Lint/ShadowingOuterLocalVariable:
 
 # Offense count: 1
 # Cop supports --auto-correct.
-Lint/StringConversionInInterpolation:
+Lint/RedundantStringCoercion:
   Exclude:
     - 'config/initializers/00_init.rb'
 
@@ -215,11 +215,6 @@ Lint/UselessAssignment:
 # Offense count: 33
 Metrics/AbcSize:
   Max: 45
-
-# Offense count: 29
-# Configuration parameters: CountComments, ExcludedMethods.
-Metrics/BlockLength:
-  Max: 196
 
 # Offense count: 2
 # Configuration parameters: CountComments.
@@ -266,12 +261,6 @@ Naming/PredicateName:
     - 'spec/**/*'
 
 # Offense count: 1
-# Configuration parameters: MinNameLength, AllowNamesEndingInNumbers, AllowedNames, ForbiddenNames.
-# AllowedNames: io, id, to
-Naming/UncommunicativeMethodParamName:
-  Exclude:
-
-# Offense count: 1
 # Cop supports --auto-correct.
 Security/YAMLLoad:
   Exclude:
@@ -308,15 +297,6 @@ Style/BlockDelimiters:
     - 'spec/controllers/votes_controller_spec.rb'
     - 'spec/models/comment_spec.rb'
     - 'spec/models/post_spec.rb'
-
-# Offense count: 4
-# Cop supports --auto-correct.
-# Configuration parameters: EnforcedStyle.
-# SupportedStyles: braces, no_braces, context_dependent
-Style/BracesAroundHashParameters:
-  Exclude:
-    - 'app/mailers/post_notification_mailer.rb'
-    - 'spec/models/comment_spec.rb'
 
 # Offense count: 20
 # Cop supports --auto-correct.
@@ -546,11 +526,6 @@ Style/StringLiteralsInInterpolation:
 Style/SymbolArray:
   EnforcedStyle: brackets
 
-# Offense count: 4
-# Cop supports --auto-correct.
-Style/UnneededInterpolation:
-  Exclude:
-
 # Offense count: 9
 # Cop supports --auto-correct.
 # Configuration parameters: WordRegex.
@@ -565,6 +540,8 @@ Style/WordArray:
 Metrics/LineLength:
   Max: 1388
 
+# Offense count: 29
+# Configuration parameters: CountComments, ExcludedMethods.
 Metrics/BlockLength:
   Max: 9999
   Exclude:

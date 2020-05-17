@@ -31,6 +31,10 @@ class Comment < ApplicationRecord
     commenter
   end
 
+  def company
+    post.company
+  end
+
   def send_notifications
     notify_mentionees
     notify_admins unless commenter.admin_of? post.company
@@ -42,6 +46,7 @@ class Comment < ApplicationRecord
   def notify_mentionees
     mentionees.each do |mentionee|
       next unless should_notify_mentionee?(mentionee)
+
       CommentNotificationMailer.mention(self, mentionee).deliver_later
     end
   end

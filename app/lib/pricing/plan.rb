@@ -19,7 +19,9 @@ module Pricing
       @config ||= Hashie::Mash.new(YAML.safe_load(File.read(PLANS_CONFIG)))
     end
 
-    private def plan
+    private
+
+    def plan
       @plan ||= config[@version]
     end
   end

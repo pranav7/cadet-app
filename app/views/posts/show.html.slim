@@ -22,7 +22,7 @@
         .text
           i.align.left.icon
           | Activity
-      - @post.activity_logs.public_activity.each do |activity|
+      - @post.activity_logs.publicly_visible.each do |activity|
         - case activity.event_type
         - when Constants::EventTypes::COMMENT_CREATED
           = render partial: "partials/comment", locals: { resource: activity.event.comment }

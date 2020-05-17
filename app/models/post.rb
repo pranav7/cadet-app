@@ -50,7 +50,7 @@ class Post < ApplicationRecord
     def status_collection
       collection = {}
       statuses.map do |key, _value|
-        collection["#{key}"] = key
+        collection[key.to_s] = key
       end
 
       collection

@@ -1,4 +1,6 @@
 class ActivityLog < ApplicationRecord
+  include ChronologicalScopes
+
   belongs_to :company
   belongs_to :post
 

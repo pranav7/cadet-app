@@ -51,7 +51,7 @@ json.accounts do
 end
 
 json.activity_logs do
-  json.array! @post.activity_logs do |activity|
+  json.array! @post.activity_logs.chronologically do |activity|
     json.event_type activity.event_type
     json.created_at render_time(activity.created_at, format: :short)
 

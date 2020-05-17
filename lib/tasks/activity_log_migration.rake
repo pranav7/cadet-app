@@ -34,4 +34,15 @@ namespace :activity_log_migration do
     puts "Total CommentCreatedEvents: #{CommentCreatedEvent.count}"
     puts "✅ Done!"
   end
+
+  task fix_timestamps: :environment do
+    Comment.find_each do |comment|
+      event = comment.comment_created_event
+
+      ActiveRecord::Base.transaction do
+        event.update(created_at: comment.created_at)
+        event.activity_log.update(created_at: comment.created_at)
+      end
+    end
+  end
 end

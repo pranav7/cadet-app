@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
 import { Container, Icon } from 'semantic-ui-react';
-
 import UpvoteButton from 'Components/UpvoteButton';
 import CommentInput from 'AdminComponents/CommentInput';
 import Account from 'Components/Account';
@@ -11,6 +10,8 @@ import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
 import UpvotedUsersList from './containers/UpvotedUsersList';
+import Event from 'AdminComponents/Event';
+import { postStatuses, eventTypes } from 'Common/constants';
 
 class PostDetails extends Component {
   constructor(props) {
@@ -50,6 +51,33 @@ class PostDetails extends Component {
   getPost() {
     this.props.fetchPost(this.state.boardId, this.state.postId);
   }
+
+  getActivty = (activity) => {
+    switch (activity.event_type) {
+      case eventTypes.commentCreatedEvent:
+        const { comment } = activity.event;
+        return (
+          <Comment
+            {...comment}
+            isEditable={comment.commenter.id === this.props.currentUser.id}
+            isNote={activity.event.visibility}
+            key={comment.id}
+            boardId={this.state.boardId}
+            postId={this.state.postId}
+            onChange={() => this.getPost()}
+          />
+        );
+      case eventTypes.statusChangedEvent:
+        return (
+          <Event admin={activity.event.admin} createdAt={activity.created_at}>
+            <span>changed the status to</span>
+            <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
+              #{postStatuses[activity.event.new_value]}
+            </strong>
+          </Event>
+        );
+    }
+  };
 
   render() {
     if (!this.props.post) {
@@ -127,22 +155,11 @@ class PostDetails extends Component {
             <div className="post-activity">
               <div className="activity-header">
                 <div className="text">
-                  <i className="comments outline icon" />
-                  Conversation
+                  <i className="icon align left" />
+                  Activity
                 </div>
               </div>
-
-              {this.props.post.comments.map((comment) => (
-                <Comment
-                  {...comment}
-                  isEditable={comment.commenter.id === this.props.currentUser.id}
-                  isNote={comment.private}
-                  key={comment.id}
-                  boardId={this.state.boardId}
-                  postId={this.state.postId}
-                  onChange={() => this.getPost()}
-                />
-              ))}
+              <div class="activity-log">{this.props.post.activity_logs.map(this.getActivty)}</div>
             </div>
           </div>
           <div className="c-right-pane">

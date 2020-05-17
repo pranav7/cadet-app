@@ -1,0 +1,8 @@
+.activity-log__item
+  span.activity-log__username
+    = event.changed_by.name
+  span changed the status to
+  strong.status.o__small.u__ml__x2 class=Post.statuses.key(event.new_value)
+    | ##{Post.statuses.key(event.new_value)}
+  span.activity-log__timestamp
+    = render_time(event.updated_at) 

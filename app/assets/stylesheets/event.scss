@@ -1,0 +1,13 @@
+.activity-log .activity-log__item {
+  padding: 8px 4px;
+}
+
+.activity-log .activity-log__item .activity-log__username {
+  font-weight: 500;
+  margin-right: 4px;
+}
+.activity-log .activity-log__item .activity-log__timestamp {
+  margin-left: 4px;
+  font-size: 12px;
+  opacity: 0.6;
+}

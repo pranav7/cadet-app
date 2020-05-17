@@ -11,5 +11,5 @@
   .post-info.soft
     = render partial: "posts/vote",
       locals: { post: post, react: true }
-    strong.margined.left.status class=post.status ##{post.status}
+    strong.margined.left.status class=post.status #{post.status}
     span.margined.left #{render_time(post.created_at, format: :short)} by #{post.requester.name}

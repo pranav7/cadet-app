@@ -31,6 +31,10 @@ class Comment < ApplicationRecord
     commenter
   end
 
+  def company
+    post.company
+  end
+
   def send_notifications
     notify_mentionees
     notify_admins unless commenter.admin_of? post.company

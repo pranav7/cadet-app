@@ -22,27 +22,27 @@ export const PostsFilterOptions = [
     type: 'sort',
   },
   {
-    text: '#open',
+    text: 'open',
     value: 'open',
     type: 'status',
   },
   {
-    text: '#planned',
+    text: 'planned',
     value: 'planned',
     type: 'status',
   },
   {
-    text: '#developing',
+    text: 'developing',
     value: 'developing',
     type: 'status',
   },
   {
-    text: '#released',
+    text: 'released',
     value: 'released',
     type: 'status',
   },
   {
-    text: '#closed',
+    text: 'closed',
     value: 'closed',
     type: 'status',
   },

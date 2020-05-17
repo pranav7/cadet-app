@@ -1,10 +1,10 @@
-import React from "react";
-import UpvoteButton from "./UpvoteButton";
-import Cookies from "js-cookie";
+import React from 'react';
+import UpvoteButton from './UpvoteButton';
+import Cookies from 'js-cookie';
 
 const PostListItem = ({ post, boardId }) => {
   function handlePostItemClick() {
-    Cookies.set("scrollPos", $(window).scrollTop());
+    Cookies.set('scrollPos', $(window).scrollTop());
   }
 
   return (
@@ -27,7 +27,7 @@ const PostListItem = ({ post, boardId }) => {
           postId={post.id}
         />
         <div className="meta">
-          <strong className={`status ${post.status}`}>#{post.status}</strong>
+          <strong className={`status ${post.status}`}>{post.status}</strong>
           <span className="dates">
             {post.created_at} by {post.created_by}
           </span>

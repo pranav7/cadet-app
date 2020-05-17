@@ -72,7 +72,7 @@ class PostDetails extends Component {
           <Event admin={activity.event.admin} createdAt={activity.created_at}>
             <span>changed the status to</span>
             <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
-              #{postStatuses[activity.event.new_value]}
+              {postStatuses[activity.event.new_value]}
             </strong>
           </Event>
         );
@@ -120,7 +120,7 @@ class PostDetails extends Component {
                 <h1 className="post-title">{this.props.post.title}</h1>
                 <div className="post-header-info">
                   <strong className={`status o__small ${this.props.post.status}`}>
-                    #{this.props.post.status}
+                    {this.props.post.status}
                   </strong>
                 </div>
               </div>

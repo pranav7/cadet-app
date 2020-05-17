@@ -59,6 +59,7 @@ module Comments
 
     def validate_admin_can_create_note
       return if Current.user.admin_of?(Current.company)
+
       raise Errors::AdminLacksPermission
     end
   end

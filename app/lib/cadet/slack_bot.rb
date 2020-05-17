@@ -21,16 +21,16 @@ module Cadet
 
         message = Slack::Messages::Formatting.unescape(data.text)
         case message
-        when 'bot hi' then
+        when 'bot hi'
           client.message channel: data.channel, text: "Hi <@#{data.user}>!"
-        when /^bot how many companies/i then
+        when /^bot how many companies/i
           client.message channel: data.channel, text: "The current number of companies are #{Company.count}"
-        when /^bot get trial expiry for (.+)$/i then
+        when /^bot get trial expiry for (.+)$/i
           client.message channel: data.channel, text: get_trial_expiry($1)
         when /^bot extend expiry for (.+) by (.+) days$/ then
           duration = $2.to_i.days
           client.message channel: data.channel, text: extend_expiry($1, duration)
-        when /^bot update (.+) to paying$/ then
+        when /^bot update (.+) to paying$/
           client.message channel: data.channel, text: update_to_paying
         when /^bot get active users for (.+)$/i then
           company = Company.find_by subdomain: $1

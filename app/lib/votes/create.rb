@@ -16,11 +16,13 @@ module Votes
 
     def added_by
       return if Current.user == voter
+
       Current.user
     end
 
     def validate_user_has_not_voted
       return unless voter.voted?(post)
+
       raise Errors::ServiceValidationException, "User already upvoted the post"
     end
   end

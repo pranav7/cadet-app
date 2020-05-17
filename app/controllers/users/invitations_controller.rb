@@ -83,6 +83,7 @@ class Users::InvitationsController < Devise::InvitationsController
 
   def validate_role
     return if Membership.roles.keys.include?(params[:role].downcase)
+
     raise "The role provided is invalid"
   end
 

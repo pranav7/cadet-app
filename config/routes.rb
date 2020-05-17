@@ -36,9 +36,6 @@ Rails.application.routes.draw do
   namespace :admin do
     resource :billing, only: [:show], controller: :billing
 
-    get "boards/:board_id/posts/:post_id",
-        to: redirect("%{board_id}/posts/%{post_id}")
-
     resources :accounts do
       resource :account_memberships, only: [:create, :destroy]
     end

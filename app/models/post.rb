@@ -112,6 +112,7 @@ class Post < ApplicationRecord
   def notify_post_created_to_all_admins
     company.admins.each do |admin|
       next if admin == requester
+
       PostNotificationMailer.new_post(self, admin).deliver_later
     end
   end

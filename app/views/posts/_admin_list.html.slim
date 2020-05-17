@@ -7,7 +7,7 @@ a.admin-post-list-item href=admin_board_post_path(board, post, request.query_par
     span
       = render_time(post.created_at, format: :short)
     span.status.o__small.u__ml__8 class=post.status
-      | ##{post.status}
+      | #{post.status}
     span &nbsp;
     span.ui.tiny.label.soft
       - if account

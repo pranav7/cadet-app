@@ -25,11 +25,11 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    mail({
+    mail(
       subject: "#{@upvoter.name} upvoted #{@post.title}",
       to: @user.formatted_address,
       from: from_address
-    })
+    )
   end
 
   def status_changed(post, status, user)
@@ -41,12 +41,12 @@ class PostNotificationMailer < ApplicationMailer
 
     build_post_url
 
-    mail({
-      subject: "#{@post.title} was marked as ##{@status}",
+    mail(
+      subject: "#{@post.title} was marked as #{@status}",
       to: @user.formatted_address,
       from: from_address,
       reply_to: reply_to_address("status-changed", @post.id)
-    })
+    )
   end
 
   private

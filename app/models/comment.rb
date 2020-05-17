@@ -46,6 +46,7 @@ class Comment < ApplicationRecord
   def notify_mentionees
     mentionees.each do |mentionee|
       next unless should_notify_mentionee?(mentionee)
+
       CommentNotificationMailer.mention(self, mentionee).deliver_later
     end
   end

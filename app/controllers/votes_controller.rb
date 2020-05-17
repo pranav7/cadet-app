@@ -41,6 +41,7 @@ class VotesController < ApplicationController
 
   def find_voter
     return User.find(params[:user_id]) if params[:user_id]
+
     current_user
   end
 end

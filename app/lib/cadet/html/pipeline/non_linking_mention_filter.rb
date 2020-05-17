@@ -51,7 +51,7 @@ module Cadet::HTML::Pipeline
 
     # Default pattern used to extract usernames from text. The value can be
     # overriden by providing the username_pattern variable in the context.
-    UsernamePattern = /[a-z0-9][a-z0-9-]*/
+    UsernamePattern = /[a-z0-9][a-z0-9-]*/.freeze
 
     # List of username logins that, when mentioned, link to the blog post
     # about @mentions instead of triggering a real mention.
@@ -72,8 +72,10 @@ module Cadet::HTML::Pipeline
         content = node.to_html
         next unless content.include?('@')
         next if has_ancestor?(node, IGNORE_PARENTS)
+
         html = mention_link_filter(content, base_url, info_url, username_pattern)
         next if html == content
+
         node.replace(html)
       end
       doc
@@ -116,6 +118,7 @@ module Cadet::HTML::Pipeline
 
     def link_to_mention_info(text, info_url = nil)
       return "@#{text}" if info_url.nil?
+
       "<span class='user-mention'>" \
         "@#{text}" \
         '</span>'

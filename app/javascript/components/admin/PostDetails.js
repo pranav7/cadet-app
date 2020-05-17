@@ -71,7 +71,7 @@ class PostDetails extends Component {
         return (
           <Event admin={activity.event.admin} createdAt={activity.created_at}>
             <span>changed the status to</span>
-            <strong class={`status o__small u__ml__x2 ${postStatuses[activity.event.new_value]}`}>
+            <strong class={`status o__small u__ml__x1 ${postStatuses[activity.event.new_value]}`}>
               {postStatuses[activity.event.new_value]}
             </strong>
           </Event>

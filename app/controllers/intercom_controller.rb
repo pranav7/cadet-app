@@ -11,7 +11,10 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
 
-    sign_in(user) if user
+    if user
+      sign_out(user)
+      sign_in(user)
+    end
 
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end

@@ -1,4 +1,5 @@
 class VotesController < ApplicationController
+  skip_before_action :verify_authenticity_token
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :load_post
 

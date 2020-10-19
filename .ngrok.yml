@@ -1,0 +1,17 @@
+tunnels:
+  cadet-app:
+    proto: http
+    hostname: cadet-app.ngrok.io
+    addr: localhost:3000
+
+  cadet-test:
+    proto: http
+    hostname: cadet-test.ngrok.io
+    addr: localhost:3000
+    # -------------------------
+    # Additional options
+    # -------------------------
+    # auth: "username:password"
+    # host_header: rewrite
+    # inspect: true
+    # bind_tls: true

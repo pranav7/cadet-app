@@ -11,9 +11,10 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
 
-    sign_in(user) if user
+    binding.pry
+    sign_in(user, host: "#{company.subdomain}.ngrok.io") if user
 
-    redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
+    redirect_to board_url(board, host: "#{company.subdomain}.ngrok.io", intercom_iframe: true)
   end
 
   def new
@@ -31,7 +32,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
             "style": "primary",
             "action": {
               "type": "sheet",
-              "url": "https://app.getcadet.com/intercom/sheets"
+              "url": "https://cadet-app.ngrok.io/intercom/sheets"
             }
           }]
         }
@@ -102,13 +103,13 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     [{
       "type": "input",
       "id": "subdomain",
-      "label": "Enter the subdomain of your Cadet account",
+      "label": "Enter the subdomain of your Cadet account [Test]",
       "placeholder": "Cadet Subdomain",
       "value": subdomain
     }, {
       "type": "input",
       "id": "board_slug",
-      "label": "Enter the Board ID to show your users",
+      "label": "Enter the Board ID to show your users [Test]",
       "placeholder": "Board ID",
       "value": board_slug
     }, {

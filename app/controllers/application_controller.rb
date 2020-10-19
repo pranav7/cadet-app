@@ -1,6 +1,6 @@
 class ApplicationController < ActionController::Base
+  protect_from_forgery prepend: true
   before_action :drop_naked_ip_requests
-  protect_from_forgery preprend: true, with: :exception
 
   include SetCurrentRequestDetails
   include SetCurrentCompany

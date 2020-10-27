@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_09_30_195803) do
+ActiveRecord::Schema.define(version: 2020_04_29_181425) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -58,6 +58,17 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.index ["key"], name: "index_active_storage_blobs_on_key", unique: true
   end
 
+  create_table "activity_logs", force: :cascade do |t|
+    t.integer "event_type"
+    t.bigint "event_id"
+    t.bigint "company_id"
+    t.integer "visibility"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["post_id"], name: "index_activity_logs_on_post_id"
+  end
+
   create_table "boards", force: :cascade do |t|
     t.bigint "company_id"
     t.string "name"
@@ -68,8 +79,18 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.boolean "private", default: false
     t.integer "default_sort_order"
     t.boolean "unlisted", default: false
+    t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
+  end
+
+  create_table "comment_created_events", force: :cascade do |t|
+    t.bigint "comment_id"
+    t.bigint "user_id"
+    t.bigint "company_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comments", force: :cascade do |t|
@@ -98,10 +119,10 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.string "paddle_subscription_id"
-    t.string "stripe_customer_id"
     t.string "api_key"
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
+    t.string "intercom_access_token"
     t.index ["company_id"], name: "index_company_settings_on_company_id"
   end
 
@@ -156,6 +177,16 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.index ["user_id"], name: "index_posts_on_user_id"
   end
 
+  create_table "status_changed_events", force: :cascade do |t|
+    t.integer "old_value"
+    t.integer "new_value"
+    t.integer "admin_id"
+    t.bigint "company_id"
+    t.bigint "post_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "first_name", default: "", null: false
     t.string "last_name"
@@ -186,6 +217,7 @@ ActiveRecord::Schema.define(version: 2019_09_30_195803) do
     t.integer "invitations_count", default: 0
     t.string "username"
     t.index ["company_id"], name: "index_users_on_company_id"
+    t.index ["email", "company_id"], name: "index_users_on_email_and_company_id", unique: true
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["invitation_token"], name: "index_users_on_invitation_token", unique: true
     t.index ["invitations_count"], name: "index_users_on_invitations_count"

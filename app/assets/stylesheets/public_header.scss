@@ -2,10 +2,10 @@
   background: $white;
   border-bottom: 2px solid $lighter;
   min-height: 60px;
-  margin-bottom: $double-base-size;
   padding: $base-size 0;
   display: flex;
   align-items: center;
+  margin-bottom: $double-base-size;
 
   .company-name {
     font-weight: 600;
@@ -61,4 +61,8 @@
   .login-signup-container {
     display: flex;
   }
+}
+
+.iframe .public-header {
+  display: none;
 }

@@ -16,7 +16,7 @@ class User < ApplicationRecord
   # :confirmable, :lockable, :timeoutable
   devise :invitable, :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable,
-         :omniauthable, omniauth_providers: [:google_oauth2]
+         :omniauthable, omniauth_providers: [:google_oauth2, :intercom]
 
   before_create :set_username
   after_commit :notify_slack, on: :create
@@ -73,6 +73,7 @@ class User < ApplicationRecord
 
   def voted?(post)
     return false if votes.where(post: post).empty?
+
     true
   end
 
@@ -86,16 +87,19 @@ class User < ApplicationRecord
 
   def admin_of?(company)
     return false if memberships.where(company: company, role: :admin).empty?
+
     true
   end
 
   def customer_of?(company)
     return false if memberships.where(company: company, role: :customer).empty?
+
     true
   end
 
   def part_of?(company)
     return false if memberships.where(company: company).empty?
+
     true
   end
 
@@ -150,6 +154,7 @@ class User < ApplicationRecord
     loop do
       new_username = "#{username}-#{count}"
       return new_username unless taken_usernames.include?(new_username)
+
       count += 1
     end
   end

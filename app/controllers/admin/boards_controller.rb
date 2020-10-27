@@ -39,7 +39,14 @@ class Admin::BoardsController < Admin::AdminController
       @post = @board.posts.new
       @post.build_content
     else
-      redirect_to admin_board_post_path(@board, @board.posts.sorted(sort_method: params[:sort_by]).first)
+      respond_to do |format|
+        format.html do
+          redirect_to admin_board_post_path(@board, @board.posts.sorted(sort_method: params[:sort_by]).first)
+        end
+
+        format.json do
+        end
+      end
     end
   end
 
@@ -62,6 +69,6 @@ class Admin::BoardsController < Admin::AdminController
   def board_params
     params
       .require(:board)
-      .permit(:name, :description, :private, :default_sort_order, :unlisted)
+      .permit(:name, :description, :private, :default_sort_order, :unlisted, :roadmap_enabled)
   end
 end

@@ -10,7 +10,7 @@ Bundler.require(*Rails.groups)
 module CadetApp
   class Application < Rails::Application
     # Initialize configuration defaults for originally generated Rails version.
-    config.load_defaults 5.1
+    config.load_defaults 5.2
     config.active_job.queue_adapter = :sidekiq
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { api_token: Rails.application.secrets.postmark[:api_token] }

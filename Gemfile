@@ -7,6 +7,7 @@ git_source(:github) do |repo_name|
   "https://github.com/#{repo_name}.git"
 end
 
+gem 'api-pagination'
 gem 'autoprefixer-rails'
 gem 'bourbon'
 gem 'coffee-rails', '~> 4.2'
@@ -14,6 +15,7 @@ gem 'devise', '~> 4.7.1'
 gem 'devise_invitable', '~> 1.7.0'
 gem 'eventmachine'
 gem 'exception_notification'
+gem 'fast_jsonapi'
 gem 'faye-websocket'
 gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
@@ -21,12 +23,14 @@ gem 'health_check'
 gem "intercom-rails"
 gem 'jbuilder', '~> 2.5'
 gem 'jquery-rails'
+gem 'kaminari'
 gem 'octicons_helper'
 gem 'omniauth-google-oauth2'
+gem 'omniauth-intercom', '~> 0.1.9'
 gem "pg", "< 1.0"
 gem "php-serialize"
 gem 'postmark-rails'
-gem 'puma', '~> 3.7'
+gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.3'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
@@ -61,6 +65,7 @@ group :development, :test do
   gem 'byebug', platforms: [:mri, :mingw, :x64_mingw]
   gem 'pry'
   gem 'pry-rails'
+  gem 'rb-readline'
 
   gem 'capybara', '~> 2.13'
   gem 'selenium-webdriver'
@@ -81,7 +86,7 @@ group :development do
   gem 'listen', '>= 3.0.5', '< 3.2'
   gem 'web-console', '>= 3.3.0'
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
-  gem 'rubocop', '~> 0.54.0', require: false
+  gem 'rubocop', '~> 0.83.0', require: false
   gem 'spring'
   gem 'spring-watcher-listen', '~> 2.0.0'
 

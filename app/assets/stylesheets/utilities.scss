@@ -1,0 +1,79 @@
+// BEGIN-SNIPPET u__m__n.scss
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__m__#{$tokenName} {
+    margin: $tokenValue !important;
+  }
+}
+
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__mt__#{$tokenName} {
+    margin-top: $tokenValue !important;
+  }
+  .u__mr__#{$tokenName} {
+    margin-right: $tokenValue !important;
+  }
+  .u__mb__#{$tokenName} {
+    margin-bottom: $tokenValue !important;
+  }
+  .u__ml__#{$tokenName} {
+    margin-left: $tokenValue !important;
+  }
+}
+// END-SNIPPET
+
+// BEGIN-SNIPPET u__pad__n.scss
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__p__#{$tokenName} {
+    padding: $tokenValue !important;
+  }
+}
+
+@each $tokenName, $tokenValue in $tokenMap {
+  .u__pt__#{$tokenName} {
+    padding-top: $tokenValue !important;
+  }
+  .u__pr__#{$tokenName} {
+    padding-right: $tokenValue !important;
+  }
+  .u__pb__#{$tokenName} {
+    padding-bottom: $tokenValue !important;
+  }
+  .u__pl__#{$tokenName} {
+    padding-left: $tokenValue !important;
+  }
+}
+// END-SNIPPET
+
+// DEPRECATED
+.padded {
+  &.full {
+    padding: $base-size;
+  }
+
+  &.bottom {
+    padding-bottom: $base-size;
+  }
+
+  &.top {
+    padding-top: $base-size;
+  }
+
+  &.vertical {
+    padding: $base-size 0;
+  }
+}
+
+.float {
+  &.left { float: left; }
+  &.right { float: right; }
+}
+
+.margined {
+  &.left {
+    margin-left: 8px;
+
+    &.small {
+      margin-left: 4px;
+    }
+  }
+}

@@ -3,19 +3,12 @@ class VotesController < ApplicationController
   before_action :load_post
 
   def create
-    if params[:user_id]
-      user = User.find params[:user_id]
-      @post.votes.create(user: user, added_by: current_user)
-    else
-      user = current_user
-      @post.votes.create(user: user)
-    end
-
-    user.companies << current_company unless user.part_of?(current_company)
+    voter = find_voter
+    Votes::Create.run!(post: @post, voter: voter)
 
     respond_to do |format|
       format.html do
-        flash[:success] = "Vote for #{user.name} was added" if params[:user_id]
+        flash[:success] = "Vote for #{voter.name} was added" if params[:user_id]
         redirect_back fallback_location: board_post_path(@board, @post)
       end
 
@@ -26,14 +19,7 @@ class VotesController < ApplicationController
   end
 
   def destroy
-    if params[:user_id]
-      user = User.find params[:user_id]
-    else
-      user = current_user
-    end
-
-    vote = Vote.where(post: @post, user: user).first
-    vote.destroy!
+    Votes::Delete.run!(post: @post, voter: find_voter)
 
     respond_to do |format|
       format.html do
@@ -51,5 +37,11 @@ class VotesController < ApplicationController
   def load_post
     @board = current_company.boards.friendly.find(params[:board_id])
     @post = @board.posts.friendly.find(params[:post_id])
+  end
+
+  def find_voter
+    return User.find(params[:user_id]) if params[:user_id]
+
+    current_user
   end
 end

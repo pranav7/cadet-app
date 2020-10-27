@@ -11,7 +11,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
 
-    sign_in(user)
+    sign_in(user) if user
 
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end
@@ -27,7 +27,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
           }, {
             "type": "button",
             "id": "submit-issue-form",
-            "label": "Submit Feature Request",
+            "label": "Share Feedback",
             "style": "primary",
             "action": {
               "type": "sheet",
@@ -55,7 +55,6 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     board = company.boards.friendly.find(input_values[:board_slug])
 
     if ActiveSupport::SecurityUtils.secure_compare(company.company_setting.api_key, input_values["api_key"])
-      company.company_setting.intercom_workspace_id = params[:workspace_id]
       company.company_setting.intercom_default_board_slug = board.slug
       company.company_setting.save!
 
@@ -74,10 +73,10 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
         "style": "error"
       })
     end
-  rescue ActiveRecord::RecordNotFound => error
-    error_message = error.message
+  rescue ActiveRecord::RecordNotFound => e
+    error_message = e.message
     # if model is nil, its because boards.friendly.find failed to find a record
-    error_message = "Couldn't find Board" if error.model.nil?
+    error_message = "Couldn't find Board" if e.model.nil?
 
     render_canvas(configuration_components(
       subdomain: input_values[:subdomain],

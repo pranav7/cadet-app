@@ -14,6 +14,8 @@ class Post < ApplicationRecord
   has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  has_many :activity_logs, dependent: :destroy
+
   has_many :votes, dependent: :destroy
   has_many :voters, through: :votes, source: :user
 
@@ -22,6 +24,7 @@ class Post < ApplicationRecord
              optional: true,
              foreign_key: "user_id"
   belongs_to :board
+  # If created by an Admin on behalf of a Customer
   belongs_to :added_by, class_name: "User", optional: true
 
   validates :title, presence: true
@@ -47,7 +50,7 @@ class Post < ApplicationRecord
     def status_collection
       collection = {}
       statuses.map do |key, _value|
-        collection["##{key}"] = key
+        collection[key.to_s] = key
       end
 
       collection
@@ -109,6 +112,7 @@ class Post < ApplicationRecord
   def notify_post_created_to_all_admins
     company.admins.each do |admin|
       next if admin == requester
+
       PostNotificationMailer.new_post(self, admin).deliver_later
     end
   end

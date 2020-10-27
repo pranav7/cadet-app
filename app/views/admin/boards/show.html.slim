@@ -6,5 +6,5 @@
         p.soft We recommend creating at least 5 posts to help your users get started.
     .row
       .six.wide.column
-        = render partial: "posts/form",
-          locals: { board: @board, post: @post, after_create_path: :admin, admin: true }
+          = render partial: "posts/form",
+            locals: { board: @board, post: @post, after_create_path: :admin, admin: true }

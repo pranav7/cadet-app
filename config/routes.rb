@@ -34,9 +34,7 @@ Rails.application.routes.draw do
   end
 
   namespace :admin do
-    resources :boards do
-      resources :posts, except: [:new, :edit]
-    end
+    resource :billing, only: [:show], controller: :billing
 
     resources :accounts do
       resource :account_memberships, only: [:create, :destroy]
@@ -47,6 +45,10 @@ Rails.application.routes.draw do
     resource :integrations, only: [:show], controller: :integrations
 
     resources :companies, only: [:edit, :update]
+
+    resources :boards, path: "" do
+      resources :posts, except: [:new, :edit]
+    end
   end
 
   get :join, to: "users#new"
@@ -56,7 +58,9 @@ Rails.application.routes.draw do
 
   post "consume_paddle_webhook", to: "admin/billing#consume_paddle_webhook"
 
-  resources :boards, path: "" do
+  root to: "roadmaps#index", as: :roadmaps
+  get '/boards', to: 'boards#index'
+  resources :boards, path: "", except: [:index] do
     resources :posts, only: [:create, :show, :index, :new] do
       resources :comments, only: [:create, :update, :destroy]
       resource :votes, only: [:create, :destroy]
@@ -66,6 +70,5 @@ Rails.application.routes.draw do
   post "intercom/sheets", to: "intercom#sheets"
   get "intercom/sheets", to: "intercom#sheets"
   post "intercom/initialize", to: "intercom#new"
-
   post "intercom/configure", to: "intercom#configure"
 end

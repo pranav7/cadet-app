@@ -1,6 +1,12 @@
 import React from "react";
-import PostListItem from "./PostListItem";
-import Posts from "./Posts";
+import PostListItem from "Components/PostListItem";
+import Posts from "API/Posts";
+import RootReducer from "Store/RootReducer";
+
+import { createStore } from "redux";
+import { Provider } from 'react-redux';
+
+const store = createStore(RootReducer);
 
 class SuggestivePostList extends React.Component {
   constructor(props) {
@@ -18,9 +24,11 @@ class SuggestivePostList extends React.Component {
   }
 
   getPosts(params = {}) {
-    Posts.get(this.state.boardId, params)
-      .then((posts) => {
-        this.setState({ posts: posts });
+    let postsApi = new Posts(this.state.boardId)
+
+    postsApi.getMany(params)
+      .then((response) => {
+        this.setState({ posts: response.posts });
       });
   }
 
@@ -49,11 +57,13 @@ class SuggestivePostList extends React.Component {
 
   render() {
     return(
-      <div className="ui no margin grid">
-        <div className="row">
-          {this.renderPostList()}
+      <Provider store={store}>
+        <div className="ui no margin grid">
+          <div className="row">
+            {this.renderPostList()}
+          </div>
         </div>
-      </div>
+      </Provider>
     );
   }
 

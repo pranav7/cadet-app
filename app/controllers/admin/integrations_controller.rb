@@ -3,6 +3,7 @@ class Admin::IntegrationsController < Admin::AdminController
 
   def show
     @api_key = current_company.company_setting.api_key
+    @intercom_access_token = current_company.company_setting.intercom_access_token
   end
 
   private

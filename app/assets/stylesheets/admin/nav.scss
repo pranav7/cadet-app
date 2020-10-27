@@ -34,24 +34,28 @@ body.admin {
       padding: 0;
 
       li.list-item {
-        text-align: center;
         color: $darker;
         font-weight: 600;
         font-size: 13px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
-        &.active {
-          background: $darkest;
+        &.active, &:hover {
+          a.item-link {
+            background-color: $darkest;
+            border-radius: 4px;
+          }
         }
 
         a.item-link {
           color: $darker;
-          display: block;
+          display: inline-flex;
           transition: 0.4s ease;
-          padding: $half-base-size 0;
-
-          &:hover {
-            background: darken($black-light, 5);
-          }
+          align-items: center;
+          justify-content: center;
+          padding: 8px 4px;
+          margin-bottom: 8px;
 
           i.icon {
             vertical-align: super;

@@ -3,36 +3,58 @@ class CommentsController < ApplicationController
   before_action :load_post
 
   def create
-    comment = @post.comments.new(comment_params)
-    comment.commenter = current_user
-    comment.save
+    Comments::Create.run!(
+      post: @post,
+      is_private: comment_params["private"],
+      content: comment_params["content_attributes"],
+      commenter: current_user
+    )
 
-    current_user.companies << current_company unless current_user.part_of?(current_company)
+    respond_to do |format|
+      format.html do
+        redirect_back fallback_location: board_post_path(@board, @post)
+      end
 
-    redirect_back fallback_location: board_post_path(@board, @post)
+      format.json do
+        head :created
+      end
+    end
   end
 
   def update
-    comment = @post.comments.find(params[:id])
-    if comment.update_attributes(comment_params)
-      flash[:success] = "Changes saved."
-    else
-      flash[:error] = "Something went wrong, your changes were not saved."
-    end
+    @comment = @post.comments.find(params[:id])
 
-    redirect_back fallback_location: board_post_path(@board, @post)
+    respond_to do |format|
+      if authorized? && @comment.update_attributes(comment_params)
+        flash[:success] = "Changes saved."
+
+        format.html do
+          redirect_back fallback_location: board_post_path(@board, @post)
+        end
+
+        format.json do
+          head :ok
+        end
+      else
+        flash[:error] = "Something went wrong, your changes were not saved."
+      end
+    end
   end
 
   def destroy
     @comment = @post.comments.find(params[:id])
+    Comments::Destroy.run!(comment: @comment)
 
-    if authorized?
-      @comment.destroy
-      flash[:success] = "Deleted."
-    else
-      flash[:error] = "That action is not allowed."
+    respond_to do |format|
+      format.html do
+        flash[:success] = "Deleted."
+        redirect_back fallback_location: board_post_path(@board, @post)
+      end
+
+      format.json do
+        head :ok
+      end
     end
-    redirect_back fallback_location: board_post_path(@board, @post)
   end
 
   private

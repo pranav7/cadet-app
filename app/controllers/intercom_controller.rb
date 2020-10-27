@@ -13,6 +13,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
     binding.pry
     sign_in(user, host: "#{company.subdomain}.ngrok.io") if user
+    binding.pry
 
     redirect_to board_url(board, host: "#{company.subdomain}.ngrok.io", intercom_iframe: true)
   end

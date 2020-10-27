@@ -22,7 +22,7 @@ Rails.application.routes.draw do
                        omniauth_callbacks: "users/omniauth_callbacks"
                      }
 
-  constraints subdomain: 'app' do
+  constraints subdomain: 'cadet-app' do
     get '/login', to: 'users/sessions#new'
     get '/signup', to: 'users/registrations#new'
 

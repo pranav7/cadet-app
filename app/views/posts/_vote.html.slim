@@ -2,7 +2,6 @@
 - upvoted = user_signed_in? ? current_user.voted?(post) : false
 - react = react || false
 
-- binding.pry
 - if react
   = react_component "UpvoteButton",
     { voteCount: post.votes.count, upvoted: upvoted, boardId: post.board.id, postId: post.id },

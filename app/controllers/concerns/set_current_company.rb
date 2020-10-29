@@ -11,7 +11,7 @@ module SetCurrentCompany
     end
 
     before_action do
-      Current.company = current_company unless ["app"].include?(request.subdomains.first)
+      Current.company = current_company unless ["app", "cadet-app"].include?(request.subdomains.first)
     end
   end
 end

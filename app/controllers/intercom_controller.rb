@@ -154,5 +154,4 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   def log(message)
     Rails.logger.info("[#{request.uuid}] [IntercomController] #{message}")
   end
-
 end

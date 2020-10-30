@@ -14,6 +14,7 @@ module CadetApp
     config.active_job.queue_adapter = :sidekiq
     config.action_mailer.delivery_method = :postmark
     config.action_mailer.postmark_settings = { api_token: Rails.application.secrets.postmark[:api_token] }
+    config.action_dispatch.default_headers.merge!('Cache-Control' => 'no-store, no-cache')
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

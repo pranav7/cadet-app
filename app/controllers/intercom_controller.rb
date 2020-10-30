@@ -7,7 +7,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
   def sheets
     intercom_data = validate_request_and_decrtypt_data
-    log("Processing sheets request intercom_data=#{intercom_data.inspect}")
+    log("Processing sheets request")
 
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)

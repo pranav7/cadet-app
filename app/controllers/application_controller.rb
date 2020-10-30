@@ -1,5 +1,6 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery prepend: true
+  protect_from_forgery prepend: true, with: :unverified_requests
+  skip_before_action :verify_authenticity_token
   before_action :drop_naked_ip_requests
 
   include SetCurrentRequestDetails
@@ -15,6 +16,10 @@ class ApplicationController < ActionController::Base
   rescue_from Errors::ServiceValidationException, with: :handle_validation_error
 
   protected
+
+  def unverified_requests
+    Rails.logger.warn("[protect_from_forgery] Handling Unverified Requests")
+  end
 
   def not_found
     raise ActionController::RoutingError, 'Not Found'

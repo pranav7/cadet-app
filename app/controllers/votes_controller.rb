@@ -1,7 +1,6 @@
 class VotesController < ApplicationController
   before_action :authenticate_user!, only: [:create, :destroy]
   before_action :load_post
-  skip_before_action :verify_authenticity_token, if: :intercom_iframe_request?
 
   def create
     voter = find_voter

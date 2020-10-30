@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  protect_from_forgery unless: -> { request.format.json? || cookies[:authenticated_by_intercom].present? }, prepend: true
+  protect_from_forgery unless: -> { request.format.json? }, prepend: true
   before_action :drop_naked_ip_requests
 
   include SetCurrentRequestDetails

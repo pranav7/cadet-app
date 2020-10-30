@@ -17,7 +17,6 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     if user
       log("User found, #{user.inspect}")
       log("Signing user to the following host, #{request.host}")
-      cookies[:authenticated_by_intercom] = true
       sign_in(user)
       log("User signed in? #{user_signed_in?} and #{current_user}")
     end

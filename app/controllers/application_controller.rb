@@ -1,6 +1,5 @@
 class ApplicationController < ActionController::Base
   protect_from_forgery prepend: true
-  skip_before_action :verify_authenticity_token
   before_action :drop_naked_ip_requests
 
   include SetCurrentRequestDetails
@@ -41,10 +40,6 @@ class ApplicationController < ActionController::Base
 
       format.json { render status: :unprocessable_entity, json: { message: error.message } }
     end
-  end
-
-  def intercom_iframe_request?
-    params[:intercom_iframe].present?
   end
 
   private

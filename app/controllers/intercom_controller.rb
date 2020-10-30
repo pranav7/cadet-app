@@ -15,7 +15,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
     user = User.find_by_email(intercom_data.email)
     if user
-      log("User found, #{user.inspect}")
+      log("User found, #{user.id}")
       log("Signing user to the following host, #{request.host}")
       sign_in(user)
       log("User signed in? #{user_signed_in?} and #{current_user}")

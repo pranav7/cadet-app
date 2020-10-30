@@ -8,11 +8,11 @@
     { prerender: true }
 - elsif user_signed_in?
   - if upvoted
-    a.vote-button.upvoted href=board_post_votes_path(post.board, post, intercom_iframe: params[:intercom_iframe]) data-method="delete" class=(type rescue nil)
+    a.vote-button.upvoted href=board_post_votes_path(post.board, post) data-method="delete" class=(type rescue nil)
       span.text Upvoted
       span.vote-count= post.votes.count
   - else
-    a.vote-button href=board_post_votes_path(post.board, post, intercom_iframe: params[:intercom_iframe]) data-method="post" class=(type rescue nil)
+    a.vote-button href=board_post_votes_path(post.board, post) data-method="post" class=(type rescue nil)
       span.text Upvoted
       span.vote-count= post.votes.count
 - else

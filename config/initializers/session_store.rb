@@ -1,1 +1,1 @@
-Rails.application.config.session_store :cookie_store, key: "_cadet_app_session_#{Rails.env}", domain: APP_CONFIG[:base_domain]
+Rails.application.config.session_store :cookie_store, key: "_cadet_app_session_#{Rails.env}", domain: :all

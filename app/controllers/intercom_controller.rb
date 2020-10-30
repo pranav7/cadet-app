@@ -18,6 +18,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
       log("User found, #{user.inspect}")
       log("Signing user to the following host, #{request.host}")
       sign_in(user)
+      log("User signed in? #{user_signed_in?} and #{current_user}")
     end
 
     log("Redirecting to #{company.subdomain}.getcadet.com")

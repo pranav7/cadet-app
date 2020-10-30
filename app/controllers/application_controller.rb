@@ -42,6 +42,10 @@ class ApplicationController < ActionController::Base
     end
   end
 
+  def intercom_iframe_request?
+    params[:intercom_iframe].present?
+  end
+
   private
 
   def after_sign_in_path_for(resource)

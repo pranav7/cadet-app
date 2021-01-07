@@ -1,7 +1,7 @@
 ![Cadet](https://i.imgur.com/EBM5EFv.png)
 
-- `bundle install`
-- `rails db:create`
+
+## Dev Set up
 
 **Install `rvm`**
 

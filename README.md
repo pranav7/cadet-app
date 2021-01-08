@@ -47,6 +47,12 @@ gem install bundle
 bundle install
 ```
 
+**Install Packages**
+
+```bash
+yarn install
+```
+
 **Create Database & Migrate**
 
 ```bash

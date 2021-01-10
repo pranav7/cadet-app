@@ -1,0 +1,10 @@
+= simple_form_for post do |form|
+    = form.text_field :title, label: false, placeholder: "Title"
+    = form.select :status, ['New', 'Improvement', 'Bug']
+    = form.input :content, label: false, placeholder: "Content"
+    - if post.new_record?
+        = form.submit "Publish", class: "ui button"
+    - else
+        = form.submit "Update Post", class: "ui button"
+    - if !post.new_record? 
+        = link_to 'Delete', changelog_post_path(post), method: :delete, class: "a ui red button", data: { confirm: "Are you sure?" }

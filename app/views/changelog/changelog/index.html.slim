@@ -1,0 +1,29 @@
+- if user_signed_in? && current_user.admin_of?(current_company)
+    .ui.center.aligned.grid
+      .row
+        .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
+            a.ui.primary.button href=new_changelog_post_path = 'Add New Post'
+
+- @posts.each do |post|
+    .ui.grid
+      .row
+        .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
+            .posts-list.box
+                h2.changlogpost-title 
+                    = post.title
+                    - if user_signed_in? && current_user.admin_of?(current_company)
+                        a href=edit_changelog_post_path(post)
+                            i.edit.icon
+                p.changlogpost-time = render_time(post.created_at)
+                - if post.status == 'New'
+                    div.ui.green.label = post.status
+                - elsif post.status == 'Improvement'
+                    div.ui.teal.label = post.status
+                - else
+                    div.ui.yellow.label = post.status
+                br
+                br
+                .content
+                    == simple_format post.parsed.html_safe
+/ h2 = user_signed_in? && current_user.admin_of?(current_company)
+/ h2 = current_company

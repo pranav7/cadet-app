@@ -1,0 +1,2 @@
+module Changelog::PostsHelper
+end

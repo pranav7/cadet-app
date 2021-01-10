@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_181425) do
+ActiveRecord::Schema.define(version: 2021_01_09_145615) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,15 @@ ActiveRecord::Schema.define(version: 2020_04_29_181425) do
     t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
+  end
+
+  create_table "changelog_posts", force: :cascade do |t|
+    t.text "title"
+    t.text "status"
+    t.text "content"
+    t.text "subdomain"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "comment_created_events", force: :cascade do |t|

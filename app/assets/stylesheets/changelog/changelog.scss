@@ -1,0 +1,23 @@
+// Place all the styles related to the changelog/changelog controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+.changlogpost-content {
+    width: 50%;
+    margin: auto;
+}
+
+.changlogpost-title {
+    font-size: 1.55rem;
+    font-weight: 500;
+    line-height: 1.9rem;
+    min-height: 35px;
+
+    a {
+        float: right;
+    }
+}
+
+.changlogpost-time {
+    color: rgba(71,82,93,.4);
+    font-size: .9rem;
+}

@@ -18,8 +18,10 @@ class Comment < ApplicationRecord
       is_private = options.delete(:private) || false
 
       user = User.find_by!(email: email.From)
-      Comment.create(commenter: user, post: post, private: is_private,
-                     content_attributes: { body: email.StrippedTextReply })
+      Comment.create(
+        commenter: user, post: post, private: is_private,
+        content_attributes: { body: email.StrippedTextReply }
+      )
     end
   end
 

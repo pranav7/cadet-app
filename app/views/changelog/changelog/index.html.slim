@@ -9,12 +9,12 @@
     .row
       .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
         .posts-list.box
-          h2.changelogentry-title
+          h2.changelog-entry_title
             = entry.title
             - if user_signed_in? && current_user.admin_of?(current_company)
               a href=edit_changelog_entry_path(entry)
                 i.edit.icon
-          p.changelogentry-time = render_time(entry.created_at)
+          p.changelog-entry_time = render_time(entry.created_at)
           - if entry.status == Constants::ChangelogEntryStatus::NEW
             div.ui.green.label = 'New'
           - elsif entry.status == Constants::ChangelogEntryStatus::IMPROVEMENT

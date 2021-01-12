@@ -16,9 +16,10 @@ nav
           = link_to boards_path, class: "item" do
             i.soft.window.restore.icon
             | Boards
-          = link_to changelog_path, class: "item" do
-            i.soft.window.restore.icon
-            | Changelog
+          - if can_access_feature?
+            = link_to changelog_path, class: "item" do
+              i.soft.window.restore.icon
+              | Changelog
           .divider
           .header Help & Feedback
           = link_to "https://feedback.getcadet.com/feature-requests", class: "item", target: "_blank" do

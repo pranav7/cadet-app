@@ -4,6 +4,8 @@ class CreateChangelogEntries < ActiveRecord::Migration[5.2]
       t.text :title
       t.integer :status
       t.string :slug
+
+      t.index :slug
       t.belongs_to :company, foreign_key: true
 
       t.timestamps

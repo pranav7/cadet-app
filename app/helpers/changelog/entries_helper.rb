@@ -1,2 +1,0 @@
-module Changelog::EntriesHelper
-end

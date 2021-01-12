@@ -92,6 +92,7 @@ ActiveRecord::Schema.define(version: 2021_01_11_233458) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["company_id"], name: "index_changelog_entries_on_company_id"
+    t.index ["slug"], name: "index_changelog_entries_on_slug"
   end
 
   create_table "comment_created_events", force: :cascade do |t|

@@ -1,7 +1,7 @@
 // Place all the styles related to the changelog/changelog controller here.
 // They will automatically be included in application.css.
 // You can use Sass (SCSS) here: http://sass-lang.com/
-.changelogentry-title {
+.changelog-entry_title {
   font-size: 1.55rem;
   font-weight: 500;
   line-height: 1.9rem;
@@ -12,7 +12,7 @@
   }
 }
 
-.changelogentry-time {
+.changelog-entry_time {
   color: rgba(71,82,93,.4);
   font-size: .9rem;
 }

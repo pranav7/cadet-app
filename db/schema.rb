@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_04_29_181425) do
+ActiveRecord::Schema.define(version: 2021_01_11_233458) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -82,6 +82,16 @@ ActiveRecord::Schema.define(version: 2020_04_29_181425) do
     t.boolean "roadmap_enabled", default: true
     t.index ["company_id"], name: "index_boards_on_company_id"
     t.index ["slug", "company_id"], name: "index_boards_on_slug_and_company_id", unique: true
+  end
+
+  create_table "changelog_entries", force: :cascade do |t|
+    t.text "title"
+    t.integer "status"
+    t.string "slug"
+    t.bigint "company_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["company_id"], name: "index_changelog_entries_on_company_id"
   end
 
   create_table "comment_created_events", force: :cascade do |t|
@@ -241,6 +251,7 @@ ActiveRecord::Schema.define(version: 2020_04_29_181425) do
   add_foreign_key "account_memberships", "users"
   add_foreign_key "accounts", "companies"
   add_foreign_key "boards", "companies"
+  add_foreign_key "changelog_entries", "companies"
   add_foreign_key "comments", "posts"
   add_foreign_key "comments", "users"
   add_foreign_key "company_settings", "companies"

@@ -1,0 +1,29 @@
+- if user_signed_in? && current_user.admin_of?(current_company)
+  .ui.center.aligned.grid
+    .row
+      .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
+        a.ui.primary.button href=new_changelog_entry_path = 'Add New Post'
+
+- @entries.each do |entry|
+  .ui.grid
+    .row
+      .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
+        .posts-list.box
+          h2.changelogentry-title
+            = entry.title
+            - if user_signed_in? && current_user.admin_of?(current_company)
+              a href=edit_changelog_entry_path(entry)
+                i.edit.icon
+          p.changelogentry-time = render_time(entry.created_at)
+          - if entry.status == Constants::ChangelogEntryStatus::NEW
+            div.ui.green.label = 'New'
+          - elsif entry.status == Constants::ChangelogEntryStatus::IMPROVEMENT
+            div.ui.teal.label = 'Improvement'
+          - else
+            div.ui.yellow.label = 'Bug'
+          br
+          br
+          .content
+            == simple_format entry.content.parsed.html_safe
+/ h2 = user_signed_in? && current_user.admin_of?(current_company)
+/ h2 = current_company

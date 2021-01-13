@@ -3,6 +3,7 @@ class Company < ApplicationRecord
   has_many :users, through: :memberships
   has_many :boards
   has_many :accounts
+  has_many :changelog_entries
   has_one :company_setting
 
   before_save :downcase_subdomain, on: :create

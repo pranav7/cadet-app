@@ -1,6 +1,11 @@
 Rails.application.routes.draw do
   get "/robots.txt", to: "robots_txts#show"
 
+  get '/changelog', to: 'changelog/changelog#index'
+  namespace :changelog do
+    resources :entries
+  end
+
   authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'

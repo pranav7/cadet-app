@@ -1,0 +1,11 @@
+= simple_form_for entry do |form|
+  = form.text_field :title, label: false, placeholder: "Title"
+  = form.select :status, ['New', 'Improvement', 'Bug']
+  = form.simple_fields_for :content do |cf|
+    = cf.input :body, label: false, placeholder: "Content"
+  - if entry.new_record?
+    = form.submit "Publish", class: "ui button"
+  - else
+    = form.submit "Update Post", class: "ui button"
+  - if !entry.new_record?
+    = link_to 'Delete', changelog_entry_path(@entry), method: :delete, class: "a ui red button", data: { confirm: "Are you sure?" }

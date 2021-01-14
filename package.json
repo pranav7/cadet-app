@@ -29,6 +29,7 @@
     "semantic-ui-react": "^0.82.5",
     "stimulus": "^1.0.0",
     "tablesort": "^5.0.1",
+    "tailwindcss": "^2.0.2",
     "underscore": "^1.9.1"
   },
   "devDependencies": {

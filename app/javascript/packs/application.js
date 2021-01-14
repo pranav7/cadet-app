@@ -10,10 +10,11 @@
 import { Application } from 'stimulus';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 import * as Sentry from '@sentry/browser';
+import '../css/application.scss';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({
-    dsn: "https://80448e1f433c413bac9ff91282cf436e@o374876.ingest.sentry.io/5193555"
+    dsn: 'https://80448e1f433c413bac9ff91282cf436e@o374876.ingest.sentry.io/5193555',
   });
 }
 

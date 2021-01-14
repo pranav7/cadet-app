@@ -1,4 +1,4 @@
-div.top-navigation__wrapper
+top-navigation__wrapper.flex.flex-row.justify-center.items-center
   a.nav-item data-tab="roadmap" class=("active" if @top_nav_selected == :roadmaps) href=roadmaps_path
     i.soft.columns.icon
     | Roadmap
@@ -7,5 +7,5 @@ div.top-navigation__wrapper
     | Boards
   - if can_access_feature?
     a.nav-item data-tab="changelog" class=("active" if @top_nav_selected == :changelog) href=changelog_path
-      i.soft.window.restore.icon
+      i.soft.exchange.icon
       | Changelog

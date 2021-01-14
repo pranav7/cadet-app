@@ -10,7 +10,7 @@
 import { Application } from 'stimulus';
 import { definitionsFromContext } from 'stimulus/webpack-helpers';
 import * as Sentry from '@sentry/browser';
-import '../css/application.scss';
+import '../stylesheets/application.scss';
 
 if (process.env.NODE_ENV === 'production') {
   Sentry.init({

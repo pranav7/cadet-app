@@ -10,14 +10,14 @@
 
   = simple_form_for post, url: post_endpoint(board, post, after_create_path: (after_create_path rescue nil), admin: admin) do |f|
     = f.input :title,
-      placeholder: "Title",
-      label: false,
-      input_html: { "data-target" => "onboarding.postTitle", "autocomplete" => "off" }
+            placeholder: "Title",
+            label: false,
+            input_html: { "data-target" => "onboarding.postTitle", "autocomplete" => "off" }
     = f.simple_fields_for :content do |cf|
       = cf.input :body,
-        placeholder: "Description",
-        label: false,
-        input_html: { "data-target" => "onboarding.postDesc" }
+              placeholder: "Description",
+              label: false,
+              input_html: { "data-target" => "onboarding.postDesc", id: "contentDescription" }
 
     - if admin
       .ui.divider
@@ -33,7 +33,8 @@
               .item data-value=user.id
                 = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
         .hint The requester would receive email notifications for this post, only use this option if you have their consent.
-
+    = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription'}
+    br
     - if user_signed_in?
       = f.submit post_button(post), class: "ui button"
     - else

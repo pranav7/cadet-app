@@ -1,0 +1,8 @@
+- textAreaId = (textAreaId || '')
+
+.div data-controller="file"
+  label for="fileIdUpload"
+    .ui.icon.button
+      i.image.icon
+  input hidden=true id="fileIdUpload" type="file" data-action="file#startUpload"
+  p hidden=true data-target="file.text" = textAreaId

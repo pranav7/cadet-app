@@ -41,7 +41,8 @@ body.admin {
         align-items: center;
         justify-content: center;
 
-        &.active, &:hover {
+        &.active,
+        &:hover {
           a.item-link {
             background-color: $darkest;
             border-radius: 4px;
@@ -56,6 +57,7 @@ body.admin {
           justify-content: center;
           padding: 8px 4px;
           margin-bottom: 8px;
+          width: 40px;
 
           i.icon {
             vertical-align: super;

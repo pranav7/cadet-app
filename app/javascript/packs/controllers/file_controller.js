@@ -46,6 +46,8 @@ function uuidv4() {
 
 const sendFileData = (file, textAreaId) => {
   const id = uuidv4();
+  const fileComponents = file.name.split('.');
+  const extension = fileComponents[fileComponents.length - 1];
   const tempText = `![Uploading ${file.name}...]()`;
 
   // Add temporary link text
@@ -53,8 +55,9 @@ const sendFileData = (file, textAreaId) => {
     return this.value + '\n' + tempText;
   });
 
+  const newFileName = `${id}.${extension}`;
   var fd = new FormData();
-  fd.append('file', file, id);
+  fd.append('file', file, newFileName);
   const response = fetch('/images', {
     method: 'POST',
     body: fd,

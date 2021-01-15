@@ -11,13 +11,12 @@
         placeholder: placeholder,
         label: false,
         input_html: { rows: 4, class: ("transparent" if transparent), "data-target" => "mentions.#{text_area_id}" , id: "contentDescription"}
-    = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription'}
-    br
-    - if note
-      = form.submit "Add Note", class: "ui small button"
-    - else
-      = form.submit "Reply", class: "ui small button"
-
+      div style="display: inline"
+        - if note
+          = form.submit "Add Note", class: "ui small button"
+        - else
+          = form.submit "Reply", class: "ui small button"
+        = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription', style: 'display: inline'}
     a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
       span.markdown-icon
         = octicon "markdown", height: 16

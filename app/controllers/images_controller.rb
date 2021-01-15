@@ -2,7 +2,6 @@ class ImagesController < ApplicationController
   before_action :authenticate_user!
 
   def create
-    puts params[:file]
     uploaded_image = Image.new
     uploaded_image.image = params[:file]
     if uploaded_image.save

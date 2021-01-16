@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { Button, Modal, Form, Input, TextArea } from "semantic-ui-react";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
 
-import Posts from "API/Posts";
-import MarkdownStyling from "Common/MarkdownStyling";
+import Posts from 'API/Posts';
+import MarkdownStyling from 'Common/MarkdownStyling';
 
-import { fetchPosts } from "Modules/Posts/Actions";
+import { fetchPosts } from 'Modules/Posts/Actions';
 import UsersDropdown from 'Components/UsersDropdown';
 
 class CreatePostModal extends Component {
@@ -14,8 +14,8 @@ class CreatePostModal extends Component {
     super(props);
 
     this.state = {
-      title: "",
-      description: "",
+      title: '',
+      description: '',
       requester: null,
       modalOpen: false,
       hasChangedTitle: false,
@@ -27,7 +27,7 @@ class CreatePostModal extends Component {
   };
 
   handleSubmit = () => {
-    if(!!this.state.title) {
+    if (!!this.state.title) {
       this.createPost();
     }
   };
@@ -38,47 +38,47 @@ class CreatePostModal extends Component {
       post: {
         title: this.state.title,
         content_attributes: {
-          body: this.state.description
-        }
-      }
+          body: this.state.description,
+        },
+      },
     };
 
     if (this.state.requester) {
-      data.post["user_id"] = this.state.requester;
+      data.post['user_id'] = this.state.requester;
     }
 
     postsApi
       .create(data)
-      .then(response => {
+      .then((response) => {
         this.setState({
-          title: "",
-          description: "",
+          title: '',
+          description: '',
           modalOpen: false,
           requester: null,
         });
-        this.props.dispatch(fetchPosts({
-          boardId: this.props.boardId
-        }));
-        this.props.history.push(
-          `/admin/${this.props.boardId}/posts/${response.data.post.slug}`
+        this.props.dispatch(
+          fetchPosts({
+            boardId: this.props.boardId,
+          }),
         );
+        this.props.history.push(`/admin/${this.props.boardId}/posts/${response.data.post.slug}`);
         this.props.onCreatePost(response.data.post.slug);
       })
-      .catch(response => {
+      .catch((response) => {
         // TODO: Add Notification Toast
-        console.log("Error Creating Post", response);
+        console.log('Error Creating Post', response);
       });
   };
 
-  handleOpen = e => {
+  handleOpen = (e) => {
     e.preventDefault();
     this.setState({ modalOpen: true });
   };
 
   handleClose = () => {
     this.setState({
-      title: "",
-      description: "",
+      title: '',
+      description: '',
       modalOpen: false,
       requester: null,
     });
@@ -124,13 +124,19 @@ class CreatePostModal extends Component {
                 name="requester"
                 hint="The requester would receive email notifications for this post, only use this option if you have their consent."
               />
-              <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
-                Save
-              </Button>
-              <Button basic onClick={this.handleClose}>
-                Close
-              </Button>
-              <MarkdownStyling />
+              <div className="flex flex-row items-center">
+                <Button
+                  primary
+                  type="submit"
+                  disabled={!this.state.title || !this.state.description}
+                >
+                  Save
+                </Button>
+                <Button basic onClick={this.handleClose}>
+                  Close
+                </Button>
+                <MarkdownStyling />
+              </div>
             </Form>
           </Modal.Description>
         </Modal.Content>

@@ -797,38 +797,15 @@ a.c.link {
 a.styling-with-markdown {
   @extend .soft;
   fill: $darker;
+  font-size: 12px;
+}
 
-  // In Mobile
-  @media (min-width: 320px) and (max-width: 480px) {
-    margin-left: 4px;
-    margin-top: 4px;
-  }
-
-  span.markdown-icon {
-    position: relative;
-    top: 4px;
-  }
-
-  span.label {
-    margin-left: 5px;
-  }
+a.styling-with-markdown,
+a.styling-with-markdown:hover {
+  color: $darker;
 }
 // End
 // Styling with markdown
-
-// Start
-// Changelog Styling
-#HW_badge_cont {
-  display: inline-block !important;
-
-  #HW_badge {
-    top: 16px !important;
-    display: inline-block !important;
-    left: 0px !important;
-  }
-}
-// End
-// Changelog Styling
 
 .create-comment-keyboard-shortcut {
   display: inline;

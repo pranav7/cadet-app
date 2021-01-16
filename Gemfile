@@ -17,6 +17,7 @@ gem 'eventmachine'
 gem 'exception_notification'
 gem 'fast_jsonapi'
 gem 'faye-websocket'
+gem "font-awesome-rails"
 gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
 gem 'health_check'
@@ -35,7 +36,6 @@ gem 'rails', '~> 5.2.4.4'
 gem 'react-rails'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
-gem "font-awesome-rails"
 gem 'sidekiq'
 gem 'simple_form', '~> 5.0.0'
 gem 'slack-notifier' # Need for exception_notification gem

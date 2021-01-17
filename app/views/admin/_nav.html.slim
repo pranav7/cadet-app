@@ -1,4 +1,4 @@
-nav
+nav.py-4
   ul.nav-list
     li.list-item.current-user
       .c-profile-menu.ui.left.top.pointing.dropdown
@@ -11,46 +11,46 @@ nav
           .divider
           .header Public View
           = link_to roadmaps_path, class: "item" do
-            i.soft.columns.icon
+            i.soft.fa.fa-columns.mr-2
             | Roadmap
           = link_to boards_path, class: "item" do
-            i.soft.window.restore.icon
+            i.soft.fa.fa-window-restore.mr-2
             | Boards
           - if can_access_feature?
             = link_to changelog_path, class: "item" do
-              i.soft.window.restore.icon
+              i.soft.fa.fa-exchange.mr-2
               | Changelog
           .divider
           .header Help & Feedback
           = link_to "https://feedback.getcadet.com/feature-requests", class: "item", target: "_blank" do
-            i.thumbs.up.soft.icon
+            i.fa.fa-thumbs-up.soft.mr-2
             | Vote on Features
           = link_to "https://feedback.getcadet.com/bug-reports", class: "item", target: "_blank" do
-            i.bug.soft.icon
+            i.fa.fa-bug.soft.mr-2
             | Report a Bug
           = link_to "https://intercom.help/cadet/en/", class: 'item', target: "_blank" do
-            i.question.circle.soft.icon
+            i.fa.fa-question-circle.soft.mr-2
             | Help
           .ui.divider
           = link_to destroy_user_session_path, class: "item", method: :delete do
-            i.soft.sign.out.icon
+            i.fa.fa-sign-out.soft.mr-2
             | Logout
 
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "", variation: "tiny" } do
-        i.window.restore.large.icon
+        i.fa.fa-window-restore.fa-large.text-2xl.px-1
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "", variation: "tiny" }  do
-        i.users.large.icon
+        i.fa.fa-users.text-2xl.px-1
     li.list-item class=("active" if @main_selected == :settings)
       = link_to edit_admin_company_path(current_company), class: "item-link", data: { tooltip: "Settings", position: "right center", inverted: "" }  do
-        i.cog.large.icon
+        i.fa.fa-cog.text-2xl.px-1
 
   - if current_company.company_setting.expires_at
     .trial-expiry
       a href=admin_billing_path
         | #{distance_of_time_to_expiry(current_company)} left in trial
-  .cadet-logo#changelog
+  .cadet-logo
     = image_tag "cadet-logo-grey.png", width: 50
 
 javascript:

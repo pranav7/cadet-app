@@ -34,14 +34,12 @@
                 = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
         .hint The requester would receive email notifications for this post, only use this option if you have their consent.
 
-    - if user_signed_in?
-      = f.submit post_button(post), class: "ui button"
-    - else
-      a.ui.button data-action="onboarding#handleCreatePost" Create Post
-    a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
-      span.markdown-icon
-        = octicon "markdown", height: 16
-      span.label Styling with Markdown is supported
+    .flex.flex-row.gap-2
+      - if user_signed_in?
+        = f.submit post_button(post), class: "ui button"
+      - else
+        a.ui.button data-action="onboarding#handleCreatePost" Create Post
+      = render "partials/styling-with-markdown"
 
 coffee:
   $(".select-requester-dropdown").dropdown()

@@ -1,6 +1,6 @@
 .ui.grid.c-full-pane
   .twelve.wide.column
-    h1.heading Boards
+    h1.heading.mb-4 Boards
     - if @boards.reject { |board| board.id.nil? }.blank?
       .c.message
         | Let's start by adding a board. For example 

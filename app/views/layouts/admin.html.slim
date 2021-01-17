@@ -17,10 +17,3 @@ html
 
     = intercom_script_tag(intercom_hash).to_s.html_safe
   = render partial: "partials/external_js"
-
-  javascript:
-    var HW_config = {
-      selector: "#changelog", // CSS selector where to inject the badge
-      account:  "7NgqBJ"
-    }
-  script async=true src="//cdn.headwayapp.co/widget.js"

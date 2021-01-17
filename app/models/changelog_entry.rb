@@ -12,4 +12,15 @@ class ChangelogEntry < ApplicationRecord
 
   has_one :content, as: :parent, dependent: :destroy
   accepts_nested_attributes_for :content
+
+  def status_text
+    case status
+    when Constants::ChangelogEntryStatus::NEW
+      "new"
+    when Constants::ChangelogEntryStatus::IMPROVEMENT
+      "improvement"
+    when Constants::ChangelogEntryStatus::FIX
+      "fix"
+    end
+  end
 end

@@ -2,10 +2,9 @@ body.admin {
   font-size: 14px;
 
   h1.heading {
-    font-weight: 600;
+    font-weight: 800;
     color: $darkest;
-    border-bottom: 1px dashed $lighter;
-    font-size: 24px;
+    font-size: 20px;
   }
 
   .invite-link {
@@ -58,9 +57,9 @@ body.admin {
 
     .splitter {
       flex: 0 0 auto;
-      width: 4px;  
+      width: 4px;
       min-height: 200px;
-      cursor: col-resize;  
+      cursor: col-resize;
     }
 
     .c-main-pane {
@@ -146,7 +145,7 @@ body.admin {
     }
 
     &.selected {
-      background: $lightest; 
+      background: $lightest;
       border-left: 3px solid $secondary-blue;
     }
 
@@ -174,7 +173,7 @@ body.admin {
   .ui.settings.menu {
     padding: 24px 0;
     width: 100%;
-    margin: 0px; 
+    margin: 0px;
 
     .item {
       font-weight: 500;
@@ -200,37 +199,37 @@ body.admin {
 }
 
 // Start Table Sort CSS
-th[role=columnheader]:not(.no-sort) {
-	cursor: pointer !important;
+th[role='columnheader']:not(.no-sort) {
+  cursor: pointer !important;
 }
 
-th[role=columnheader]:not(.no-sort):after {
-	content: '';
-	float: right;
-	margin-top: 7px;
-	border-width: 0 4px 4px;
-	border-style: solid;
-	border-color: #404040 transparent;
-	visibility: hidden;
-	opacity: 0;
-	-ms-user-select: none;
-	-webkit-user-select: none;
-	-moz-user-select: none;
-	user-select: none;
+th[role='columnheader']:not(.no-sort):after {
+  content: '';
+  float: right;
+  margin-top: 7px;
+  border-width: 0 4px 4px;
+  border-style: solid;
+  border-color: #404040 transparent;
+  visibility: hidden;
+  opacity: 0;
+  -ms-user-select: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
-th[aria-sort=ascending]:not(.no-sort):after {
-	border-bottom: none;
-	border-width: 4px 4px 0;
+th[aria-sort='ascending']:not(.no-sort):after {
+  border-bottom: none;
+  border-width: 4px 4px 0;
 }
 
 th[aria-sort]:not(.no-sort):after {
-	visibility: visible;
-	opacity: 0.4;
+  visibility: visible;
+  opacity: 0.4;
 }
 
-th[role=columnheader]:not(.no-sort):hover:after {
-	visibility: visible;
-	opacity: 1;
+th[role='columnheader']:not(.no-sort):hover:after {
+  visibility: visible;
+  opacity: 1;
 }
 // End Table Sort CSS

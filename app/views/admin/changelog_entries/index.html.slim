@@ -1,4 +1,2 @@
-h1.heading Changelog
-
-- @entries.each do |entry|
-  h2=entry.title
+.c-full-pane
+  = render partial: "changelog_entries/list", locals: { entries: @entries }

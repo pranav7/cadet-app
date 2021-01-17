@@ -1,11 +1,13 @@
 - @entries.each do |entry|
-  h2.changelog-entry_title= entry.title
-  - if entry.status == Constants::ChangelogEntryStatus::NEW
-    .ui.green.label New
-  - elsif entry.status == Constants::ChangelogEntryStatus::IMPROVEMENT
-    .ui.teal.label Improvement
-  - else
-    .ui.yellow.label Bug
-  p.changelog-entry_time= render_time(entry.created_at)
-  .content.box
-    = simple_format entry.content.parsed.html_safe
+  = render partial: "changelog_entries/list", locals: { entries: @entries }
+
+  / h2.changelog-entry_title= entry.title
+  / - if entry.status == Constants::ChangelogEntryStatus::NEW
+  /   .ui.green.label New
+  / - elsif entry.status == Constants::ChangelogEntryStatus::IMPROVEMENT
+  /   .ui.teal.label Improvement
+  / - else
+  /   .ui.yellow.label Bug
+  / p.changelog-entry_time= render_time(entry.created_at)
+  / .content.box
+  /   = simple_format entry.content.parsed.html_safe

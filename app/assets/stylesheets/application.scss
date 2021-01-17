@@ -21,7 +21,8 @@
  */
 
 $import-google-fonts: false;
-$font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+$font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+  'Helvetica Neue', sans-serif;
 
 @import 'semantic-ui';
 @import 'bourbon';
@@ -31,18 +32,18 @@ $font-family:  -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-San
 @import 'utilities';
 @import 'pygment';
 
+@import 'atwho';
 @import 'base';
+@import 'boards';
+@import 'comments';
+@import 'changelog';
+@import 'event';
 @import 'public';
 @import 'public_header';
-@import 'boards';
 @import 'posts';
-@import 'comments';
 @import 'users';
-@import 'atwho';
 @import 'roadmaps';
 @import 'top_navigation';
-@import 'event';
-
 
 @import 'admin/base';
 @import 'admin/nav';

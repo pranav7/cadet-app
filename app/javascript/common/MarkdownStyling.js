@@ -3,7 +3,7 @@ import { GoMarkdown } from 'react-icons/go';
 
 const MarkdownStyling = () => (
   <a
-    className="styling-with-markdown inline-flex flex-row items-center justify-items-end"
+    className="styling-with-markdown inline-flex flex-row items-center gap-1"
     href="https://guides.github.com/features/mastering-markdown/"
     target="_blank"
   >

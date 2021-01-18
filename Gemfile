@@ -10,6 +10,7 @@ end
 gem 'api-pagination'
 gem 'autoprefixer-rails'
 gem 'bourbon'
+gem 'carrierwave', '~> 2.0'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.7.1'
 gem 'devise_invitable', '~> 1.7.0'
@@ -17,6 +18,7 @@ gem 'eventmachine'
 gem 'exception_notification'
 gem 'fast_jsonapi'
 gem 'faye-websocket'
+gem "fog-aws"
 gem "font-awesome-rails"
 gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
@@ -68,7 +70,7 @@ group :development, :test do
   gem 'pry-rails'
   gem 'rb-readline'
 
-  gem 'capybara', '~> 2.13'
+  gem 'capybara', '~> 2.7.1'
   gem 'selenium-webdriver'
 
   gem 'rails-controller-testing'

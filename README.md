@@ -57,6 +57,14 @@ rails db:create
 rails db:migrate
 ```
 
+**Add AWS Environment Variables**
+
+Generate an API Access Key Id and Secret Key and set the environment variables
+```bash
+export AWS_ACCESS_KEY_ID="<AWS_ACCESS_KEY_ID>"
+export AWS_SECRET_ACCESS_KEY="<AWS_SECRET_ACCESS_KEY>"
+```
+
 **Run Sidekiq & Rails Server**
 
 ```bash

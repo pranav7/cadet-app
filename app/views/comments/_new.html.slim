@@ -17,3 +17,4 @@
       .flex.flex-row.gap-2
         = form.submit "Reply", class: "ui small button"
         = render "partials/styling-with-markdown"
+        = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription', style: 'display: inline'}

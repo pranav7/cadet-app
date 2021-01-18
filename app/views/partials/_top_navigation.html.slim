@@ -1,11 +1,11 @@
-div.top-navigation__wrapper
+.top-navigation__wrapper.flex.justify-center.items-center.border-none
   a.nav-item data-tab="roadmap" class=("active" if @top_nav_selected == :roadmaps) href=roadmaps_path
-    i.soft.columns.icon
+    i.soft.fa.fa-columns.mr-2
     | Roadmap
   a.nav-item data-tab="boards" class=("active" if @top_nav_selected == :boards) href=boards_path
-    i.soft.window.restore.icon
+    i.soft.fa.fa-window-restore.mr-2
     | Boards
   - if can_access_feature?
     a.nav-item data-tab="changelog" class=("active" if @top_nav_selected == :changelog) href=changelog_path
-      i.soft.window.restore.icon
+      i.soft.fa.fa-exchange.mr-2
       | Changelog

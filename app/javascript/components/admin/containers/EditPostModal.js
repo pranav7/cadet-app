@@ -1,13 +1,13 @@
-import React, { Component } from "react";
-import { connect } from "react-redux";
-import { withRouter } from "react-router-dom";
-import { Button, Modal, Form, Input, TextArea } from "semantic-ui-react";
-import { fetchPosts, fetchPost } from "Modules/Posts/Actions";
-import MarkdownStyling from "Common/MarkdownStyling";
-import Posts from "API/Posts";
-import Users from "API/Users";
+import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import { withRouter } from 'react-router-dom';
+import { Button, Modal, Form, Input, TextArea } from 'semantic-ui-react';
+import { fetchPosts, fetchPost } from 'Modules/Posts/Actions';
+import MarkdownStyling from 'Common/MarkdownStyling';
+import Posts from 'API/Posts';
+import Users from 'API/Users';
 import EventBus from 'Common/EventBus';
-import _ from "underscore";
+import _ from 'underscore';
 import UsersDropdown from 'Components/UsersDropdown';
 
 class EditPostModal extends Component {
@@ -22,12 +22,12 @@ class EditPostModal extends Component {
     };
   }
 
-  componentWillReceiveProps = nextProps => {
+  componentWillReceiveProps = (nextProps) => {
     this.setState({
       title: nextProps.post.title,
       description: nextProps.post.content.raw,
       requester: nextProps.post.requester.id,
-      modalOpen: false
+      modalOpen: false,
     });
   };
 
@@ -35,13 +35,13 @@ class EditPostModal extends Component {
     this.setState({ [name]: value });
   };
 
-  handleOpen = e => {
+  handleOpen = (e) => {
     e.preventDefault();
     this.setState({ modalOpen: true });
   };
 
   handleSubmit = () => {
-    if(!!this.state.title) {
+    if (!!this.state.title) {
       this.updatePost();
     }
   };
@@ -53,46 +53,47 @@ class EditPostModal extends Component {
   updatePost = () => {
     window.props = this.props;
     const postApi = new Posts(this.props.match.params.boardId, {
-      postId: this.props.match.params.postId
+      postId: this.props.match.params.postId,
     });
     const data = {
       post: {
         title: this.state.title,
         content_attributes: {
-          body: this.state.description
-        }
-      }
+          body: this.state.description,
+        },
+      },
     };
 
     if (this.state.requester) {
-      data.post["user_id"] = this.state.requester;
+      data.post['user_id'] = this.state.requester;
     }
 
-    postApi.update(data).then(response => {
-      if (_.isUndefined(Cookies.get("currentSortOrder"))) {
-        this.props.dispatch(fetchPosts({
-          boardId:this.props.match.params.boardId
-        }));
+    postApi.update(data).then((response) => {
+      if (_.isUndefined(Cookies.get('currentSortOrder'))) {
+        this.props.dispatch(
+          fetchPosts({
+            boardId: this.props.match.params.boardId,
+          }),
+        );
       } else {
-        this.props.dispatch(fetchPosts({
-          boardId:this.props.match.params.boardId,
-          params: {
-            sort_by: Cookies.get("currentSortOrder")
-          }
-        }));
+        this.props.dispatch(
+          fetchPosts({
+            boardId: this.props.match.params.boardId,
+            params: {
+              sort_by: Cookies.get('currentSortOrder'),
+            },
+          }),
+        );
       }
 
       this.props.dispatch(
-        fetchPost(
-          this.props.match.params.boardId,
-          this.props.match.params.postId
-        )
+        fetchPost(this.props.match.params.boardId, this.props.match.params.postId),
       );
       EventBus.fire('updated-post', { post_slug: response.data.post.slug });
       this.setState({
-        title: "",
-        description: "",
-        modalOpen: false
+        title: '',
+        description: '',
+        modalOpen: false,
       });
     });
   };
@@ -147,13 +148,19 @@ class EditPostModal extends Component {
                 name="requester"
                 hint="The requester would receive email notifications for this post, only use this option if you have their consent."
               />
-              <Button primary type="submit" disabled={!this.state.title || !this.state.description}>
-                Save
-              </Button>
-              <Button basic onClick={this.handleClose}>
-                Close
-              </Button>
-              <MarkdownStyling />
+              <div className="flex flex-row items-center">
+                <Button
+                  primary
+                  type="submit"
+                  disabled={!this.state.title || !this.state.description}
+                >
+                  Save
+                </Button>
+                <Button basic onClick={this.handleClose}>
+                  Close
+                </Button>
+                <MarkdownStyling />
+              </div>
             </Form>
           </Modal.Description>
         </Modal.Content>

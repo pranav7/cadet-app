@@ -5,9 +5,6 @@ div data-controller="mentions"
     = form.simple_fields_for :content do |cf|
       = cf.input :body, label: false,
         input_html: { rows: 4, class: "transparent", "data-target" => "mentions.#{text_area_id}" }
-    = form.submit "Save", class: "ui small button"
-
-    a.styling-with-markdown href="https://guides.github.com/features/mastering-markdown/" target="_blank"
-      span.markdown-icon
-        = octicon "markdown", height: 16
-      span.label Styling with Markdown is supported
+    .flex.flex-row
+      = form.submit "Save", class: "ui small button"
+      = render "partials/styling-with-markdown"

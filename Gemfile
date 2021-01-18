@@ -19,6 +19,7 @@ gem 'exception_notification'
 gem 'fast_jsonapi'
 gem 'faye-websocket'
 gem "fog-aws"
+gem "font-awesome-rails"
 gem 'friendly_id', '>= 5.1.0'
 gem 'hashie'
 gem 'health_check'

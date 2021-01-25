@@ -25,6 +25,7 @@ Rails.application.configure do
   # Disable serving static files from the `/public` folder by default since
   # Apache or NGINX already handles this.
   config.public_file_server.enabled = ENV['RAILS_SERVE_STATIC_FILES'].present?
+  config.serve_static_assets = true
 
   # Compress JavaScripts and CSS.
   config.assets.js_compressor = Uglifier.new(harmony: true)
@@ -48,7 +49,7 @@ Rails.application.configure do
   # config.action_cable.allowed_request_origins = [ 'http://example.com', /http:\/\/example.*/ ]
 
   # Force all access to the app over SSL, use Strict-Transport-Security, and use secure cookies.
-  config.force_ssl = true
+  config.force_ssl = false
 
   # Use the lowest log level to ensure availability of diagnostic information
   # when problems arise.
@@ -106,9 +107,9 @@ end
 CarrierWave.configure do |config|
   config.fog_credentials = {
     provider: 'AWS', # required
-    # aws_access_key_id:     'xxx',                        # required unless using use_iam_profile
-    # aws_secret_access_key: 'yyy',                        # required unless using use_iam_profile
-    use_iam_profile: true, # optional, defaults to false
+    aws_access_key_id: Rails.application.secrets.aws[:key_id], # required unless using use_iam_profile
+    aws_secret_access_key: Rails.application.secrets.aws[:access_key], # required unless using use_iam_profile
+    # use_iam_profile: true, # optional, defaults to false
     region: 'us-east-2' # optional, defaults to 'us-east-1'
     # host:                  's3.example.com',             # optional, defaults to nil
     # endpoint:              'https://s3.example.com:8080' # optional, defaults to nil

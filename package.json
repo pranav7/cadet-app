@@ -3,7 +3,7 @@
   "main": "./build/index.js",
   "private": true,
   "scripts": {
-    "build": "webpack"
+    "server": "./bin/webpack-dev-server"
   },
   "dependencies": {
     "@babel/preset-react": "^7.12.10",

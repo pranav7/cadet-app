@@ -10,7 +10,7 @@ end
 gem 'api-pagination'
 gem 'autoprefixer-rails'
 gem 'bourbon'
-gem 'carrierwave', '~> 2.0'
+gem 'carrierwave', '~> 2.1'
 gem 'coffee-rails', '~> 4.2'
 gem 'devise', '~> 4.7.1'
 gem 'devise_invitable', '~> 1.7.0'

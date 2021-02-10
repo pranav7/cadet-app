@@ -1,6 +1,6 @@
-const { environment } = require('@rails/webpacker')
-const resolverConfig = require('./resolver')
+const { environment } = require('@rails/webpacker');
+const resolverConfig = require('./resolver');
 
-environment.config.merge(resolverConfig)
+environment.config.merge(resolverConfig);
 
-module.exports = environment
+module.exports = environment;

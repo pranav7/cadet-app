@@ -1,4 +1,4 @@
-import API from "Services/api";
+import API from 'Services/api';
 
 class Posts {
   constructor(boardId, options = {}) {
@@ -10,31 +10,34 @@ class Posts {
     const api = new API(`/admin/${this.boardId}/posts/${this.postId}`);
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve({
             post: response.data,
-            headers: response.headers
+            headers: response.headers,
           });
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });
   }
 
   getMany(params = {}) {
+    console.log('Getting Posts');
     const api = new API(`/${this.boardId}/posts`, { params });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve({
             posts: response.data.posts,
-            headers: response.headers
+            headers: response.headers,
           });
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });
@@ -43,15 +46,16 @@ class Posts {
   update(data) {
     const api = new API(`/admin/${this.boardId}/posts/${this.postId}`, {
       method: 'put',
-      data
+      data,
     });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve(response);
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });
@@ -60,15 +64,16 @@ class Posts {
   create(data) {
     const api = new API(`/admin/${this.boardId}/posts/`, {
       method: 'post',
-      data
+      data,
     });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve(response);
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });
@@ -76,50 +81,53 @@ class Posts {
 
   comment(data) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/comments`, {
-      method: "post",
-      data
+      method: 'post',
+      data,
     });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve(response);
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });
   }
 
-  upvote(data=undefined) {
+  upvote(data = undefined) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
-      method: "post",
-      data
+      method: 'post',
+      data,
     });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve(response);
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response);
         });
     });
   }
 
-  downvote(data=undefined) {
+  downvote(data = undefined) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
-      method: "delete",
-      data
+      method: 'delete',
+      data,
     });
 
     return new Promise((resolve, reject) => {
-      api.execute()
-        .then(response => {
+      api
+        .execute()
+        .then((response) => {
           resolve(response);
         })
-        .catch(response => {
+        .catch((response) => {
           reject(response.status);
         });
     });

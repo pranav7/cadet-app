@@ -488,7 +488,7 @@ DEPENDENCIES
   rails (~> 5.2.4.4)
   rails-controller-testing
   rb-readline
-  react-rails
+  react-rails (~> 2.4.7)
   rinku
   rspec
   rspec-mocks

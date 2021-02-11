@@ -35,6 +35,13 @@ module.exports = function (api) {
           exclude: ['transform-typeof-symbol'],
         },
       ],
+      [
+        '@babel/preset-react',
+        {
+          development: isDevelopmentEnv || isTestEnv,
+          useBuiltIns: true,
+        },
+      ],
     ].filter(Boolean),
     plugins: [
       'babel-plugin-macros',

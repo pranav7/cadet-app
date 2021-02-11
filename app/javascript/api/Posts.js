@@ -25,7 +25,6 @@ class Posts {
   }
 
   getMany(params = {}) {
-    console.log('Getting Posts');
     const api = new API(`/${this.boardId}/posts`, { params });
 
     return new Promise((resolve, reject) => {

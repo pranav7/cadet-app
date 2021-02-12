@@ -2,11 +2,11 @@
   "name": "cadet-app",
   "private": true,
   "dependencies": {
-    "@rails/webpacker": "^3.6.0",
+    "@babel/preset-react": "^7.12.13",
+    "@rails/webpacker": "5.2.1",
     "@sentry/browser": "^5.15.4",
     "at.js": "^1.5.3",
     "axios": "^0.18.1",
-    "babel-preset-react": "^6.24.1",
     "clipboard": "^1.7.1",
     "jquery-resizable-dom": "^0.28.0",
     "jquery-ujs": "^1.2.2",
@@ -29,13 +29,13 @@
     "semantic-ui-react": "^0.82.5",
     "stimulus": "^1.0.0",
     "tablesort": "^5.0.1",
-    "underscore": "^1.9.1"
+    "underscore": "^1.9.1",
+    "webpack-cli": "^3.1.0"
   },
   "devDependencies": {
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
-    "webpack-cli": "^3.1.0",
-    "webpack-dev-server": "3.1.11"
+    "webpack-dev-server": "^3.11.2"
   },
   "optionalDependencies": {
     "fsevents": "^1.2.7",

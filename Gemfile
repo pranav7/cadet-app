@@ -32,7 +32,7 @@ gem "php-serialize"
 gem 'postmark-rails'
 gem 'puma', '~> 3.12'
 gem 'rails', '~> 5.2.4.4'
-gem 'react-rails'
+gem 'react-rails', '~> 2.4.7'
 gem 'sass-rails', '~> 5.0'
 gem 'semantic-ui-sass', git: 'https://github.com/doabit/semantic-ui-sass.git'
 gem 'sidekiq'
@@ -42,7 +42,7 @@ gem 'slack-ruby-client'
 gem 'slim-rails'
 gem 'turbolinks', '~> 5'
 gem 'uglifier', '>= 1.3.0'
-gem 'webpacker', '~> 3.0'
+gem 'webpacker', '~> 5.2.1'
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'commonmarker'

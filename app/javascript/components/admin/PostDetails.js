@@ -117,7 +117,7 @@ class PostDetails extends Component {
 
             <div className="post-header">
               <div className="header">
-                <h1 className="post-title">{this.props.post.title}</h1>
+                <h1 className="post-title mb-8">{this.props.post.title}</h1>
                 <div className="post-header-info">
                   <strong className={`status o__small ${this.props.post.status}`}>
                     {this.props.post.status}

@@ -17,6 +17,7 @@
     "normalize.css": "^7.0.0",
     "postcss": "^8.2.6",
     "postcss-cssnext": "^3.1.0",
+    "postcss-loader": "3.0.0",
     "prop-types": "^15.6.2",
     "react": "^16.4.2",
     "react-device-detect": "^1.6.1",
@@ -31,6 +32,7 @@
     "redux-thunk": "^2.3.0",
     "semantic-ui-react": "^0.82.5",
     "stimulus": "^1.0.0",
+    "style-loader": "^2.0.0",
     "tablesort": "^5.0.1",
     "tailwindcss": "^2.0.3",
     "underscore": "^1.9.1",
@@ -39,11 +41,10 @@
   "devDependencies": {
     "eslint-config-prettier": "^6.10.1",
     "eslint-plugin-prettier": "^3.1.2",
-    "postcss-loader": "3.0.0",
+    "prettier": "2.0.4",
     "webpack-dev-server": "^3.11.2"
   },
   "optionalDependencies": {
-    "fsevents": "^1.2.7",
-    "prettier": "2.0.4"
+    "fsevents": "^1.2.7"
   }
 }

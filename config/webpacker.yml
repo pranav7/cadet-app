@@ -4,7 +4,7 @@ default: &default
   source_path: app/javascript
   source_entry_path: packs
   public_root_path: public
-  public_output_path: assets
+  public_output_path: packs
   cache_path: tmp/cache/webpacker
   webpack_compile_output: true
 
@@ -50,7 +50,7 @@ default: &default
 
 development:
   <<: *default
-  compile: true
+  compile: false
 
   # Reference: https://webpack.js.org/configuration/dev-server/
   dev_server:
@@ -81,6 +81,7 @@ test:
 
 production:
   <<: *default
+  public_output_path: assets
 
   # Production depends on precompilation of packs prior to booting for performance.
   compile: false

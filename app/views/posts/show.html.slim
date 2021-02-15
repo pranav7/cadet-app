@@ -2,9 +2,9 @@
   .row
     .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column.activity-log
       // Post Header
-      .post-header.p-4
+      .post-header.vertical-padded
         .header
-          h1.post-title.mb-8.bg-black= @post.title
+          h1.post-title= @post.title
           .post-header-info
             strong.status class=@post.status #{@post.status}
         .votes

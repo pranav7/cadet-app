@@ -25,5 +25,3 @@
           br
           .content
             == simple_format entry.content.parsed.html_safe
-/ h2 = user_signed_in? && current_user.admin_of?(current_company)
-/ h2 = current_company

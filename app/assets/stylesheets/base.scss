@@ -2,7 +2,8 @@
 // This file contains all the globals styles
 
 html {
-  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Oxygen-Sans, Ubuntu, Cantarell, "Helvetica Neue", sans-serif;
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen-Sans, Ubuntu, Cantarell,
+    'Helvetica Neue', sans-serif;
   @include font-smoothing(on);
 }
 
@@ -103,7 +104,7 @@ a.c.link {
   }
 
   &.hoverunderline {
-  transition: 0s ease;
+    transition: 0s ease;
 
     &:hover {
       text-decoration: underline;
@@ -228,7 +229,7 @@ a.c.link {
   color: $white;
 
   &:hover {
-    background-color: darken($google, 3)
+    background-color: darken($google, 3);
   }
 }
 
@@ -291,23 +292,25 @@ a.c.link {
 }
 
 .ui.form {
-  input[type="color"],
-  input[type="date"],
-  input[type="datetime"],
-  input[type="datetime-local"],
-  input[type="email"],
-  input[type="month"],
-  input[type="number"],
-  input[type="password"],
-  input[type="search"],
-  input[type="tel"],
-  input[type="text"],
-  input[type="time"],
-  input[type="url"],
-  input[type="week"],
+  input[type='color'],
+  input[type='date'],
+  input[type='datetime'],
+  input[type='datetime-local'],
+  input[type='email'],
+  input[type='month'],
+  input[type='number'],
+  input[type='password'],
+  input[type='search'],
+  input[type='tel'],
+  input[type='text'],
+  input[type='time'],
+  input[type='url'],
+  input[type='week'],
   select,
   textarea {
-    @media screen and (min-width: 320px) and (max-width: 480px) { font-size: 16px }
+    @media screen and (min-width: 320px) and (max-width: 480px) {
+      font-size: 16px;
+    }
   }
 
   .field .hint {
@@ -502,11 +505,21 @@ a.c.link {
 
 // Start
 // Placeholder Avatar Styling
-.avatar.circle.mini    { @include avatar(16px); }
-.avatar.circle.small   { @include avatar(32px); }
-.avatar.circle         { @include avatar(40px); }
-.avatar.circle.large   { @include avatar(64px); }
-.avatar.circle.huge    { @include avatar(128px); }
+.avatar.circle.mini {
+  @include avatar(16px);
+}
+.avatar.circle.small {
+  @include avatar(32px);
+}
+.avatar.circle {
+  @include avatar(40px);
+}
+.avatar.circle.large {
+  @include avatar(64px);
+}
+.avatar.circle.huge {
+  @include avatar(128px);
+}
 // End
 // Placeholder Avatar Styling
 
@@ -518,9 +531,10 @@ a.c.link {
   align-items: center;
   user-select: none;
   box-sizing: border-box;
-  transition: opacity ease-in-out 100ms,color ease-in-out 100ms,background-color ease-in-out 100ms,border-color ease-in-out 100ms;
+  transition: opacity ease-in-out 100ms, color ease-in-out 100ms, background-color ease-in-out 100ms,
+    border-color ease-in-out 100ms;
   border-radius: 3px;
-  box-shadow: 0 1px 1px 0 rgba(200,200,200,0.2);
+  box-shadow: 0 1px 1px 0 rgba(200, 200, 200, 0.2);
   font-weight: 500;
   outline: 0;
   padding: 3px 7px 4px 7px;
@@ -581,7 +595,7 @@ a.c.link {
 
 // Start
 // Styling for Post Item in Post List
-.create-posts.mobile .posts-list{
+.create-posts.mobile .posts-list {
   .post-list-item {
     border-top: 1px solid #ececec;
     padding: $base-size 0;
@@ -621,7 +635,9 @@ a.c.link {
     .post-body {
       display: flex;
 
-      &:hover { color: $black; }
+      &:hover {
+        color: $black;
+      }
 
       .post-summary {
         padding-bottom: $base-size;
@@ -780,44 +796,16 @@ a.c.link {
 // Styling with markdown
 a.styling-with-markdown {
   @extend .soft;
-
-  display: inline-flex;
-  align-items: center;
-  margin-left: 10px;
-  font-size: 12px;
   fill: $darker;
+  font-size: 12px;
+}
 
-  // In Mobile
-  @media (min-width: 320px) and (max-width: 480px) {
-    margin-left: 4px;
-    margin-top: 4px;
-  }
-
-  span.markdown-icon {
-    position: relative;
-    top: 4px;
-  }
-
-  span.label {
-    margin-left: 5px;
-  }
+a.styling-with-markdown,
+a.styling-with-markdown:hover {
+  color: $darker;
 }
 // End
 // Styling with markdown
-
-// Start
-// Changelog Styling
-#HW_badge_cont {
-  display: inline-block !important;
-
-  #HW_badge {
-   top: 16px !important;
-   display: inline-block !important;
-   left: 0px !important;
-  }
-}
-// End
-// Changelog Styling
 
 .create-comment-keyboard-shortcut {
   display: inline;
@@ -831,8 +819,4 @@ a.styling-with-markdown {
     box-shadow: 0px 1px 0 $lighter;
     color: $darker;
   }
-}
-
-.pointer {
-  cursor: pointer !important;
 }

@@ -9,6 +9,7 @@ class Changelog::EntriesController < ApplicationController
 
   def create
     @entry = current_company.changelog_entries.new(entry_params)
+    params[:changelog_entry][:status] = convert_status(params[:changelog_entry][:status])
 
     if @entry.save
       redirect_to changelog_url
@@ -23,6 +24,7 @@ class Changelog::EntriesController < ApplicationController
 
   def update
     @entry = current_company.changelog_entries.friendly.find(params[:id])
+    params[:changelog_entry][:status] = convert_status(params[:changelog_entry][:status])
 
     if @entry.update(entry_params)
       redirect_to changelog_url
@@ -36,6 +38,17 @@ class Changelog::EntriesController < ApplicationController
     @entry.destroy
 
     redirect_to changelog_url
+  end
+
+  def convert_status(entry_status)
+    case entry_status
+    when 'New'
+      0
+    when 'Improvement'
+      1
+    when 'Fix'
+      2
+    end
   end
 
   private

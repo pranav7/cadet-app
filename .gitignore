@@ -7,6 +7,9 @@
 # Ignore Rubymine
 .idea
 
+# Ignore uploader images
+public/uploads/
+
 # Ignore bundler config.
 /.bundle
 

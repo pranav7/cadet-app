@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :entries
   end
 
+  resources :images, only: [:create]
+
   authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'

@@ -63,3 +63,24 @@ rails db:migrate
 bundle exec sidekiq -q default -q mailers
 bundle exec rails server
 ```
+
+**Deploying to Production**
+
+```bash
+bundle exec cap production deploy
+```
+
+**Connecting to Production Instance**
+
+Make sure the SSH config is appropriately created
+```
+host *getcadet.com
+  # IdentityFile ~/.ssh/
+  IdentityFile ~/.ssh/id_digital_ocean_rsa
+  IdentitiesOnly yes
+  ForwardAgent yes
+```
+
+```bash
+ssh -i ~/.ssh/id_digital_ocean_rsa rails@web1.getcadet.com
+```

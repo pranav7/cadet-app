@@ -38,7 +38,10 @@ nav.py-4
 
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "", variation: "tiny" } do
-        i.window.restore.large.icon
+        i.fa.fa-window-restore.fa-large.text-2xl.px-1
+    li.list-item class=("active" if @main_selected == :changelog)
+      = link_to admin_changelog_entries_path, class: "item-link", data: { tooltip: "Changelog", position: "right center", inverted: "", variation: "tiny" } do
+        i.fa.fa-exchange.fa-large.text-2xl.px-1
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "", variation: "tiny" }  do
         i.users.large.icon

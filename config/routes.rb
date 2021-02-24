@@ -29,6 +29,8 @@ Rails.application.routes.draw do
     root to: redirect('signup')
   end
 
+  resources :images, only: [:create]
+
   resource :inbound_emails, only: [] do
     post :consume
   end

@@ -36,7 +36,7 @@ class Admin::ChangelogEntriesController < Admin::AdminController
   end
 
   def index
-    @main_selected = :changelog 
+    @main_selected = :changelog
     @entries = current_company.changelog_entries.reverse_chronologically
   end
 

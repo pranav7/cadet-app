@@ -34,7 +34,7 @@
                 = render partial: "partials/user", locals: { user: user, size: :small, show_email: true, hide_avatar: true }
         .hint The requester would receive email notifications for this post, only use this option if you have their consent.
 
-    .flex.flex-row.gap-2
+    .flex.flex-row.gap-1
       - if user_signed_in?
         = f.submit post_button(post), class: "ui button"
       - else

@@ -522,10 +522,10 @@ DEPENDENCIES
   pry
   pry-rails
   puma (= 3.12.4)
-  rails (~> 5.2.4.4)
+  rails (= 5.2.4.4)
   rails-controller-testing
   rb-readline
-  react-rails (~> 2.4.7)
+  react-rails (= 2.4.7)
   rinku (= 2.0.4)
   rspec (= 3.7.0)
   rspec-mocks (~> 3.6)
@@ -537,7 +537,7 @@ DEPENDENCIES
   semantic-ui-sass!
   shoulda-matchers
   sidekiq (= 5.0.5)
-  simple_form (~> 5.0.0)
+  simple_form (= 5.0.0)
   slack-notifier (= 2.3.2)
   slack-ruby-client (= 0.11.0)
   slim-rails (= 3.1.3)

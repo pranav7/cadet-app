@@ -1,0 +1,13 @@
+.changelog-entries.mt-8
+  - entries.each do |entry|
+    .flex.flex-row.items-start.gap-8.mt-14
+      .changelog-entry__meta.flex.flex-col.items-end.gap-2
+        span.changelog-entry__status class="o__#{entry.status_text}"
+          = entry.status_text
+        .soft.text-sm= entry.created_at.strftime("%d %b %Y")
+      .mt-1
+        = render partial: "svgs/ellipses"
+      .changelog-entry__content.flex.flex-col.justify-items-start
+        h2.changelog-entry__title= entry.title
+        .content.box.p-4
+          = simple_format entry.content.parsed.html_safe

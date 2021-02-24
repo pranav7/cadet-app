@@ -1,13 +1,6 @@
 Rails.application.routes.draw do
   get "/robots.txt", to: "robots_txts#show"
 
-  get '/changelog', to: 'changelog/changelog#index'
-  namespace :changelog do
-    resources :entries
-  end
-
-  resources :images, only: [:create]
-
   authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
@@ -36,11 +29,16 @@ Rails.application.routes.draw do
     root to: redirect('signup')
   end
 
+  resources :images, only: [:create]
+
   resource :inbound_emails, only: [] do
     post :consume
   end
 
+  resources :changelog_entries, path: 'changelog', only: [:index, :show]
+
   namespace :admin do
+    resources :changelog_entries, path: 'changelog'
     resource :billing, only: [:show], controller: :billing
 
     resources :accounts do

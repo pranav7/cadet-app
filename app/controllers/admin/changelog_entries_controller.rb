@@ -1,7 +1,4 @@
-class Changelog::EntriesController < ApplicationController
-  before_action :authenticate_user!
-  before_action :authorize!
-
+class Admin::ChangelogEntriesController < Admin::AdminController
   def new
     @entry = current_company.changelog_entries.new
     @entry.build_content
@@ -38,7 +35,13 @@ class Changelog::EntriesController < ApplicationController
     redirect_to changelog_url
   end
 
+  def index
+    @main_selected = :changelog
+    @entries = current_company.changelog_entries.reverse_chronologically
+  end
+
   private
+
   def entry_params
     params.require(:changelog_entry).permit(:title, :status, content_attributes: [:body])
   end

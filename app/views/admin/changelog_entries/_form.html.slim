@@ -1,10 +1,10 @@
-= simple_form_for entry do |form|
+= simple_form_for(entry, url: admin_changelog_entries_path) do |form|
   = form.text_field :title, label: false, placeholder: "Title"
   = form.select :status, [['New', 0], ['Improvement', 1], ['Fix', 2]]
   = form.simple_fields_for :content do |cf|
     = cf.input :body, label: false, placeholder: "Content",
-            input_html: { id: 'contentDescription' }
-  = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription' }
+        input_html: { id: 'contentDescription' }
+  = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription'}
   br
   - if entry.new_record?
     = form.submit "Publish", class: "ui button"

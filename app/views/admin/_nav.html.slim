@@ -17,7 +17,7 @@ nav.py-4
             i.soft.window.restore.icon
             | Boards
           - if can_access_feature?
-            = link_to changelog_path, class: "item" do
+            = link_to changelog_entries_path, class: "item" do
               i.soft.redo.icon
               | Changelog
           .divider
@@ -39,6 +39,10 @@ nav.py-4
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "", variation: "tiny" } do
         i.window.restore.large.icon
+    - if can_access_feature?
+      li.list-item class=("active" if @main_selected == :changelog)
+        = link_to admin_changelog_entries_path, class: "item-link", data: { tooltip: "Changelog", position: "right center", inverted: "", variation: "tiny" } do
+          i.redo.large.icon
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "", variation: "tiny" }  do
         i.users.large.icon
@@ -50,7 +54,7 @@ nav.py-4
     .trial-expiry
       a href=admin_billing_path
         | #{distance_of_time_to_expiry(current_company)} left in trial
-  .cadet-logo#changelog
+  .cadet-logo
     = image_tag "cadet-logo-grey.png", width: 50
 
 javascript:

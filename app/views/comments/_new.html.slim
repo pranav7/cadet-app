@@ -10,7 +10,9 @@
       = cf.input :body,
         placeholder: placeholder,
         label: false,
-        input_html: { rows: 4, class: ("transparent" if transparent), id: text_area_id, "data-target" => "mentions.#{text_area_id}" }
+        input_html: { rows: 4, class: ("transparent" if transparent), "data-target" => "mentions.#{text_area_id}" , id: "contentDescription"}
+    = render partial: "partials/file_upload", locals: { textAreaId: '#contentDescription'}
+    br
     - if note
       = form.submit "Add Note", class: "ui small button"
     - else

@@ -9,6 +9,7 @@ import { fetchPost } from 'Modules/Posts/Actions';
 import StatusDropdown from 'AdminContainers/StatusDropdown';
 import EditPostModal from 'AdminContainers/EditPostModal';
 import AddVoterModal from 'AdminContainers/AddVoterModal';
+import TagManager from './containers/TagManager';
 import UpvotedUsersList from './containers/UpvotedUsersList';
 import Event from 'AdminComponents/Event';
 import { postStatuses, eventTypes } from 'Common/constants';
@@ -88,6 +89,7 @@ class PostDetails extends Component {
         </Container>
       );
     } else {
+      console.log(this.props.post);
       return (
         <React.Fragment>
           <div className="c-main-pane">
@@ -97,7 +99,6 @@ class PostDetails extends Component {
               </div>
 
               <EditPostModal post={this.props.post} />
-
               <div className="item u__pr__x2">
                 <a
                   className="fluid ui tiny button"
@@ -113,6 +114,16 @@ class PostDetails extends Component {
               </div>
 
               <AddVoterModal post={this.props.post} onChange={this.onPostChange} />
+            </div>
+
+            <div>
+              <TagManager key={this.props.post.id} post={this.props.post} onChange={this.onPostChange} addTag={(tag) => {
+                console.log(tag);
+
+              }} removeTag={(tag) => {
+                console.log('Removing');
+                console.log(tag);
+              }} />
             </div>
 
             <div className="post-header">

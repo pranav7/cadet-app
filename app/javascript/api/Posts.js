@@ -96,6 +96,42 @@ class Posts {
     });
   }
 
+  add_tag(data) {
+    const api = new API(`/admin/${this.boardId}/posts/${this.postId}/add_tag`, {
+      method: 'post',
+      data,
+    });
+
+    return new Promise((resolve, reject) => {
+      api
+      .execute()
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((response) => {
+        reject(response.status);
+      });
+    });
+  }
+
+  remove_tag(data) {
+    const api = new API(`/admin/${this.boardId}/posts/${this.postId}/remove_tag`, {
+      method: 'post',
+      data,
+    });
+
+    return new Promise((resolve, reject) => {
+      api
+      .execute()
+      .then((response) => {
+        resolve(response);
+      })
+      .catch((response) => {
+        reject(response.status);
+      });
+    });
+  }
+
   upvote(data = undefined) {
     const api = new API(`/${this.boardId}/posts/${this.postId}/votes`, {
       method: 'post',

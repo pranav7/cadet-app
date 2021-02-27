@@ -51,8 +51,13 @@ Rails.application.routes.draw do
 
     resources :companies, only: [:edit, :update]
 
+    resources :tags
+
     resources :boards, path: "" do
-      resources :posts, except: [:new, :edit]
+      resources :posts, except: [:new, :edit] do
+        post :add_tag
+        post :remove_tag
+      end
     end
   end
 

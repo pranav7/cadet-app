@@ -14,6 +14,8 @@ class Post < ApplicationRecord
   has_one :content, as: :parent, dependent: :destroy
   has_many :comments, dependent: :destroy
 
+  acts_as_ordered_taggable_on :tags
+
   has_many :activity_logs, dependent: :destroy
 
   has_many :votes, dependent: :destroy

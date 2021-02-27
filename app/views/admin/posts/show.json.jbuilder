@@ -6,6 +6,7 @@ json.upvoted user_signed_in? ? current_user.voted?(@post) : false
 json.votes_count @post.votes.count
 json.created_at render_time(@post.created_at, format: :short)
 json.test_slug @post.slug
+json.tags @post.tags
 
 json.content do
   json.body simple_format(@post.content.parsed) # Backward support

@@ -41,6 +41,20 @@ class Admin::PostsController < Admin::AdminController
     end
   end
 
+  def add_tag
+    @post = @board.posts.friendly.find(params[:post_id])
+    tags = params[:tags_list][0]
+    @post.tag_list.add(tags['text'])
+    @post.save
+  end
+
+  def remove_tag
+    @post = @board.posts.friendly.find(params[:post_id])
+    tags = params[:tags_list][0]
+    @post.tag_list.remove(tags['text'])
+    @post.save
+  end
+
   def update
     @post = @board.posts.friendly.find(params[:id])
     Posts::Update.run!(
@@ -83,7 +97,7 @@ class Admin::PostsController < Admin::AdminController
   end
 
   def post_params
-    params.require(:post).permit(:title, :status, :user_id, content_attributes: [:body])
+    params.require(:post).permit(:title, :status, :user_id, :tags_list, content_attributes: [:body])
   end
 
   def add_voter

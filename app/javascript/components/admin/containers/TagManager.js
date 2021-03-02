@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import {withRouter} from "react-router-dom";
-import Posts from "API/Posts";
+  import Posts from "API/Posts";
 
 const KeyCodes = {
   comma: 188,

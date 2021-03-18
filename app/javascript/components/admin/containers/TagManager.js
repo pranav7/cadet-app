@@ -14,7 +14,6 @@ const delimiters = [KeyCodes.comma, KeyCodes.enter];
 class TagManager extends React.Component {
   constructor(props) {
     super(props);
-    console.log('Updating props');
 
     this.state = {
       tags: props.post.tags.map(x => {
@@ -23,14 +22,7 @@ class TagManager extends React.Component {
           text: x.name
         }
       }),
-      suggestions: [
-        { id: 'USA', text: 'USA' },
-        { id: 'Germany', text: 'Germany' },
-        { id: 'Austria', text: 'Austria' },
-        { id: 'Costa Rica', text: 'Costa Rica' },
-        { id: 'Sri Lanka', text: 'Sri Lanka' },
-        { id: 'Thailand', text: 'Thailand' }
-      ]
+      suggestions: []
     };
     this.handleDelete = this.handleDelete.bind(this);
     this.handleAddition = this.handleAddition.bind(this);
@@ -49,9 +41,7 @@ class TagManager extends React.Component {
     const data = {
       tags_list: [tag]
     };
-    postApi.remove_tag(data).then(response => {
-      console.log(response);
-    });
+    postApi.remove_tag(data);
   }
 
   handleAddition(tag) {
@@ -63,18 +53,18 @@ class TagManager extends React.Component {
     const data = {
       tags_list: [tag]
     };
-    postApi.add_tag(data).then(response => {
-      console.log(response);
-    });
+    postApi.add_tag(data);
   }
 
   render() {
     const { tags, suggestions } = this.state;
     return (
       <div>
+        <p className="mb-2 font-bold sm:text-lg">Tags</p>
         <ReactTags classNames={{
-          tag: "m-4 p-2 bg-gray-200",
-          tagInput: "m-6 p-2"
+          tag: "mx-2 my-4 p-2 bg-gray-200",
+          tagInput: "my-2 p-2",
+          tagInputField: "border-2 border-grey-600 rounded-md"
         }} tags={tags}
                    suggestions={suggestions}
                    handleDelete={this.handleDelete}
@@ -83,6 +73,7 @@ class TagManager extends React.Component {
                    allowDeleteFromEmptyInput={false}
                    allowDragDrop={false}
                    inline={false}
+                   placeholder={'Add new tag'}
         />
       </div>
     )

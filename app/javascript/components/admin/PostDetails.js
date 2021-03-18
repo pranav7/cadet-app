@@ -89,7 +89,6 @@ class PostDetails extends Component {
         </Container>
       );
     } else {
-      console.log(this.props.post);
       return (
         <React.Fragment>
           <div className="c-main-pane">
@@ -117,13 +116,7 @@ class PostDetails extends Component {
             </div>
 
             <div>
-              <TagManager key={this.props.post.id} post={this.props.post} onChange={this.onPostChange} addTag={(tag) => {
-                console.log(tag);
-
-              }} removeTag={(tag) => {
-                console.log('Removing');
-                console.log(tag);
-              }} />
+              <TagManager key={this.props.post.id} post={this.props.post} onChange={this.onPostChange} />
             </div>
 
             <div className="post-header">
@@ -170,7 +163,7 @@ class PostDetails extends Component {
                   Activity
                 </div>
               </div>
-              <div class="activity-log">{this.props.post.activity_logs.map(this.getActivty)}</div>
+              <div className="activity-log">{this.props.post.activity_logs.map(this.getActivty)}</div>
             </div>
           </div>
           <div className="c-right-pane">

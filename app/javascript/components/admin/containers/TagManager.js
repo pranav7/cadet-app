@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { WithContext as ReactTags } from 'react-tag-input';
 import {withRouter} from "react-router-dom";
-  import Posts from "API/Posts";
+import Posts from "API/Posts";
 
 const KeyCodes = {
   comma: 188,
@@ -30,7 +30,6 @@ class TagManager extends React.Component {
 
   handleDelete(i) {
     const tag = this.state.tags[i];
-    this.props.removeTag(tag);
     const { tags } = this.state;
     this.setState({
       tags: tags.filter((tag, index) => index !== i),
@@ -45,7 +44,6 @@ class TagManager extends React.Component {
   }
 
   handleAddition(tag) {
-    this.props.addTag(tag);
     this.setState(state => ({ tags: [...state.tags, tag] }), this.props.onChange);
     const postApi = new Posts(this.props.match.params.boardId, {
       postId: this.props.match.params.postId

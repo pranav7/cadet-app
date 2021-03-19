@@ -51,8 +51,9 @@ Rails.application.routes.draw do
 
     resources :companies, only: [:edit, :update]
 
-    resources :tags, only: [:index]
-    post 'tags/search'
+    resources :tags, only: [:index] do
+      post :search, on: :collection
+    end
 
     resources :boards, path: "" do
       resources :posts, except: [:new, :edit] do

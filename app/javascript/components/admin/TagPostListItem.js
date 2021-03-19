@@ -34,4 +34,3 @@ const TagPostListItem = ({ post }) => {
 };
 
 export default TagPostListItem;
-

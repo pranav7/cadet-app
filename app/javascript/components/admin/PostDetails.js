@@ -115,9 +115,9 @@ class PostDetails extends Component {
               <AddVoterModal post={this.props.post} onChange={this.onPostChange} />
             </div>
 
-            <div>
+            {this.props.can_access_feature && <div>
               <TagManager key={this.props.post.id} post={this.props.post} onChange={this.onPostChange} />
-            </div>
+            </div>}
 
             <div className="post-header">
               <div className="header">

@@ -43,9 +43,10 @@ nav.py-4
       li.list-item class=("active" if @main_selected == :changelog)
         = link_to admin_changelog_entries_path, class: "item-link", data: { tooltip: "Changelog", position: "right center", inverted: "", variation: "tiny" } do
           i.redo.large.icon
-    li.list-item class=("active" if @main_selected == :tag)
-      = link_to admin_tags_path, class: "item-link", data: { tooltip: "Tag Search", position: "right center", inverted: "", variation: "tiny" } do
-        i.tags.large.icon
+    - if can_access_feature?
+      li.list-item class=("active" if @main_selected == :tag)
+        = link_to admin_tags_path, class: "item-link", data: { tooltip: "Tag Search", position: "right center", inverted: "", variation: "tiny" } do
+          i.tags.large.icon
     li.list-item class=("active" if @main_selected == :customers)
       = link_to admin_users_path, class: "item-link", data: { tooltip: "Users", position: "right center", inverted: "", variation: "tiny" }  do
         i.users.large.icon

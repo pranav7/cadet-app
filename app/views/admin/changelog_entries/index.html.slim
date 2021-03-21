@@ -3,4 +3,4 @@
     h1.heading.mb-4 Changelog
     a.ui.primary.button  href=new_admin_changelog_entry_path
       | + Add Changelog
-  = render partial: "changelog_entries/list", locals: { entries: @entries }
+  = render partial: "changelog_entries/list", locals: { entries: @entries, hide_edit_button: false }

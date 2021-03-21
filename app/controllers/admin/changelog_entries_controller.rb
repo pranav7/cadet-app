@@ -8,7 +8,7 @@ class Admin::ChangelogEntriesController < Admin::AdminController
     @entry = current_company.changelog_entries.new(entry_params)
 
     if @entry.save
-      redirect_to changelog_url
+      redirect_to admin_changelog_entries_path
     else
       render :new
     end
@@ -22,7 +22,7 @@ class Admin::ChangelogEntriesController < Admin::AdminController
     @entry = current_company.changelog_entries.friendly.find(params[:id])
 
     if @entry.update(entry_params)
-      redirect_to changelog_url
+      redirect_to admin_changelog_entries_path
     else
       render :edit
     end
@@ -32,7 +32,7 @@ class Admin::ChangelogEntriesController < Admin::AdminController
     @entry = current_company.changelog_entries.friendly.find(params[:id])
     @entry.destroy
 
-    redirect_to changelog_url
+    redirect_to admin_changelog_entries_path
   end
 
   def index

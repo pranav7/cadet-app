@@ -8,6 +8,10 @@
       .mt-1
         = render partial: "svgs/ellipses"
       .changelog-entry__content.flex.flex-col.justify-items-start
-        h2.changelog-entry__title= entry.title
+        .flex.flex-row.justify-between
+          h2.changelog-entry__title= entry.title
+          div 
+            a.ui.icon.tiny.button href=edit_admin_changelog_entry_path(entry)
+              i.edit.icon
         .content.box.p-4
           = simple_format entry.content.parsed.html_safe

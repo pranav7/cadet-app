@@ -1,6 +1,4 @@
-.ui.center.aligned.grid
-  .row
-    .sixteen.wide.mobile.ten.wide.tablet.ten.wide.computer.column.centered
-      h1 = 'New Post'
-      .content
-        = render partial: "form", locals: {entry: @entry}
+.c-full-pane
+  h1.heading.mb-4 Create Changelog
+  .content.box.p-4.max-w-xl
+    = render partial: "form", locals: {entry: @entry}

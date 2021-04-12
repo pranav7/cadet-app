@@ -1,8 +1,12 @@
-.ui.grid
+.ui.grid.mt-4
   .row
     .sixteen.wide.mobile.ten.wide.tablet.column.ten.wide.computer.column.activity-log
+      <div class="md:hidden">
+        = link_to board_path(@board), class: "ui small button" do 
+          | Back
+      </div>
       // Post Header
-      .post-header.vertical-padded
+      .post-header.py-4
         .header
           h1.post-title= @post.title
           .post-header-info

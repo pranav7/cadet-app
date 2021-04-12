@@ -1,4 +1,6 @@
-.top-navigation__wrapper.flex.justify-center.items-center.border-none
+- with_border = with_border || false
+
+.top-navigation__wrapper.flex.justify-center.items-center.w-full class=("pb-2 border-b-2" if with_border)
   a.nav-item data-tab="roadmap" class=("active" if @top_nav_selected == :roadmaps) href=roadmaps_path
     i.soft.columns.icon
     | Roadmap

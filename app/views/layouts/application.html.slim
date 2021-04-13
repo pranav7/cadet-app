@@ -27,7 +27,7 @@ html
   body class="#{controller_name} #{action_name}"
     = render partial: "partials/flash_messages"
     = render partial: "partials/public_header"
-    .ui.container
+    .ui.container.mt-4
       = yield
     = render partial: "partials/external_js"
     = render partial: "partials/login_modal"

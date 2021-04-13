@@ -81,8 +81,9 @@
                 a.ui.small.basic.button href="javascript:void(0);" data-action="onboarding#openLoginModal" Log in
                 a.ui.small.button href="javascript:void(0);" data-action="onboarding#openSignupModal" Sign up
 
-.ui.grid.mobile.tablet.only.center.aligned style="margin-bottom: 8px"
-  = render partial: "partials/top_navigation"
+<div class="flex flex-row justify-center md:hidden my-4">
+    = render partial: "partials/top_navigation", locals: { with_border: true }
+</div>
 
 coffee:
   $(".ui.dropdown").dropdown({

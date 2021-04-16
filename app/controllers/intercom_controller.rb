@@ -14,7 +14,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     if user
       sign_in(user)
     else
-      message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [User: #{user.email}] User not found!"
+      message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [Email: #{intercom_data.email}] User not found!"
       NotifySlackJob.perform_later(message, channel: "#alerts")
     end
 

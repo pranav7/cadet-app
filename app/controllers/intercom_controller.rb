@@ -7,21 +7,17 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
   def sheets
     intercom_data = validate_request_and_decrtypt_data
-    log("Processing sheets request")
-
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
-    log("Company=#{company.subdomain} board=#{board.slug}")
-
     user = User.find_by_email(intercom_data.email)
+
     if user
-      log("User found, #{user.id}")
-      log("Signing user to the following host, #{request.host}")
       sign_in(user)
-      log("User signed in? #{user_signed_in?} and #{current_user}")
+    else
+      message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [User: #{user.email}] User not found!"
+      NotifySlackJob.perform_later(message, channel: "#alerts")
     end
 
-    log("Redirecting to #{company.subdomain}.getcadet.com")
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end
 

@@ -72,6 +72,11 @@ bundle exec sidekiq -q default -q mailers
 bundle exec rails server
 ```
 
+In other terminal tab, run webpack
+```bash
+./bin/webpack-dev-server
+```
+
 **Deploying to Production**
 
 ```bash

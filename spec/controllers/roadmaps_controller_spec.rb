@@ -53,7 +53,7 @@ RSpec.describe RoadmapsController, type: :controller do
     it "should return empty list for devloping status in roadmap" do
       get :index
 
-      expect(assigns(:devloping_posts)).to eq([])
+      expect(assigns(:developing_posts)).to eq([])
     end
 
     it "should return empty list for released status in roadmap" do

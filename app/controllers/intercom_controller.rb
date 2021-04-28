@@ -6,7 +6,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   GCM_AUTH_TAG_LENGTH = 16
 
   def sheets
-    intercom_data = validate_request_and_decrtypt_data
+    intercom_data = validate_request_and_decrypt_data
     company = CompanySetting.find_by_intercom_workspace_id!(intercom_data.app_id).company
     board = company.boards.friendly.find(company.company_setting.intercom_default_board_slug)
     user = User.find_by_email(intercom_data.email)
@@ -16,6 +16,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     else
       message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [Email: #{intercom_data.email}] User not found!"
       NotifySlackJob.perform_later(message, channel: "#alerts")
+      create_and_sign_in_user(intercom_data, company)
     end
 
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
@@ -93,6 +94,21 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     })
   end
 
+  def create_and_sign_in_user(intercom_data, company)
+    @user = User.new
+    @user.email = intercom_data.email
+    @user.first_name = intercom_data.name.split[0]
+    @user.last_name = intercom_data.name.split[-1]
+    message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{@user.email}], first name: #{@user.first_name}, and last name: #{@user.last_name}"
+    NotifySlackJob.perform_later(message, channel: "#alerts")
+
+    @user.transaction do
+      @user.save
+      Membership.create(user: @user, company: company, primary: true)
+      sign_in(@user)
+    end
+  end
+
   def render_canvas(components)
     render json: {
       canvas: {
@@ -132,7 +148,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     }]
   end
 
-  def validate_request_and_decrtypt_data
+  def validate_request_and_decrypt_data
     intercom_data = JSON.parse(params[:intercom_data])
     decoded_user = Base64.decode64(intercom_data["user"].encode('utf-8'))
 

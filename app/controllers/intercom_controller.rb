@@ -97,8 +97,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   def create_and_sign_in_user(intercom_data, company)
     @user = User.new
     @user.email = intercom_data.email
-    @user.first_name = intercom_data.name.split[0]
-    @user.last_name = intercom_data.name.split[-1]
+    @user.name = intercom_data.name
     message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{@user.email}], first name: #{@user.first_name}, and last name: #{@user.last_name}"
     NotifySlackJob.perform_later(message, channel: "#alerts")
 

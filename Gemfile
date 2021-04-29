@@ -34,7 +34,7 @@ gem 'omniauth-intercom', '0.1.9'
 gem "pg", "0.21.0"
 gem "php-serialize", '1.2.0'
 gem 'postmark-rails', '0.21.0'
-gem 'puma', '3.12.4'
+gem 'puma', '3.12.6'
 gem 'rails', '5.2.4.4'
 gem 'react-rails', '2.4.7'
 gem 'sass-rails', '5.0.7'

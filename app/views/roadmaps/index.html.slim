@@ -27,12 +27,12 @@
     .status-header-section
       strong.margined.status class="developing"
         | developing
-    - if @devloping_posts.length == 0
+    - if @developing_posts.length == 0
         div.no_posts_container
           | No Posts
     - else
       .posts_container
-        - @devloping_posts.each do |post|
+        - @developing_posts.each do |post|
           a href=build_post_link(post, link_to: link_to)
             .roadmap_list_item
               .title

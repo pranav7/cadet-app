@@ -16,8 +16,8 @@
               input type="text" disabled=true value=@api_key
             - if @intercom_access_token
               = simple_form_for @company_setting, url: admin_integrations_url do |form|
-                = form.input :canvas_label, label: 'Intercom Header Text', input_html: { value: @canvas_label }
-                = form.input :canvas_text, label: 'Intercom Button Label', input_html: { value: @canvas_text }
+                = form.input :canvas_text, label: 'Intercom Header Text', input_html: { value: @canvas_text }
+                = form.input :canvas_label, label: 'Intercom Button Label', input_html: { value: @canvas_label }
                 = form.button :submit, "Update Intercom App Text", class: "ui fluid button"
 
             - unless @intercom_access_token

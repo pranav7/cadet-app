@@ -23,6 +23,8 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   end
 
   def new
+    Rails.logger.debug("Params:")
+    Rails.logger.debug(params)
     input_values = params[:input_values]
     company = Company.find_by_subdomain!(input_values[:subdomain])
 

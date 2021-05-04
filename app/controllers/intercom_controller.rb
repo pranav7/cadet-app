@@ -22,12 +22,11 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end
 
-  def new
-    Rails.logger.debug("Params:")
-    Rails.logger.debug(params)
+  def new # rubocop:disable Metrics/MethodLength
+    Rails.logger.debug('Params:')
+    Rails.logger.debug(params.inspect)
     input_values = params[:input_values]
-    Rails.logger.debug("Input")
-    Rails.logger.debug(input_values)
+    Rails.logger.debug(input_values.inspect)
     company = Company.find_by_subdomain!(input_values[:subdomain])
 
     intercom_canvas_setting = company.company_setting.intercom_canvas_settings

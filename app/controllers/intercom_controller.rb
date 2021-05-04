@@ -22,7 +22,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     redirect_to board_url(board, host: "#{company.subdomain}.getcadet.com", intercom_iframe: true)
   end
 
-  def new # rubocop:disable Metrics/MethodLength
+  def new
     company = CompanySetting.find_by_intercom_workspace_id!(params["workspace_id"]).company
     intercom_canvas_setting = company.company_setting.intercom_canvas_settings
     canvas_text = '*Share ideas or feedback*'

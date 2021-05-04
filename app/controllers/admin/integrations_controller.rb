@@ -5,8 +5,8 @@ class Admin::IntegrationsController < Admin::AdminController
     @api_key = current_company.company_setting.api_key
     @intercom_access_token = current_company.company_setting.intercom_access_token
     @company_setting = current_company.company_setting
-    @canvas_label = 'Share ideas or feedback'
-    @canvas_text = 'Share Feedback'
+    @canvas_label = 'Share Feedback'
+    @canvas_text = 'Share ideas or feedback'
     @canvas_label = @company_setting.intercom_canvas_settings['canvas_label'] if @company_setting.intercom_canvas_settings && !@company_setting.intercom_canvas_settings['canvas_label'].blank?
     @canvas_text = @company_setting.intercom_canvas_settings['canvas_text'] if @company_setting.intercom_canvas_settings && !@company_setting.intercom_canvas_settings['canvas_text'].blank?
   end

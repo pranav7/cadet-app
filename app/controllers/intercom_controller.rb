@@ -26,6 +26,8 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     Rails.logger.debug("Params:")
     Rails.logger.debug(params)
     input_values = params[:input_values]
+    Rails.logger.debug("Input")
+    Rails.logger.debug(input_values)
     company = Company.find_by_subdomain!(input_values[:subdomain])
 
     intercom_canvas_setting = company.company_setting.intercom_canvas_settings

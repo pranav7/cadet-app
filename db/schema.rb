@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2021_04_28_154045) do
+ActiveRecord::Schema.define(version: 2021_05_04_134957) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -134,7 +134,7 @@ ActiveRecord::Schema.define(version: 2021_04_28_154045) do
     t.string "intercom_workspace_id"
     t.string "intercom_default_board_slug"
     t.string "intercom_access_token"
-    t.jsonb "intercom_canvas_settings"
+    t.jsonb "intercom_canvas_settings", default: {}
     t.index ["company_id"], name: "index_company_settings_on_company_id"
   end
 

@@ -98,6 +98,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
     @user = User.new
     @user.email = intercom_data.email
     @user.name = intercom_data.name
+    @user.password = SecureRandom.hex(16)
     message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{@user.email}], first name: #{@user.first_name}, and last name: #{@user.last_name}"
     NotifySlackJob.perform_later(message, channel: "#alerts")
 

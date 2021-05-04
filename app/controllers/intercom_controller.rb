@@ -23,17 +23,28 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   end
 
   def new
+    input_values = params[:input_values]
+    company = Company.find_by_subdomain!(input_values[:subdomain])
+
+    intercom_canvas_setting = company.company_setting.intercom_canvas_settings
+    canvas_text = '*Share ideas or feedback*'
+    canvas_label = 'Share Feedback'
+    if intercom_canvas_setting
+      canvas_text = "*#{intercom_canvas_setting['canvas_text']}*" if intercom_canvas_setting['canvas_text']
+      canvas_label = intercom_canvas_setting['canvas_label'] if intercom_canvas_setting['canvas_label']
+    end
+
     render json: {
       canvas: {
         content: {
           components: [{
             "type": "text",
-            "text": "*Share ideas or feedback*",
+            "text": canvas_text,
             "style": "header"
           }, {
             "type": "button",
             "id": "submit-issue-form",
-            "label": "Share Feedback",
+            "label": canvas_label,
             "style": "primary",
             "action": {
               "type": "sheet",

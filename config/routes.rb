@@ -37,6 +37,13 @@ Rails.application.routes.draw do
 
   resources :changelog_entries, path: 'changelog', only: [:index, :show]
 
+  # Intercom integrations support
+  authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" || u.email == "ruthwickp@gmail.com" } do
+    get "inter/intercom_integrations/:company_id/accounts", to: "intercom_integrations#load_accounts"
+    get "inter/intercom_integrations/:company_id/customers", to: "intercom_integrations#load_customers"
+    get "inter/intercom_integrations/:company_id/membership", to: "intercom_integrations#load_membership"
+  end
+
   namespace :admin do
     resources :changelog_entries, path: 'changelog'
     resource :billing, only: [:show], controller: :billing

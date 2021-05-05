@@ -57,6 +57,16 @@ rails db:create
 rails db:migrate
 ```
 
+**Setting subdomain on localhost**
+
+Cadet uses subdomains for different companies. To enable subdomain on localhost, update the `/etc/hosts` file to contain an additional line
+
+```
+127.0.0.1   lvh.me
+```
+
+With this, you can access `app.lvh.me` subdomain as well as other company subdomains.
+
 **Add AWS Environment Variables**
 
 Generate an API Access Key Id and Secret Key and set the environment variables
@@ -97,3 +107,41 @@ host *getcadet.com
 ```bash
 ssh -i ~/.ssh/id_digital_ocean_rsa rails@web1.getcadet.com
 ```
+
+**Debugging in Ruby**
+
+Add `binding.pry` to set a breakpoint. An interactive console will show up in the terminal. To escape out of it, type `exit`.
+
+**Setting up Https locally (required for Intercom & other integrations)**
+
+We are going to generate a self-signed SSL certificate to connect locally. Full details are here: https://madeintandem.com/blog/rails-local-development-https-using-self-signed-ssl-certificate/
+
+* Generate two files using the following command. You'll be promoted with several questions. Ignore all except the url (put in lvh.me).
+```bash
+openssl req -x509 -sha256 -nodes -newkey rsa:2048 -days 365 -keyout localhost.key -out localhost.crt
+```
+
+* Replace `puma` in the Gemfile with the following line. For more info on why, check out this: https://github.com/puma/puma/issues/1670
+```bash
+gem 'puma', git: 'https://github.com/eric-norcross/puma.git', branch: 'chrome_70_ssl_curve_compatiblity'
+```
+
+* Run `bundle install`
+
+* Run rails using the ssl certificate like below
+```bash
+bundle exec rails server -b 'ssl://lvh.me:3000?key=localhost.key&cert=localhost.crt'
+```
+
+* Go to `https://app.lvh.me:3000`, click on `Advanced` in Chrome and proceed to the website.
+
+
+**Setting up Intercom locally**
+
+Create an App on Intercom Developer Center. The app will spit out a `Client ID` and `Client Secret`. The `App Id` can be found in the url (i.e. `zfmc7m57` in `https://app.intercom.com/a/apps/zfmc7m57/developer-hub/app-packages/66612/basic-info`).
+
+Update the `secrets.yml` file with the values and restart the server.
+
+**Cadet Data Model**
+
+![Cadet Data Model](Cadet_Data_Model.png)

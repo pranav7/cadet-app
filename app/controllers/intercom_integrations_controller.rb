@@ -68,7 +68,7 @@ class IntercomIntegrationsController < ApplicationController
     a.name = intercom_company.name
     a.domain = intercom_company.name
     a.mrr = intercom_company.monthly_spend
-    a.paying = a.mrr.present? && a.mrr > 0
+    a.paying = a.mrr.present? && a.mrr.positive?
     a.save! ? 1 : 0
   end
 

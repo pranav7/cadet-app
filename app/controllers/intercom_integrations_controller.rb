@@ -7,8 +7,8 @@ class IntercomIntegrationsController < ApplicationController
 
     Rails.logger.info("Loading intercom accounts for company #{company.name}...")
     accounts = company.accounts
-    account_names = accounts.map(&:name).to_set
-    companies_to_add = intercom.companies.scroll.reject { |c| account_names.include?(c.name) }
+    account_identifiers = accounts.map(&:source_identifier).to_set
+    companies_to_add = intercom.companies.scroll.reject { |c| account_identifiers.include?(c.name) }
     Account.transaction do
       num_companies_saved = companies_to_add.map { |c| convert_to_account_and_save(c) }.sum
       Rails.logger.info("Attempted to save #{companies_to_add.length} companies. Saved #{num_companies_saved} companies")
@@ -69,6 +69,8 @@ class IntercomIntegrationsController < ApplicationController
     a.domain = intercom_company.name
     a.mrr = intercom_company.monthly_spend
     a.paying = a.mrr.present? && a.mrr.positive?
+    a.source = 'Intercom'
+    a.source_identifier = intercom_company.id
     a.save! ? 1 : 0
   end
 
@@ -87,7 +89,7 @@ class IntercomIntegrationsController < ApplicationController
   def add_account_membership_for_user(intercom_user, user_model)
     memberships_saved = 0
     intercom_user.companies.each do |c|
-      account = Account.find_by_name(c.name)
+      account = Account.find_by_source_identifier(c.id)
       account_membership = account.account_memberships.new(user: user_model)
       memberships_saved += 1 if account_membership.save
     end

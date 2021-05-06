@@ -35,7 +35,7 @@ gem 'omniauth-intercom', '0.1.9'
 gem "pg", "0.21.0"
 gem "php-serialize", '1.2.0'
 gem 'postmark-rails', '0.21.0'
-gem 'puma', git: 'https://github.com/eric-norcross/puma.git', branch: 'chrome_70_ssl_curve_compatiblity'
+gem 'puma', '4.1.0'
 gem 'rails', '5.2.4.4'
 gem 'react-rails', '2.4.7'
 gem 'sass-rails', '5.0.7'
@@ -101,7 +101,7 @@ group :development do
   gem 'capistrano-rails', '~> 1.3'
   gem 'capistrano-rvm', '0.1.2'
   gem 'capistrano-sidekiq', '0.20.0'
-  gem 'capistrano3-puma'
+  gem 'capistrano3-puma', '5.0.4'
 end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem

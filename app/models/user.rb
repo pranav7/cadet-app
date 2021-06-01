@@ -1,6 +1,4 @@
 class User < ApplicationRecord
-  include Lightning::Flaggable
-
   has_many :posts
   has_many :comments
 

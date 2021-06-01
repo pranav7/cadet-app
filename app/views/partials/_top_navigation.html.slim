@@ -8,7 +8,7 @@
   a.nav-item data-tab="boards" class=("active" if @top_nav_selected == :boards) href=boards_path
     i.soft.window.restore.icon
     | Boards
-  - if can_access_feature?
+  - if Lightning.enabled?("changelog", current_company)
     a.nav-item data-tab="changelog" class=("active" if @top_nav_selected == :changelog) href=changelog_entries_path
       i.soft.redo.icon
       | Changelog

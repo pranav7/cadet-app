@@ -47,6 +47,7 @@ gem 'slim-rails', '3.1.3'
 gem 'turbolinks', '5.1.0'
 gem 'uglifier', '4.1.3'
 gem 'webpacker', '5.2.1'
+gem 'lightningff', require: 'lightning', path: '/Users/pranavsingh/LightningFF/lightning'
 
 # All HTML Pipeline for Content Formatting Gems
 gem 'commonmarker', '0.17.7.1'

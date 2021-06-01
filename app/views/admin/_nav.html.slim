@@ -16,7 +16,7 @@ nav.py-4
           = link_to boards_path, class: "item" do
             i.soft.window.restore.icon
             | Boards
-          - if can_access_feature?
+          - if Lightning.enabled?("changelog", current_company)
             = link_to changelog_entries_path, class: "item" do
               i.soft.redo.icon
               | Changelog

@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" || u.email == "ruthwickp@gmail.com" } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'
+    mount Lightning::Engine => "/lightning"
   end
 
   %w[404 422 500 503].each do |code|

@@ -12,6 +12,12 @@ GIT
   specs:
     mimemagic (0.3.5)
 
+PATH
+  remote: /Users/pranavsingh/LightningFF/lightning
+  specs:
+    lightningff (0.0.2)
+      rails (>= 5.0.0)
+
 GEM
   remote: https://rubygems.org/
   specs:
@@ -517,6 +523,7 @@ DEPENDENCIES
   jbuilder (= 2.7.0)
   jquery-rails (= 4.3.1)
   kaminari (= 1.1.1)
+  lightningff!
   listen (>= 3.0.5, < 3.2)
   mimemagic!
   octicons_helper (= 4.2.0)

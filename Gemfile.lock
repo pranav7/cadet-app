@@ -1,8 +1,8 @@
 GIT
   remote: https://github.com/LightningFF/lightning
-  revision: c5694536314e0ccead4299aed78d162cc670a753
+  revision: 7b3811d06fd1375f5845d74bf240c0d7fc329456
   specs:
-    lightningff (0.0.3)
+    lightningff (0.0.4)
       rails (>= 5.0.0)
 
 GIT

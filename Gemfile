@@ -55,7 +55,7 @@ gem 'html-pipeline', '2.7.1'
 gem 'html-pipeline-rouge_filter', '1.0.6'
 gem 'rinku', '2.0.4'
 gem 'sanitize', '4.5.0'
-gem 'lightningff', require: 'lightning', path: '/Users/pranavsingh/LightningFF/lightning'
+gem 'lightningff', require: 'lightning', git: 'https://github.com/LightningFF/lightning
 
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby

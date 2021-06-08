@@ -16,7 +16,7 @@ nav.py-4
           = link_to boards_path, class: "item" do
             i.soft.window.restore.icon
             | Boards
-          - if can_access_feature?
+          - if Lightning.enabled?("changelog", current_company) && current_user.admin_of?(current_company)
             = link_to changelog_entries_path, class: "item" do
               i.soft.redo.icon
               | Changelog
@@ -39,7 +39,7 @@ nav.py-4
     li.list-item class=("active" if @main_selected == :boards)
       = link_to admin_boards_path, class: "item-link", data: { tooltip: "Boards", position: "right center", inverted: "", variation: "tiny" } do
         i.window.restore.large.icon
-    - if can_access_feature?
+    - if Lightning.enabled?("changelog", current_company) && current_user.admin_of?(current_company)
       li.list-item class=("active" if @main_selected == :changelog)
         = link_to admin_changelog_entries_path, class: "item-link", data: { tooltip: "Changelog", position: "right center", inverted: "", variation: "tiny" } do
           i.redo.large.icon

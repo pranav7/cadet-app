@@ -56,6 +56,11 @@ gem 'html-pipeline-rouge_filter', '1.0.6'
 gem 'rinku', '2.0.4'
 gem 'sanitize', '4.5.0'
 
+gem 'flipper'
+gem 'flipper-active_record'
+gem 'flipper-ui'
+
+
 # See https://github.com/rails/execjs#readme for more supported runtimes
 # gem 'therubyracer', platforms: :ruby
 # Use Redis adapter to run Action Cable in production

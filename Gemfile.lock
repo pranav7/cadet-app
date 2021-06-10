@@ -163,6 +163,15 @@ GEM
       eventmachine (>= 0.12.0)
       websocket-driver (>= 0.5.1)
     ffi (1.9.25)
+    flipper (0.21.0)
+    flipper-active_record (0.21.0)
+      activerecord (>= 5.0, < 7)
+      flipper (~> 0.21.0)
+    flipper-ui (0.21.0)
+      erubi (>= 1.0.0, < 2.0.0)
+      flipper (~> 0.21.0)
+      rack (>= 1.4, < 3)
+      rack-protection (>= 1.5.3, < 2.2.0)
     fog-aws (3.8.0)
       fog-core (~> 2.1)
       fog-json (~> 1.1)
@@ -505,6 +514,9 @@ DEPENDENCIES
   faker (~> 1.7.3)
   fast_jsonapi (= 1.4)
   faye-websocket (= 0.10.7)
+  flipper
+  flipper-active_record
+  flipper-ui
   fog-aws (= 3.8.0)
   font-awesome-rails (= 4.7.0.7)
   friendly_id (= 5.2.3)

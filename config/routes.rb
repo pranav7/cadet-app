@@ -1,6 +1,7 @@
 Rails.application.routes.draw do
   get "/robots.txt", to: "robots_txts#show"
-
+  mount Flipper::UI.app(Flipper) => '/flipper'
+  
   authenticate :user, lambda { |u| u.email == "hello@pranavsingh.me" || u.email == "ruthwickp@gmail.com" } do
     require 'sidekiq/web'
     mount Sidekiq::Web => '/sidekiq'

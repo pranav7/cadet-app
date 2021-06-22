@@ -25,7 +25,7 @@ jobs:
     - name: Add ssh-key
       run: |
         eval `ssh-agent -s`
-        ssh-add id_rsa
+        ssh-add ~/.ssh/id_rsa
 
     - uses: actions/checkout@v2
     - name: Set up Ruby

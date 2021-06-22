@@ -23,7 +23,9 @@ jobs:
             ForwardAgent yes
 
     - name: Add ssh-key
-      run: ssh-add id_rsa
+      run: |
+        eval `ssh-agent -s`
+        ssh-add id_rsa
 
     - uses: actions/checkout@v2
     - name: Set up Ruby

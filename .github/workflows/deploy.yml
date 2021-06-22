@@ -31,4 +31,4 @@ jobs:
 
     - name: Deploy to production
       run: |
-        bundle exec cap production deploy --dry-run
+        bundle exec cap production deploy

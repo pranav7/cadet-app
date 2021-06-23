@@ -1,8 +1,12 @@
 name: Deploy To Server
 
 on:
-  workflow_dispatch:
+  # Deploy on merge to master
+  push:
     branches: [ master ]
+#  # Manually deploy branch
+#  workflow_dispatch:
+#    branches: [ master ]
 
 jobs:
   deploy:

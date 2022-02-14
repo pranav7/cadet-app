@@ -66,6 +66,8 @@ class User < ApplicationRecord
   end
 
   def name=(name)
+    return unless name.present?
+
     self.first_name, self.last_name = name.split(" ")
   end
 

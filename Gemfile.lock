@@ -1,4 +1,11 @@
 GIT
+  remote: https://github.com/LightningFF/lightning
+  revision: 7b3811d06fd1375f5845d74bf240c0d7fc329456
+  specs:
+    lightningff (0.0.4)
+      rails (>= 5.0.0)
+
+GIT
   remote: https://github.com/doabit/semantic-ui-sass.git
   revision: 7d97a3584ab677ff20ea887dbd2e03c4d0eb401d
   specs:
@@ -126,7 +133,7 @@ GEM
     coffee-script-source (1.12.2)
     commonmarker (0.17.7.1)
       ruby-enum (~> 0.5)
-    concurrent-ruby (1.1.8)
+    concurrent-ruby (1.1.9)
     connection_pool (2.2.2)
     crass (1.0.6)
     devise (4.7.1)
@@ -231,7 +238,7 @@ GEM
       rb-fsevent (~> 0.9, >= 0.9.4)
       rb-inotify (~> 0.9, >= 0.9.7)
       ruby_dep (~> 1.2)
-    loofah (2.9.0)
+    loofah (2.10.0)
       crass (~> 1.0.2)
       nokogiri (>= 1.5.9)
     mail (2.7.1)
@@ -243,16 +250,16 @@ GEM
       mime-types-data (~> 3.2015)
     mime-types-data (3.2021.0212)
     mini_magick (4.11.0)
-    mini_mime (1.0.2)
+    mini_mime (1.1.0)
     mini_portile2 (2.4.0)
-    minitest (5.14.3)
+    minitest (5.14.4)
     multi_json (1.14.1)
     multi_xml (0.6.0)
     multipart-post (2.1.1)
     net-scp (1.2.1)
       net-ssh (>= 2.6.5)
     net-ssh (4.2.0)
-    nio4r (2.5.4)
+    nio4r (2.5.7)
     nokogiri (1.10.10)
       mini_portile2 (~> 2.4.0)
     nokogumbo (1.4.13)
@@ -472,7 +479,7 @@ GEM
       rack-proxy (>= 0.6.1)
       railties (>= 5.2)
       semantic_range (>= 2.3.0)
-    websocket-driver (0.7.3)
+    websocket-driver (0.7.4)
       websocket-extensions (>= 0.1.0)
     websocket-extensions (0.1.5)
     xpath (2.1.0)
@@ -517,6 +524,7 @@ DEPENDENCIES
   jbuilder (= 2.7.0)
   jquery-rails (= 4.3.1)
   kaminari (= 1.1.1)
+  lightningff!
   listen (>= 3.0.5, < 3.2)
   mimemagic!
   octicons_helper (= 4.2.0)

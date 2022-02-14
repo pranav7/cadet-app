@@ -1,4 +1,6 @@
 class Company < ApplicationRecord
+  include Lightning::Flaggable
+
   has_many :memberships
   has_many :users, through: :memberships
   has_many :boards

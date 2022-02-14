@@ -93,10 +93,17 @@ RSpec.describe User, type: :model do
 
   describe User, "#name=" do
     it "sets the user's first_name and last_name" do
-      user = build(:user, name: "Jamie Lannister")
+      user = build(:user, first_name: "", last_name: "")
 
+      user.name = "Jamie Lannister"
       expect(user.first_name).to eq("Jamie")
       expect(user.last_name).to eq("Lannister")
+    end
+
+    it "fails safely when name is empty" do
+      user = build(:user)
+
+      expect { user.name = "" }.to_not raise_error
     end
   end
 

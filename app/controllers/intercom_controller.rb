@@ -126,10 +126,9 @@ class IntercomController < ApplicationController
     message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{user.email}], first name: #{user.first_name}, and last name: #{user.last_name}"
     NotifySlackJob.perform_later(message, channel: "#alerts")
 
-    @user.transaction do
-      @user.save
+    user.transaction do
+      user.save
       Membership.create(user: user, company: company, primary: true)
-      sign_in(user)
     end
   end
 

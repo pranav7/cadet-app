@@ -1,6 +1,9 @@
 {
   "name": "cadet-app",
   "private": true,
+  "scripts": {
+    "webpack": "./bin/webpack"
+  },
   "dependencies": {
     "@babel/preset-react": "^7.12.13",
     "@rails/webpacker": "5.2.1",

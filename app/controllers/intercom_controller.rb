@@ -129,6 +129,7 @@ class IntercomController < ApplicationController
     user.transaction do
       user.save
       Membership.create(user: user, company: company, primary: true)
+      sign_in(user)
     end
   end
 

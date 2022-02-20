@@ -216,13 +216,6 @@ Lint/UselessAssignment:
 Metrics/AbcSize:
   Max: 45
 
-# Offense count: 2
-# Configuration parameters: CountComments.
-Metrics/ClassLength:
-  Max: 111
-  Exclude:
-    - 'app/models/user.rb'
-
 # Offense count: 3
 Metrics/CyclomaticComplexity:
   Max: 8

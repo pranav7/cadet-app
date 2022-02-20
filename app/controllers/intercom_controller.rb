@@ -1,4 +1,4 @@
-class IntercomController < ApplicationController # rubocop:disable Metrics/ClassLength
+class IntercomController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :validate_company_expiry
 
@@ -13,6 +13,7 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
     if user
       sign_in(user)
+      update_intercom_user_id(user, intercom_data)
     else
       message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [Email: #{intercom_data.email}] User not found!"
       NotifySlackJob.perform_later(message, channel: "#alerts")
@@ -64,6 +65,19 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
 
   private
 
+  def find_user(intercom_data)
+    User.find_by_intercom_user_id(intercom_data.id) || User.find_by_email(intercom_data.email)
+  end
+
+  def update_intercom_user_id(user, intercom_data)
+    return if user.intercom_user_id.present?
+
+    message = "[IntercomController#sheets] [Company: #{company.subdomain}] User found, updating intercom_user_id"
+    NotifySlackJob.perform_later(message, channel: "#alerts")
+    user.intercom_user_id = intercom_data.id
+    user.save
+  end
+
   def save_and_render_configuration # rubocop:disable Metrics/MethodLength
     input_values = params[:input_values]
     company = Company.find_by_subdomain!(input_values[:subdomain])
@@ -104,17 +118,18 @@ class IntercomController < ApplicationController # rubocop:disable Metrics/Class
   end
 
   def create_and_sign_in_user(intercom_data, company)
-    @user = User.new
-    @user.email = intercom_data.email
-    @user.name = intercom_data.name
-    @user.password = SecureRandom.hex(16)
-    message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{@user.email}], first name: #{@user.first_name}, and last name: #{@user.last_name}"
+    user = User.new
+    user.email = intercom_data.email
+    user.name = intercom_data.name
+    user.intercom_user_id = intercom_data.id
+    user.password = SecureRandom.hex(16)
+    message = "[IntercomController#sheets] [Company: #{company.subdomain}] Creating user with email: #{user.email}], first name: #{user.first_name}, and last name: #{user.last_name}"
     NotifySlackJob.perform_later(message, channel: "#alerts")
 
     @user.transaction do
       @user.save
-      Membership.create(user: @user, company: company, primary: true)
-      sign_in(@user)
+      Membership.create(user: user, company: company, primary: true)
+      sign_in(user)
     end
   end
 

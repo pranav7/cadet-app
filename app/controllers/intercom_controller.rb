@@ -1,4 +1,4 @@
-class IntercomController < ApplicationController # rubocop:disable Metrics/ClassLength
+class IntercomController < ApplicationController
   skip_before_action :verify_authenticity_token
   skip_before_action :validate_company_expiry
 

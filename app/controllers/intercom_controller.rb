@@ -13,7 +13,7 @@ class IntercomController < ApplicationController
 
     if user
       sign_in(user)
-      update_intercom_user_id(user, intercom_data)
+      update_intercom_user_id(user, company, intercom_data)
     else
       message = "[IntercomController#sheets] [Company: #{company.subdomain}] [Board: #{board.slug}] [Email: #{intercom_data.email}] User not found!"
       NotifySlackJob.perform_later(message, channel: "#alerts")
@@ -69,7 +69,7 @@ class IntercomController < ApplicationController
     User.find_by_intercom_user_id(intercom_data.id) || User.find_by_email(intercom_data.email)
   end
 
-  def update_intercom_user_id(user, intercom_data)
+  def update_intercom_user_id(user, company, intercom_data)
     return if user.intercom_user_id.present?
 
     message = "[IntercomController#sheets] [Company: #{company.subdomain}] User found, updating intercom_user_id"

@@ -8,3 +8,6 @@ Layout/FirstMethodArgumentLineBreak:
 
 Layout/FirstMethodParameterLineBreak:
   Enabled: true
+
+Metrics/ClassLength:
+  Enabled: false

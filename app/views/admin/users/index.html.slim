@@ -19,6 +19,7 @@
                 th Email
                 th Account
                 th Invitation Status
+                th Source
             - @users.each do |user|
               tr.selectable-row data-href=admin_user_path(user)
                 td
@@ -39,6 +40,7 @@
                     td -
                 - else
                   td -
+                td= user.from_intercom? ? "Intercom" : "-"
 
   .c-right-pane
     .box
@@ -65,5 +67,5 @@
 
 coffee:
   $(document).ready ->
-    new Tablesort(document.getElementById('users-table')) 
+    new Tablesort(document.getElementById('users-table'))
     $(".ui.dropdown").dropdown()

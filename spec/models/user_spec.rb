@@ -192,6 +192,20 @@ RSpec.describe User, type: :model do
     end
   end
 
+  describe "#from_intercom?" do
+    subject { user.from_intercom? }
+
+    context "when user was created from intercom" do
+      let(:user) { create :user, intercom_user_id: "1234" }
+      it { is_expected.to be_truthy }
+    end
+
+    context "when user was created from intercom" do
+      let(:user) { create :user }
+      it { is_expected.to be_falsey }
+    end
+  end
+
   describe "#from_omniauth" do
     it "returns a user if one already exists" do
       user = create :user, provider: "google_oauth2", uid: "1234578910"

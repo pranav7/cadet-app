@@ -81,6 +81,14 @@ class User < ApplicationRecord
     true
   end
 
+  def from_intercom?
+    intercom_user_id.present?
+  end
+
+  def intercom_profile_url
+    "https://app.intercom.com/a/#{primary_company.company_setting.intercom_workspace_id}/users/#{intercom_user_id}"
+  end
+
   # @todo Add Test
   def make_admin!(company)
     membership = memberships.where(company: company).first

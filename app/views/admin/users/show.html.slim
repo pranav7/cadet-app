@@ -4,13 +4,13 @@
   .c-main-pane
     - if @board
       p.soft
-        | These are the posts that 
+        | These are the posts that
         strong #{@user.name}
-        |  has upvoted in 
+        |  has upvoted in
         strong #{@board.name}
     - else
       p.soft
-        | Please select a board to see the posts upvoted by 
+        | Please select a board to see the posts upvoted by
         strong #{@user.name}
     .box
       = form_tag admin_user_path(@user), method: :get
@@ -27,7 +27,7 @@
           .four.wide.column
             = render partial: "partials/post_sort_field", locals: { hide_most_voted: true }
       .ui.divider
-      
+
       - if @board
         - if @posts.blank?
           h4.soft
@@ -92,10 +92,18 @@
           - account = @user.account_for(current_company)
           - if account
             a href=admin_account_path(account)
-              | #{account.name} 
+              | #{account.name}
               i.external.link.icon
           - else
             | -
+      - if @user.from_intercom?
+        .account-info
+          .info-label.c-soft Intercom profile
+          .info-value
+            a href=@user.intercom_profile_url target="_blank"
+              | Link&nbsp;
+              i.external.small.icon
+
 
 coffee:
   $('.ui.dropdown').dropdown()

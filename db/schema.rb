@@ -167,6 +167,25 @@ ActiveRecord::Schema.define(version: 2022_02_20_001536) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "lightning_feature_opt_ins", id: :serial, force: :cascade do |t|
+    t.integer "feature_id", null: false
+    t.integer "entity_id", null: false
+    t.string "entity_type", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["entity_id", "entity_type"], name: "index_lightning_feature_opt_ins_on_entity_id_and_entity_type"
+    t.index ["feature_id", "entity_id", "entity_type"], name: "opt_in_index", unique: true
+  end
+
+  create_table "lightning_features", id: :serial, force: :cascade do |t|
+    t.string "key", null: false
+    t.text "description"
+    t.integer "state", default: 0, null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["key"], name: "index_lightning_features_on_key", unique: true
+  end
+
   create_table "memberships", force: :cascade do |t|
     t.bigint "user_id"
     t.bigint "company_id"

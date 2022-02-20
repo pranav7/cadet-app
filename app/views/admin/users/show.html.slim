@@ -10,7 +10,7 @@
         strong #{@board.name}
     - else
       p.soft
-        | Please select a board to see the posts upvoted by
+        | Please select a board to see the posts upvoted by&nbsp;
         strong #{@user.name}
     .box
       = form_tag admin_user_path(@user), method: :get

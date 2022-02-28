@@ -92,8 +92,8 @@
           - account = @user.account_for(current_company)
           - if account
             a href=admin_account_path(account)
-              | #{account.name}
-              i.external.link.icon
+              | #{account.name}&nbsp;
+              i.external.small.icon
           - else
             | -
       - if @user.from_intercom?

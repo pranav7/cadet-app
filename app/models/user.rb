@@ -86,7 +86,7 @@ class User < ApplicationRecord
   end
 
   def intercom_profile_url
-    "https://app.intercom.com/a/#{primary_company.company_setting.intercom_workspace_id}/users/#{intercom_user_id}"
+    "https://app.intercom.com/a/apps/#{primary_company.company_setting.intercom_workspace_id}/users/#{intercom_user_id}"
   end
 
   # @todo Add Test

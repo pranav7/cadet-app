@@ -16,7 +16,7 @@
     "jquery-ujs": "^1.2.2",
     "jquery.caret": "^0.3.1",
     "js-cookie": "^2.1.4",
-    "linkifyjs": "^2.1.4",
+    "linkifyjs": "^4.3.2",
     "node-sass": "4.14.1",
     "normalize.css": "^7.0.0",
     "postcss": "^7",
